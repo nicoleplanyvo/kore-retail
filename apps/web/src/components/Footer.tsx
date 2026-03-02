@@ -1,0 +1,68 @@
+import { Link } from 'react-router-dom';
+import t from '../locales/de.json';
+
+export function Footer() {
+  const year = new Date().getFullYear();
+
+  return (
+    <footer className="bg-kore-ink text-kore-white py-16">
+      <div className="container-default">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+          {/* Brand */}
+          <div>
+            <span className="font-display text-2xl font-light">KORE</span>
+            <p className="font-body text-small font-light text-kore-faint mt-3">
+              {t.footer.tagline}
+            </p>
+          </div>
+
+          {/* Navigation */}
+          <div>
+            <h4 className="font-body font-medium text-caption uppercase tracking-[0.16em] text-kore-faint mb-4">
+              Navigation
+            </h4>
+            <div className="flex flex-col gap-2">
+              <Link to="/consulting" className="font-body text-small font-light text-kore-faint hover:text-kore-brass-lt transition-colors">
+                {t.footer.links.consulting}
+              </Link>
+              <Link to="/training" className="font-body text-small font-light text-kore-faint hover:text-kore-brass-lt transition-colors">
+                {t.footer.links.training}
+              </Link>
+              <Link to="/suite" className="font-body text-small font-light text-kore-faint hover:text-kore-brass-lt transition-colors">
+                {t.footer.links.suite}
+              </Link>
+              <Link to="/about" className="font-body text-small font-light text-kore-faint hover:text-kore-brass-lt transition-colors">
+                {t.footer.links.about}
+              </Link>
+              <Link to="/contact" className="font-body text-small font-light text-kore-faint hover:text-kore-brass-lt transition-colors">
+                {t.footer.links.contact}
+              </Link>
+            </div>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h4 className="font-body font-medium text-caption uppercase tracking-[0.16em] text-kore-faint mb-4">
+              Rechtliches
+            </h4>
+            <div className="flex flex-col gap-2">
+              <Link to="/legal" className="font-body text-small font-light text-kore-faint hover:text-kore-brass-lt transition-colors">
+                {t.footer.legal.imprint}
+              </Link>
+              <Link to="/legal#datenschutz" className="font-body text-small font-light text-kore-faint hover:text-kore-brass-lt transition-colors">
+                {t.footer.legal.privacy}
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-white/10 pt-6">
+          <p className="font-body text-small font-light text-kore-faint">
+            &copy; {year} {t.footer.copyright}
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}

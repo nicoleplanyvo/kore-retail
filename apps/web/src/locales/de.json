@@ -1,0 +1,125 @@
+{
+  "nav": {
+    "consulting": "Consulting",
+    "training": "Training",
+    "suite": "Suite",
+    "about": "Ueber KORE",
+    "contact": "Kontakt",
+    "cta": "Kostenloses Audit"
+  },
+  "hero": {
+    "title": "KORE",
+    "subtitle": "Retail Intelligence",
+    "lead": "Premium Retail Consulting fuer DACH.",
+    "cta_primary": "Kostenloses Audit anfragen",
+    "cta_secondary": "Services ansehen",
+    "stat_experience": "10+ Jahre Experience",
+    "stat_streams": "3 Revenue Streams",
+    "stat_region": "DACH-weit"
+  },
+  "services": {
+    "heading": "Was wir tun",
+    "consulting": {
+      "title": "Consulting",
+      "description": "Operative Audits, Mystery Shopping Analysen und massgeschneiderte Strategien fuer nachhaltige Performance-Steigerung im stationaeren Retail."
+    },
+    "training": {
+      "title": "Training Academy",
+      "description": "Digitale Lernpfade und praxisnahe Workshops fuer Verkaufsteams — von Kundenansprache bis Visual Merchandising."
+    },
+    "suite": {
+      "title": "KORE Suite",
+      "description": "Eigene digitale Tools fuer KPI-Tracking, Dienstplanung und Teamtraining — entwickelt fuer den stationaeren Retail."
+    }
+  },
+  "why": {
+    "heading": "Warum KORE",
+    "quote": "From the Floor. For the Floor.",
+    "text_1": "KORE wurde von einer Fuehrungskraft mit ueber einem Jahrzehnt Erfahrung im Premium Retail gegruendet. Keine Theorie, kein akademischer Abstand — sondern echtes Verstaendnis fuer das, was auf der Flaeche zaehlt.",
+    "text_2": "Wir kombinieren persoenliche Beratung mit skalierbaren digitalen Tools, um die operative Performance systematisch zu verbessern. Von der einzelnen Store-Analyse bis zur unternehmensweiten Trainingsstrategie."
+  },
+  "caseStudies": {
+    "heading": "Ergebnisse",
+    "cases": [
+      {
+        "client": "Leading Premium Retailer, DACH",
+        "result": "+23% Conversion nach operativem Audit",
+        "description": "Umfassende Analyse aller Touchpoints mit konkretem Massnahmenplan. Umsetzung innerhalb von 8 Wochen."
+      },
+      {
+        "client": "Lifestyle Brand, Deutschland",
+        "result": "+18% ATV durch gezieltes Upselling-Training",
+        "description": "Individuelles Trainingsprogramm fuer 45 Mitarbeiter in 6 Stores. Messbare Ergebnisse nach 4 Wochen."
+      },
+      {
+        "client": "Fashion Retailer, Oesterreich",
+        "result": "Reduktion der Personalkosten um 12%",
+        "description": "Budget-intelligente Dienstplanung basierend auf Revenue-Forecasts und Frequenzanalyse."
+      }
+    ]
+  },
+  "suiteTeaser": {
+    "heading": "KORE Suite",
+    "lead": "Digitale Tools, gebaut fuer den stationaeren Retail.",
+    "tools": [
+      {
+        "name": "KORE Train",
+        "description": "Interaktive Trainingsplattform fuer Retail-Teams. Lernpfade, Quizzes und Zertifikate — direkt auf dem Smartphone."
+      },
+      {
+        "name": "KORE Pulse",
+        "description": "KPI-Dashboard fuer Store Manager. Revenue, Conversion, ATV und Team-Performance in Echtzeit."
+      },
+      {
+        "name": "KORE Shift",
+        "description": "Budget-intelligenter Dienstplan. Vom Revenue-Forecast zur optimalen Stunden-Struktur."
+      }
+    ],
+    "cta": "Pricing ansehen"
+  },
+  "contactCta": {
+    "heading": "Bereit fuer den naechsten Schritt?",
+    "lead": "Starten Sie mit einem kostenlosen Audit — wir analysieren Ihren Store und zeigen konkrete Optimierungspotenziale.",
+    "cta": "Kostenloses Audit anfragen"
+  },
+  "footer": {
+    "tagline": "Premium Retail Consulting fuer DACH",
+    "links": {
+      "consulting": "Consulting",
+      "training": "Training",
+      "suite": "KORE Suite",
+      "about": "Ueber KORE",
+      "contact": "Kontakt"
+    },
+    "legal": {
+      "imprint": "Impressum",
+      "privacy": "Datenschutz"
+    },
+    "copyright": "gadplan GmbH. Alle Rechte vorbehalten."
+  },
+  "audit": {
+    "heading": "Kostenloses Audit anfragen",
+    "lead": "Wir analysieren Ihren Store und identifizieren konkrete Optimierungspotenziale — kostenlos und unverbindlich.",
+    "form": {
+      "name": "Ihr Name",
+      "company": "Unternehmen",
+      "storeCount": "Anzahl Stores",
+      "challenge": "Ihre groesste Herausforderung",
+      "email": "E-Mail-Adresse",
+      "submit": "Audit anfragen",
+      "success": "Vielen Dank! Wir melden uns innerhalb von 24 Stunden bei Ihnen."
+    }
+  },
+  "contact": {
+    "heading": "Kontakt",
+    "lead": "Haben Sie Fragen oder moechten Sie mehr erfahren? Schreiben Sie uns.",
+    "form": {
+      "name": "Ihr Name",
+      "email": "E-Mail-Adresse",
+      "company": "Unternehmen (optional)",
+      "message": "Ihre Nachricht",
+      "submit": "Nachricht senden",
+      "success": "Vielen Dank fuer Ihre Nachricht! Wir melden uns in Kuerze."
+    }
+  }
+}

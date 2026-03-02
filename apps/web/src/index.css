@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-body font-light text-kore-ink bg-kore-bg;
+  }
+
+  ::selection {
+    background-color: #C9B898;
+    color: #1C1A17;
+  }
+
+  h1, h2, h3 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-kore-ink text-kore-white
+           px-7 py-3 font-body font-medium text-caption uppercase tracking-widest
+           transition-all duration-200 hover:bg-kore-brass cursor-pointer;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 bg-transparent text-kore-ink
+           border border-kore-ink px-7 py-3 font-body font-medium text-caption uppercase
+           tracking-widest transition-all duration-200
+           hover:border-kore-brass hover:text-kore-brass cursor-pointer;
+  }
+
+  .btn-brass {
+    @apply inline-flex items-center justify-center gap-2 bg-kore-brass text-kore-white
+           px-7 py-3 font-body font-medium text-caption uppercase tracking-widest
+           transition-all duration-200 hover:bg-kore-brass-dk cursor-pointer;
+  }
+
+  .section-padding {
+    @apply py-section;
+  }
+
+  .container-default {
+    @apply w-full max-w-[1200px] mx-auto px-6;
+  }
+
+  .container-narrow {
+    @apply w-full max-w-[800px] mx-auto px-6;
+  }
+
+  .card-default {
+    @apply bg-kore-white border border-kore-border rounded-md p-8;
+  }
+
+  .card-accent {
+    @apply bg-kore-white border border-kore-border rounded-md p-8 border-l-[3px] border-l-kore-brass;
+  }
+
+  .input-default {
+    @apply w-full bg-kore-white border border-kore-border p-3 px-4
+           font-body font-light text-body text-kore-ink outline-none
+           transition-colors duration-200 focus:border-kore-brass;
+    border-radius: 0;
+  }
+
+  .label-default {
+    @apply font-body font-medium text-caption uppercase tracking-[0.16em] text-kore-mid;
+  }
+
+  .tag-default {
+    @apply inline-block border border-kore-border py-1 px-2.5
+           font-body font-medium text-caption uppercase tracking-widest text-kore-mid;
+  }
+}

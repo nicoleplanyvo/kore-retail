@@ -1,0 +1,23 @@
+{
+  "name": "kore",
+  "private": true,
+  "version": "0.0.1",
+  "description": "KORE — Premium Retail Consulting",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "clean": "turbo clean",
+    "typecheck": "turbo typecheck"
+  },
+  "packageManager": "pnpm@10.30.3",
+  "engines": {
+    "node": ">=20"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild"]
+  },
+  "devDependencies": {
+    "turbo": "^2.8.12"
+  }
+}
