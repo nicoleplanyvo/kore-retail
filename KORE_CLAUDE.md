@@ -1,5 +1,5 @@
 # KORE — Master Briefing für Claude Code
-> Vertraulich · gadplan GmbH · Stand März 2026  
+> Vertraulich · planyvo GmbH · Stand März 2026  
 > Dieses Dokument ist die einzige Source of Truth für alle KORE-Entwicklungsarbeiten.
 
 ---
@@ -15,11 +15,11 @@
 | **KORE Pulse** | SaaS (KPI-Dashboard) | P2 — Q3 2026 |
 | **KORE Shift** | SaaS (Dienstplan-Tool) | P3 — Q4 2026 |
 
-**Inhaberin:** Nici — Store Manager bei Ralph Lauren Roermond Outlet (10+ Jahre Premium Retail Management), gleichzeitig Unternehmerin (gadplan GmbH, Meerbusch). Arbeitet anonym aufgrund ihrer RL-Position.
+**Inhaberin:** Nici — Store Manager bei Ralph Lauren Roermond Outlet (10+ Jahre Premium Retail Management), gleichzeitig Unternehmerin (planyvo GmbH, Meerbusch). Arbeitet anonym aufgrund ihrer RL-Position.
 
 **Co-Founder:** Mathis — technischer Lead, übernimmt Backend und Infrastruktur.
 
-**Rechtlicher Rahmen:** KORE läuft unter gadplan GmbH. Kein Naming von Ralph Lauren in irgendeinem öffentlich sichtbaren Content.
+**Rechtlicher Rahmen:** KORE läuft unter planyvo GmbH. Kein Naming von Ralph Lauren in irgendeinem öffentlich sichtbaren Content.
 
 ---
 
@@ -307,7 +307,7 @@ Lead-Generation + Credibility-Aufbau. Potenzielle Kunden sollen eine kostenlose 
 
 8. FOOTER
    - Logo + Tagline + Links + Impressum + DSGVO
-   - © gadplan GmbH
+   - © planyvo GmbH
 ```
 
 ### Anforderungen
@@ -866,7 +866,7 @@ export const calculateProgress = (completedLessons: number, totalLessons: number
 
 - Alle Content-Texte auf der Website und in Apps auf **Deutsch (DE)**
 - **DSGVO:** Cookie-Consent, Datenschutzerklärung, Recht auf Löschung implementieren
-- **Impressum:** gadplan GmbH, Meerbusch — echter Inhalt wird von Nici geliefert
+- **Impressum:** planyvo GmbH, Meerbusch — echter Inhalt wird von Nici geliefert
 - **Keine Erwähnung von:** Ralph Lauren, Roermond, Nicis Nachnamen, anderen Arbeitgebern
 - **Keine Stock-Fotos** ohne Lizenz — Illustrations oder reine Typografie-Layouts bevorzugen
 - **SSL:** Immer HTTPS, Vercel handled das automatisch

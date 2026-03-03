@@ -10,13 +10,14 @@ export function CookieBanner() {
     }
   }, []);
 
-  const handleAccept = () => {
-    localStorage.setItem('kore-cookie-consent', 'essential');
+  const handleAcceptAll = () => {
+    localStorage.setItem('kore-cookie-consent', 'analytics');
     setVisible(false);
+    window.location.reload(); // Reload to trigger GA4 loading
   };
 
-  const handleDecline = () => {
-    localStorage.setItem('kore-cookie-consent', 'declined');
+  const handleEssentialOnly = () => {
+    localStorage.setItem('kore-cookie-consent', 'essential');
     setVisible(false);
   };
 
@@ -24,19 +25,21 @@ export function CookieBanner() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 bg-kore-white border-t border-kore-border shadow-lg">
-      <div className="container-default py-4 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
-        <p className="font-body text-small font-light text-kore-ink max-w-2xl">
-          Wir verwenden nur technisch notwendige Cookies, um die Website-Funktionalitaet sicherzustellen. Keine Tracking-Cookies, kein Google Analytics.{' '}
-          <a href="/legal#datenschutz" className="underline hover:text-kore-brass">
-            Mehr erfahren
-          </a>
-        </p>
+      <div className="container-default py-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
+        <div className="max-w-2xl">
+          <p className="font-body text-small text-kore-ink">
+            Wir verwenden technisch notwendige Cookies und optional Google Analytics (mit anonymisierter IP) zur Verbesserung unserer Website.{' '}
+            <a href="/legal#datenschutz" className="underline hover:text-kore-brass">
+              Datenschutzerklärung
+            </a>
+          </p>
+        </div>
         <div className="flex gap-3 shrink-0">
-          <button onClick={handleDecline} className="btn-secondary text-[0.6rem] py-2 px-4">
-            Ablehnen
+          <button onClick={handleEssentialOnly} className="btn-secondary text-[0.6rem] py-2 px-4">
+            Nur notwendige
           </button>
-          <button onClick={handleAccept} className="btn-primary text-[0.6rem] py-2 px-4">
-            Verstanden
+          <button onClick={handleAcceptAll} className="btn-primary text-[0.6rem] py-2 px-4">
+            Alle akzeptieren
           </button>
         </div>
       </div>

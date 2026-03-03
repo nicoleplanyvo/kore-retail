@@ -16,7 +16,7 @@
   }
 
   body {
-    @apply font-body font-light text-kore-ink bg-kore-bg;
+    @apply font-body font-normal text-kore-ink bg-kore-bg;
   }
 
   ::selection {
@@ -30,25 +30,30 @@
 }
 
 @layer components {
+  /* === Buttons — mit Hover-Lift und subtilen Schatten === */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 bg-kore-ink text-kore-white
-           px-7 py-3 font-body font-medium text-caption uppercase tracking-widest
-           transition-all duration-200 hover:bg-kore-brass cursor-pointer;
+           px-7 py-3.5 font-body font-medium text-caption uppercase tracking-widest
+           transition-all duration-300 hover:bg-kore-brass cursor-pointer
+           hover:shadow-md hover:-translate-y-[1px];
   }
 
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2 bg-transparent text-kore-ink
-           border border-kore-ink px-7 py-3 font-body font-medium text-caption uppercase
-           tracking-widest transition-all duration-200
-           hover:border-kore-brass hover:text-kore-brass cursor-pointer;
+           border border-kore-ink px-7 py-3.5 font-body font-medium text-caption uppercase
+           tracking-widest transition-all duration-300
+           hover:border-kore-brass hover:text-kore-brass cursor-pointer
+           hover:shadow-sm hover:-translate-y-[1px];
   }
 
   .btn-brass {
     @apply inline-flex items-center justify-center gap-2 bg-kore-brass text-kore-white
-           px-7 py-3 font-body font-medium text-caption uppercase tracking-widest
-           transition-all duration-200 hover:bg-kore-brass-dk cursor-pointer;
+           px-7 py-3.5 font-body font-medium text-caption uppercase tracking-widest
+           transition-all duration-300 hover:bg-kore-brass-dk cursor-pointer
+           hover:shadow-md hover:-translate-y-[1px];
   }
 
+  /* === Layout === */
   .section-padding {
     @apply py-section;
   }
@@ -61,21 +66,26 @@
     @apply w-full max-w-[800px] mx-auto px-6;
   }
 
+  /* === Cards — mit Hover-Effekten und Tiefe === */
   .card-default {
-    @apply bg-kore-white border border-kore-border rounded-md p-8;
+    @apply bg-kore-white border border-kore-border rounded-md p-8
+           transition-all duration-300 hover:shadow-md hover:border-kore-brass-lt/50;
   }
 
   .card-accent {
-    @apply bg-kore-white border border-kore-border rounded-md p-8 border-l-[3px] border-l-kore-brass;
+    @apply bg-kore-white border border-kore-border rounded-md p-8 border-l-[3px] border-l-kore-brass
+           transition-all duration-300 hover:shadow-md;
   }
 
+  /* === Inputs === */
   .input-default {
-    @apply w-full bg-kore-white border border-kore-border p-3 px-4
-           font-body font-light text-body text-kore-ink outline-none
-           transition-colors duration-200 focus:border-kore-brass;
+    @apply w-full bg-kore-white border border-kore-border p-3.5 px-4
+           font-body font-normal text-body text-kore-ink outline-none
+           transition-all duration-200 focus:border-kore-brass focus:shadow-sm;
     border-radius: 0;
   }
 
+  /* === Labels & Tags === */
   .label-default {
     @apply font-body font-medium text-caption uppercase tracking-[0.16em] text-kore-mid;
   }
@@ -84,4 +94,56 @@
     @apply inline-block border border-kore-border py-1 px-2.5
            font-body font-medium text-caption uppercase tracking-widest text-kore-mid;
   }
+}
+
+/* === Subtile Animationen für Scroll-Elemente === */
+@layer utilities {
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out both;
+  }
+
+  .animate-fade-up-delay-1 {
+    animation: fadeUp 0.6s ease-out 0.1s both;
+  }
+
+  .animate-fade-up-delay-2 {
+    animation: fadeUp 0.6s ease-out 0.2s both;
+  }
+
+  .animate-fade-up-delay-3 {
+    animation: fadeUp 0.6s ease-out 0.3s both;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Dekorative Linie für Premium-Feel === */
+.brass-line::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 2px;
+  background-color: #9E8460;
+  margin-top: 24px;
+}
+
+/* === Gradient Overlay für dunkle Sections === */
+.gradient-dark {
+  background: linear-gradient(135deg, #1C1A17 0%, #2A2622 50%, #1C1A17 100%);
+}
+
+/* === Subtle Pattern für Surface Sections === */
+.surface-pattern {
+  background-color: #EDEAE4;
+  background-image: radial-gradient(#D8D4CC 0.5px, transparent 0.5px);
+  background-size: 24px 24px;
 }

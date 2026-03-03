@@ -8,20 +8,27 @@ import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { AuditPage } from './pages/AuditPage';
 import { LegalPage } from './pages/LegalPage';
+import { useAnalytics } from './hooks/useAnalytics';
+import { ScrollToTop } from './components/ScrollToTop';
 
 export function App() {
+  useAnalytics();
+
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/consulting" element={<ConsultingPage />} />
-        <Route path="/training" element={<TrainingPage />} />
-        <Route path="/suite" element={<SuitePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/audit" element={<AuditPage />} />
-        <Route path="/legal" element={<LegalPage />} />
-      </Route>
-    </Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/consulting" element={<ConsultingPage />} />
+          <Route path="/training" element={<TrainingPage />} />
+          <Route path="/suite" element={<SuitePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/audit" element={<AuditPage />} />
+          <Route path="/legal" element={<LegalPage />} />
+        </Route>
+      </Routes>
+    </>
   );
 }

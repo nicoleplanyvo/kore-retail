@@ -11,7 +11,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <span className="font-display text-2xl font-light">KORE</span>
-            <p className="font-body text-small font-light text-kore-faint mt-3">
+            <p className="font-body text-small font-normal text-kore-faint mt-3">
               {t.footer.tagline}
             </p>
           </div>
@@ -22,19 +22,19 @@ export function Footer() {
               Navigation
             </h4>
             <div className="flex flex-col gap-2">
-              <Link to="/consulting" className="font-body text-small font-light text-kore-faint hover:text-kore-brass-lt transition-colors">
+              <Link to="/consulting" className="font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
                 {t.footer.links.consulting}
               </Link>
-              <Link to="/training" className="font-body text-small font-light text-kore-faint hover:text-kore-brass-lt transition-colors">
+              <Link to="/training" className="font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
                 {t.footer.links.training}
               </Link>
-              <Link to="/suite" className="font-body text-small font-light text-kore-faint hover:text-kore-brass-lt transition-colors">
+              <Link to="/suite" className="font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
                 {t.footer.links.suite}
               </Link>
-              <Link to="/about" className="font-body text-small font-light text-kore-faint hover:text-kore-brass-lt transition-colors">
+              <Link to="/about" className="font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
                 {t.footer.links.about}
               </Link>
-              <Link to="/contact" className="font-body text-small font-light text-kore-faint hover:text-kore-brass-lt transition-colors">
+              <Link to="/contact" className="font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
                 {t.footer.links.contact}
               </Link>
             </div>
@@ -46,19 +46,31 @@ export function Footer() {
               Rechtliches
             </h4>
             <div className="flex flex-col gap-2">
-              <Link to="/legal" className="font-body text-small font-light text-kore-faint hover:text-kore-brass-lt transition-colors">
+              <Link to="/legal" className="font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
                 {t.footer.legal.imprint}
               </Link>
-              <Link to="/legal#datenschutz" className="font-body text-small font-light text-kore-faint hover:text-kore-brass-lt transition-colors">
+              <Link to="/legal#datenschutz" className="font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
                 {t.footer.legal.privacy}
               </Link>
+              <Link to="/legal#agb" className="font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
+                AGB
+              </Link>
+              <button
+                onClick={() => {
+                  localStorage.removeItem('kore-cookie-consent');
+                  window.location.reload();
+                }}
+                className="font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors text-left cursor-pointer"
+              >
+                Cookie-Einstellungen
+              </button>
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-6">
-          <p className="font-body text-small font-light text-kore-faint">
+          <p className="font-body text-small font-normal text-kore-faint">
             &copy; {year} {t.footer.copyright}
           </p>
         </div>

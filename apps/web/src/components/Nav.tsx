@@ -29,7 +29,7 @@ export function Nav() {
             <Link
               key={link.href}
               to={link.href}
-              className={`font-body text-small font-light transition-colors duration-200 hover:text-kore-brass ${
+              className={`font-body text-small font-normal transition-colors duration-200 hover:text-kore-brass ${
                 location.pathname === link.href ? 'text-kore-brass' : 'text-kore-ink'
               }`}
             >
@@ -45,7 +45,7 @@ export function Nav() {
         <button
           className="md:hidden p-2 text-kore-ink"
           onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label={mobileOpen ? 'Menue schliessen' : 'Menue oeffnen'}
+          aria-label={mobileOpen ? 'Menü schließen' : 'Menü öffnen'}
         >
           {mobileOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
@@ -60,7 +60,7 @@ export function Nav() {
                 key={link.href}
                 to={link.href}
                 onClick={() => setMobileOpen(false)}
-                className={`font-body text-body font-light py-2 transition-colors duration-200 hover:text-kore-brass ${
+                className={`font-body text-body font-normal py-2 transition-colors duration-200 hover:text-kore-brass ${
                   location.pathname === link.href ? 'text-kore-brass' : 'text-kore-ink'
                 }`}
               >

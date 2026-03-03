@@ -1,0 +1,9 @@
+# KORE — koreretail.de
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://koreretail.de/sitemap.xml
+
+# Disallow API and internal paths
+Disallow: /api/

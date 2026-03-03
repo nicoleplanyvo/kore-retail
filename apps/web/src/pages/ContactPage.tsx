@@ -4,9 +4,16 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { contactFormSchema, type ContactFormInput } from '@kore/validators';
 import { Send } from 'lucide-react';
 import t from '../locales/de.json';
+import { usePageMeta } from '../hooks/usePageMeta';
 
 export function ContactPage() {
+  usePageMeta({
+    title: 'Kontakt | KORE Retail Intelligence — Beratung für den Einzelhandel',
+    description: 'Kontaktieren Sie KORE für Retail Consulting, Verkaufstrainings und maßgeschneiderte digitale Tools im Einzelhandel. Premium Beratung für DACH.',
+  });
+
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -16,10 +23,26 @@ export function ContactPage() {
     resolver: zodResolver(contactFormSchema),
   });
 
+  const API_URL = import.meta.env.VITE_API_URL ?? '';
+
   const onSubmit = async (data: ContactFormInput) => {
-    // TODO: API call to backend
-    console.log('Contact form data:', data);
-    setSubmitted(true);
+    setSubmitError(null);
+    try {
+      const res = await fetch(`${API_URL}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error ?? 'Anfrage fehlgeschlagen');
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error ? err.message : 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.'
+      );
+    }
   };
 
   return (
@@ -37,7 +60,7 @@ export function ContactPage() {
           {submitted ? (
             <div className="card-accent">
               <p className="font-display text-h3 text-kore-ink mb-2">Vielen Dank!</p>
-              <p className="font-body text-body font-light text-kore-mid">
+              <p className="font-body text-body font-normal text-kore-mid">
                 {t.contact.form.success}
               </p>
             </div>
@@ -89,9 +112,15 @@ export function ContactPage() {
                 )}
               </div>
 
+              {submitError && (
+                <div className="bg-kore-error/10 border border-kore-error/30 rounded-md p-4">
+                  <p className="font-body text-small text-kore-error">{submitError}</p>
+                </div>
+              )}
+
               <button type="submit" disabled={isSubmitting} className="btn-primary self-start">
                 <Send size={16} />
-                {t.contact.form.submit}
+                {isSubmitting ? 'Wird gesendet...' : t.contact.form.submit}
               </button>
             </form>
           )}
