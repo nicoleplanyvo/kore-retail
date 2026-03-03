@@ -121,7 +121,7 @@ export function ConsultingPage() {
             <p className="label-default">Unser Prozess</p>
             <div className="flex-1 h-px bg-kore-border" />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
             {[
               { step: '01', title: 'Verstehen', desc: 'Gemeinsame Analyse Ihrer Painpoints und Ziele' },
               { step: '02', title: 'Diagnostizieren', desc: 'Datenbasierte Findings und Ursachenanalyse' },

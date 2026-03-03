@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "kore-web",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@kore/web", "dev"],
+      "port": 5173
+    },
+    {
+      "name": "dashboard",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@kore/dashboard", "dev"],
+      "port": 5174
+    },
+    {
+      "name": "api",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@kore/api", "dev"],
+      "port": 3001
+    }
+  ]
+}

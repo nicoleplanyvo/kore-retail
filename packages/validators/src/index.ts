@@ -58,6 +58,29 @@ export const kpiEntrySchema = z.object({
   staffHours: z.number().min(0).optional(),
 });
 
+// === Tenant Management (Dashboard) ===
+
+export const tenantCreateSchema = z.object({
+  name: z.string().min(2, 'Name muss mindestens 2 Zeichen haben').max(100),
+  slug: z
+    .string()
+    .min(2, 'Slug muss mindestens 2 Zeichen haben')
+    .max(50)
+    .regex(/^[a-z0-9-]+$/, 'Slug darf nur Kleinbuchstaben, Zahlen und Bindestriche enthalten'),
+  plan: z.enum(['STARTER', 'PROFESSIONAL', 'ENTERPRISE']),
+  contactEmail: z.string().email('Bitte gültige E-Mail-Adresse eingeben').optional().or(z.literal('')),
+  contactName: z.string().max(100).optional().or(z.literal('')),
+  contactPhone: z.string().max(30).optional().or(z.literal('')),
+  maxUsers: z.number().int().min(1).max(10000).optional(),
+});
+
+export const tenantUpdateSchema = tenantCreateSchema.partial();
+
+export const toolAssignSchema = z.object({
+  tenantId: z.string().min(1),
+  tool: z.enum(['TRAIN', 'PULSE', 'SHIFT']),
+});
+
 // === Type Exports ===
 
 export type AuditRequestInput = z.infer<typeof auditRequestSchema>;
@@ -65,3 +88,6 @@ export type ContactFormInput = z.infer<typeof contactFormSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
 export type CourseCreateInput = z.infer<typeof courseCreateSchema>;
 export type KPIEntryInput = z.infer<typeof kpiEntrySchema>;
+export type TenantCreateInput = z.infer<typeof tenantCreateSchema>;
+export type TenantUpdateInput = z.infer<typeof tenantUpdateSchema>;
+export type ToolAssignInput = z.infer<typeof toolAssignSchema>;

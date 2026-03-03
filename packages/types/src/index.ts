@@ -48,6 +48,61 @@ export interface KPIEntryInput {
   staffHours?: number;
 }
 
+// === KORE Tools ===
+
+export type KoreTool = 'TRAIN' | 'PULSE' | 'SHIFT';
+
+export interface ToolAssignment {
+  id: string;
+  tenantId: string;
+  tool: KoreTool;
+  assignedAt: string;
+  isActive: boolean;
+}
+
+// === Tenant ===
+
+export interface Tenant {
+  id: string;
+  name: string;
+  slug: string;
+  plan: Plan;
+  status: SubStatus;
+  contactEmail: string | null;
+  contactName: string | null;
+  contactPhone: string | null;
+  maxUsers: number;
+  logoUrl: string | null;
+  createdAt: string;
+  updatedAt: string;
+  tools: ToolAssignment[];
+  _count?: { users: number };
+}
+
+// === Dashboard ===
+
+export interface DashboardStats {
+  totalTenants: number;
+  activeTenants: number;
+  tenantsByPlan: Record<Plan, number>;
+  toolCounts: Record<KoreTool, number>;
+}
+
+export interface PaginatedResponse<T> {
+  data: T[];
+  total: number;
+  page: number;
+  pageSize: number;
+}
+
+export interface TenantListParams {
+  page?: number;
+  pageSize?: number;
+  search?: string;
+  plan?: Plan;
+  status?: SubStatus;
+}
+
 // === Navigation ===
 
 export interface NavItem {

@@ -6,3 +6,7 @@ export { Textarea } from './Textarea';
 export { Divider } from './Divider';
 export { Container } from './Container';
 export { Section } from './Section';
+export { Select } from './Select';
+export { Badge } from './Badge';
+export { Table, Thead, Tbody, Th, Tr, Td } from './Table';
+export { Toggle } from './Toggle';

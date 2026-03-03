@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import t from '../locales/de.json';
@@ -14,6 +14,14 @@ const navLinks = [
 export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+
+  // Body Scroll Lock when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 h-14 bg-kore-bg/[0.94] backdrop-blur-[10px] border-b border-kore-border">
@@ -36,14 +44,14 @@ export function Nav() {
               {link.label}
             </Link>
           ))}
-          <Link to="/audit" className="btn-brass text-[0.65rem] py-2 px-5">
+          <Link to="/audit" className="btn-brass text-[0.65rem] py-2.5 px-6">
             {t.nav.cta}
           </Link>
         </div>
 
-        {/* Mobile Toggle */}
+        {/* Mobile Toggle — 44px Touch-Target */}
         <button
-          className="md:hidden p-2 text-kore-ink"
+          className="md:hidden p-3 -mr-3 text-kore-ink"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? 'Menü schließen' : 'Menü öffnen'}
         >
@@ -54,13 +62,13 @@ export function Nav() {
       {/* Mobile Menu */}
       {mobileOpen && (
         <div className="md:hidden bg-kore-bg border-b border-kore-border">
-          <div className="container-default py-6 flex flex-col gap-4">
+          <div className="container-default py-6 flex flex-col gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
                 onClick={() => setMobileOpen(false)}
-                className={`font-body text-body font-normal py-2 transition-colors duration-200 hover:text-kore-brass ${
+                className={`font-body text-body font-normal py-3 transition-colors duration-200 hover:text-kore-brass ${
                   location.pathname === link.href ? 'text-kore-brass' : 'text-kore-ink'
                 }`}
               >
@@ -70,7 +78,7 @@ export function Nav() {
             <Link
               to="/audit"
               onClick={() => setMobileOpen(false)}
-              className="btn-brass text-center mt-2"
+              className="btn-brass text-center mt-4"
             >
               {t.nav.cta}
             </Link>

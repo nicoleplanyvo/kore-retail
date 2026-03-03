@@ -21,20 +21,20 @@ export function Footer() {
             <h4 className="font-body font-medium text-caption uppercase tracking-[0.16em] text-kore-faint mb-4">
               Navigation
             </h4>
-            <div className="flex flex-col gap-2">
-              <Link to="/consulting" className="font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
+            <div className="flex flex-col">
+              <Link to="/consulting" className="py-1.5 font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
                 {t.footer.links.consulting}
               </Link>
-              <Link to="/training" className="font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
+              <Link to="/training" className="py-1.5 font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
                 {t.footer.links.training}
               </Link>
-              <Link to="/suite" className="font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
+              <Link to="/suite" className="py-1.5 font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
                 {t.footer.links.suite}
               </Link>
-              <Link to="/about" className="font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
+              <Link to="/about" className="py-1.5 font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
                 {t.footer.links.about}
               </Link>
-              <Link to="/contact" className="font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
+              <Link to="/contact" className="py-1.5 font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
                 {t.footer.links.contact}
               </Link>
             </div>
@@ -45,14 +45,14 @@ export function Footer() {
             <h4 className="font-body font-medium text-caption uppercase tracking-[0.16em] text-kore-faint mb-4">
               Rechtliches
             </h4>
-            <div className="flex flex-col gap-2">
-              <Link to="/legal" className="font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
+            <div className="flex flex-col">
+              <Link to="/legal" className="py-1.5 font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
                 {t.footer.legal.imprint}
               </Link>
-              <Link to="/legal#datenschutz" className="font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
+              <Link to="/legal#datenschutz" className="py-1.5 font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
                 {t.footer.legal.privacy}
               </Link>
-              <Link to="/legal#agb" className="font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
+              <Link to="/legal#agb" className="py-1.5 font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors">
                 AGB
               </Link>
               <button
@@ -60,7 +60,7 @@ export function Footer() {
                   localStorage.removeItem('kore-cookie-consent');
                   window.location.reload();
                 }}
-                className="font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors text-left cursor-pointer"
+                className="py-1.5 font-body text-small font-normal text-kore-faint hover:text-kore-brass-lt transition-colors text-left cursor-pointer"
               >
                 Cookie-Einstellungen
               </button>

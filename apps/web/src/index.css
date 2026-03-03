@@ -55,7 +55,7 @@
 
   /* === Layout === */
   .section-padding {
-    @apply py-section;
+    @apply py-12 md:py-16 lg:py-section;
   }
 
   .container-default {

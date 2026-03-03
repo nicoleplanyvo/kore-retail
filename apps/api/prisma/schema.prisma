@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// === Enums ===
+
+enum UserRole {
+  kore_admin
+  tenant_admin
+  store_manager
+  learner
+}
+
+enum Plan {
+  STARTER
+  PROFESSIONAL
+  ENTERPRISE
+}
+
+enum SubStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELED
+  TRIALING
+}
+
+enum KoreTool {
+  TRAIN
+  PULSE
+  SHIFT
+}
+
+// === Models ===
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String
+  passwordHash String
+  role         UserRole
+  tenantId     String?
+  tenant       Tenant?   @relation(fields: [tenantId], references: [id])
+  isActive     Boolean   @default(true)
+  lastLoginAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Tenant {
+  id           String           @id @default(cuid())
+  name         String
+  slug         String           @unique
+  plan         Plan             @default(STARTER)
+  status       SubStatus        @default(ACTIVE)
+  contactEmail String?
+  contactName  String?
+  contactPhone String?
+  maxUsers     Int              @default(15)
+  logoUrl      String?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  users        User[]
+  tools        ToolAssignment[]
+  subscription Subscription?
+}
+
+model ToolAssignment {
+  id         String   @id @default(cuid())
+  tenantId   String
+  tenant     Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  tool       KoreTool
+  assignedAt DateTime @default(now())
+  isActive   Boolean  @default(true)
+
+  @@unique([tenantId, tool])
+}
+
+model Subscription {
+  id               String    @id @default(cuid())
+  tenantId         String    @unique
+  tenant           Tenant    @relation(fields: [tenantId], references: [id])
+  stripeCustomerId String    @unique
+  stripeSubId      String    @unique
+  plan             Plan
+  status           SubStatus
+  currentPeriodEnd DateTime
+  cancelAtPeriod   Boolean   @default(false)
+}

@@ -119,8 +119,10 @@ export function SuitePage() {
               </div>
             </div>
             {/* Mobile: Mockup unter Text */}
-            <div className="mt-8 flex justify-center lg:hidden">
-              <TrainMockup />
+            <div className="mt-8 lg:hidden overflow-x-auto -mx-6 px-6">
+              <div className="min-w-[480px]">
+                <TrainMockup />
+              </div>
             </div>
           </div>
 
@@ -141,8 +143,10 @@ export function SuitePage() {
               </div>
             </div>
             {/* Mobile: Mockup unter Text */}
-            <div className="mt-8 lg:hidden">
-              <ShiftMockup />
+            <div className="mt-8 lg:hidden overflow-x-auto -mx-6 px-6">
+              <div className="min-w-[520px]">
+                <ShiftMockup />
+              </div>
             </div>
           </div>
 
@@ -163,8 +167,10 @@ export function SuitePage() {
               </div>
             </div>
             {/* Mobile: Mockup unter Text */}
-            <div className="mt-8 lg:hidden">
-              <AuditMockup />
+            <div className="mt-8 lg:hidden overflow-x-auto -mx-6 px-6">
+              <div className="min-w-[480px]">
+                <AuditMockup />
+              </div>
             </div>
           </div>
         </div>
@@ -200,7 +206,7 @@ export function SuitePage() {
                 ))}
               </div>
             </div>
-            <div className="hidden lg:flex flex-col gap-4">
+            <div className="flex flex-col gap-4 mt-8 lg:mt-0">
               {[
                 { q: '„Wir brauchen ein Tool für Mystery Shopping."', status: 'Gebaut.' },
                 { q: '„Unser Wareneingang hat keinen digitalen Prozess."', status: 'Gebaut.' },

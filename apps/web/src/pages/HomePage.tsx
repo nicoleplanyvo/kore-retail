@@ -45,7 +45,7 @@ export function HomePage() {
           {/* Stat Bar */}
           <div className="mt-20 pt-8 border-t border-kore-border grid grid-cols-1 sm:grid-cols-3 gap-8">
             <div className="flex items-baseline gap-3">
-              <span className="font-display text-[2.8rem] font-light text-kore-brass leading-none">
+              <span className="font-display text-3xl sm:text-[2.8rem] font-light text-kore-brass leading-none">
                 10+
               </span>
               <span className="font-body text-small font-normal text-kore-mid">
@@ -54,19 +54,19 @@ export function HomePage() {
             </div>
             <div>
               <div className="flex items-baseline gap-3">
-                <span className="font-display text-[2.8rem] font-light text-kore-brass leading-none">
+                <span className="font-display text-3xl sm:text-[2.8rem] font-light text-kore-brass leading-none">
                   3
                 </span>
                 <span className="font-body text-small font-normal text-kore-mid">
                   {t.hero.stat_streams}
                 </span>
               </div>
-              <p className="font-body text-small font-normal text-kore-brass/70 mt-1 pl-[3.4rem]">
+              <p className="font-body text-small font-normal text-kore-brass/70 mt-1 pl-[2.6rem] sm:pl-[3.4rem]">
                 {t.hero.stat_streams_sub}
               </p>
             </div>
             <div className="flex items-baseline gap-3">
-              <span className="font-display text-[2.8rem] font-light text-kore-brass leading-none">
+              <span className="font-display text-3xl sm:text-[2.8rem] font-light text-kore-brass leading-none">
                 DACH
               </span>
               <span className="font-body text-small font-normal text-kore-mid">
@@ -120,7 +120,7 @@ export function HomePage() {
             <p className="label-default">{t.why.heading}</p>
             <div className="flex-1 h-px bg-kore-border" />
           </div>
-          <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
             <div className="relative">
               {/* Dekorativer Rahmen hinter dem Quote */}
               <div className="absolute -left-4 -top-4 w-24 h-24 border border-kore-brass-lt/30" />

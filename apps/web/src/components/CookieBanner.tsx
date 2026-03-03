@@ -34,11 +34,11 @@ export function CookieBanner() {
             </a>
           </p>
         </div>
-        <div className="flex gap-3 shrink-0">
-          <button onClick={handleEssentialOnly} className="btn-secondary text-[0.6rem] py-2 px-4">
+        <div className="flex gap-3 shrink-0 w-full sm:w-auto">
+          <button onClick={handleEssentialOnly} className="btn-secondary text-[0.7rem] py-3 px-5 flex-1 sm:flex-none">
             Nur notwendige
           </button>
-          <button onClick={handleAcceptAll} className="btn-primary text-[0.6rem] py-2 px-4">
+          <button onClick={handleAcceptAll} className="btn-primary text-[0.7rem] py-3 px-5 flex-1 sm:flex-none">
             Alle akzeptieren
           </button>
         </div>
