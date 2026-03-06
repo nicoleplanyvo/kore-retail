@@ -3,8 +3,9 @@
 ## Architektur
 
 ```
-koreretail.de          → Statische SPA (React)     → apps/web/dist/
-api.koreretail.de      → Node.js API (Express)     → apps/api/
+kore-retail.de              → Statische SPA (React)     → apps/web/dist/
+dashboard.kore-retail.de    → Statische SPA (React)     → apps/dashboard/dist/
+api.kore-retail.de          → Node.js API (Express)     → apps/api/
 ```
 
 ---
@@ -15,62 +16,74 @@ api.koreretail.de      → Node.js API (Express)     → apps/api/
 # Node.js 20+ installiert (über Plesk Node.js Extension)
 node -v   # >= 20.0.0
 
-# PM2 global installieren
-npm install -g pm2
+# pnpm und PM2 global installieren
+npm install -g pnpm pm2
 ```
 
 ---
 
 ## 2. Domain-Setup in Plesk
 
-### 2a. Frontend: `koreretail.de`
+### 2a. Frontend: `kore-retail.de`
 
-1. **Domain hinzufügen**: `koreretail.de`
-2. **Document Root**: `/var/www/vhosts/koreretail.de/httpdocs`
+1. **Domain hinzufügen**: `kore-retail.de`
+2. **Document Root**: `/var/www/vhosts/kore-retail.de/httpdocs`
 3. **SSL/TLS**: Let's Encrypt Zertifikat aktivieren
-4. **Apache .htaccess**: Wird automatisch aus `apps/web/dist/.htaccess` verwendet
-5. Die gebauten Dateien aus `apps/web/dist/` in den Document Root kopieren
+4. **Apache .htaccess** für SPA-Routing erstellen:
 
-### 2b. API: `api.koreretail.de`
+```apache
+# /var/www/vhosts/kore-retail.de/httpdocs/.htaccess
+RewriteEngine On
+RewriteBase /
 
-1. **Subdomain hinzufügen**: `api.koreretail.de`
+# Bestehende Dateien und Ordner direkt ausliefern
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Alles andere an index.html weiterleiten (SPA)
+RewriteRule ^ index.html [QSA,L]
+
+# Caching für statische Assets
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# Gzip-Kompression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+</IfModule>
+```
+
+### 2b. Dashboard: `dashboard.kore-retail.de`
+
+1. **Subdomain hinzufügen**: `dashboard.kore-retail.de`
+2. **Document Root**: `/var/www/vhosts/dashboard.kore-retail.de/httpdocs`
+3. **SSL/TLS**: Let's Encrypt Zertifikat aktivieren
+4. **Apache .htaccess** wie bei 2a (gleiche SPA-Routing-Regeln)
+
+### 2c. API: `api.kore-retail.de`
+
+1. **Subdomain hinzufügen**: `api.kore-retail.de`
 2. **SSL/TLS**: Let's Encrypt Zertifikat aktivieren
-3. **Node.js App** in Plesk einrichten:
-   - **Node.js Version**: 20.x
-   - **Application Root**: `/var/www/vhosts/api.koreretail.de`
-   - **Application Startup File**: `dist/index.js`
-   - **Application Mode**: Production
+3. **Option A — Plesk Node.js App** (empfohlen):
+   - Node.js Version: 20.x
+   - Application Root: `/var/www/vhosts/api.kore-retail.de`
+   - Application Startup File: `dist/index.js`
+   - Application Mode: Production
 
-**ODER** PM2 manuell verwenden:
+4. **Option B — PM2 manuell**:
 ```bash
-cd /var/www/vhosts/api.koreretail.de
+cd /var/www/vhosts/api.kore-retail.de
 pm2 start ecosystem.config.cjs
 pm2 save
 pm2 startup  # Autostart nach Server-Reboot
 ```
-
-### 2c. Reverse Proxy (Alternative zu Subdomain)
-
-Falls du **keine Subdomain** nutzen willst, kannst du in Plesk einen Reverse Proxy einrichten:
-
-1. Gehe zu `koreretail.de` → **Apache & nginx Settings**
-2. Unter **Additional nginx directives** einfügen:
-
-```nginx
-location /api/ {
-    proxy_pass http://127.0.0.1:3001;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection 'upgrade';
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto $scheme;
-    proxy_cache_bypass $http_upgrade;
-}
-```
-
-Bei dieser Variante: `VITE_API_URL=https://koreretail.de` (kein `/api` Suffix nötig)
 
 ---
 
@@ -79,22 +92,35 @@ Bei dieser Variante: `VITE_API_URL=https://koreretail.de` (kein `/api` Suffix n�
 ### Frontend: `apps/web/.env.production`
 
 ```env
-VITE_API_URL=https://api.koreretail.de
+VITE_API_URL=https://api.kore-retail.de
 VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+```
+
+### Dashboard: `apps/dashboard/.env.production`
+
+```env
+VITE_API_URL=https://api.kore-retail.de
 ```
 
 ### API: `apps/api/.env` (auf dem Server)
 
 ```env
+# Database (SQLite)
+DATABASE_URL="file:./data/kore.db"
+
+# JWT
+JWT_SECRET="dein-jwt-secret-min-32-zeichen"
+JWT_REFRESH_SECRET="dein-refresh-secret-min-32-zeichen"
+
 # Resend — https://resend.com/api-keys
 RESEND_API_KEY=re_xxxxxxxxxxxx
 
 # E-Mails
 NOTIFICATION_EMAIL=hello@planyvo.com
-FROM_EMAIL=noreply@koreretail.de
+FROM_EMAIL=noreply@kore-retail.de
 
-# CORS — Frontend-URL erlauben
-CORS_ORIGIN=https://koreretail.de
+# CORS — Frontend-URLs erlauben
+CORS_ORIGIN=https://kore-retail.de,https://www.kore-retail.de,https://dashboard.kore-retail.de
 
 # Server
 PORT=3001
@@ -105,7 +131,7 @@ NODE_ENV=production
 
 ## 4. Erstmalige Einrichtung
 
-### Lokal
+### Lokal bauen
 
 ```bash
 # 1. Frontend-Env erstellen
@@ -117,22 +143,28 @@ pnpm install
 pnpm build
 
 # 3. Deploy-Script konfigurieren
-# → In scripts/deploy.sh die Server-Daten anpassen:
-#   PLESK_USER, PLESK_HOST, WEB_REMOTE_PATH, API_REMOTE_PATH
+# → In scripts/deploy.sh PLESK_USER und PLESK_HOST anpassen
 ```
 
 ### Auf dem Server
 
 ```bash
-# 1. API-Env erstellen
-cd /var/www/vhosts/api.koreretail.de
-nano .env
-# → Alle Werte aus .env.example eintragen
+# 1. API-Verzeichnis vorbereiten
+cd /var/www/vhosts/api.kore-retail.de
+mkdir -p data logs prisma
 
-# 2. Dependencies installieren
+# 2. .env erstellen
+nano .env
+# → Alle Werte aus Abschnitt 3 eintragen
+
+# 3. Dependencies installieren
 npm install --production
 
-# 3. PM2 starten
+# 4. Prisma Client generieren & DB initialisieren
+npx prisma generate
+npx prisma db push
+
+# 5. PM2 starten
 pm2 start ecosystem.config.cjs
 pm2 save
 pm2 startup
@@ -142,16 +174,30 @@ pm2 startup
 
 ## 5. Deployment
 
+### Mit dem Deploy-Script (empfohlen)
+
 ```bash
-# Alles deployen (Frontend + API)
+# Alles deployen (Frontend + Dashboard + API)
 ./scripts/deploy.sh
 
 # Nur Frontend
 ./scripts/deploy.sh web
 
+# Nur Dashboard
+./scripts/deploy.sh dashboard
+
 # Nur API
 ./scripts/deploy.sh api
 ```
+
+### Mit Plesk Git-Integration
+
+1. In Plesk: **Git** → Repository hinzufügen
+2. Repository-URL eintragen
+3. **Auto-Deploy** aktivieren
+4. **Post-Deploy Script**: `bash deploy.sh`
+
+Bei dieser Variante wird `deploy.sh` (im Root) direkt auf dem Server ausgeführt.
 
 ---
 
@@ -160,7 +206,7 @@ pm2 startup
 ### 6a. Resend (E-Mail)
 
 1. Account erstellen: https://resend.com
-2. Domain verifizieren: `koreretail.de` (DNS-Einträge setzen)
+2. Domain verifizieren: `kore-retail.de` (DNS-Einträge setzen)
 3. API Key generieren → in `.env` auf Server eintragen
 
 ### 6b. Google Analytics 4
@@ -177,7 +223,7 @@ pm2 startup
    ```html
    <meta name="google-site-verification" content="DEIN_CODE" />
    ```
-4. Sitemap einreichen: `https://koreretail.de/sitemap.xml`
+4. Sitemap einreichen: `https://kore-retail.de/sitemap.xml`
 
 ---
 
@@ -194,28 +240,32 @@ pm2 status
 pm2 restart kore-api
 
 # Health Check
-curl https://api.koreretail.de/health
+curl https://api.kore-retail.de/health
 
 # Frontend testen (SPA-Routing)
-curl -I https://koreretail.de/consulting
+curl -I https://kore-retail.de/consulting
 # → Sollte 200 OK zurückgeben (nicht 404)
+
+# Dashboard testen
+curl -I https://dashboard.kore-retail.de
 ```
 
 ---
 
 ## 8. DNS-Einträge
 
-Bei deinem Domain-Provider (z.B. Strato, IONOS, Hetzner):
+Bei deinem Domain-Provider:
 
 ```
-koreretail.de        A      → [Plesk-Server-IP]
-www.koreretail.de    CNAME  → koreretail.de
-api.koreretail.de    A      → [Plesk-Server-IP]
+kore-retail.de              A      → [Plesk-Server-IP]
+www.kore-retail.de          CNAME  → kore-retail.de
+api.kore-retail.de          A      → [Plesk-Server-IP]
+dashboard.kore-retail.de    A      → [Plesk-Server-IP]
 ```
 
 Für Resend (E-Mail-Verifizierung):
 ```
 # Diese Werte bekommst du von Resend nach Domain-Verifizierung
-_dmarc.koreretail.de    TXT   → "v=DMARC1; p=none"
-resend._domainkey...     CNAME → ... (von Resend)
+_dmarc.kore-retail.de       TXT   → "v=DMARC1; p=none"
+resend._domainkey...        CNAME → ... (von Resend)
 ```

@@ -1,4 +1,6 @@
-# KORE — Plesk Deployment
+# KORE — Plesk Deployment (VERALTET)
+
+> **Hinweis:** Dieses Dokument ist veraltet. Bitte nutze stattdessen [DEPLOYMENT.md](./DEPLOYMENT.md).
 
 ## Architektur
 

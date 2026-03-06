@@ -4,7 +4,7 @@ import { GitBranch, Users, Store, MapPin } from 'lucide-react';
 import { useReportingHierarchy } from '../hooks/useReporting';
 import { useTenants } from '../hooks/useTenants';
 import { useAuthStore } from '../stores/authStore';
-import type { UserRole } from '@kore/types';
+import type { UserRole, ReportingManager } from '@kore/types';
 
 const ROLE_LABELS: Record<string, string> = {
   tenant_admin: 'Kunden-Admin',
@@ -52,7 +52,7 @@ export function ReportingPage() {
   }
 
   // Manager nach Rolle gruppieren
-  const managersByRole: Record<string, typeof hierarchy extends { managers: infer M } ? M : never> = {};
+  const managersByRole: Record<string, ReportingManager[]> = {};
   if (hierarchy?.managers) {
     for (const mgr of hierarchy.managers) {
       if (!managersByRole[mgr.role]) managersByRole[mgr.role] = [];

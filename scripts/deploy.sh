@@ -6,16 +6,18 @@
 #   ./scripts/deploy.sh              # Alles bauen + deployen
 #   ./scripts/deploy.sh web          # Nur Frontend
 #   ./scripts/deploy.sh api          # Nur API
+#   ./scripts/deploy.sh dashboard    # Nur Dashboard
 # ──────────────────────────────────────────────────
 
 set -e
 
 # ─── Konfiguration ──────────────────────────────
 # Anpassen an dein Plesk-Setup:
-PLESK_USER="koreretail"
+PLESK_USER="kore-retail"
 PLESK_HOST="dein-server.de"
-WEB_REMOTE_PATH="/var/www/vhosts/koreretail.de/httpdocs"
-API_REMOTE_PATH="/var/www/vhosts/api.koreretail.de"
+WEB_REMOTE_PATH="/var/www/vhosts/kore-retail.de/httpdocs"
+API_REMOTE_PATH="/var/www/vhosts/api.kore-retail.de"
+DASHBOARD_REMOTE_PATH="/var/www/vhosts/dashboard.kore-retail.de/httpdocs"
 
 # ─── Farben ─────────────────────────────────────
 GREEN='\033[0;32m'
@@ -56,7 +58,20 @@ if [[ "$TARGET" == "all" || "$TARGET" == "web" ]]; then
     apps/web/dist/ \
     "$PLESK_USER@$PLESK_HOST:$WEB_REMOTE_PATH/"
 
-  info "Frontend deployed ✓"
+  info "Frontend deployed"
+fi
+
+# ─── Dashboard Deploy ──────────────────────────
+if [[ "$TARGET" == "all" || "$TARGET" == "dashboard" ]]; then
+  echo ""
+  info "Deploye Dashboard → $PLESK_HOST:$DASHBOARD_REMOTE_PATH"
+
+  rsync -avz --delete \
+    --exclude='.DS_Store' \
+    apps/dashboard/dist/ \
+    "$PLESK_USER@$PLESK_HOST:$DASHBOARD_REMOTE_PATH/"
+
+  info "Dashboard deployed"
 fi
 
 # ─── API Deploy ─────────────────────────────────
@@ -69,12 +84,18 @@ if [[ "$TARGET" == "all" || "$TARGET" == "api" ]]; then
     --exclude='node_modules' \
     --exclude='.env' \
     --exclude='logs' \
+    --exclude='data' \
     --exclude='src' \
     --exclude='tsconfig.tsbuildinfo' \
     apps/api/dist/ \
     apps/api/package.json \
     apps/api/ecosystem.config.cjs \
     "$PLESK_USER@$PLESK_HOST:$API_REMOTE_PATH/"
+
+  # Prisma-Dateien deployen
+  rsync -avz \
+    apps/api/prisma/schema.prisma \
+    "$PLESK_USER@$PLESK_HOST:$API_REMOTE_PATH/prisma/"
 
   # Auch validators-Paket deployen (wird von API gebraucht)
   rsync -avz --delete \
@@ -86,9 +107,10 @@ if [[ "$TARGET" == "all" || "$TARGET" == "api" ]]; then
 
   # Dependencies auf Server installieren & PM2 neustarten
   ssh "$PLESK_USER@$PLESK_HOST" << 'REMOTE'
-    cd /var/www/vhosts/api.koreretail.de
+    cd /var/www/vhosts/api.kore-retail.de
     npm install --production --omit=dev
-    mkdir -p logs
+    npx prisma generate
+    mkdir -p logs data
 
     # PM2 neustarten
     if pm2 describe kore-api > /dev/null 2>&1; then
@@ -99,11 +121,11 @@ if [[ "$TARGET" == "all" || "$TARGET" == "api" ]]; then
     pm2 save
 REMOTE
 
-  info "API deployed & neugestartet ✓"
+  info "API deployed & neugestartet"
 fi
 
 echo ""
 echo "══════════════════════════════════════════"
-echo "  ✓ Deployment abgeschlossen"
+echo "  Deployment abgeschlossen"
 echo "══════════════════════════════════════════"
 echo ""

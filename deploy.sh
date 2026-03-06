@@ -7,9 +7,9 @@
 # ──────────────────────────────────────────────────
 #
 # Plesk-Setup (3 Domains, 1 Repo):
-#   koreretail.de             → Document Root: apps/web/dist/
-#   dashboard.koreretail.de   → Document Root: apps/dashboard/dist/
-#   api.koreretail.de         → Node.js App (PM2, Port 3001)
+#   kore-retail.de             → Document Root: apps/web/dist/
+#   dashboard.kore-retail.de   → Document Root: apps/dashboard/dist/
+#   api.kore-retail.de         → Node.js App (PM2, Port 3001)
 #
 # Voraussetzungen auf dem Server:
 #   - Node.js >= 20

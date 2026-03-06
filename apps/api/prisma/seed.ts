@@ -11,10 +11,10 @@ const prisma = new PrismaClient({ adapter });
 async function main() {
   // Kore Admin User
   const admin = await prisma.user.upsert({
-    where: { email: 'admin@koreretail.de' },
+    where: { email: 'admin@kore-retail.de' },
     update: {},
     create: {
-      email: 'admin@koreretail.de',
+      email: 'admin@kore-retail.de',
       name: 'KORE Admin',
       passwordHash: hashSync('admin1234', 12),
       role: 'kore_admin',

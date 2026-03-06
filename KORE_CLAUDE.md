@@ -6,7 +6,7 @@
 
 ## 1. Projektübersicht
 
-**KORE** (Domain: `koreretail.de`) ist eine Premium Retail Consulting Brand mit drei integrierten Produkten:
+**KORE** (Domain: `kore-retail.de`) ist eine Premium Retail Consulting Brand mit drei integrierten Produkten:
 
 | Produkt | Typ | Priorität |
 |---------|-----|-----------|
@@ -230,7 +230,7 @@ Frontend:     Vercel
 Backend:      Railway
 Database:     Neon (PostgreSQL serverless) oder Railway PostgreSQL
 CDN:          Cloudflare
-Domain:       koreretail.de (+ kore-train.de, kore-pulse.de optional später)
+Domain:       kore-retail.de (+ kore-train.de, kore-pulse.de optional später)
 Monitoring:   Sentry (Errors), Vercel Analytics
 ```
 
@@ -771,8 +771,8 @@ audit_request_confirm   — Bestätigung an den Anfragenden
 ### Absender
 
 ```
-from: "KORE <hello@koreretail.de>"
-reply-to: "nici@koreretail.de" (intern)
+from: "KORE <hello@kore-retail.de>"
+reply-to: "nici@kore-retail.de" (intern)
 ```
 
 ---
