@@ -3,35 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-}
-
-// === Enums ===
-
-enum UserRole {
-  kore_admin
-  tenant_admin
-  store_manager
-  learner
-}
-
-enum Plan {
-  STARTER
-  PROFESSIONAL
-  ENTERPRISE
-}
-
-enum SubStatus {
-  ACTIVE
-  PAST_DUE
-  CANCELED
-  TRIALING
-}
-
-enum KoreTool {
-  TRAIN
-  PULSE
-  SHIFT
+  provider = "sqlite"
 }
 
 // === Models ===
@@ -41,43 +13,99 @@ model User {
   email        String    @unique
   name         String
   passwordHash String
-  role         UserRole
+  role         String    @default("learner")
   tenantId     String?
   tenant       Tenant?   @relation(fields: [tenantId], references: [id])
   isActive     Boolean   @default(true)
   lastLoginAt  DateTime?
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
+
+  storeAssignments UserStoreAssignment[]
+
+  @@index([tenantId])
 }
 
 model Tenant {
-  id           String           @id @default(cuid())
+  id           String    @id @default(cuid())
   name         String
-  slug         String           @unique
-  plan         Plan             @default(STARTER)
-  status       SubStatus        @default(ACTIVE)
+  slug         String    @unique
+  status       String    @default("ACTIVE")
   contactEmail String?
   contactName  String?
   contactPhone String?
-  maxUsers     Int              @default(15)
+  maxUsers     Int       @default(15)
   logoUrl      String?
-  createdAt    DateTime         @default(now())
-  updatedAt    DateTime         @updatedAt
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
 
   users        User[]
-  tools        ToolAssignment[]
+  stores       Store[]
   subscription Subscription?
+  consents     DataProcessingConsent[]
 }
 
-model ToolAssignment {
-  id         String   @id @default(cuid())
-  tenantId   String
-  tenant     Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  tool       KoreTool
-  assignedAt DateTime @default(now())
-  isActive   Boolean  @default(true)
+model Store {
+  id        String   @id @default(cuid())
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  name      String
+  city      String?
+  address   String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  @@unique([tenantId, tool])
+  tools     StoreToolAssignment[]
+  userAssignments UserStoreAssignment[]
+
+  @@index([tenantId])
+}
+
+model ToolDefinition {
+  id           String   @id @default(cuid())
+  key          String   @unique
+  name         String
+  description  String?
+  category     String
+  icon         String?
+  priceMonthly Int      @default(0) // Preis in Cent pro Store pro Monat
+  isActive     Boolean  @default(true)
+  sortOrder    Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  assignments  StoreToolAssignment[]
+
+  @@index([category])
+}
+
+model StoreToolAssignment {
+  id         String   @id @default(cuid())
+  storeId    String
+  store      Store          @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  toolId     String
+  tool       ToolDefinition @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  isActive   Boolean  @default(true)
+  assignedAt DateTime @default(now())
+  config     String?
+
+  @@unique([storeId, toolId])
+  @@index([storeId])
+  @@index([toolId])
+}
+
+model UserStoreAssignment {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  storeId    String
+  store      Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  assignedAt DateTime @default(now())
+
+  @@unique([userId, storeId])
+  @@index([userId])
+  @@index([storeId])
 }
 
 model Subscription {
@@ -86,8 +114,41 @@ model Subscription {
   tenant           Tenant    @relation(fields: [tenantId], references: [id])
   stripeCustomerId String    @unique
   stripeSubId      String    @unique
-  plan             Plan
-  status           SubStatus
+  status           String
   currentPeriodEnd DateTime
   cancelAtPeriod   Boolean   @default(false)
+}
+
+// GDPR: Audit-Log für Datenänderungen
+model AuditLog {
+  id         String   @id @default(cuid())
+  tenantId   String?
+  userId     String?
+  action     String
+  entity     String
+  entityId   String?
+  details    String?
+  ipAddress  String?
+  createdAt  DateTime @default(now())
+
+  @@index([tenantId])
+  @@index([createdAt])
+  @@index([entity, entityId])
+}
+
+// GDPR: Data Processing Agreement Tracking
+model DataProcessingConsent {
+  id          String    @id @default(cuid())
+  tenantId    String
+  tenant      Tenant    @relation(fields: [tenantId], references: [id])
+  consentType String
+  grantedAt   DateTime  @default(now())
+  grantedBy   String
+  revokedAt   DateTime?
+  revokedBy   String?
+  version     String
+  document    String?
+
+  @@index([tenantId])
+  @@unique([tenantId, consentType])
 }

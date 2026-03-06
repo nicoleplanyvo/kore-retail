@@ -10,3 +10,10 @@ dist/
 coverage/
 .vercel/
 logs/
+
+# Database
+*.db
+*.db-journal
+
+# Claude Code
+.claude/worktrees/

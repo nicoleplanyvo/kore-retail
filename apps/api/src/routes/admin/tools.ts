@@ -1,94 +1,67 @@
 import { Router, type Router as RouterType } from 'express';
 import prisma from '../../lib/prisma.js';
-import { authenticate, requireRole } from '../../middleware/auth.js';
-import { toolAssignSchema } from '@kore/validators';
+import { authenticate, requireMinRole } from '../../middleware/auth.js';
 
 export const adminToolsRouter: RouterType = Router();
+adminToolsRouter.use(authenticate, requireMinRole('store_manager'));
 
-// Alle Admin-Tool-Routes erfordern kore_admin
-adminToolsRouter.use(authenticate, requireRole('kore_admin'));
-
-// GET /api/admin/tools/overview — Tool-Übersicht: pro Tool die zugewiesenen Tenants
-adminToolsRouter.get('/overview', async (_req, res) => {
+// GET /api/admin/tools — 34 Tools gruppiert nach Kategorie mit Assignment-Counts
+adminToolsRouter.get('/', async (_req, res) => {
   try {
-    const assignments = await prisma.toolAssignment.findMany({
+    const tools = await prisma.toolDefinition.findMany({
+      orderBy: [{ category: 'asc' }, { sortOrder: 'asc' }],
+      include: { _count: { select: { assignments: true } } },
+    });
+
+    // Gruppiere nach Kategorie
+    const grouped: Record<string, typeof tools> = {};
+    for (const tool of tools) {
+      if (!grouped[tool.category]) grouped[tool.category] = [];
+      grouped[tool.category]!.push(tool);
+    }
+
+    res.json({ tools, grouped });
+  } catch (err) {
+    console.error('Tools list error:', err);
+    res.status(500).json({ error: 'Interner Serverfehler.' });
+  }
+});
+
+// GET /api/admin/tools/stats — Statistiken: Kategorie-Stats + MRR
+adminToolsRouter.get('/stats', async (_req, res) => {
+  try {
+    const totalTools = await prisma.toolDefinition.count({ where: { isActive: true } });
+    const totalAssignments = await prisma.storeToolAssignment.count({ where: { isActive: true } });
+
+    // MRR berechnen: Summe aller aktiven Zuweisungen * Preis
+    const activeAssignments = await prisma.storeToolAssignment.findMany({
       where: { isActive: true },
-      include: {
-        tenant: {
-          select: { id: true, name: true, slug: true, plan: true, status: true },
-        },
-      },
-      orderBy: { assignedAt: 'desc' },
+      include: { tool: { select: { priceMonthly: true } } },
     });
 
-    // Gruppiere nach Tool
-    const overview: Record<string, { count: number; tenants: typeof assignments }> = {
-      TRAIN: { count: 0, tenants: [] },
-      PULSE: { count: 0, tenants: [] },
-      SHIFT: { count: 0, tenants: [] },
-    };
+    let mrr = 0;
+    for (const a of activeAssignments) {
+      mrr += a.tool.priceMonthly;
+    }
 
-    for (const assignment of assignments) {
-      const group = overview[assignment.tool];
-      if (group) {
-        group.count++;
-        group.tenants.push(assignment);
+    // Zuweisungen pro Kategorie
+    const tools = await prisma.toolDefinition.findMany({
+      where: { isActive: true },
+      include: { _count: { select: { assignments: true } } },
+    });
+
+    const categoryStats: Record<string, { total: number; assigned: number }> = {};
+    for (const tool of tools) {
+      if (!categoryStats[tool.category]) {
+        categoryStats[tool.category] = { total: 0, assigned: 0 };
       }
+      categoryStats[tool.category]!.total++;
+      categoryStats[tool.category]!.assigned += tool._count.assignments;
     }
 
-    res.json(overview);
+    res.json({ totalTools, totalAssignments, mrr, categoryStats });
   } catch (err) {
-    console.error('Admin tools overview error:', err);
-    res.status(500).json({ error: 'Interner Serverfehler.' });
-  }
-});
-
-// POST /api/admin/tools/assign — Tool an Tenant zuweisen
-adminToolsRouter.post('/assign', async (req, res) => {
-  try {
-    const result = toolAssignSchema.safeParse(req.body);
-    if (!result.success) {
-      res.status(400).json({
-        error: 'Validierungsfehler',
-        details: result.error.flatten().fieldErrors,
-      });
-      return;
-    }
-
-    const { tenantId, tool } = result.data;
-
-    // Prüfe ob Tenant existiert
-    const tenant = await prisma.tenant.findUnique({ where: { id: tenantId } });
-    if (!tenant) {
-      res.status(404).json({ error: 'Tenant nicht gefunden.' });
-      return;
-    }
-
-    // Upsert: Falls bereits zugewiesen aber deaktiviert, reaktivieren
-    const assignment = await prisma.toolAssignment.upsert({
-      where: { tenantId_tool: { tenantId, tool } },
-      update: { isActive: true },
-      create: { tenantId, tool },
-    });
-
-    res.status(201).json(assignment);
-  } catch (err) {
-    console.error('Admin tool assign error:', err);
-    res.status(500).json({ error: 'Interner Serverfehler.' });
-  }
-});
-
-// DELETE /api/admin/tools/assign/:id — Tool-Zuweisung entfernen (soft delete)
-adminToolsRouter.delete('/assign/:id', async (req, res) => {
-  try {
-    const assignment = await prisma.toolAssignment.update({
-      where: { id: req.params['id'] },
-      data: { isActive: false },
-    });
-
-    res.json({ success: true, assignment });
-  } catch (err) {
-    console.error('Admin tool unassign error:', err);
+    console.error('Tool stats error:', err);
     res.status(500).json({ error: 'Interner Serverfehler.' });
   }
 });

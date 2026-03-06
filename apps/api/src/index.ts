@@ -6,6 +6,10 @@ import { auditRouter } from './routes/audit.js';
 import { authRouter } from './routes/auth.js';
 import { adminTenantsRouter } from './routes/admin/tenants.js';
 import { adminToolsRouter } from './routes/admin/tools.js';
+import { adminStoresRouter } from './routes/admin/stores.js';
+import { adminGdprRouter } from './routes/admin/gdpr.js';
+import { adminUsersRouter } from './routes/admin/users.js';
+import { adminReportingRouter } from './routes/admin/reporting.js';
 
 const app = express();
 const PORT = parseInt(process.env['PORT'] ?? '3001', 10);
@@ -40,6 +44,10 @@ app.use('/api/auth', authRouter);
 // Routes — Admin Dashboard
 app.use('/api/admin/tenants', adminTenantsRouter);
 app.use('/api/admin/tools', adminToolsRouter);
+app.use('/api/admin/stores', adminStoresRouter);
+app.use('/api/admin/gdpr', adminGdprRouter);
+app.use('/api/admin/users', adminUsersRouter);
+app.use('/api/admin/reporting', adminReportingRouter);
 
 // Health check
 app.get('/health', (_req, res) => {
