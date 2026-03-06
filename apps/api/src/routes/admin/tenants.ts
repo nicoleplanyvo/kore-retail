@@ -1,40 +1,38 @@
 import { Router, type Router as RouterType } from 'express';
 import prisma from '../../lib/prisma.js';
-import { authenticate } from '../../middleware/auth.js';
-import { requireRole } from '../../middleware/auth.js';
+import { authenticate, requireMinRole } from '../../middleware/auth.js';
 import { tenantCreateSchema, tenantUpdateSchema } from '@kore/validators';
-import type { Plan, SubStatus } from '@prisma/client';
 
 export const adminTenantsRouter: RouterType = Router();
-
-// Alle Admin-Tenant-Routes erfordern kore_admin
-adminTenantsRouter.use(authenticate, requireRole('kore_admin'));
+adminTenantsRouter.use(authenticate, requireMinRole('kore_admin'));
 
 // GET /api/admin/tenants/stats — Dashboard-Statistiken
 adminTenantsRouter.get('/stats', async (_req, res) => {
   try {
-    const [totalTenants, activeTenants, byPlan, toolAssignments] = await Promise.all([
+    const [totalTenants, activeTenants, totalStores, activeStores, activeAssignments] = await Promise.all([
       prisma.tenant.count(),
       prisma.tenant.count({ where: { status: 'ACTIVE' } }),
-      prisma.tenant.groupBy({ by: ['plan'], _count: { plan: true } }),
-      prisma.toolAssignment.groupBy({
-        by: ['tool'],
+      prisma.store.count(),
+      prisma.store.count({ where: { isActive: true } }),
+      prisma.storeToolAssignment.findMany({
         where: { isActive: true },
-        _count: { tool: true },
+        include: { tool: { select: { priceMonthly: true } } },
       }),
     ]);
 
-    const tenantsByPlan: Record<string, number> = { STARTER: 0, PROFESSIONAL: 0, ENTERPRISE: 0 };
-    for (const row of byPlan) {
-      tenantsByPlan[row.plan] = row._count.plan;
+    let mrr = 0;
+    for (const a of activeAssignments) {
+      mrr += a.tool.priceMonthly;
     }
 
-    const toolCounts: Record<string, number> = { TRAIN: 0, PULSE: 0, SHIFT: 0 };
-    for (const row of toolAssignments) {
-      toolCounts[row.tool] = row._count.tool;
-    }
-
-    res.json({ totalTenants, activeTenants, tenantsByPlan, toolCounts });
+    res.json({
+      totalTenants,
+      activeTenants,
+      totalStores,
+      activeStores,
+      totalToolBookings: activeAssignments.length,
+      mrr,
+    });
   } catch (err) {
     console.error('Admin stats error:', err);
     res.status(500).json({ error: 'Interner Serverfehler.' });
@@ -47,28 +45,25 @@ adminTenantsRouter.get('/', async (req, res) => {
     const page = Math.max(1, parseInt(req.query['page'] as string) || 1);
     const pageSize = Math.min(100, Math.max(1, parseInt(req.query['pageSize'] as string) || 20));
     const search = (req.query['search'] as string) || '';
-    const plan = req.query['plan'] as Plan | undefined;
-    const status = req.query['status'] as SubStatus | undefined;
+    const status = req.query['status'] as string | undefined;
 
     const where: Record<string, unknown> = {};
 
     if (search) {
       where['OR'] = [
-        { name: { contains: search, mode: 'insensitive' } },
-        { slug: { contains: search, mode: 'insensitive' } },
-        { contactEmail: { contains: search, mode: 'insensitive' } },
-        { contactName: { contains: search, mode: 'insensitive' } },
+        { name: { contains: search } },
+        { slug: { contains: search } },
+        { contactEmail: { contains: search } },
+        { contactName: { contains: search } },
       ];
     }
-    if (plan) where['plan'] = plan;
     if (status) where['status'] = status;
 
     const [tenants, total] = await Promise.all([
       prisma.tenant.findMany({
         where,
         include: {
-          tools: { where: { isActive: true } },
-          _count: { select: { users: true } },
+          _count: { select: { users: true, stores: true } },
         },
         orderBy: { createdAt: 'desc' },
         skip: (page - 1) * pageSize,
@@ -84,14 +79,17 @@ adminTenantsRouter.get('/', async (req, res) => {
   }
 });
 
-// GET /api/admin/tenants/:id — Tenant Detail
+// GET /api/admin/tenants/:id — Tenant Detail mit Stores
 adminTenantsRouter.get('/:id', async (req, res) => {
   try {
     const tenant = await prisma.tenant.findUnique({
       where: { id: req.params['id'] },
       include: {
-        tools: true,
-        _count: { select: { users: true } },
+        stores: {
+          include: { _count: { select: { tools: true } } },
+          orderBy: { name: 'asc' },
+        },
+        _count: { select: { users: true, stores: true } },
       },
     });
 
@@ -112,16 +110,12 @@ adminTenantsRouter.post('/', async (req, res) => {
   try {
     const result = tenantCreateSchema.safeParse(req.body);
     if (!result.success) {
-      res.status(400).json({
-        error: 'Validierungsfehler',
-        details: result.error.flatten().fieldErrors,
-      });
+      res.status(400).json({ error: 'Validierungsfehler', details: result.error.flatten().fieldErrors });
       return;
     }
 
     const data = result.data;
 
-    // Prüfe ob Slug schon existiert
     const existing = await prisma.tenant.findUnique({ where: { slug: data.slug } });
     if (existing) {
       res.status(409).json({ error: 'Ein Tenant mit diesem Slug existiert bereits.' });
@@ -132,15 +126,14 @@ adminTenantsRouter.post('/', async (req, res) => {
       data: {
         name: data.name,
         slug: data.slug,
-        plan: data.plan,
         contactEmail: data.contactEmail || null,
         contactName: data.contactName || null,
         contactPhone: data.contactPhone || null,
         maxUsers: data.maxUsers ?? 15,
       },
       include: {
-        tools: true,
-        _count: { select: { users: true } },
+        stores: { include: { _count: { select: { tools: true } } } },
+        _count: { select: { users: true, stores: true } },
       },
     });
 
@@ -156,16 +149,12 @@ adminTenantsRouter.put('/:id', async (req, res) => {
   try {
     const result = tenantUpdateSchema.safeParse(req.body);
     if (!result.success) {
-      res.status(400).json({
-        error: 'Validierungsfehler',
-        details: result.error.flatten().fieldErrors,
-      });
+      res.status(400).json({ error: 'Validierungsfehler', details: result.error.flatten().fieldErrors });
       return;
     }
 
     const data = result.data;
 
-    // Prüfe ob Slug schon von anderem Tenant verwendet wird
     if (data.slug) {
       const existing = await prisma.tenant.findUnique({ where: { slug: data.slug } });
       if (existing && existing.id !== req.params['id']) {
@@ -183,8 +172,8 @@ adminTenantsRouter.put('/:id', async (req, res) => {
         contactPhone: data.contactPhone || null,
       },
       include: {
-        tools: true,
-        _count: { select: { users: true } },
+        stores: { include: { _count: { select: { tools: true } } } },
+        _count: { select: { users: true, stores: true } },
       },
     });
 

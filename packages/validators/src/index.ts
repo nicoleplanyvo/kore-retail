@@ -67,7 +67,6 @@ export const tenantCreateSchema = z.object({
     .min(2, 'Slug muss mindestens 2 Zeichen haben')
     .max(50)
     .regex(/^[a-z0-9-]+$/, 'Slug darf nur Kleinbuchstaben, Zahlen und Bindestriche enthalten'),
-  plan: z.enum(['STARTER', 'PROFESSIONAL', 'ENTERPRISE']),
   contactEmail: z.string().email('Bitte gültige E-Mail-Adresse eingeben').optional().or(z.literal('')),
   contactName: z.string().max(100).optional().or(z.literal('')),
   contactPhone: z.string().max(30).optional().or(z.literal('')),
@@ -76,9 +75,100 @@ export const tenantCreateSchema = z.object({
 
 export const tenantUpdateSchema = tenantCreateSchema.partial();
 
-export const toolAssignSchema = z.object({
+// === Store Management ===
+
+export const storeCreateSchema = z.object({
   tenantId: z.string().min(1),
-  tool: z.enum(['TRAIN', 'PULSE', 'SHIFT']),
+  name: z.string().min(2, 'Name muss mindestens 2 Zeichen haben').max(100),
+  city: z.string().max(100).optional().or(z.literal('')),
+  address: z.string().max(200).optional().or(z.literal('')),
+});
+
+export const storeUpdateSchema = storeCreateSchema.omit({ tenantId: true }).partial();
+
+export const storeToolAssignSchema = z.object({
+  storeId: z.string().min(1),
+  toolId: z.string().min(1),
+});
+
+// === User Management ===
+
+const userRoleEnum = z.enum([
+  'kore_admin',
+  'tenant_admin',
+  'regional_manager',
+  'multisite_manager',
+  'store_manager',
+  'learner',
+]);
+
+export const userCreateSchema = z.object({
+  name: z.string().min(2, 'Name muss mindestens 2 Zeichen haben').max(100),
+  email: z.string().email('Bitte gültige E-Mail-Adresse eingeben'),
+  password: z.string().min(8, 'Passwort muss mindestens 8 Zeichen haben'),
+  role: userRoleEnum,
+  tenantId: z.string().min(1).optional(), // Required für alle außer kore_admin
+  storeIds: z.array(z.string().min(1)).optional(),
+});
+
+export const userUpdateSchema = z.object({
+  name: z.string().min(2).max(100).optional(),
+  email: z.string().email().optional(),
+  role: userRoleEnum.optional(),
+  isActive: z.boolean().optional(),
+  storeIds: z.array(z.string().min(1)).optional(),
+});
+
+export const userStoreAssignSchema = z.object({
+  storeIds: z.array(z.string().min(1)),
+});
+
+export const storeUserAssignSchema = z.object({
+  userIds: z.array(z.string().min(1)),
+});
+
+// ============================================================
+// Store Excellence Audit — Validators
+// ============================================================
+
+export const auditCriterionSchema = z.object({
+  name: z.string().min(2).max(200),
+  description: z.string().max(500).optional(),
+  sortOrder: z.number().int().min(0).optional(),
+  isRequired: z.boolean().optional(),
+  photoRequired: z.boolean().optional(),
+});
+
+export const auditCategorySchema = z.object({
+  name: z.string().min(2).max(100),
+  description: z.string().max(500).optional(),
+  sortOrder: z.number().int().min(0).optional(),
+  weight: z.number().min(0).max(100).optional(),
+  criteria: z.array(auditCriterionSchema).optional(),
+});
+
+export const auditTemplateCreateSchema = z.object({
+  name: z.string().min(2, 'Name muss mindestens 2 Zeichen haben').max(100),
+  description: z.string().max(500).optional(),
+  categories: z.array(auditCategorySchema).optional(),
+});
+
+export const auditTemplateUpdateSchema = z.object({
+  name: z.string().min(2).max(100).optional(),
+  description: z.string().max(500).optional(),
+});
+
+export const auditSessionCreateSchema = z.object({
+  storeId: z.string().min(1, 'Store muss ausgewählt werden'),
+  templateId: z.string().min(1, 'Template muss ausgewählt werden'),
+  storeLocation: z.string().max(200).optional(),
+  notes: z.string().max(2000).optional(),
+});
+
+export const auditResponseSchema = z.object({
+  scorePercent: z.number().int().min(0).max(100).optional().nullable(),
+  passed: z.boolean().optional().nullable(),
+  comment: z.string().max(1000).optional().nullable(),
 });
 
 // === Type Exports ===
@@ -90,4 +180,14 @@ export type CourseCreateInput = z.infer<typeof courseCreateSchema>;
 export type KPIEntryInput = z.infer<typeof kpiEntrySchema>;
 export type TenantCreateInput = z.infer<typeof tenantCreateSchema>;
 export type TenantUpdateInput = z.infer<typeof tenantUpdateSchema>;
-export type ToolAssignInput = z.infer<typeof toolAssignSchema>;
+export type StoreCreateInput = z.infer<typeof storeCreateSchema>;
+export type StoreUpdateInput = z.infer<typeof storeUpdateSchema>;
+export type StoreToolAssignInput = z.infer<typeof storeToolAssignSchema>;
+export type UserCreateInput = z.infer<typeof userCreateSchema>;
+export type UserUpdateInput = z.infer<typeof userUpdateSchema>;
+export type UserStoreAssignInput = z.infer<typeof userStoreAssignSchema>;
+export type StoreUserAssignInput = z.infer<typeof storeUserAssignSchema>;
+export type AuditTemplateCreateInput = z.infer<typeof auditTemplateCreateSchema>;
+export type AuditTemplateUpdateInput = z.infer<typeof auditTemplateUpdateSchema>;
+export type AuditSessionCreateInput = z.infer<typeof auditSessionCreateSchema>;
+export type AuditResponseInput = z.infer<typeof auditResponseSchema>;

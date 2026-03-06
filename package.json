@@ -15,7 +15,7 @@
     "node": ">=20"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["esbuild", "prisma", "@prisma/engines"]
+    "onlyBuiltDependencies": ["esbuild", "prisma", "@prisma/engines", "better-sqlite3"]
   },
   "devDependencies": {
     "turbo": "^2.8.12"

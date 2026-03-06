@@ -2,10 +2,37 @@ import { Router, type Router as RouterType } from 'express';
 import bcrypt from 'bcryptjs';
 import prisma from '../lib/prisma.js';
 import { signAccessToken, signRefreshToken, verifyRefreshToken } from '../lib/jwt.js';
-import { authenticate } from '../middleware/auth.js';
+import { authenticate, requireRole } from '../middleware/auth.js';
 import { loginSchema } from '@kore/validators';
 
 export const authRouter: RouterType = Router();
+
+/** Helper: Lade User-Daten inkl. Store-Zuweisungen für Auth-Response */
+async function buildAuthResponse(userId: string, impersonatedBy?: string) {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      role: true,
+      tenantId: true,
+      storeAssignments: { select: { storeId: true } },
+    },
+  });
+
+  if (!user) return null;
+
+  return {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+    tenantId: user.tenantId,
+    impersonatedBy: impersonatedBy || undefined,
+    storeAssignments: user.storeAssignments.map((a) => a.storeId),
+  };
+}
 
 // POST /api/auth/login
 authRouter.post('/login', async (req, res) => {
@@ -56,15 +83,9 @@ authRouter.post('/login', async (req, res) => {
       path: '/api/auth',
     });
 
-    res.json({
-      accessToken,
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-      },
-    });
+    const authUser = await buildAuthResponse(user.id);
+
+    res.json({ accessToken, user: authUser });
   } catch (err) {
     console.error('Auth login error:', err);
     res.status(500).json({ error: 'Interner Serverfehler.' });
@@ -94,15 +115,9 @@ authRouter.post('/refresh', async (req, res) => {
       role: user.role,
     });
 
-    res.json({
-      accessToken,
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-      },
-    });
+    const authUser = await buildAuthResponse(user.id);
+
+    res.json({ accessToken, user: authUser });
   } catch {
     res.status(401).json({ error: 'Refresh-Token ungültig oder abgelaufen.' });
   }
@@ -117,19 +132,91 @@ authRouter.post('/logout', (_req, res) => {
 // GET /api/auth/me
 authRouter.get('/me', authenticate, async (req, res) => {
   try {
-    const user = await prisma.user.findUnique({
-      where: { id: req.user!.sub },
-      select: { id: true, name: true, email: true, role: true },
-    });
+    const authUser = await buildAuthResponse(
+      req.user!.sub,
+      req.user!.impersonatedBy,
+    );
 
-    if (!user) {
+    if (!authUser) {
       res.status(404).json({ error: 'Benutzer nicht gefunden.' });
       return;
     }
 
-    res.json({ user });
+    res.json({ user: authUser });
   } catch (err) {
     console.error('Auth me error:', err);
+    res.status(500).json({ error: 'Interner Serverfehler.' });
+  }
+});
+
+// POST /api/auth/impersonate — nur kore_admin
+authRouter.post('/impersonate', authenticate, requireRole('kore_admin'), async (req, res) => {
+  try {
+    const { userId } = req.body;
+    if (!userId) {
+      res.status(400).json({ error: 'userId ist erforderlich.' });
+      return;
+    }
+
+    const targetUser = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { id: true, tenantId: true, role: true, isActive: true },
+    });
+
+    if (!targetUser || !targetUser.isActive) {
+      res.status(404).json({ error: 'Ziel-Benutzer nicht gefunden oder deaktiviert.' });
+      return;
+    }
+
+    // Erstelle Token mit impersonatedBy
+    const accessToken = signAccessToken({
+      sub: targetUser.id,
+      tenantId: targetUser.tenantId,
+      role: targetUser.role,
+      impersonatedBy: req.user!.sub,
+    });
+
+    const authUser = await buildAuthResponse(targetUser.id, req.user!.sub);
+
+    res.json({ accessToken, user: authUser });
+  } catch (err) {
+    console.error('Impersonate error:', err);
+    res.status(500).json({ error: 'Interner Serverfehler.' });
+  }
+});
+
+// POST /api/auth/stop-impersonation
+authRouter.post('/stop-impersonation', authenticate, async (req, res) => {
+  try {
+    const impersonatedBy = req.user!.impersonatedBy;
+    if (!impersonatedBy) {
+      res.status(400).json({ error: 'Keine aktive Impersonation.' });
+      return;
+    }
+
+    // Lade Original-Admin
+    const adminUser = await prisma.user.findUnique({
+      where: { id: impersonatedBy },
+      select: { id: true, tenantId: true, role: true, isActive: true },
+    });
+
+    if (!adminUser || !adminUser.isActive) {
+      res.status(404).json({ error: 'Original-Admin nicht gefunden.' });
+      return;
+    }
+
+    // Erstelle neuen Token für den Admin (ohne impersonatedBy)
+    const accessToken = signAccessToken({
+      sub: adminUser.id,
+      tenantId: adminUser.tenantId,
+      role: adminUser.role,
+    });
+
+    const authUser = await buildAuthResponse(adminUser.id);
+
+    res.json({ accessToken, user: authUser });
+  } catch (err) {
+    console.error('Stop impersonation error:', err);
     res.status(500).json({ error: 'Interner Serverfehler.' });
   }
 });

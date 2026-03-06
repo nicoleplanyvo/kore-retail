@@ -1,11 +1,18 @@
 import express from 'express';
+import path from 'path';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { contactRouter } from './routes/contact.js';
 import { auditRouter } from './routes/audit.js';
 import { authRouter } from './routes/auth.js';
+import { authenticate } from './middleware/auth.js';
 import { adminTenantsRouter } from './routes/admin/tenants.js';
 import { adminToolsRouter } from './routes/admin/tools.js';
+import { adminStoresRouter } from './routes/admin/stores.js';
+import { adminGdprRouter } from './routes/admin/gdpr.js';
+import { adminUsersRouter } from './routes/admin/users.js';
+import { adminReportingRouter } from './routes/admin/reporting.js';
+import { storeExcellenceAuditRouter } from './routes/tools/store-excellence-audit/index.js';
 
 const app = express();
 const PORT = parseInt(process.env['PORT'] ?? '3001', 10);
@@ -40,6 +47,17 @@ app.use('/api/auth', authRouter);
 // Routes — Admin Dashboard
 app.use('/api/admin/tenants', adminTenantsRouter);
 app.use('/api/admin/tools', adminToolsRouter);
+app.use('/api/admin/stores', adminStoresRouter);
+app.use('/api/admin/gdpr', adminGdprRouter);
+app.use('/api/admin/users', adminUsersRouter);
+app.use('/api/admin/reporting', adminReportingRouter);
+
+// Routes — Tools
+app.use('/api/tools/sea', storeExcellenceAuditRouter);
+
+// Statische Uploads mit Auth-Schutz
+const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? path.join(process.cwd(), 'uploads');
+app.use('/api/uploads', authenticate, express.static(UPLOAD_DIR));
 
 // Health check
 app.get('/health', (_req, res) => {
