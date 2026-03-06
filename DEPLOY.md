@@ -2,11 +2,13 @@
 
 ## Architektur
 
+Ein Git-Repo, drei Dienste auf zwei Domains:
+
 | App | Domain | Typ | Build-Output |
 |-----|--------|-----|-------------|
-| Landing Page | `koreretail.de` | Statische Website | `apps/web/dist/` |
-| Dashboard | `dashboard.koreretail.de` | Statische SPA | `apps/dashboard/dist/` |
-| API | `api.koreretail.de` | Node.js (PM2) | `apps/api/dist/` |
+| Landing Page | `kore-retail.de` | Statische Website | `apps/web/dist/` |
+| Dashboard | `dashboard.kore-retail.de` | Statische SPA | `apps/dashboard/dist/` |
+| API | `api.kore-retail.de` | Node.js (PM2) | `apps/api/dist/` |
 
 ## Server-Voraussetzungen
 
@@ -28,12 +30,14 @@ In Plesk unter **Git** das Repository verbinden:
 - **Repository URL:** `https://github.com/nicoleplanyvo/kore-retail.git`
 - **Deploy-Aktion:** `bash deploy.sh`
 
+Das Repo wird einmal geklont (z.B. unter `kore-retail.de`). Beide Domains (`kore-retail.de` und `dashboard.kore-retail.de`) zeigen auf verschiedene Unterordner im selben Repo.
+
 ## 2. Environment-Variablen
 
 Erstelle `apps/api/.env` auf dem Server:
 
 ```bash
-cd /var/www/vhosts/koreretail.de/kore-retail/apps/api
+cd /var/www/vhosts/kore-retail.de/kore-retail/apps/api
 cp .env.example .env
 nano .env
 ```
@@ -44,7 +48,7 @@ Pflichtfelder:
 DATABASE_URL="file:./data/kore.db"
 JWT_SECRET="<mindestens-32-zeichen-generieren>"
 JWT_REFRESH_SECRET="<mindestens-32-zeichen-generieren>"
-CORS_ORIGIN="https://dashboard.koreretail.de"
+CORS_ORIGIN="https://dashboard.kore-retail.de,https://kore-retail.de"
 PORT=3001
 NODE_ENV=production
 ```
@@ -61,7 +65,7 @@ Optional (E-Mail-Versand):
 ```env
 RESEND_API_KEY=re_xxxxxxxxxxxx
 NOTIFICATION_EMAIL=hello@planyvo.com
-FROM_EMAIL=noreply@koreretail.de
+FROM_EMAIL=noreply@kore-retail.de
 ```
 
 ## 3. Erstes Deployment
@@ -78,18 +82,18 @@ cd apps/api && pnpm db:seed
 
 ## 4. Plesk Domain-Konfiguration
 
-### Landing Page (`koreretail.de`)
+### Landing Page (`kore-retail.de`)
 
-- **Document Root:** `/kore-retail/apps/web/dist`
+- **Document Root:** `kore-retail/apps/web/dist`
 - **SSL:** Let's Encrypt aktivieren
 
-### Dashboard (`dashboard.koreretail.de`)
+### Dashboard (`dashboard.kore-retail.de`)
 
-- **Document Root:** `/kore-retail/apps/dashboard/dist`
+- **Document Root:** `kore-retail/apps/dashboard/dist`
 - **SSL:** Let's Encrypt aktivieren
 - **Apache/Nginx:** SPA-Fallback konfigurieren (alle Routen auf `index.html`)
 
-Nginx-Regel (Plesk → Apache & nginx Einstellungen → nginx-Direktiven):
+Nginx-Regel (Plesk → Apache & nginx Einstellungen → Zusätzliche nginx-Direktiven):
 
 ```nginx
 location / {
@@ -97,9 +101,9 @@ location / {
 }
 ```
 
-### API (`api.koreretail.de`)
+### API (`api.kore-retail.de`)
 
-Nginx Reverse Proxy (Plesk → Apache & nginx Einstellungen → nginx-Direktiven):
+Nginx Reverse Proxy (Plesk → Apache & nginx Einstellungen → Zusätzliche nginx-Direktiven):
 
 ```nginx
 location / {
@@ -131,7 +135,7 @@ Auf Plesk: **Git → Pull** klicken, oder automatisch per Webhook.
 Manuell auf dem Server:
 
 ```bash
-cd /var/www/vhosts/koreretail.de/kore-retail
+cd /var/www/vhosts/kore-retail.de/kore-retail
 git pull origin main
 bash deploy.sh
 ```
