@@ -1,0 +1,105 @@
+import { z } from 'zod';
+// === Website Forms ===
+export const auditRequestSchema = z.object({
+    name: z.string().min(2, 'Name muss mindestens 2 Zeichen haben').max(100),
+    company: z.string().min(2, 'Unternehmen muss mindestens 2 Zeichen haben').max(100),
+    storeCount: z.string().min(1, 'Bitte Store-Anzahl angeben'),
+    challenge: z.string().min(10, 'Bitte beschreiben Sie Ihre Herausforderung (min. 10 Zeichen)').max(1000),
+    email: z.string().email('Bitte geben Sie eine gültige E-Mail-Adresse ein'),
+});
+export const contactFormSchema = z.object({
+    name: z.string().min(2, 'Name muss mindestens 2 Zeichen haben').max(100),
+    email: z.string().email('Bitte geben Sie eine gültige E-Mail-Adresse ein'),
+    company: z.string().max(100).optional(),
+    message: z.string().min(10, 'Nachricht muss mindestens 10 Zeichen haben').max(2000),
+});
+// === Auth ===
+export const loginSchema = z.object({
+    email: z.string().email(),
+    password: z.string().min(8),
+});
+// === Courses (Train) ===
+export const courseCreateSchema = z.object({
+    title: z.string().min(3).max(100),
+    description: z.string().max(500).optional(),
+    estimatedMins: z.number().int().min(1).max(600).optional(),
+    tags: z.array(z.string().max(30)).max(10).optional(),
+});
+export const moduleCreateSchema = z.object({
+    title: z.string().min(2).max(100),
+    order: z.number().int().min(0),
+});
+export const lessonCreateSchema = z.object({
+    title: z.string().min(2).max(100),
+    type: z.enum(['VIDEO', 'TEXT', 'QUIZ', 'CHECKLIST']),
+    content: z.record(z.unknown()),
+    order: z.number().int().min(0),
+    durationMins: z.number().int().min(1).max(120).optional(),
+});
+// === KPI (Pulse) ===
+export const kpiEntrySchema = z.object({
+    storeId: z.string().cuid(),
+    date: z.string().date(),
+    revenue: z.number().min(0),
+    transactions: z.number().int().min(0),
+    footfall: z.number().int().min(0).optional(),
+    unitsSold: z.number().int().min(0).optional(),
+    staffHours: z.number().min(0).optional(),
+});
+// === Tenant Management (Dashboard) ===
+export const tenantCreateSchema = z.object({
+    name: z.string().min(2, 'Name muss mindestens 2 Zeichen haben').max(100),
+    slug: z
+        .string()
+        .min(2, 'Slug muss mindestens 2 Zeichen haben')
+        .max(50)
+        .regex(/^[a-z0-9-]+$/, 'Slug darf nur Kleinbuchstaben, Zahlen und Bindestriche enthalten'),
+    contactEmail: z.string().email('Bitte gültige E-Mail-Adresse eingeben').optional().or(z.literal('')),
+    contactName: z.string().max(100).optional().or(z.literal('')),
+    contactPhone: z.string().max(30).optional().or(z.literal('')),
+    maxUsers: z.number().int().min(1).max(10000).optional(),
+});
+export const tenantUpdateSchema = tenantCreateSchema.partial();
+// === Store Management ===
+export const storeCreateSchema = z.object({
+    tenantId: z.string().min(1),
+    name: z.string().min(2, 'Name muss mindestens 2 Zeichen haben').max(100),
+    city: z.string().max(100).optional().or(z.literal('')),
+    address: z.string().max(200).optional().or(z.literal('')),
+});
+export const storeUpdateSchema = storeCreateSchema.omit({ tenantId: true }).partial();
+export const storeToolAssignSchema = z.object({
+    storeId: z.string().min(1),
+    toolId: z.string().min(1),
+});
+// === User Management ===
+const userRoleEnum = z.enum([
+    'kore_admin',
+    'tenant_admin',
+    'regional_manager',
+    'multisite_manager',
+    'store_manager',
+    'learner',
+]);
+export const userCreateSchema = z.object({
+    name: z.string().min(2, 'Name muss mindestens 2 Zeichen haben').max(100),
+    email: z.string().email('Bitte gültige E-Mail-Adresse eingeben'),
+    password: z.string().min(8, 'Passwort muss mindestens 8 Zeichen haben'),
+    role: userRoleEnum,
+    tenantId: z.string().min(1).optional(), // Required für alle außer kore_admin
+    storeIds: z.array(z.string().min(1)).optional(),
+});
+export const userUpdateSchema = z.object({
+    name: z.string().min(2).max(100).optional(),
+    email: z.string().email().optional(),
+    role: userRoleEnum.optional(),
+    isActive: z.boolean().optional(),
+    storeIds: z.array(z.string().min(1)).optional(),
+});
+export const userStoreAssignSchema = z.object({
+    storeIds: z.array(z.string().min(1)),
+});
+export const storeUserAssignSchema = z.object({
+    userIds: z.array(z.string().min(1)),
+});
+//# sourceMappingURL=index.js.map
