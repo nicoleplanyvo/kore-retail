@@ -1,23 +1,20 @@
 #!/bin/bash
 # ──────────────────────────────────────────────────
-# KORE — Deployment Script für Plesk
+# KORE — Deployment Script (rsync → Plesk)
 # ──────────────────────────────────────────────────
+# Unified Server: Website + API + Dashboard
+# auf einer Domain (kore-retail.de)
+#
 # Verwendung:
-#   ./scripts/deploy.sh              # Alles bauen + deployen
-#   ./scripts/deploy.sh web          # Nur Frontend
-#   ./scripts/deploy.sh api          # Nur API
-#   ./scripts/deploy.sh dashboard    # Nur Dashboard
+#   ./scripts/deploy.sh
 # ──────────────────────────────────────────────────
 
 set -e
 
 # ─── Konfiguration ──────────────────────────────
-# Anpassen an dein Plesk-Setup:
 PLESK_USER="kore-retail"
-PLESK_HOST="dein-server.de"
-WEB_REMOTE_PATH="/var/www/vhosts/kore-retail.de/httpdocs"
-API_REMOTE_PATH="/var/www/vhosts/api.kore-retail.de"
-DASHBOARD_REMOTE_PATH="/var/www/vhosts/dashboard.kore-retail.de/httpdocs"
+PLESK_HOST="craft.serverforall.de"
+REMOTE_PATH="/var/www/vhosts/kore-retail.de"
 
 # ─── Farben ─────────────────────────────────────
 GREEN='\033[0;32m'
@@ -33,11 +30,10 @@ error() { echo -e "${RED}✗${NC} $1"; exit 1; }
 command -v pnpm >/dev/null 2>&1 || error "pnpm ist nicht installiert"
 command -v rsync >/dev/null 2>&1 || error "rsync ist nicht installiert"
 
-TARGET=${1:-all}
-
 echo ""
 echo "══════════════════════════════════════════"
-echo "  KORE — Deployment ($TARGET)"
+echo "  KORE — Unified Deployment"
+echo "  → $PLESK_HOST"
 echo "══════════════════════════════════════════"
 echo ""
 
@@ -45,87 +41,89 @@ echo ""
 info "Installiere Dependencies..."
 pnpm install --frozen-lockfile
 
+info "Erstelle Production-Env (falls nicht vorhanden)..."
+[ ! -f apps/web/.env.production ] && echo "VITE_API_URL=" > apps/web/.env.production
+[ ! -f apps/dashboard/.env.production ] && echo "VITE_API_URL=" > apps/dashboard/.env.production
+
 info "Baue Projekt..."
 pnpm build
 
-# ─── Web Deploy ─────────────────────────────────
-if [[ "$TARGET" == "all" || "$TARGET" == "web" ]]; then
-  echo ""
-  info "Deploye Frontend → $PLESK_HOST:$WEB_REMOTE_PATH"
+# ─── Deploy: API ────────────────────────────────
+echo ""
+info "Deploye API..."
+rsync -avz --delete \
+  --exclude='node_modules' \
+  --exclude='.env' \
+  --exclude='logs' \
+  --exclude='data' \
+  --exclude='src' \
+  apps/api/dist/ \
+  "$PLESK_USER@$PLESK_HOST:$REMOTE_PATH/apps/api/dist/"
 
-  rsync -avz --delete \
-    --exclude='.DS_Store' \
-    apps/web/dist/ \
-    "$PLESK_USER@$PLESK_HOST:$WEB_REMOTE_PATH/"
+rsync -avz \
+  apps/api/package.json \
+  apps/api/ecosystem.config.cjs \
+  "$PLESK_USER@$PLESK_HOST:$REMOTE_PATH/apps/api/"
 
-  info "Frontend deployed"
-fi
+rsync -avz \
+  apps/api/prisma/schema.prisma \
+  "$PLESK_USER@$PLESK_HOST:$REMOTE_PATH/apps/api/prisma/"
 
-# ─── Dashboard Deploy ──────────────────────────
-if [[ "$TARGET" == "all" || "$TARGET" == "dashboard" ]]; then
-  echo ""
-  info "Deploye Dashboard → $PLESK_HOST:$DASHBOARD_REMOTE_PATH"
+# ─── Deploy: Website ───────────────────────────
+info "Deploye Website..."
+rsync -avz --delete \
+  --exclude='.DS_Store' \
+  apps/web/dist/ \
+  "$PLESK_USER@$PLESK_HOST:$REMOTE_PATH/apps/web/dist/"
 
-  rsync -avz --delete \
-    --exclude='.DS_Store' \
-    apps/dashboard/dist/ \
-    "$PLESK_USER@$PLESK_HOST:$DASHBOARD_REMOTE_PATH/"
+# ─── Deploy: Dashboard ─────────────────────────
+info "Deploye Dashboard..."
+rsync -avz --delete \
+  --exclude='.DS_Store' \
+  apps/dashboard/dist/ \
+  "$PLESK_USER@$PLESK_HOST:$REMOTE_PATH/apps/dashboard/dist/"
 
-  info "Dashboard deployed"
-fi
+# ─── Deploy: Shared Packages ───────────────────
+for pkg in validators types; do
+  if [ -d "packages/$pkg/dist" ]; then
+    info "Deploye @kore/$pkg..."
+    rsync -avz --delete \
+      --exclude='node_modules' \
+      --exclude='src' \
+      "packages/$pkg/dist/" \
+      "packages/$pkg/package.json" \
+      "$PLESK_USER@$PLESK_HOST:$REMOTE_PATH/apps/api/node_modules/@kore/$pkg/"
+  fi
+done
 
-# ─── API Deploy ─────────────────────────────────
-if [[ "$TARGET" == "all" || "$TARGET" == "api" ]]; then
-  echo ""
-  info "Deploye API → $PLESK_HOST:$API_REMOTE_PATH"
+info "Alle Dateien synchronisiert"
 
-  # API-Dateien synchronisieren
-  rsync -avz --delete \
-    --exclude='node_modules' \
-    --exclude='.env' \
-    --exclude='logs' \
-    --exclude='data' \
-    --exclude='src' \
-    --exclude='tsconfig.tsbuildinfo' \
-    apps/api/dist/ \
-    apps/api/package.json \
-    apps/api/ecosystem.config.cjs \
-    "$PLESK_USER@$PLESK_HOST:$API_REMOTE_PATH/"
+# ─── Server: Install + Restart ──────────────────
+echo ""
+info "Server-Setup: Dependencies + PM2..."
 
-  # Prisma-Dateien deployen
-  rsync -avz \
-    apps/api/prisma/schema.prisma \
-    "$PLESK_USER@$PLESK_HOST:$API_REMOTE_PATH/prisma/"
+ssh "$PLESK_USER@$PLESK_HOST" << 'REMOTE'
+  cd /var/www/vhosts/kore-retail.de/apps/api
+  npm install --production --omit=dev
+  npx prisma generate
+  mkdir -p logs data
 
-  # Auch validators-Paket deployen (wird von API gebraucht)
-  rsync -avz --delete \
-    --exclude='node_modules' \
-    --exclude='src' \
-    packages/validators/dist/ \
-    packages/validators/package.json \
-    "$PLESK_USER@$PLESK_HOST:$API_REMOTE_PATH/node_modules/@kore/validators/"
-
-  # Dependencies auf Server installieren & PM2 neustarten
-  ssh "$PLESK_USER@$PLESK_HOST" << 'REMOTE'
-    cd /var/www/vhosts/api.kore-retail.de
-    npm install --production --omit=dev
-    npx prisma generate
-    mkdir -p logs data
-
-    # PM2 neustarten
-    if pm2 describe kore-api > /dev/null 2>&1; then
-      pm2 restart kore-api
-    else
-      pm2 start ecosystem.config.cjs
-    fi
+  if pm2 describe kore-server > /dev/null 2>&1; then
+    pm2 restart kore-server
+    echo "  kore-server neugestartet"
+  else
+    pm2 start ecosystem.config.cjs
     pm2 save
+    echo "  kore-server gestartet"
+  fi
 REMOTE
-
-  info "API deployed & neugestartet"
-fi
 
 echo ""
 echo "══════════════════════════════════════════"
-echo "  Deployment abgeschlossen"
+echo "  Deployment abgeschlossen!"
+echo ""
+echo "  Website:   https://kore-retail.de"
+echo "  Dashboard: https://kore-retail.de/dashboard/"
+echo "  Health:    https://kore-retail.de/health"
 echo "══════════════════════════════════════════"
 echo ""

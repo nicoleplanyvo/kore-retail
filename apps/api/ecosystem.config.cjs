@@ -1,19 +1,21 @@
 // ──────────────────────────────────────────────────
-// KORE API — PM2 Konfiguration für Plesk
+// KORE — PM2 Konfiguration für Plesk
 // ──────────────────────────────────────────────────
+// Unified Server: Serviert Website + API + Dashboard
+// auf einer einzelnen Domain (kore-retail.de)
+//
 // Starten:  pm2 start ecosystem.config.cjs
 // Status:   pm2 status
-// Logs:     pm2 logs kore-api
-// Restart:  pm2 restart kore-api
+// Logs:     pm2 logs kore-server
+// Restart:  pm2 restart kore-server
 // ──────────────────────────────────────────────────
 
 module.exports = {
   apps: [
     {
-      name: 'kore-api',
+      name: 'kore-server',
       script: './dist/index.js',
       cwd: __dirname,
-      node_args: '--experimental-specifier-resolution=node',
       instances: 1,
       autorestart: true,
       watch: false,
