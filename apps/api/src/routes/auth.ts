@@ -30,7 +30,7 @@ async function buildAuthResponse(userId: string, impersonatedBy?: string) {
     role: user.role,
     tenantId: user.tenantId,
     impersonatedBy: impersonatedBy || undefined,
-    storeAssignments: user.storeAssignments.map((a) => a.storeId),
+    storeAssignments: user.storeAssignments.map((a: { storeId: string }) => a.storeId),
   };
 }
 

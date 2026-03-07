@@ -71,12 +71,12 @@ adminReportingRouter.get('/hierarchy', async (req, res) => {
     });
 
     // Formatierung
-    const formattedStores = stores.map((s) => ({
+    const formattedStores = stores.map((s: { id: string; name: string; city: string | null; isActive: boolean; userAssignments: Array<{ assignedAt: Date; user: { id: string; name: string; email: string; role: string } }> }) => ({
       id: s.id,
       name: s.name,
       city: s.city,
       isActive: s.isActive,
-      users: s.userAssignments.map((a) => ({
+      users: s.userAssignments.map((a: { assignedAt: Date; user: { id: string; name: string; email: string; role: string } }) => ({
         id: a.user.id,
         name: a.user.name,
         email: a.user.email,
@@ -85,12 +85,12 @@ adminReportingRouter.get('/hierarchy', async (req, res) => {
       })),
     }));
 
-    const formattedManagers = managers.map((m) => ({
+    const formattedManagers = managers.map((m: { id: string; name: string; email: string; role: string; storeAssignments: Array<{ store: { id: string; name: string; city: string | null } }> }) => ({
       id: m.id,
       name: m.name,
       email: m.email,
       role: m.role,
-      stores: m.storeAssignments.map((a) => ({
+      stores: m.storeAssignments.map((a: { store: { id: string; name: string; city: string | null } }) => ({
         id: a.store.id,
         name: a.store.name,
         city: a.store.city,

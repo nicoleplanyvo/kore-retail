@@ -1,9 +1,9 @@
-# KORE — koreretail.de
+# KORE — kore-retail.de
 User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://koreretail.de/sitemap.xml
+Sitemap: https://kore-retail.de/sitemap.xml
 
 # Disallow API and internal paths
 Disallow: /api/

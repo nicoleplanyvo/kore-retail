@@ -6,7 +6,7 @@ interface PageMeta {
   description: string;
 }
 
-const BASE_URL = 'https://koreretail.de';
+const BASE_URL = 'https://kore-retail.de';
 
 /**
  * Sets document title, meta description, OG tags, Twitter tags

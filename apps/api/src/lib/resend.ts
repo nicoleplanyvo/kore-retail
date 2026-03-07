@@ -7,7 +7,7 @@ if (!apiKey) {
 
 export const resend = apiKey ? new Resend(apiKey) : null;
 
-const FROM = process.env['FROM_EMAIL'] ?? 'noreply@koreretail.de';
+const FROM = process.env['FROM_EMAIL'] ?? 'noreply@kore-retail.de';
 const NOTIFY = process.env['NOTIFICATION_EMAIL'] ?? 'hello@planyvo.com';
 
 // ──────────────────────────────────────────────
