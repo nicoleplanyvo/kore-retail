@@ -28,17 +28,17 @@ model User {
 }
 
 model Tenant {
-  id           String    @id @default(cuid())
+  id           String   @id @default(cuid())
   name         String
-  slug         String    @unique
-  status       String    @default("ACTIVE")
+  slug         String   @unique
+  status       String   @default("ACTIVE")
   contactEmail String?
   contactName  String?
   contactPhone String?
-  maxUsers     Int       @default(15)
+  maxUsers     Int      @default(15)
   logoUrl      String?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   users        User[]
   stores       Store[]
@@ -57,7 +57,7 @@ model Store {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  tools     StoreToolAssignment[]
+  tools           StoreToolAssignment[]
   userAssignments UserStoreAssignment[]
 
   @@index([tenantId])
@@ -76,19 +76,19 @@ model ToolDefinition {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  assignments  StoreToolAssignment[]
+  assignments StoreToolAssignment[]
 
   @@index([category])
 }
 
 model StoreToolAssignment {
-  id         String   @id @default(cuid())
+  id         String         @id @default(cuid())
   storeId    String
   store      Store          @relation(fields: [storeId], references: [id], onDelete: Cascade)
   toolId     String
   tool       ToolDefinition @relation(fields: [toolId], references: [id], onDelete: Cascade)
-  isActive   Boolean  @default(true)
-  assignedAt DateTime @default(now())
+  isActive   Boolean        @default(true)
+  assignedAt DateTime       @default(now())
   config     String?
 
   @@unique([storeId, toolId])
@@ -110,27 +110,27 @@ model UserStoreAssignment {
 }
 
 model Subscription {
-  id               String    @id @default(cuid())
-  tenantId         String    @unique
-  tenant           Tenant    @relation(fields: [tenantId], references: [id])
-  stripeCustomerId String    @unique
-  stripeSubId      String    @unique
+  id               String   @id @default(cuid())
+  tenantId         String   @unique
+  tenant           Tenant   @relation(fields: [tenantId], references: [id])
+  stripeCustomerId String   @unique
+  stripeSubId      String   @unique
   status           String
   currentPeriodEnd DateTime
-  cancelAtPeriod   Boolean   @default(false)
+  cancelAtPeriod   Boolean  @default(false)
 }
 
 // GDPR: Audit-Log für Datenänderungen
 model AuditLog {
-  id         String   @id @default(cuid())
-  tenantId   String?
-  userId     String?
-  action     String
-  entity     String
-  entityId   String?
-  details    String?
-  ipAddress  String?
-  createdAt  DateTime @default(now())
+  id        String   @id @default(cuid())
+  tenantId  String?
+  userId    String?
+  action    String
+  entity    String
+  entityId  String?
+  details   String?
+  ipAddress String?
+  createdAt DateTime @default(now())
 
   @@index([tenantId])
   @@index([createdAt])
@@ -150,6 +150,6 @@ model DataProcessingConsent {
   version     String
   document    String?
 
-  @@index([tenantId])
   @@unique([tenantId, consentType])
+  @@index([tenantId])
 }

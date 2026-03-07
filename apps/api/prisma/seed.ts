@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from './generated/client/index.js';
 import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
 import { hashSync } from 'bcryptjs';
 
