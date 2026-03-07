@@ -1,5 +1,5 @@
 node_modules/
-dist/
+# dist/ — Build-Artefakte werden für Plesk-Deployment committed
 .turbo/
 .env
 .env.local
