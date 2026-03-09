@@ -13,10 +13,11 @@ import { adminGdprRouter } from './routes/admin/gdpr.js';
 import { adminUsersRouter } from './routes/admin/users.js';
 import { adminReportingRouter } from './routes/admin/reporting.js';
 import { storeExcellenceAuditRouter } from './routes/tools/store-excellence-audit/index.js';
+import { toolsRouter } from './routes/tools/index.js';
 
 const app = express();
 const PORT = parseInt(process.env['PORT'] ?? '3001', 10);
-const CORS_ORIGIN = process.env['CORS_ORIGIN'] ?? 'http://localhost:5173';
+const CORS_ORIGIN = process.env['CORS_ORIGIN'] ?? 'http://localhost:5173,http://localhost:5174,http://localhost:5175,http://127.0.0.1:5173,http://127.0.0.1:5174,http://127.0.0.1:5175';
 
 // Parse allowed origins (comma-separated für mehrere Domains)
 const allowedOrigins = CORS_ORIGIN.split(',').map((o) => o.trim());
@@ -52,7 +53,9 @@ app.use('/api/admin/gdpr', adminGdprRouter);
 app.use('/api/admin/users', adminUsersRouter);
 app.use('/api/admin/reporting', adminReportingRouter);
 
-// Routes — Tools
+// Routes — Tools (App: zugewiesene Tools des Users)
+app.use('/api/tools', toolsRouter);
+// Routes — Tools (SEA)
 app.use('/api/tools/sea', storeExcellenceAuditRouter);
 
 // Statische Uploads mit Auth-Schutz
