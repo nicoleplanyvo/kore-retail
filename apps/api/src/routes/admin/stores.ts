@@ -3,16 +3,35 @@ import prisma from '../../lib/prisma.js';
 import { authenticate, requireMinRole } from '../../middleware/auth.js';
 import { storeCreateSchema, storeUpdateSchema, storeToolAssignSchema, storeUserAssignSchema } from '@kore/validators';
 import { logAudit } from '../../lib/audit.js';
+import { hasMinRole, type UserRole } from '@kore/types';
 
 export const adminStoresRouter: RouterType = Router();
-adminStoresRouter.use(authenticate, requireMinRole('tenant_admin'));
+// store_manager+ kann Stores sehen; Erstellung erfordert höhere Rolle (inline geprüft)
+adminStoresRouter.use(authenticate, requireMinRole('store_manager'));
 
-// GET /api/admin/stores — Alle Stores (optional Filter by tenantId)
+// GET /api/admin/stores — Stores mit Rollen-basiertem Scoping
 adminStoresRouter.get('/', async (req, res) => {
   try {
     const tenantId = req.query['tenantId'] as string | undefined;
     const where: Record<string, unknown> = {};
-    if (tenantId) where['tenantId'] = tenantId;
+    const userRole = req.user!.role as UserRole;
+
+    if (userRole === 'kore_admin') {
+      if (tenantId) where['tenantId'] = tenantId;
+    } else if (userRole === 'tenant_admin') {
+      // tenant_admin sieht alle Stores des eigenen Tenants
+      where['tenantId'] = req.user!.tenantId;
+    } else {
+      // regional_manager, multisite_manager, store_manager, learner:
+      // Nur zugewiesene Stores
+      where['tenantId'] = req.user!.tenantId;
+      const myAssignments = await prisma.userStoreAssignment.findMany({
+        where: { userId: req.user!.sub },
+        select: { storeId: true },
+      });
+      const myStoreIds = myAssignments.map((a: { storeId: string }) => a.storeId);
+      where['id'] = { in: myStoreIds };
+    }
 
     const stores = await prisma.store.findMany({
       where,
@@ -56,9 +75,15 @@ adminStoresRouter.get('/:id', async (req, res) => {
   }
 });
 
-// POST /api/admin/stores — Store erstellen
+// POST /api/admin/stores — Store erstellen (mindestens multisite_manager)
 adminStoresRouter.post('/', async (req, res) => {
   try {
+    // Store-Erstellung erfordert mindestens multisite_manager
+    if (!hasMinRole(req.user!.role as UserRole, 'multisite_manager')) {
+      res.status(403).json({ error: 'Keine Berechtigung zum Erstellen von Stores.' });
+      return;
+    }
+
     const result = storeCreateSchema.safeParse(req.body);
     if (!result.success) {
       res.status(400).json({ error: 'Validierungsfehler', details: result.error.flatten().fieldErrors });
@@ -66,6 +91,12 @@ adminStoresRouter.post('/', async (req, res) => {
     }
 
     const data = result.data;
+
+    // Nicht-kore_admin muss eigenen Tenant verwenden
+    if (req.user!.role !== 'kore_admin' && data.tenantId !== req.user!.tenantId) {
+      res.status(403).json({ error: 'Kein Zugriff auf diesen Mandanten.' });
+      return;
+    }
 
     const tenant = await prisma.tenant.findUnique({ where: { id: data.tenantId } });
     if (!tenant) {

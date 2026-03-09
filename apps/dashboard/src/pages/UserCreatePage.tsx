@@ -9,14 +9,14 @@ import { useCreateUser } from '../hooks/useUsers';
 import { useAuthStore } from '../stores/authStore';
 import { useTenants } from '../hooks/useTenants';
 import { useStores } from '../hooks/useStores';
-import { hasMinRole, type UserRole } from '@kore/types';
+import { canCreateRole, type UserRole } from '@kore/types';
 
-const ROLE_OPTIONS: { value: string; label: string; minCreatorRole: UserRole }[] = [
-  { value: 'tenant_admin', label: 'Kunden-Admin', minCreatorRole: 'kore_admin' },
-  { value: 'regional_manager', label: 'Regional Manager', minCreatorRole: 'tenant_admin' },
-  { value: 'multisite_manager', label: 'Multisite Manager', minCreatorRole: 'tenant_admin' },
-  { value: 'store_manager', label: 'Store Manager', minCreatorRole: 'tenant_admin' },
-  { value: 'learner', label: 'Mitarbeiter', minCreatorRole: 'tenant_admin' },
+const ROLE_OPTIONS: { value: UserRole; label: string }[] = [
+  { value: 'tenant_admin', label: 'Kunden-Admin' },
+  { value: 'regional_manager', label: 'Regional Manager' },
+  { value: 'multisite_manager', label: 'Multisite Manager' },
+  { value: 'store_manager', label: 'Store Manager' },
+  { value: 'learner', label: 'Mitarbeiter' },
 ];
 
 export function UserCreatePage() {
@@ -29,6 +29,11 @@ export function UserCreatePage() {
   const { data: tenantsData } = useTenants({ pageSize: 100 });
   const isKoreAdmin = user?.role === 'kore_admin';
 
+  // Erste erstellbare Rolle als Default
+  const defaultRole = ROLE_OPTIONS.find((r) =>
+    canCreateRole((user?.role || 'learner') as UserRole, r.value),
+  )?.value || 'learner';
+
   const {
     register,
     handleSubmit,
@@ -37,7 +42,7 @@ export function UserCreatePage() {
   } = useForm<UserCreateInput>({
     resolver: zodResolver(userCreateSchema),
     defaultValues: {
-      role: 'store_manager',
+      role: defaultRole,
       tenantId: isKoreAdmin ? '' : (user?.tenantId || ''),
       storeIds: [],
     },
@@ -48,9 +53,9 @@ export function UserCreatePage() {
   // Lade Stores des ausgewählten Tenants
   const { data: storesData } = useStores(selectedTenantId || user?.tenantId);
 
-  // Filtere Rollen basierend auf eigener Rolle
+  // Filtere Rollen: nur Rollen strikt unter der eigenen
   const availableRoles = ROLE_OPTIONS.filter((r) =>
-    hasMinRole(user?.role || 'learner', r.minCreatorRole),
+    canCreateRole((user?.role || 'learner') as UserRole, r.value),
   );
 
   const onSubmit = async (data: UserCreateInput) => {

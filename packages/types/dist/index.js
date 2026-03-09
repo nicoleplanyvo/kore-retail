@@ -12,4 +12,13 @@ export const ROLE_HIERARCHY = [
 export function hasMinRole(userRole, requiredRole) {
     return ROLE_HIERARCHY.indexOf(userRole) <= ROLE_HIERARCHY.indexOf(requiredRole);
 }
+/** Prüft ob creator eine Rolle STRIKT unter sich erstellen kann */
+export function canCreateRole(creatorRole, targetRole) {
+    return ROLE_HIERARCHY.indexOf(creatorRole) < ROLE_HIERARCHY.indexOf(targetRole);
+}
+/** Gibt alle Rollen zurück, die ein User erstellen kann (strikt unterhalb) */
+export function getCreatableRoles(creatorRole) {
+    const idx = ROLE_HIERARCHY.indexOf(creatorRole);
+    return ROLE_HIERARCHY.slice(idx + 1);
+}
 //# sourceMappingURL=index.js.map

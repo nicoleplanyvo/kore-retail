@@ -15,9 +15,9 @@ interface NavItem {
 const navItems: NavItem[] = [
   { to: '/', icon: LayoutDashboard, label: t.nav.dashboard, minRole: 'learner' },
   { to: '/tenants', icon: Building2, label: t.nav.tenants, minRole: 'kore_admin' },
-  { to: '/users', icon: Users, label: 'Benutzer', minRole: 'tenant_admin' },
+  { to: '/users', icon: Users, label: 'Benutzer', minRole: 'store_manager' },
   { to: '/stores', icon: Store, label: 'Stores', minRole: 'store_manager' },
-  { to: '/reporting', icon: GitBranch, label: 'Organisation', minRole: 'tenant_admin' },
+  { to: '/reporting', icon: GitBranch, label: 'Organisation', minRole: 'regional_manager' },
   { to: '/tools', icon: Wrench, label: t.nav.tools, minRole: 'store_manager' },
   { to: '/gdpr', icon: Shield, label: t.nav.gdpr, minRole: 'tenant_admin' },
 ];

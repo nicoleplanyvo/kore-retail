@@ -40,15 +40,15 @@ export function App() {
 
           {/* tenant_admin+ */}
           <Route element={<ProtectedRoute minRole="tenant_admin" />}>
-            <Route path="/users" element={<UsersListPage />} />
-            <Route path="/users/new" element={<UserCreatePage />} />
-            <Route path="/users/:id" element={<UserDetailPage />} />
             <Route path="/gdpr" element={<GdprPage />} />
             <Route path="/reporting" element={<ReportingPage />} />
           </Route>
 
-          {/* store_manager+ */}
+          {/* store_manager+ (Benutzer verwalten, Stores, Tools) */}
           <Route element={<ProtectedRoute minRole="store_manager" />}>
+            <Route path="/users" element={<UsersListPage />} />
+            <Route path="/users/new" element={<UserCreatePage />} />
+            <Route path="/users/:id" element={<UserDetailPage />} />
             <Route path="/stores" element={<StoresListPage />} />
             <Route path="/stores/:id" element={<StoreDetailPage />} />
             <Route path="/tools" element={<ToolsOverviewPage />} />

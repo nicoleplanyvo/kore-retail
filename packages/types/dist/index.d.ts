@@ -3,6 +3,10 @@ export type UserRole = 'kore_admin' | 'tenant_admin' | 'regional_manager' | 'mul
 export declare const ROLE_HIERARCHY: UserRole[];
 /** Prüft ob roleA ≥ roleB in der Hierarchie */
 export declare function hasMinRole(userRole: UserRole, requiredRole: UserRole): boolean;
+/** Prüft ob creator eine Rolle STRIKT unter sich erstellen kann */
+export declare function canCreateRole(creatorRole: UserRole, targetRole: UserRole): boolean;
+/** Gibt alle Rollen zurück, die ein User erstellen kann (strikt unterhalb) */
+export declare function getCreatableRoles(creatorRole: UserRole): UserRole[];
 export type SubStatus = 'ACTIVE' | 'PAST_DUE' | 'CANCELED' | 'TRIALING';
 export type LessonType = 'VIDEO' | 'TEXT' | 'QUIZ' | 'CHECKLIST';
 export type EnrollmentStatus = 'NOT_STARTED' | 'IN_PROGRESS' | 'COMPLETED' | 'OVERDUE';

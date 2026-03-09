@@ -2,73 +2,63 @@
 # ──────────────────────────────────────────────────
 # KORE — Plesk Server-Side Deployment Script
 # ──────────────────────────────────────────────────
-# Wird direkt auf dem Server ausgeführt (z.B. als Plesk Git-Hook).
-#
-# Unified Server: Website + API + Dashboard
-# Alles läuft auf kore-retail.de (eine Domain, ein Node.js-Prozess)
-#
-# Voraussetzungen:
-#   - Node.js >= 20
-#   - pnpm >= 10  (npm install -g pnpm)
-#   - PM2         (npm install -g pm2)
+# Dashboard-Subdomain: dashboard.kore-retail.de
+# Nutzt npx pnpm@latest statt globaler pnpm-Installation.
 # ──────────────────────────────────────────────────
 
 set -e
 
 echo "══════════════════════════════════════════════"
-echo "  KORE — Unified Server Deployment"
+echo "  KORE Dashboard — Deployment"
 echo "══════════════════════════════════════════════"
 
-# 1. Dependencies installieren
+# 0. Node.js finden (Plesk: /opt/plesk/node/<version>/bin/)
+echo ""
+echo "→ Node.js suchen..."
+for NODE_DIR in $(ls -rd /opt/plesk/node/*/bin 2>/dev/null); do
+  if [ -x "$NODE_DIR/node" ]; then
+    export PATH="$NODE_DIR:$PATH"
+    echo "  Gefunden: $NODE_DIR ($(node --version))"
+    break
+  fi
+done
+export PATH="$HOME/.local/share/pnpm:$HOME/.npm-global/bin:/usr/local/bin:$PATH"
+
+if ! command -v node &> /dev/null; then
+  echo "  FEHLER: Node.js nicht gefunden!"
+  exit 1
+fi
+echo "  Node: $(node --version)  npm: $(npm --version)"
+
+# 1. Dependencies installieren (npx pnpm — keine globale Installation nötig)
 echo ""
 echo "→ Dependencies installieren..."
-pnpm install --frozen-lockfile
+npx --yes pnpm@latest install --frozen-lockfile 2>&1 || npx --yes pnpm@latest install 2>&1
 
-# 2. Production-Env für Frontends (Same-Origin API)
+# 2. Production-Env
 echo ""
 echo "→ Production-Env erstellen..."
-[ ! -f apps/web/.env.production ] && echo "VITE_API_URL=" > apps/web/.env.production
 [ ! -f apps/dashboard/.env.production ] && echo "VITE_API_URL=" > apps/dashboard/.env.production
 
 # 3. Prisma Client generieren
 echo ""
 echo "→ Prisma Client generieren..."
 cd apps/api
-pnpm exec prisma generate
+npx --yes pnpm@latest exec prisma generate 2>&1
 
 # 4. Datenbank-Schema synchronisieren (SQLite)
 echo ""
-echo "→ Datenbank-Schema synchronisieren..."
+echo "→ Datenbank synchronisieren..."
 mkdir -p data
-pnpm exec prisma db push --skip-generate
+npx --yes pnpm@latest exec prisma db push --skip-generate 2>&1
 cd ../..
 
-# 5. Alle Packages + Apps bauen (Turbo cached)
+# 5. Build (Turbo)
 echo ""
-echo "→ Build starten (turbo)..."
-pnpm build
-
-# 6. Server mit PM2 neustarten
-echo ""
-echo "→ Server neustarten (PM2)..."
-cd apps/api
-mkdir -p logs
-if pm2 describe kore-server > /dev/null 2>&1; then
-  pm2 restart kore-server
-  echo "  kore-server neugestartet"
-else
-  pm2 start ecosystem.config.cjs
-  pm2 save
-  echo "  kore-server gestartet und gespeichert"
-fi
-cd ../..
+echo "→ Build starten..."
+npx --yes pnpm@latest build 2>&1
 
 echo ""
 echo "══════════════════════════════════════════════"
-echo "  Deployment abgeschlossen!"
+echo "  ✓ Build abgeschlossen!"
 echo "══════════════════════════════════════════════"
-echo ""
-echo "  Website:   https://kore-retail.de"
-echo "  Dashboard: https://kore-retail.de/dashboard/"
-echo "  Health:    https://kore-retail.de/health"
-echo ""

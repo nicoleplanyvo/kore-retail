@@ -4,14 +4,15 @@ import prisma from '../../lib/prisma.js';
 import { logAudit } from '../../lib/audit.js';
 import { authenticate, requireMinRole } from '../../middleware/auth.js';
 import { userCreateSchema, userUpdateSchema, userStoreAssignSchema } from '@kore/validators';
-import { ROLE_HIERARCHY, hasMinRole, type UserRole } from '@kore/types';
+import { ROLE_HIERARCHY, hasMinRole, canCreateRole, type UserRole } from '@kore/types';
 
 export const adminUsersRouter: RouterType = Router();
 
-// Alle Routen erfordern mindestens tenant_admin
-adminUsersRouter.use(authenticate, requireMinRole('tenant_admin'));
+// Alle Routen erfordern mindestens store_manager
+// (store_manager kann Mitarbeiter erstellen/verwalten)
+adminUsersRouter.use(authenticate, requireMinRole('store_manager'));
 
-// GET /api/admin/users — Liste aller User (kore_admin: alle, tenant_admin: eigener Tenant)
+// GET /api/admin/users — Liste aller User (scoping je nach Rolle)
 adminUsersRouter.get('/', async (req, res) => {
   try {
     const { search, role, tenantId, page = '1', pageSize = '20' } = req.query;
@@ -19,21 +20,52 @@ adminUsersRouter.get('/', async (req, res) => {
     const ps = Math.min(100, Math.max(1, Number(pageSize)));
 
     const where: Record<string, unknown> = {};
+    const userRole = req.user!.role as UserRole;
 
     // Tenant-Scoping
-    if (req.user!.role === 'kore_admin') {
+    if (userRole === 'kore_admin') {
       if (tenantId) where['tenantId'] = tenantId;
     } else {
-      // tenant_admin sieht nur eigenen Tenant
+      // Alle anderen sehen nur eigenen Tenant
       where['tenantId'] = req.user!.tenantId;
+    }
+
+    // Rollen unterhalb der eigenen anzeigen (außer kore_admin/tenant_admin → sehen alle)
+    if (userRole !== 'kore_admin' && userRole !== 'tenant_admin') {
+      // store_manager, multisite_manager, regional_manager:
+      // Nur User sehen die in den gleichen Stores zugewiesen sind
+      const myStoreAssignments = await prisma.userStoreAssignment.findMany({
+        where: { userId: req.user!.sub },
+        select: { storeId: true },
+      });
+      const myStoreIds = myStoreAssignments.map((a: { storeId: string }) => a.storeId);
+
+      if (myStoreIds.length > 0) {
+        where['OR'] = [
+          // User die in meinen Stores zugewiesen sind
+          { storeAssignments: { some: { storeId: { in: myStoreIds } } } },
+          // Mich selbst
+          { id: req.user!.sub },
+        ];
+      } else {
+        // Nur mich selbst
+        where['id'] = req.user!.sub;
+      }
     }
 
     if (role) where['role'] = role;
     if (search) {
-      where['OR'] = [
+      // Bei Store-Scoped Queries muss OR kombiniert werden
+      const searchFilter = [
         { name: { contains: search as string } },
         { email: { contains: search as string } },
       ];
+      if (where['OR']) {
+        where['AND'] = [{ OR: where['OR'] as unknown[] }, { OR: searchFilter }];
+        delete where['OR'];
+      } else {
+        where['OR'] = searchFilter;
+      }
     }
 
     const [users, total] = await Promise.all([
@@ -129,13 +161,14 @@ adminUsersRouter.post('/', async (req, res) => {
 
     const { name, email, password, role, tenantId, storeIds } = result.data;
 
-    // Rollenbeschränkung: tenant_admin kann nur Rollen unter sich erstellen
+    // Rollenbeschränkung: Nur Rollen STRIKT unter der eigenen erstellen
+    if (!canCreateRole(req.user!.role as UserRole, role as UserRole)) {
+      res.status(403).json({ error: 'Sie können keine Benutzer mit gleicher oder höherer Rolle erstellen.' });
+      return;
+    }
+
+    // Nicht-kore_admin muss eigenen Tenant verwenden
     if (req.user!.role !== 'kore_admin') {
-      if (!hasMinRole(req.user!.role as UserRole, role as UserRole)) {
-        res.status(403).json({ error: 'Sie können keine Benutzer mit gleicher oder höherer Rolle erstellen.' });
-        return;
-      }
-      // tenant_admin muss eigenen Tenant verwenden
       if (tenantId && tenantId !== req.user!.tenantId) {
         res.status(403).json({ error: 'Kein Zugriff auf diesen Mandanten.' });
         return;
@@ -240,10 +273,29 @@ adminUsersRouter.put('/:id', async (req, res) => {
 
     const { storeIds, ...updateData } = result.data;
 
-    // Rollenbeschränkung: Darf keine höhere Rolle vergeben
-    if (updateData.role && req.user!.role !== 'kore_admin') {
-      if (!hasMinRole(req.user!.role as UserRole, updateData.role as UserRole)) {
+    // Rollenbeschränkung: Darf keine gleiche oder höhere Rolle vergeben
+    if (updateData.role) {
+      if (!canCreateRole(req.user!.role as UserRole, updateData.role as UserRole)) {
         res.status(403).json({ error: 'Sie können keine Benutzer auf gleiche oder höhere Rolle setzen.' });
+        return;
+      }
+    }
+
+    // Nicht-kore_admin/tenant_admin: Nur User in eigenen Stores bearbeiten
+    const userRole = req.user!.role as UserRole;
+    if (userRole !== 'kore_admin' && userRole !== 'tenant_admin') {
+      const myStores = await prisma.userStoreAssignment.findMany({
+        where: { userId: req.user!.sub },
+        select: { storeId: true },
+      });
+      const myStoreIds = myStores.map((a: { storeId: string }) => a.storeId);
+      const targetStores = await prisma.userStoreAssignment.findMany({
+        where: { userId: targetUser.id },
+        select: { storeId: true },
+      });
+      const hasOverlap = targetStores.some((a: { storeId: string }) => myStoreIds.includes(a.storeId));
+      if (!hasOverlap && targetUser.id !== req.user!.sub) {
+        res.status(403).json({ error: 'Kein Zugriff auf diesen Benutzer.' });
         return;
       }
     }

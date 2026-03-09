@@ -4,7 +4,7 @@ import path from 'path';
 
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  base: mode === 'production' ? '/dashboard/' : '/',
+  base: '/',
   server: {
     host: true,
   },

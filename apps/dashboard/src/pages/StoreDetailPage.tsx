@@ -35,7 +35,7 @@ export function StoreDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const user = useAuthStore((s) => s.user);
-  const canManageUsers = user ? hasMinRole(user.role as UserRole, 'tenant_admin') : false;
+  const canManageUsers = user ? hasMinRole(user.role as UserRole, 'store_manager') : false;
   const { data: store, isLoading } = useStore(id);
   const { data: storeToolsData } = useStoreTools(id);
   const { data: storeUsersData } = useStoreUsers(canManageUsers ? id : undefined);

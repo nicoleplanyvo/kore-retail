@@ -23,6 +23,17 @@ export function hasMinRole(userRole: UserRole, requiredRole: UserRole): boolean 
   return ROLE_HIERARCHY.indexOf(userRole) <= ROLE_HIERARCHY.indexOf(requiredRole);
 }
 
+/** Prüft ob creator eine Rolle STRIKT unter sich erstellen kann */
+export function canCreateRole(creatorRole: UserRole, targetRole: UserRole): boolean {
+  return ROLE_HIERARCHY.indexOf(creatorRole) < ROLE_HIERARCHY.indexOf(targetRole);
+}
+
+/** Gibt alle Rollen zurück, die ein User erstellen kann (strikt unterhalb) */
+export function getCreatableRoles(creatorRole: UserRole): UserRole[] {
+  const idx = ROLE_HIERARCHY.indexOf(creatorRole);
+  return ROLE_HIERARCHY.slice(idx + 1);
+}
+
 export type SubStatus = 'ACTIVE' | 'PAST_DUE' | 'CANCELED' | 'TRIALING';
 
 export type LessonType = 'VIDEO' | 'TEXT' | 'QUIZ' | 'CHECKLIST';

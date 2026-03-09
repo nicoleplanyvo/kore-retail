@@ -29,7 +29,7 @@ const isProduction = NODE_ENV === 'production';
 // Production: Same-Origin (kein CORS nötig, aber als Fallback konfiguriert)
 // Development: Vite Dev-Server auf Port 5173 (Web) und 5174 (Dashboard)
 const CORS_ORIGIN =
-  process.env['CORS_ORIGIN'] ?? 'http://localhost:5173,http://localhost:5174,http://localhost:5175,http://127.0.0.1:5173,http://127.0.0.1:5174,http://127.0.0.1:5175';
+  process.env['CORS_ORIGIN'] ?? 'http://localhost:5173,http://localhost:5174,http://localhost:5175,http://localhost:5176,http://127.0.0.1:5173,http://127.0.0.1:5174,http://127.0.0.1:5175,http://127.0.0.1:5176,https://dashboard.kore-retail.de,https://app.kore-retail.de';
 const allowedOrigins = CORS_ORIGIN.split(',').map((o) => o.trim());
 
 app.use(
@@ -79,48 +79,57 @@ app.get('/health', (_req, res) => {
 
 // ── Static File Serving (nur in Production) ───────
 // In Development werden Web + Dashboard von eigenen Vite Dev-Servern bedient.
-// In Production serviert dieser Server alles:
+// In Production serviert dieser Server alles über einen Node.js-Prozess.
+//
+// Modus 1 (DASHBOARD_ONLY=true): dashboard.kore-retail.de
+//   /              → Dashboard SPA (apps/dashboard/dist)
+//   /api/*         → Express API
+//
+// Modus 2 (Default): kore-retail.de (Unified)
 //   /              → Website (apps/web/dist)
 //   /dashboard/    → Dashboard SPA (apps/dashboard/dist)
-//   /api/*         → Express API (oben definiert)
+//   /api/*         → Express API
 if (isProduction) {
-  // Pfade relativ zu dist/index.js:
-  //   dist/index.js → ../../web/dist     (= apps/web/dist)
-  //   dist/index.js → ../../dashboard/dist (= apps/dashboard/dist)
-  const webRoot =
-    process.env['WEB_ROOT'] ?? path.resolve(__dirname, '../../web/dist');
+  const dashboardOnly = process.env['DASHBOARD_ONLY'] === 'true';
+
   const dashboardRoot =
     process.env['DASHBOARD_ROOT'] ??
     path.resolve(__dirname, '../../dashboard/dist');
 
-  // Dashboard: Statische Dateien unter /dashboard/
-  app.use('/dashboard', express.static(dashboardRoot));
+  if (dashboardOnly) {
+    // ── Subdomain-Modus: Dashboard am Root ──
+    app.use(express.static(dashboardRoot));
 
-  // Website: Statische Dateien im Root /
-  app.use(express.static(webRoot));
-
-  // SPA Fallback — fängt alle GET-Requests auf, die keine Datei gefunden haben
-  // MUSS nach allen API-Routes und express.static() kommen
-  app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
-    // Nur GET-Requests bekommen SPA-Fallback
-    if (req.method !== 'GET') return next();
-
-    // API-Routes und Health-Check NICHT auffangen — sollen normal 404 geben
-    if (req.path.startsWith('/api/') || req.path === '/health') return next();
-
-    // Dashboard SPA-Routing: /dashboard/login, /dashboard/stores/123, etc.
-    if (req.path.startsWith('/dashboard')) {
+    app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
+      if (req.method !== 'GET') return next();
+      if (req.path.startsWith('/api/') || req.path === '/health') return next();
       res.sendFile(path.join(dashboardRoot, 'index.html'));
-      return;
-    }
+    });
 
-    // Website SPA-Routing: /consulting, /about, etc.
-    res.sendFile(path.join(webRoot, 'index.html'));
-  });
+    console.log('  Mode: Dashboard-Only (Subdomain)');
+    console.log(`    Dashboard: ${dashboardRoot}`);
+  } else {
+    // ── Unified-Modus: Website + Dashboard ──
+    const webRoot =
+      process.env['WEB_ROOT'] ?? path.resolve(__dirname, '../../web/dist');
 
-  console.log('  Static files:');
-  console.log(`    Website:   ${webRoot}`);
-  console.log(`    Dashboard: ${dashboardRoot}`);
+    app.use('/dashboard', express.static(dashboardRoot));
+    app.use(express.static(webRoot));
+
+    app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
+      if (req.method !== 'GET') return next();
+      if (req.path.startsWith('/api/') || req.path === '/health') return next();
+      if (req.path.startsWith('/dashboard')) {
+        res.sendFile(path.join(dashboardRoot, 'index.html'));
+        return;
+      }
+      res.sendFile(path.join(webRoot, 'index.html'));
+    });
+
+    console.log('  Mode: Unified (Website + Dashboard)');
+    console.log(`    Website:   ${webRoot}`);
+    console.log(`    Dashboard: ${dashboardRoot}`);
+  }
 }
 
 // ── Start ─────────────────────────────────────────

@@ -5,7 +5,7 @@ import { Badge, Button } from '@kore/ui';
 import { useUser, useUpdateUser, useDeleteUser, useImpersonate, useUpdateUserStores } from '../hooks/useUsers';
 import { useStores } from '../hooks/useStores';
 import { useAuthStore } from '../stores/authStore';
-import { hasMinRole, type UserRole } from '@kore/types';
+import { canCreateRole, type UserRole } from '@kore/types';
 
 const ROLE_LABELS: Record<string, string> = {
   kore_admin: 'Super Admin',
@@ -16,12 +16,12 @@ const ROLE_LABELS: Record<string, string> = {
   learner: 'Mitarbeiter',
 };
 
-const ROLE_OPTIONS: { value: string; label: string; minCreatorRole: UserRole }[] = [
-  { value: 'tenant_admin', label: 'Kunden-Admin', minCreatorRole: 'kore_admin' },
-  { value: 'regional_manager', label: 'Regional Manager', minCreatorRole: 'tenant_admin' },
-  { value: 'multisite_manager', label: 'Multisite Manager', minCreatorRole: 'tenant_admin' },
-  { value: 'store_manager', label: 'Store Manager', minCreatorRole: 'tenant_admin' },
-  { value: 'learner', label: 'Mitarbeiter', minCreatorRole: 'tenant_admin' },
+const ROLE_OPTIONS: { value: UserRole; label: string }[] = [
+  { value: 'tenant_admin', label: 'Kunden-Admin' },
+  { value: 'regional_manager', label: 'Regional Manager' },
+  { value: 'multisite_manager', label: 'Multisite Manager' },
+  { value: 'store_manager', label: 'Store Manager' },
+  { value: 'learner', label: 'Mitarbeiter' },
 ];
 
 export function UserDetailPage() {
@@ -113,9 +113,9 @@ export function UserDetailPage() {
     );
   };
 
-  // Filtere verfügbare Rollen
+  // Filtere verfügbare Rollen: nur Rollen strikt unter der eigenen
   const availableRoles = ROLE_OPTIONS.filter((r) =>
-    hasMinRole(currentUser?.role || 'learner', r.minCreatorRole),
+    canCreateRole((currentUser?.role || 'learner') as UserRole, r.value),
   );
 
   if (isLoading) {
