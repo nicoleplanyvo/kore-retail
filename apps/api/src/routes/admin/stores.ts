@@ -174,7 +174,7 @@ adminStoresRouter.get('/:id/users', async (req, res) => {
     });
 
     // Verfügbare Tenant-User (exkl. bereits zugewiesene + exkl. kore_admin)
-    const assignedUserIds = new Set(assignments.map((a) => a.userId));
+    const assignedUserIds = new Set(assignments.map((a: { userId: string }) => a.userId));
     const tenantUsers = await prisma.user.findMany({
       where: {
         tenantId: store.tenantId,
@@ -185,7 +185,7 @@ adminStoresRouter.get('/:id/users', async (req, res) => {
       orderBy: { name: 'asc' },
     });
 
-    const availableUsers = tenantUsers.filter((u) => !assignedUserIds.has(u.id));
+    const availableUsers = tenantUsers.filter((u: { id: string }) => !assignedUserIds.has(u.id));
 
     res.json({ store, assignments, availableUsers });
   } catch (err) {
@@ -279,9 +279,9 @@ adminStoresRouter.get('/:id/tools', async (req, res) => {
       where: { storeId: store.id },
     });
 
-    const assignedToolIds = new Set(assignments.filter((a) => a.isActive).map((a) => a.toolId));
+    const assignedToolIds = new Set(assignments.filter((a: { isActive: boolean }) => a.isActive).map((a: { toolId: string }) => a.toolId));
 
-    const toolsWithAssignment = allTools.map((tool) => ({
+    const toolsWithAssignment = allTools.map((tool: { id: string; [key: string]: unknown }) => ({
       ...tool,
       assigned: assignedToolIds.has(tool.id),
     }));

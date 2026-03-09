@@ -1,13 +1,24 @@
 node_modules/
-dist/
+# dist/ — Build-Artefakte werden für Plesk-Deployment committed
 .turbo/
 .env
 .env.local
 .env.*.local
 .env.production
 *.log
+*.tsbuildinfo
+*.d.ts.map
+vite.config.js
+vite.config.d.ts
+vite.config.js.map
 .DS_Store
 coverage/
 .vercel/
 logs/
 *.db
+
+# Database
+*.db-journal
+
+# Claude Code
+.claude/worktrees/

@@ -15,10 +15,10 @@ importers:
   apps/api:
     dependencies:
       '@kore/types':
-        specifier: workspace:*
+        specifier: file:../../packages/types
         version: link:../../packages/types
       '@kore/validators':
-        specifier: workspace:*
+        specifier: file:../../packages/validators
         version: link:../../packages/validators
       '@prisma/adapter-better-sqlite3':
         specifier: ^7.4.2
@@ -234,7 +234,11 @@ importers:
         specifier: ^7.3.1
         version: 7.3.1(@types/node@24.11.0)(jiti@2.6.1)(tsx@4.21.0)
 
-  packages/types: {}
+  packages/types:
+    devDependencies:
+      typescript:
+        specifier: ^5.8.0
+        version: 5.9.3
 
   packages/ui:
     dependencies:
@@ -247,12 +251,23 @@ importers:
       react-dom:
         specifier: ^18.0.0 || ^19.0.0
         version: 19.2.4(react@19.2.4)
+    devDependencies:
+      '@types/react':
+        specifier: ^19.2.14
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19.2.3
+        version: 19.2.3(@types/react@19.2.14)
 
   packages/validators:
     dependencies:
       zod:
         specifier: ^3.24.0
         version: 3.25.76
+    devDependencies:
+      typescript:
+        specifier: ^5.8.0
+        version: 5.9.3
 
 packages:
 

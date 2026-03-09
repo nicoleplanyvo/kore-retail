@@ -172,7 +172,7 @@ export async function getAccessibleStoreIds(
       where: { tenantId },
       select: { id: true },
     });
-    return stores.map((s) => s.id);
+    return stores.map((s: { id: string }) => s.id);
   }
 
   // Andere: nur zugewiesene Stores
@@ -180,5 +180,5 @@ export async function getAccessibleStoreIds(
     where: { userId },
     select: { storeId: true },
   });
-  return assignments.map((a) => a.storeId);
+  return assignments.map((a: { storeId: string }) => a.storeId);
 }

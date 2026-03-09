@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import { fileURLToPath } from 'url';
 import { contactRouter } from './routes/contact.js';
 import { auditRouter } from './routes/audit.js';
 import { authRouter } from './routes/auth.js';
@@ -15,18 +16,26 @@ import { adminReportingRouter } from './routes/admin/reporting.js';
 import { storeExcellenceAuditRouter } from './routes/tools/store-excellence-audit/index.js';
 import { toolsRouter } from './routes/tools/index.js';
 
+// ── ESM __dirname ─────────────────────────────────
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 const PORT = parseInt(process.env['PORT'] ?? '3001', 10);
-const CORS_ORIGIN = process.env['CORS_ORIGIN'] ?? 'http://localhost:5173,http://localhost:5174,http://localhost:5175,http://127.0.0.1:5173,http://127.0.0.1:5174,http://127.0.0.1:5175';
+const NODE_ENV = process.env['NODE_ENV'] ?? 'development';
+const isProduction = NODE_ENV === 'production';
 
-// Parse allowed origins (comma-separated für mehrere Domains)
+// ── CORS ──────────────────────────────────────────
+// Production: Same-Origin (kein CORS nötig, aber als Fallback konfiguriert)
+// Development: Vite Dev-Server auf Port 5173 (Web) und 5174 (Dashboard)
+const CORS_ORIGIN =
+  process.env['CORS_ORIGIN'] ?? 'http://localhost:5173,http://localhost:5174,http://localhost:5175,http://127.0.0.1:5173,http://127.0.0.1:5174,http://127.0.0.1:5175';
 const allowedOrigins = CORS_ORIGIN.split(',').map((o) => o.trim());
 
-// Middleware
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Erlaube Requests ohne Origin (z.B. Health Checks, Server-to-Server)
+      // Erlaube Requests ohne Origin (Health Checks, Same-Origin)
       if (!origin) return callback(null, true);
       if (allowedOrigins.includes(origin)) return callback(null, true);
       callback(new Error(`Origin ${origin} not allowed by CORS`));
@@ -38,14 +47,15 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
-// Routes — Website
+// ── API Routes ────────────────────────────────────
+// Website-Formulare
 app.use('/api/contact', contactRouter);
 app.use('/api/audit', auditRouter);
 
-// Routes — Auth
+// Auth
 app.use('/api/auth', authRouter);
 
-// Routes — Admin Dashboard
+// Admin Dashboard
 app.use('/api/admin/tenants', adminTenantsRouter);
 app.use('/api/admin/tools', adminToolsRouter);
 app.use('/api/admin/stores', adminStoresRouter);
@@ -62,14 +72,64 @@ app.use('/api/tools/sea', storeExcellenceAuditRouter);
 const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? path.join(process.cwd(), 'uploads');
 app.use('/api/uploads', authenticate, express.static(UPLOAD_DIR));
 
-// Health check
+// Health Check
 app.get('/health', (_req, res) => {
-  res.json({ status: 'ok', service: 'kore-api' });
+  res.json({ status: 'ok', service: 'kore-server', mode: NODE_ENV });
 });
 
-// Start
+// ── Static File Serving (nur in Production) ───────
+// In Development werden Web + Dashboard von eigenen Vite Dev-Servern bedient.
+// In Production serviert dieser Server alles:
+//   /              → Website (apps/web/dist)
+//   /dashboard/    → Dashboard SPA (apps/dashboard/dist)
+//   /api/*         → Express API (oben definiert)
+if (isProduction) {
+  // Pfade relativ zu dist/index.js:
+  //   dist/index.js → ../../web/dist     (= apps/web/dist)
+  //   dist/index.js → ../../dashboard/dist (= apps/dashboard/dist)
+  const webRoot =
+    process.env['WEB_ROOT'] ?? path.resolve(__dirname, '../../web/dist');
+  const dashboardRoot =
+    process.env['DASHBOARD_ROOT'] ??
+    path.resolve(__dirname, '../../dashboard/dist');
+
+  // Dashboard: Statische Dateien unter /dashboard/
+  app.use('/dashboard', express.static(dashboardRoot));
+
+  // Website: Statische Dateien im Root /
+  app.use(express.static(webRoot));
+
+  // SPA Fallback — fängt alle GET-Requests auf, die keine Datei gefunden haben
+  // MUSS nach allen API-Routes und express.static() kommen
+  app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
+    // Nur GET-Requests bekommen SPA-Fallback
+    if (req.method !== 'GET') return next();
+
+    // API-Routes und Health-Check NICHT auffangen — sollen normal 404 geben
+    if (req.path.startsWith('/api/') || req.path === '/health') return next();
+
+    // Dashboard SPA-Routing: /dashboard/login, /dashboard/stores/123, etc.
+    if (req.path.startsWith('/dashboard')) {
+      res.sendFile(path.join(dashboardRoot, 'index.html'));
+      return;
+    }
+
+    // Website SPA-Routing: /consulting, /about, etc.
+    res.sendFile(path.join(webRoot, 'index.html'));
+  });
+
+  console.log('  Static files:');
+  console.log(`    Website:   ${webRoot}`);
+  console.log(`    Dashboard: ${dashboardRoot}`);
+}
+
+// ── Start ─────────────────────────────────────────
 app.listen(PORT, () => {
-  console.log(`✓ KORE API running on port ${PORT}`);
-  console.log(`  CORS origin: ${CORS_ORIGIN}`);
-  console.log(`  Resend: ${process.env['RESEND_API_KEY'] ? 'configured' : 'not configured (dev mode)'}`);
+  console.log(`\u2713 KORE Server running on port ${PORT} (${NODE_ENV})`);
+  if (!isProduction) {
+    console.log(`  CORS: ${CORS_ORIGIN}`);
+  }
+  console.log(
+    `  Resend: ${process.env['RESEND_API_KEY'] ? 'configured' : 'not configured (dev mode)'}`,
+  );
 });

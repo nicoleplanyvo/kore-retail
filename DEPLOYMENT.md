@@ -2,220 +2,211 @@
 
 ## Architektur
 
+Alles läuft auf **einer Domain** mit **einem Node.js-Prozess**:
+
 ```
-koreretail.de          → Statische SPA (React)     → apps/web/dist/
-api.koreretail.de      → Node.js API (Express)     → apps/api/
+kore-retail.de/              → Website (React SPA)
+kore-retail.de/dashboard/    → Dashboard (React SPA)
+kore-retail.de/api/*         → Express API
+kore-retail.de/health        → Health Check
 ```
+
+Der Express-Server (`apps/api`) serviert in Production auch die statischen
+Dateien der Website und des Dashboards. Keine Subdomains, kein Apache/Nginx nötig.
 
 ---
 
-## 1. Voraussetzungen auf dem Server
+## 1. Voraussetzungen
+
+### Auf dem Plesk-Server
 
 ```bash
-# Node.js 20+ installiert (über Plesk Node.js Extension)
+# Node.js 20+ (über Plesk Node.js Extension)
 node -v   # >= 20.0.0
 
-# PM2 global installieren
-npm install -g pm2
+# pnpm und PM2 global installieren
+npm install -g pnpm pm2
+```
+
+### DNS
+
+Nur **zwei** DNS-Einträge nötig:
+
+```
+kore-retail.de        A      → 213.165.77.153
+www.kore-retail.de    CNAME  → kore-retail.de
 ```
 
 ---
 
-## 2. Domain-Setup in Plesk
+## 2. Plesk-Konfiguration
 
-### 2a. Frontend: `koreretail.de`
+### Node.js einrichten
 
-1. **Domain hinzufügen**: `koreretail.de`
-2. **Document Root**: `/var/www/vhosts/koreretail.de/httpdocs`
-3. **SSL/TLS**: Let's Encrypt Zertifikat aktivieren
-4. **Apache .htaccess**: Wird automatisch aus `apps/web/dist/.htaccess` verwendet
-5. Die gebauten Dateien aus `apps/web/dist/` in den Document Root kopieren
+In Plesk unter **kore-retail.de → Node.js**:
 
-### 2b. API: `api.koreretail.de`
+| Einstellung           | Wert                    |
+| --------------------- | ----------------------- |
+| Node.js Version       | 20.x (oder neuer)       |
+| Application Root      | `/var/www/vhosts/kore-retail.de` |
+| Application Startup File | `apps/api/dist/index.js` |
+| Application Mode      | Production              |
 
-1. **Subdomain hinzufügen**: `api.koreretail.de`
-2. **SSL/TLS**: Let's Encrypt Zertifikat aktivieren
-3. **Node.js App** in Plesk einrichten:
-   - **Node.js Version**: 20.x
-   - **Application Root**: `/var/www/vhosts/api.koreretail.de`
-   - **Application Startup File**: `dist/index.js`
-   - **Application Mode**: Production
+### SSL/TLS
 
-**ODER** PM2 manuell verwenden:
-```bash
-cd /var/www/vhosts/api.koreretail.de
-pm2 start ecosystem.config.cjs
-pm2 save
-pm2 startup  # Autostart nach Server-Reboot
-```
-
-### 2c. Reverse Proxy (Alternative zu Subdomain)
-
-Falls du **keine Subdomain** nutzen willst, kannst du in Plesk einen Reverse Proxy einrichten:
-
-1. Gehe zu `koreretail.de` → **Apache & nginx Settings**
-2. Unter **Additional nginx directives** einfügen:
-
-```nginx
-location /api/ {
-    proxy_pass http://127.0.0.1:3001;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection 'upgrade';
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto $scheme;
-    proxy_cache_bypass $http_upgrade;
-}
-```
-
-Bei dieser Variante: `VITE_API_URL=https://koreretail.de` (kein `/api` Suffix nötig)
+1. **Let's Encrypt** aktivieren für `kore-retail.de` + `www.kore-retail.de`
+2. **HTTPS erzwingen** in den Hosting-Einstellungen
 
 ---
 
 ## 3. Umgebungsvariablen
 
-### Frontend: `apps/web/.env.production`
+### Server: `apps/api/.env`
 
 ```env
-VITE_API_URL=https://api.koreretail.de
-VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
-```
+# Database (SQLite)
+DATABASE_URL="file:./data/kore.db"
 
-### API: `apps/api/.env` (auf dem Server)
+# JWT Secrets (mindestens 32 Zeichen!)
+JWT_SECRET="dein-jwt-secret-min-32-zeichen-hier"
+JWT_REFRESH_SECRET="dein-refresh-secret-min-32-zeichen"
 
-```env
 # Resend — https://resend.com/api-keys
 RESEND_API_KEY=re_xxxxxxxxxxxx
 
 # E-Mails
 NOTIFICATION_EMAIL=hello@planyvo.com
-FROM_EMAIL=noreply@koreretail.de
-
-# CORS — Frontend-URL erlauben
-CORS_ORIGIN=https://koreretail.de
+FROM_EMAIL=noreply@kore-retail.de
 
 # Server
 PORT=3001
 NODE_ENV=production
 ```
 
+> **Hinweis:** `CORS_ORIGIN` wird in Production nicht benötigt, da alles
+> Same-Origin läuft (Website, Dashboard und API auf derselben Domain).
+
+### Frontends: `apps/web/.env.production` + `apps/dashboard/.env.production`
+
+```env
+# Leer = Same-Origin (API auf derselben Domain)
+VITE_API_URL=
+```
+
+Diese Dateien werden automatisch vom Deploy-Script erstellt, falls sie fehlen.
+
 ---
 
 ## 4. Erstmalige Einrichtung
 
-### Lokal
-
-```bash
-# 1. Frontend-Env erstellen
-cp apps/web/.env.production.example apps/web/.env.production
-# → VITE_API_URL und VITE_GA_MEASUREMENT_ID eintragen
-
-# 2. Projekt bauen
-pnpm install
-pnpm build
-
-# 3. Deploy-Script konfigurieren
-# → In scripts/deploy.sh die Server-Daten anpassen:
-#   PLESK_USER, PLESK_HOST, WEB_REMOTE_PATH, API_REMOTE_PATH
-```
-
 ### Auf dem Server
 
 ```bash
-# 1. API-Env erstellen
-cd /var/www/vhosts/api.koreretail.de
-nano .env
-# → Alle Werte aus .env.example eintragen
+# 1. Repository klonen
+cd /var/www/vhosts/kore-retail.de
+git clone <REPO_URL> .
 
-# 2. Dependencies installieren
-npm install --production
+# 2. .env für API erstellen
+nano apps/api/.env
+# → Werte aus Abschnitt 3 eintragen
 
-# 3. PM2 starten
-pm2 start ecosystem.config.cjs
-pm2 save
-pm2 startup
+# 3. Erstmaliges Deployment ausführen
+bash deploy.sh
+```
+
+Das `deploy.sh`-Script erledigt alles:
+- Dependencies installieren
+- Prisma Client generieren
+- Datenbank erstellen/migrieren
+- Alle Apps bauen
+- PM2 starten
+
+### Datenbank initialisieren (optional)
+
+```bash
+cd apps/api
+pnpm exec prisma db seed   # Demo-Daten laden
 ```
 
 ---
 
 ## 5. Deployment
 
+### Option A: Plesk Git-Integration (empfohlen)
+
+1. In Plesk: **Git** → Repository hinzufügen
+2. Repository-URL eintragen
+3. **Auto-Deploy** aktivieren
+4. **Post-Deploy Script**: `bash deploy.sh`
+
+Bei jedem Push wird automatisch gebaut und deployed.
+
+### Option B: Manuell per rsync
+
 ```bash
-# Alles deployen (Frontend + API)
+# Lokal ausführen — baut lokal und deployed per rsync
 ./scripts/deploy.sh
-
-# Nur Frontend
-./scripts/deploy.sh web
-
-# Nur API
-./scripts/deploy.sh api
 ```
+
+> **Hinweis:** In `scripts/deploy.sh` vorher `PLESK_USER` und `PLESK_HOST` anpassen.
 
 ---
 
-## 6. Externe Dienste einrichten
+## 6. Externe Dienste
 
-### 6a. Resend (E-Mail)
+### Resend (E-Mail)
 
 1. Account erstellen: https://resend.com
-2. Domain verifizieren: `koreretail.de` (DNS-Einträge setzen)
-3. API Key generieren → in `.env` auf Server eintragen
+2. Domain `kore-retail.de` verifizieren (DNS-Einträge setzen)
+3. API Key generieren → in `apps/api/.env` eintragen
 
-### 6b. Google Analytics 4
+DNS für Resend:
+```
+_dmarc.kore-retail.de       TXT   → "v=DMARC1; p=none"
+resend._domainkey...        CNAME → ... (von Resend)
+```
+
+### Google Analytics 4
 
 1. GA4 Property erstellen: https://analytics.google.com
-2. Measurement ID (G-XXXXXXXXXX) → in `apps/web/.env.production` eintragen
-3. Neu bauen & deployen
-
-### 6c. Google Search Console
-
-1. Property hinzufügen: https://search.google.com/search-console
-2. Verifizierungscode holen
-3. In `apps/web/index.html` eintragen:
-   ```html
-   <meta name="google-site-verification" content="DEIN_CODE" />
+2. Measurement ID → in `apps/web/.env.production` eintragen:
+   ```env
+   VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
    ```
-4. Sitemap einreichen: `https://koreretail.de/sitemap.xml`
+3. Neu bauen & deployen
 
 ---
 
 ## 7. Troubleshooting
 
 ```bash
-# API Logs anschauen
-pm2 logs kore-api
+# Server Logs anschauen
+pm2 logs kore-server
 
-# API Status
+# Server Status
 pm2 status
 
-# API neustarten
-pm2 restart kore-api
+# Server neustarten
+pm2 restart kore-server
 
 # Health Check
-curl https://api.koreretail.de/health
+curl https://kore-retail.de/health
+# → { "status": "ok", "service": "kore-server", "mode": "production" }
 
-# Frontend testen (SPA-Routing)
-curl -I https://koreretail.de/consulting
-# → Sollte 200 OK zurückgeben (nicht 404)
+# Website testen (SPA-Routing)
+curl -I https://kore-retail.de/consulting
+# → 200 OK
+
+# Dashboard testen
+curl -I https://kore-retail.de/dashboard/
+# → 200 OK
 ```
 
----
+### Häufige Probleme
 
-## 8. DNS-Einträge
-
-Bei deinem Domain-Provider (z.B. Strato, IONOS, Hetzner):
-
-```
-koreretail.de        A      → [Plesk-Server-IP]
-www.koreretail.de    CNAME  → koreretail.de
-api.koreretail.de    A      → [Plesk-Server-IP]
-```
-
-Für Resend (E-Mail-Verifizierung):
-```
-# Diese Werte bekommst du von Resend nach Domain-Verifizierung
-_dmarc.koreretail.de    TXT   → "v=DMARC1; p=none"
-resend._domainkey...     CNAME → ... (von Resend)
-```
+| Problem | Lösung |
+| ------- | ------ |
+| 502 Bad Gateway | PM2-Prozess läuft nicht → `pm2 start ecosystem.config.cjs` |
+| Dashboard zeigt Blank Page | Vite `base` nicht auf `/dashboard/` gesetzt → prüfe `vite.config.ts` |
+| API gibt CORS-Fehler | In Production nicht nötig (Same-Origin). Im Dev: `CORS_ORIGIN` prüfen |
+| Prisma-Fehler | `npx prisma generate && npx prisma db push` |

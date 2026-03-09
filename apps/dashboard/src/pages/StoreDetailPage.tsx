@@ -54,7 +54,7 @@ export function StoreDetailPage() {
   }
 
   // Group tools by category
-  const toolsByCategory: Record<string, typeof storeToolsData extends { tools: infer T } ? T : never> = {};
+  const toolsByCategory: Record<string, NonNullable<typeof storeToolsData>['tools']> = {};
   if (storeToolsData?.tools) {
     for (const tool of storeToolsData.tools) {
       if (!toolsByCategory[tool.category]) toolsByCategory[tool.category] = [];

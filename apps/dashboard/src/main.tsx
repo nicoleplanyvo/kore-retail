@@ -16,7 +16,7 @@ function AuthInitializer({ children }: { children: React.ReactNode }) {
     async function initAuth() {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_API_URL || 'http://localhost:3001'}/api/auth/refresh`,
+          `${import.meta.env.VITE_API_URL || ''}/api/auth/refresh`,
           { method: 'POST', credentials: 'include' }
         );
         if (res.ok) {
@@ -39,7 +39,7 @@ function AuthInitializer({ children }: { children: React.ReactNode }) {
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <AuthInitializer>
           <App />
         </AuthInitializer>

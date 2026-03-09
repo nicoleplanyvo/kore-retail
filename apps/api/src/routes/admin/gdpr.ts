@@ -148,14 +148,14 @@ adminGdprRouter.get('/data-export/:tenantId', async (req, res) => {
         createdAt: tenant.createdAt,
       },
       users: tenant.users,
-      stores: tenant.stores.map((s) => ({
+      stores: tenant.stores.map((s: { id: string; name: string; city: string | null; address: string | null; isActive: boolean; createdAt: Date; tools: Array<{ assignedAt: Date; isActive: boolean; tool: { name: string; category: string; priceMonthly: number } }> }) => ({
         id: s.id,
         name: s.name,
         city: s.city,
         address: s.address,
         isActive: s.isActive,
         createdAt: s.createdAt,
-        toolAssignments: s.tools.map((ta) => ({
+        toolAssignments: s.tools.map((ta: { assignedAt: Date; isActive: boolean; tool: { name: string; category: string; priceMonthly: number } }) => ({
           toolName: ta.tool.name,
           toolCategory: ta.tool.category,
           priceMonthly: ta.tool.priceMonthly,
