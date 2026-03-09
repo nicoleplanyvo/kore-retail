@@ -127,6 +127,50 @@ export const storeUserAssignSchema = z.object({
   userIds: z.array(z.string().min(1)),
 });
 
+// ============================================================
+// Store Excellence Audit — Validators
+// ============================================================
+
+export const auditCriterionSchema = z.object({
+  name: z.string().min(2).max(200),
+  description: z.string().max(500).optional(),
+  sortOrder: z.number().int().min(0).optional(),
+  isRequired: z.boolean().optional(),
+  photoRequired: z.boolean().optional(),
+});
+
+export const auditCategorySchema = z.object({
+  name: z.string().min(2).max(100),
+  description: z.string().max(500).optional(),
+  sortOrder: z.number().int().min(0).optional(),
+  weight: z.number().min(0).max(100).optional(),
+  criteria: z.array(auditCriterionSchema).optional(),
+});
+
+export const auditTemplateCreateSchema = z.object({
+  name: z.string().min(2, 'Name muss mindestens 2 Zeichen haben').max(100),
+  description: z.string().max(500).optional(),
+  categories: z.array(auditCategorySchema).optional(),
+});
+
+export const auditTemplateUpdateSchema = z.object({
+  name: z.string().min(2).max(100).optional(),
+  description: z.string().max(500).optional(),
+});
+
+export const auditSessionCreateSchema = z.object({
+  storeId: z.string().min(1, 'Store muss ausgewählt werden'),
+  templateId: z.string().min(1, 'Template muss ausgewählt werden'),
+  storeLocation: z.string().max(200).optional(),
+  notes: z.string().max(2000).optional(),
+});
+
+export const auditResponseSchema = z.object({
+  scorePercent: z.number().int().min(0).max(100).optional().nullable(),
+  passed: z.boolean().optional().nullable(),
+  comment: z.string().max(1000).optional().nullable(),
+});
+
 // === Type Exports ===
 
 export type AuditRequestInput = z.infer<typeof auditRequestSchema>;
@@ -143,3 +187,7 @@ export type UserCreateInput = z.infer<typeof userCreateSchema>;
 export type UserUpdateInput = z.infer<typeof userUpdateSchema>;
 export type UserStoreAssignInput = z.infer<typeof userStoreAssignSchema>;
 export type StoreUserAssignInput = z.infer<typeof storeUserAssignSchema>;
+export type AuditTemplateCreateInput = z.infer<typeof auditTemplateCreateSchema>;
+export type AuditTemplateUpdateInput = z.infer<typeof auditTemplateUpdateSchema>;
+export type AuditSessionCreateInput = z.infer<typeof auditSessionCreateSchema>;
+export type AuditResponseInput = z.infer<typeof auditResponseSchema>;

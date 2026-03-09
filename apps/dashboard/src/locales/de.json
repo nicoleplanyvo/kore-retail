@@ -9,6 +9,7 @@
     "tools": "Tools",
     "stores": "Stores",
     "gdpr": "DSGVO",
+    "audit": "Store Audit",
     "logout": "Abmelden"
   },
   "login": {
@@ -108,6 +109,27 @@
     "banner": "Angemeldet als",
     "back": "Zurück zum Admin",
     "button": "Als Benutzer anmelden"
+  },
+  "audit": {
+    "title": "Store Excellence Audit",
+    "overview": "Übersicht",
+    "sessions": "Audit-Historie",
+    "newSession": "Neues Audit",
+    "templates": "Templates",
+    "avgScore": "Durchschnitt",
+    "passRate": "Pass-Rate",
+    "totalAudits": "Durchgeführte Audits",
+    "trend": {
+      "up": "Aufwärtstrend",
+      "down": "Abwärtstrend",
+      "stable": "Stabil"
+    },
+    "status": {
+      "DRAFT": "Entwurf",
+      "IN_PROGRESS": "In Arbeit",
+      "COMPLETED": "Abgeschlossen",
+      "CANCELLED": "Abgebrochen"
+    }
   },
   "common": {
     "loading": "Laden...",

@@ -15,9 +15,9 @@ vite.config.js.map
 coverage/
 .vercel/
 logs/
+*.db
 
 # Database
-*.db
 *.db-journal
 
 # Claude Code

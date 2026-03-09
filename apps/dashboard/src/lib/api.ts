@@ -66,3 +66,42 @@ export async function api<T = unknown>(
 
   return res.json();
 }
+
+export { API_URL };
+
+/** Upload-Request mit FormData (kein Content-Type Header — Browser setzt multipart) */
+export async function apiUpload<T = unknown>(
+  path: string,
+  formData: FormData,
+): Promise<T> {
+  const url = `${API_URL}${path}`;
+  const headers: Record<string, string> = {};
+  if (accessToken) headers['Authorization'] = `Bearer ${accessToken}`;
+
+  let res = await fetch(url, {
+    method: 'POST',
+    headers,
+    body: formData,
+    credentials: 'include',
+  });
+
+  if (res.status === 401 && accessToken) {
+    const newToken = await refreshAccessToken();
+    if (newToken) {
+      headers['Authorization'] = `Bearer ${newToken}`;
+      res = await fetch(url, {
+        method: 'POST',
+        headers,
+        body: formData,
+        credentials: 'include',
+      });
+    }
+  }
+
+  if (!res.ok) {
+    const error = await res.json().catch(() => ({ error: 'Netzwerkfehler' }));
+    throw new Error(error.error || `HTTP ${res.status}`);
+  }
+
+  return res.json();
+}

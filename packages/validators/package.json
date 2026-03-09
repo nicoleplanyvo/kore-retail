@@ -9,7 +9,8 @@
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./audit-scoring": "./src/audit-scoring.ts"
   },
   "dependencies": {
     "zod": "^3.24.0"

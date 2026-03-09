@@ -15,6 +15,7 @@ import { UserCreatePage } from './pages/UserCreatePage';
 import { UserDetailPage } from './pages/UserDetailPage';
 import GdprPage from './pages/GdprPage';
 import { ReportingPage } from './pages/ReportingPage';
+import { StoreExcellenceAuditRoutes } from './tools/store-excellence-audit/index';
 
 export function App() {
   return (
@@ -51,6 +52,7 @@ export function App() {
             <Route path="/stores" element={<StoresListPage />} />
             <Route path="/stores/:id" element={<StoreDetailPage />} />
             <Route path="/tools" element={<ToolsOverviewPage />} />
+            <Route path="/tools/sea/*" element={<StoreExcellenceAuditRoutes />} />
           </Route>
         </Route>
       </Route>

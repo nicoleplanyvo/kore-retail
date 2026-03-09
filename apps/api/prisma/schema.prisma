@@ -59,6 +59,7 @@ model Store {
 
   tools     StoreToolAssignment[]
   userAssignments UserStoreAssignment[]
+  auditSessions   AuditSession[]
 
   @@index([tenantId])
 }
@@ -70,7 +71,7 @@ model ToolDefinition {
   description  String?
   category     String
   icon         String?
-  priceMonthly Int      @default(0) // Preis in Cent pro Store pro Monat
+  priceMonthly Int      @default(0)
   isActive     Boolean  @default(true)
   sortOrder    Int      @default(0)
   createdAt    DateTime @default(now())
@@ -152,4 +153,98 @@ model DataProcessingConsent {
 
   @@index([tenantId])
   @@unique([tenantId, consentType])
+}
+
+// ============================================================
+// Store Excellence Audit — Tool Models
+// Verknüpft mit Store (FK), aber unabhängig von anderen Tool-Models
+// ============================================================
+
+model AuditTemplate {
+  id          String   @id @default(cuid())
+  tenantId    String?  // null = KORE-Default, non-null = Tenant-spezifisch
+  name        String
+  description String?
+  version     Int      @default(1)
+  isDefault   Boolean  @default(false)
+  isActive    Boolean  @default(true)
+  createdBy   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  categories AuditCategory[]
+  sessions   AuditSession[]
+
+  @@index([tenantId])
+}
+
+model AuditCategory {
+  id          String        @id @default(cuid())
+  templateId  String
+  template    AuditTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  name        String
+  description String?
+  sortOrder   Int           @default(0)
+  weight      Float         @default(1.0)
+
+  criteria AuditCriterion[]
+
+  @@index([templateId])
+}
+
+model AuditCriterion {
+  id            String        @id @default(cuid())
+  categoryId    String
+  category      AuditCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  name          String
+  description   String?
+  sortOrder     Int           @default(0)
+  isRequired    Boolean       @default(true)
+  photoRequired Boolean       @default(false)
+
+  responses AuditResponse[]
+
+  @@index([categoryId])
+}
+
+model AuditSession {
+  id            String    @id @default(cuid())
+  tenantId      String
+  storeId       String
+  store         Store     @relation(fields: [storeId], references: [id])
+  templateId    String
+  template      AuditTemplate @relation(fields: [templateId], references: [id])
+  conductedBy   String
+  storeLocation String?   // Optionaler Sub-Bereich im Store
+  status        String    @default("DRAFT") // DRAFT, IN_PROGRESS, COMPLETED, CANCELLED
+  overallScore  Float?
+  notes         String?
+  startedAt     DateTime?
+  completedAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  responses AuditResponse[]
+
+  @@index([tenantId])
+  @@index([storeId])
+  @@index([tenantId, completedAt])
+  @@index([conductedBy])
+}
+
+model AuditResponse {
+  id           String         @id @default(cuid())
+  sessionId    String
+  session      AuditSession   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  criterionId  String
+  criterion    AuditCriterion @relation(fields: [criterionId], references: [id])
+  scorePercent Int?
+  passed       Boolean?
+  comment      String?
+  photoPath    String?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  @@unique([sessionId, criterionId])
+  @@index([sessionId])
 }

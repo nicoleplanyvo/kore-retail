@@ -1,17 +1,20 @@
 import express from 'express';
+import path from 'path';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import path from 'path';
 import { fileURLToPath } from 'url';
 import { contactRouter } from './routes/contact.js';
 import { auditRouter } from './routes/audit.js';
 import { authRouter } from './routes/auth.js';
+import { authenticate } from './middleware/auth.js';
 import { adminTenantsRouter } from './routes/admin/tenants.js';
 import { adminToolsRouter } from './routes/admin/tools.js';
 import { adminStoresRouter } from './routes/admin/stores.js';
 import { adminGdprRouter } from './routes/admin/gdpr.js';
 import { adminUsersRouter } from './routes/admin/users.js';
 import { adminReportingRouter } from './routes/admin/reporting.js';
+import { storeExcellenceAuditRouter } from './routes/tools/store-excellence-audit/index.js';
+import { toolsRouter } from './routes/tools/index.js';
 
 // ── ESM __dirname ─────────────────────────────────
 const __filename = fileURLToPath(import.meta.url);
@@ -26,7 +29,7 @@ const isProduction = NODE_ENV === 'production';
 // Production: Same-Origin (kein CORS nötig, aber als Fallback konfiguriert)
 // Development: Vite Dev-Server auf Port 5173 (Web) und 5174 (Dashboard)
 const CORS_ORIGIN =
-  process.env['CORS_ORIGIN'] ?? 'http://localhost:5173,http://localhost:5174';
+  process.env['CORS_ORIGIN'] ?? 'http://localhost:5173,http://localhost:5174,http://localhost:5175,http://127.0.0.1:5173,http://127.0.0.1:5174,http://127.0.0.1:5175';
 const allowedOrigins = CORS_ORIGIN.split(',').map((o) => o.trim());
 
 app.use(
@@ -59,6 +62,15 @@ app.use('/api/admin/stores', adminStoresRouter);
 app.use('/api/admin/gdpr', adminGdprRouter);
 app.use('/api/admin/users', adminUsersRouter);
 app.use('/api/admin/reporting', adminReportingRouter);
+
+// Routes — Tools (App: zugewiesene Tools des Users)
+app.use('/api/tools', toolsRouter);
+// Routes — Tools (SEA)
+app.use('/api/tools/sea', storeExcellenceAuditRouter);
+
+// Statische Uploads mit Auth-Schutz
+const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? path.join(process.cwd(), 'uploads');
+app.use('/api/uploads', authenticate, express.static(UPLOAD_DIR));
 
 // Health Check
 app.get('/health', (_req, res) => {

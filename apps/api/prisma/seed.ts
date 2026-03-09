@@ -103,7 +103,7 @@ async function main() {
     // STANDARDS & COMPLIANCE
     { key: 'standards.checklisten', name: 'Checklisten', category: 'STANDARDS_COMPLIANCE', description: 'Standardisierte Checklisten für Store-Visits und Audits', icon: 'ClipboardCheck', priceMonthly: 1500, sortOrder: 1 },
     { key: 'standards.store_standards', name: 'Store Standards', category: 'STANDARDS_COMPLIANCE', description: 'Store-Standards definieren, messen und benchmarken', icon: 'Award', priceMonthly: 1500, sortOrder: 2 },
-    { key: 'standards.excellence_tracker', name: 'Excellence Tracker', category: 'STANDARDS_COMPLIANCE', description: 'Fortlaufendes Tracking von Store-Excellence-KPIs', icon: 'TrendingUp', priceMonthly: 1900, sortOrder: 3 },
+    { key: 'standards.excellence_tracker', name: 'Excellence Tracker', category: 'STANDARDS_COMPLIANCE', description: 'Store Excellence Audit mit Foto-Proof und Scoring', icon: 'TrendingUp', priceMonthly: 1900, sortOrder: 3 },
     { key: 'standards.vm_foto_compliance', name: 'VM Foto-Compliance', category: 'STANDARDS_COMPLIANCE', description: 'Foto-basierte VM-Compliance-Checks mit KI-Unterstützung', icon: 'Camera', priceMonthly: 1900, sortOrder: 4 },
     { key: 'standards.sop_bibliothek', name: 'SOP Bibliothek', category: 'STANDARDS_COMPLIANCE', description: 'Zentrale Verwaltung aller Standard Operating Procedures', icon: 'BookOpen', priceMonthly: 1500, sortOrder: 5 },
 
@@ -289,6 +289,120 @@ async function main() {
   }
 
   console.log(`✓ ${demoUsers.length} Demo-User erstellt (ta/rm/mm/sm/learner @modehouse.de, Passwort: demo1234)`);
+
+  // ============================================================
+  // Store Excellence Audit — KORE Default-Template
+  // ============================================================
+
+  const existingTemplate = await prisma.auditTemplate.findFirst({
+    where: { isDefault: true, name: 'KORE Store Excellence Standard' },
+  });
+
+  if (!existingTemplate) {
+    await prisma.auditTemplate.create({
+      data: {
+        name: 'KORE Store Excellence Standard',
+        description: 'KORE Standard-Template für Store Excellence Audits. Deckt alle wesentlichen Bereiche eines Premium-Retail-Stores ab.',
+        tenantId: null,
+        isDefault: true,
+        createdBy: admin.id,
+        categories: {
+          create: [
+            {
+              name: 'Kundenansprache & Service',
+              description: 'Begrüßung, Beratungsqualität, Verabschiedung',
+              sortOrder: 0,
+              weight: 1.5,
+              criteria: {
+                create: [
+                  { name: 'Aktive Begrüßung innerhalb 30 Sekunden', sortOrder: 0, isRequired: true, photoRequired: false },
+                  { name: 'Bedarfsanalyse durchgeführt', sortOrder: 1, isRequired: true, photoRequired: false },
+                  { name: 'Produktwissen demonstriert', sortOrder: 2, isRequired: true, photoRequired: false },
+                  { name: 'Cross-Selling / Up-Selling angeboten', sortOrder: 3, isRequired: false, photoRequired: false },
+                  { name: 'Freundliche Verabschiedung', sortOrder: 4, isRequired: true, photoRequired: false },
+                ],
+              },
+            },
+            {
+              name: 'Visual Merchandising',
+              description: 'Schaufenster, Warenpräsentation, Beschilderung',
+              sortOrder: 1,
+              weight: 1.2,
+              criteria: {
+                create: [
+                  { name: 'Schaufenster aktuell und ansprechend', sortOrder: 0, isRequired: true, photoRequired: true },
+                  { name: 'Eingangsbereich einladend', sortOrder: 1, isRequired: true, photoRequired: true },
+                  { name: 'Warenpräsentation nach VM-Guideline', sortOrder: 2, isRequired: true, photoRequired: true },
+                  { name: 'Preisauszeichnung vollständig', sortOrder: 3, isRequired: true, photoRequired: false },
+                  { name: 'Kampagnen-Material korrekt platziert', sortOrder: 4, isRequired: false, photoRequired: true },
+                ],
+              },
+            },
+            {
+              name: 'Sauberkeit & Ordnung',
+              description: 'Verkaufsfläche, Umkleide, Kassenbereich',
+              sortOrder: 2,
+              weight: 1.0,
+              criteria: {
+                create: [
+                  { name: 'Verkaufsfläche sauber und aufgeräumt', sortOrder: 0, isRequired: true, photoRequired: false },
+                  { name: 'Umkleidekabinen ordentlich', sortOrder: 1, isRequired: true, photoRequired: true },
+                  { name: 'Kassenbereich aufgeräumt', sortOrder: 2, isRequired: true, photoRequired: false },
+                  { name: 'Lagerbereich organisiert', sortOrder: 3, isRequired: false, photoRequired: false },
+                ],
+              },
+            },
+            {
+              name: 'Team & Erscheinungsbild',
+              description: 'Dresscode, Namensschilder, Teamverhalten',
+              sortOrder: 3,
+              weight: 0.8,
+              criteria: {
+                create: [
+                  { name: 'Dresscode eingehalten', sortOrder: 0, isRequired: true, photoRequired: false },
+                  { name: 'Namensschilder getragen', sortOrder: 1, isRequired: true, photoRequired: false },
+                  { name: 'Professionelles Auftreten', sortOrder: 2, isRequired: true, photoRequired: false },
+                  { name: 'Ausreichend Personal auf der Fläche', sortOrder: 3, isRequired: true, photoRequired: false },
+                ],
+              },
+            },
+            {
+              name: 'Operative Prozesse',
+              description: 'Kasse, Retouren, Warenwirtschaft',
+              sortOrder: 4,
+              weight: 1.0,
+              criteria: {
+                create: [
+                  { name: 'Kassenprozess effizient', sortOrder: 0, isRequired: true, photoRequired: false },
+                  { name: 'Retouren-Prozess korrekt', sortOrder: 1, isRequired: true, photoRequired: false },
+                  { name: 'Wareneingang zeitnah verarbeitet', sortOrder: 2, isRequired: false, photoRequired: false },
+                  { name: 'Inventur-Differenzen im Rahmen', sortOrder: 3, isRequired: false, photoRequired: false },
+                  { name: 'Briefing / Handover dokumentiert', sortOrder: 4, isRequired: true, photoRequired: false },
+                ],
+              },
+            },
+            {
+              name: 'KPI-Awareness',
+              description: 'Kenntnis und Kommunikation der Store-KPIs',
+              sortOrder: 5,
+              weight: 0.5,
+              criteria: {
+                create: [
+                  { name: 'Tagesumsatz-Ziel bekannt', sortOrder: 0, isRequired: true, photoRequired: false },
+                  { name: 'Conversion-Rate bewusst', sortOrder: 1, isRequired: false, photoRequired: false },
+                  { name: 'UPT-Ziel kommuniziert', sortOrder: 2, isRequired: false, photoRequired: false },
+                  { name: 'Team-Challenges aktiv', sortOrder: 3, isRequired: false, photoRequired: false },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    });
+    console.log('✓ KORE Store Excellence Default-Template erstellt (6 Kategorien, 27 Kriterien)');
+  } else {
+    console.log('✓ KORE Store Excellence Default-Template bereits vorhanden');
+  }
 }
 
 main()

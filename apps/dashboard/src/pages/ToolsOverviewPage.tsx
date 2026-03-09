@@ -1,7 +1,9 @@
+import { Link } from 'react-router-dom';
 import { Badge } from '@kore/ui';
 import { useTools, useToolStats } from '../hooks/useTools';
 import { TOOL_CATEGORIES, CATEGORY_ORDER } from '../lib/moduleCategories';
-import { Euro, Wrench, BarChart3 } from 'lucide-react';
+import { getToolRoute } from '../lib/toolRoutes';
+import { Euro, Wrench, BarChart3, ChevronRight } from 'lucide-react';
 import t from '../locales/de.json';
 
 function StatsCard({ icon: Icon, label, value, color }: { icon: React.ElementType; label: string; value: string | number; color?: string }) {
@@ -54,22 +56,42 @@ export function ToolsOverviewPage() {
                 <p className="font-body text-small text-kore-mid mt-xs">{catInfo.description}</p>
               </div>
               <div className="divide-y divide-kore-border">
-                {catTools.map((tool) => (
-                  <div key={tool.id} className="px-md sm:px-xl py-md flex items-center justify-between gap-md">
-                    <div className="min-w-0">
-                      <p className="font-body text-body text-kore-ink font-normal">{tool.name}</p>
-                      <p className="font-body text-small text-kore-mid truncate">{tool.description}</p>
+                {catTools.map((tool) => {
+                  const route = getToolRoute(tool.key);
+                  const content = (
+                    <>
+                      <div className="min-w-0">
+                        <p className="font-body text-body text-kore-ink font-normal">{tool.name}</p>
+                        <p className="font-body text-small text-kore-mid truncate">{tool.description}</p>
+                      </div>
+                      <div className="flex items-center gap-md flex-shrink-0">
+                        <Badge variant="brass">
+                          {tool._count.assignments} Stores
+                        </Badge>
+                        <span className="font-body text-small text-kore-ink whitespace-nowrap">
+                          {formatPrice(tool.priceMonthly)}
+                        </span>
+                        {route && (
+                          <ChevronRight size={16} className="text-kore-brass" />
+                        )}
+                      </div>
+                    </>
+                  );
+
+                  return route ? (
+                    <Link
+                      key={tool.id}
+                      to={route}
+                      className="px-md sm:px-xl py-md flex items-center justify-between gap-md hover:bg-kore-surface transition-colors duration-150"
+                    >
+                      {content}
+                    </Link>
+                  ) : (
+                    <div key={tool.id} className="px-md sm:px-xl py-md flex items-center justify-between gap-md opacity-60">
+                      {content}
                     </div>
-                    <div className="flex items-center gap-md flex-shrink-0">
-                      <Badge variant="brass">
-                        {tool._count.assignments} Stores
-                      </Badge>
-                      <span className="font-body text-small text-kore-ink whitespace-nowrap">
-                        {formatPrice(tool.priceMonthly)}
-                      </span>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           );
