@@ -65,13 +65,13 @@ export function HomePage() {
                 {t.hero.stat_streams_sub}
               </p>
             </div>
-            <div className="flex items-baseline gap-3">
+            <div>
               <span className="font-display text-3xl sm:text-[2.8rem] font-light text-kore-brass leading-none">
                 DACH
               </span>
-              <span className="font-body text-small font-normal text-kore-mid">
+              <p className="font-body text-small font-normal text-kore-mid mt-2">
                 {t.hero.stat_region}
-              </span>
+              </p>
             </div>
           </div>
         </div>
@@ -122,8 +122,6 @@ export function HomePage() {
           </div>
           <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
             <div className="relative">
-              {/* Dekorativer Rahmen hinter dem Quote */}
-              <div className="absolute -left-4 -top-4 w-24 h-24 border border-kore-brass-lt/30" />
               <div className="border-l-[3px] border-l-kore-brass pl-8 relative">
                 <blockquote className="font-display text-h1 text-kore-ink italic">
                   &ldquo;{t.why.quote}&rdquo;
