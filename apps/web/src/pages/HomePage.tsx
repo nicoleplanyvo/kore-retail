@@ -143,32 +143,6 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* === CASE STUDIES === */}
-      <section className="section-padding surface-pattern">
-        <div className="container-default">
-          <div className="flex items-center gap-4 mb-4">
-            <p className="label-default">{t.caseStudies.heading}</p>
-            <div className="flex-1 h-px bg-kore-border" />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
-            {t.caseStudies.cases.map((cs, i) => (
-              <div key={i} className="card-accent group">
-                <p className="font-body text-caption uppercase tracking-[0.16em] text-kore-mid mb-4">
-                  {cs.client}
-                </p>
-                <p className="font-display text-h3 text-kore-brass mb-4">
-                  {cs.result}
-                </p>
-                <div className="w-8 h-px bg-kore-border mb-4 group-hover:w-12 group-hover:bg-kore-brass transition-all duration-300" />
-                <p className="font-body text-small font-normal text-kore-mid">
-                  {cs.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* === KORE SUITE TEASER === */}
       <section className="section-padding">
         <div className="container-default">
