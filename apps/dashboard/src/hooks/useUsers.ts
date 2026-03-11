@@ -26,6 +26,12 @@ interface UserDetail extends UserListItem {
     assignedAt: string;
     store: { id: string; name: string; city: string | null };
   }[];
+  regionAssignments: {
+    id: string;
+    regionId: string;
+    assignedAt: string;
+    region: { id: string; name: string };
+  }[];
 }
 
 interface UserListParams {

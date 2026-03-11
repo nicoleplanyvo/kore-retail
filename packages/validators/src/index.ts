@@ -109,6 +109,7 @@ export const userCreateSchema = z.object({
   role: userRoleEnum,
   tenantId: z.string().min(1).optional(), // Required für alle außer kore_admin
   storeIds: z.array(z.string().min(1)).optional(),
+  regionIds: z.array(z.string().min(1)).optional(),
 });
 
 export const userUpdateSchema = z.object({
@@ -117,10 +118,15 @@ export const userUpdateSchema = z.object({
   role: userRoleEnum.optional(),
   isActive: z.boolean().optional(),
   storeIds: z.array(z.string().min(1)).optional(),
+  regionIds: z.array(z.string().min(1)).optional(),
 });
 
 export const userStoreAssignSchema = z.object({
   storeIds: z.array(z.string().min(1)),
+});
+
+export const userRegionAssignSchema = z.object({
+  regionIds: z.array(z.string().min(1)),
 });
 
 export const storeUserAssignSchema = z.object({

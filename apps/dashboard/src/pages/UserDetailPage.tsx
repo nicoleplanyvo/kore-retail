@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, UserCog, Store, Eye, Save, Trash2 } from 'lucide-react';
+import { ArrowLeft, UserCog, Store, Eye, Save, Trash2, Globe } from 'lucide-react';
 import { Badge, Button } from '@kore/ui';
 import { useUser, useUpdateUser, useDeleteUser, useImpersonate, useUpdateUserStores } from '../hooks/useUsers';
 import { useStores } from '../hooks/useStores';
+import { useRegions, useUpdateUserRegions } from '../hooks/useRegions';
 import { useAuthStore } from '../stores/authStore';
-import { canCreateRole, type UserRole } from '@kore/types';
+import { canCreateRole, hasMinRole, type UserRole } from '@kore/types';
 
 const ROLE_LABELS: Record<string, string> = {
   kore_admin: 'Super Admin',
@@ -42,12 +43,18 @@ export function UserDetailPage() {
   const [isEditing, setIsEditing] = useState(false);
   const [selectedStoreIds, setSelectedStoreIds] = useState<string[]>([]);
   const [storesEditing, setStoresEditing] = useState(false);
+  const [selectedRegionIds, setSelectedRegionIds] = useState<string[]>([]);
+  const [regionsEditing, setRegionsEditing] = useState(false);
 
   // Load stores for the user's tenant
   const tenantId = userData?.tenantId || currentUser?.tenantId;
   const { data: allStores } = useStores(tenantId || undefined);
+  const { data: allRegions } = useRegions(tenantId || undefined);
+  const updateRegions = useUpdateUserRegions(id || '');
 
   const isKoreAdmin = currentUser?.role === 'kore_admin';
+  const canManageRegions = hasMinRole((currentUser?.role || 'learner') as UserRole, 'tenant_admin');
+  const isRegionalManager = userData?.role === 'regional_manager';
 
   const startEditing = () => {
     if (!userData) return;
@@ -110,6 +117,28 @@ export function UserDetailPage() {
       prev.includes(storeId)
         ? prev.filter((id) => id !== storeId)
         : [...prev, storeId],
+    );
+  };
+
+  const startRegionEditing = () => {
+    setSelectedRegionIds(userData?.regionAssignments?.map((a) => a.regionId) || []);
+    setRegionsEditing(true);
+  };
+
+  const handleSaveRegions = async () => {
+    try {
+      await updateRegions.mutateAsync(selectedRegionIds);
+      setRegionsEditing(false);
+    } catch (err) {
+      console.error('Update regions error:', err);
+    }
+  };
+
+  const toggleRegion = (regionId: string) => {
+    setSelectedRegionIds((prev) =>
+      prev.includes(regionId)
+        ? prev.filter((id) => id !== regionId)
+        : [...prev, regionId],
     );
   };
 
@@ -346,6 +375,79 @@ export function UserDetailPage() {
           </div>
         )}
       </div>
+
+      {/* Region Assignments — nur für regional_manager, sichtbar für tenant_admin+ */}
+      {isRegionalManager && canManageRegions && (
+        <div className="bg-kore-white border border-kore-border mt-lg">
+          <div className="px-md sm:px-xl py-md border-b border-kore-border flex items-center justify-between">
+            <div className="flex items-center gap-md">
+              <Globe size={18} className="text-kore-mid" />
+              <h2 className="font-display text-h3 text-kore-ink">Region-Zuweisungen</h2>
+            </div>
+            {!regionsEditing ? (
+              <button
+                onClick={startRegionEditing}
+                className="font-body text-small text-kore-brass hover:text-kore-ink transition-colors"
+              >
+                Bearbeiten
+              </button>
+            ) : (
+              <div className="flex gap-sm">
+                <button
+                  onClick={handleSaveRegions}
+                  disabled={updateRegions.isPending}
+                  className="flex items-center gap-xs px-md py-xs bg-kore-ink text-kore-white font-body text-caption hover:bg-kore-ink/90 transition-colors"
+                >
+                  <Save size={12} />
+                  Speichern
+                </button>
+                <button
+                  onClick={() => setRegionsEditing(false)}
+                  className="px-md py-xs font-body text-caption text-kore-mid hover:text-kore-ink border border-kore-border transition-colors"
+                >
+                  Abbrechen
+                </button>
+              </div>
+            )}
+          </div>
+
+          {regionsEditing ? (
+            <div className="divide-y divide-kore-border">
+              {allRegions?.map((region) => (
+                <label key={region.id} className="flex items-center gap-md px-md sm:px-xl py-md hover:bg-kore-surface/50 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={selectedRegionIds.includes(region.id)}
+                    onChange={() => toggleRegion(region.id)}
+                    className="w-4 h-4 accent-kore-brass"
+                  />
+                  <span className="font-body text-body text-kore-ink">{region.name}</span>
+                </label>
+              ))}
+              {(!allRegions || allRegions.length === 0) && (
+                <p className="px-xl py-md text-kore-mid font-body text-small">Keine Regionen verfügbar.</p>
+              )}
+            </div>
+          ) : (
+            <div className="divide-y divide-kore-border">
+              {userData.regionAssignments && userData.regionAssignments.length > 0 ? (
+                userData.regionAssignments.map((a) => (
+                  <div key={a.id} className="px-md sm:px-xl py-md flex items-center justify-between">
+                    <p className="font-body text-body text-kore-ink">{a.region.name}</p>
+                    <span className="font-body text-caption text-kore-mid">
+                      seit {new Date(a.assignedAt).toLocaleDateString('de-DE')}
+                    </span>
+                  </div>
+                ))
+              ) : (
+                <p className="px-xl py-md text-kore-mid font-body text-small">
+                  Keine Regionen zugewiesen.
+                </p>
+              )}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

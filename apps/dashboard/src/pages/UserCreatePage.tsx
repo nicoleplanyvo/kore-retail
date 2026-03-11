@@ -9,6 +9,7 @@ import { useCreateUser } from '../hooks/useUsers';
 import { useAuthStore } from '../stores/authStore';
 import { useTenants } from '../hooks/useTenants';
 import { useStores } from '../hooks/useStores';
+import { useRegions } from '../hooks/useRegions';
 import { canCreateRole, type UserRole } from '@kore/types';
 
 const ROLE_OPTIONS: { value: UserRole; label: string }[] = [
@@ -49,9 +50,11 @@ export function UserCreatePage() {
   });
 
   const selectedTenantId = watch('tenantId');
+  const selectedRole = watch('role');
 
-  // Lade Stores des ausgewählten Tenants
+  // Lade Stores und Regionen des ausgewählten Tenants
   const { data: storesData } = useStores(selectedTenantId || user?.tenantId);
+  const { data: regionsData } = useRegions(selectedTenantId || user?.tenantId);
 
   // Filtere Rollen: nur Rollen strikt unter der eigenen
   const availableRoles = ROLE_OPTIONS.filter((r) =>
@@ -134,6 +137,26 @@ export function UserCreatePage() {
                 ))}
               </select>
               {errors.tenantId && <p className="font-body text-caption text-kore-error mt-xs">{errors.tenantId.message}</p>}
+            </div>
+          )}
+
+          {/* Region-Zuweisungen (nur für regional_manager) */}
+          {selectedRole === 'regional_manager' && regionsData && regionsData.length > 0 && (
+            <div>
+              <label className="block font-body text-small text-kore-mid mb-xs">Region-Zuweisungen</label>
+              <div className="border border-kore-border divide-y divide-kore-border max-h-[200px] overflow-y-auto">
+                {regionsData.map((region) => (
+                  <label key={region.id} className="flex items-center gap-md px-md py-sm hover:bg-kore-surface/50 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      value={region.id}
+                      {...register('regionIds')}
+                      className="w-4 h-4 accent-kore-brass"
+                    />
+                    <span className="font-body text-small text-kore-ink">{region.name}</span>
+                  </label>
+                ))}
+              </div>
             </div>
           )}
 
