@@ -159,7 +159,7 @@ function KoreAdminDashboard() {
   );
 }
 
-/** Tool-Cards Grid fuer alle Rollen */
+/** Tool-Cards Grid für alle Rollen */
 function ToolCardsGrid() {
   const { data: myTools, isLoading } = useMyTools();
   const navigate = useNavigate();
@@ -259,7 +259,7 @@ export function DashboardPage() {
 
   return (
     <div>
-      {/* Header mit Begruessung */}
+      {/* Header mit Begrüßung */}
       <div className="mb-lg sm:mb-xl">
         <h1 className="font-display text-h2 sm:text-h1 text-kore-ink">
           Hallo, {user?.name?.split(' ')[0] || 'User'}

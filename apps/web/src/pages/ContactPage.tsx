@@ -105,7 +105,7 @@ export function ContactPage() {
                 <textarea
                   {...register('message')}
                   className="input-default min-h-[150px] resize-y"
-                  placeholder="Wie koennen wir Ihnen helfen?"
+                  placeholder="Wie können wir Ihnen helfen?"
                 />
                 {errors.message && (
                   <p className="font-body text-small text-kore-error mt-1">{errors.message.message}</p>

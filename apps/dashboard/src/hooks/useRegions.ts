@@ -15,7 +15,7 @@ export function useRegions(tenantId?: string) {
 }
 
 /**
- * Setzt die Region-Zuweisungen fuer einen User.
+ * Setzt die Region-Zuweisungen für einen User.
  */
 export function useUpdateUserRegions(userId: string) {
   const qc = useQueryClient();

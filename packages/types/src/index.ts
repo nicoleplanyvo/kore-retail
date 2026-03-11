@@ -285,8 +285,17 @@ export interface ReportingStore {
   }[];
 }
 
+export interface ReportingRegion {
+  id: string;
+  name: string;
+  description: string | null;
+  sortOrder: number;
+  stores: ReportingStore[];
+}
+
 export interface ReportingHierarchy {
   tenant: { id: string; name: string };
+  regions: ReportingRegion[];
   stores: ReportingStore[];
   managers: ReportingManager[];
 }

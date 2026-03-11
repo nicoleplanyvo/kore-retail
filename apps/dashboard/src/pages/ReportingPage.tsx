@@ -4,7 +4,7 @@ import { GitBranch, Users, Store, MapPin } from 'lucide-react';
 import { useReportingHierarchy } from '../hooks/useReporting';
 import { useTenants } from '../hooks/useTenants';
 import { useAuthStore } from '../stores/authStore';
-import type { UserRole, ReportingManager } from '@kore/types';
+import type { UserRole, ReportingManager, ReportingStore } from '@kore/types';
 
 const ROLE_LABELS: Record<string, string> = {
   tenant_admin: 'Kunden-Admin',
@@ -31,6 +31,65 @@ const ROLE_ORDER: UserRole[] = [
 ];
 
 type ViewMode = 'manager' | 'store';
+
+/** Store-Karte mit Benutzerliste */
+function StoreCard({ store }: { store: ReportingStore }) {
+  return (
+    <div className="bg-kore-white border border-kore-border">
+      <div className="px-md sm:px-xl py-md border-b border-kore-border flex items-center justify-between">
+        <div className="flex items-center gap-md">
+          <Link
+            to={`/admin/stores/${store.id}`}
+            className="font-display text-h3 text-kore-ink hover:text-kore-brass transition-colors"
+          >
+            {store.name}
+          </Link>
+          {store.city && (
+            <span className="flex items-center gap-xs font-body text-small text-kore-mid">
+              <MapPin size={12} />
+              {store.city}
+            </span>
+          )}
+        </div>
+        <span className="font-body text-small text-kore-mid">
+          {store.users.length} Benutzer
+        </span>
+      </div>
+
+      {store.users.length > 0 ? (
+        <div className="px-md sm:px-xl py-md">
+          <div className="flex flex-col gap-xs">
+            {ROLE_ORDER.map((role) => {
+              const usersForRole = store.users.filter((u) => u.role === role);
+              if (usersForRole.length === 0) return null;
+
+              return usersForRole.map((u) => (
+                <div key={u.id} className="flex items-center gap-md py-xs">
+                  <span className={`inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full min-w-[120px] justify-center ${ROLE_COLORS[u.role] || ''}`}>
+                    {ROLE_LABELS[u.role] || u.role}
+                  </span>
+                  <Link
+                    to={`/admin/users/${u.id}`}
+                    className="font-body text-body text-kore-ink hover:text-kore-brass transition-colors"
+                  >
+                    {u.name}
+                  </Link>
+                  <span className="font-body text-small text-kore-mid">{u.email}</span>
+                </div>
+              ));
+            })}
+          </div>
+        </div>
+      ) : (
+        <div className="px-md sm:px-xl py-md">
+          <p className="font-body text-small text-kore-mid italic">
+            Keine Benutzer zugewiesen
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function ReportingPage() {
   const user = useAuthStore((s) => s.user);
@@ -59,6 +118,11 @@ export function ReportingPage() {
       managersByRole[mgr.role]!.push(mgr);
     }
   }
+
+  // Gesamtzahl aller Stores (Regionen + nicht zugeordnete)
+  const totalStoreCount = hierarchy
+    ? (hierarchy.regions?.reduce((sum, r) => sum + r.stores.length, 0) ?? 0) + hierarchy.stores.length
+    : 0;
 
   return (
     <div>
@@ -139,7 +203,7 @@ export function ReportingPage() {
             <p className="font-body text-caption text-kore-mid uppercase tracking-[0.14em]">Kunde</p>
             <p className="font-display text-h3 text-kore-ink">{hierarchy.tenant.name}</p>
             <p className="font-body text-small text-kore-mid mt-xs">
-              {hierarchy.stores.length} Stores · {hierarchy.managers.length} Benutzer
+              {totalStoreCount} Stores · {hierarchy.regions?.length ?? 0} Regionen · {hierarchy.managers.length} Benutzer
             </p>
           </div>
 
@@ -214,65 +278,57 @@ export function ReportingPage() {
               )}
             </div>
           ) : (
-            /* === Store-Ansicht: Wer ist wo? === */
+            /* === Store-Ansicht: Regionen → Stores → Benutzer === */
             <div className="flex flex-col gap-lg">
-              {hierarchy.stores.map((store) => (
-                <div key={store.id} className="bg-kore-white border border-kore-border">
-                  <div className="px-md sm:px-xl py-md border-b border-kore-border flex items-center justify-between">
-                    <div className="flex items-center gap-md">
-                      <Link
-                        to={`/admin/stores/${store.id}`}
-                        className="font-display text-h3 text-kore-ink hover:text-kore-brass transition-colors"
-                      >
-                        {store.name}
-                      </Link>
-                      {store.city && (
-                        <span className="flex items-center gap-xs font-body text-small text-kore-mid">
-                          <MapPin size={12} />
-                          {store.city}
-                        </span>
-                      )}
-                    </div>
+              {/* Regionen mit ihren Stores */}
+              {hierarchy.regions?.map((region) => (
+                <div key={region.id}>
+                  <div className="flex items-center gap-sm mb-md">
+                    <MapPin size={16} className="text-kore-brass" />
+                    <h3 className="font-display text-h3 text-kore-ink">{region.name}</h3>
+                    {region.description && (
+                      <span className="font-body text-small text-kore-mid">— {region.description}</span>
+                    )}
                     <span className="font-body text-small text-kore-mid">
-                      {store.users.length} Benutzer
+                      ({region.stores.length} Stores)
                     </span>
                   </div>
 
-                  {store.users.length > 0 ? (
-                    <div className="px-md sm:px-xl py-md">
-                      <div className="flex flex-col gap-xs">
-                        {ROLE_ORDER.map((role) => {
-                          const usersForRole = store.users.filter((u) => u.role === role);
-                          if (usersForRole.length === 0) return null;
-
-                          return usersForRole.map((u) => (
-                            <div key={u.id} className="flex items-center gap-md py-xs">
-                              <span className={`inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full min-w-[120px] justify-center ${ROLE_COLORS[u.role] || ''}`}>
-                                {ROLE_LABELS[u.role] || u.role}
-                              </span>
-                              <Link
-                                to={`/admin/users/${u.id}`}
-                                className="font-body text-body text-kore-ink hover:text-kore-brass transition-colors"
-                              >
-                                {u.name}
-                              </Link>
-                              <span className="font-body text-small text-kore-mid">{u.email}</span>
-                            </div>
-                          ));
-                        })}
-                      </div>
+                  {region.stores.length > 0 ? (
+                    <div className="flex flex-col gap-md ml-md">
+                      {region.stores.map((store) => (
+                        <StoreCard key={store.id} store={store} />
+                      ))}
                     </div>
                   ) : (
-                    <div className="px-md sm:px-xl py-md">
+                    <div className="bg-kore-white border border-kore-border p-lg ml-md">
                       <p className="font-body text-small text-kore-mid italic">
-                        Keine Benutzer zugewiesen
+                        Keine Stores in dieser Region.
                       </p>
                     </div>
                   )}
                 </div>
               ))}
 
-              {hierarchy.stores.length === 0 && (
+              {/* Nicht zugeordnete Stores */}
+              {hierarchy.stores.length > 0 && (
+                <div>
+                  <div className="flex items-center gap-sm mb-md">
+                    <Store size={16} className="text-kore-mid" />
+                    <h3 className="font-display text-h3 text-kore-ink">Ohne Region</h3>
+                    <span className="font-body text-small text-kore-mid">
+                      ({hierarchy.stores.length} Stores)
+                    </span>
+                  </div>
+                  <div className="flex flex-col gap-md ml-md">
+                    {hierarchy.stores.map((store) => (
+                      <StoreCard key={store.id} store={store} />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {totalStoreCount === 0 && (
                 <div className="bg-kore-white border border-kore-border p-xl text-center">
                   <p className="font-body text-body text-kore-mid">Keine Stores vorhanden.</p>
                 </div>
