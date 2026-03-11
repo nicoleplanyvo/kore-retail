@@ -25,34 +25,42 @@ export function App() {
         <Route path="/login" element={<LoginPage />} />
       </Route>
 
-      {/* Protected Dashboard Routes */}
+      {/* Protected App Routes */}
       <Route element={<ProtectedRoute />}>
         <Route element={<DashboardLayout />}>
-          {/* Alle authentifizierten User */}
+          {/* Home — alle authentifizierten User */}
           <Route path="/" element={<DashboardPage />} />
 
-          {/* Nur kore_admin */}
-          <Route element={<ProtectedRoute minRole="kore_admin" />}>
-            <Route path="/tenants" element={<TenantsListPage />} />
-            <Route path="/tenants/new" element={<TenantCreatePage />} />
-            <Route path="/tenants/:id" element={<TenantDetailPage />} />
+          {/* Tools — alle mit Tool-Zugang (API prueft den Zugriff) */}
+          <Route path="/tools/sea/*" element={<StoreExcellenceAuditRoutes />} />
+
+          {/* === Verwaltung (Admin) === */}
+
+          {/* store_manager+ (Benutzer verwalten, Stores) */}
+          <Route element={<ProtectedRoute minRole="store_manager" />}>
+            <Route path="/admin/users" element={<UsersListPage />} />
+            <Route path="/admin/users/new" element={<UserCreatePage />} />
+            <Route path="/admin/users/:id" element={<UserDetailPage />} />
+            <Route path="/admin/stores" element={<StoresListPage />} />
+            <Route path="/admin/stores/:id" element={<StoreDetailPage />} />
+          </Route>
+
+          {/* regional_manager+ (Tool-Katalog) */}
+          <Route element={<ProtectedRoute minRole="regional_manager" />}>
+            <Route path="/admin/tools" element={<ToolsOverviewPage />} />
           </Route>
 
           {/* tenant_admin+ */}
           <Route element={<ProtectedRoute minRole="tenant_admin" />}>
-            <Route path="/gdpr" element={<GdprPage />} />
-            <Route path="/reporting" element={<ReportingPage />} />
+            <Route path="/admin/gdpr" element={<GdprPage />} />
+            <Route path="/admin/reporting" element={<ReportingPage />} />
           </Route>
 
-          {/* store_manager+ (Benutzer verwalten, Stores, Tools) */}
-          <Route element={<ProtectedRoute minRole="store_manager" />}>
-            <Route path="/users" element={<UsersListPage />} />
-            <Route path="/users/new" element={<UserCreatePage />} />
-            <Route path="/users/:id" element={<UserDetailPage />} />
-            <Route path="/stores" element={<StoresListPage />} />
-            <Route path="/stores/:id" element={<StoreDetailPage />} />
-            <Route path="/tools" element={<ToolsOverviewPage />} />
-            <Route path="/tools/sea/*" element={<StoreExcellenceAuditRoutes />} />
+          {/* Nur kore_admin */}
+          <Route element={<ProtectedRoute minRole="kore_admin" />}>
+            <Route path="/admin/tenants" element={<TenantsListPage />} />
+            <Route path="/admin/tenants/new" element={<TenantCreatePage />} />
+            <Route path="/admin/tenants/:id" element={<TenantDetailPage />} />
           </Route>
         </Route>
       </Route>

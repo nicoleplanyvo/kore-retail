@@ -167,7 +167,7 @@ export function ReportingPage() {
                         <div key={mgr.id} className="px-md sm:px-xl py-md">
                           <div className="flex items-center justify-between mb-sm">
                             <Link
-                              to={`/users/${mgr.id}`}
+                              to={`/admin/users/${mgr.id}`}
                               className="font-body text-body text-kore-ink font-medium hover:text-kore-brass transition-colors"
                             >
                               {mgr.name}
@@ -179,7 +179,7 @@ export function ReportingPage() {
                               {mgr.stores.map((s) => (
                                 <Link
                                   key={s.id}
-                                  to={`/stores/${s.id}`}
+                                  to={`/admin/stores/${s.id}`}
                                   className="inline-flex items-center gap-xs px-md py-xs bg-kore-surface border border-kore-border text-kore-ink font-body text-small hover:border-kore-brass transition-colors"
                                 >
                                   <Store size={12} className="text-kore-mid" />
@@ -221,7 +221,7 @@ export function ReportingPage() {
                   <div className="px-md sm:px-xl py-md border-b border-kore-border flex items-center justify-between">
                     <div className="flex items-center gap-md">
                       <Link
-                        to={`/stores/${store.id}`}
+                        to={`/admin/stores/${store.id}`}
                         className="font-display text-h3 text-kore-ink hover:text-kore-brass transition-colors"
                       >
                         {store.name}
@@ -251,7 +251,7 @@ export function ReportingPage() {
                                 {ROLE_LABELS[u.role] || u.role}
                               </span>
                               <Link
-                                to={`/users/${u.id}`}
+                                to={`/admin/users/${u.id}`}
                                 className="font-body text-body text-kore-ink hover:text-kore-brass transition-colors"
                               >
                                 {u.name}

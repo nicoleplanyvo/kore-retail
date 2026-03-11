@@ -43,7 +43,7 @@ export function TenantCreatePage() {
     setServerError('');
     try {
       const tenant = await createTenant.mutateAsync(data);
-      navigate(`/tenants/${tenant.id}`);
+      navigate(`/admin/tenants/${tenant.id}`);
     } catch (err) {
       setServerError(err instanceof Error ? err.message : t.common.error);
     }
@@ -52,7 +52,7 @@ export function TenantCreatePage() {
   return (
     <div>
       <button
-        onClick={() => navigate('/tenants')}
+        onClick={() => navigate('/admin/tenants')}
         className="flex items-center gap-sm text-kore-mid hover:text-kore-ink font-body text-small mb-lg transition-colors"
       >
         <ArrowLeft size={16} />
@@ -109,7 +109,7 @@ export function TenantCreatePage() {
             <Button
               type="button"
               variant="secondary"
-              onClick={() => navigate('/tenants')}
+              onClick={() => navigate('/admin/tenants')}
             >
               {t.tenants.cancel}
             </Button>

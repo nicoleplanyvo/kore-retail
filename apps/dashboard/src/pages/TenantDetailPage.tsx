@@ -54,7 +54,7 @@ export function TenantDetailPage() {
     if (!confirm(t.tenants.deleteConfirm)) return;
     try {
       await deleteTenant.mutateAsync(id!);
-      navigate('/tenants');
+      navigate('/admin/tenants');
     } catch {
       // Error handled by React Query
     }
@@ -71,7 +71,7 @@ export function TenantDetailPage() {
   return (
     <div>
       <button
-        onClick={() => navigate('/tenants')}
+        onClick={() => navigate('/admin/tenants')}
         className="flex items-center gap-sm text-kore-mid hover:text-kore-ink font-body text-small mb-lg transition-colors"
       >
         <ArrowLeft size={16} />
@@ -127,7 +127,7 @@ export function TenantDetailPage() {
               tenant.stores.map((store) => (
                 <Link
                   key={store.id}
-                  to={`/stores/${store.id}`}
+                  to={`/admin/stores/${store.id}`}
                   className="flex items-center justify-between p-md border border-kore-border hover:border-kore-brass transition-colors group"
                 >
                   <div className="flex items-center gap-md min-w-0">

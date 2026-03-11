@@ -76,7 +76,7 @@ export function UserDetailPage() {
     if (!confirm('Benutzer wirklich deaktivieren?')) return;
     try {
       await deleteUser.mutateAsync(id!);
-      navigate('/users');
+      navigate('/admin/users');
     } catch (err) {
       console.error('Delete user error:', err);
     }

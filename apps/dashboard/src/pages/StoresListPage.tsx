@@ -121,7 +121,7 @@ export function StoresListPage() {
           {visibleStores.map((store) => (
             <Link
               key={store.id}
-              to={`/stores/${store.id}`}
+              to={`/admin/stores/${store.id}`}
               className="bg-kore-white border border-kore-border p-xl hover:border-kore-brass transition-colors group"
             >
               <div className="flex items-start justify-between mb-md">

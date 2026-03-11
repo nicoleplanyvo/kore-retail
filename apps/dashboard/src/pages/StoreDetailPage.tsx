@@ -216,7 +216,7 @@ export function StoreDetailPage() {
                         <div key={a.id} className="flex items-center justify-between py-xs">
                           <div className="flex items-center gap-md">
                             <Link
-                              to={`/users/${a.user.id}`}
+                              to={`/admin/users/${a.user.id}`}
                               className="font-body text-body text-kore-ink hover:text-kore-brass transition-colors"
                             >
                               {a.user.name}

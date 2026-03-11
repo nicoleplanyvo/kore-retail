@@ -54,7 +54,7 @@ export function UsersListPage() {
           <h1 className="font-display text-h2 sm:text-h1 text-kore-ink">Benutzer</h1>
         </div>
         <Link
-          to="/users/new"
+          to="/admin/users/new"
           className="flex items-center gap-xs px-lg py-sm bg-kore-ink text-kore-white font-body text-small hover:bg-kore-ink/90 transition-colors"
         >
           <Plus size={16} />
@@ -105,7 +105,7 @@ export function UsersListPage() {
                 {data.data.map((u) => (
                   <tr key={u.id} className="hover:bg-kore-surface/50 transition-colors">
                     <td className="px-md sm:px-xl py-md">
-                      <Link to={`/users/${u.id}`} className="font-body text-body text-kore-ink hover:text-kore-brass transition-colors">
+                      <Link to={`/admin/users/${u.id}`} className="font-body text-body text-kore-ink hover:text-kore-brass transition-colors">
                         {u.name}
                       </Link>
                       <p className="font-body text-caption text-kore-mid sm:hidden">{u.email}</p>

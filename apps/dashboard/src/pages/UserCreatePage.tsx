@@ -65,7 +65,7 @@ export function UserCreatePage() {
         ...data,
         tenantId: isKoreAdmin ? data.tenantId : (user?.tenantId || undefined),
       });
-      navigate('/users');
+      navigate('/admin/users');
     } catch (err) {
       setServerError(err instanceof Error ? err.message : 'Fehler beim Erstellen.');
     }

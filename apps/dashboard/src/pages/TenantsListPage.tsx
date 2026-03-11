@@ -32,7 +32,7 @@ export function TenantsListPage() {
     <div>
       <div className="flex items-center justify-between mb-lg sm:mb-xl gap-md">
         <h1 className="font-display text-h2 sm:text-h1 text-kore-ink">{t.tenants.title}</h1>
-        <Button onClick={() => navigate('/tenants/new')}>
+        <Button onClick={() => navigate('/admin/tenants/new')}>
           <span className="flex items-center gap-sm">
             <Plus size={16} />
             <span className="hidden sm:inline">{t.tenants.new}</span>
@@ -81,7 +81,7 @@ export function TenantsListPage() {
             </Thead>
             <Tbody>
               {data?.data.map((tenant) => (
-                <Tr key={tenant.id} onClick={() => navigate(`/tenants/${tenant.id}`)}>
+                <Tr key={tenant.id} onClick={() => navigate(`/admin/tenants/${tenant.id}`)}>
                   <Td>
                     <div>
                       <p className="font-normal text-kore-ink">{tenant.name}</p>

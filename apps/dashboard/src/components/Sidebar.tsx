@@ -1,25 +1,49 @@
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Building2, Wrench, Store, Shield, Users, GitBranch, LogOut, X } from 'lucide-react';
+import {
+  Home, Building2, Wrench, Store, Shield, Users, GitBranch, LogOut, X,
+  ClipboardCheck, Award, TrendingUp, Camera, BookOpen, BarChart3, Wallet,
+  LineChart, Package, Monitor, Activity, Palette, GraduationCap,
+  Clock, Trophy, UserPlus, MessageSquare, Compass, Star, CalendarDays,
+  Heart, Smile, FileText, ArrowLeftRight, Bell, Mail, Navigation,
+  Map, LayoutDashboard, PackageSearch, type LucideIcon,
+} from 'lucide-react';
 import { useAuthStore } from '../stores/authStore';
 import { hasMinRole, type UserRole } from '@kore/types';
+import { useMyTools } from '../hooks/useMyTools';
 import { api } from '../lib/api';
-import t from '../locales/de.json';
 
-interface NavItem {
+// Icon-Mapping: icon-String aus DB -> Lucide-Komponente
+const iconMap: Record<string, LucideIcon> = {
+  ClipboardCheck, Award, TrendingUp, Camera, BookOpen,
+  BarChart3, Wallet, LineChart, Shield, Package,
+  Monitor, Activity, Palette, Wrench,
+  GraduationCap, Clock, Trophy, UserPlus,
+  MessageSquare, Compass, Star, CalendarDays, Heart, Smile,
+  FileText, ArrowLeftRight, Bell, Mail,
+  Users, PackageSearch, Navigation,
+  Map, LayoutDashboard,
+};
+
+// Tool-Key -> Route-Mapping (nur Tools mit registrierter Route)
+const toolRoutes: Record<string, string> = {
+  'standards.excellence_tracker': '/tools/sea',
+  // Weitere Tools hier registrieren wenn implementiert
+};
+
+interface AdminNavItem {
   to: string;
-  icon: React.ElementType;
+  icon: LucideIcon;
   label: string;
   minRole: UserRole;
 }
 
-const navItems: NavItem[] = [
-  { to: '/', icon: LayoutDashboard, label: t.nav.dashboard, minRole: 'learner' },
-  { to: '/tenants', icon: Building2, label: t.nav.tenants, minRole: 'kore_admin' },
-  { to: '/users', icon: Users, label: 'Benutzer', minRole: 'store_manager' },
-  { to: '/stores', icon: Store, label: 'Stores', minRole: 'store_manager' },
-  { to: '/reporting', icon: GitBranch, label: 'Organisation', minRole: 'regional_manager' },
-  { to: '/tools', icon: Wrench, label: t.nav.tools, minRole: 'store_manager' },
-  { to: '/gdpr', icon: Shield, label: t.nav.gdpr, minRole: 'tenant_admin' },
+const adminItems: AdminNavItem[] = [
+  { to: '/admin/users', icon: Users, label: 'Benutzer', minRole: 'store_manager' },
+  { to: '/admin/stores', icon: Store, label: 'Stores', minRole: 'store_manager' },
+  { to: '/admin/tools', icon: Wrench, label: 'Tool-Katalog', minRole: 'regional_manager' },
+  { to: '/admin/reporting', icon: GitBranch, label: 'Organisation', minRole: 'tenant_admin' },
+  { to: '/admin/gdpr', icon: Shield, label: 'DSGVO', minRole: 'tenant_admin' },
+  { to: '/admin/tenants', icon: Building2, label: 'Mandanten', minRole: 'kore_admin' },
 ];
 
 interface SidebarProps {
@@ -29,12 +53,23 @@ interface SidebarProps {
 
 export function Sidebar({ open, onClose }: SidebarProps) {
   const { user, clearAuth } = useAuthStore();
-  const userRole = user?.role || 'learner';
+  const userRole = (user?.role || 'learner') as UserRole;
+  const { data: myTools } = useMyTools();
 
-  // Filtere NavItems basierend auf User-Rolle
-  const visibleItems = navItems.filter((item) =>
+  // Admin-Items basierend auf Rolle filtern
+  const visibleAdminItems = adminItems.filter((item) =>
     hasMinRole(userRole, item.minRole),
   );
+
+  // Tool-Items: nur Tools mit registrierter Route anzeigen
+  const toolNavItems = (myTools || [])
+    .filter((assignment) => toolRoutes[assignment.tool.key])
+    .map((assignment) => ({
+      key: assignment.tool.key,
+      to: toolRoutes[assignment.tool.key]!,
+      icon: iconMap[assignment.tool.icon || ''] || Wrench,
+      label: assignment.tool.name,
+    }));
 
   const handleLogout = async () => {
     try {
@@ -44,6 +79,13 @@ export function Sidebar({ open, onClose }: SidebarProps) {
     }
     clearAuth();
   };
+
+  const linkClasses = ({ isActive }: { isActive: boolean }) =>
+    `flex items-center gap-md-sm px-md py-md-sm rounded-sm mb-xs transition-colors duration-200 ${
+      isActive
+        ? 'bg-white/10 text-kore-brass-lt'
+        : 'text-kore-faint hover:text-kore-white hover:bg-white/5'
+    }`;
 
   return (
     <>
@@ -69,7 +111,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           <div>
             <h1 className="font-display text-h3 text-kore-white tracking-wider">KORE</h1>
             <p className="font-body text-[0.65rem] text-kore-faint uppercase tracking-[0.16em] mt-xs">
-              {userRole === 'kore_admin' ? 'Admin Dashboard' : 'Dashboard'}
+              Retail Platform
             </p>
           </div>
           <button
@@ -82,24 +124,56 @@ export function Sidebar({ open, onClose }: SidebarProps) {
 
         {/* Navigation */}
         <nav className="flex-1 py-lg px-md-sm overflow-y-auto">
-          {visibleItems.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              end={item.to === '/'}
-              onClick={onClose}
-              className={({ isActive }) =>
-                `flex items-center gap-md-sm px-md py-md-sm rounded-sm mb-xs transition-colors duration-200 ${
-                  isActive
-                    ? 'bg-white/10 text-kore-brass-lt'
-                    : 'text-kore-faint hover:text-kore-white hover:bg-white/5'
-                }`
-              }
-            >
-              <item.icon size={18} />
-              <span className="font-body text-small font-normal">{item.label}</span>
-            </NavLink>
-          ))}
+          {/* Sektion 1: Home */}
+          <NavLink
+            to="/"
+            end
+            onClick={onClose}
+            className={linkClasses}
+          >
+            <Home size={18} />
+            <span className="font-body text-small font-normal">Home</span>
+          </NavLink>
+
+          {/* Sektion 2: Meine Tools (dynamisch) */}
+          {toolNavItems.length > 0 && (
+            <>
+              <p className="font-body text-[0.6rem] text-kore-faint/50 uppercase tracking-[0.16em] px-md mt-lg mb-xs">
+                Meine Tools
+              </p>
+              {toolNavItems.map((item) => (
+                <NavLink
+                  key={item.key}
+                  to={item.to}
+                  onClick={onClose}
+                  className={linkClasses}
+                >
+                  <item.icon size={18} />
+                  <span className="font-body text-small font-normal">{item.label}</span>
+                </NavLink>
+              ))}
+            </>
+          )}
+
+          {/* Sektion 3: Verwaltung (rollenbasiert) */}
+          {visibleAdminItems.length > 0 && (
+            <>
+              <p className="font-body text-[0.6rem] text-kore-faint/50 uppercase tracking-[0.16em] px-md mt-lg mb-xs">
+                Verwaltung
+              </p>
+              {visibleAdminItems.map((item) => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  onClick={onClose}
+                  className={linkClasses}
+                >
+                  <item.icon size={18} />
+                  <span className="font-body text-small font-normal">{item.label}</span>
+                </NavLink>
+              ))}
+            </>
+          )}
         </nav>
 
         {/* User Info + Logout */}
@@ -115,7 +189,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
             className="flex items-center gap-md-sm px-md py-md-sm text-kore-faint hover:text-kore-error transition-colors duration-200 w-full font-body text-small"
           >
             <LogOut size={18} />
-            <span>{t.nav.logout}</span>
+            <span>Abmelden</span>
           </button>
         </div>
       </aside>

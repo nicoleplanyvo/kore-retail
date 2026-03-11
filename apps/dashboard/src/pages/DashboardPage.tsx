@@ -1,8 +1,47 @@
-import { Building2, Store, Wrench, TrendingUp, Euro } from 'lucide-react';
+import {
+  Building2, Store, Wrench, TrendingUp, Euro,
+  ClipboardCheck, Award, Camera, BookOpen, BarChart3, Wallet,
+  LineChart, Package, Monitor, Activity, Palette, GraduationCap,
+  Clock, Trophy, UserPlus, MessageSquare, Compass, Star, CalendarDays,
+  Heart, Smile, FileText, ArrowLeftRight, Bell, Mail, Navigation,
+  Map, LayoutDashboard, PackageSearch, Shield, type LucideIcon,
+} from 'lucide-react';
 import { useDashboardStats, useTenants } from '../hooks/useTenants';
+import { useMyTools } from '../hooks/useMyTools';
+import { useAuthStore } from '../stores/authStore';
+import { hasMinRole, type UserRole } from '@kore/types';
 import { Badge } from '@kore/ui';
 import { useNavigate } from 'react-router-dom';
 import t from '../locales/de.json';
+
+// Icon-Mapping: icon-String aus DB -> Lucide-Komponente
+const iconMap: Record<string, LucideIcon> = {
+  ClipboardCheck, Award, TrendingUp, Camera, BookOpen,
+  BarChart3, Wallet, LineChart, Shield, Package,
+  Monitor, Activity, Palette, Wrench,
+  GraduationCap, Clock, Trophy, UserPlus,
+  MessageSquare, Compass, Star, CalendarDays, Heart, Smile,
+  FileText, ArrowLeftRight, Bell, Mail,
+  PackageSearch, Navigation,
+  Map, LayoutDashboard,
+};
+
+// Tool-Key -> Route-Mapping (nur Tools mit Route)
+const toolRoutes: Record<string, string> = {
+  'standards.excellence_tracker': '/tools/sea',
+};
+
+// Kategorie-Labels
+const categoryLabels: Record<string, string> = {
+  STANDARDS_COMPLIANCE: 'Standards & Compliance',
+  PERFORMANCE: 'Performance & Sichtbarkeit',
+  FLOOR: 'Floor in Echtzeit',
+  TRAINING: 'Training & Entwicklung',
+  COACHING_PEOPLE: 'Coaching & People',
+  KOMMUNIKATION: 'Kommunikation & Signal',
+  CUSTOMER_STOCK: 'Customer, Clienteling & Stock',
+  REGIONAL_INSIGHTS: 'Regional Insights',
+};
 
 function StatsCard({
   icon: Icon,
@@ -10,7 +49,7 @@ function StatsCard({
   value,
   color,
 }: {
-  icon: React.ElementType;
+  icon: LucideIcon;
   label: string;
   value: string | number;
   color?: string;
@@ -38,20 +77,17 @@ const statusVariant: Record<string, 'success' | 'warning' | 'error' | 'brass'> =
   TRIALING: 'brass',
 };
 
-export function DashboardPage() {
+/** kore_admin Dashboard: Plattform-Stats + Recent Tenants */
+function KoreAdminDashboard() {
   const { data: stats, isLoading: statsLoading } = useDashboardStats();
   const { data: recentTenants } = useTenants({ page: 1, pageSize: 5 });
   const navigate = useNavigate();
 
-  const formatMrr = (cents: number) => {
-    return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(cents / 100);
-  };
+  const formatMrr = (cents: number) =>
+    new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(cents / 100);
 
   return (
-    <div>
-      <h1 className="font-display text-h2 sm:text-h1 text-kore-ink mb-lg sm:mb-xl">{t.dashboard.title}</h1>
-
-      {/* Stats Grid */}
+    <>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-lg mb-2xl">
         <StatsCard
           icon={Building2}
@@ -89,7 +125,6 @@ export function DashboardPage() {
         />
       </div>
 
-      {/* Recent Tenants */}
       <div className="bg-kore-white border border-kore-border">
         <div className="px-xl py-lg border-b border-kore-border">
           <h2 className="font-display text-h3 text-kore-ink">{t.dashboard.recentTenants}</h2>
@@ -99,7 +134,7 @@ export function DashboardPage() {
             <div
               key={tenant.id}
               className="px-md sm:px-xl py-md flex items-start sm:items-center justify-between gap-md cursor-pointer hover:bg-kore-surface transition-colors"
-              onClick={() => navigate(`/tenants/${tenant.id}`)}
+              onClick={() => navigate(`/admin/tenants/${tenant.id}`)}
             >
               <div className="min-w-0">
                 <p className="font-body text-body text-kore-ink font-normal truncate">{tenant.name}</p>
@@ -119,6 +154,131 @@ export function DashboardPage() {
             <p className="px-xl py-lg text-kore-mid font-body text-small">{t.tenants.empty}</p>
           )}
         </div>
+      </div>
+    </>
+  );
+}
+
+/** Tool-Cards Grid fuer alle Rollen */
+function ToolCardsGrid() {
+  const { data: myTools, isLoading } = useMyTools();
+  const navigate = useNavigate();
+
+  if (isLoading) {
+    return (
+      <div className="py-xl text-center">
+        <p className="font-body text-kore-mid">Tools werden geladen...</p>
+      </div>
+    );
+  }
+
+  if (!myTools || myTools.length === 0) {
+    return (
+      <div className="bg-kore-white border border-kore-border p-2xl text-center">
+        <Wrench size={32} className="text-kore-mid/30 mx-auto mb-md" />
+        <p className="font-body text-kore-mid">Keine Tools zugewiesen.</p>
+        <p className="font-body text-small text-kore-mid/60 mt-xs">
+          Kontaktieren Sie Ihren Administrator, um Tools freizuschalten.
+        </p>
+      </div>
+    );
+  }
+
+  // Gruppiere nach Kategorie
+  const grouped: Record<string, typeof myTools> = {};
+  for (const assignment of myTools) {
+    const cat = assignment.tool.category;
+    if (!grouped[cat]) grouped[cat] = [];
+    grouped[cat]!.push(assignment);
+  }
+
+  return (
+    <div className="space-y-xl">
+      {Object.entries(grouped).map(([category, assignments]) => (
+        <div key={category}>
+          <h3 className="font-body text-caption text-kore-mid uppercase tracking-[0.14em] mb-md">
+            {categoryLabels[category] || category}
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md">
+            {assignments.map((assignment) => {
+              const tool = assignment.tool;
+              const Icon = iconMap[tool.icon || ''] || Wrench;
+              const route = toolRoutes[tool.key];
+
+              return (
+                <div
+                  key={tool.id}
+                  className={`bg-kore-white border border-kore-border p-lg flex items-start gap-md transition-colors ${
+                    route
+                      ? 'cursor-pointer hover:border-kore-brass/40 hover:bg-kore-surface'
+                      : 'opacity-60'
+                  }`}
+                  onClick={() => route && navigate(route)}
+                >
+                  <div className="w-[36px] h-[36px] bg-kore-surface flex items-center justify-center flex-shrink-0">
+                    <Icon size={18} className="text-kore-ink" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="font-body text-small text-kore-ink font-normal truncate">
+                      {tool.name}
+                    </p>
+                    {tool.description && (
+                      <p className="font-body text-[0.65rem] text-kore-mid mt-xs line-clamp-2">
+                        {tool.description}
+                      </p>
+                    )}
+                    {!route && (
+                      <p className="font-body text-[0.6rem] text-kore-brass mt-xs">
+                        Bald verfügbar
+                      </p>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function DashboardPage() {
+  const { user } = useAuthStore();
+  const userRole = (user?.role || 'learner') as UserRole;
+
+  // Rollenbasierter Greeting
+  const roleLabels: Record<string, string> = {
+    kore_admin: 'Plattform-Admin',
+    tenant_admin: 'Administrator',
+    regional_manager: 'Regional Manager',
+    multisite_manager: 'Multisite Manager',
+    store_manager: 'Store Manager',
+    learner: 'Mitarbeiter',
+  };
+
+  return (
+    <div>
+      {/* Header mit Begruessung */}
+      <div className="mb-lg sm:mb-xl">
+        <h1 className="font-display text-h2 sm:text-h1 text-kore-ink">
+          Hallo, {user?.name?.split(' ')[0] || 'User'}
+        </h1>
+        <p className="font-body text-small text-kore-mid mt-xs">
+          {roleLabels[userRole] || userRole}
+          {user?.tenantId && ' — '}
+        </p>
+      </div>
+
+      {/* kore_admin: Plattform-Stats */}
+      {userRole === 'kore_admin' && <KoreAdminDashboard />}
+
+      {/* Alle Rollen: Tool-Cards */}
+      <div className={userRole === 'kore_admin' ? 'mt-2xl' : ''}>
+        <h2 className="font-display text-h3 text-kore-ink mb-lg">
+          {hasMinRole(userRole, 'store_manager') ? 'Meine Tools' : 'Verfügbare Tools'}
+        </h2>
+        <ToolCardsGrid />
       </div>
     </div>
   );

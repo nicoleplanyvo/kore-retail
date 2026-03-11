@@ -59,6 +59,7 @@ export interface AuthUser {
   tenantId?: string;
   impersonatedBy?: string;
   storeAssignments?: string[]; // Store-IDs
+  regionAssignments?: string[]; // Region-IDs (für regional_manager)
 }
 
 // === User Store Assignment ===
@@ -68,6 +69,16 @@ export interface UserStoreAssignment {
   userId: string;
   storeId: string;
   store?: Store;
+  assignedAt: string;
+}
+
+// === User Region Assignment ===
+
+export interface UserRegionAssignment {
+  id: string;
+  userId: string;
+  regionId: string;
+  region?: Region;
   assignedAt: string;
 }
 
@@ -122,6 +133,22 @@ export interface ToolDefinition {
   priceMonthly: number; // Cent pro Store pro Monat
   isActive: boolean;
   sortOrder: number;
+  learnerAccessible: boolean;
+}
+
+// === Region ===
+
+export interface Region {
+  id: string;
+  tenantId: string;
+  name: string;
+  description: string | null;
+  sortOrder: number;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+  stores?: Store[];
+  _count?: { stores: number };
 }
 
 // === Store ===
