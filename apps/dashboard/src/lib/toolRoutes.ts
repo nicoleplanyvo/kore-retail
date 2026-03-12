@@ -8,6 +8,10 @@
  */
 export const TOOL_ROUTES: Record<string, string> = {
   'standards.excellence_tracker': '/tools/sea',
+  'standards.checklisten': '/tools/checklisten',
+  'standards.sop_bibliothek': '/tools/sop',
+  'standards.vm_foto_compliance': '/tools/vm-compliance',
+  'standards.store_standards': '/tools/store-standards',
 };
 
 /**

@@ -16,6 +16,10 @@ import { UserDetailPage } from './pages/UserDetailPage';
 import GdprPage from './pages/GdprPage';
 import { ReportingPage } from './pages/ReportingPage';
 import { StoreExcellenceAuditRoutes } from './tools/store-excellence-audit/index';
+import { ChecklistenRoutes } from './tools/checklisten/index';
+import SopBibliothekRoutes from './tools/sop-bibliothek/index';
+import VmComplianceRoutes from './tools/vm-compliance/index';
+import StoreStandardsRoutes from './tools/store-standards/index';
 
 export function App() {
   return (
@@ -33,6 +37,10 @@ export function App() {
 
           {/* Tools — alle mit Tool-Zugang (API prueft den Zugriff) */}
           <Route path="/tools/sea/*" element={<StoreExcellenceAuditRoutes />} />
+          <Route path="/tools/checklisten/*" element={<ChecklistenRoutes />} />
+          <Route path="/tools/sop/*" element={<SopBibliothekRoutes />} />
+          <Route path="/tools/vm-compliance/*" element={<VmComplianceRoutes />} />
+          <Route path="/tools/store-standards/*" element={<StoreStandardsRoutes />} />
 
           {/* === Verwaltung (Admin) === */}
 

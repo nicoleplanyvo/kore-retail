@@ -387,3 +387,188 @@ export interface AuditSummaryStats {
   passRate: number;
   recentTrend: 'up' | 'down' | 'stable';
 }
+
+// ============================================================
+// Checklisten Tool — Types
+// ============================================================
+
+export type ChecklistItemType = 'BOOLEAN' | 'TEXT' | 'NUMBER' | 'PHOTO';
+export type ChecklistSessionStatus = 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED';
+
+export interface ChecklistTemplate {
+  id: string;
+  tenantId: string | null;
+  name: string;
+  description: string | null;
+  version: number;
+  isDefault: boolean;
+  isActive: boolean;
+  createdBy: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ChecklistSection {
+  id: string;
+  templateId: string;
+  name: string;
+  sortOrder: number;
+  items: ChecklistItem[];
+}
+
+export interface ChecklistItem {
+  id: string;
+  sectionId: string;
+  text: string;
+  type: ChecklistItemType;
+  isRequired: boolean;
+  sortOrder: number;
+}
+
+export interface ChecklistSession {
+  id: string;
+  tenantId: string;
+  storeId: string;
+  templateId: string;
+  conductedBy: string;
+  status: ChecklistSessionStatus;
+  completionRate: number;
+  notes: string | null;
+  startedAt: string;
+  completedAt: string | null;
+}
+
+export interface ChecklistEntry {
+  id: string;
+  sessionId: string;
+  itemId: string;
+  valueBool: boolean | null;
+  valueText: string | null;
+  valueNumber: number | null;
+  photoPath: string | null;
+  comment: string | null;
+  answeredAt: string;
+}
+
+// ============================================================
+// SOP Bibliothek Tool — Types
+// ============================================================
+
+export type SopStatus = 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
+
+export interface SopCategory {
+  id: string;
+  tenantId: string | null;
+  name: string;
+  sortOrder: number;
+  isActive: boolean;
+}
+
+export interface SopDocument {
+  id: string;
+  tenantId: string | null;
+  categoryId: string;
+  title: string;
+  content: string;
+  version: number;
+  status: SopStatus;
+  createdBy: string;
+  attachmentPath: string | null;
+  publishedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface SopAcknowledgment {
+  id: string;
+  sopId: string;
+  userId: string;
+  acknowledgedAt: string;
+}
+
+// ============================================================
+// VM Foto-Compliance Tool — Types
+// ============================================================
+
+export type VmSubmissionStatus = 'PENDING' | 'APPROVED' | 'REJECTED';
+
+export interface VmGuideline {
+  id: string;
+  tenantId: string;
+  name: string;
+  description: string | null;
+  category: string | null;
+  referencePhoto: string | null;
+  isActive: boolean;
+  sortOrder: number;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface VmSubmission {
+  id: string;
+  tenantId: string;
+  guidelineId: string;
+  storeId: string;
+  submittedBy: string;
+  photoPath: string;
+  status: VmSubmissionStatus;
+  reviewedBy: string | null;
+  reviewNote: string | null;
+  submittedAt: string;
+  reviewedAt: string | null;
+}
+
+// ============================================================
+// Store Standards Tool — Types
+// ============================================================
+
+export type StandardOperator = 'GTE' | 'LTE' | 'EQ' | 'GT' | 'LT';
+export type StandardEvaluationStatus = 'IN_PROGRESS' | 'COMPLETED';
+
+export interface StandardCategory {
+  id: string;
+  tenantId: string | null;
+  name: string;
+  description: string | null;
+  sortOrder: number;
+  isActive: boolean;
+}
+
+export interface StandardDefinition {
+  id: string;
+  categoryId: string;
+  tenantId: string | null;
+  name: string;
+  description: string | null;
+  unit: string | null;
+  targetValue: number;
+  operator: StandardOperator;
+  weight: number;
+  isActive: boolean;
+  sortOrder: number;
+}
+
+export interface StandardEvaluation {
+  id: string;
+  tenantId: string;
+  storeId: string;
+  evaluatedBy: string;
+  period: string;
+  overallScore: number | null;
+  notes: string | null;
+  status: StandardEvaluationStatus;
+  evaluatedAt: string;
+  completedAt: string | null;
+}
+
+export interface StandardScore {
+  id: string;
+  evaluationId: string;
+  definitionId: string;
+  actualValue: number;
+  passed: boolean;
+  score: number;
+  comment: string | null;
+}

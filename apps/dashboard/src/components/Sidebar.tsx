@@ -27,7 +27,10 @@ const iconMap: Record<string, LucideIcon> = {
 // Tool-Key -> Route-Mapping (nur Tools mit registrierter Route)
 const toolRoutes: Record<string, string> = {
   'standards.excellence_tracker': '/tools/sea',
-  // Weitere Tools hier registrieren wenn implementiert
+  'standards.checklisten': '/tools/checklisten',
+  'standards.sop_bibliothek': '/tools/sop',
+  'standards.vm_foto_compliance': '/tools/vm-compliance',
+  'standards.store_standards': '/tools/store-standards',
 };
 
 interface AdminNavItem {
