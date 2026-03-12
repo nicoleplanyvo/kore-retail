@@ -572,3 +572,164 @@ export interface StandardScore {
   score: number;
   comment: string | null;
 }
+
+// ============================================================
+// KPI Dashboard (Pulse) — Types
+// ============================================================
+
+export interface KpiEntry {
+  id: string;
+  tenantId: string;
+  storeId: string;
+  date: string;
+  revenue: number;
+  transactions: number;
+  footfall: number | null;
+  unitsSold: number | null;
+  staffHours: number | null;
+  enteredBy: string;
+  createdAt: string;
+  updatedAt: string;
+  store?: { id: string; name: string; city: string | null };
+}
+
+export interface KpiSummary {
+  totalRevenue: number;
+  totalTransactions: number;
+  totalFootfall: number;
+  avgConversion: number;
+  avgUPT: number;
+  storeCount: number;
+}
+
+// ============================================================
+// Budget Tracker — Types
+// ============================================================
+
+export type BudgetType = 'MONTHLY' | 'QUARTERLY' | 'YEARLY';
+export type BudgetCategory = 'REVENUE' | 'COGS' | 'LABOR' | 'RENT' | 'MARKETING' | 'OTHER';
+
+export interface BudgetPeriod {
+  id: string;
+  tenantId: string;
+  storeId: string;
+  period: string;
+  budgetType: BudgetType;
+  revenue: number;
+  cogs: number;
+  labor: number;
+  rent: number;
+  marketing: number;
+  other: number;
+  notes: string | null;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+  store?: { id: string; name: string; city: string | null };
+  actuals?: BudgetActual[];
+}
+
+export interface BudgetActual {
+  id: string;
+  budgetPeriodId: string;
+  category: BudgetCategory;
+  actualAmount: number;
+  date: string;
+  description: string | null;
+  enteredBy: string;
+  createdAt: string;
+}
+
+// ============================================================
+// Forecast — Types
+// ============================================================
+
+export type ForecastType = 'REVENUE' | 'TRANSACTIONS' | 'FOOTFALL';
+export type ForecastMethod = 'MANUAL' | 'TREND' | 'AI';
+
+export interface Forecast {
+  id: string;
+  tenantId: string;
+  storeId: string;
+  period: string;
+  forecastType: ForecastType;
+  forecastValue: number;
+  actualValue: number | null;
+  confidence: number | null;
+  method: ForecastMethod;
+  notes: string | null;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+  store?: { id: string; name: string; city: string | null };
+}
+
+// ============================================================
+// Loss Prevention — Types
+// ============================================================
+
+export type LossCategory = 'THEFT' | 'DAMAGE' | 'ADMIN_ERROR' | 'SUPPLIER' | 'OTHER';
+export type LossSeverity = 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
+export type LossStatus = 'OPEN' | 'INVESTIGATING' | 'RESOLVED' | 'CLOSED';
+
+export interface LossIncident {
+  id: string;
+  tenantId: string;
+  storeId: string;
+  incidentDate: string;
+  category: LossCategory;
+  amount: number;
+  description: string;
+  severity: LossSeverity;
+  status: LossStatus;
+  resolution: string | null;
+  reportedBy: string;
+  assignedTo: string | null;
+  photoPath: string | null;
+  resolvedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+  store?: { id: string; name: string; city: string | null };
+}
+
+// ============================================================
+// Inventory — Types
+// ============================================================
+
+export type InventoryCountType = 'FULL' | 'PARTIAL' | 'CYCLE';
+export type InventoryCountStatus = 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED';
+
+export interface InventoryCount {
+  id: string;
+  tenantId: string;
+  storeId: string;
+  countDate: string;
+  countType: InventoryCountType;
+  status: InventoryCountStatus;
+  totalItems: number;
+  countedItems: number;
+  discrepancies: number;
+  totalValue: number;
+  notes: string | null;
+  conductedBy: string;
+  completedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+  store?: { id: string; name: string; city: string | null };
+  items?: InventoryItem[];
+}
+
+export interface InventoryItem {
+  id: string;
+  countId: string;
+  sku: string;
+  productName: string;
+  category: string | null;
+  expectedQty: number;
+  actualQty: number;
+  unitPrice: number;
+  discrepancy: number;
+  discrepancyValue: number;
+  notes: string | null;
+  countedAt: string | null;
+}

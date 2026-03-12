@@ -20,6 +20,11 @@ import { ChecklistenRoutes } from './tools/checklisten/index';
 import SopBibliothekRoutes from './tools/sop-bibliothek/index';
 import VmComplianceRoutes from './tools/vm-compliance/index';
 import StoreStandardsRoutes from './tools/store-standards/index';
+import KpiDashboardRoutes from './tools/kpi-dashboard/index';
+import BudgetTrackerRoutes from './tools/budget-tracker/index';
+import ForecastRoutes from './tools/forecast/index';
+import LossPreventionRoutes from './tools/loss-prevention/index';
+import InventoryRoutes from './tools/inventory/index';
 
 export function App() {
   return (
@@ -41,6 +46,13 @@ export function App() {
           <Route path="/tools/sop/*" element={<SopBibliothekRoutes />} />
           <Route path="/tools/vm-compliance/*" element={<VmComplianceRoutes />} />
           <Route path="/tools/store-standards/*" element={<StoreStandardsRoutes />} />
+
+          {/* Tools — Performance & Sichtbarkeit */}
+          <Route path="/tools/kpi/*" element={<KpiDashboardRoutes />} />
+          <Route path="/tools/budget/*" element={<BudgetTrackerRoutes />} />
+          <Route path="/tools/forecast/*" element={<ForecastRoutes />} />
+          <Route path="/tools/loss-prevention/*" element={<LossPreventionRoutes />} />
+          <Route path="/tools/inventory/*" element={<InventoryRoutes />} />
 
           {/* === Verwaltung (Admin) === */}
 

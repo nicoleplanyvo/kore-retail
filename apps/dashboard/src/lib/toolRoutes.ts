@@ -12,6 +12,12 @@ export const TOOL_ROUTES: Record<string, string> = {
   'standards.sop_bibliothek': '/tools/sop',
   'standards.vm_foto_compliance': '/tools/vm-compliance',
   'standards.store_standards': '/tools/store-standards',
+  // Performance & Sichtbarkeit
+  'performance.kpi_dashboard': '/tools/kpi',
+  'performance.budget_tracker': '/tools/budget',
+  'performance.forecast': '/tools/forecast',
+  'performance.loss_prevention': '/tools/loss-prevention',
+  'performance.inventory': '/tools/inventory',
 };
 
 /**
