@@ -88,6 +88,7 @@ export const userCreateSchema = z.object({
     role: userRoleEnum,
     tenantId: z.string().min(1).optional(), // Required für alle außer kore_admin
     storeIds: z.array(z.string().min(1)).optional(),
+    regionIds: z.array(z.string().min(1)).optional(),
 });
 export const userUpdateSchema = z.object({
     name: z.string().min(2).max(100).optional(),
@@ -95,11 +96,52 @@ export const userUpdateSchema = z.object({
     role: userRoleEnum.optional(),
     isActive: z.boolean().optional(),
     storeIds: z.array(z.string().min(1)).optional(),
+    regionIds: z.array(z.string().min(1)).optional(),
 });
 export const userStoreAssignSchema = z.object({
     storeIds: z.array(z.string().min(1)),
 });
+export const userRegionAssignSchema = z.object({
+    regionIds: z.array(z.string().min(1)),
+});
 export const storeUserAssignSchema = z.object({
     userIds: z.array(z.string().min(1)),
+});
+// ============================================================
+// Store Excellence Audit — Validators
+// ============================================================
+export const auditCriterionSchema = z.object({
+    name: z.string().min(2).max(200),
+    description: z.string().max(500).optional(),
+    sortOrder: z.number().int().min(0).optional(),
+    isRequired: z.boolean().optional(),
+    photoRequired: z.boolean().optional(),
+});
+export const auditCategorySchema = z.object({
+    name: z.string().min(2).max(100),
+    description: z.string().max(500).optional(),
+    sortOrder: z.number().int().min(0).optional(),
+    weight: z.number().min(0).max(100).optional(),
+    criteria: z.array(auditCriterionSchema).optional(),
+});
+export const auditTemplateCreateSchema = z.object({
+    name: z.string().min(2, 'Name muss mindestens 2 Zeichen haben').max(100),
+    description: z.string().max(500).optional(),
+    categories: z.array(auditCategorySchema).optional(),
+});
+export const auditTemplateUpdateSchema = z.object({
+    name: z.string().min(2).max(100).optional(),
+    description: z.string().max(500).optional(),
+});
+export const auditSessionCreateSchema = z.object({
+    storeId: z.string().min(1, 'Store muss ausgewählt werden'),
+    templateId: z.string().min(1, 'Template muss ausgewählt werden'),
+    storeLocation: z.string().max(200).optional(),
+    notes: z.string().max(2000).optional(),
+});
+export const auditResponseSchema = z.object({
+    scorePercent: z.number().int().min(0).max(100).optional().nullable(),
+    passed: z.boolean().optional().nullable(),
+    comment: z.string().max(1000).optional().nullable(),
 });
 //# sourceMappingURL=index.js.map

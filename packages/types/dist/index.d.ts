@@ -26,12 +26,20 @@ export interface AuthUser {
     tenantId?: string;
     impersonatedBy?: string;
     storeAssignments?: string[];
+    regionAssignments?: string[];
 }
 export interface UserStoreAssignment {
     id: string;
     userId: string;
     storeId: string;
     store?: Store;
+    assignedAt: string;
+}
+export interface UserRegionAssignment {
+    id: string;
+    userId: string;
+    regionId: string;
+    region?: Region;
     assignedAt: string;
 }
 export interface AuditRequestInput {
@@ -67,6 +75,21 @@ export interface ToolDefinition {
     priceMonthly: number;
     isActive: boolean;
     sortOrder: number;
+    learnerAccessible: boolean;
+}
+export interface Region {
+    id: string;
+    tenantId: string;
+    name: string;
+    description: string | null;
+    sortOrder: number;
+    isActive: boolean;
+    createdAt: string;
+    updatedAt: string;
+    stores?: Store[];
+    _count?: {
+        stores: number;
+    };
 }
 export interface Store {
     id: string;
@@ -188,16 +211,402 @@ export interface ReportingStore {
         assignedAt: string;
     }[];
 }
+export interface ReportingRegion {
+    id: string;
+    name: string;
+    description: string | null;
+    sortOrder: number;
+    stores: ReportingStore[];
+}
 export interface ReportingHierarchy {
     tenant: {
         id: string;
         name: string;
     };
+    regions: ReportingRegion[];
     stores: ReportingStore[];
     managers: ReportingManager[];
 }
 export interface NavItem {
     label: string;
     href: string;
+}
+export type AuditSessionStatus = 'DRAFT' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED';
+export interface AuditTemplate {
+    id: string;
+    tenantId: string | null;
+    name: string;
+    description: string | null;
+    version: number;
+    isDefault: boolean;
+    isActive: boolean;
+    createdBy: string;
+    createdAt: string;
+    updatedAt: string;
+    categories?: AuditCategory[];
+}
+export interface AuditCategory {
+    id: string;
+    templateId: string;
+    name: string;
+    description: string | null;
+    sortOrder: number;
+    weight: number;
+    criteria?: AuditCriterion[];
+    _count?: {
+        criteria: number;
+    };
+}
+export interface AuditCriterion {
+    id: string;
+    categoryId: string;
+    name: string;
+    description: string | null;
+    sortOrder: number;
+    isRequired: boolean;
+    photoRequired: boolean;
+}
+export interface AuditSession {
+    id: string;
+    tenantId: string;
+    storeId: string;
+    templateId: string;
+    conductedBy: string;
+    storeLocation: string | null;
+    status: AuditSessionStatus;
+    overallScore: number | null;
+    notes: string | null;
+    startedAt: string | null;
+    completedAt: string | null;
+    createdAt: string;
+    updatedAt: string;
+    template?: AuditTemplate;
+    store?: {
+        id: string;
+        name: string;
+        city: string | null;
+    };
+    responses?: AuditResponse[];
+    _count?: {
+        responses: number;
+    };
+}
+export interface AuditResponse {
+    id: string;
+    sessionId: string;
+    criterionId: string;
+    scorePercent: number | null;
+    passed: boolean | null;
+    comment: string | null;
+    photoPath: string | null;
+    createdAt: string;
+    updatedAt: string;
+    criterion?: AuditCriterion;
+}
+export interface AuditSummaryStats {
+    totalAudits: number;
+    averageScore: number;
+    passRate: number;
+    recentTrend: 'up' | 'down' | 'stable';
+}
+export type ChecklistItemType = 'BOOLEAN' | 'TEXT' | 'NUMBER' | 'PHOTO';
+export type ChecklistSessionStatus = 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED';
+export interface ChecklistTemplate {
+    id: string;
+    tenantId: string | null;
+    name: string;
+    description: string | null;
+    version: number;
+    isDefault: boolean;
+    isActive: boolean;
+    createdBy: string | null;
+    createdAt: string;
+    updatedAt: string;
+}
+export interface ChecklistSection {
+    id: string;
+    templateId: string;
+    name: string;
+    sortOrder: number;
+    items: ChecklistItem[];
+}
+export interface ChecklistItem {
+    id: string;
+    sectionId: string;
+    text: string;
+    type: ChecklistItemType;
+    isRequired: boolean;
+    sortOrder: number;
+}
+export interface ChecklistSession {
+    id: string;
+    tenantId: string;
+    storeId: string;
+    templateId: string;
+    conductedBy: string;
+    status: ChecklistSessionStatus;
+    completionRate: number;
+    notes: string | null;
+    startedAt: string;
+    completedAt: string | null;
+}
+export interface ChecklistEntry {
+    id: string;
+    sessionId: string;
+    itemId: string;
+    valueBool: boolean | null;
+    valueText: string | null;
+    valueNumber: number | null;
+    photoPath: string | null;
+    comment: string | null;
+    answeredAt: string;
+}
+export type SopStatus = 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
+export interface SopCategory {
+    id: string;
+    tenantId: string | null;
+    name: string;
+    sortOrder: number;
+    isActive: boolean;
+}
+export interface SopDocument {
+    id: string;
+    tenantId: string | null;
+    categoryId: string;
+    title: string;
+    content: string;
+    version: number;
+    status: SopStatus;
+    createdBy: string;
+    attachmentPath: string | null;
+    publishedAt: string | null;
+    createdAt: string;
+    updatedAt: string;
+}
+export interface SopAcknowledgment {
+    id: string;
+    sopId: string;
+    userId: string;
+    acknowledgedAt: string;
+}
+export type VmSubmissionStatus = 'PENDING' | 'APPROVED' | 'REJECTED';
+export interface VmGuideline {
+    id: string;
+    tenantId: string;
+    name: string;
+    description: string | null;
+    category: string | null;
+    referencePhoto: string | null;
+    isActive: boolean;
+    sortOrder: number;
+    createdBy: string;
+    createdAt: string;
+    updatedAt: string;
+}
+export interface VmSubmission {
+    id: string;
+    tenantId: string;
+    guidelineId: string;
+    storeId: string;
+    submittedBy: string;
+    photoPath: string;
+    status: VmSubmissionStatus;
+    reviewedBy: string | null;
+    reviewNote: string | null;
+    submittedAt: string;
+    reviewedAt: string | null;
+}
+export type StandardOperator = 'GTE' | 'LTE' | 'EQ' | 'GT' | 'LT';
+export type StandardEvaluationStatus = 'IN_PROGRESS' | 'COMPLETED';
+export interface StandardCategory {
+    id: string;
+    tenantId: string | null;
+    name: string;
+    description: string | null;
+    sortOrder: number;
+    isActive: boolean;
+}
+export interface StandardDefinition {
+    id: string;
+    categoryId: string;
+    tenantId: string | null;
+    name: string;
+    description: string | null;
+    unit: string | null;
+    targetValue: number;
+    operator: StandardOperator;
+    weight: number;
+    isActive: boolean;
+    sortOrder: number;
+}
+export interface StandardEvaluation {
+    id: string;
+    tenantId: string;
+    storeId: string;
+    evaluatedBy: string;
+    period: string;
+    overallScore: number | null;
+    notes: string | null;
+    status: StandardEvaluationStatus;
+    evaluatedAt: string;
+    completedAt: string | null;
+}
+export interface StandardScore {
+    id: string;
+    evaluationId: string;
+    definitionId: string;
+    actualValue: number;
+    passed: boolean;
+    score: number;
+    comment: string | null;
+}
+export interface KpiEntry {
+    id: string;
+    tenantId: string;
+    storeId: string;
+    date: string;
+    revenue: number;
+    transactions: number;
+    footfall: number | null;
+    unitsSold: number | null;
+    staffHours: number | null;
+    enteredBy: string;
+    createdAt: string;
+    updatedAt: string;
+    store?: {
+        id: string;
+        name: string;
+        city: string | null;
+    };
+}
+export interface KpiSummary {
+    totalRevenue: number;
+    totalTransactions: number;
+    totalFootfall: number;
+    avgConversion: number;
+    avgUPT: number;
+    storeCount: number;
+}
+export type BudgetType = 'MONTHLY' | 'QUARTERLY' | 'YEARLY';
+export type BudgetCategory = 'REVENUE' | 'COGS' | 'LABOR' | 'RENT' | 'MARKETING' | 'OTHER';
+export interface BudgetPeriod {
+    id: string;
+    tenantId: string;
+    storeId: string;
+    period: string;
+    budgetType: BudgetType;
+    revenue: number;
+    cogs: number;
+    labor: number;
+    rent: number;
+    marketing: number;
+    other: number;
+    notes: string | null;
+    createdBy: string;
+    createdAt: string;
+    updatedAt: string;
+    store?: {
+        id: string;
+        name: string;
+        city: string | null;
+    };
+    actuals?: BudgetActual[];
+}
+export interface BudgetActual {
+    id: string;
+    budgetPeriodId: string;
+    category: BudgetCategory;
+    actualAmount: number;
+    date: string;
+    description: string | null;
+    enteredBy: string;
+    createdAt: string;
+}
+export type ForecastType = 'REVENUE' | 'TRANSACTIONS' | 'FOOTFALL';
+export type ForecastMethod = 'MANUAL' | 'TREND' | 'AI';
+export interface Forecast {
+    id: string;
+    tenantId: string;
+    storeId: string;
+    period: string;
+    forecastType: ForecastType;
+    forecastValue: number;
+    actualValue: number | null;
+    confidence: number | null;
+    method: ForecastMethod;
+    notes: string | null;
+    createdBy: string;
+    createdAt: string;
+    updatedAt: string;
+    store?: {
+        id: string;
+        name: string;
+        city: string | null;
+    };
+}
+export type LossCategory = 'THEFT' | 'DAMAGE' | 'ADMIN_ERROR' | 'SUPPLIER' | 'OTHER';
+export type LossSeverity = 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
+export type LossStatus = 'OPEN' | 'INVESTIGATING' | 'RESOLVED' | 'CLOSED';
+export interface LossIncident {
+    id: string;
+    tenantId: string;
+    storeId: string;
+    incidentDate: string;
+    category: LossCategory;
+    amount: number;
+    description: string;
+    severity: LossSeverity;
+    status: LossStatus;
+    resolution: string | null;
+    reportedBy: string;
+    assignedTo: string | null;
+    photoPath: string | null;
+    resolvedAt: string | null;
+    createdAt: string;
+    updatedAt: string;
+    store?: {
+        id: string;
+        name: string;
+        city: string | null;
+    };
+}
+export type InventoryCountType = 'FULL' | 'PARTIAL' | 'CYCLE';
+export type InventoryCountStatus = 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED';
+export interface InventoryCount {
+    id: string;
+    tenantId: string;
+    storeId: string;
+    countDate: string;
+    countType: InventoryCountType;
+    status: InventoryCountStatus;
+    totalItems: number;
+    countedItems: number;
+    discrepancies: number;
+    totalValue: number;
+    notes: string | null;
+    conductedBy: string;
+    completedAt: string | null;
+    createdAt: string;
+    updatedAt: string;
+    store?: {
+        id: string;
+        name: string;
+        city: string | null;
+    };
+    items?: InventoryItem[];
+}
+export interface InventoryItem {
+    id: string;
+    countId: string;
+    sku: string;
+    productName: string;
+    category: string | null;
+    expectedQty: number;
+    actualQty: number;
+    unitPrice: number;
+    discrepancy: number;
+    discrepancyValue: number;
+    notes: string | null;
+    countedAt: string | null;
 }
 //# sourceMappingURL=index.d.ts.map

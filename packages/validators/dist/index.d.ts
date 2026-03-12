@@ -204,6 +204,7 @@ export declare const userCreateSchema: z.ZodObject<{
     role: z.ZodEnum<["kore_admin", "tenant_admin", "regional_manager", "multisite_manager", "store_manager", "learner"]>;
     tenantId: z.ZodOptional<z.ZodString>;
     storeIds: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
+    regionIds: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
 }, "strip", z.ZodTypeAny, {
     name: string;
     email: string;
@@ -211,6 +212,7 @@ export declare const userCreateSchema: z.ZodObject<{
     role: "kore_admin" | "tenant_admin" | "regional_manager" | "multisite_manager" | "store_manager" | "learner";
     tenantId?: string | undefined;
     storeIds?: string[] | undefined;
+    regionIds?: string[] | undefined;
 }, {
     name: string;
     email: string;
@@ -218,6 +220,7 @@ export declare const userCreateSchema: z.ZodObject<{
     role: "kore_admin" | "tenant_admin" | "regional_manager" | "multisite_manager" | "store_manager" | "learner";
     tenantId?: string | undefined;
     storeIds?: string[] | undefined;
+    regionIds?: string[] | undefined;
 }>;
 export declare const userUpdateSchema: z.ZodObject<{
     name: z.ZodOptional<z.ZodString>;
@@ -225,17 +228,20 @@ export declare const userUpdateSchema: z.ZodObject<{
     role: z.ZodOptional<z.ZodEnum<["kore_admin", "tenant_admin", "regional_manager", "multisite_manager", "store_manager", "learner"]>>;
     isActive: z.ZodOptional<z.ZodBoolean>;
     storeIds: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
+    regionIds: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
 }, "strip", z.ZodTypeAny, {
     name?: string | undefined;
     email?: string | undefined;
     role?: "kore_admin" | "tenant_admin" | "regional_manager" | "multisite_manager" | "store_manager" | "learner" | undefined;
     storeIds?: string[] | undefined;
+    regionIds?: string[] | undefined;
     isActive?: boolean | undefined;
 }, {
     name?: string | undefined;
     email?: string | undefined;
     role?: "kore_admin" | "tenant_admin" | "regional_manager" | "multisite_manager" | "store_manager" | "learner" | undefined;
     storeIds?: string[] | undefined;
+    regionIds?: string[] | undefined;
     isActive?: boolean | undefined;
 }>;
 export declare const userStoreAssignSchema: z.ZodObject<{
@@ -245,12 +251,211 @@ export declare const userStoreAssignSchema: z.ZodObject<{
 }, {
     storeIds: string[];
 }>;
+export declare const userRegionAssignSchema: z.ZodObject<{
+    regionIds: z.ZodArray<z.ZodString, "many">;
+}, "strip", z.ZodTypeAny, {
+    regionIds: string[];
+}, {
+    regionIds: string[];
+}>;
 export declare const storeUserAssignSchema: z.ZodObject<{
     userIds: z.ZodArray<z.ZodString, "many">;
 }, "strip", z.ZodTypeAny, {
     userIds: string[];
 }, {
     userIds: string[];
+}>;
+export declare const auditCriterionSchema: z.ZodObject<{
+    name: z.ZodString;
+    description: z.ZodOptional<z.ZodString>;
+    sortOrder: z.ZodOptional<z.ZodNumber>;
+    isRequired: z.ZodOptional<z.ZodBoolean>;
+    photoRequired: z.ZodOptional<z.ZodBoolean>;
+}, "strip", z.ZodTypeAny, {
+    name: string;
+    description?: string | undefined;
+    sortOrder?: number | undefined;
+    isRequired?: boolean | undefined;
+    photoRequired?: boolean | undefined;
+}, {
+    name: string;
+    description?: string | undefined;
+    sortOrder?: number | undefined;
+    isRequired?: boolean | undefined;
+    photoRequired?: boolean | undefined;
+}>;
+export declare const auditCategorySchema: z.ZodObject<{
+    name: z.ZodString;
+    description: z.ZodOptional<z.ZodString>;
+    sortOrder: z.ZodOptional<z.ZodNumber>;
+    weight: z.ZodOptional<z.ZodNumber>;
+    criteria: z.ZodOptional<z.ZodArray<z.ZodObject<{
+        name: z.ZodString;
+        description: z.ZodOptional<z.ZodString>;
+        sortOrder: z.ZodOptional<z.ZodNumber>;
+        isRequired: z.ZodOptional<z.ZodBoolean>;
+        photoRequired: z.ZodOptional<z.ZodBoolean>;
+    }, "strip", z.ZodTypeAny, {
+        name: string;
+        description?: string | undefined;
+        sortOrder?: number | undefined;
+        isRequired?: boolean | undefined;
+        photoRequired?: boolean | undefined;
+    }, {
+        name: string;
+        description?: string | undefined;
+        sortOrder?: number | undefined;
+        isRequired?: boolean | undefined;
+        photoRequired?: boolean | undefined;
+    }>, "many">>;
+}, "strip", z.ZodTypeAny, {
+    name: string;
+    description?: string | undefined;
+    sortOrder?: number | undefined;
+    weight?: number | undefined;
+    criteria?: {
+        name: string;
+        description?: string | undefined;
+        sortOrder?: number | undefined;
+        isRequired?: boolean | undefined;
+        photoRequired?: boolean | undefined;
+    }[] | undefined;
+}, {
+    name: string;
+    description?: string | undefined;
+    sortOrder?: number | undefined;
+    weight?: number | undefined;
+    criteria?: {
+        name: string;
+        description?: string | undefined;
+        sortOrder?: number | undefined;
+        isRequired?: boolean | undefined;
+        photoRequired?: boolean | undefined;
+    }[] | undefined;
+}>;
+export declare const auditTemplateCreateSchema: z.ZodObject<{
+    name: z.ZodString;
+    description: z.ZodOptional<z.ZodString>;
+    categories: z.ZodOptional<z.ZodArray<z.ZodObject<{
+        name: z.ZodString;
+        description: z.ZodOptional<z.ZodString>;
+        sortOrder: z.ZodOptional<z.ZodNumber>;
+        weight: z.ZodOptional<z.ZodNumber>;
+        criteria: z.ZodOptional<z.ZodArray<z.ZodObject<{
+            name: z.ZodString;
+            description: z.ZodOptional<z.ZodString>;
+            sortOrder: z.ZodOptional<z.ZodNumber>;
+            isRequired: z.ZodOptional<z.ZodBoolean>;
+            photoRequired: z.ZodOptional<z.ZodBoolean>;
+        }, "strip", z.ZodTypeAny, {
+            name: string;
+            description?: string | undefined;
+            sortOrder?: number | undefined;
+            isRequired?: boolean | undefined;
+            photoRequired?: boolean | undefined;
+        }, {
+            name: string;
+            description?: string | undefined;
+            sortOrder?: number | undefined;
+            isRequired?: boolean | undefined;
+            photoRequired?: boolean | undefined;
+        }>, "many">>;
+    }, "strip", z.ZodTypeAny, {
+        name: string;
+        description?: string | undefined;
+        sortOrder?: number | undefined;
+        weight?: number | undefined;
+        criteria?: {
+            name: string;
+            description?: string | undefined;
+            sortOrder?: number | undefined;
+            isRequired?: boolean | undefined;
+            photoRequired?: boolean | undefined;
+        }[] | undefined;
+    }, {
+        name: string;
+        description?: string | undefined;
+        sortOrder?: number | undefined;
+        weight?: number | undefined;
+        criteria?: {
+            name: string;
+            description?: string | undefined;
+            sortOrder?: number | undefined;
+            isRequired?: boolean | undefined;
+            photoRequired?: boolean | undefined;
+        }[] | undefined;
+    }>, "many">>;
+}, "strip", z.ZodTypeAny, {
+    name: string;
+    description?: string | undefined;
+    categories?: {
+        name: string;
+        description?: string | undefined;
+        sortOrder?: number | undefined;
+        weight?: number | undefined;
+        criteria?: {
+            name: string;
+            description?: string | undefined;
+            sortOrder?: number | undefined;
+            isRequired?: boolean | undefined;
+            photoRequired?: boolean | undefined;
+        }[] | undefined;
+    }[] | undefined;
+}, {
+    name: string;
+    description?: string | undefined;
+    categories?: {
+        name: string;
+        description?: string | undefined;
+        sortOrder?: number | undefined;
+        weight?: number | undefined;
+        criteria?: {
+            name: string;
+            description?: string | undefined;
+            sortOrder?: number | undefined;
+            isRequired?: boolean | undefined;
+            photoRequired?: boolean | undefined;
+        }[] | undefined;
+    }[] | undefined;
+}>;
+export declare const auditTemplateUpdateSchema: z.ZodObject<{
+    name: z.ZodOptional<z.ZodString>;
+    description: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    name?: string | undefined;
+    description?: string | undefined;
+}, {
+    name?: string | undefined;
+    description?: string | undefined;
+}>;
+export declare const auditSessionCreateSchema: z.ZodObject<{
+    storeId: z.ZodString;
+    templateId: z.ZodString;
+    storeLocation: z.ZodOptional<z.ZodString>;
+    notes: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    storeId: string;
+    templateId: string;
+    storeLocation?: string | undefined;
+    notes?: string | undefined;
+}, {
+    storeId: string;
+    templateId: string;
+    storeLocation?: string | undefined;
+    notes?: string | undefined;
+}>;
+export declare const auditResponseSchema: z.ZodObject<{
+    scorePercent: z.ZodNullable<z.ZodOptional<z.ZodNumber>>;
+    passed: z.ZodNullable<z.ZodOptional<z.ZodBoolean>>;
+    comment: z.ZodNullable<z.ZodOptional<z.ZodString>>;
+}, "strip", z.ZodTypeAny, {
+    scorePercent?: number | null | undefined;
+    passed?: boolean | null | undefined;
+    comment?: string | null | undefined;
+}, {
+    scorePercent?: number | null | undefined;
+    passed?: boolean | null | undefined;
+    comment?: string | null | undefined;
 }>;
 export type AuditRequestInput = z.infer<typeof auditRequestSchema>;
 export type ContactFormInput = z.infer<typeof contactFormSchema>;
@@ -266,4 +471,8 @@ export type UserCreateInput = z.infer<typeof userCreateSchema>;
 export type UserUpdateInput = z.infer<typeof userUpdateSchema>;
 export type UserStoreAssignInput = z.infer<typeof userStoreAssignSchema>;
 export type StoreUserAssignInput = z.infer<typeof storeUserAssignSchema>;
+export type AuditTemplateCreateInput = z.infer<typeof auditTemplateCreateSchema>;
+export type AuditTemplateUpdateInput = z.infer<typeof auditTemplateUpdateSchema>;
+export type AuditSessionCreateInput = z.infer<typeof auditSessionCreateSchema>;
+export type AuditResponseInput = z.infer<typeof auditResponseSchema>;
 //# sourceMappingURL=index.d.ts.map

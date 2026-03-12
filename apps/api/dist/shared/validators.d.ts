@@ -1070,4 +1070,181 @@ export type LossIncidentCreateInput = z.infer<typeof lossIncidentCreateSchema>;
 export type LossIncidentUpdateInput = z.infer<typeof lossIncidentUpdateSchema>;
 export type InventoryCountCreateInput = z.infer<typeof inventoryCountCreateSchema>;
 export type InventoryItemUpsertInput = z.infer<typeof inventoryItemUpsertSchema>;
+export declare const floorZoneCreateSchema: z.ZodObject<{
+    storeId: z.ZodString;
+    name: z.ZodString;
+    sortOrder: z.ZodDefault<z.ZodNumber>;
+}, "strip", z.ZodTypeAny, {
+    name: string;
+    storeId: string;
+    sortOrder: number;
+}, {
+    name: string;
+    storeId: string;
+    sortOrder?: number | undefined;
+}>;
+export declare const floorZoneUpdateSchema: z.ZodObject<{
+    name: z.ZodOptional<z.ZodString>;
+    sortOrder: z.ZodOptional<z.ZodNumber>;
+    isActive: z.ZodOptional<z.ZodBoolean>;
+}, "strip", z.ZodTypeAny, {
+    name?: string | undefined;
+    sortOrder?: number | undefined;
+    isActive?: boolean | undefined;
+}, {
+    name?: string | undefined;
+    sortOrder?: number | undefined;
+    isActive?: boolean | undefined;
+}>;
+export declare const floorPositionCreateSchema: z.ZodObject<{
+    storeId: z.ZodString;
+    zoneId: z.ZodOptional<z.ZodString>;
+    userId: z.ZodString;
+    userName: z.ZodString;
+    status: z.ZodDefault<z.ZodEnum<["ON_FLOOR", "ON_BREAK", "OFF_FLOOR", "CASHIER"]>>;
+    notes: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    status: "ON_FLOOR" | "ON_BREAK" | "OFF_FLOOR" | "CASHIER";
+    storeId: string;
+    userId: string;
+    userName: string;
+    notes?: string | undefined;
+    zoneId?: string | undefined;
+}, {
+    storeId: string;
+    userId: string;
+    userName: string;
+    status?: "ON_FLOOR" | "ON_BREAK" | "OFF_FLOOR" | "CASHIER" | undefined;
+    notes?: string | undefined;
+    zoneId?: string | undefined;
+}>;
+export declare const floorPositionUpdateSchema: z.ZodObject<{
+    zoneId: z.ZodOptional<z.ZodNullable<z.ZodString>>;
+    status: z.ZodOptional<z.ZodEnum<["ON_FLOOR", "ON_BREAK", "OFF_FLOOR", "CASHIER"]>>;
+    notes: z.ZodOptional<z.ZodString>;
+    endedAt: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    status?: "ON_FLOOR" | "ON_BREAK" | "OFF_FLOOR" | "CASHIER" | undefined;
+    notes?: string | undefined;
+    zoneId?: string | null | undefined;
+    endedAt?: string | undefined;
+}, {
+    status?: "ON_FLOOR" | "ON_BREAK" | "OFF_FLOOR" | "CASHIER" | undefined;
+    notes?: string | undefined;
+    zoneId?: string | null | undefined;
+    endedAt?: string | undefined;
+}>;
+export declare const footfallUpsertSchema: z.ZodObject<{
+    storeId: z.ZodString;
+    date: z.ZodString;
+    hour: z.ZodOptional<z.ZodNumber>;
+    footfall: z.ZodNumber;
+    revenue: z.ZodOptional<z.ZodNumber>;
+    transactions: z.ZodOptional<z.ZodNumber>;
+}, "strip", z.ZodTypeAny, {
+    date: string;
+    storeId: string;
+    footfall: number;
+    revenue?: number | undefined;
+    transactions?: number | undefined;
+    hour?: number | undefined;
+}, {
+    date: string;
+    storeId: string;
+    footfall: number;
+    revenue?: number | undefined;
+    transactions?: number | undefined;
+    hour?: number | undefined;
+}>;
+export declare const vmGuidelineDocCreateSchema: z.ZodObject<{
+    title: z.ZodString;
+    category: z.ZodOptional<z.ZodString>;
+    content: z.ZodString;
+    effectiveFrom: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    title: string;
+    content: string;
+    category?: string | undefined;
+    effectiveFrom?: string | undefined;
+}, {
+    title: string;
+    content: string;
+    category?: string | undefined;
+    effectiveFrom?: string | undefined;
+}>;
+export declare const vmGuidelineDocUpdateSchema: z.ZodObject<{
+    title: z.ZodOptional<z.ZodString>;
+    category: z.ZodOptional<z.ZodString>;
+    content: z.ZodOptional<z.ZodString>;
+    effectiveFrom: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    title?: string | undefined;
+    content?: string | undefined;
+    category?: string | undefined;
+    effectiveFrom?: string | undefined;
+}, {
+    title?: string | undefined;
+    content?: string | undefined;
+    category?: string | undefined;
+    effectiveFrom?: string | undefined;
+}>;
+export declare const maintenanceRequestCreateSchema: z.ZodObject<{
+    storeId: z.ZodString;
+    title: z.ZodString;
+    description: z.ZodString;
+    category: z.ZodEnum<["ELECTRICAL", "PLUMBING", "HVAC", "FIXTURE", "IT", "OTHER"]>;
+    priority: z.ZodDefault<z.ZodEnum<["LOW", "MEDIUM", "HIGH", "URGENT"]>>;
+}, "strip", z.ZodTypeAny, {
+    title: string;
+    description: string;
+    storeId: string;
+    category: "OTHER" | "ELECTRICAL" | "PLUMBING" | "HVAC" | "FIXTURE" | "IT";
+    priority: "LOW" | "MEDIUM" | "HIGH" | "URGENT";
+}, {
+    title: string;
+    description: string;
+    storeId: string;
+    category: "OTHER" | "ELECTRICAL" | "PLUMBING" | "HVAC" | "FIXTURE" | "IT";
+    priority?: "LOW" | "MEDIUM" | "HIGH" | "URGENT" | undefined;
+}>;
+export declare const maintenanceRequestUpdateSchema: z.ZodObject<{
+    title: z.ZodOptional<z.ZodString>;
+    description: z.ZodOptional<z.ZodString>;
+    category: z.ZodOptional<z.ZodEnum<["ELECTRICAL", "PLUMBING", "HVAC", "FIXTURE", "IT", "OTHER"]>>;
+    priority: z.ZodOptional<z.ZodEnum<["LOW", "MEDIUM", "HIGH", "URGENT"]>>;
+    status: z.ZodOptional<z.ZodEnum<["OPEN", "IN_PROGRESS", "RESOLVED", "CLOSED"]>>;
+    assignedTo: z.ZodOptional<z.ZodString>;
+    estimatedCost: z.ZodOptional<z.ZodNumber>;
+    actualCost: z.ZodOptional<z.ZodNumber>;
+    resolution: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    status?: "OPEN" | "RESOLVED" | "CLOSED" | "IN_PROGRESS" | undefined;
+    title?: string | undefined;
+    description?: string | undefined;
+    category?: "OTHER" | "ELECTRICAL" | "PLUMBING" | "HVAC" | "FIXTURE" | "IT" | undefined;
+    resolution?: string | undefined;
+    assignedTo?: string | undefined;
+    priority?: "LOW" | "MEDIUM" | "HIGH" | "URGENT" | undefined;
+    estimatedCost?: number | undefined;
+    actualCost?: number | undefined;
+}, {
+    status?: "OPEN" | "RESOLVED" | "CLOSED" | "IN_PROGRESS" | undefined;
+    title?: string | undefined;
+    description?: string | undefined;
+    category?: "OTHER" | "ELECTRICAL" | "PLUMBING" | "HVAC" | "FIXTURE" | "IT" | undefined;
+    resolution?: string | undefined;
+    assignedTo?: string | undefined;
+    priority?: "LOW" | "MEDIUM" | "HIGH" | "URGENT" | undefined;
+    estimatedCost?: number | undefined;
+    actualCost?: number | undefined;
+}>;
+export type FloorZoneCreateInput = z.infer<typeof floorZoneCreateSchema>;
+export type FloorZoneUpdateInput = z.infer<typeof floorZoneUpdateSchema>;
+export type FloorPositionCreateInput = z.infer<typeof floorPositionCreateSchema>;
+export type FloorPositionUpdateInput = z.infer<typeof floorPositionUpdateSchema>;
+export type FootfallUpsertInput = z.infer<typeof footfallUpsertSchema>;
+export type VmGuidelineDocCreateInput = z.infer<typeof vmGuidelineDocCreateSchema>;
+export type VmGuidelineDocUpdateInput = z.infer<typeof vmGuidelineDocUpdateSchema>;
+export type MaintenanceRequestCreateInput = z.infer<typeof maintenanceRequestCreateSchema>;
+export type MaintenanceRequestUpdateInput = z.infer<typeof maintenanceRequestUpdateSchema>;
 //# sourceMappingURL=validators.d.ts.map

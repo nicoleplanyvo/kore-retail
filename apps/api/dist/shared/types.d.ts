@@ -615,4 +615,121 @@ export interface InventoryItem {
     notes: string | null;
     countedAt: string | null;
 }
+export type FloorStaffStatus = 'ON_FLOOR' | 'ON_BREAK' | 'OFF_FLOOR' | 'CASHIER';
+export interface FloorZone {
+    id: string;
+    tenantId: string;
+    storeId: string;
+    name: string;
+    sortOrder: number;
+    isActive: boolean;
+    createdAt: string;
+    updatedAt: string;
+    store?: {
+        id: string;
+        name: string;
+    };
+    _count?: {
+        positions: number;
+    };
+}
+export interface FloorStaffPosition {
+    id: string;
+    tenantId: string;
+    storeId: string;
+    zoneId: string | null;
+    userId: string;
+    userName: string;
+    status: FloorStaffStatus;
+    startedAt: string;
+    endedAt: string | null;
+    notes: string | null;
+    createdAt: string;
+    updatedAt: string;
+    zone?: {
+        id: string;
+        name: string;
+    } | null;
+    store?: {
+        id: string;
+        name: string;
+    };
+}
+export interface FootfallEntry {
+    id: string;
+    tenantId: string;
+    storeId: string;
+    date: string;
+    hour: number | null;
+    footfall: number;
+    revenue: number | null;
+    transactions: number | null;
+    conversionRate: number | null;
+    createdAt: string;
+    updatedAt: string;
+    store?: {
+        id: string;
+        name: string;
+        city: string | null;
+    };
+}
+export interface FootfallSummary {
+    totalFootfall: number;
+    totalRevenue: number;
+    totalTransactions: number;
+    avgConversion: number;
+    dayCount: number;
+}
+export type VmGuidelineDocStatus = 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
+export interface VmGuidelineDoc {
+    id: string;
+    tenantId: string;
+    title: string;
+    category: string | null;
+    content: string;
+    version: number;
+    status: VmGuidelineDocStatus;
+    effectiveFrom: string | null;
+    createdBy: string;
+    createdAt: string;
+    updatedAt: string;
+    images?: VmGuidelineImage[];
+    _count?: {
+        images: number;
+    };
+}
+export interface VmGuidelineImage {
+    id: string;
+    guidelineDocId: string;
+    imagePath: string;
+    caption: string | null;
+    sortOrder: number;
+    createdAt: string;
+}
+export type MaintenanceCategory = 'ELECTRICAL' | 'PLUMBING' | 'HVAC' | 'FIXTURE' | 'IT' | 'OTHER';
+export type MaintenancePriority = 'LOW' | 'MEDIUM' | 'HIGH' | 'URGENT';
+export type MaintenanceStatus = 'OPEN' | 'IN_PROGRESS' | 'RESOLVED' | 'CLOSED';
+export interface MaintenanceRequest {
+    id: string;
+    tenantId: string;
+    storeId: string;
+    title: string;
+    description: string;
+    category: MaintenanceCategory;
+    priority: MaintenancePriority;
+    status: MaintenanceStatus;
+    reportedBy: string;
+    assignedTo: string | null;
+    estimatedCost: number | null;
+    actualCost: number | null;
+    photoPath: string | null;
+    resolvedAt: string | null;
+    createdAt: string;
+    updatedAt: string;
+    store?: {
+        id: string;
+        name: string;
+        city: string | null;
+    };
+}
 //# sourceMappingURL=types.d.ts.map

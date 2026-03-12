@@ -1,13 +1,9 @@
 import 'dotenv/config';
+import { fileURLToPath } from 'url';
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import { fileURLToPath } from 'url';
-
-// ── ESM __dirname ─────────────────────────────────
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 import { contactRouter } from './routes/contact.js';
 import { auditRouter } from './routes/audit.js';
 import { authRouter } from './routes/auth.js';
@@ -29,7 +25,14 @@ import { budgetTrackerRouter } from './routes/tools/budget-tracker/index.js';
 import { forecastRouter as forecastToolRouter } from './routes/tools/forecast/index.js';
 import { lossPreventionRouter } from './routes/tools/loss-prevention/index.js';
 import { inventoryRouter } from './routes/tools/inventory/index.js';
+import { liveFloorRouter } from './routes/tools/live-floor/index.js';
+import { frTrackingRouter } from './routes/tools/fr-tracking/index.js';
+import { vmGuidelinesRouter } from './routes/tools/vm-guidelines/index.js';
+import { maintenanceRouter } from './routes/tools/maintenance/index.js';
 import { toolsRouter } from './routes/tools/index.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = parseInt(process.env['PORT'] ?? '3001', 10);
@@ -96,61 +99,46 @@ app.use('/api/tools/forecast', forecastToolRouter);
 app.use('/api/tools/loss-prevention', lossPreventionRouter);
 // Tools — Inventory
 app.use('/api/tools/inventory', inventoryRouter);
+// Tools — Live Floor
+app.use('/api/tools/live-floor', liveFloorRouter);
+// Tools — FR Tracking
+app.use('/api/tools/fr-tracking', frTrackingRouter);
+// Tools — VM Guidelines
+app.use('/api/tools/vm-guidelines', vmGuidelinesRouter);
+// Tools — Maintenance
+app.use('/api/tools/maintenance', maintenanceRouter);
 
 // Statische Uploads mit Auth-Schutz
 const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? path.join(process.cwd(), 'uploads');
 app.use('/api/uploads', authenticate, express.static(UPLOAD_DIR));
+
+// ── Production Static File Serving ────────────────
+if (isProduction) {
+  const dashboardDist = path.resolve(__dirname, '../../dashboard/dist');
+  const webDist = path.resolve(__dirname, '../../web/dist');
+
+  // Dashboard (dashboard.kore-retail.de) — wenn als eigene Domain gehostet
+  app.use('/dashboard', express.static(dashboardDist));
+  app.get('/dashboard/*', (_req, res) => {
+    res.sendFile(path.join(dashboardDist, 'index.html'));
+  });
+
+  // Unified mode: Alle Nicht-API-Routen → Dashboard SPA
+  app.use(express.static(dashboardDist));
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api/') || req.path === '/health') return next();
+    res.sendFile(path.join(dashboardDist, 'index.html'));
+  });
+}
 
 // Health Check
 app.get('/health', (_req, res) => {
   res.json({ status: 'ok', service: 'kore-server', mode: NODE_ENV });
 });
 
-// ── Static File Serving (nur in Production) ───────
-if (isProduction) {
-  const dashboardOnly = process.env['DASHBOARD_ONLY'] === 'true';
-
-  const dashboardRoot =
-    process.env['DASHBOARD_ROOT'] ??
-    path.resolve(__dirname, '../../dashboard/dist');
-
-  if (dashboardOnly) {
-    app.use(express.static(dashboardRoot));
-
-    app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
-      if (req.method !== 'GET') return next();
-      if (req.path.startsWith('/api/') || req.path === '/health') return next();
-      res.sendFile(path.join(dashboardRoot, 'index.html'));
-    });
-
-    console.log('  Mode: Dashboard-Only (Subdomain)');
-    console.log(`    Dashboard: ${dashboardRoot}`);
-  } else {
-    const webRoot =
-      process.env['WEB_ROOT'] ?? path.resolve(__dirname, '../../web/dist');
-
-    app.use('/dashboard', express.static(dashboardRoot));
-    app.use(express.static(webRoot));
-
-    app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
-      if (req.method !== 'GET') return next();
-      if (req.path.startsWith('/api/') || req.path === '/health') return next();
-      if (req.path.startsWith('/dashboard')) {
-        res.sendFile(path.join(dashboardRoot, 'index.html'));
-        return;
-      }
-      res.sendFile(path.join(webRoot, 'index.html'));
-    });
-
-    console.log('  Mode: Unified (Website + Dashboard)');
-    console.log(`    Website:   ${webRoot}`);
-    console.log(`    Dashboard: ${dashboardRoot}`);
-  }
-}
-
 // ── Start ─────────────────────────────────────────
 app.listen(PORT, () => {
-  console.log(`\u2713 KORE Server running on port ${PORT} (${NODE_ENV})`);
+  console.log(`✓ KORE API running on port ${PORT} (${NODE_ENV})`);
   console.log(`  CORS: ${allowedOrigins.join(', ')}`);
   console.log(
     `  Resend: ${process.env['RESEND_API_KEY'] ? 'configured' : 'not configured (dev mode)'}`,

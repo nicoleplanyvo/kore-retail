@@ -25,6 +25,10 @@ import BudgetTrackerRoutes from './tools/budget-tracker/index';
 import ForecastRoutes from './tools/forecast/index';
 import LossPreventionRoutes from './tools/loss-prevention/index';
 import InventoryRoutes from './tools/inventory/index';
+import LiveFloorRoutes from './tools/live-floor/index';
+import FrTrackingRoutes from './tools/fr-tracking/index';
+import VmGuidelinesRoutes from './tools/vm-guidelines/index';
+import MaintenanceRoutes from './tools/maintenance/index';
 
 export function App() {
   return (
@@ -53,6 +57,12 @@ export function App() {
           <Route path="/tools/forecast/*" element={<ForecastRoutes />} />
           <Route path="/tools/loss-prevention/*" element={<LossPreventionRoutes />} />
           <Route path="/tools/inventory/*" element={<InventoryRoutes />} />
+
+          {/* Tools — Floor in Echtzeit */}
+          <Route path="/tools/live-floor/*" element={<LiveFloorRoutes />} />
+          <Route path="/tools/fr-tracking/*" element={<FrTrackingRoutes />} />
+          <Route path="/tools/vm-guidelines/*" element={<VmGuidelinesRoutes />} />
+          <Route path="/tools/maintenance/*" element={<MaintenanceRoutes />} />
 
           {/* === Verwaltung (Admin) === */}
 

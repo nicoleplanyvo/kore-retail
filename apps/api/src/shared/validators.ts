@@ -490,3 +490,102 @@ export type LossIncidentCreateInput = z.infer<typeof lossIncidentCreateSchema>;
 export type LossIncidentUpdateInput = z.infer<typeof lossIncidentUpdateSchema>;
 export type InventoryCountCreateInput = z.infer<typeof inventoryCountCreateSchema>;
 export type InventoryItemUpsertInput = z.infer<typeof inventoryItemUpsertSchema>;
+
+// ============================================================
+// Live Floor — Validators
+// ============================================================
+
+export const floorZoneCreateSchema = z.object({
+  storeId: z.string().min(1),
+  name: z.string().min(1).max(100),
+  sortOrder: z.number().int().min(0).default(0),
+});
+
+export const floorZoneUpdateSchema = z.object({
+  name: z.string().min(1).max(100).optional(),
+  sortOrder: z.number().int().min(0).optional(),
+  isActive: z.boolean().optional(),
+});
+
+export const floorPositionCreateSchema = z.object({
+  storeId: z.string().min(1),
+  zoneId: z.string().min(1).optional(),
+  userId: z.string().min(1),
+  userName: z.string().min(1).max(100),
+  status: z.enum(['ON_FLOOR', 'ON_BREAK', 'OFF_FLOOR', 'CASHIER']).default('ON_FLOOR'),
+  notes: z.string().max(500).optional(),
+});
+
+export const floorPositionUpdateSchema = z.object({
+  zoneId: z.string().min(1).nullable().optional(),
+  status: z.enum(['ON_FLOOR', 'ON_BREAK', 'OFF_FLOOR', 'CASHIER']).optional(),
+  notes: z.string().max(500).optional(),
+  endedAt: z.string().optional(),
+});
+
+// ============================================================
+// FR Tracking — Validators
+// ============================================================
+
+export const footfallUpsertSchema = z.object({
+  storeId: z.string().min(1),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  hour: z.number().int().min(0).max(23).optional(),
+  footfall: z.number().int().min(0),
+  revenue: z.number().min(0).optional(),
+  transactions: z.number().int().min(0).optional(),
+});
+
+// ============================================================
+// VM Guidelines — Validators
+// ============================================================
+
+export const vmGuidelineDocCreateSchema = z.object({
+  title: z.string().min(2).max(200),
+  category: z.string().max(50).optional(),
+  content: z.string().min(1),
+  effectiveFrom: z.string().optional(),
+});
+
+export const vmGuidelineDocUpdateSchema = z.object({
+  title: z.string().min(2).max(200).optional(),
+  category: z.string().max(50).optional(),
+  content: z.string().min(1).optional(),
+  effectiveFrom: z.string().optional(),
+});
+
+// ============================================================
+// Maintenance — Validators
+// ============================================================
+
+export const maintenanceRequestCreateSchema = z.object({
+  storeId: z.string().min(1),
+  title: z.string().min(2).max(200),
+  description: z.string().min(5).max(2000),
+  category: z.enum(['ELECTRICAL', 'PLUMBING', 'HVAC', 'FIXTURE', 'IT', 'OTHER']),
+  priority: z.enum(['LOW', 'MEDIUM', 'HIGH', 'URGENT']).default('MEDIUM'),
+});
+
+export const maintenanceRequestUpdateSchema = z.object({
+  title: z.string().min(2).max(200).optional(),
+  description: z.string().min(5).max(2000).optional(),
+  category: z.enum(['ELECTRICAL', 'PLUMBING', 'HVAC', 'FIXTURE', 'IT', 'OTHER']).optional(),
+  priority: z.enum(['LOW', 'MEDIUM', 'HIGH', 'URGENT']).optional(),
+  status: z.enum(['OPEN', 'IN_PROGRESS', 'RESOLVED', 'CLOSED']).optional(),
+  assignedTo: z.string().min(1).optional(),
+  estimatedCost: z.number().min(0).optional(),
+  actualCost: z.number().min(0).optional(),
+  resolution: z.string().max(2000).optional(),
+});
+
+// === Type Exports (Floor) ===
+
+export type FloorZoneCreateInput = z.infer<typeof floorZoneCreateSchema>;
+export type FloorZoneUpdateInput = z.infer<typeof floorZoneUpdateSchema>;
+export type FloorPositionCreateInput = z.infer<typeof floorPositionCreateSchema>;
+export type FloorPositionUpdateInput = z.infer<typeof floorPositionUpdateSchema>;
+export type FootfallUpsertInput = z.infer<typeof footfallUpsertSchema>;
+export type VmGuidelineDocCreateInput = z.infer<typeof vmGuidelineDocCreateSchema>;
+export type VmGuidelineDocUpdateInput = z.infer<typeof vmGuidelineDocUpdateSchema>;
+export type MaintenanceRequestCreateInput = z.infer<typeof maintenanceRequestCreateSchema>;
+export type MaintenanceRequestUpdateInput = z.infer<typeof maintenanceRequestUpdateSchema>;
