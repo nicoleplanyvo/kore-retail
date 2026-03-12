@@ -35,11 +35,17 @@ export function requireToolAccess(toolKey: string) {
       // Finde das Tool
       const tool = await prisma.toolDefinition.findUnique({
         where: { key: toolKey },
-        select: { id: true },
+        select: { id: true, learnerAccessible: true },
       });
 
       if (!tool) {
         res.status(404).json({ error: 'Tool nicht gefunden.' });
+        return;
+      }
+
+      // Learner darf nur auf learnerAccessible Tools zugreifen
+      if (req.user.role === 'learner' && !tool.learnerAccessible) {
+        res.status(403).json({ error: 'Kein Zugriff auf dieses Tool.' });
         return;
       }
 

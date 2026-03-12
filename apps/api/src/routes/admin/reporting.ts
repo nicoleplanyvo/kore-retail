@@ -5,6 +5,29 @@ import { authenticate, requireMinRole } from '../../middleware/auth.js';
 export const adminReportingRouter: RouterType = Router();
 adminReportingRouter.use(authenticate, requireMinRole('tenant_admin'));
 
+// Hilfsfunktion: Store-Daten formatieren
+function formatStore(s: {
+  id: string;
+  name: string;
+  city: string | null;
+  isActive: boolean;
+  userAssignments: Array<{ assignedAt: Date; user: { id: string; name: string; email: string; role: string } }>;
+}) {
+  return {
+    id: s.id,
+    name: s.name,
+    city: s.city,
+    isActive: s.isActive,
+    users: s.userAssignments.map((a) => ({
+      id: a.user.id,
+      name: a.user.name,
+      email: a.user.email,
+      role: a.user.role,
+      assignedAt: a.assignedAt.toISOString(),
+    })),
+  };
+}
+
 // GET /api/admin/reporting/hierarchy — Organisationsstruktur für einen Tenant
 adminReportingRouter.get('/hierarchy', async (req, res) => {
   try {
@@ -29,9 +52,7 @@ adminReportingRouter.get('/hierarchy', async (req, res) => {
       return;
     }
 
-    // Store-zentrische Ansicht: Stores mit allen zugewiesenen Usern
-    const stores = await prisma.store.findMany({
-      where: { tenantId, isActive: true },
+    const storeInclude = {
       select: {
         id: true,
         name: true,
@@ -43,10 +64,28 @@ adminReportingRouter.get('/hierarchy', async (req, res) => {
               select: { id: true, name: true, email: true, role: true },
             },
           },
-          orderBy: { assignedAt: 'desc' },
+          orderBy: { assignedAt: 'desc' as const },
         },
       },
-      orderBy: { name: 'asc' },
+      orderBy: { name: 'asc' as const },
+    };
+
+    // Regionen mit ihren Stores
+    const regions = await prisma.region.findMany({
+      where: { tenantId, isActive: true },
+      include: {
+        stores: {
+          where: { isActive: true },
+          ...storeInclude,
+        },
+      },
+      orderBy: [{ sortOrder: 'asc' }, { name: 'asc' }],
+    });
+
+    // Nicht zugeordnete Stores (regionId: null)
+    const unassignedStores = await prisma.store.findMany({
+      where: { tenantId, isActive: true, regionId: null },
+      ...storeInclude,
     });
 
     // Manager-zentrische Ansicht: Manager mit ihren zugewiesenen Stores
@@ -71,19 +110,15 @@ adminReportingRouter.get('/hierarchy', async (req, res) => {
     });
 
     // Formatierung
-    const formattedStores = stores.map((s: { id: string; name: string; city: string | null; isActive: boolean; userAssignments: Array<{ assignedAt: Date; user: { id: string; name: string; email: string; role: string } }> }) => ({
-      id: s.id,
-      name: s.name,
-      city: s.city,
-      isActive: s.isActive,
-      users: s.userAssignments.map((a: { assignedAt: Date; user: { id: string; name: string; email: string; role: string } }) => ({
-        id: a.user.id,
-        name: a.user.name,
-        email: a.user.email,
-        role: a.user.role,
-        assignedAt: a.assignedAt.toISOString(),
-      })),
+    const formattedRegions = regions.map((r) => ({
+      id: r.id,
+      name: r.name,
+      description: r.description,
+      sortOrder: r.sortOrder,
+      stores: r.stores.map(formatStore),
     }));
+
+    const formattedUnassignedStores = unassignedStores.map(formatStore);
 
     const formattedManagers = managers.map((m: { id: string; name: string; email: string; role: string; storeAssignments: Array<{ store: { id: string; name: string; city: string | null } }> }) => ({
       id: m.id,
@@ -99,7 +134,8 @@ adminReportingRouter.get('/hierarchy', async (req, res) => {
 
     res.json({
       tenant,
-      stores: formattedStores,
+      regions: formattedRegions,
+      stores: formattedUnassignedStores,
       managers: formattedManagers,
     });
   } catch (err) {

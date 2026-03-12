@@ -1,9 +1,9 @@
-import { Router } from 'express';
+import { Router, type Router as RouterType } from 'express';
 import { authenticate } from '../../middleware/auth.js';
 import { getAccessibleStoreIds } from '../../middleware/auth.js';
 import prisma from '../../lib/prisma.js';
 
-export const toolsRouter = Router();
+export const toolsRouter: RouterType = Router();
 
 /**
  * GET /api/tools
@@ -28,7 +28,20 @@ toolsRouter.get('/', authenticate, async (req, res) => {
       orderBy: [{ tool: { category: 'asc' } }, { tool: { sortOrder: 'asc' } }],
     });
 
-    res.json(assignments);
+    // Learner: nur learnerAccessible Tools anzeigen
+    const filteredAssignments = user.role === 'learner'
+      ? assignments.filter((a) => a.tool.learnerAccessible)
+      : assignments;
+
+    // Deduplizieren nach toolId (User kann mehrere Stores mit demselben Tool haben)
+    const seen = new Set<string>();
+    const deduplicated = filteredAssignments.filter((a) => {
+      if (seen.has(a.tool.id)) return false;
+      seen.add(a.tool.id);
+      return true;
+    });
+
+    res.json(deduplicated);
   } catch (error) {
     console.error('Fehler beim Laden der Tools:', error);
     res.status(500).json({ error: 'Interner Serverfehler.' });

@@ -38,17 +38,17 @@ export function PeriodListPage() {
       ) : (
         <>
           <div className="space-y-md">
-            {periods.map((p: Record<string, unknown>) => {
+            {periods.map((p: any) => {
               const totalBudget = Number(p.totalBudget ?? 0);
               const totalActual = Number(p.totalActual ?? 0);
               return (
-                <Link key={p.id as string} to={`/tools/budget/periods/${p.id}`} className="block bg-kore-white border border-kore-border p-lg hover:border-kore-brass transition-colors">
+                <Link key={p.id} to={`/tools/budget/periods/${p.id}`} className="block bg-kore-white border border-kore-border p-lg hover:border-kore-brass transition-colors">
                   <div className="flex items-center justify-between mb-md">
                     <div>
-                      <span className="text-body font-medium text-kore-ink">{p.name as string}</span>
+                      <span className="text-body font-medium text-kore-ink">{p.name}</span>
                       <div className="flex items-center gap-md mt-xs">
-                        <span className="text-small text-kore-mid">{(p.store as Record<string, string>)?.name}</span>
-                        <span className="text-small text-kore-faint">{p.period as string}</span>
+                        <span className="text-small text-kore-mid">{(p.store as any)?.name}</span>
+                        <span className="text-small text-kore-faint">{p.period}</span>
                         <span className={`text-small font-medium px-sm py-px border ${p.status === 'CLOSED' ? 'bg-kore-bg text-kore-mid border-kore-border' : 'bg-emerald-50 text-emerald-700 border-emerald-200'}`}>{p.status === 'CLOSED' ? 'Geschlossen' : 'Aktiv'}</span>
                       </div>
                     </div>

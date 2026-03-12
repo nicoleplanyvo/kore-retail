@@ -144,9 +144,21 @@ exports.Prisma.TenantScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.RegionScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  description: 'description',
+  sortOrder: 'sortOrder',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.StoreScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
+  regionId: 'regionId',
   name: 'name',
   city: 'city',
   address: 'address',
@@ -165,6 +177,7 @@ exports.Prisma.ToolDefinitionScalarFieldEnum = {
   priceMonthly: 'priceMonthly',
   isActive: 'isActive',
   sortOrder: 'sortOrder',
+  learnerAccessible: 'learnerAccessible',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -219,6 +232,431 @@ exports.Prisma.DataProcessingConsentScalarFieldEnum = {
   document: 'document'
 };
 
+exports.Prisma.UserRegionAssignmentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  regionId: 'regionId',
+  assignedAt: 'assignedAt'
+};
+
+exports.Prisma.AuditTemplateScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  description: 'description',
+  version: 'version',
+  isDefault: 'isDefault',
+  isActive: 'isActive',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AuditCategoryScalarFieldEnum = {
+  id: 'id',
+  templateId: 'templateId',
+  name: 'name',
+  description: 'description',
+  sortOrder: 'sortOrder',
+  weight: 'weight'
+};
+
+exports.Prisma.AuditCriterionScalarFieldEnum = {
+  id: 'id',
+  categoryId: 'categoryId',
+  name: 'name',
+  description: 'description',
+  sortOrder: 'sortOrder',
+  isRequired: 'isRequired',
+  photoRequired: 'photoRequired'
+};
+
+exports.Prisma.AuditSessionScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  storeId: 'storeId',
+  templateId: 'templateId',
+  conductedBy: 'conductedBy',
+  storeLocation: 'storeLocation',
+  status: 'status',
+  overallScore: 'overallScore',
+  notes: 'notes',
+  startedAt: 'startedAt',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AuditResponseScalarFieldEnum = {
+  id: 'id',
+  sessionId: 'sessionId',
+  criterionId: 'criterionId',
+  scorePercent: 'scorePercent',
+  passed: 'passed',
+  comment: 'comment',
+  photoPath: 'photoPath',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ChecklistTemplateScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  description: 'description',
+  version: 'version',
+  isDefault: 'isDefault',
+  isActive: 'isActive',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ChecklistSectionScalarFieldEnum = {
+  id: 'id',
+  templateId: 'templateId',
+  name: 'name',
+  sortOrder: 'sortOrder'
+};
+
+exports.Prisma.ChecklistItemScalarFieldEnum = {
+  id: 'id',
+  sectionId: 'sectionId',
+  text: 'text',
+  type: 'type',
+  isRequired: 'isRequired',
+  sortOrder: 'sortOrder'
+};
+
+exports.Prisma.ChecklistSessionScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  storeId: 'storeId',
+  templateId: 'templateId',
+  conductedBy: 'conductedBy',
+  status: 'status',
+  completionRate: 'completionRate',
+  notes: 'notes',
+  startedAt: 'startedAt',
+  completedAt: 'completedAt'
+};
+
+exports.Prisma.ChecklistEntryScalarFieldEnum = {
+  id: 'id',
+  sessionId: 'sessionId',
+  itemId: 'itemId',
+  valueBool: 'valueBool',
+  valueText: 'valueText',
+  valueNumber: 'valueNumber',
+  photoPath: 'photoPath',
+  comment: 'comment',
+  answeredAt: 'answeredAt'
+};
+
+exports.Prisma.SopCategoryScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  sortOrder: 'sortOrder',
+  isActive: 'isActive'
+};
+
+exports.Prisma.SopScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  categoryId: 'categoryId',
+  title: 'title',
+  content: 'content',
+  version: 'version',
+  status: 'status',
+  createdBy: 'createdBy',
+  attachmentPath: 'attachmentPath',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SopAcknowledgmentScalarFieldEnum = {
+  id: 'id',
+  sopId: 'sopId',
+  userId: 'userId',
+  acknowledgedAt: 'acknowledgedAt'
+};
+
+exports.Prisma.VmGuidelineScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  description: 'description',
+  category: 'category',
+  referencePhoto: 'referencePhoto',
+  isActive: 'isActive',
+  sortOrder: 'sortOrder',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.VmSubmissionScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  guidelineId: 'guidelineId',
+  storeId: 'storeId',
+  submittedBy: 'submittedBy',
+  photoPath: 'photoPath',
+  status: 'status',
+  reviewedBy: 'reviewedBy',
+  reviewNote: 'reviewNote',
+  submittedAt: 'submittedAt',
+  reviewedAt: 'reviewedAt'
+};
+
+exports.Prisma.StandardCategoryScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  description: 'description',
+  sortOrder: 'sortOrder',
+  isActive: 'isActive'
+};
+
+exports.Prisma.StandardDefinitionScalarFieldEnum = {
+  id: 'id',
+  categoryId: 'categoryId',
+  tenantId: 'tenantId',
+  name: 'name',
+  description: 'description',
+  unit: 'unit',
+  targetValue: 'targetValue',
+  operator: 'operator',
+  weight: 'weight',
+  isActive: 'isActive',
+  sortOrder: 'sortOrder'
+};
+
+exports.Prisma.StandardEvaluationScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  storeId: 'storeId',
+  evaluatedBy: 'evaluatedBy',
+  period: 'period',
+  overallScore: 'overallScore',
+  notes: 'notes',
+  status: 'status',
+  evaluatedAt: 'evaluatedAt',
+  completedAt: 'completedAt'
+};
+
+exports.Prisma.StandardScoreScalarFieldEnum = {
+  id: 'id',
+  evaluationId: 'evaluationId',
+  definitionId: 'definitionId',
+  actualValue: 'actualValue',
+  passed: 'passed',
+  score: 'score',
+  comment: 'comment'
+};
+
+exports.Prisma.KpiEntryScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  storeId: 'storeId',
+  date: 'date',
+  revenue: 'revenue',
+  transactions: 'transactions',
+  footfall: 'footfall',
+  unitsSold: 'unitsSold',
+  staffHours: 'staffHours',
+  enteredBy: 'enteredBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BudgetPeriodScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  storeId: 'storeId',
+  period: 'period',
+  budgetType: 'budgetType',
+  revenue: 'revenue',
+  cogs: 'cogs',
+  labor: 'labor',
+  rent: 'rent',
+  marketing: 'marketing',
+  other: 'other',
+  notes: 'notes',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BudgetActualScalarFieldEnum = {
+  id: 'id',
+  budgetPeriodId: 'budgetPeriodId',
+  category: 'category',
+  actualAmount: 'actualAmount',
+  date: 'date',
+  description: 'description',
+  enteredBy: 'enteredBy',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ForecastScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  storeId: 'storeId',
+  period: 'period',
+  forecastType: 'forecastType',
+  forecastValue: 'forecastValue',
+  actualValue: 'actualValue',
+  confidence: 'confidence',
+  method: 'method',
+  notes: 'notes',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.LossIncidentScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  storeId: 'storeId',
+  incidentDate: 'incidentDate',
+  category: 'category',
+  amount: 'amount',
+  description: 'description',
+  severity: 'severity',
+  status: 'status',
+  resolution: 'resolution',
+  reportedBy: 'reportedBy',
+  assignedTo: 'assignedTo',
+  photoPath: 'photoPath',
+  resolvedAt: 'resolvedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.InventoryCountScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  storeId: 'storeId',
+  countDate: 'countDate',
+  countType: 'countType',
+  status: 'status',
+  totalItems: 'totalItems',
+  countedItems: 'countedItems',
+  discrepancies: 'discrepancies',
+  totalValue: 'totalValue',
+  notes: 'notes',
+  conductedBy: 'conductedBy',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.InventoryItemScalarFieldEnum = {
+  id: 'id',
+  countId: 'countId',
+  sku: 'sku',
+  productName: 'productName',
+  category: 'category',
+  expectedQty: 'expectedQty',
+  actualQty: 'actualQty',
+  unitPrice: 'unitPrice',
+  discrepancy: 'discrepancy',
+  discrepancyValue: 'discrepancyValue',
+  notes: 'notes',
+  countedAt: 'countedAt'
+};
+
+exports.Prisma.FloorZoneScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  storeId: 'storeId',
+  name: 'name',
+  description: 'description',
+  sortOrder: 'sortOrder',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FloorStaffPositionScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  storeId: 'storeId',
+  zoneId: 'zoneId',
+  userId: 'userId',
+  userName: 'userName',
+  role: 'role',
+  status: 'status',
+  startedAt: 'startedAt',
+  endedAt: 'endedAt',
+  notes: 'notes',
+  updatedBy: 'updatedBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FootfallEntryScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  storeId: 'storeId',
+  date: 'date',
+  hour: 'hour',
+  footfall: 'footfall',
+  revenue: 'revenue',
+  transactions: 'transactions',
+  conversionRate: 'conversionRate',
+  enteredBy: 'enteredBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.VmGuidelineDocScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  title: 'title',
+  category: 'category',
+  content: 'content',
+  version: 'version',
+  status: 'status',
+  effectiveFrom: 'effectiveFrom',
+  effectiveTo: 'effectiveTo',
+  createdBy: 'createdBy',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.VmGuidelineImageScalarFieldEnum = {
+  id: 'id',
+  guidelineDocId: 'guidelineDocId',
+  imagePath: 'imagePath',
+  caption: 'caption',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.MaintenanceRequestScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  storeId: 'storeId',
+  title: 'title',
+  description: 'description',
+  category: 'category',
+  priority: 'priority',
+  status: 'status',
+  reportedBy: 'reportedBy',
+  assignedTo: 'assignedTo',
+  estimatedCost: 'estimatedCost',
+  actualCost: 'actualCost',
+  photoPath: 'photoPath',
+  resolvedAt: 'resolvedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -233,13 +671,47 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   User: 'User',
   Tenant: 'Tenant',
+  Region: 'Region',
   Store: 'Store',
   ToolDefinition: 'ToolDefinition',
   StoreToolAssignment: 'StoreToolAssignment',
   UserStoreAssignment: 'UserStoreAssignment',
   Subscription: 'Subscription',
   AuditLog: 'AuditLog',
-  DataProcessingConsent: 'DataProcessingConsent'
+  DataProcessingConsent: 'DataProcessingConsent',
+  UserRegionAssignment: 'UserRegionAssignment',
+  AuditTemplate: 'AuditTemplate',
+  AuditCategory: 'AuditCategory',
+  AuditCriterion: 'AuditCriterion',
+  AuditSession: 'AuditSession',
+  AuditResponse: 'AuditResponse',
+  ChecklistTemplate: 'ChecklistTemplate',
+  ChecklistSection: 'ChecklistSection',
+  ChecklistItem: 'ChecklistItem',
+  ChecklistSession: 'ChecklistSession',
+  ChecklistEntry: 'ChecklistEntry',
+  SopCategory: 'SopCategory',
+  Sop: 'Sop',
+  SopAcknowledgment: 'SopAcknowledgment',
+  VmGuideline: 'VmGuideline',
+  VmSubmission: 'VmSubmission',
+  StandardCategory: 'StandardCategory',
+  StandardDefinition: 'StandardDefinition',
+  StandardEvaluation: 'StandardEvaluation',
+  StandardScore: 'StandardScore',
+  KpiEntry: 'KpiEntry',
+  BudgetPeriod: 'BudgetPeriod',
+  BudgetActual: 'BudgetActual',
+  Forecast: 'Forecast',
+  LossIncident: 'LossIncident',
+  InventoryCount: 'InventoryCount',
+  InventoryItem: 'InventoryItem',
+  FloorZone: 'FloorZone',
+  FloorStaffPosition: 'FloorStaffPosition',
+  FootfallEntry: 'FootfallEntry',
+  VmGuidelineDoc: 'VmGuidelineDoc',
+  VmGuidelineImage: 'VmGuidelineImage',
+  MaintenanceRequest: 'MaintenanceRequest'
 };
 
 /**

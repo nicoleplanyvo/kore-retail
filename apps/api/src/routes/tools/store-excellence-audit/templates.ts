@@ -1,7 +1,7 @@
 import { Router, type Router as RouterType } from 'express';
 import prisma from '../../../lib/prisma.js';
 import { requireRole } from '../../../middleware/auth.js';
-import { auditTemplateCreateSchema, auditTemplateUpdateSchema } from '@kore/validators';
+import { auditTemplateCreateSchema, auditTemplateUpdateSchema } from '../../../shared/validators.js';
 
 export const seaTemplatesRouter: RouterType = Router();
 

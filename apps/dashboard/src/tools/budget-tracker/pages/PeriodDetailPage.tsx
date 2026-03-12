@@ -12,7 +12,7 @@ export function PeriodDetailPage() {
 
   const totalBudget = Number(period.totalBudget ?? 0);
   const totalActual = Number(period.totalActual ?? 0);
-  const actuals = (period.actuals ?? []) as Array<Record<string, unknown>>;
+  const actuals = (period.actuals ?? []) as Array<any>;
 
   return (
     <div className="p-xl max-w-5xl">
@@ -70,11 +70,11 @@ export function PeriodDetailPage() {
               </thead>
               <tbody>
                 {actuals.map((a) => (
-                  <tr key={a.id as string} className="border-b border-kore-border last:border-0">
-                    <td className="px-lg py-md text-kore-ink">{a.category as string}</td>
-                    <td className="px-lg py-md text-kore-ink">{(a.description as string) || '-'}</td>
+                  <tr key={a.id} className="border-b border-kore-border last:border-0">
+                    <td className="px-lg py-md text-kore-ink">{a.category}</td>
+                    <td className="px-lg py-md text-kore-ink">{(a.description) || '-'}</td>
                     <td className="px-lg py-md text-right text-kore-ink">{Number(a.amount).toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })}</td>
-                    <td className="px-lg py-md text-kore-mid">{new Date(a.bookedAt as string).toLocaleDateString('de-DE')}</td>
+                    <td className="px-lg py-md text-kore-mid">{new Date(a.bookedAt).toLocaleDateString('de-DE')}</td>
                   </tr>
                 ))}
               </tbody>

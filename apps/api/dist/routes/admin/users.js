@@ -3,34 +3,91 @@ import bcrypt from 'bcryptjs';
 import prisma from '../../lib/prisma.js';
 import { logAudit } from '../../lib/audit.js';
 import { authenticate, requireMinRole } from '../../middleware/auth.js';
-import { userCreateSchema, userUpdateSchema, userStoreAssignSchema } from '@kore/validators';
-import { hasMinRole } from '@kore/types';
+import { userCreateSchema, userUpdateSchema, userStoreAssignSchema, userRegionAssignSchema } from '../../shared/validators.js';
+import { hasMinRole, canCreateRole } from '../../shared/types.js';
 export const adminUsersRouter = Router();
-// Alle Routen erfordern mindestens tenant_admin
-adminUsersRouter.use(authenticate, requireMinRole('tenant_admin'));
-// GET /api/admin/users — Liste aller User (kore_admin: alle, tenant_admin: eigener Tenant)
+// Alle Routen erfordern mindestens store_manager
+// (store_manager kann Mitarbeiter erstellen/verwalten)
+adminUsersRouter.use(authenticate, requireMinRole('store_manager'));
+// GET /api/admin/users — Liste aller User (scoping je nach Rolle)
 adminUsersRouter.get('/', async (req, res) => {
     try {
         const { search, role, tenantId, page = '1', pageSize = '20' } = req.query;
         const p = Math.max(1, Number(page));
         const ps = Math.min(100, Math.max(1, Number(pageSize)));
         const where = {};
+        const userRole = req.user.role;
         // Tenant-Scoping
-        if (req.user.role === 'kore_admin') {
+        if (userRole === 'kore_admin') {
             if (tenantId)
                 where['tenantId'] = tenantId;
         }
         else {
-            // tenant_admin sieht nur eigenen Tenant
+            // Alle anderen sehen nur eigenen Tenant
             where['tenantId'] = req.user.tenantId;
+        }
+        // Rollen unterhalb der eigenen anzeigen (außer kore_admin/tenant_admin → sehen alle)
+        if (userRole !== 'kore_admin' && userRole !== 'tenant_admin') {
+            // regional_manager: Stores aus zugewiesenen Regionen + direkte Store-Zuweisungen
+            // multisite_manager, store_manager: nur direkt zugewiesene Stores
+            let myStoreIds = [];
+            if (userRole === 'regional_manager') {
+                const [regionAssignments, storeAssignments] = await Promise.all([
+                    prisma.userRegionAssignment.findMany({
+                        where: { userId: req.user.sub },
+                        select: { regionId: true },
+                    }),
+                    prisma.userStoreAssignment.findMany({
+                        where: { userId: req.user.sub },
+                        select: { storeId: true },
+                    }),
+                ]);
+                const regionIds = regionAssignments.map((a) => a.regionId);
+                const directStoreIds = storeAssignments.map((a) => a.storeId);
+                const regionStores = regionIds.length > 0
+                    ? await prisma.store.findMany({
+                        where: { regionId: { in: regionIds } },
+                        select: { id: true },
+                    })
+                    : [];
+                const regionStoreIds = regionStores.map((s) => s.id);
+                myStoreIds = [...new Set([...directStoreIds, ...regionStoreIds])];
+            }
+            else {
+                const storeAssignments = await prisma.userStoreAssignment.findMany({
+                    where: { userId: req.user.sub },
+                    select: { storeId: true },
+                });
+                myStoreIds = storeAssignments.map((a) => a.storeId);
+            }
+            if (myStoreIds.length > 0) {
+                where['OR'] = [
+                    // User die in meinen Stores zugewiesen sind
+                    { storeAssignments: { some: { storeId: { in: myStoreIds } } } },
+                    // Mich selbst
+                    { id: req.user.sub },
+                ];
+            }
+            else {
+                // Nur mich selbst
+                where['id'] = req.user.sub;
+            }
         }
         if (role)
             where['role'] = role;
         if (search) {
-            where['OR'] = [
+            // Bei Store-Scoped Queries muss OR kombiniert werden
+            const searchFilter = [
                 { name: { contains: search } },
                 { email: { contains: search } },
             ];
+            if (where['OR']) {
+                where['AND'] = [{ OR: where['OR'] }, { OR: searchFilter }];
+                delete where['OR'];
+            }
+            else {
+                where['OR'] = searchFilter;
+            }
         }
         const [users, total] = await Promise.all([
             prisma.user.findMany({
@@ -49,6 +106,12 @@ adminUsersRouter.get('/', async (req, res) => {
                         select: {
                             storeId: true,
                             store: { select: { name: true } },
+                        },
+                    },
+                    regionAssignments: {
+                        select: {
+                            regionId: true,
+                            region: { select: { name: true } },
                         },
                     },
                 },
@@ -89,6 +152,14 @@ adminUsersRouter.get('/:id', async (req, res) => {
                         store: { select: { id: true, name: true, city: true } },
                     },
                 },
+                regionAssignments: {
+                    select: {
+                        id: true,
+                        regionId: true,
+                        assignedAt: true,
+                        region: { select: { id: true, name: true, description: true } },
+                    },
+                },
             },
         });
         if (!user) {
@@ -118,14 +189,14 @@ adminUsersRouter.post('/', async (req, res) => {
             });
             return;
         }
-        const { name, email, password, role, tenantId, storeIds } = result.data;
-        // Rollenbeschränkung: tenant_admin kann nur Rollen unter sich erstellen
+        const { name, email, password, role, tenantId, storeIds, regionIds } = result.data;
+        // Rollenbeschränkung: Nur Rollen STRIKT unter der eigenen erstellen
+        if (!canCreateRole(req.user.role, role)) {
+            res.status(403).json({ error: 'Sie können keine Benutzer mit gleicher oder höherer Rolle erstellen.' });
+            return;
+        }
+        // Nicht-kore_admin muss eigenen Tenant verwenden
         if (req.user.role !== 'kore_admin') {
-            if (!hasMinRole(req.user.role, role)) {
-                res.status(403).json({ error: 'Sie können keine Benutzer mit gleicher oder höherer Rolle erstellen.' });
-                return;
-            }
-            // tenant_admin muss eigenen Tenant verwenden
             if (tenantId && tenantId !== req.user.tenantId) {
                 res.status(403).json({ error: 'Kein Zugriff auf diesen Mandanten.' });
                 return;
@@ -162,6 +233,15 @@ adminUsersRouter.post('/', async (req, res) => {
                 })),
             });
         }
+        // Region-Zuweisungen erstellen (für regional_manager)
+        if (regionIds && regionIds.length > 0) {
+            await prisma.userRegionAssignment.createMany({
+                data: regionIds.map((regionId) => ({
+                    userId: user.id,
+                    regionId,
+                })),
+            });
+        }
         await logAudit({
             tenantId: effectiveTenantId,
             userId: req.user.sub,
@@ -171,7 +251,7 @@ adminUsersRouter.post('/', async (req, res) => {
             details: JSON.stringify({ userName: name, role }),
             ipAddress: req.ip || null,
         });
-        // Return user with store assignments
+        // Return user with store + region assignments
         const created = await prisma.user.findUnique({
             where: { id: user.id },
             select: {
@@ -183,6 +263,9 @@ adminUsersRouter.post('/', async (req, res) => {
                 isActive: true,
                 storeAssignments: {
                     select: { storeId: true, store: { select: { name: true } } },
+                },
+                regionAssignments: {
+                    select: { regionId: true, region: { select: { name: true } } },
                 },
             },
         });
@@ -216,11 +299,29 @@ adminUsersRouter.put('/:id', async (req, res) => {
             res.status(403).json({ error: 'Kein Zugriff auf diesen Benutzer.' });
             return;
         }
-        const { storeIds, ...updateData } = result.data;
-        // Rollenbeschränkung: Darf keine höhere Rolle vergeben
-        if (updateData.role && req.user.role !== 'kore_admin') {
-            if (!hasMinRole(req.user.role, updateData.role)) {
+        const { storeIds, regionIds, ...updateData } = result.data;
+        // Rollenbeschränkung: Darf keine gleiche oder höhere Rolle vergeben
+        if (updateData.role) {
+            if (!canCreateRole(req.user.role, updateData.role)) {
                 res.status(403).json({ error: 'Sie können keine Benutzer auf gleiche oder höhere Rolle setzen.' });
+                return;
+            }
+        }
+        // Nicht-kore_admin/tenant_admin: Nur User in eigenen Stores bearbeiten
+        const userRole = req.user.role;
+        if (userRole !== 'kore_admin' && userRole !== 'tenant_admin') {
+            const myStores = await prisma.userStoreAssignment.findMany({
+                where: { userId: req.user.sub },
+                select: { storeId: true },
+            });
+            const myStoreIds = myStores.map((a) => a.storeId);
+            const targetStores = await prisma.userStoreAssignment.findMany({
+                where: { userId: targetUser.id },
+                select: { storeId: true },
+            });
+            const hasOverlap = targetStores.some((a) => myStoreIds.includes(a.storeId));
+            if (!hasOverlap && targetUser.id !== req.user.sub) {
+                res.status(403).json({ error: 'Kein Zugriff auf diesen Benutzer.' });
                 return;
             }
         }
@@ -239,6 +340,20 @@ adminUsersRouter.put('/:id', async (req, res) => {
                     data: storeIds.map((storeId) => ({
                         userId: user.id,
                         storeId,
+                    })),
+                });
+            }
+        }
+        // Region-Zuweisungen aktualisieren (wenn angegeben)
+        if (regionIds !== undefined) {
+            await prisma.userRegionAssignment.deleteMany({
+                where: { userId: user.id },
+            });
+            if (regionIds.length > 0) {
+                await prisma.userRegionAssignment.createMany({
+                    data: regionIds.map((regionId) => ({
+                        userId: user.id,
+                        regionId,
                     })),
                 });
             }
@@ -263,6 +378,9 @@ adminUsersRouter.put('/:id', async (req, res) => {
                 isActive: true,
                 storeAssignments: {
                     select: { storeId: true, store: { select: { name: true } } },
+                },
+                regionAssignments: {
+                    select: { regionId: true, region: { select: { name: true } } },
                 },
             },
         });
@@ -331,6 +449,72 @@ adminUsersRouter.put('/:id/stores', async (req, res) => {
     }
     catch (err) {
         console.error('User store assign error:', err);
+        res.status(500).json({ error: 'Interner Serverfehler.' });
+    }
+});
+// PUT /api/admin/users/:id/regions — Region-Zuweisungen aktualisieren
+adminUsersRouter.put('/:id/regions', async (req, res) => {
+    try {
+        const result = userRegionAssignSchema.safeParse(req.body);
+        if (!result.success) {
+            res.status(400).json({
+                error: 'Validierungsfehler',
+                details: result.error.flatten().fieldErrors,
+            });
+            return;
+        }
+        const targetUser = await prisma.user.findUnique({
+            where: { id: req.params['id'] },
+        });
+        if (!targetUser) {
+            res.status(404).json({ error: 'Benutzer nicht gefunden.' });
+            return;
+        }
+        // Tenant-Scoping
+        if (req.user.role !== 'kore_admin' && targetUser.tenantId !== req.user.tenantId) {
+            res.status(403).json({ error: 'Kein Zugriff auf diesen Benutzer.' });
+            return;
+        }
+        // Mindestens tenant_admin für Region-Zuweisungen
+        if (!hasMinRole(req.user.role, 'tenant_admin')) {
+            res.status(403).json({ error: 'Keine Berechtigung für Region-Zuweisungen.' });
+            return;
+        }
+        const { regionIds } = result.data;
+        // Replace all region assignments
+        await prisma.userRegionAssignment.deleteMany({
+            where: { userId: targetUser.id },
+        });
+        if (regionIds.length > 0) {
+            await prisma.userRegionAssignment.createMany({
+                data: regionIds.map((regionId) => ({
+                    userId: targetUser.id,
+                    regionId,
+                })),
+            });
+        }
+        await logAudit({
+            tenantId: targetUser.tenantId,
+            userId: req.user.sub,
+            action: 'UPDATE',
+            entity: 'user_regions',
+            entityId: targetUser.id,
+            details: JSON.stringify({ userName: targetUser.name, regionsAssigned: regionIds.length }),
+            ipAddress: req.ip || null,
+        });
+        const assignments = await prisma.userRegionAssignment.findMany({
+            where: { userId: targetUser.id },
+            select: {
+                id: true,
+                regionId: true,
+                assignedAt: true,
+                region: { select: { id: true, name: true, description: true } },
+            },
+        });
+        res.json({ regionAssignments: assignments });
+    }
+    catch (err) {
+        console.error('User region assign error:', err);
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });

@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { api } from '../lib/api';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export function useLossStores() {
-  return useQuery({ queryKey: ['loss', 'stores'], queryFn: () => api.get('/tools/loss-prevention/stores').then((r) => r.data) });
+  return useQuery({ queryKey: ['loss', 'stores'], queryFn: () => api<any[]>('/api/tools/loss-prevention/stores') });
 }
 
 export function useLossIncidents(page = 1, storeId?: string, status?: string, category?: string) {
@@ -13,7 +15,7 @@ export function useLossIncidents(page = 1, storeId?: string, status?: string, ca
       if (storeId) params.set('storeId', storeId);
       if (status) params.set('status', status);
       if (category) params.set('category', category);
-      return api.get(`/tools/loss-prevention/incidents?${params}`).then((r) => r.data);
+      return api<{ data: any[]; total: number }>(`/api/tools/loss-prevention/incidents?${params}`);
     },
   });
 }
@@ -21,7 +23,7 @@ export function useLossIncidents(page = 1, storeId?: string, status?: string, ca
 export function useLossIncident(id: string) {
   return useQuery({
     queryKey: ['loss', 'incident', id],
-    queryFn: () => api.get(`/tools/loss-prevention/incidents/${id}`).then((r) => r.data),
+    queryFn: () => api<any>(`/api/tools/loss-prevention/incidents/${id}`),
     enabled: !!id,
   });
 }
@@ -29,6 +31,6 @@ export function useLossIncident(id: string) {
 export function useLossSummary() {
   return useQuery({
     queryKey: ['loss', 'summary'],
-    queryFn: () => api.get('/tools/loss-prevention/summary').then((r) => r.data),
+    queryFn: () => api<any>('/api/tools/loss-prevention/summary'),
   });
 }

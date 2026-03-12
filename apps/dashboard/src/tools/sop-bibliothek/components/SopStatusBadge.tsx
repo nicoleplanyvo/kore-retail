@@ -7,7 +7,7 @@ const statusConfig: Record<string, { label: string; className: string }> = {
 };
 
 export function SopStatusBadge({ status }: SopStatusBadgeProps) {
-  const cfg = statusConfig[status] || statusConfig.DRAFT;
+  const cfg = statusConfig[status] ?? statusConfig['DRAFT']!;
   return (
     <span className={`inline-flex items-center px-md py-xs text-caption font-medium border ${cfg.className}`}>
       {cfg.label}

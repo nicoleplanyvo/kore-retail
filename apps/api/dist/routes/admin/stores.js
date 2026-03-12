@@ -1,22 +1,69 @@
 import { Router } from 'express';
 import prisma from '../../lib/prisma.js';
 import { authenticate, requireMinRole } from '../../middleware/auth.js';
-import { storeCreateSchema, storeUpdateSchema, storeUserAssignSchema } from '@kore/validators';
+import { storeCreateSchema, storeUpdateSchema, storeUserAssignSchema } from '../../shared/validators.js';
 import { logAudit } from '../../lib/audit.js';
+import { hasMinRole } from '../../shared/types.js';
 export const adminStoresRouter = Router();
-adminStoresRouter.use(authenticate, requireMinRole('tenant_admin'));
-// GET /api/admin/stores — Alle Stores (optional Filter by tenantId)
+// store_manager+ kann Stores sehen; Erstellung erfordert höhere Rolle (inline geprüft)
+adminStoresRouter.use(authenticate, requireMinRole('store_manager'));
+// GET /api/admin/stores — Stores mit Rollen-basiertem Scoping
 adminStoresRouter.get('/', async (req, res) => {
     try {
         const tenantId = req.query['tenantId'];
         const where = {};
-        if (tenantId)
-            where['tenantId'] = tenantId;
+        const userRole = req.user.role;
+        if (userRole === 'kore_admin') {
+            if (tenantId)
+                where['tenantId'] = tenantId;
+        }
+        else if (userRole === 'tenant_admin') {
+            // tenant_admin sieht alle Stores des eigenen Tenants
+            where['tenantId'] = req.user.tenantId;
+        }
+        else if (userRole === 'regional_manager') {
+            // regional_manager: Stores aus zugewiesenen Regionen + direkt zugewiesene Stores
+            where['tenantId'] = req.user.tenantId;
+            const [regionAssignments, storeAssignments] = await Promise.all([
+                prisma.userRegionAssignment.findMany({
+                    where: { userId: req.user.sub },
+                    select: { regionId: true },
+                }),
+                prisma.userStoreAssignment.findMany({
+                    where: { userId: req.user.sub },
+                    select: { storeId: true },
+                }),
+            ]);
+            const regionIds = regionAssignments.map((a) => a.regionId);
+            const directStoreIds = storeAssignments.map((a) => a.storeId);
+            // Alle Stores in zugewiesenen Regionen holen
+            const regionStores = regionIds.length > 0
+                ? await prisma.store.findMany({
+                    where: { regionId: { in: regionIds } },
+                    select: { id: true },
+                })
+                : [];
+            const regionStoreIds = regionStores.map((s) => s.id);
+            const allMyStoreIds = [...new Set([...directStoreIds, ...regionStoreIds])];
+            where['id'] = { in: allMyStoreIds };
+        }
+        else {
+            // multisite_manager, store_manager, learner:
+            // Nur direkt zugewiesene Stores
+            where['tenantId'] = req.user.tenantId;
+            const myAssignments = await prisma.userStoreAssignment.findMany({
+                where: { userId: req.user.sub },
+                select: { storeId: true },
+            });
+            const myStoreIds = myAssignments.map((a) => a.storeId);
+            where['id'] = { in: myStoreIds };
+        }
         const stores = await prisma.store.findMany({
             where,
             include: {
                 tenant: { select: { id: true, name: true, slug: true } },
-                _count: { select: { tools: true } },
+                region: { select: { id: true, name: true } },
+                _count: { select: { tools: true, userAssignments: true } },
             },
             orderBy: { createdAt: 'desc' },
         });
@@ -34,6 +81,7 @@ adminStoresRouter.get('/:id', async (req, res) => {
             where: { id: req.params['id'] },
             include: {
                 tenant: { select: { id: true, name: true, slug: true } },
+                region: { select: { id: true, name: true, description: true } },
                 tools: {
                     include: { tool: true },
                     orderBy: { assignedAt: 'desc' },
@@ -51,15 +99,25 @@ adminStoresRouter.get('/:id', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// POST /api/admin/stores — Store erstellen
+// POST /api/admin/stores — Store erstellen (mindestens multisite_manager)
 adminStoresRouter.post('/', async (req, res) => {
     try {
+        // Store-Erstellung erfordert mindestens multisite_manager
+        if (!hasMinRole(req.user.role, 'multisite_manager')) {
+            res.status(403).json({ error: 'Keine Berechtigung zum Erstellen von Stores.' });
+            return;
+        }
         const result = storeCreateSchema.safeParse(req.body);
         if (!result.success) {
             res.status(400).json({ error: 'Validierungsfehler', details: result.error.flatten().fieldErrors });
             return;
         }
         const data = result.data;
+        // Nicht-kore_admin muss eigenen Tenant verwenden
+        if (req.user.role !== 'kore_admin' && data.tenantId !== req.user.tenantId) {
+            res.status(403).json({ error: 'Kein Zugriff auf diesen Mandanten.' });
+            return;
+        }
         const tenant = await prisma.tenant.findUnique({ where: { id: data.tenantId } });
         if (!tenant) {
             res.status(404).json({ error: 'Tenant nicht gefunden.' });
@@ -71,10 +129,12 @@ adminStoresRouter.post('/', async (req, res) => {
                 name: data.name,
                 city: data.city || null,
                 address: data.address || null,
+                regionId: data.regionId || null,
             },
             include: {
                 tenant: { select: { id: true, name: true, slug: true } },
-                _count: { select: { tools: true } },
+                region: { select: { id: true, name: true } },
+                _count: { select: { tools: true, userAssignments: true } },
             },
         });
         await logAudit({
@@ -101,16 +161,20 @@ adminStoresRouter.put('/:id', async (req, res) => {
             res.status(400).json({ error: 'Validierungsfehler', details: result.error.flatten().fieldErrors });
             return;
         }
+        const updateData = { ...result.data };
+        if ('city' in updateData)
+            updateData['city'] = updateData['city'] || null;
+        if ('address' in updateData)
+            updateData['address'] = updateData['address'] || null;
+        if ('regionId' in updateData)
+            updateData['regionId'] = updateData['regionId'] || null;
         const store = await prisma.store.update({
             where: { id: req.params['id'] },
-            data: {
-                ...result.data,
-                city: result.data.city || null,
-                address: result.data.address || null,
-            },
+            data: updateData,
             include: {
                 tenant: { select: { id: true, name: true, slug: true } },
-                _count: { select: { tools: true } },
+                region: { select: { id: true, name: true } },
+                _count: { select: { tools: true, userAssignments: true } },
             },
         });
         res.json(store);

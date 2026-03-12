@@ -7,7 +7,7 @@ export function TrendsPage() {
   const [storeId, setStoreId] = useState('');
   const { data: stores } = useKpiStores();
   const { data: trends, isLoading } = useKpiTrends(storeId || undefined);
-  const trendData = (trends ?? []) as Array<Record<string, unknown>>;
+  const trendData = (trends ?? []) as Array<any>;
 
   // Find max values for chart scaling
   const maxRevenue = Math.max(1, ...trendData.map((t) => Number(t.avgRevenue ?? 0)));
@@ -40,8 +40,8 @@ export function TrendsPage() {
             <h2 className="font-display text-h3 text-kore-ink mb-lg">Umsatz-Trend</h2>
             <div className="space-y-sm">
               {trendData.map((t) => (
-                <div key={t.date as string} className="flex items-center gap-md">
-                  <span className="text-small text-kore-mid w-20 flex-shrink-0">{t.date as string}</span>
+                <div key={t.date} className="flex items-center gap-md">
+                  <span className="text-small text-kore-mid w-20 flex-shrink-0">{t.date}</span>
                   <div className="flex-1 bg-kore-bg h-6 relative">
                     <div className="bg-kore-ink h-full transition-all" style={{ width: `${(Number(t.avgRevenue ?? 0) / maxRevenue) * 100}%` }} />
                   </div>
@@ -66,13 +66,13 @@ export function TrendsPage() {
               </thead>
               <tbody>
                 {trendData.map((t) => (
-                  <tr key={t.date as string} className="border-b border-kore-border last:border-0">
-                    <td className="px-lg py-md text-kore-ink">{t.date as string}</td>
+                  <tr key={t.date} className="border-b border-kore-border last:border-0">
+                    <td className="px-lg py-md text-kore-ink">{t.date}</td>
                     <td className="px-lg py-md text-right text-kore-ink">{Number(t.avgRevenue ?? 0).toLocaleString('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })}</td>
                     <td className="px-lg py-md text-right text-kore-ink">{Math.round(Number(t.avgFootfall ?? 0))}</td>
                     <td className="px-lg py-md text-right text-kore-ink">{Number(t.avgConversion ?? 0).toFixed(1)}%</td>
                     <td className="px-lg py-md text-right text-kore-ink">{Number(t.avgBasket ?? 0).toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })}</td>
-                    <td className="px-lg py-md text-right text-kore-mid">{t.count as number}</td>
+                    <td className="px-lg py-md text-right text-kore-mid">{t.count}</td>
                   </tr>
                 ))}
               </tbody>

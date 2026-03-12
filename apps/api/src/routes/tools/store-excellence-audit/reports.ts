@@ -1,6 +1,6 @@
 import { Router, type Router as RouterType } from 'express';
 import prisma from '../../../lib/prisma.js';
-import { calculateAuditScore } from '@kore/validators/audit-scoring';
+import { calculateAuditScore } from '../../../shared/audit-scoring.js';
 
 export const seaReportsRouter: RouterType = Router();
 

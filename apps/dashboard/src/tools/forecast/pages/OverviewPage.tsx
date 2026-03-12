@@ -39,18 +39,18 @@ export function OverviewPage() {
           </div>
 
           {/* Accuracy by type */}
-          {accuracy.byType && (accuracy.byType as Array<Record<string, unknown>>).length > 0 && (
+          {accuracy.byType && (accuracy.byType as Array<any>).length > 0 && (
             <div className="bg-kore-white border border-kore-border p-xl">
               <h2 className="font-display text-h3 text-kore-ink mb-lg">Genauigkeit nach Typ</h2>
               <div className="space-y-md">
-                {(accuracy.byType as Array<Record<string, unknown>>).map((t) => (
-                  <div key={t.forecastType as string} className="flex items-center gap-lg">
-                    <span className="text-small text-kore-ink w-28 capitalize">{t.forecastType as string}</span>
+                {(accuracy.byType as Array<any>).map((t) => (
+                  <div key={t.forecastType} className="flex items-center gap-lg">
+                    <span className="text-small text-kore-ink w-28 capitalize">{t.forecastType}</span>
                     <div className="flex-1 bg-kore-bg h-4 relative">
                       <div className="bg-kore-ink h-full" style={{ width: `${Math.max(0, 100 - Number(t.avgDeviation ?? 0))}%` }} />
                     </div>
                     <span className="text-small text-kore-mid w-20 text-right">{Number(t.avgDeviation ?? 0).toFixed(1)}% Abw.</span>
-                    <span className="text-small text-kore-faint w-14 text-right">{t.count as number}x</span>
+                    <span className="text-small text-kore-faint w-14 text-right">{t.count}x</span>
                   </div>
                 ))}
               </div>

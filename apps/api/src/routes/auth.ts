@@ -3,11 +3,11 @@ import bcrypt from 'bcryptjs';
 import prisma from '../lib/prisma.js';
 import { signAccessToken, signRefreshToken, verifyRefreshToken } from '../lib/jwt.js';
 import { authenticate, requireRole } from '../middleware/auth.js';
-import { loginSchema } from '@kore/validators';
+import { loginSchema } from '../shared/validators.js';
 
 export const authRouter: RouterType = Router();
 
-/** Helper: Lade User-Daten inkl. Store-Zuweisungen für Auth-Response */
+/** Helper: Lade User-Daten inkl. Store- und Region-Zuweisungen für Auth-Response */
 async function buildAuthResponse(userId: string, impersonatedBy?: string) {
   const user = await prisma.user.findUnique({
     where: { id: userId },
@@ -18,6 +18,7 @@ async function buildAuthResponse(userId: string, impersonatedBy?: string) {
       role: true,
       tenantId: true,
       storeAssignments: { select: { storeId: true } },
+      regionAssignments: { select: { regionId: true } },
     },
   });
 
@@ -31,6 +32,7 @@ async function buildAuthResponse(userId: string, impersonatedBy?: string) {
     tenantId: user.tenantId,
     impersonatedBy: impersonatedBy || undefined,
     storeAssignments: user.storeAssignments.map((a: { storeId: string }) => a.storeId),
+    regionAssignments: user.regionAssignments.map((a: { regionId: string }) => a.regionId),
   };
 }
 

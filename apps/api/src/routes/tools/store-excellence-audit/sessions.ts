@@ -2,8 +2,8 @@ import { Router, type Router as RouterType } from 'express';
 import prisma from '../../../lib/prisma.js';
 import { requireMinRole } from '../../../middleware/auth.js';
 import { logAudit } from '../../../lib/audit.js';
-import { auditSessionCreateSchema } from '@kore/validators';
-import { calculateAuditScore } from '@kore/validators/audit-scoring';
+import { auditSessionCreateSchema } from '../../../shared/validators.js';
+import { calculateAuditScore } from '../../../shared/audit-scoring.js';
 
 export const seaSessionsRouter: RouterType = Router();
 

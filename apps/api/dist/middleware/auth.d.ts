@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 import { type JWTPayload } from '../lib/jwt.js';
-import { type UserRole } from '@kore/types';
+import { type UserRole } from '../shared/types.js';
 declare global {
     namespace Express {
         interface Request {

@@ -1,7 +1,7 @@
 import { Router, type Router as RouterType } from 'express';
 import prisma from '../../lib/prisma.js';
 import { authenticate, requireMinRole } from '../../middleware/auth.js';
-import { tenantCreateSchema, tenantUpdateSchema } from '@kore/validators';
+import { tenantCreateSchema, tenantUpdateSchema } from '../../shared/validators.js';
 
 export const adminTenantsRouter: RouterType = Router();
 adminTenantsRouter.use(authenticate, requireMinRole('kore_admin'));

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { ShieldAlert, List, AlertTriangle } from 'lucide-react';
 import { useLossSummary } from '../../../hooks/useLossPrevention';
 
-const SEVERITY_COLORS: Record<string, string> = {
+const SEVERITY_COLORS: any = {
   LOW: 'bg-blue-50 text-blue-700 border-blue-200',
   MEDIUM: 'bg-amber-50 text-amber-700 border-amber-200',
   HIGH: 'bg-orange-50 text-orange-700 border-orange-200',
@@ -46,14 +46,14 @@ export function OverviewPage() {
           </div>
 
           {/* By Severity */}
-          {stats.bySeverity && (stats.bySeverity as Array<Record<string, unknown>>).length > 0 && (
+          {stats.bySeverity && (stats.bySeverity as Array<any>).length > 0 && (
             <div className="bg-kore-white border border-kore-border p-xl mb-2xl">
               <h2 className="font-display text-h3 text-kore-ink mb-lg">Nach Schweregrad</h2>
               <div className="flex gap-lg">
-                {(stats.bySeverity as Array<Record<string, unknown>>).map((s) => (
-                  <div key={s.severity as string} className={`flex-1 border px-lg py-md text-center ${SEVERITY_COLORS[s.severity as string] ?? 'bg-kore-bg text-kore-ink border-kore-border'}`}>
-                    <div className="text-caption uppercase tracking-widest">{s.severity as string}</div>
-                    <div className="font-display text-h2 mt-xs">{s._count as number}</div>
+                {(stats.bySeverity as Array<any>).map((s) => (
+                  <div key={s.severity} className={`flex-1 border px-lg py-md text-center ${SEVERITY_COLORS[s.severity] ?? 'bg-kore-bg text-kore-ink border-kore-border'}`}>
+                    <div className="text-caption uppercase tracking-widest">{s.severity}</div>
+                    <div className="font-display text-h2 mt-xs">{s._count}</div>
                   </div>
                 ))}
               </div>
@@ -61,19 +61,19 @@ export function OverviewPage() {
           )}
 
           {/* By Category */}
-          {stats.byCategory && (stats.byCategory as Array<Record<string, unknown>>).length > 0 && (
+          {stats.byCategory && (stats.byCategory as Array<any>).length > 0 && (
             <div className="bg-kore-white border border-kore-border p-xl">
               <h2 className="font-display text-h3 text-kore-ink mb-lg">Nach Kategorie</h2>
               <div className="space-y-sm">
-                {(stats.byCategory as Array<Record<string, unknown>>).map((c) => {
-                  const max = Math.max(1, ...(stats.byCategory as Array<Record<string, unknown>>).map((x) => x._count as number));
+                {(stats.byCategory as Array<any>).map((c) => {
+                  const max = Math.max(1, ...(stats.byCategory as Array<any>).map((x) => x._count));
                   return (
-                    <div key={c.category as string} className="flex items-center gap-md">
-                      <span className="text-small text-kore-ink w-32 capitalize">{(c.category as string).replace(/_/g, ' ')}</span>
+                    <div key={c.category} className="flex items-center gap-md">
+                      <span className="text-small text-kore-ink w-32 capitalize">{(c.category).replace(/_/g, ' ')}</span>
                       <div className="flex-1 bg-kore-bg h-4">
-                        <div className="bg-kore-ink h-full" style={{ width: `${((c._count as number) / max) * 100}%` }} />
+                        <div className="bg-kore-ink h-full" style={{ width: `${((c._count) / max) * 100}%` }} />
                       </div>
-                      <span className="text-small text-kore-mid w-10 text-right">{c._count as number}</span>
+                      <span className="text-small text-kore-mid w-10 text-right">{c._count}</span>
                     </div>
                   );
                 })}

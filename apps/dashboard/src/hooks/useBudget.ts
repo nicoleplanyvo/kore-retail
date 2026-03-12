@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { api } from '../lib/api';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export function useBudgetStores() {
-  return useQuery({ queryKey: ['budget', 'stores'], queryFn: () => api.get('/tools/budget/stores').then((r) => r.data) });
+  return useQuery({ queryKey: ['budget', 'stores'], queryFn: () => api<any[]>('/api/tools/budget/stores') });
 }
 
 export function useBudgetPeriods(page = 1, storeId?: string) {
@@ -11,7 +13,7 @@ export function useBudgetPeriods(page = 1, storeId?: string) {
     queryFn: () => {
       const params = new URLSearchParams({ page: String(page), pageSize: '20' });
       if (storeId) params.set('storeId', storeId);
-      return api.get(`/tools/budget/periods?${params}`).then((r) => r.data);
+      return api<{ data: any[]; total: number }>(`/api/tools/budget/periods?${params}`);
     },
   });
 }
@@ -19,7 +21,7 @@ export function useBudgetPeriods(page = 1, storeId?: string) {
 export function useBudgetPeriod(id: string) {
   return useQuery({
     queryKey: ['budget', 'period', id],
-    queryFn: () => api.get(`/tools/budget/periods/${id}`).then((r) => r.data),
+    queryFn: () => api<any>(`/api/tools/budget/periods/${id}`),
     enabled: !!id,
   });
 }
@@ -30,7 +32,7 @@ export function useBudgetSummary(period?: string) {
     queryFn: () => {
       const params = new URLSearchParams();
       if (period) params.set('period', period);
-      return api.get(`/tools/budget/summary?${params}`).then((r) => r.data);
+      return api<any>(`/api/tools/budget/summary?${params}`);
     },
   });
 }

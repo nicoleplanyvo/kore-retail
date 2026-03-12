@@ -1,14 +1,73 @@
-import { Resend } from 'resend';
+/**
+ * E-Mail-Versand über Lettermint API
+ * https://api.lettermint.co/v1/send
+ */
 
-const apiKey = process.env['RESEND_API_KEY'];
-if (!apiKey) {
-  console.warn('⚠ RESEND_API_KEY nicht gesetzt — E-Mails werden nur geloggt.');
+const LETTERMINT_TOKEN = process.env['LETTERMINT_API_TOKEN'];
+if (!LETTERMINT_TOKEN) {
+  console.warn('⚠ LETTERMINT_API_TOKEN nicht gesetzt — E-Mails werden nur geloggt.');
 }
 
-export const resend = apiKey ? new Resend(apiKey) : null;
-
 const FROM = process.env['FROM_EMAIL'] ?? 'noreply@kore-retail.de';
-const NOTIFY = process.env['NOTIFICATION_EMAIL'] ?? 'hello@planyvo.com';
+const NOTIFY = process.env['NOTIFICATION_EMAIL'] ?? 'info@kore-retail.de';
+
+// ──────────────────────────────────────────────
+// Lettermint Send
+// ──────────────────────────────────────────────
+
+interface EmailPayload {
+  from: string;
+  to: string | string[];
+  subject: string;
+  html: string;
+  reply_to?: string;
+}
+
+interface SendResult {
+  success: boolean;
+  messageId?: string;
+  error?: string;
+}
+
+export async function sendEmail(payload: EmailPayload): Promise<SendResult> {
+  if (!LETTERMINT_TOKEN) {
+    console.log('[DEV] E-Mail (nur geloggt):', {
+      from: payload.from,
+      to: payload.to,
+      subject: payload.subject,
+    });
+    return { success: true, messageId: 'dev-mode' };
+  }
+
+  try {
+    const res = await fetch('https://api.lettermint.co/v1/send', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-lettermint-token': LETTERMINT_TOKEN,
+      },
+      body: JSON.stringify({
+        from: payload.from,
+        to: Array.isArray(payload.to) ? payload.to : [payload.to],
+        subject: payload.subject,
+        html: payload.html,
+        ...(payload.reply_to ? { reply_to: Array.isArray(payload.reply_to) ? payload.reply_to : [payload.reply_to] } : {}),
+      }),
+    });
+
+    if (!res.ok) {
+      const body = await res.text();
+      console.error('Lettermint error:', res.status, body);
+      return { success: false, error: `Lettermint ${res.status}: ${body}` };
+    }
+
+    const data = (await res.json()) as { message_id?: string };
+    return { success: true, messageId: data.message_id };
+  } catch (err) {
+    console.error('Lettermint fetch error:', err);
+    return { success: false, error: String(err) };
+  }
+}
 
 // ──────────────────────────────────────────────
 // E-Mail-Templates
@@ -61,11 +120,12 @@ export function contactNotificationEmail(data: {
   email: string;
   company?: string;
   message: string;
-}) {
+}): EmailPayload {
   return {
     from: `KORE <${FROM}>`,
     to: NOTIFY,
     subject: `Neue KORE Kontaktanfrage: ${data.name}`,
+    reply_to: data.email,
     html: baseLayout(`
       <h2>Neue Kontaktanfrage</h2>
       <div class="label">Name</div>
@@ -79,7 +139,7 @@ export function contactNotificationEmail(data: {
   };
 }
 
-export function contactConfirmationEmail(data: { name: string; email: string }) {
+export function contactConfirmationEmail(data: { name: string; email: string }): EmailPayload {
   return {
     from: `KORE <${FROM}>`,
     to: data.email,
@@ -88,7 +148,7 @@ export function contactConfirmationEmail(data: { name: string; email: string }) 
       <h2>Vielen Dank, ${escapeHtml(data.name)}.</h2>
       <p>Wir haben Ihre Anfrage erhalten und melden uns in der Regel innerhalb von 24 Stunden bei Ihnen.</p>
       <div class="brass-line"></div>
-      <p>Falls Sie in der Zwischenzeit Fragen haben, erreichen Sie uns jederzeit unter <a href="mailto:hello@planyvo.com">hello@planyvo.com</a>.</p>
+      <p>Falls Sie in der Zwischenzeit Fragen haben, erreichen Sie uns jederzeit unter <a href="mailto:info@kore-retail.de">info@kore-retail.de</a>.</p>
       <p style="margin-top: 24px; color: #9E8460; font-style: italic;">
         Mit besten Grüßen,<br/>
         Nicole Muñoz Bonilla<br/>
@@ -108,11 +168,12 @@ export function auditNotificationEmail(data: {
   company: string;
   storeCount: string;
   challenge: string;
-}) {
+}): EmailPayload {
   return {
     from: `KORE <${FROM}>`,
     to: NOTIFY,
     subject: `Neue KORE Audit-Anfrage: ${data.company}`,
+    reply_to: data.email,
     html: baseLayout(`
       <h2>Neue Audit-Anfrage</h2>
       <div class="label">Name</div>
@@ -129,7 +190,7 @@ export function auditNotificationEmail(data: {
   };
 }
 
-export function auditConfirmationEmail(data: { name: string; email: string; company: string }) {
+export function auditConfirmationEmail(data: { name: string; email: string; company: string }): EmailPayload {
   return {
     from: `KORE <${FROM}>`,
     to: data.email,

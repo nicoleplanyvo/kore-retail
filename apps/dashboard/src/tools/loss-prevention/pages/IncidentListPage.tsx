@@ -57,22 +57,22 @@ export function IncidentListPage() {
       ) : (
         <>
           <div className="space-y-md">
-            {incidents.map((i: Record<string, unknown>) => (
-              <Link key={i.id as string} to={`/tools/loss-prevention/incidents/${i.id}`} className="block bg-kore-white border border-kore-border p-lg hover:border-kore-brass transition-colors">
+            {incidents.map((i: any) => (
+              <Link key={i.id} to={`/tools/loss-prevention/incidents/${i.id}`} className="block bg-kore-white border border-kore-border p-lg hover:border-kore-brass transition-colors">
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="text-body font-medium text-kore-ink">{i.title as string}</span>
+                    <span className="text-body font-medium text-kore-ink">{i.title}</span>
                     <div className="flex items-center gap-md mt-xs">
-                      <span className="text-small text-kore-mid">{(i.store as Record<string, string>)?.name}</span>
-                      <SeverityBadge severity={i.severity as string} />
-                      <span className="text-small text-kore-faint capitalize">{(i.category as string).replace(/_/g, ' ')}</span>
+                      <span className="text-small text-kore-mid">{(i.store as any)?.name}</span>
+                      <SeverityBadge severity={i.severity} />
+                      <span className="text-small text-kore-faint capitalize">{(i.category).replace(/_/g, ' ')}</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-lg">
                     {i.estimatedLoss != null && (
                       <span className="text-body font-medium text-red-600">{Number(i.estimatedLoss).toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })}</span>
                     )}
-                    <StatusBadge status={i.status as string} />
+                    <StatusBadge status={i.status} />
                   </div>
                 </div>
               </Link>

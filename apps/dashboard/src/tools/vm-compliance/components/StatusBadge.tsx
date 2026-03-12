@@ -4,6 +4,6 @@ const cfg: Record<string, { label: string; className: string }> = {
   REJECTED: { label: 'Abgelehnt', className: 'bg-red-50 text-red-700 border-red-200' },
 };
 export function StatusBadge({ status }: { status: string }) {
-  const c = cfg[status] || cfg.PENDING;
+  const c = cfg[status] ?? cfg['PENDING']!;
   return <span className={`inline-flex items-center px-md py-xs text-caption font-medium border ${c.className}`}>{c.label}</span>;
 }

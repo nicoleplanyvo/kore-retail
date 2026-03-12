@@ -1,7 +1,7 @@
 import { Router, type Router as RouterType } from 'express';
 import prisma from '../../../lib/prisma.js';
 import { requireRole } from '../../../middleware/auth.js';
-import { auditResponseSchema } from '@kore/validators';
+import { auditResponseSchema } from '../../../shared/validators.js';
 import { createToolUpload, deleteUploadFile, getRelativePath } from '../../../lib/upload.js';
 
 export const seaResponsesRouter: RouterType = Router();

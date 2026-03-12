@@ -3,19 +3,19 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useInventoryCounts, useInventoryStores } from '../../../hooks/useInventory';
 
-const STATUS_LABELS: Record<string, string> = {
+const STATUS_LABELS: any = {
   IN_PROGRESS: 'In Arbeit',
   COMPLETED: 'Abgeschlossen',
   CANCELLED: 'Abgebrochen',
 };
 
-const STATUS_STYLES: Record<string, string> = {
+const STATUS_STYLES: any = {
   IN_PROGRESS: 'bg-amber-50 text-amber-700 border-amber-200',
   COMPLETED: 'bg-emerald-50 text-emerald-700 border-emerald-200',
   CANCELLED: 'bg-kore-bg text-kore-mid border-kore-border',
 };
 
-const TYPE_LABELS: Record<string, string> = {
+const TYPE_LABELS: any = {
   FULL: 'Vollinventur',
   CYCLE: 'Stichprobe',
   SPOT: 'Spot-Check',
@@ -62,15 +62,15 @@ export function CountListPage() {
       ) : (
         <>
           <div className="space-y-md">
-            {counts.map((c: Record<string, unknown>) => (
-              <Link key={c.id as string} to={`/tools/inventory/counts/${c.id}`} className="block bg-kore-white border border-kore-border p-lg hover:border-kore-brass transition-colors">
+            {counts.map((c: any) => (
+              <Link key={c.id} to={`/tools/inventory/counts/${c.id}`} className="block bg-kore-white border border-kore-border p-lg hover:border-kore-brass transition-colors">
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="text-body font-medium text-kore-ink">{(c.store as Record<string, string>)?.name}</span>
+                    <span className="text-body font-medium text-kore-ink">{(c.store as any)?.name}</span>
                     <div className="flex items-center gap-md mt-xs">
-                      <span className="text-small px-sm py-px border border-kore-border bg-kore-bg text-kore-ink">{TYPE_LABELS[c.countType as string] ?? c.countType}</span>
-                      <span className="text-small text-kore-faint">{new Date(c.countedAt as string).toLocaleDateString('de-DE')}</span>
-                      <span className="text-small text-kore-faint">{(c._count as Record<string, number>)?.items ?? 0} Positionen</span>
+                      <span className="text-small px-sm py-px border border-kore-border bg-kore-bg text-kore-ink">{TYPE_LABELS[c.countType] ?? String(c.countType)}</span>
+                      <span className="text-small text-kore-faint">{new Date(c.countedAt).toLocaleDateString('de-DE')}</span>
+                      <span className="text-small text-kore-faint">{(c._count as any)?.items ?? 0} Positionen</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-lg">
@@ -79,7 +79,7 @@ export function CountListPage() {
                         {Number(c.totalVariance) > 0 ? '+' : ''}{Number(c.totalVariance).toLocaleString('de-DE')}
                       </span>
                     )}
-                    <span className={`text-small font-medium px-md py-xs border ${STATUS_STYLES[c.status as string] ?? 'bg-kore-bg text-kore-ink border-kore-border'}`}>{STATUS_LABELS[c.status as string] ?? c.status}</span>
+                    <span className={`text-small font-medium px-md py-xs border ${STATUS_STYLES[c.status] ?? 'bg-kore-bg text-kore-ink border-kore-border'}`}>{STATUS_LABELS[c.status] ?? String(c.status)}</span>
                   </div>
                 </div>
               </Link>

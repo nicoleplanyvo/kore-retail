@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { api } from '../lib/api';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export function useForecastStores() {
-  return useQuery({ queryKey: ['forecast', 'stores'], queryFn: () => api.get('/tools/forecast/stores').then((r) => r.data) });
+  return useQuery({ queryKey: ['forecast', 'stores'], queryFn: () => api<any[]>('/api/tools/forecast/stores') });
 }
 
 export function useForecasts(page = 1, storeId?: string, forecastType?: string) {
@@ -12,7 +14,7 @@ export function useForecasts(page = 1, storeId?: string, forecastType?: string) 
       const params = new URLSearchParams({ page: String(page), pageSize: '20' });
       if (storeId) params.set('storeId', storeId);
       if (forecastType) params.set('forecastType', forecastType);
-      return api.get(`/tools/forecast?${params}`).then((r) => r.data);
+      return api<{ data: any[]; total: number }>(`/api/tools/forecast?${params}`);
     },
   });
 }
@@ -20,7 +22,7 @@ export function useForecasts(page = 1, storeId?: string, forecastType?: string) 
 export function useForecast(id: string) {
   return useQuery({
     queryKey: ['forecast', 'detail', id],
-    queryFn: () => api.get(`/tools/forecast/${id}`).then((r) => r.data),
+    queryFn: () => api<any>(`/api/tools/forecast/${id}`),
     enabled: !!id,
   });
 }
@@ -28,6 +30,6 @@ export function useForecast(id: string) {
 export function useForecastAccuracy() {
   return useQuery({
     queryKey: ['forecast', 'accuracy'],
-    queryFn: () => api.get('/tools/forecast/reports/accuracy').then((r) => r.data),
+    queryFn: () => api<any>('/api/tools/forecast/reports/accuracy'),
   });
 }

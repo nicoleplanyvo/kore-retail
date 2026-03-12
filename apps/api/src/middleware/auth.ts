@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 import { verifyAccessToken, type JWTPayload } from '../lib/jwt.js';
-import { ROLE_HIERARCHY, hasMinRole, type UserRole } from '@kore/types';
+import { ROLE_HIERARCHY, hasMinRole, type UserRole } from '../shared/types.js';
 import prisma from '../lib/prisma.js';
 
 // Extend Express Request
@@ -141,7 +141,27 @@ export function requireStoreAccess() {
       return;
     }
 
-    // Andere Rollen: Prüfe Store-Zuweisung
+    // regional_manager: Prüfe Region-Zuweisung ODER direkte Store-Zuweisung
+    if (req.user.role === 'regional_manager') {
+      const storeDetail = await prisma.store.findUnique({
+        where: { id: storeId },
+        select: { regionId: true },
+      });
+
+      // Prüfe ob Store in einer zugewiesenen Region liegt
+      if (storeDetail?.regionId) {
+        const regionAssignment = await prisma.userRegionAssignment.findUnique({
+          where: { userId_regionId: { userId: req.user.sub, regionId: storeDetail.regionId } },
+        });
+        if (regionAssignment) {
+          next();
+          return;
+        }
+      }
+      // Falls nicht über Region → prüfe direkte Store-Zuweisung (Fallthrough)
+    }
+
+    // Andere Rollen: Prüfe direkte Store-Zuweisung
     const assignment = await prisma.userStoreAssignment.findUnique({
       where: { userId_storeId: { userId: req.user.sub, storeId } },
     });
@@ -175,7 +195,37 @@ export async function getAccessibleStoreIds(
     return stores.map((s: { id: string }) => s.id);
   }
 
-  // Andere: nur zugewiesene Stores
+  // regional_manager: Stores aus zugewiesenen Regionen + direkt zugewiesene Stores
+  if (role === 'regional_manager') {
+    const [regionAssignments, storeAssignments] = await Promise.all([
+      prisma.userRegionAssignment.findMany({
+        where: { userId },
+        select: { regionId: true },
+      }),
+      prisma.userStoreAssignment.findMany({
+        where: { userId },
+        select: { storeId: true },
+      }),
+    ]);
+
+    const regionIds = regionAssignments.map((a: { regionId: string }) => a.regionId);
+    const directStoreIds = storeAssignments.map((a: { storeId: string }) => a.storeId);
+
+    // Alle Stores in zugewiesenen Regionen holen
+    const regionStores = regionIds.length > 0
+      ? await prisma.store.findMany({
+          where: { regionId: { in: regionIds } },
+          select: { id: true },
+        })
+      : [];
+
+    const regionStoreIds = regionStores.map((s: { id: string }) => s.id);
+
+    // Deduplizieren
+    return [...new Set([...directStoreIds, ...regionStoreIds])];
+  }
+
+  // multisite_manager, store_manager, learner: nur direkt zugewiesene Stores
   const assignments = await prisma.userStoreAssignment.findMany({
     where: { userId },
     select: { storeId: true },

@@ -2,14 +2,14 @@ import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { useForecast } from '../../../hooks/useForecast';
 
-const TYPE_LABELS: Record<string, string> = {
+const TYPE_LABELS: any = {
   REVENUE: 'Umsatz',
   FOOTFALL: 'Kundenfrequenz',
   STAFFING: 'Personal',
   INVENTORY: 'Bestand',
 };
 
-const METHOD_LABELS: Record<string, string> = {
+const METHOD_LABELS: any = {
   MANUAL: 'Manuell',
   MOVING_AVG: 'Gleitender Durchschnitt',
   LINEAR: 'Lineare Regression',

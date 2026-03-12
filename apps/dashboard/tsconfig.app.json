@@ -5,6 +5,7 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "outDir": "./dist",
     "rootDir": "./src",
+    "noUncheckedIndexedAccess": false,
     "paths": {
       "@/*": ["./src/*"]
     }

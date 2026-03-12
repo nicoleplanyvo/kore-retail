@@ -51,12 +51,12 @@ export function EntryListPage() {
                 </tr>
               </thead>
               <tbody>
-                {entries.map((e: Record<string, unknown>) => (
-                  <tr key={e.id as string} className="border-b border-kore-border last:border-0 hover:bg-kore-bg/50">
-                    <td className="px-lg py-md text-kore-ink">{new Date(e.date as string).toLocaleDateString('de-DE')}</td>
-                    <td className="px-lg py-md text-kore-ink">{(e.store as Record<string, string>)?.name ?? '-'}</td>
+                {entries.map((e: any) => (
+                  <tr key={e.id} className="border-b border-kore-border last:border-0 hover:bg-kore-bg/50">
+                    <td className="px-lg py-md text-kore-ink">{new Date(e.date).toLocaleDateString('de-DE')}</td>
+                    <td className="px-lg py-md text-kore-ink">{(e.store as any)?.name ?? '-'}</td>
                     <td className="px-lg py-md text-right text-kore-ink">{e.revenue != null ? Number(e.revenue).toLocaleString('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }) : '-'}</td>
-                    <td className="px-lg py-md text-right text-kore-ink">{e.footfall ?? '-'}</td>
+                    <td className="px-lg py-md text-right text-kore-ink">{e.footfall != null ? String(e.footfall) : '-'}</td>
                     <td className="px-lg py-md text-right text-kore-ink">{e.conversionRate != null ? `${Number(e.conversionRate).toFixed(1)}%` : '-'}</td>
                     <td className="px-lg py-md text-right text-kore-ink">{e.avgBasket != null ? Number(e.avgBasket).toLocaleString('de-DE', { style: 'currency', currency: 'EUR' }) : '-'}</td>
                     <td className="px-lg py-md text-right text-kore-ink">{e.upt != null ? Number(e.upt).toFixed(1) : '-'}</td>

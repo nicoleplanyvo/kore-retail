@@ -22,7 +22,24 @@ model User {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 
-  storeAssignments UserStoreAssignment[]
+  storeAssignments  UserStoreAssignment[]
+  regionAssignments UserRegionAssignment[]
+  checklistSessions ChecklistSession[]
+  createdSops       Sop[]
+  sopAcknowledgments SopAcknowledgment[]
+  vmSubmissions     VmSubmission[]  @relation("VmSubmitter")
+  vmReviews         VmSubmission[]  @relation("VmReviewer")
+  standardEvaluations StandardEvaluation[]
+  kpiEntries        KpiEntry[]      @relation("KpiEntries")
+  budgetPeriods     BudgetPeriod[]  @relation("BudgetPeriods")
+  forecasts         Forecast[]      @relation("Forecasts")
+  lossReports       LossIncident[]  @relation("LossReporter")
+  lossAssignments   LossIncident[]  @relation("LossAssignee")
+  inventoryCounts   InventoryCount[] @relation("InventoryConductor")
+  floorPositions    FloorStaffPosition[] @relation("FloorPositionUser")
+  floorUpdates      FloorStaffPosition[] @relation("FloorPositionUpdater")
+  maintenanceReports MaintenanceRequest[] @relation("MaintenanceReporter")
+  maintenanceAssignments MaintenanceRequest[] @relation("MaintenanceAssignee")
 
   @@index([tenantId])
 }
@@ -42,14 +59,53 @@ model Tenant {
 
   users        User[]
   stores       Store[]
+  regions      Region[]
   subscription Subscription?
   consents     DataProcessingConsent[]
+  checklistTemplates ChecklistTemplate[]
+  checklistSessions  ChecklistSession[]
+  sopCategories      SopCategory[]
+  sops               Sop[]
+  vmGuidelines       VmGuideline[]
+  vmSubmissions      VmSubmission[]
+  standardCategories StandardCategory[]
+  standardDefinitions StandardDefinition[]
+  standardEvaluations StandardEvaluation[]
+  kpiEntries         KpiEntry[]
+  budgetPeriods      BudgetPeriod[]
+  forecasts          Forecast[]
+  lossIncidents      LossIncident[]
+  inventoryCounts    InventoryCount[]
+  floorZones         FloorZone[]
+  floorPositions     FloorStaffPosition[]
+  footfallEntries    FootfallEntry[]
+  vmGuidelineDocs    VmGuidelineDoc[]
+  maintenanceRequests MaintenanceRequest[]
+}
+
+model Region {
+  id          String   @id @default(cuid())
+  tenantId    String
+  tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  name        String
+  description String?
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  stores          Store[]
+  userAssignments UserRegionAssignment[]
+
+  @@index([tenantId])
 }
 
 model Store {
   id        String   @id @default(cuid())
   tenantId  String
   tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  regionId  String?
+  region    Region?  @relation(fields: [regionId], references: [id], onDelete: SetNull)
   name      String
   city      String?
   address   String?
@@ -60,8 +116,21 @@ model Store {
   tools     StoreToolAssignment[]
   userAssignments UserStoreAssignment[]
   auditSessions   AuditSession[]
+  checklistSessions ChecklistSession[]
+  vmSubmissions     VmSubmission[]
+  standardEvaluations StandardEvaluation[]
+  kpiEntries        KpiEntry[]
+  budgetPeriods     BudgetPeriod[]
+  forecasts         Forecast[]
+  lossIncidents     LossIncident[]
+  inventoryCounts   InventoryCount[]
+  floorZones        FloorZone[]
+  floorPositions    FloorStaffPosition[]
+  footfallEntries   FootfallEntry[]
+  maintenanceRequests MaintenanceRequest[]
 
   @@index([tenantId])
+  @@index([regionId])
 }
 
 model ToolDefinition {
@@ -73,9 +142,10 @@ model ToolDefinition {
   icon         String?
   priceMonthly Int      @default(0)
   isActive     Boolean  @default(true)
-  sortOrder    Int      @default(0)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  sortOrder         Int      @default(0)
+  learnerAccessible Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 
   assignments  StoreToolAssignment[]
 
@@ -153,6 +223,19 @@ model DataProcessingConsent {
 
   @@index([tenantId])
   @@unique([tenantId, consentType])
+}
+
+model UserRegionAssignment {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  regionId   String
+  region     Region   @relation(fields: [regionId], references: [id], onDelete: Cascade)
+  assignedAt DateTime @default(now())
+
+  @@unique([userId, regionId])
+  @@index([userId])
+  @@index([regionId])
 }
 
 // ============================================================
@@ -247,4 +330,581 @@ model AuditResponse {
 
   @@unique([sessionId, criterionId])
   @@index([sessionId])
+}
+
+// ============================================================
+// Checklisten Tool — Einfache Checklisten für Store-Visits
+// ============================================================
+
+model ChecklistTemplate {
+  id          String   @id @default(cuid())
+  tenantId    String?
+  tenant      Tenant?  @relation(fields: [tenantId], references: [id])
+  name        String
+  description String?
+  version     Int      @default(1)
+  isDefault   Boolean  @default(false)
+  isActive    Boolean  @default(true)
+  createdBy   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  sections    ChecklistSection[]
+  sessions    ChecklistSession[]
+
+  @@index([tenantId])
+}
+
+model ChecklistSection {
+  id         String            @id @default(cuid())
+  templateId String
+  template   ChecklistTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  name       String
+  sortOrder  Int               @default(0)
+
+  items ChecklistItem[]
+
+  @@index([templateId])
+}
+
+model ChecklistItem {
+  id         String           @id @default(cuid())
+  sectionId  String
+  section    ChecklistSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  text       String
+  type       String           @default("BOOLEAN") // BOOLEAN, TEXT, NUMBER, PHOTO
+  isRequired Boolean          @default(false)
+  sortOrder  Int              @default(0)
+
+  entries ChecklistEntry[]
+
+  @@index([sectionId])
+}
+
+model ChecklistSession {
+  id             String            @id @default(cuid())
+  tenantId       String
+  tenant         Tenant            @relation(fields: [tenantId], references: [id])
+  storeId        String
+  store          Store             @relation(fields: [storeId], references: [id])
+  templateId     String
+  template       ChecklistTemplate @relation(fields: [templateId], references: [id])
+  conductedBy    String
+  conductor      User              @relation(fields: [conductedBy], references: [id])
+  status         String            @default("IN_PROGRESS") // IN_PROGRESS, COMPLETED, CANCELLED
+  completionRate Float             @default(0)
+  notes          String?
+  startedAt      DateTime          @default(now())
+  completedAt    DateTime?
+
+  entries ChecklistEntry[]
+
+  @@index([tenantId])
+  @@index([storeId])
+  @@index([conductedBy])
+}
+
+model ChecklistEntry {
+  id          String           @id @default(cuid())
+  sessionId   String
+  session     ChecklistSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  itemId      String
+  item        ChecklistItem    @relation(fields: [itemId], references: [id])
+  valueBool   Boolean?
+  valueText   String?
+  valueNumber Float?
+  photoPath   String?
+  comment     String?
+  answeredAt  DateTime         @default(now())
+
+  @@unique([sessionId, itemId])
+  @@index([sessionId])
+}
+
+// ============================================================
+// SOP Bibliothek — Standard Operating Procedures
+// ============================================================
+
+model SopCategory {
+  id        String   @id @default(cuid())
+  tenantId  String?
+  tenant    Tenant?  @relation(fields: [tenantId], references: [id])
+  name      String
+  sortOrder Int      @default(0)
+  isActive  Boolean  @default(true)
+
+  documents Sop[]
+
+  @@index([tenantId])
+}
+
+model Sop {
+  id             String       @id @default(cuid())
+  tenantId       String?
+  tenant         Tenant?      @relation(fields: [tenantId], references: [id])
+  categoryId     String
+  category       SopCategory  @relation(fields: [categoryId], references: [id])
+  title          String
+  content        String       // Markdown
+  version        Int          @default(1)
+  status         String       @default("DRAFT") // DRAFT, PUBLISHED, ARCHIVED
+  createdBy      String
+  creator        User         @relation(fields: [createdBy], references: [id])
+  attachmentPath String?
+  publishedAt    DateTime?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  acknowledgments SopAcknowledgment[]
+
+  @@index([tenantId])
+  @@index([categoryId])
+}
+
+model SopAcknowledgment {
+  id             String   @id @default(cuid())
+  sopId          String
+  sop            Sop      @relation(fields: [sopId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+  acknowledgedAt DateTime @default(now())
+
+  @@unique([sopId, userId])
+  @@index([sopId])
+}
+
+// ============================================================
+// VM Foto-Compliance — Foto-basierte VM-Compliance-Checks
+// ============================================================
+
+model VmGuideline {
+  id             String   @id @default(cuid())
+  tenantId       String
+  tenant         Tenant   @relation(fields: [tenantId], references: [id])
+  name           String
+  description    String?
+  category       String?  // z.B. "Schaufenster", "Eingang", "Kasse"
+  referencePhoto String?  // Pfad zum Referenzbild
+  isActive       Boolean  @default(true)
+  sortOrder      Int      @default(0)
+  createdBy      String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  submissions VmSubmission[]
+
+  @@index([tenantId])
+}
+
+model VmSubmission {
+  id           String       @id @default(cuid())
+  tenantId     String
+  tenant       Tenant       @relation(fields: [tenantId], references: [id])
+  guidelineId  String
+  guideline    VmGuideline  @relation(fields: [guidelineId], references: [id])
+  storeId      String
+  store        Store        @relation(fields: [storeId], references: [id])
+  submittedBy  String
+  submitter    User         @relation("VmSubmitter", fields: [submittedBy], references: [id])
+  photoPath    String
+  status       String       @default("PENDING") // PENDING, APPROVED, REJECTED
+  reviewedBy   String?
+  reviewer     User?        @relation("VmReviewer", fields: [reviewedBy], references: [id])
+  reviewNote   String?
+  submittedAt  DateTime     @default(now())
+  reviewedAt   DateTime?
+
+  @@index([tenantId])
+  @@index([storeId])
+  @@index([guidelineId])
+  @@index([status])
+}
+
+// ============================================================
+// Store Standards — Store-Standards definieren, messen, benchmarken
+// ============================================================
+
+model StandardCategory {
+  id          String   @id @default(cuid())
+  tenantId    String?
+  tenant      Tenant?  @relation(fields: [tenantId], references: [id])
+  name        String
+  description String?
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+
+  definitions StandardDefinition[]
+
+  @@index([tenantId])
+}
+
+model StandardDefinition {
+  id          String           @id @default(cuid())
+  categoryId  String
+  category    StandardCategory @relation(fields: [categoryId], references: [id])
+  tenantId    String?
+  tenant      Tenant?          @relation(fields: [tenantId], references: [id])
+  name        String
+  description String?
+  unit        String?          // z.B. "%", "min", "€", "Anzahl"
+  targetValue Float
+  operator    String           @default("GTE") // GTE, LTE, EQ, GT, LT
+  weight      Float            @default(1)
+  isActive    Boolean          @default(true)
+  sortOrder   Int              @default(0)
+
+  scores StandardScore[]
+
+  @@index([categoryId])
+  @@index([tenantId])
+}
+
+model StandardEvaluation {
+  id           String    @id @default(cuid())
+  tenantId     String
+  tenant       Tenant    @relation(fields: [tenantId], references: [id])
+  storeId      String
+  store        Store     @relation(fields: [storeId], references: [id])
+  evaluatedBy  String
+  evaluator    User      @relation(fields: [evaluatedBy], references: [id])
+  period       String    // z.B. "2025-KW12" oder "2025-03"
+  overallScore Float?
+  notes        String?
+  status       String    @default("IN_PROGRESS") // IN_PROGRESS, COMPLETED
+  evaluatedAt  DateTime  @default(now())
+  completedAt  DateTime?
+
+  scores StandardScore[]
+
+  @@index([tenantId])
+  @@index([storeId])
+  @@index([evaluatedBy])
+}
+
+model StandardScore {
+  id           String             @id @default(cuid())
+  evaluationId String
+  evaluation   StandardEvaluation @relation(fields: [evaluationId], references: [id], onDelete: Cascade)
+  definitionId String
+  definition   StandardDefinition @relation(fields: [definitionId], references: [id])
+  actualValue  Float
+  passed       Boolean
+  score        Float              // 0-100
+  comment      String?
+
+  @@unique([evaluationId, definitionId])
+  @@index([evaluationId])
+}
+
+// ============================================================
+// KPI Dashboard (Pulse) — Tägliche Store-KPIs
+// ============================================================
+
+model KpiEntry {
+  id           String   @id @default(cuid())
+  tenantId     String
+  tenant       Tenant   @relation(fields: [tenantId], references: [id])
+  storeId      String
+  store        Store    @relation(fields: [storeId], references: [id])
+  date         String   // ISO date "2025-03-12"
+  revenue      Float    @default(0)
+  transactions Int      @default(0)
+  footfall     Int?
+  unitsSold    Int?
+  staffHours   Float?
+  enteredBy    String
+  user         User     @relation("KpiEntries", fields: [enteredBy], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([storeId, date])
+  @@index([tenantId])
+  @@index([storeId])
+  @@index([date])
+}
+
+// ============================================================
+// Budget Tracker — Budget-Planung und Kostenverfolgung
+// ============================================================
+
+model BudgetPeriod {
+  id         String   @id @default(cuid())
+  tenantId   String
+  tenant     Tenant   @relation(fields: [tenantId], references: [id])
+  storeId    String
+  store      Store    @relation(fields: [storeId], references: [id])
+  period     String   // z.B. "2025-03" oder "2025-Q1"
+  budgetType String   @default("MONTHLY") // MONTHLY, QUARTERLY, YEARLY
+  revenue    Float    @default(0) // Budget-Ziel Umsatz
+  cogs       Float    @default(0) // Cost of Goods Sold
+  labor      Float    @default(0) // Personalkosten
+  rent       Float    @default(0) // Miete
+  marketing  Float    @default(0) // Marketing-Budget
+  other      Float    @default(0) // Sonstige Kosten
+  notes      String?
+  createdBy  String
+  user       User     @relation("BudgetPeriods", fields: [createdBy], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  actuals BudgetActual[]
+
+  @@unique([storeId, period, budgetType])
+  @@index([tenantId])
+  @@index([storeId])
+}
+
+model BudgetActual {
+  id             String       @id @default(cuid())
+  budgetPeriodId String
+  budgetPeriod   BudgetPeriod @relation(fields: [budgetPeriodId], references: [id], onDelete: Cascade)
+  category       String       // REVENUE, COGS, LABOR, RENT, MARKETING, OTHER
+  actualAmount   Float
+  date           String       // ISO date
+  description    String?
+  enteredBy      String
+  createdAt      DateTime     @default(now())
+
+  @@index([budgetPeriodId])
+}
+
+// ============================================================
+// Forecast — Umsatz- und Performance-Prognosen
+// ============================================================
+
+model Forecast {
+  id              String   @id @default(cuid())
+  tenantId        String
+  tenant          Tenant   @relation(fields: [tenantId], references: [id])
+  storeId         String
+  store           Store    @relation(fields: [storeId], references: [id])
+  period          String   // z.B. "2025-03" oder "2025-KW12"
+  forecastType    String   @default("REVENUE") // REVENUE, TRANSACTIONS, FOOTFALL
+  forecastValue   Float
+  actualValue     Float?
+  confidence      Float?   // 0-100
+  method          String   @default("MANUAL") // MANUAL, TREND, AI
+  notes           String?
+  createdBy       String
+  user            User     @relation("Forecasts", fields: [createdBy], references: [id])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@unique([storeId, period, forecastType])
+  @@index([tenantId])
+  @@index([storeId])
+}
+
+// ============================================================
+// Loss Prevention — Schwund-Erkennung und Verlustprävention
+// ============================================================
+
+model LossIncident {
+  id            String   @id @default(cuid())
+  tenantId      String
+  tenant        Tenant   @relation(fields: [tenantId], references: [id])
+  storeId       String
+  store         Store    @relation(fields: [storeId], references: [id])
+  incidentDate  String   // ISO date
+  category      String   // THEFT, DAMAGE, ADMIN_ERROR, SUPPLIER, OTHER
+  amount        Float    // Wert in EUR/Cent
+  description   String
+  severity      String   @default("MEDIUM") // LOW, MEDIUM, HIGH, CRITICAL
+  status        String   @default("OPEN") // OPEN, INVESTIGATING, RESOLVED, CLOSED
+  resolution    String?
+  reportedBy    String
+  reporter      User     @relation("LossReporter", fields: [reportedBy], references: [id])
+  assignedTo    String?
+  assignee      User?    @relation("LossAssignee", fields: [assignedTo], references: [id])
+  photoPath     String?
+  resolvedAt    DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([tenantId])
+  @@index([storeId])
+  @@index([status])
+  @@index([incidentDate])
+}
+
+// ============================================================
+// Inventory — Bestandsmanagement und Inventur
+// ============================================================
+
+model InventoryCount {
+  id           String   @id @default(cuid())
+  tenantId     String
+  tenant       Tenant   @relation(fields: [tenantId], references: [id])
+  storeId      String
+  store        Store    @relation(fields: [storeId], references: [id])
+  countDate    String   // ISO date
+  countType    String   @default("FULL") // FULL, PARTIAL, CYCLE
+  status       String   @default("IN_PROGRESS") // IN_PROGRESS, COMPLETED, CANCELLED
+  totalItems   Int      @default(0)
+  countedItems Int      @default(0)
+  discrepancies Int     @default(0)
+  totalValue   Float    @default(0)
+  notes        String?
+  conductedBy  String
+  conductor    User     @relation("InventoryConductor", fields: [conductedBy], references: [id])
+  completedAt  DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  items InventoryItem[]
+
+  @@index([tenantId])
+  @@index([storeId])
+  @@index([countDate])
+}
+
+model InventoryItem {
+  id             String         @id @default(cuid())
+  countId        String
+  count          InventoryCount @relation(fields: [countId], references: [id], onDelete: Cascade)
+  sku            String
+  productName    String
+  category       String?
+  expectedQty    Int            @default(0)
+  actualQty      Int            @default(0)
+  unitPrice      Float          @default(0)
+  discrepancy    Int            @default(0) // actualQty - expectedQty
+  discrepancyValue Float        @default(0)
+  notes          String?
+  countedAt      DateTime?
+
+  @@unique([countId, sku])
+  @@index([countId])
+}
+
+// ============================================================
+// Floor in Echtzeit — Live Floor, FR Tracking, VM Guidelines, Maintenance
+// ============================================================
+
+model FloorZone {
+  id          String   @id @default(cuid())
+  tenantId    String
+  tenant      Tenant   @relation(fields: [tenantId], references: [id])
+  storeId     String
+  store       Store    @relation(fields: [storeId], references: [id])
+  name        String
+  description String?
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  positions FloorStaffPosition[]
+
+  @@index([tenantId])
+  @@index([storeId])
+}
+
+model FloorStaffPosition {
+  id        String    @id @default(cuid())
+  tenantId  String
+  tenant    Tenant    @relation(fields: [tenantId], references: [id])
+  storeId   String
+  store     Store     @relation(fields: [storeId], references: [id])
+  zoneId    String?
+  zone      FloorZone? @relation(fields: [zoneId], references: [id])
+  userId    String
+  user      User      @relation("FloorPositionUser", fields: [userId], references: [id])
+  userName  String    // denormalized for quick display
+  role      String?   // staff role on floor
+  status    String    @default("ON_FLOOR") // ON_FLOOR, ON_BREAK, OFF_FLOOR, CASHIER
+  startedAt DateTime  @default(now())
+  endedAt   DateTime?
+  notes     String?
+  updatedBy String
+  updater   User      @relation("FloorPositionUpdater", fields: [updatedBy], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@index([tenantId, storeId])
+  @@index([storeId, status])
+}
+
+model FootfallEntry {
+  id             String   @id @default(cuid())
+  tenantId       String
+  tenant         Tenant   @relation(fields: [tenantId], references: [id])
+  storeId        String
+  store          Store    @relation(fields: [storeId], references: [id])
+  date           String   // ISO date "2025-03-12"
+  hour           Int?     // 0-23, null = daily aggregate
+  footfall       Int      @default(0)
+  revenue        Float    @default(0)
+  transactions   Int      @default(0)
+  conversionRate Float?
+  enteredBy      String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([storeId, date, hour])
+  @@index([tenantId])
+  @@index([storeId])
+  @@index([date])
+}
+
+model VmGuidelineDoc {
+  id            String    @id @default(cuid())
+  tenantId      String
+  tenant        Tenant    @relation(fields: [tenantId], references: [id])
+  title         String
+  category      String?   // z.B. "Schaufenster", "Eingang", "Warenträger"
+  content       String    // Markdown
+  version       Int       @default(1)
+  status        String    @default("DRAFT") // DRAFT, PUBLISHED, ARCHIVED
+  effectiveFrom String?   // ISO date
+  effectiveTo   String?   // ISO date
+  createdBy     String
+  publishedAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  images VmGuidelineImage[]
+
+  @@index([tenantId])
+  @@index([status])
+}
+
+model VmGuidelineImage {
+  id            String         @id @default(cuid())
+  guidelineDocId String
+  guidelineDoc  VmGuidelineDoc @relation(fields: [guidelineDocId], references: [id], onDelete: Cascade)
+  imagePath     String
+  caption       String?
+  sortOrder     Int            @default(0)
+  createdAt     DateTime       @default(now())
+
+  @@index([guidelineDocId])
+}
+
+model MaintenanceRequest {
+  id            String    @id @default(cuid())
+  tenantId      String
+  tenant        Tenant    @relation(fields: [tenantId], references: [id])
+  storeId       String
+  store         Store     @relation(fields: [storeId], references: [id])
+  title         String
+  description   String
+  category      String    @default("OTHER") // ELECTRICAL, PLUMBING, HVAC, FIXTURE, IT, OTHER
+  priority      String    @default("MEDIUM") // LOW, MEDIUM, HIGH, URGENT
+  status        String    @default("OPEN") // OPEN, IN_PROGRESS, WAITING_PARTS, RESOLVED, CLOSED
+  reportedBy    String
+  reporter      User      @relation("MaintenanceReporter", fields: [reportedBy], references: [id])
+  assignedTo    String?
+  assignee      User?     @relation("MaintenanceAssignee", fields: [assignedTo], references: [id])
+  estimatedCost Float?
+  actualCost    Float?
+  photoPath     String?
+  resolvedAt    DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([tenantId])
+  @@index([storeId])
+  @@index([status])
+  @@index([priority])
 }

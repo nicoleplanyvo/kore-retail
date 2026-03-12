@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { api } from '../lib/api';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export function useInventoryStores() {
-  return useQuery({ queryKey: ['inventory', 'stores'], queryFn: () => api.get('/tools/inventory/stores').then((r) => r.data) });
+  return useQuery({ queryKey: ['inventory', 'stores'], queryFn: () => api<any[]>('/api/tools/inventory/stores') });
 }
 
 export function useInventoryCounts(page = 1, storeId?: string, status?: string) {
@@ -12,7 +14,7 @@ export function useInventoryCounts(page = 1, storeId?: string, status?: string) 
       const params = new URLSearchParams({ page: String(page), pageSize: '20' });
       if (storeId) params.set('storeId', storeId);
       if (status) params.set('status', status);
-      return api.get(`/tools/inventory/counts?${params}`).then((r) => r.data);
+      return api<{ data: any[]; total: number }>(`/api/tools/inventory/counts?${params}`);
     },
   });
 }
@@ -20,7 +22,7 @@ export function useInventoryCounts(page = 1, storeId?: string, status?: string) 
 export function useInventoryCount(id: string) {
   return useQuery({
     queryKey: ['inventory', 'count', id],
-    queryFn: () => api.get(`/tools/inventory/counts/${id}`).then((r) => r.data),
+    queryFn: () => api<any>(`/api/tools/inventory/counts/${id}`),
     enabled: !!id,
   });
 }
@@ -28,6 +30,6 @@ export function useInventoryCount(id: string) {
 export function useInventorySummary() {
   return useQuery({
     queryKey: ['inventory', 'summary'],
-    queryFn: () => api.get('/tools/inventory/summary').then((r) => r.data),
+    queryFn: () => api<any>('/api/tools/inventory/summary'),
   });
 }

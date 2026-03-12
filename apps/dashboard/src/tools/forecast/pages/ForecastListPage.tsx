@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useForecasts, useForecastStores } from '../../../hooks/useForecast';
 
-const TYPE_LABELS: Record<string, string> = {
+const TYPE_LABELS: any = {
   REVENUE: 'Umsatz',
   FOOTFALL: 'Kundenfrequenz',
   STAFFING: 'Personal',
   INVENTORY: 'Bestand',
 };
 
-const METHOD_LABELS: Record<string, string> = {
+const METHOD_LABELS: any = {
   MANUAL: 'Manuell',
   MOVING_AVG: 'Gleitender Ø',
   LINEAR: 'Linear',
@@ -59,19 +59,19 @@ export function ForecastListPage() {
       ) : (
         <>
           <div className="space-y-md">
-            {forecasts.map((f: Record<string, unknown>) => {
+            {forecasts.map((f: any) => {
               const deviation = f.actualValue != null
                 ? Math.abs(((Number(f.actualValue) - Number(f.forecastValue)) / Number(f.forecastValue)) * 100)
                 : null;
               return (
-                <Link key={f.id as string} to={`/tools/forecast/${f.id}`} className="block bg-kore-white border border-kore-border p-lg hover:border-kore-brass transition-colors">
+                <Link key={f.id} to={`/tools/forecast/${f.id}`} className="block bg-kore-white border border-kore-border p-lg hover:border-kore-brass transition-colors">
                   <div className="flex items-center justify-between">
                     <div>
-                      <span className="text-body font-medium text-kore-ink">{(f.store as Record<string, string>)?.name}</span>
+                      <span className="text-body font-medium text-kore-ink">{(f.store as any)?.name}</span>
                       <div className="flex items-center gap-md mt-xs">
-                        <span className="text-small px-sm py-px border border-kore-border bg-kore-bg text-kore-ink">{TYPE_LABELS[f.forecastType as string] ?? f.forecastType}</span>
-                        <span className="text-small text-kore-mid">{METHOD_LABELS[f.method as string] ?? f.method}</span>
-                        <span className="text-small text-kore-faint">{f.period as string}</span>
+                        <span className="text-small px-sm py-px border border-kore-border bg-kore-bg text-kore-ink">{TYPE_LABELS[f.forecastType] ?? String(f.forecastType)}</span>
+                        <span className="text-small text-kore-mid">{METHOD_LABELS[f.method] ?? String(f.method)}</span>
+                        <span className="text-small text-kore-faint">{f.period}</span>
                       </div>
                     </div>
                     <div className="text-right">

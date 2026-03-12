@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { auditRequestSchema } from '@kore/validators';
-import { resend, auditNotificationEmail, auditConfirmationEmail, } from '../lib/resend.js';
+import { auditRequestSchema } from '../shared/validators.js';
+import { sendEmail, auditNotificationEmail, auditConfirmationEmail, } from '../lib/email.js';
 export const auditRouter = Router();
 auditRouter.post('/', async (req, res) => {
     try {
@@ -15,19 +15,14 @@ auditRouter.post('/', async (req, res) => {
         }
         const data = result.data;
         // Send emails
-        if (resend) {
-            const [notification, confirmation] = await Promise.all([
-                resend.emails.send(auditNotificationEmail(data)),
-                resend.emails.send(auditConfirmationEmail(data)),
-            ]);
-            if (notification.error || confirmation.error) {
-                console.error('Resend error:', notification.error || confirmation.error);
-                res.status(500).json({ error: 'E-Mail konnte nicht gesendet werden.' });
-                return;
-            }
-        }
-        else {
-            console.log('[DEV] Audit form submission:', data);
+        const [notification, confirmation] = await Promise.all([
+            sendEmail(auditNotificationEmail(data)),
+            sendEmail(auditConfirmationEmail(data)),
+        ]);
+        if (!notification.success || !confirmation.success) {
+            console.error('Email error:', notification.error || confirmation.error);
+            res.status(500).json({ error: 'E-Mail konnte nicht gesendet werden.' });
+            return;
         }
         res.json({ success: true });
     }

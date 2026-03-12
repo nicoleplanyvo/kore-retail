@@ -3,7 +3,7 @@ import prisma from '../../lib/prisma.js';
 import { authenticate, requireMinRole } from '../../middleware/auth.js';
 
 export const adminToolsRouter: RouterType = Router();
-adminToolsRouter.use(authenticate, requireMinRole('store_manager'));
+adminToolsRouter.use(authenticate, requireMinRole('regional_manager'));
 
 // GET /api/admin/tools — 34 Tools gruppiert nach Kategorie mit Assignment-Counts
 adminToolsRouter.get('/', async (_req, res) => {

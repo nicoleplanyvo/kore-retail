@@ -1,10 +1,10 @@
 import { Router, type Router as RouterType } from 'express';
-import { contactFormSchema } from '@kore/validators';
+import { contactFormSchema } from '../shared/validators.js';
 import {
-  resend,
+  sendEmail,
   contactNotificationEmail,
   contactConfirmationEmail,
-} from '../lib/resend.js';
+} from '../lib/email.js';
 
 export const contactRouter: RouterType = Router();
 
@@ -23,19 +23,15 @@ contactRouter.post('/', async (req, res) => {
     const data = result.data;
 
     // Send emails
-    if (resend) {
-      const [notification, confirmation] = await Promise.all([
-        resend.emails.send(contactNotificationEmail(data)),
-        resend.emails.send(contactConfirmationEmail(data)),
-      ]);
+    const [notification, confirmation] = await Promise.all([
+      sendEmail(contactNotificationEmail(data)),
+      sendEmail(contactConfirmationEmail(data)),
+    ]);
 
-      if (notification.error || confirmation.error) {
-        console.error('Resend error:', notification.error || confirmation.error);
-        res.status(500).json({ error: 'E-Mail konnte nicht gesendet werden.' });
-        return;
-      }
-    } else {
-      console.log('[DEV] Contact form submission:', data);
+    if (!notification.success || !confirmation.success) {
+      console.error('Email error:', notification.error || confirmation.error);
+      res.status(500).json({ error: 'E-Mail konnte nicht gesendet werden.' });
+      return;
     }
 
     res.json({ success: true });
