@@ -1073,6 +1073,93 @@ exports.Prisma.NewsletterViewScalarFieldEnum = {
   viewedAt: 'viewedAt'
 };
 
+exports.Prisma.ConversionGoalScalarFieldEnum = {
+  id: 'id',
+  storeId: 'storeId',
+  period: 'period',
+  targetConversion: 'targetConversion',
+  targetAvgBasket: 'targetAvgBasket',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ClientProfileScalarFieldEnum = {
+  id: 'id',
+  storeId: 'storeId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  email: 'email',
+  phone: 'phone',
+  preferences: 'preferences',
+  vipLevel: 'vipLevel',
+  totalPurchases: 'totalPurchases',
+  lastVisit: 'lastVisit',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ClientInteractionScalarFieldEnum = {
+  id: 'id',
+  clientId: 'clientId',
+  userId: 'userId',
+  type: 'type',
+  date: 'date',
+  notes: 'notes',
+  purchaseAmount: 'purchaseAmount',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ClientTaskScalarFieldEnum = {
+  id: 'id',
+  clientId: 'clientId',
+  userId: 'userId',
+  title: 'title',
+  dueDate: 'dueDate',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.StockCalloutScalarFieldEnum = {
+  id: 'id',
+  storeId: 'storeId',
+  sku: 'sku',
+  productName: 'productName',
+  currentStock: 'currentStock',
+  reorderPoint: 'reorderPoint',
+  requestedQty: 'requestedQty',
+  urgency: 'urgency',
+  status: 'status',
+  reportedBy: 'reportedBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CustomerOrderScalarFieldEnum = {
+  id: 'id',
+  storeId: 'storeId',
+  orderNumber: 'orderNumber',
+  customerName: 'customerName',
+  customerEmail: 'customerEmail',
+  status: 'status',
+  trackingNumber: 'trackingNumber',
+  carrier: 'carrier',
+  estimatedDelivery: 'estimatedDelivery',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OrderStatusUpdateScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  status: 'status',
+  updatedBy: 'updatedBy',
+  notes: 'notes',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1161,7 +1248,14 @@ exports.Prisma.ModelName = {
   TeamMessageRead: 'TeamMessageRead',
   Newsletter: 'Newsletter',
   NewsletterSection: 'NewsletterSection',
-  NewsletterView: 'NewsletterView'
+  NewsletterView: 'NewsletterView',
+  ConversionGoal: 'ConversionGoal',
+  ClientProfile: 'ClientProfile',
+  ClientInteraction: 'ClientInteraction',
+  ClientTask: 'ClientTask',
+  StockCallout: 'StockCallout',
+  CustomerOrder: 'CustomerOrder',
+  OrderStatusUpdate: 'OrderStatusUpdate'
 };
 
 /**

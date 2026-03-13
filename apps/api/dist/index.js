@@ -43,6 +43,10 @@ import { briefingsRouter } from './routes/tools/briefings/index.js';
 import { handoverRouter } from './routes/tools/handover/index.js';
 import { teamPushRouter } from './routes/tools/team-push/index.js';
 import { newsletterRouter } from './routes/tools/newsletter/index.js';
+import { frConversionRouter } from './routes/tools/fr-conversion/index.js';
+import { clientelingRouter } from './routes/tools/clienteling/index.js';
+import { stockCalloutsRouter } from './routes/tools/stock-callouts/index.js';
+import { trackTraceRouter } from './routes/tools/track-trace/index.js';
 import { toolsRouter } from './routes/tools/index.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -140,6 +144,14 @@ app.use('/api/tools/handover', handoverRouter);
 app.use('/api/tools/team-push', teamPushRouter);
 // Tools — Newsletter
 app.use('/api/tools/newsletter', newsletterRouter);
+// Tools — FR Conversion
+app.use('/api/tools/fr-conversion', frConversionRouter);
+// Tools — Clienteling
+app.use('/api/tools/clienteling', clientelingRouter);
+// Tools — Stock Callouts
+app.use('/api/tools/stock-callouts', stockCalloutsRouter);
+// Tools — Track & Trace
+app.use('/api/tools/track-trace', trackTraceRouter);
 // Statische Uploads mit Auth-Schutz
 const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? path.join(process.cwd(), 'uploads');
 app.use('/api/uploads', authenticate, express.static(UPLOAD_DIR));

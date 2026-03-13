@@ -1298,3 +1298,19 @@ export interface TeamMessageRead { id: string; messageId: string; userId: string
 export interface Newsletter { id: string; tenantId: string; title: string; content: string | null; coverImagePath: string | null; status: NewsletterStatus; publishedAt: string | null; createdBy: string; }
 export interface NewsletterSection { id: string; newsletterId: string; title: string; content: string; sortOrder: number; }
 export interface NewsletterView { id: string; newsletterId: string; userId: string; viewedAt: string; }
+
+// ── Kat.7: Customer, Clienteling & Stock ──────────────
+
+export type ClientInteractionType = 'VISIT' | 'CALL' | 'EMAIL' | 'EVENT';
+export type ClientTaskStatus = 'OPEN' | 'DONE' | 'CANCELLED';
+export type StockCalloutUrgency = 'LOW' | 'NORMAL' | 'HIGH' | 'CRITICAL';
+export type StockCalloutStatus = 'OPEN' | 'ORDERED' | 'RECEIVED' | 'CANCELLED';
+export type OrderStatus = 'ORDERED' | 'SHIPPED' | 'IN_TRANSIT' | 'DELIVERED' | 'RETURNED';
+
+export interface ConversionGoal { id: string; storeId: string; period: string; targetConversion: number | null; targetAvgBasket: number | null; }
+export interface ClientProfile { id: string; storeId: string; firstName: string; lastName: string; email: string | null; phone: string | null; preferences: string | null; vipLevel: string | null; totalPurchases: number; lastVisit: string | null; createdBy: string; }
+export interface ClientInteraction { id: string; clientId: string; userId: string; type: ClientInteractionType; date: string; notes: string | null; purchaseAmount: number | null; }
+export interface ClientTask { id: string; clientId: string; userId: string; title: string; dueDate: string | null; status: ClientTaskStatus; }
+export interface StockCallout { id: string; storeId: string; sku: string; productName: string; currentStock: number; reorderPoint: number; requestedQty: number; urgency: StockCalloutUrgency; status: StockCalloutStatus; reportedBy: string; }
+export interface CustomerOrder { id: string; storeId: string; orderNumber: string; customerName: string; customerEmail: string | null; status: OrderStatus; trackingNumber: string | null; carrier: string | null; estimatedDelivery: string | null; createdBy: string; }
+export interface OrderStatusUpdate { id: string; orderId: string; status: string; updatedBy: string; notes: string | null; }

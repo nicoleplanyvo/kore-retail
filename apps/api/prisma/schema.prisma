@@ -66,6 +66,12 @@ model User {
   teamMessageReads     TeamMessageRead[]         @relation("TeamMessageReads")
   newslettersCreated   Newsletter[]              @relation("NewsletterCreator")
   newsletterViews      NewsletterView[]          @relation("NewsletterViews")
+  clientsCreated       ClientProfile[]       @relation("ClientCreator")
+  clientInteractions   ClientInteraction[]   @relation("ClientInteractions")
+  clientTasks          ClientTask[]          @relation("ClientTasks")
+  stockCallouts        StockCallout[]        @relation("StockCalloutReporter")
+  ordersCreated        CustomerOrder[]       @relation("OrderCreator")
+  orderStatusUpdates   OrderStatusUpdate[]   @relation("OrderStatusUpdater")
 
   @@index([tenantId])
 }
@@ -180,6 +186,10 @@ model Store {
   wellbeingCheckIns WellbeingCheckIn[]
   briefings    Briefing[]
   handovers    Handover[]
+  conversionGoals    ConversionGoal[]
+  clientProfiles     ClientProfile[]
+  stockCallouts      StockCallout[]
+  customerOrders     CustomerOrder[]
 
   @@index([tenantId])
   @@index([regionId])
@@ -1565,4 +1575,111 @@ model NewsletterView {
   viewedAt     DateTime   @default(now())
 
   @@unique([newsletterId, userId])
+}
+
+// ── Kat.7: Customer, Clienteling & Stock ──────────
+
+model ConversionGoal {
+  id              String   @id @default(cuid())
+  storeId         String
+  store           Store    @relation(fields: [storeId], references: [id])
+  period          String
+  targetConversion Float?
+  targetAvgBasket Float?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@unique([storeId, period])
+}
+
+model ClientProfile {
+  id             String   @id @default(cuid())
+  storeId        String
+  store          Store    @relation(fields: [storeId], references: [id])
+  firstName      String
+  lastName       String
+  email          String?
+  phone          String?
+  preferences    String?
+  vipLevel       String?
+  totalPurchases Float    @default(0)
+  lastVisit      DateTime?
+  createdBy      String
+  creator        User     @relation("ClientCreator", fields: [createdBy], references: [id])
+  interactions   ClientInteraction[]
+  tasks          ClientTask[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model ClientInteraction {
+  id             String        @id @default(cuid())
+  clientId       String
+  client         ClientProfile @relation(fields: [clientId], references: [id])
+  userId         String
+  user           User          @relation("ClientInteractions", fields: [userId], references: [id])
+  type           String        @default("VISIT")
+  date           DateTime      @default(now())
+  notes          String?
+  purchaseAmount Float?
+  createdAt      DateTime      @default(now())
+}
+
+model ClientTask {
+  id        String        @id @default(cuid())
+  clientId  String
+  client    ClientProfile @relation(fields: [clientId], references: [id])
+  userId    String
+  user      User          @relation("ClientTasks", fields: [userId], references: [id])
+  title     String
+  dueDate   DateTime?
+  status    String        @default("OPEN")
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+model StockCallout {
+  id            String   @id @default(cuid())
+  storeId       String
+  store         Store    @relation(fields: [storeId], references: [id])
+  sku           String
+  productName   String
+  currentStock  Int      @default(0)
+  reorderPoint  Int      @default(0)
+  requestedQty  Int      @default(0)
+  urgency       String   @default("NORMAL")
+  status        String   @default("OPEN")
+  reportedBy    String
+  reporter      User     @relation("StockCalloutReporter", fields: [reportedBy], references: [id])
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model CustomerOrder {
+  id                String              @id @default(cuid())
+  storeId           String
+  store             Store               @relation(fields: [storeId], references: [id])
+  orderNumber       String
+  customerName      String
+  customerEmail     String?
+  status            String              @default("ORDERED")
+  trackingNumber    String?
+  carrier           String?
+  estimatedDelivery DateTime?
+  createdBy         String
+  creator           User                @relation("OrderCreator", fields: [createdBy], references: [id])
+  statusUpdates     OrderStatusUpdate[]
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+}
+
+model OrderStatusUpdate {
+  id        String        @id @default(cuid())
+  orderId   String
+  order     CustomerOrder @relation(fields: [orderId], references: [id])
+  status    String
+  updatedBy String
+  updater   User          @relation("OrderStatusUpdater", fields: [updatedBy], references: [id])
+  notes     String?
+  createdAt DateTime      @default(now())
 }

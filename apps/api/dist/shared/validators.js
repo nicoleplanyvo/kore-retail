@@ -700,4 +700,15 @@ export const teamMessageCreateSchema = z.object({ title: z.string().min(1), body
 export const newsletterCreateSchema = z.object({ title: z.string().min(1), content: z.string().optional() });
 export const newsletterUpdateSchema = z.object({ title: z.string().min(1).optional(), content: z.string().optional(), status: z.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED']).optional() });
 export const newsletterSectionSchema = z.object({ title: z.string().min(1), content: z.string().min(1), sortOrder: z.number().int().optional() });
+// ── Kat.7: Customer, Clienteling & Stock Validators ───
+export const conversionGoalSchema = z.object({ period: z.string().min(1), targetConversion: z.number().optional(), targetAvgBasket: z.number().optional() });
+export const clientProfileCreateSchema = z.object({ firstName: z.string().min(1), lastName: z.string().min(1), email: z.string().email().optional(), phone: z.string().optional(), preferences: z.string().optional(), vipLevel: z.string().optional() });
+export const clientProfileUpdateSchema = z.object({ firstName: z.string().min(1).optional(), lastName: z.string().min(1).optional(), email: z.string().email().optional(), phone: z.string().optional(), preferences: z.string().optional(), vipLevel: z.string().optional(), totalPurchases: z.number().optional(), lastVisit: z.string().optional() });
+export const clientInteractionSchema = z.object({ type: z.enum(['VISIT', 'CALL', 'EMAIL', 'EVENT']).optional(), notes: z.string().optional(), purchaseAmount: z.number().optional() });
+export const clientTaskSchema = z.object({ title: z.string().min(1), dueDate: z.string().optional(), status: z.enum(['OPEN', 'DONE', 'CANCELLED']).optional() });
+export const stockCalloutCreateSchema = z.object({ sku: z.string().min(1), productName: z.string().min(1), currentStock: z.number().int().optional(), reorderPoint: z.number().int().optional(), requestedQty: z.number().int().min(1), urgency: z.enum(['LOW', 'NORMAL', 'HIGH', 'CRITICAL']).optional() });
+export const stockCalloutUpdateSchema = z.object({ status: z.enum(['OPEN', 'ORDERED', 'RECEIVED', 'CANCELLED']).optional(), currentStock: z.number().int().optional(), requestedQty: z.number().int().optional(), urgency: z.enum(['LOW', 'NORMAL', 'HIGH', 'CRITICAL']).optional() });
+export const customerOrderCreateSchema = z.object({ orderNumber: z.string().min(1), customerName: z.string().min(1), customerEmail: z.string().email().optional(), trackingNumber: z.string().optional(), carrier: z.string().optional(), estimatedDelivery: z.string().optional() });
+export const customerOrderUpdateSchema = z.object({ status: z.enum(['ORDERED', 'SHIPPED', 'IN_TRANSIT', 'DELIVERED', 'RETURNED']).optional(), trackingNumber: z.string().optional(), carrier: z.string().optional(), estimatedDelivery: z.string().optional() });
+export const orderStatusUpdateSchema = z.object({ status: z.string().min(1), notes: z.string().optional() });
 //# sourceMappingURL=validators.js.map

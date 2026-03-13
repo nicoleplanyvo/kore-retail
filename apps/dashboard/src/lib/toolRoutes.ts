@@ -40,6 +40,11 @@ export const TOOL_ROUTES: Record<string, string> = {
   'komm.handover': '/tools/handover',
   'komm.team_push': '/tools/team-push',
   'komm.team_newsletter': '/tools/newsletter',
+  // Customer, Clienteling & Stock
+  'customer.fr_conversion': '/tools/fr-conversion',
+  'customer.clienteling_crm': '/tools/clienteling',
+  'customer.stock_callouts': '/tools/stock-callouts',
+  'customer.track_trace': '/tools/track-trace',
 };
 
 /**

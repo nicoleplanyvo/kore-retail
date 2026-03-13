@@ -43,6 +43,10 @@ import BriefingsRoutes from './tools/briefings/index';
 import HandoverRoutes from './tools/handover/index';
 import TeamPushRoutes from './tools/team-push/index';
 import NewsletterRoutes from './tools/newsletter/index';
+import FrConversionRoutes from './tools/fr-conversion/index';
+import ClientelingRoutes from './tools/clienteling/index';
+import StockCalloutsRoutes from './tools/stock-callouts/index';
+import TrackTraceRoutes from './tools/track-trace/index';
 
 export function App() {
   return (
@@ -97,6 +101,12 @@ export function App() {
           <Route path="/tools/handover/*" element={<HandoverRoutes />} />
           <Route path="/tools/team-push/*" element={<TeamPushRoutes />} />
           <Route path="/tools/newsletter/*" element={<NewsletterRoutes />} />
+
+          {/* Tools — Customer, Clienteling & Stock */}
+          <Route path="/tools/fr-conversion/*" element={<FrConversionRoutes />} />
+          <Route path="/tools/clienteling/*" element={<ClientelingRoutes />} />
+          <Route path="/tools/stock-callouts/*" element={<StockCalloutsRoutes />} />
+          <Route path="/tools/track-trace/*" element={<TrackTraceRoutes />} />
 
           {/* === Verwaltung (Admin) === */}
 

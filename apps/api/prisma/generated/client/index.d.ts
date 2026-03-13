@@ -398,6 +398,41 @@ export type NewsletterSection = $Result.DefaultSelection<Prisma.$NewsletterSecti
  * 
  */
 export type NewsletterView = $Result.DefaultSelection<Prisma.$NewsletterViewPayload>
+/**
+ * Model ConversionGoal
+ * 
+ */
+export type ConversionGoal = $Result.DefaultSelection<Prisma.$ConversionGoalPayload>
+/**
+ * Model ClientProfile
+ * 
+ */
+export type ClientProfile = $Result.DefaultSelection<Prisma.$ClientProfilePayload>
+/**
+ * Model ClientInteraction
+ * 
+ */
+export type ClientInteraction = $Result.DefaultSelection<Prisma.$ClientInteractionPayload>
+/**
+ * Model ClientTask
+ * 
+ */
+export type ClientTask = $Result.DefaultSelection<Prisma.$ClientTaskPayload>
+/**
+ * Model StockCallout
+ * 
+ */
+export type StockCallout = $Result.DefaultSelection<Prisma.$StockCalloutPayload>
+/**
+ * Model CustomerOrder
+ * 
+ */
+export type CustomerOrder = $Result.DefaultSelection<Prisma.$CustomerOrderPayload>
+/**
+ * Model OrderStatusUpdate
+ * 
+ */
+export type OrderStatusUpdate = $Result.DefaultSelection<Prisma.$OrderStatusUpdatePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -1289,6 +1324,76 @@ export class PrismaClient<
     * ```
     */
   get newsletterView(): Prisma.NewsletterViewDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.conversionGoal`: Exposes CRUD operations for the **ConversionGoal** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ConversionGoals
+    * const conversionGoals = await prisma.conversionGoal.findMany()
+    * ```
+    */
+  get conversionGoal(): Prisma.ConversionGoalDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.clientProfile`: Exposes CRUD operations for the **ClientProfile** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ClientProfiles
+    * const clientProfiles = await prisma.clientProfile.findMany()
+    * ```
+    */
+  get clientProfile(): Prisma.ClientProfileDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.clientInteraction`: Exposes CRUD operations for the **ClientInteraction** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ClientInteractions
+    * const clientInteractions = await prisma.clientInteraction.findMany()
+    * ```
+    */
+  get clientInteraction(): Prisma.ClientInteractionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.clientTask`: Exposes CRUD operations for the **ClientTask** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ClientTasks
+    * const clientTasks = await prisma.clientTask.findMany()
+    * ```
+    */
+  get clientTask(): Prisma.ClientTaskDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.stockCallout`: Exposes CRUD operations for the **StockCallout** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more StockCallouts
+    * const stockCallouts = await prisma.stockCallout.findMany()
+    * ```
+    */
+  get stockCallout(): Prisma.StockCalloutDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.customerOrder`: Exposes CRUD operations for the **CustomerOrder** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CustomerOrders
+    * const customerOrders = await prisma.customerOrder.findMany()
+    * ```
+    */
+  get customerOrder(): Prisma.CustomerOrderDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.orderStatusUpdate`: Exposes CRUD operations for the **OrderStatusUpdate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more OrderStatusUpdates
+    * const orderStatusUpdates = await prisma.orderStatusUpdate.findMany()
+    * ```
+    */
+  get orderStatusUpdate(): Prisma.OrderStatusUpdateDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1799,7 +1904,14 @@ export namespace Prisma {
     TeamMessageRead: 'TeamMessageRead',
     Newsletter: 'Newsletter',
     NewsletterSection: 'NewsletterSection',
-    NewsletterView: 'NewsletterView'
+    NewsletterView: 'NewsletterView',
+    ConversionGoal: 'ConversionGoal',
+    ClientProfile: 'ClientProfile',
+    ClientInteraction: 'ClientInteraction',
+    ClientTask: 'ClientTask',
+    StockCallout: 'StockCallout',
+    CustomerOrder: 'CustomerOrder',
+    OrderStatusUpdate: 'OrderStatusUpdate'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1815,7 +1927,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "tenant" | "region" | "store" | "toolDefinition" | "storeToolAssignment" | "userStoreAssignment" | "subscription" | "auditLog" | "dataProcessingConsent" | "userRegionAssignment" | "auditTemplate" | "auditCategory" | "auditCriterion" | "auditSession" | "auditResponse" | "checklistTemplate" | "checklistSection" | "checklistItem" | "checklistSession" | "checklistEntry" | "sopCategory" | "sop" | "sopAcknowledgment" | "vmGuideline" | "vmSubmission" | "standardCategory" | "standardDefinition" | "standardEvaluation" | "standardScore" | "kpiEntry" | "budgetPeriod" | "budgetActual" | "forecast" | "lossIncident" | "inventoryCount" | "inventoryItem" | "floorZone" | "floorStaffPosition" | "footfallEntry" | "vmGuidelineDoc" | "vmGuidelineImage" | "maintenanceRequest" | "course" | "courseModule" | "courseEnrollment" | "certificate" | "trainingLog" | "challenge" | "challengeParticipant" | "onboardingTemplate" | "onboardingStep" | "onboardingJourney" | "onboardingProgress" | "coachingSession" | "developmentPlan" | "developmentGoal" | "developmentReview" | "appraisalCycle" | "appraisal" | "shiftTemplate" | "shiftEntry" | "shiftSwapRequest" | "pulseSurvey" | "pulseQuestion" | "pulseResponse" | "pulseAnswer" | "wellbeingCheckIn" | "wellbeingResource" | "briefing" | "briefingAcknowledgment" | "handover" | "teamMessage" | "teamMessageRead" | "newsletter" | "newsletterSection" | "newsletterView"
+      modelProps: "user" | "tenant" | "region" | "store" | "toolDefinition" | "storeToolAssignment" | "userStoreAssignment" | "subscription" | "auditLog" | "dataProcessingConsent" | "userRegionAssignment" | "auditTemplate" | "auditCategory" | "auditCriterion" | "auditSession" | "auditResponse" | "checklistTemplate" | "checklistSection" | "checklistItem" | "checklistSession" | "checklistEntry" | "sopCategory" | "sop" | "sopAcknowledgment" | "vmGuideline" | "vmSubmission" | "standardCategory" | "standardDefinition" | "standardEvaluation" | "standardScore" | "kpiEntry" | "budgetPeriod" | "budgetActual" | "forecast" | "lossIncident" | "inventoryCount" | "inventoryItem" | "floorZone" | "floorStaffPosition" | "footfallEntry" | "vmGuidelineDoc" | "vmGuidelineImage" | "maintenanceRequest" | "course" | "courseModule" | "courseEnrollment" | "certificate" | "trainingLog" | "challenge" | "challengeParticipant" | "onboardingTemplate" | "onboardingStep" | "onboardingJourney" | "onboardingProgress" | "coachingSession" | "developmentPlan" | "developmentGoal" | "developmentReview" | "appraisalCycle" | "appraisal" | "shiftTemplate" | "shiftEntry" | "shiftSwapRequest" | "pulseSurvey" | "pulseQuestion" | "pulseResponse" | "pulseAnswer" | "wellbeingCheckIn" | "wellbeingResource" | "briefing" | "briefingAcknowledgment" | "handover" | "teamMessage" | "teamMessageRead" | "newsletter" | "newsletterSection" | "newsletterView" | "conversionGoal" | "clientProfile" | "clientInteraction" | "clientTask" | "stockCallout" | "customerOrder" | "orderStatusUpdate"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -7517,6 +7629,524 @@ export namespace Prisma {
           }
         }
       }
+      ConversionGoal: {
+        payload: Prisma.$ConversionGoalPayload<ExtArgs>
+        fields: Prisma.ConversionGoalFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ConversionGoalFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionGoalPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ConversionGoalFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionGoalPayload>
+          }
+          findFirst: {
+            args: Prisma.ConversionGoalFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionGoalPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ConversionGoalFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionGoalPayload>
+          }
+          findMany: {
+            args: Prisma.ConversionGoalFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionGoalPayload>[]
+          }
+          create: {
+            args: Prisma.ConversionGoalCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionGoalPayload>
+          }
+          createMany: {
+            args: Prisma.ConversionGoalCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ConversionGoalCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionGoalPayload>[]
+          }
+          delete: {
+            args: Prisma.ConversionGoalDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionGoalPayload>
+          }
+          update: {
+            args: Prisma.ConversionGoalUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionGoalPayload>
+          }
+          deleteMany: {
+            args: Prisma.ConversionGoalDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ConversionGoalUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ConversionGoalUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionGoalPayload>[]
+          }
+          upsert: {
+            args: Prisma.ConversionGoalUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionGoalPayload>
+          }
+          aggregate: {
+            args: Prisma.ConversionGoalAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateConversionGoal>
+          }
+          groupBy: {
+            args: Prisma.ConversionGoalGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ConversionGoalGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ConversionGoalCountArgs<ExtArgs>
+            result: $Utils.Optional<ConversionGoalCountAggregateOutputType> | number
+          }
+        }
+      }
+      ClientProfile: {
+        payload: Prisma.$ClientProfilePayload<ExtArgs>
+        fields: Prisma.ClientProfileFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ClientProfileFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientProfilePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ClientProfileFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientProfilePayload>
+          }
+          findFirst: {
+            args: Prisma.ClientProfileFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientProfilePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ClientProfileFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientProfilePayload>
+          }
+          findMany: {
+            args: Prisma.ClientProfileFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientProfilePayload>[]
+          }
+          create: {
+            args: Prisma.ClientProfileCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientProfilePayload>
+          }
+          createMany: {
+            args: Prisma.ClientProfileCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ClientProfileCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientProfilePayload>[]
+          }
+          delete: {
+            args: Prisma.ClientProfileDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientProfilePayload>
+          }
+          update: {
+            args: Prisma.ClientProfileUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientProfilePayload>
+          }
+          deleteMany: {
+            args: Prisma.ClientProfileDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ClientProfileUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ClientProfileUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientProfilePayload>[]
+          }
+          upsert: {
+            args: Prisma.ClientProfileUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientProfilePayload>
+          }
+          aggregate: {
+            args: Prisma.ClientProfileAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClientProfile>
+          }
+          groupBy: {
+            args: Prisma.ClientProfileGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClientProfileGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ClientProfileCountArgs<ExtArgs>
+            result: $Utils.Optional<ClientProfileCountAggregateOutputType> | number
+          }
+        }
+      }
+      ClientInteraction: {
+        payload: Prisma.$ClientInteractionPayload<ExtArgs>
+        fields: Prisma.ClientInteractionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ClientInteractionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientInteractionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ClientInteractionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientInteractionPayload>
+          }
+          findFirst: {
+            args: Prisma.ClientInteractionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientInteractionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ClientInteractionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientInteractionPayload>
+          }
+          findMany: {
+            args: Prisma.ClientInteractionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientInteractionPayload>[]
+          }
+          create: {
+            args: Prisma.ClientInteractionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientInteractionPayload>
+          }
+          createMany: {
+            args: Prisma.ClientInteractionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ClientInteractionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientInteractionPayload>[]
+          }
+          delete: {
+            args: Prisma.ClientInteractionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientInteractionPayload>
+          }
+          update: {
+            args: Prisma.ClientInteractionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientInteractionPayload>
+          }
+          deleteMany: {
+            args: Prisma.ClientInteractionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ClientInteractionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ClientInteractionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientInteractionPayload>[]
+          }
+          upsert: {
+            args: Prisma.ClientInteractionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientInteractionPayload>
+          }
+          aggregate: {
+            args: Prisma.ClientInteractionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClientInteraction>
+          }
+          groupBy: {
+            args: Prisma.ClientInteractionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClientInteractionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ClientInteractionCountArgs<ExtArgs>
+            result: $Utils.Optional<ClientInteractionCountAggregateOutputType> | number
+          }
+        }
+      }
+      ClientTask: {
+        payload: Prisma.$ClientTaskPayload<ExtArgs>
+        fields: Prisma.ClientTaskFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ClientTaskFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientTaskPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ClientTaskFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientTaskPayload>
+          }
+          findFirst: {
+            args: Prisma.ClientTaskFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientTaskPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ClientTaskFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientTaskPayload>
+          }
+          findMany: {
+            args: Prisma.ClientTaskFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientTaskPayload>[]
+          }
+          create: {
+            args: Prisma.ClientTaskCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientTaskPayload>
+          }
+          createMany: {
+            args: Prisma.ClientTaskCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ClientTaskCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientTaskPayload>[]
+          }
+          delete: {
+            args: Prisma.ClientTaskDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientTaskPayload>
+          }
+          update: {
+            args: Prisma.ClientTaskUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientTaskPayload>
+          }
+          deleteMany: {
+            args: Prisma.ClientTaskDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ClientTaskUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ClientTaskUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientTaskPayload>[]
+          }
+          upsert: {
+            args: Prisma.ClientTaskUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientTaskPayload>
+          }
+          aggregate: {
+            args: Prisma.ClientTaskAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClientTask>
+          }
+          groupBy: {
+            args: Prisma.ClientTaskGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClientTaskGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ClientTaskCountArgs<ExtArgs>
+            result: $Utils.Optional<ClientTaskCountAggregateOutputType> | number
+          }
+        }
+      }
+      StockCallout: {
+        payload: Prisma.$StockCalloutPayload<ExtArgs>
+        fields: Prisma.StockCalloutFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StockCalloutFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StockCalloutPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StockCalloutFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StockCalloutPayload>
+          }
+          findFirst: {
+            args: Prisma.StockCalloutFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StockCalloutPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StockCalloutFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StockCalloutPayload>
+          }
+          findMany: {
+            args: Prisma.StockCalloutFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StockCalloutPayload>[]
+          }
+          create: {
+            args: Prisma.StockCalloutCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StockCalloutPayload>
+          }
+          createMany: {
+            args: Prisma.StockCalloutCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.StockCalloutCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StockCalloutPayload>[]
+          }
+          delete: {
+            args: Prisma.StockCalloutDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StockCalloutPayload>
+          }
+          update: {
+            args: Prisma.StockCalloutUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StockCalloutPayload>
+          }
+          deleteMany: {
+            args: Prisma.StockCalloutDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StockCalloutUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.StockCalloutUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StockCalloutPayload>[]
+          }
+          upsert: {
+            args: Prisma.StockCalloutUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StockCalloutPayload>
+          }
+          aggregate: {
+            args: Prisma.StockCalloutAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStockCallout>
+          }
+          groupBy: {
+            args: Prisma.StockCalloutGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StockCalloutGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StockCalloutCountArgs<ExtArgs>
+            result: $Utils.Optional<StockCalloutCountAggregateOutputType> | number
+          }
+        }
+      }
+      CustomerOrder: {
+        payload: Prisma.$CustomerOrderPayload<ExtArgs>
+        fields: Prisma.CustomerOrderFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CustomerOrderFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerOrderPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CustomerOrderFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerOrderPayload>
+          }
+          findFirst: {
+            args: Prisma.CustomerOrderFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerOrderPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CustomerOrderFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerOrderPayload>
+          }
+          findMany: {
+            args: Prisma.CustomerOrderFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerOrderPayload>[]
+          }
+          create: {
+            args: Prisma.CustomerOrderCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerOrderPayload>
+          }
+          createMany: {
+            args: Prisma.CustomerOrderCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CustomerOrderCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerOrderPayload>[]
+          }
+          delete: {
+            args: Prisma.CustomerOrderDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerOrderPayload>
+          }
+          update: {
+            args: Prisma.CustomerOrderUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerOrderPayload>
+          }
+          deleteMany: {
+            args: Prisma.CustomerOrderDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CustomerOrderUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CustomerOrderUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerOrderPayload>[]
+          }
+          upsert: {
+            args: Prisma.CustomerOrderUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerOrderPayload>
+          }
+          aggregate: {
+            args: Prisma.CustomerOrderAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCustomerOrder>
+          }
+          groupBy: {
+            args: Prisma.CustomerOrderGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CustomerOrderGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CustomerOrderCountArgs<ExtArgs>
+            result: $Utils.Optional<CustomerOrderCountAggregateOutputType> | number
+          }
+        }
+      }
+      OrderStatusUpdate: {
+        payload: Prisma.$OrderStatusUpdatePayload<ExtArgs>
+        fields: Prisma.OrderStatusUpdateFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OrderStatusUpdateFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusUpdatePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OrderStatusUpdateFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusUpdatePayload>
+          }
+          findFirst: {
+            args: Prisma.OrderStatusUpdateFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusUpdatePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OrderStatusUpdateFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusUpdatePayload>
+          }
+          findMany: {
+            args: Prisma.OrderStatusUpdateFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusUpdatePayload>[]
+          }
+          create: {
+            args: Prisma.OrderStatusUpdateCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusUpdatePayload>
+          }
+          createMany: {
+            args: Prisma.OrderStatusUpdateCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.OrderStatusUpdateCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusUpdatePayload>[]
+          }
+          delete: {
+            args: Prisma.OrderStatusUpdateDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusUpdatePayload>
+          }
+          update: {
+            args: Prisma.OrderStatusUpdateUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusUpdatePayload>
+          }
+          deleteMany: {
+            args: Prisma.OrderStatusUpdateDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OrderStatusUpdateUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.OrderStatusUpdateUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusUpdatePayload>[]
+          }
+          upsert: {
+            args: Prisma.OrderStatusUpdateUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderStatusUpdatePayload>
+          }
+          aggregate: {
+            args: Prisma.OrderStatusUpdateAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOrderStatusUpdate>
+          }
+          groupBy: {
+            args: Prisma.OrderStatusUpdateGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OrderStatusUpdateGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.OrderStatusUpdateCountArgs<ExtArgs>
+            result: $Utils.Optional<OrderStatusUpdateCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -7702,6 +8332,13 @@ export namespace Prisma {
     newsletter?: NewsletterOmit
     newsletterSection?: NewsletterSectionOmit
     newsletterView?: NewsletterViewOmit
+    conversionGoal?: ConversionGoalOmit
+    clientProfile?: ClientProfileOmit
+    clientInteraction?: ClientInteractionOmit
+    clientTask?: ClientTaskOmit
+    stockCallout?: StockCalloutOmit
+    customerOrder?: CustomerOrderOmit
+    orderStatusUpdate?: OrderStatusUpdateOmit
   }
 
   /* Types for Logging */
@@ -7826,6 +8463,12 @@ export namespace Prisma {
     teamMessageReads: number
     newslettersCreated: number
     newsletterViews: number
+    clientsCreated: number
+    clientInteractions: number
+    clientTasks: number
+    stockCallouts: number
+    ordersCreated: number
+    orderStatusUpdates: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7873,6 +8516,12 @@ export namespace Prisma {
     teamMessageReads?: boolean | UserCountOutputTypeCountTeamMessageReadsArgs
     newslettersCreated?: boolean | UserCountOutputTypeCountNewslettersCreatedArgs
     newsletterViews?: boolean | UserCountOutputTypeCountNewsletterViewsArgs
+    clientsCreated?: boolean | UserCountOutputTypeCountClientsCreatedArgs
+    clientInteractions?: boolean | UserCountOutputTypeCountClientInteractionsArgs
+    clientTasks?: boolean | UserCountOutputTypeCountClientTasksArgs
+    stockCallouts?: boolean | UserCountOutputTypeCountStockCalloutsArgs
+    ordersCreated?: boolean | UserCountOutputTypeCountOrdersCreatedArgs
+    orderStatusUpdates?: boolean | UserCountOutputTypeCountOrderStatusUpdatesArgs
   }
 
   // Custom InputTypes
@@ -8192,6 +8841,48 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountNewsletterViewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: NewsletterViewWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountClientsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientProfileWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountClientInteractionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientInteractionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountClientTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientTaskWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountStockCalloutsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StockCalloutWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountOrdersCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CustomerOrderWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountOrderStatusUpdatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrderStatusUpdateWhereInput
   }
 
 
@@ -8614,6 +9305,10 @@ export namespace Prisma {
     wellbeingCheckIns: number
     briefings: number
     handovers: number
+    conversionGoals: number
+    clientProfiles: number
+    stockCallouts: number
+    customerOrders: number
   }
 
   export type StoreCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8645,6 +9340,10 @@ export namespace Prisma {
     wellbeingCheckIns?: boolean | StoreCountOutputTypeCountWellbeingCheckInsArgs
     briefings?: boolean | StoreCountOutputTypeCountBriefingsArgs
     handovers?: boolean | StoreCountOutputTypeCountHandoversArgs
+    conversionGoals?: boolean | StoreCountOutputTypeCountConversionGoalsArgs
+    clientProfiles?: boolean | StoreCountOutputTypeCountClientProfilesArgs
+    stockCallouts?: boolean | StoreCountOutputTypeCountStockCalloutsArgs
+    customerOrders?: boolean | StoreCountOutputTypeCountCustomerOrdersArgs
   }
 
   // Custom InputTypes
@@ -8852,6 +9551,34 @@ export namespace Prisma {
    */
   export type StoreCountOutputTypeCountHandoversArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: HandoverWhereInput
+  }
+
+  /**
+   * StoreCountOutputType without action
+   */
+  export type StoreCountOutputTypeCountConversionGoalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversionGoalWhereInput
+  }
+
+  /**
+   * StoreCountOutputType without action
+   */
+  export type StoreCountOutputTypeCountClientProfilesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientProfileWhereInput
+  }
+
+  /**
+   * StoreCountOutputType without action
+   */
+  export type StoreCountOutputTypeCountStockCalloutsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StockCalloutWhereInput
+  }
+
+  /**
+   * StoreCountOutputType without action
+   */
+  export type StoreCountOutputTypeCountCustomerOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CustomerOrderWhereInput
   }
 
 
@@ -9942,6 +10669,77 @@ export namespace Prisma {
 
 
   /**
+   * Count Type ClientProfileCountOutputType
+   */
+
+  export type ClientProfileCountOutputType = {
+    interactions: number
+    tasks: number
+  }
+
+  export type ClientProfileCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    interactions?: boolean | ClientProfileCountOutputTypeCountInteractionsArgs
+    tasks?: boolean | ClientProfileCountOutputTypeCountTasksArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ClientProfileCountOutputType without action
+   */
+  export type ClientProfileCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientProfileCountOutputType
+     */
+    select?: ClientProfileCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ClientProfileCountOutputType without action
+   */
+  export type ClientProfileCountOutputTypeCountInteractionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientInteractionWhereInput
+  }
+
+  /**
+   * ClientProfileCountOutputType without action
+   */
+  export type ClientProfileCountOutputTypeCountTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientTaskWhereInput
+  }
+
+
+  /**
+   * Count Type CustomerOrderCountOutputType
+   */
+
+  export type CustomerOrderCountOutputType = {
+    statusUpdates: number
+  }
+
+  export type CustomerOrderCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    statusUpdates?: boolean | CustomerOrderCountOutputTypeCountStatusUpdatesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CustomerOrderCountOutputType without action
+   */
+  export type CustomerOrderCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerOrderCountOutputType
+     */
+    select?: CustomerOrderCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CustomerOrderCountOutputType without action
+   */
+  export type CustomerOrderCountOutputTypeCountStatusUpdatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrderStatusUpdateWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -10194,6 +10992,12 @@ export namespace Prisma {
     teamMessageReads?: boolean | User$teamMessageReadsArgs<ExtArgs>
     newslettersCreated?: boolean | User$newslettersCreatedArgs<ExtArgs>
     newsletterViews?: boolean | User$newsletterViewsArgs<ExtArgs>
+    clientsCreated?: boolean | User$clientsCreatedArgs<ExtArgs>
+    clientInteractions?: boolean | User$clientInteractionsArgs<ExtArgs>
+    clientTasks?: boolean | User$clientTasksArgs<ExtArgs>
+    stockCallouts?: boolean | User$stockCalloutsArgs<ExtArgs>
+    ordersCreated?: boolean | User$ordersCreatedArgs<ExtArgs>
+    orderStatusUpdates?: boolean | User$orderStatusUpdatesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -10285,6 +11089,12 @@ export namespace Prisma {
     teamMessageReads?: boolean | User$teamMessageReadsArgs<ExtArgs>
     newslettersCreated?: boolean | User$newslettersCreatedArgs<ExtArgs>
     newsletterViews?: boolean | User$newsletterViewsArgs<ExtArgs>
+    clientsCreated?: boolean | User$clientsCreatedArgs<ExtArgs>
+    clientInteractions?: boolean | User$clientInteractionsArgs<ExtArgs>
+    clientTasks?: boolean | User$clientTasksArgs<ExtArgs>
+    stockCallouts?: boolean | User$stockCalloutsArgs<ExtArgs>
+    ordersCreated?: boolean | User$ordersCreatedArgs<ExtArgs>
+    orderStatusUpdates?: boolean | User$orderStatusUpdatesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10342,6 +11152,12 @@ export namespace Prisma {
       teamMessageReads: Prisma.$TeamMessageReadPayload<ExtArgs>[]
       newslettersCreated: Prisma.$NewsletterPayload<ExtArgs>[]
       newsletterViews: Prisma.$NewsletterViewPayload<ExtArgs>[]
+      clientsCreated: Prisma.$ClientProfilePayload<ExtArgs>[]
+      clientInteractions: Prisma.$ClientInteractionPayload<ExtArgs>[]
+      clientTasks: Prisma.$ClientTaskPayload<ExtArgs>[]
+      stockCallouts: Prisma.$StockCalloutPayload<ExtArgs>[]
+      ordersCreated: Prisma.$CustomerOrderPayload<ExtArgs>[]
+      orderStatusUpdates: Prisma.$OrderStatusUpdatePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10793,6 +11609,12 @@ export namespace Prisma {
     teamMessageReads<T extends User$teamMessageReadsArgs<ExtArgs> = {}>(args?: Subset<T, User$teamMessageReadsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeamMessageReadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     newslettersCreated<T extends User$newslettersCreatedArgs<ExtArgs> = {}>(args?: Subset<T, User$newslettersCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsletterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     newsletterViews<T extends User$newsletterViewsArgs<ExtArgs> = {}>(args?: Subset<T, User$newsletterViewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsletterViewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    clientsCreated<T extends User$clientsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, User$clientsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientProfilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    clientInteractions<T extends User$clientInteractionsArgs<ExtArgs> = {}>(args?: Subset<T, User$clientInteractionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientInteractionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    clientTasks<T extends User$clientTasksArgs<ExtArgs> = {}>(args?: Subset<T, User$clientTasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    stockCallouts<T extends User$stockCalloutsArgs<ExtArgs> = {}>(args?: Subset<T, User$stockCalloutsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockCalloutPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ordersCreated<T extends User$ordersCreatedArgs<ExtArgs> = {}>(args?: Subset<T, User$ordersCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomerOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    orderStatusUpdates<T extends User$orderStatusUpdatesArgs<ExtArgs> = {}>(args?: Subset<T, User$orderStatusUpdatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderStatusUpdatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -12298,6 +13120,150 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: NewsletterViewScalarFieldEnum | NewsletterViewScalarFieldEnum[]
+  }
+
+  /**
+   * User.clientsCreated
+   */
+  export type User$clientsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientProfile
+     */
+    select?: ClientProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientProfile
+     */
+    omit?: ClientProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientProfileInclude<ExtArgs> | null
+    where?: ClientProfileWhereInput
+    orderBy?: ClientProfileOrderByWithRelationInput | ClientProfileOrderByWithRelationInput[]
+    cursor?: ClientProfileWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClientProfileScalarFieldEnum | ClientProfileScalarFieldEnum[]
+  }
+
+  /**
+   * User.clientInteractions
+   */
+  export type User$clientInteractionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientInteraction
+     */
+    select?: ClientInteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientInteraction
+     */
+    omit?: ClientInteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInteractionInclude<ExtArgs> | null
+    where?: ClientInteractionWhereInput
+    orderBy?: ClientInteractionOrderByWithRelationInput | ClientInteractionOrderByWithRelationInput[]
+    cursor?: ClientInteractionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClientInteractionScalarFieldEnum | ClientInteractionScalarFieldEnum[]
+  }
+
+  /**
+   * User.clientTasks
+   */
+  export type User$clientTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientTask
+     */
+    select?: ClientTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientTask
+     */
+    omit?: ClientTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTaskInclude<ExtArgs> | null
+    where?: ClientTaskWhereInput
+    orderBy?: ClientTaskOrderByWithRelationInput | ClientTaskOrderByWithRelationInput[]
+    cursor?: ClientTaskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClientTaskScalarFieldEnum | ClientTaskScalarFieldEnum[]
+  }
+
+  /**
+   * User.stockCallouts
+   */
+  export type User$stockCalloutsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockCallout
+     */
+    select?: StockCalloutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StockCallout
+     */
+    omit?: StockCalloutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StockCalloutInclude<ExtArgs> | null
+    where?: StockCalloutWhereInput
+    orderBy?: StockCalloutOrderByWithRelationInput | StockCalloutOrderByWithRelationInput[]
+    cursor?: StockCalloutWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StockCalloutScalarFieldEnum | StockCalloutScalarFieldEnum[]
+  }
+
+  /**
+   * User.ordersCreated
+   */
+  export type User$ordersCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerOrder
+     */
+    select?: CustomerOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerOrder
+     */
+    omit?: CustomerOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerOrderInclude<ExtArgs> | null
+    where?: CustomerOrderWhereInput
+    orderBy?: CustomerOrderOrderByWithRelationInput | CustomerOrderOrderByWithRelationInput[]
+    cursor?: CustomerOrderWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CustomerOrderScalarFieldEnum | CustomerOrderScalarFieldEnum[]
+  }
+
+  /**
+   * User.orderStatusUpdates
+   */
+  export type User$orderStatusUpdatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusUpdate
+     */
+    select?: OrderStatusUpdateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderStatusUpdate
+     */
+    omit?: OrderStatusUpdateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusUpdateInclude<ExtArgs> | null
+    where?: OrderStatusUpdateWhereInput
+    orderBy?: OrderStatusUpdateOrderByWithRelationInput | OrderStatusUpdateOrderByWithRelationInput[]
+    cursor?: OrderStatusUpdateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OrderStatusUpdateScalarFieldEnum | OrderStatusUpdateScalarFieldEnum[]
   }
 
   /**
@@ -15915,6 +16881,10 @@ export namespace Prisma {
     wellbeingCheckIns?: boolean | Store$wellbeingCheckInsArgs<ExtArgs>
     briefings?: boolean | Store$briefingsArgs<ExtArgs>
     handovers?: boolean | Store$handoversArgs<ExtArgs>
+    conversionGoals?: boolean | Store$conversionGoalsArgs<ExtArgs>
+    clientProfiles?: boolean | Store$clientProfilesArgs<ExtArgs>
+    stockCallouts?: boolean | Store$stockCalloutsArgs<ExtArgs>
+    customerOrders?: boolean | Store$customerOrdersArgs<ExtArgs>
     _count?: boolean | StoreCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["store"]>
 
@@ -15990,6 +16960,10 @@ export namespace Prisma {
     wellbeingCheckIns?: boolean | Store$wellbeingCheckInsArgs<ExtArgs>
     briefings?: boolean | Store$briefingsArgs<ExtArgs>
     handovers?: boolean | Store$handoversArgs<ExtArgs>
+    conversionGoals?: boolean | Store$conversionGoalsArgs<ExtArgs>
+    clientProfiles?: boolean | Store$clientProfilesArgs<ExtArgs>
+    stockCallouts?: boolean | Store$stockCalloutsArgs<ExtArgs>
+    customerOrders?: boolean | Store$customerOrdersArgs<ExtArgs>
     _count?: boolean | StoreCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type StoreIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -16034,6 +17008,10 @@ export namespace Prisma {
       wellbeingCheckIns: Prisma.$WellbeingCheckInPayload<ExtArgs>[]
       briefings: Prisma.$BriefingPayload<ExtArgs>[]
       handovers: Prisma.$HandoverPayload<ExtArgs>[]
+      conversionGoals: Prisma.$ConversionGoalPayload<ExtArgs>[]
+      clientProfiles: Prisma.$ClientProfilePayload<ExtArgs>[]
+      stockCallouts: Prisma.$StockCalloutPayload<ExtArgs>[]
+      customerOrders: Prisma.$CustomerOrderPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -16469,6 +17447,10 @@ export namespace Prisma {
     wellbeingCheckIns<T extends Store$wellbeingCheckInsArgs<ExtArgs> = {}>(args?: Subset<T, Store$wellbeingCheckInsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WellbeingCheckInPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     briefings<T extends Store$briefingsArgs<ExtArgs> = {}>(args?: Subset<T, Store$briefingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BriefingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     handovers<T extends Store$handoversArgs<ExtArgs> = {}>(args?: Subset<T, Store$handoversArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HandoverPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    conversionGoals<T extends Store$conversionGoalsArgs<ExtArgs> = {}>(args?: Subset<T, Store$conversionGoalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversionGoalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    clientProfiles<T extends Store$clientProfilesArgs<ExtArgs> = {}>(args?: Subset<T, Store$clientProfilesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientProfilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    stockCallouts<T extends Store$stockCalloutsArgs<ExtArgs> = {}>(args?: Subset<T, Store$stockCalloutsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockCalloutPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    customerOrders<T extends Store$customerOrdersArgs<ExtArgs> = {}>(args?: Subset<T, Store$customerOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomerOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -17589,6 +18571,102 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: HandoverScalarFieldEnum | HandoverScalarFieldEnum[]
+  }
+
+  /**
+   * Store.conversionGoals
+   */
+  export type Store$conversionGoalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionGoal
+     */
+    select?: ConversionGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionGoal
+     */
+    omit?: ConversionGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionGoalInclude<ExtArgs> | null
+    where?: ConversionGoalWhereInput
+    orderBy?: ConversionGoalOrderByWithRelationInput | ConversionGoalOrderByWithRelationInput[]
+    cursor?: ConversionGoalWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConversionGoalScalarFieldEnum | ConversionGoalScalarFieldEnum[]
+  }
+
+  /**
+   * Store.clientProfiles
+   */
+  export type Store$clientProfilesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientProfile
+     */
+    select?: ClientProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientProfile
+     */
+    omit?: ClientProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientProfileInclude<ExtArgs> | null
+    where?: ClientProfileWhereInput
+    orderBy?: ClientProfileOrderByWithRelationInput | ClientProfileOrderByWithRelationInput[]
+    cursor?: ClientProfileWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClientProfileScalarFieldEnum | ClientProfileScalarFieldEnum[]
+  }
+
+  /**
+   * Store.stockCallouts
+   */
+  export type Store$stockCalloutsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockCallout
+     */
+    select?: StockCalloutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StockCallout
+     */
+    omit?: StockCalloutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StockCalloutInclude<ExtArgs> | null
+    where?: StockCalloutWhereInput
+    orderBy?: StockCalloutOrderByWithRelationInput | StockCalloutOrderByWithRelationInput[]
+    cursor?: StockCalloutWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StockCalloutScalarFieldEnum | StockCalloutScalarFieldEnum[]
+  }
+
+  /**
+   * Store.customerOrders
+   */
+  export type Store$customerOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerOrder
+     */
+    select?: CustomerOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerOrder
+     */
+    omit?: CustomerOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerOrderInclude<ExtArgs> | null
+    where?: CustomerOrderWhereInput
+    orderBy?: CustomerOrderOrderByWithRelationInput | CustomerOrderOrderByWithRelationInput[]
+    cursor?: CustomerOrderWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CustomerOrderScalarFieldEnum | CustomerOrderScalarFieldEnum[]
   }
 
   /**
@@ -102692,6 +103770,8085 @@ export namespace Prisma {
 
 
   /**
+   * Model ConversionGoal
+   */
+
+  export type AggregateConversionGoal = {
+    _count: ConversionGoalCountAggregateOutputType | null
+    _avg: ConversionGoalAvgAggregateOutputType | null
+    _sum: ConversionGoalSumAggregateOutputType | null
+    _min: ConversionGoalMinAggregateOutputType | null
+    _max: ConversionGoalMaxAggregateOutputType | null
+  }
+
+  export type ConversionGoalAvgAggregateOutputType = {
+    targetConversion: number | null
+    targetAvgBasket: number | null
+  }
+
+  export type ConversionGoalSumAggregateOutputType = {
+    targetConversion: number | null
+    targetAvgBasket: number | null
+  }
+
+  export type ConversionGoalMinAggregateOutputType = {
+    id: string | null
+    storeId: string | null
+    period: string | null
+    targetConversion: number | null
+    targetAvgBasket: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ConversionGoalMaxAggregateOutputType = {
+    id: string | null
+    storeId: string | null
+    period: string | null
+    targetConversion: number | null
+    targetAvgBasket: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ConversionGoalCountAggregateOutputType = {
+    id: number
+    storeId: number
+    period: number
+    targetConversion: number
+    targetAvgBasket: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ConversionGoalAvgAggregateInputType = {
+    targetConversion?: true
+    targetAvgBasket?: true
+  }
+
+  export type ConversionGoalSumAggregateInputType = {
+    targetConversion?: true
+    targetAvgBasket?: true
+  }
+
+  export type ConversionGoalMinAggregateInputType = {
+    id?: true
+    storeId?: true
+    period?: true
+    targetConversion?: true
+    targetAvgBasket?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ConversionGoalMaxAggregateInputType = {
+    id?: true
+    storeId?: true
+    period?: true
+    targetConversion?: true
+    targetAvgBasket?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ConversionGoalCountAggregateInputType = {
+    id?: true
+    storeId?: true
+    period?: true
+    targetConversion?: true
+    targetAvgBasket?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ConversionGoalAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ConversionGoal to aggregate.
+     */
+    where?: ConversionGoalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConversionGoals to fetch.
+     */
+    orderBy?: ConversionGoalOrderByWithRelationInput | ConversionGoalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ConversionGoalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConversionGoals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConversionGoals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ConversionGoals
+    **/
+    _count?: true | ConversionGoalCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ConversionGoalAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ConversionGoalSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ConversionGoalMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ConversionGoalMaxAggregateInputType
+  }
+
+  export type GetConversionGoalAggregateType<T extends ConversionGoalAggregateArgs> = {
+        [P in keyof T & keyof AggregateConversionGoal]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateConversionGoal[P]>
+      : GetScalarType<T[P], AggregateConversionGoal[P]>
+  }
+
+
+
+
+  export type ConversionGoalGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversionGoalWhereInput
+    orderBy?: ConversionGoalOrderByWithAggregationInput | ConversionGoalOrderByWithAggregationInput[]
+    by: ConversionGoalScalarFieldEnum[] | ConversionGoalScalarFieldEnum
+    having?: ConversionGoalScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ConversionGoalCountAggregateInputType | true
+    _avg?: ConversionGoalAvgAggregateInputType
+    _sum?: ConversionGoalSumAggregateInputType
+    _min?: ConversionGoalMinAggregateInputType
+    _max?: ConversionGoalMaxAggregateInputType
+  }
+
+  export type ConversionGoalGroupByOutputType = {
+    id: string
+    storeId: string
+    period: string
+    targetConversion: number | null
+    targetAvgBasket: number | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ConversionGoalCountAggregateOutputType | null
+    _avg: ConversionGoalAvgAggregateOutputType | null
+    _sum: ConversionGoalSumAggregateOutputType | null
+    _min: ConversionGoalMinAggregateOutputType | null
+    _max: ConversionGoalMaxAggregateOutputType | null
+  }
+
+  type GetConversionGoalGroupByPayload<T extends ConversionGoalGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ConversionGoalGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ConversionGoalGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ConversionGoalGroupByOutputType[P]>
+            : GetScalarType<T[P], ConversionGoalGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ConversionGoalSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    storeId?: boolean
+    period?: boolean
+    targetConversion?: boolean
+    targetAvgBasket?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["conversionGoal"]>
+
+  export type ConversionGoalSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    storeId?: boolean
+    period?: boolean
+    targetConversion?: boolean
+    targetAvgBasket?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["conversionGoal"]>
+
+  export type ConversionGoalSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    storeId?: boolean
+    period?: boolean
+    targetConversion?: boolean
+    targetAvgBasket?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["conversionGoal"]>
+
+  export type ConversionGoalSelectScalar = {
+    id?: boolean
+    storeId?: boolean
+    period?: boolean
+    targetConversion?: boolean
+    targetAvgBasket?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ConversionGoalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "storeId" | "period" | "targetConversion" | "targetAvgBasket" | "createdAt" | "updatedAt", ExtArgs["result"]["conversionGoal"]>
+  export type ConversionGoalInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+  }
+  export type ConversionGoalIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+  }
+  export type ConversionGoalIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+  }
+
+  export type $ConversionGoalPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ConversionGoal"
+    objects: {
+      store: Prisma.$StorePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      storeId: string
+      period: string
+      targetConversion: number | null
+      targetAvgBasket: number | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["conversionGoal"]>
+    composites: {}
+  }
+
+  type ConversionGoalGetPayload<S extends boolean | null | undefined | ConversionGoalDefaultArgs> = $Result.GetResult<Prisma.$ConversionGoalPayload, S>
+
+  type ConversionGoalCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ConversionGoalFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ConversionGoalCountAggregateInputType | true
+    }
+
+  export interface ConversionGoalDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ConversionGoal'], meta: { name: 'ConversionGoal' } }
+    /**
+     * Find zero or one ConversionGoal that matches the filter.
+     * @param {ConversionGoalFindUniqueArgs} args - Arguments to find a ConversionGoal
+     * @example
+     * // Get one ConversionGoal
+     * const conversionGoal = await prisma.conversionGoal.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ConversionGoalFindUniqueArgs>(args: SelectSubset<T, ConversionGoalFindUniqueArgs<ExtArgs>>): Prisma__ConversionGoalClient<$Result.GetResult<Prisma.$ConversionGoalPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ConversionGoal that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ConversionGoalFindUniqueOrThrowArgs} args - Arguments to find a ConversionGoal
+     * @example
+     * // Get one ConversionGoal
+     * const conversionGoal = await prisma.conversionGoal.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ConversionGoalFindUniqueOrThrowArgs>(args: SelectSubset<T, ConversionGoalFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ConversionGoalClient<$Result.GetResult<Prisma.$ConversionGoalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ConversionGoal that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversionGoalFindFirstArgs} args - Arguments to find a ConversionGoal
+     * @example
+     * // Get one ConversionGoal
+     * const conversionGoal = await prisma.conversionGoal.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ConversionGoalFindFirstArgs>(args?: SelectSubset<T, ConversionGoalFindFirstArgs<ExtArgs>>): Prisma__ConversionGoalClient<$Result.GetResult<Prisma.$ConversionGoalPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ConversionGoal that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversionGoalFindFirstOrThrowArgs} args - Arguments to find a ConversionGoal
+     * @example
+     * // Get one ConversionGoal
+     * const conversionGoal = await prisma.conversionGoal.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ConversionGoalFindFirstOrThrowArgs>(args?: SelectSubset<T, ConversionGoalFindFirstOrThrowArgs<ExtArgs>>): Prisma__ConversionGoalClient<$Result.GetResult<Prisma.$ConversionGoalPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ConversionGoals that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversionGoalFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ConversionGoals
+     * const conversionGoals = await prisma.conversionGoal.findMany()
+     * 
+     * // Get first 10 ConversionGoals
+     * const conversionGoals = await prisma.conversionGoal.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const conversionGoalWithIdOnly = await prisma.conversionGoal.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ConversionGoalFindManyArgs>(args?: SelectSubset<T, ConversionGoalFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversionGoalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ConversionGoal.
+     * @param {ConversionGoalCreateArgs} args - Arguments to create a ConversionGoal.
+     * @example
+     * // Create one ConversionGoal
+     * const ConversionGoal = await prisma.conversionGoal.create({
+     *   data: {
+     *     // ... data to create a ConversionGoal
+     *   }
+     * })
+     * 
+     */
+    create<T extends ConversionGoalCreateArgs>(args: SelectSubset<T, ConversionGoalCreateArgs<ExtArgs>>): Prisma__ConversionGoalClient<$Result.GetResult<Prisma.$ConversionGoalPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ConversionGoals.
+     * @param {ConversionGoalCreateManyArgs} args - Arguments to create many ConversionGoals.
+     * @example
+     * // Create many ConversionGoals
+     * const conversionGoal = await prisma.conversionGoal.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ConversionGoalCreateManyArgs>(args?: SelectSubset<T, ConversionGoalCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ConversionGoals and returns the data saved in the database.
+     * @param {ConversionGoalCreateManyAndReturnArgs} args - Arguments to create many ConversionGoals.
+     * @example
+     * // Create many ConversionGoals
+     * const conversionGoal = await prisma.conversionGoal.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ConversionGoals and only return the `id`
+     * const conversionGoalWithIdOnly = await prisma.conversionGoal.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ConversionGoalCreateManyAndReturnArgs>(args?: SelectSubset<T, ConversionGoalCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversionGoalPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ConversionGoal.
+     * @param {ConversionGoalDeleteArgs} args - Arguments to delete one ConversionGoal.
+     * @example
+     * // Delete one ConversionGoal
+     * const ConversionGoal = await prisma.conversionGoal.delete({
+     *   where: {
+     *     // ... filter to delete one ConversionGoal
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ConversionGoalDeleteArgs>(args: SelectSubset<T, ConversionGoalDeleteArgs<ExtArgs>>): Prisma__ConversionGoalClient<$Result.GetResult<Prisma.$ConversionGoalPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ConversionGoal.
+     * @param {ConversionGoalUpdateArgs} args - Arguments to update one ConversionGoal.
+     * @example
+     * // Update one ConversionGoal
+     * const conversionGoal = await prisma.conversionGoal.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ConversionGoalUpdateArgs>(args: SelectSubset<T, ConversionGoalUpdateArgs<ExtArgs>>): Prisma__ConversionGoalClient<$Result.GetResult<Prisma.$ConversionGoalPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ConversionGoals.
+     * @param {ConversionGoalDeleteManyArgs} args - Arguments to filter ConversionGoals to delete.
+     * @example
+     * // Delete a few ConversionGoals
+     * const { count } = await prisma.conversionGoal.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ConversionGoalDeleteManyArgs>(args?: SelectSubset<T, ConversionGoalDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ConversionGoals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversionGoalUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ConversionGoals
+     * const conversionGoal = await prisma.conversionGoal.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ConversionGoalUpdateManyArgs>(args: SelectSubset<T, ConversionGoalUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ConversionGoals and returns the data updated in the database.
+     * @param {ConversionGoalUpdateManyAndReturnArgs} args - Arguments to update many ConversionGoals.
+     * @example
+     * // Update many ConversionGoals
+     * const conversionGoal = await prisma.conversionGoal.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ConversionGoals and only return the `id`
+     * const conversionGoalWithIdOnly = await prisma.conversionGoal.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ConversionGoalUpdateManyAndReturnArgs>(args: SelectSubset<T, ConversionGoalUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversionGoalPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ConversionGoal.
+     * @param {ConversionGoalUpsertArgs} args - Arguments to update or create a ConversionGoal.
+     * @example
+     * // Update or create a ConversionGoal
+     * const conversionGoal = await prisma.conversionGoal.upsert({
+     *   create: {
+     *     // ... data to create a ConversionGoal
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ConversionGoal we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ConversionGoalUpsertArgs>(args: SelectSubset<T, ConversionGoalUpsertArgs<ExtArgs>>): Prisma__ConversionGoalClient<$Result.GetResult<Prisma.$ConversionGoalPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ConversionGoals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversionGoalCountArgs} args - Arguments to filter ConversionGoals to count.
+     * @example
+     * // Count the number of ConversionGoals
+     * const count = await prisma.conversionGoal.count({
+     *   where: {
+     *     // ... the filter for the ConversionGoals we want to count
+     *   }
+     * })
+    **/
+    count<T extends ConversionGoalCountArgs>(
+      args?: Subset<T, ConversionGoalCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ConversionGoalCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ConversionGoal.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversionGoalAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ConversionGoalAggregateArgs>(args: Subset<T, ConversionGoalAggregateArgs>): Prisma.PrismaPromise<GetConversionGoalAggregateType<T>>
+
+    /**
+     * Group by ConversionGoal.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversionGoalGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ConversionGoalGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ConversionGoalGroupByArgs['orderBy'] }
+        : { orderBy?: ConversionGoalGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ConversionGoalGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetConversionGoalGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ConversionGoal model
+   */
+  readonly fields: ConversionGoalFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ConversionGoal.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ConversionGoalClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    store<T extends StoreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StoreDefaultArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ConversionGoal model
+   */
+  interface ConversionGoalFieldRefs {
+    readonly id: FieldRef<"ConversionGoal", 'String'>
+    readonly storeId: FieldRef<"ConversionGoal", 'String'>
+    readonly period: FieldRef<"ConversionGoal", 'String'>
+    readonly targetConversion: FieldRef<"ConversionGoal", 'Float'>
+    readonly targetAvgBasket: FieldRef<"ConversionGoal", 'Float'>
+    readonly createdAt: FieldRef<"ConversionGoal", 'DateTime'>
+    readonly updatedAt: FieldRef<"ConversionGoal", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ConversionGoal findUnique
+   */
+  export type ConversionGoalFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionGoal
+     */
+    select?: ConversionGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionGoal
+     */
+    omit?: ConversionGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionGoalInclude<ExtArgs> | null
+    /**
+     * Filter, which ConversionGoal to fetch.
+     */
+    where: ConversionGoalWhereUniqueInput
+  }
+
+  /**
+   * ConversionGoal findUniqueOrThrow
+   */
+  export type ConversionGoalFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionGoal
+     */
+    select?: ConversionGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionGoal
+     */
+    omit?: ConversionGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionGoalInclude<ExtArgs> | null
+    /**
+     * Filter, which ConversionGoal to fetch.
+     */
+    where: ConversionGoalWhereUniqueInput
+  }
+
+  /**
+   * ConversionGoal findFirst
+   */
+  export type ConversionGoalFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionGoal
+     */
+    select?: ConversionGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionGoal
+     */
+    omit?: ConversionGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionGoalInclude<ExtArgs> | null
+    /**
+     * Filter, which ConversionGoal to fetch.
+     */
+    where?: ConversionGoalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConversionGoals to fetch.
+     */
+    orderBy?: ConversionGoalOrderByWithRelationInput | ConversionGoalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ConversionGoals.
+     */
+    cursor?: ConversionGoalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConversionGoals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConversionGoals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConversionGoals.
+     */
+    distinct?: ConversionGoalScalarFieldEnum | ConversionGoalScalarFieldEnum[]
+  }
+
+  /**
+   * ConversionGoal findFirstOrThrow
+   */
+  export type ConversionGoalFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionGoal
+     */
+    select?: ConversionGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionGoal
+     */
+    omit?: ConversionGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionGoalInclude<ExtArgs> | null
+    /**
+     * Filter, which ConversionGoal to fetch.
+     */
+    where?: ConversionGoalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConversionGoals to fetch.
+     */
+    orderBy?: ConversionGoalOrderByWithRelationInput | ConversionGoalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ConversionGoals.
+     */
+    cursor?: ConversionGoalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConversionGoals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConversionGoals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConversionGoals.
+     */
+    distinct?: ConversionGoalScalarFieldEnum | ConversionGoalScalarFieldEnum[]
+  }
+
+  /**
+   * ConversionGoal findMany
+   */
+  export type ConversionGoalFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionGoal
+     */
+    select?: ConversionGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionGoal
+     */
+    omit?: ConversionGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionGoalInclude<ExtArgs> | null
+    /**
+     * Filter, which ConversionGoals to fetch.
+     */
+    where?: ConversionGoalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConversionGoals to fetch.
+     */
+    orderBy?: ConversionGoalOrderByWithRelationInput | ConversionGoalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ConversionGoals.
+     */
+    cursor?: ConversionGoalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConversionGoals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConversionGoals.
+     */
+    skip?: number
+    distinct?: ConversionGoalScalarFieldEnum | ConversionGoalScalarFieldEnum[]
+  }
+
+  /**
+   * ConversionGoal create
+   */
+  export type ConversionGoalCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionGoal
+     */
+    select?: ConversionGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionGoal
+     */
+    omit?: ConversionGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionGoalInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ConversionGoal.
+     */
+    data: XOR<ConversionGoalCreateInput, ConversionGoalUncheckedCreateInput>
+  }
+
+  /**
+   * ConversionGoal createMany
+   */
+  export type ConversionGoalCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ConversionGoals.
+     */
+    data: ConversionGoalCreateManyInput | ConversionGoalCreateManyInput[]
+  }
+
+  /**
+   * ConversionGoal createManyAndReturn
+   */
+  export type ConversionGoalCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionGoal
+     */
+    select?: ConversionGoalSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionGoal
+     */
+    omit?: ConversionGoalOmit<ExtArgs> | null
+    /**
+     * The data used to create many ConversionGoals.
+     */
+    data: ConversionGoalCreateManyInput | ConversionGoalCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionGoalIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ConversionGoal update
+   */
+  export type ConversionGoalUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionGoal
+     */
+    select?: ConversionGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionGoal
+     */
+    omit?: ConversionGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionGoalInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ConversionGoal.
+     */
+    data: XOR<ConversionGoalUpdateInput, ConversionGoalUncheckedUpdateInput>
+    /**
+     * Choose, which ConversionGoal to update.
+     */
+    where: ConversionGoalWhereUniqueInput
+  }
+
+  /**
+   * ConversionGoal updateMany
+   */
+  export type ConversionGoalUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ConversionGoals.
+     */
+    data: XOR<ConversionGoalUpdateManyMutationInput, ConversionGoalUncheckedUpdateManyInput>
+    /**
+     * Filter which ConversionGoals to update
+     */
+    where?: ConversionGoalWhereInput
+    /**
+     * Limit how many ConversionGoals to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ConversionGoal updateManyAndReturn
+   */
+  export type ConversionGoalUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionGoal
+     */
+    select?: ConversionGoalSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionGoal
+     */
+    omit?: ConversionGoalOmit<ExtArgs> | null
+    /**
+     * The data used to update ConversionGoals.
+     */
+    data: XOR<ConversionGoalUpdateManyMutationInput, ConversionGoalUncheckedUpdateManyInput>
+    /**
+     * Filter which ConversionGoals to update
+     */
+    where?: ConversionGoalWhereInput
+    /**
+     * Limit how many ConversionGoals to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionGoalIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ConversionGoal upsert
+   */
+  export type ConversionGoalUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionGoal
+     */
+    select?: ConversionGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionGoal
+     */
+    omit?: ConversionGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionGoalInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ConversionGoal to update in case it exists.
+     */
+    where: ConversionGoalWhereUniqueInput
+    /**
+     * In case the ConversionGoal found by the `where` argument doesn't exist, create a new ConversionGoal with this data.
+     */
+    create: XOR<ConversionGoalCreateInput, ConversionGoalUncheckedCreateInput>
+    /**
+     * In case the ConversionGoal was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ConversionGoalUpdateInput, ConversionGoalUncheckedUpdateInput>
+  }
+
+  /**
+   * ConversionGoal delete
+   */
+  export type ConversionGoalDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionGoal
+     */
+    select?: ConversionGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionGoal
+     */
+    omit?: ConversionGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionGoalInclude<ExtArgs> | null
+    /**
+     * Filter which ConversionGoal to delete.
+     */
+    where: ConversionGoalWhereUniqueInput
+  }
+
+  /**
+   * ConversionGoal deleteMany
+   */
+  export type ConversionGoalDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ConversionGoals to delete
+     */
+    where?: ConversionGoalWhereInput
+    /**
+     * Limit how many ConversionGoals to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ConversionGoal without action
+   */
+  export type ConversionGoalDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionGoal
+     */
+    select?: ConversionGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionGoal
+     */
+    omit?: ConversionGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionGoalInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ClientProfile
+   */
+
+  export type AggregateClientProfile = {
+    _count: ClientProfileCountAggregateOutputType | null
+    _avg: ClientProfileAvgAggregateOutputType | null
+    _sum: ClientProfileSumAggregateOutputType | null
+    _min: ClientProfileMinAggregateOutputType | null
+    _max: ClientProfileMaxAggregateOutputType | null
+  }
+
+  export type ClientProfileAvgAggregateOutputType = {
+    totalPurchases: number | null
+  }
+
+  export type ClientProfileSumAggregateOutputType = {
+    totalPurchases: number | null
+  }
+
+  export type ClientProfileMinAggregateOutputType = {
+    id: string | null
+    storeId: string | null
+    firstName: string | null
+    lastName: string | null
+    email: string | null
+    phone: string | null
+    preferences: string | null
+    vipLevel: string | null
+    totalPurchases: number | null
+    lastVisit: Date | null
+    createdBy: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ClientProfileMaxAggregateOutputType = {
+    id: string | null
+    storeId: string | null
+    firstName: string | null
+    lastName: string | null
+    email: string | null
+    phone: string | null
+    preferences: string | null
+    vipLevel: string | null
+    totalPurchases: number | null
+    lastVisit: Date | null
+    createdBy: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ClientProfileCountAggregateOutputType = {
+    id: number
+    storeId: number
+    firstName: number
+    lastName: number
+    email: number
+    phone: number
+    preferences: number
+    vipLevel: number
+    totalPurchases: number
+    lastVisit: number
+    createdBy: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ClientProfileAvgAggregateInputType = {
+    totalPurchases?: true
+  }
+
+  export type ClientProfileSumAggregateInputType = {
+    totalPurchases?: true
+  }
+
+  export type ClientProfileMinAggregateInputType = {
+    id?: true
+    storeId?: true
+    firstName?: true
+    lastName?: true
+    email?: true
+    phone?: true
+    preferences?: true
+    vipLevel?: true
+    totalPurchases?: true
+    lastVisit?: true
+    createdBy?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ClientProfileMaxAggregateInputType = {
+    id?: true
+    storeId?: true
+    firstName?: true
+    lastName?: true
+    email?: true
+    phone?: true
+    preferences?: true
+    vipLevel?: true
+    totalPurchases?: true
+    lastVisit?: true
+    createdBy?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ClientProfileCountAggregateInputType = {
+    id?: true
+    storeId?: true
+    firstName?: true
+    lastName?: true
+    email?: true
+    phone?: true
+    preferences?: true
+    vipLevel?: true
+    totalPurchases?: true
+    lastVisit?: true
+    createdBy?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ClientProfileAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClientProfile to aggregate.
+     */
+    where?: ClientProfileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientProfiles to fetch.
+     */
+    orderBy?: ClientProfileOrderByWithRelationInput | ClientProfileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ClientProfileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientProfiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientProfiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ClientProfiles
+    **/
+    _count?: true | ClientProfileCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ClientProfileAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ClientProfileSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ClientProfileMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ClientProfileMaxAggregateInputType
+  }
+
+  export type GetClientProfileAggregateType<T extends ClientProfileAggregateArgs> = {
+        [P in keyof T & keyof AggregateClientProfile]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateClientProfile[P]>
+      : GetScalarType<T[P], AggregateClientProfile[P]>
+  }
+
+
+
+
+  export type ClientProfileGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientProfileWhereInput
+    orderBy?: ClientProfileOrderByWithAggregationInput | ClientProfileOrderByWithAggregationInput[]
+    by: ClientProfileScalarFieldEnum[] | ClientProfileScalarFieldEnum
+    having?: ClientProfileScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ClientProfileCountAggregateInputType | true
+    _avg?: ClientProfileAvgAggregateInputType
+    _sum?: ClientProfileSumAggregateInputType
+    _min?: ClientProfileMinAggregateInputType
+    _max?: ClientProfileMaxAggregateInputType
+  }
+
+  export type ClientProfileGroupByOutputType = {
+    id: string
+    storeId: string
+    firstName: string
+    lastName: string
+    email: string | null
+    phone: string | null
+    preferences: string | null
+    vipLevel: string | null
+    totalPurchases: number
+    lastVisit: Date | null
+    createdBy: string
+    createdAt: Date
+    updatedAt: Date
+    _count: ClientProfileCountAggregateOutputType | null
+    _avg: ClientProfileAvgAggregateOutputType | null
+    _sum: ClientProfileSumAggregateOutputType | null
+    _min: ClientProfileMinAggregateOutputType | null
+    _max: ClientProfileMaxAggregateOutputType | null
+  }
+
+  type GetClientProfileGroupByPayload<T extends ClientProfileGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ClientProfileGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ClientProfileGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ClientProfileGroupByOutputType[P]>
+            : GetScalarType<T[P], ClientProfileGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ClientProfileSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    storeId?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    email?: boolean
+    phone?: boolean
+    preferences?: boolean
+    vipLevel?: boolean
+    totalPurchases?: boolean
+    lastVisit?: boolean
+    createdBy?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+    creator?: boolean | UserDefaultArgs<ExtArgs>
+    interactions?: boolean | ClientProfile$interactionsArgs<ExtArgs>
+    tasks?: boolean | ClientProfile$tasksArgs<ExtArgs>
+    _count?: boolean | ClientProfileCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clientProfile"]>
+
+  export type ClientProfileSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    storeId?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    email?: boolean
+    phone?: boolean
+    preferences?: boolean
+    vipLevel?: boolean
+    totalPurchases?: boolean
+    lastVisit?: boolean
+    createdBy?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+    creator?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clientProfile"]>
+
+  export type ClientProfileSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    storeId?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    email?: boolean
+    phone?: boolean
+    preferences?: boolean
+    vipLevel?: boolean
+    totalPurchases?: boolean
+    lastVisit?: boolean
+    createdBy?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+    creator?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clientProfile"]>
+
+  export type ClientProfileSelectScalar = {
+    id?: boolean
+    storeId?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    email?: boolean
+    phone?: boolean
+    preferences?: boolean
+    vipLevel?: boolean
+    totalPurchases?: boolean
+    lastVisit?: boolean
+    createdBy?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ClientProfileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "storeId" | "firstName" | "lastName" | "email" | "phone" | "preferences" | "vipLevel" | "totalPurchases" | "lastVisit" | "createdBy" | "createdAt" | "updatedAt", ExtArgs["result"]["clientProfile"]>
+  export type ClientProfileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+    creator?: boolean | UserDefaultArgs<ExtArgs>
+    interactions?: boolean | ClientProfile$interactionsArgs<ExtArgs>
+    tasks?: boolean | ClientProfile$tasksArgs<ExtArgs>
+    _count?: boolean | ClientProfileCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ClientProfileIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+    creator?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ClientProfileIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+    creator?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ClientProfilePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ClientProfile"
+    objects: {
+      store: Prisma.$StorePayload<ExtArgs>
+      creator: Prisma.$UserPayload<ExtArgs>
+      interactions: Prisma.$ClientInteractionPayload<ExtArgs>[]
+      tasks: Prisma.$ClientTaskPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      storeId: string
+      firstName: string
+      lastName: string
+      email: string | null
+      phone: string | null
+      preferences: string | null
+      vipLevel: string | null
+      totalPurchases: number
+      lastVisit: Date | null
+      createdBy: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["clientProfile"]>
+    composites: {}
+  }
+
+  type ClientProfileGetPayload<S extends boolean | null | undefined | ClientProfileDefaultArgs> = $Result.GetResult<Prisma.$ClientProfilePayload, S>
+
+  type ClientProfileCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ClientProfileFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ClientProfileCountAggregateInputType | true
+    }
+
+  export interface ClientProfileDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ClientProfile'], meta: { name: 'ClientProfile' } }
+    /**
+     * Find zero or one ClientProfile that matches the filter.
+     * @param {ClientProfileFindUniqueArgs} args - Arguments to find a ClientProfile
+     * @example
+     * // Get one ClientProfile
+     * const clientProfile = await prisma.clientProfile.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ClientProfileFindUniqueArgs>(args: SelectSubset<T, ClientProfileFindUniqueArgs<ExtArgs>>): Prisma__ClientProfileClient<$Result.GetResult<Prisma.$ClientProfilePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ClientProfile that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ClientProfileFindUniqueOrThrowArgs} args - Arguments to find a ClientProfile
+     * @example
+     * // Get one ClientProfile
+     * const clientProfile = await prisma.clientProfile.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ClientProfileFindUniqueOrThrowArgs>(args: SelectSubset<T, ClientProfileFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClientProfileClient<$Result.GetResult<Prisma.$ClientProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ClientProfile that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientProfileFindFirstArgs} args - Arguments to find a ClientProfile
+     * @example
+     * // Get one ClientProfile
+     * const clientProfile = await prisma.clientProfile.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ClientProfileFindFirstArgs>(args?: SelectSubset<T, ClientProfileFindFirstArgs<ExtArgs>>): Prisma__ClientProfileClient<$Result.GetResult<Prisma.$ClientProfilePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ClientProfile that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientProfileFindFirstOrThrowArgs} args - Arguments to find a ClientProfile
+     * @example
+     * // Get one ClientProfile
+     * const clientProfile = await prisma.clientProfile.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ClientProfileFindFirstOrThrowArgs>(args?: SelectSubset<T, ClientProfileFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClientProfileClient<$Result.GetResult<Prisma.$ClientProfilePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ClientProfiles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientProfileFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ClientProfiles
+     * const clientProfiles = await prisma.clientProfile.findMany()
+     * 
+     * // Get first 10 ClientProfiles
+     * const clientProfiles = await prisma.clientProfile.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const clientProfileWithIdOnly = await prisma.clientProfile.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ClientProfileFindManyArgs>(args?: SelectSubset<T, ClientProfileFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientProfilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ClientProfile.
+     * @param {ClientProfileCreateArgs} args - Arguments to create a ClientProfile.
+     * @example
+     * // Create one ClientProfile
+     * const ClientProfile = await prisma.clientProfile.create({
+     *   data: {
+     *     // ... data to create a ClientProfile
+     *   }
+     * })
+     * 
+     */
+    create<T extends ClientProfileCreateArgs>(args: SelectSubset<T, ClientProfileCreateArgs<ExtArgs>>): Prisma__ClientProfileClient<$Result.GetResult<Prisma.$ClientProfilePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ClientProfiles.
+     * @param {ClientProfileCreateManyArgs} args - Arguments to create many ClientProfiles.
+     * @example
+     * // Create many ClientProfiles
+     * const clientProfile = await prisma.clientProfile.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ClientProfileCreateManyArgs>(args?: SelectSubset<T, ClientProfileCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ClientProfiles and returns the data saved in the database.
+     * @param {ClientProfileCreateManyAndReturnArgs} args - Arguments to create many ClientProfiles.
+     * @example
+     * // Create many ClientProfiles
+     * const clientProfile = await prisma.clientProfile.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ClientProfiles and only return the `id`
+     * const clientProfileWithIdOnly = await prisma.clientProfile.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ClientProfileCreateManyAndReturnArgs>(args?: SelectSubset<T, ClientProfileCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientProfilePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ClientProfile.
+     * @param {ClientProfileDeleteArgs} args - Arguments to delete one ClientProfile.
+     * @example
+     * // Delete one ClientProfile
+     * const ClientProfile = await prisma.clientProfile.delete({
+     *   where: {
+     *     // ... filter to delete one ClientProfile
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ClientProfileDeleteArgs>(args: SelectSubset<T, ClientProfileDeleteArgs<ExtArgs>>): Prisma__ClientProfileClient<$Result.GetResult<Prisma.$ClientProfilePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ClientProfile.
+     * @param {ClientProfileUpdateArgs} args - Arguments to update one ClientProfile.
+     * @example
+     * // Update one ClientProfile
+     * const clientProfile = await prisma.clientProfile.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ClientProfileUpdateArgs>(args: SelectSubset<T, ClientProfileUpdateArgs<ExtArgs>>): Prisma__ClientProfileClient<$Result.GetResult<Prisma.$ClientProfilePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ClientProfiles.
+     * @param {ClientProfileDeleteManyArgs} args - Arguments to filter ClientProfiles to delete.
+     * @example
+     * // Delete a few ClientProfiles
+     * const { count } = await prisma.clientProfile.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ClientProfileDeleteManyArgs>(args?: SelectSubset<T, ClientProfileDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ClientProfiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientProfileUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ClientProfiles
+     * const clientProfile = await prisma.clientProfile.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ClientProfileUpdateManyArgs>(args: SelectSubset<T, ClientProfileUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ClientProfiles and returns the data updated in the database.
+     * @param {ClientProfileUpdateManyAndReturnArgs} args - Arguments to update many ClientProfiles.
+     * @example
+     * // Update many ClientProfiles
+     * const clientProfile = await prisma.clientProfile.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ClientProfiles and only return the `id`
+     * const clientProfileWithIdOnly = await prisma.clientProfile.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ClientProfileUpdateManyAndReturnArgs>(args: SelectSubset<T, ClientProfileUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientProfilePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ClientProfile.
+     * @param {ClientProfileUpsertArgs} args - Arguments to update or create a ClientProfile.
+     * @example
+     * // Update or create a ClientProfile
+     * const clientProfile = await prisma.clientProfile.upsert({
+     *   create: {
+     *     // ... data to create a ClientProfile
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ClientProfile we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ClientProfileUpsertArgs>(args: SelectSubset<T, ClientProfileUpsertArgs<ExtArgs>>): Prisma__ClientProfileClient<$Result.GetResult<Prisma.$ClientProfilePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ClientProfiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientProfileCountArgs} args - Arguments to filter ClientProfiles to count.
+     * @example
+     * // Count the number of ClientProfiles
+     * const count = await prisma.clientProfile.count({
+     *   where: {
+     *     // ... the filter for the ClientProfiles we want to count
+     *   }
+     * })
+    **/
+    count<T extends ClientProfileCountArgs>(
+      args?: Subset<T, ClientProfileCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ClientProfileCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ClientProfile.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientProfileAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ClientProfileAggregateArgs>(args: Subset<T, ClientProfileAggregateArgs>): Prisma.PrismaPromise<GetClientProfileAggregateType<T>>
+
+    /**
+     * Group by ClientProfile.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientProfileGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ClientProfileGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ClientProfileGroupByArgs['orderBy'] }
+        : { orderBy?: ClientProfileGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ClientProfileGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClientProfileGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ClientProfile model
+   */
+  readonly fields: ClientProfileFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ClientProfile.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ClientProfileClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    store<T extends StoreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StoreDefaultArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    creator<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    interactions<T extends ClientProfile$interactionsArgs<ExtArgs> = {}>(args?: Subset<T, ClientProfile$interactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientInteractionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    tasks<T extends ClientProfile$tasksArgs<ExtArgs> = {}>(args?: Subset<T, ClientProfile$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ClientProfile model
+   */
+  interface ClientProfileFieldRefs {
+    readonly id: FieldRef<"ClientProfile", 'String'>
+    readonly storeId: FieldRef<"ClientProfile", 'String'>
+    readonly firstName: FieldRef<"ClientProfile", 'String'>
+    readonly lastName: FieldRef<"ClientProfile", 'String'>
+    readonly email: FieldRef<"ClientProfile", 'String'>
+    readonly phone: FieldRef<"ClientProfile", 'String'>
+    readonly preferences: FieldRef<"ClientProfile", 'String'>
+    readonly vipLevel: FieldRef<"ClientProfile", 'String'>
+    readonly totalPurchases: FieldRef<"ClientProfile", 'Float'>
+    readonly lastVisit: FieldRef<"ClientProfile", 'DateTime'>
+    readonly createdBy: FieldRef<"ClientProfile", 'String'>
+    readonly createdAt: FieldRef<"ClientProfile", 'DateTime'>
+    readonly updatedAt: FieldRef<"ClientProfile", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ClientProfile findUnique
+   */
+  export type ClientProfileFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientProfile
+     */
+    select?: ClientProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientProfile
+     */
+    omit?: ClientProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientProfileInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientProfile to fetch.
+     */
+    where: ClientProfileWhereUniqueInput
+  }
+
+  /**
+   * ClientProfile findUniqueOrThrow
+   */
+  export type ClientProfileFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientProfile
+     */
+    select?: ClientProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientProfile
+     */
+    omit?: ClientProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientProfileInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientProfile to fetch.
+     */
+    where: ClientProfileWhereUniqueInput
+  }
+
+  /**
+   * ClientProfile findFirst
+   */
+  export type ClientProfileFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientProfile
+     */
+    select?: ClientProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientProfile
+     */
+    omit?: ClientProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientProfileInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientProfile to fetch.
+     */
+    where?: ClientProfileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientProfiles to fetch.
+     */
+    orderBy?: ClientProfileOrderByWithRelationInput | ClientProfileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClientProfiles.
+     */
+    cursor?: ClientProfileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientProfiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientProfiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClientProfiles.
+     */
+    distinct?: ClientProfileScalarFieldEnum | ClientProfileScalarFieldEnum[]
+  }
+
+  /**
+   * ClientProfile findFirstOrThrow
+   */
+  export type ClientProfileFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientProfile
+     */
+    select?: ClientProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientProfile
+     */
+    omit?: ClientProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientProfileInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientProfile to fetch.
+     */
+    where?: ClientProfileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientProfiles to fetch.
+     */
+    orderBy?: ClientProfileOrderByWithRelationInput | ClientProfileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClientProfiles.
+     */
+    cursor?: ClientProfileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientProfiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientProfiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClientProfiles.
+     */
+    distinct?: ClientProfileScalarFieldEnum | ClientProfileScalarFieldEnum[]
+  }
+
+  /**
+   * ClientProfile findMany
+   */
+  export type ClientProfileFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientProfile
+     */
+    select?: ClientProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientProfile
+     */
+    omit?: ClientProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientProfileInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientProfiles to fetch.
+     */
+    where?: ClientProfileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientProfiles to fetch.
+     */
+    orderBy?: ClientProfileOrderByWithRelationInput | ClientProfileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ClientProfiles.
+     */
+    cursor?: ClientProfileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientProfiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientProfiles.
+     */
+    skip?: number
+    distinct?: ClientProfileScalarFieldEnum | ClientProfileScalarFieldEnum[]
+  }
+
+  /**
+   * ClientProfile create
+   */
+  export type ClientProfileCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientProfile
+     */
+    select?: ClientProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientProfile
+     */
+    omit?: ClientProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientProfileInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ClientProfile.
+     */
+    data: XOR<ClientProfileCreateInput, ClientProfileUncheckedCreateInput>
+  }
+
+  /**
+   * ClientProfile createMany
+   */
+  export type ClientProfileCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ClientProfiles.
+     */
+    data: ClientProfileCreateManyInput | ClientProfileCreateManyInput[]
+  }
+
+  /**
+   * ClientProfile createManyAndReturn
+   */
+  export type ClientProfileCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientProfile
+     */
+    select?: ClientProfileSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientProfile
+     */
+    omit?: ClientProfileOmit<ExtArgs> | null
+    /**
+     * The data used to create many ClientProfiles.
+     */
+    data: ClientProfileCreateManyInput | ClientProfileCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientProfileIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ClientProfile update
+   */
+  export type ClientProfileUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientProfile
+     */
+    select?: ClientProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientProfile
+     */
+    omit?: ClientProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientProfileInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ClientProfile.
+     */
+    data: XOR<ClientProfileUpdateInput, ClientProfileUncheckedUpdateInput>
+    /**
+     * Choose, which ClientProfile to update.
+     */
+    where: ClientProfileWhereUniqueInput
+  }
+
+  /**
+   * ClientProfile updateMany
+   */
+  export type ClientProfileUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ClientProfiles.
+     */
+    data: XOR<ClientProfileUpdateManyMutationInput, ClientProfileUncheckedUpdateManyInput>
+    /**
+     * Filter which ClientProfiles to update
+     */
+    where?: ClientProfileWhereInput
+    /**
+     * Limit how many ClientProfiles to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ClientProfile updateManyAndReturn
+   */
+  export type ClientProfileUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientProfile
+     */
+    select?: ClientProfileSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientProfile
+     */
+    omit?: ClientProfileOmit<ExtArgs> | null
+    /**
+     * The data used to update ClientProfiles.
+     */
+    data: XOR<ClientProfileUpdateManyMutationInput, ClientProfileUncheckedUpdateManyInput>
+    /**
+     * Filter which ClientProfiles to update
+     */
+    where?: ClientProfileWhereInput
+    /**
+     * Limit how many ClientProfiles to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientProfileIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ClientProfile upsert
+   */
+  export type ClientProfileUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientProfile
+     */
+    select?: ClientProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientProfile
+     */
+    omit?: ClientProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientProfileInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ClientProfile to update in case it exists.
+     */
+    where: ClientProfileWhereUniqueInput
+    /**
+     * In case the ClientProfile found by the `where` argument doesn't exist, create a new ClientProfile with this data.
+     */
+    create: XOR<ClientProfileCreateInput, ClientProfileUncheckedCreateInput>
+    /**
+     * In case the ClientProfile was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ClientProfileUpdateInput, ClientProfileUncheckedUpdateInput>
+  }
+
+  /**
+   * ClientProfile delete
+   */
+  export type ClientProfileDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientProfile
+     */
+    select?: ClientProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientProfile
+     */
+    omit?: ClientProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientProfileInclude<ExtArgs> | null
+    /**
+     * Filter which ClientProfile to delete.
+     */
+    where: ClientProfileWhereUniqueInput
+  }
+
+  /**
+   * ClientProfile deleteMany
+   */
+  export type ClientProfileDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClientProfiles to delete
+     */
+    where?: ClientProfileWhereInput
+    /**
+     * Limit how many ClientProfiles to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ClientProfile.interactions
+   */
+  export type ClientProfile$interactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientInteraction
+     */
+    select?: ClientInteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientInteraction
+     */
+    omit?: ClientInteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInteractionInclude<ExtArgs> | null
+    where?: ClientInteractionWhereInput
+    orderBy?: ClientInteractionOrderByWithRelationInput | ClientInteractionOrderByWithRelationInput[]
+    cursor?: ClientInteractionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClientInteractionScalarFieldEnum | ClientInteractionScalarFieldEnum[]
+  }
+
+  /**
+   * ClientProfile.tasks
+   */
+  export type ClientProfile$tasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientTask
+     */
+    select?: ClientTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientTask
+     */
+    omit?: ClientTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTaskInclude<ExtArgs> | null
+    where?: ClientTaskWhereInput
+    orderBy?: ClientTaskOrderByWithRelationInput | ClientTaskOrderByWithRelationInput[]
+    cursor?: ClientTaskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClientTaskScalarFieldEnum | ClientTaskScalarFieldEnum[]
+  }
+
+  /**
+   * ClientProfile without action
+   */
+  export type ClientProfileDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientProfile
+     */
+    select?: ClientProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientProfile
+     */
+    omit?: ClientProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientProfileInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ClientInteraction
+   */
+
+  export type AggregateClientInteraction = {
+    _count: ClientInteractionCountAggregateOutputType | null
+    _avg: ClientInteractionAvgAggregateOutputType | null
+    _sum: ClientInteractionSumAggregateOutputType | null
+    _min: ClientInteractionMinAggregateOutputType | null
+    _max: ClientInteractionMaxAggregateOutputType | null
+  }
+
+  export type ClientInteractionAvgAggregateOutputType = {
+    purchaseAmount: number | null
+  }
+
+  export type ClientInteractionSumAggregateOutputType = {
+    purchaseAmount: number | null
+  }
+
+  export type ClientInteractionMinAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    userId: string | null
+    type: string | null
+    date: Date | null
+    notes: string | null
+    purchaseAmount: number | null
+    createdAt: Date | null
+  }
+
+  export type ClientInteractionMaxAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    userId: string | null
+    type: string | null
+    date: Date | null
+    notes: string | null
+    purchaseAmount: number | null
+    createdAt: Date | null
+  }
+
+  export type ClientInteractionCountAggregateOutputType = {
+    id: number
+    clientId: number
+    userId: number
+    type: number
+    date: number
+    notes: number
+    purchaseAmount: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ClientInteractionAvgAggregateInputType = {
+    purchaseAmount?: true
+  }
+
+  export type ClientInteractionSumAggregateInputType = {
+    purchaseAmount?: true
+  }
+
+  export type ClientInteractionMinAggregateInputType = {
+    id?: true
+    clientId?: true
+    userId?: true
+    type?: true
+    date?: true
+    notes?: true
+    purchaseAmount?: true
+    createdAt?: true
+  }
+
+  export type ClientInteractionMaxAggregateInputType = {
+    id?: true
+    clientId?: true
+    userId?: true
+    type?: true
+    date?: true
+    notes?: true
+    purchaseAmount?: true
+    createdAt?: true
+  }
+
+  export type ClientInteractionCountAggregateInputType = {
+    id?: true
+    clientId?: true
+    userId?: true
+    type?: true
+    date?: true
+    notes?: true
+    purchaseAmount?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ClientInteractionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClientInteraction to aggregate.
+     */
+    where?: ClientInteractionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientInteractions to fetch.
+     */
+    orderBy?: ClientInteractionOrderByWithRelationInput | ClientInteractionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ClientInteractionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientInteractions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientInteractions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ClientInteractions
+    **/
+    _count?: true | ClientInteractionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ClientInteractionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ClientInteractionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ClientInteractionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ClientInteractionMaxAggregateInputType
+  }
+
+  export type GetClientInteractionAggregateType<T extends ClientInteractionAggregateArgs> = {
+        [P in keyof T & keyof AggregateClientInteraction]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateClientInteraction[P]>
+      : GetScalarType<T[P], AggregateClientInteraction[P]>
+  }
+
+
+
+
+  export type ClientInteractionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientInteractionWhereInput
+    orderBy?: ClientInteractionOrderByWithAggregationInput | ClientInteractionOrderByWithAggregationInput[]
+    by: ClientInteractionScalarFieldEnum[] | ClientInteractionScalarFieldEnum
+    having?: ClientInteractionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ClientInteractionCountAggregateInputType | true
+    _avg?: ClientInteractionAvgAggregateInputType
+    _sum?: ClientInteractionSumAggregateInputType
+    _min?: ClientInteractionMinAggregateInputType
+    _max?: ClientInteractionMaxAggregateInputType
+  }
+
+  export type ClientInteractionGroupByOutputType = {
+    id: string
+    clientId: string
+    userId: string
+    type: string
+    date: Date
+    notes: string | null
+    purchaseAmount: number | null
+    createdAt: Date
+    _count: ClientInteractionCountAggregateOutputType | null
+    _avg: ClientInteractionAvgAggregateOutputType | null
+    _sum: ClientInteractionSumAggregateOutputType | null
+    _min: ClientInteractionMinAggregateOutputType | null
+    _max: ClientInteractionMaxAggregateOutputType | null
+  }
+
+  type GetClientInteractionGroupByPayload<T extends ClientInteractionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ClientInteractionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ClientInteractionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ClientInteractionGroupByOutputType[P]>
+            : GetScalarType<T[P], ClientInteractionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ClientInteractionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clientId?: boolean
+    userId?: boolean
+    type?: boolean
+    date?: boolean
+    notes?: boolean
+    purchaseAmount?: boolean
+    createdAt?: boolean
+    client?: boolean | ClientProfileDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clientInteraction"]>
+
+  export type ClientInteractionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clientId?: boolean
+    userId?: boolean
+    type?: boolean
+    date?: boolean
+    notes?: boolean
+    purchaseAmount?: boolean
+    createdAt?: boolean
+    client?: boolean | ClientProfileDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clientInteraction"]>
+
+  export type ClientInteractionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clientId?: boolean
+    userId?: boolean
+    type?: boolean
+    date?: boolean
+    notes?: boolean
+    purchaseAmount?: boolean
+    createdAt?: boolean
+    client?: boolean | ClientProfileDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clientInteraction"]>
+
+  export type ClientInteractionSelectScalar = {
+    id?: boolean
+    clientId?: boolean
+    userId?: boolean
+    type?: boolean
+    date?: boolean
+    notes?: boolean
+    purchaseAmount?: boolean
+    createdAt?: boolean
+  }
+
+  export type ClientInteractionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "userId" | "type" | "date" | "notes" | "purchaseAmount" | "createdAt", ExtArgs["result"]["clientInteraction"]>
+  export type ClientInteractionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | ClientProfileDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ClientInteractionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | ClientProfileDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ClientInteractionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | ClientProfileDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ClientInteractionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ClientInteraction"
+    objects: {
+      client: Prisma.$ClientProfilePayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      clientId: string
+      userId: string
+      type: string
+      date: Date
+      notes: string | null
+      purchaseAmount: number | null
+      createdAt: Date
+    }, ExtArgs["result"]["clientInteraction"]>
+    composites: {}
+  }
+
+  type ClientInteractionGetPayload<S extends boolean | null | undefined | ClientInteractionDefaultArgs> = $Result.GetResult<Prisma.$ClientInteractionPayload, S>
+
+  type ClientInteractionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ClientInteractionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ClientInteractionCountAggregateInputType | true
+    }
+
+  export interface ClientInteractionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ClientInteraction'], meta: { name: 'ClientInteraction' } }
+    /**
+     * Find zero or one ClientInteraction that matches the filter.
+     * @param {ClientInteractionFindUniqueArgs} args - Arguments to find a ClientInteraction
+     * @example
+     * // Get one ClientInteraction
+     * const clientInteraction = await prisma.clientInteraction.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ClientInteractionFindUniqueArgs>(args: SelectSubset<T, ClientInteractionFindUniqueArgs<ExtArgs>>): Prisma__ClientInteractionClient<$Result.GetResult<Prisma.$ClientInteractionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ClientInteraction that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ClientInteractionFindUniqueOrThrowArgs} args - Arguments to find a ClientInteraction
+     * @example
+     * // Get one ClientInteraction
+     * const clientInteraction = await prisma.clientInteraction.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ClientInteractionFindUniqueOrThrowArgs>(args: SelectSubset<T, ClientInteractionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClientInteractionClient<$Result.GetResult<Prisma.$ClientInteractionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ClientInteraction that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientInteractionFindFirstArgs} args - Arguments to find a ClientInteraction
+     * @example
+     * // Get one ClientInteraction
+     * const clientInteraction = await prisma.clientInteraction.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ClientInteractionFindFirstArgs>(args?: SelectSubset<T, ClientInteractionFindFirstArgs<ExtArgs>>): Prisma__ClientInteractionClient<$Result.GetResult<Prisma.$ClientInteractionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ClientInteraction that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientInteractionFindFirstOrThrowArgs} args - Arguments to find a ClientInteraction
+     * @example
+     * // Get one ClientInteraction
+     * const clientInteraction = await prisma.clientInteraction.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ClientInteractionFindFirstOrThrowArgs>(args?: SelectSubset<T, ClientInteractionFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClientInteractionClient<$Result.GetResult<Prisma.$ClientInteractionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ClientInteractions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientInteractionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ClientInteractions
+     * const clientInteractions = await prisma.clientInteraction.findMany()
+     * 
+     * // Get first 10 ClientInteractions
+     * const clientInteractions = await prisma.clientInteraction.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const clientInteractionWithIdOnly = await prisma.clientInteraction.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ClientInteractionFindManyArgs>(args?: SelectSubset<T, ClientInteractionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientInteractionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ClientInteraction.
+     * @param {ClientInteractionCreateArgs} args - Arguments to create a ClientInteraction.
+     * @example
+     * // Create one ClientInteraction
+     * const ClientInteraction = await prisma.clientInteraction.create({
+     *   data: {
+     *     // ... data to create a ClientInteraction
+     *   }
+     * })
+     * 
+     */
+    create<T extends ClientInteractionCreateArgs>(args: SelectSubset<T, ClientInteractionCreateArgs<ExtArgs>>): Prisma__ClientInteractionClient<$Result.GetResult<Prisma.$ClientInteractionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ClientInteractions.
+     * @param {ClientInteractionCreateManyArgs} args - Arguments to create many ClientInteractions.
+     * @example
+     * // Create many ClientInteractions
+     * const clientInteraction = await prisma.clientInteraction.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ClientInteractionCreateManyArgs>(args?: SelectSubset<T, ClientInteractionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ClientInteractions and returns the data saved in the database.
+     * @param {ClientInteractionCreateManyAndReturnArgs} args - Arguments to create many ClientInteractions.
+     * @example
+     * // Create many ClientInteractions
+     * const clientInteraction = await prisma.clientInteraction.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ClientInteractions and only return the `id`
+     * const clientInteractionWithIdOnly = await prisma.clientInteraction.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ClientInteractionCreateManyAndReturnArgs>(args?: SelectSubset<T, ClientInteractionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientInteractionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ClientInteraction.
+     * @param {ClientInteractionDeleteArgs} args - Arguments to delete one ClientInteraction.
+     * @example
+     * // Delete one ClientInteraction
+     * const ClientInteraction = await prisma.clientInteraction.delete({
+     *   where: {
+     *     // ... filter to delete one ClientInteraction
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ClientInteractionDeleteArgs>(args: SelectSubset<T, ClientInteractionDeleteArgs<ExtArgs>>): Prisma__ClientInteractionClient<$Result.GetResult<Prisma.$ClientInteractionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ClientInteraction.
+     * @param {ClientInteractionUpdateArgs} args - Arguments to update one ClientInteraction.
+     * @example
+     * // Update one ClientInteraction
+     * const clientInteraction = await prisma.clientInteraction.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ClientInteractionUpdateArgs>(args: SelectSubset<T, ClientInteractionUpdateArgs<ExtArgs>>): Prisma__ClientInteractionClient<$Result.GetResult<Prisma.$ClientInteractionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ClientInteractions.
+     * @param {ClientInteractionDeleteManyArgs} args - Arguments to filter ClientInteractions to delete.
+     * @example
+     * // Delete a few ClientInteractions
+     * const { count } = await prisma.clientInteraction.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ClientInteractionDeleteManyArgs>(args?: SelectSubset<T, ClientInteractionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ClientInteractions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientInteractionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ClientInteractions
+     * const clientInteraction = await prisma.clientInteraction.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ClientInteractionUpdateManyArgs>(args: SelectSubset<T, ClientInteractionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ClientInteractions and returns the data updated in the database.
+     * @param {ClientInteractionUpdateManyAndReturnArgs} args - Arguments to update many ClientInteractions.
+     * @example
+     * // Update many ClientInteractions
+     * const clientInteraction = await prisma.clientInteraction.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ClientInteractions and only return the `id`
+     * const clientInteractionWithIdOnly = await prisma.clientInteraction.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ClientInteractionUpdateManyAndReturnArgs>(args: SelectSubset<T, ClientInteractionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientInteractionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ClientInteraction.
+     * @param {ClientInteractionUpsertArgs} args - Arguments to update or create a ClientInteraction.
+     * @example
+     * // Update or create a ClientInteraction
+     * const clientInteraction = await prisma.clientInteraction.upsert({
+     *   create: {
+     *     // ... data to create a ClientInteraction
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ClientInteraction we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ClientInteractionUpsertArgs>(args: SelectSubset<T, ClientInteractionUpsertArgs<ExtArgs>>): Prisma__ClientInteractionClient<$Result.GetResult<Prisma.$ClientInteractionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ClientInteractions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientInteractionCountArgs} args - Arguments to filter ClientInteractions to count.
+     * @example
+     * // Count the number of ClientInteractions
+     * const count = await prisma.clientInteraction.count({
+     *   where: {
+     *     // ... the filter for the ClientInteractions we want to count
+     *   }
+     * })
+    **/
+    count<T extends ClientInteractionCountArgs>(
+      args?: Subset<T, ClientInteractionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ClientInteractionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ClientInteraction.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientInteractionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ClientInteractionAggregateArgs>(args: Subset<T, ClientInteractionAggregateArgs>): Prisma.PrismaPromise<GetClientInteractionAggregateType<T>>
+
+    /**
+     * Group by ClientInteraction.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientInteractionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ClientInteractionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ClientInteractionGroupByArgs['orderBy'] }
+        : { orderBy?: ClientInteractionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ClientInteractionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClientInteractionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ClientInteraction model
+   */
+  readonly fields: ClientInteractionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ClientInteraction.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ClientInteractionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends ClientProfileDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientProfileDefaultArgs<ExtArgs>>): Prisma__ClientProfileClient<$Result.GetResult<Prisma.$ClientProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ClientInteraction model
+   */
+  interface ClientInteractionFieldRefs {
+    readonly id: FieldRef<"ClientInteraction", 'String'>
+    readonly clientId: FieldRef<"ClientInteraction", 'String'>
+    readonly userId: FieldRef<"ClientInteraction", 'String'>
+    readonly type: FieldRef<"ClientInteraction", 'String'>
+    readonly date: FieldRef<"ClientInteraction", 'DateTime'>
+    readonly notes: FieldRef<"ClientInteraction", 'String'>
+    readonly purchaseAmount: FieldRef<"ClientInteraction", 'Float'>
+    readonly createdAt: FieldRef<"ClientInteraction", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ClientInteraction findUnique
+   */
+  export type ClientInteractionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientInteraction
+     */
+    select?: ClientInteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientInteraction
+     */
+    omit?: ClientInteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInteractionInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientInteraction to fetch.
+     */
+    where: ClientInteractionWhereUniqueInput
+  }
+
+  /**
+   * ClientInteraction findUniqueOrThrow
+   */
+  export type ClientInteractionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientInteraction
+     */
+    select?: ClientInteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientInteraction
+     */
+    omit?: ClientInteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInteractionInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientInteraction to fetch.
+     */
+    where: ClientInteractionWhereUniqueInput
+  }
+
+  /**
+   * ClientInteraction findFirst
+   */
+  export type ClientInteractionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientInteraction
+     */
+    select?: ClientInteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientInteraction
+     */
+    omit?: ClientInteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInteractionInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientInteraction to fetch.
+     */
+    where?: ClientInteractionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientInteractions to fetch.
+     */
+    orderBy?: ClientInteractionOrderByWithRelationInput | ClientInteractionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClientInteractions.
+     */
+    cursor?: ClientInteractionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientInteractions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientInteractions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClientInteractions.
+     */
+    distinct?: ClientInteractionScalarFieldEnum | ClientInteractionScalarFieldEnum[]
+  }
+
+  /**
+   * ClientInteraction findFirstOrThrow
+   */
+  export type ClientInteractionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientInteraction
+     */
+    select?: ClientInteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientInteraction
+     */
+    omit?: ClientInteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInteractionInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientInteraction to fetch.
+     */
+    where?: ClientInteractionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientInteractions to fetch.
+     */
+    orderBy?: ClientInteractionOrderByWithRelationInput | ClientInteractionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClientInteractions.
+     */
+    cursor?: ClientInteractionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientInteractions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientInteractions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClientInteractions.
+     */
+    distinct?: ClientInteractionScalarFieldEnum | ClientInteractionScalarFieldEnum[]
+  }
+
+  /**
+   * ClientInteraction findMany
+   */
+  export type ClientInteractionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientInteraction
+     */
+    select?: ClientInteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientInteraction
+     */
+    omit?: ClientInteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInteractionInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientInteractions to fetch.
+     */
+    where?: ClientInteractionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientInteractions to fetch.
+     */
+    orderBy?: ClientInteractionOrderByWithRelationInput | ClientInteractionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ClientInteractions.
+     */
+    cursor?: ClientInteractionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientInteractions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientInteractions.
+     */
+    skip?: number
+    distinct?: ClientInteractionScalarFieldEnum | ClientInteractionScalarFieldEnum[]
+  }
+
+  /**
+   * ClientInteraction create
+   */
+  export type ClientInteractionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientInteraction
+     */
+    select?: ClientInteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientInteraction
+     */
+    omit?: ClientInteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInteractionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ClientInteraction.
+     */
+    data: XOR<ClientInteractionCreateInput, ClientInteractionUncheckedCreateInput>
+  }
+
+  /**
+   * ClientInteraction createMany
+   */
+  export type ClientInteractionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ClientInteractions.
+     */
+    data: ClientInteractionCreateManyInput | ClientInteractionCreateManyInput[]
+  }
+
+  /**
+   * ClientInteraction createManyAndReturn
+   */
+  export type ClientInteractionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientInteraction
+     */
+    select?: ClientInteractionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientInteraction
+     */
+    omit?: ClientInteractionOmit<ExtArgs> | null
+    /**
+     * The data used to create many ClientInteractions.
+     */
+    data: ClientInteractionCreateManyInput | ClientInteractionCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInteractionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ClientInteraction update
+   */
+  export type ClientInteractionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientInteraction
+     */
+    select?: ClientInteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientInteraction
+     */
+    omit?: ClientInteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInteractionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ClientInteraction.
+     */
+    data: XOR<ClientInteractionUpdateInput, ClientInteractionUncheckedUpdateInput>
+    /**
+     * Choose, which ClientInteraction to update.
+     */
+    where: ClientInteractionWhereUniqueInput
+  }
+
+  /**
+   * ClientInteraction updateMany
+   */
+  export type ClientInteractionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ClientInteractions.
+     */
+    data: XOR<ClientInteractionUpdateManyMutationInput, ClientInteractionUncheckedUpdateManyInput>
+    /**
+     * Filter which ClientInteractions to update
+     */
+    where?: ClientInteractionWhereInput
+    /**
+     * Limit how many ClientInteractions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ClientInteraction updateManyAndReturn
+   */
+  export type ClientInteractionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientInteraction
+     */
+    select?: ClientInteractionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientInteraction
+     */
+    omit?: ClientInteractionOmit<ExtArgs> | null
+    /**
+     * The data used to update ClientInteractions.
+     */
+    data: XOR<ClientInteractionUpdateManyMutationInput, ClientInteractionUncheckedUpdateManyInput>
+    /**
+     * Filter which ClientInteractions to update
+     */
+    where?: ClientInteractionWhereInput
+    /**
+     * Limit how many ClientInteractions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInteractionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ClientInteraction upsert
+   */
+  export type ClientInteractionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientInteraction
+     */
+    select?: ClientInteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientInteraction
+     */
+    omit?: ClientInteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInteractionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ClientInteraction to update in case it exists.
+     */
+    where: ClientInteractionWhereUniqueInput
+    /**
+     * In case the ClientInteraction found by the `where` argument doesn't exist, create a new ClientInteraction with this data.
+     */
+    create: XOR<ClientInteractionCreateInput, ClientInteractionUncheckedCreateInput>
+    /**
+     * In case the ClientInteraction was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ClientInteractionUpdateInput, ClientInteractionUncheckedUpdateInput>
+  }
+
+  /**
+   * ClientInteraction delete
+   */
+  export type ClientInteractionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientInteraction
+     */
+    select?: ClientInteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientInteraction
+     */
+    omit?: ClientInteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInteractionInclude<ExtArgs> | null
+    /**
+     * Filter which ClientInteraction to delete.
+     */
+    where: ClientInteractionWhereUniqueInput
+  }
+
+  /**
+   * ClientInteraction deleteMany
+   */
+  export type ClientInteractionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClientInteractions to delete
+     */
+    where?: ClientInteractionWhereInput
+    /**
+     * Limit how many ClientInteractions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ClientInteraction without action
+   */
+  export type ClientInteractionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientInteraction
+     */
+    select?: ClientInteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientInteraction
+     */
+    omit?: ClientInteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInteractionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ClientTask
+   */
+
+  export type AggregateClientTask = {
+    _count: ClientTaskCountAggregateOutputType | null
+    _min: ClientTaskMinAggregateOutputType | null
+    _max: ClientTaskMaxAggregateOutputType | null
+  }
+
+  export type ClientTaskMinAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    userId: string | null
+    title: string | null
+    dueDate: Date | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ClientTaskMaxAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    userId: string | null
+    title: string | null
+    dueDate: Date | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ClientTaskCountAggregateOutputType = {
+    id: number
+    clientId: number
+    userId: number
+    title: number
+    dueDate: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ClientTaskMinAggregateInputType = {
+    id?: true
+    clientId?: true
+    userId?: true
+    title?: true
+    dueDate?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ClientTaskMaxAggregateInputType = {
+    id?: true
+    clientId?: true
+    userId?: true
+    title?: true
+    dueDate?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ClientTaskCountAggregateInputType = {
+    id?: true
+    clientId?: true
+    userId?: true
+    title?: true
+    dueDate?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ClientTaskAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClientTask to aggregate.
+     */
+    where?: ClientTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientTasks to fetch.
+     */
+    orderBy?: ClientTaskOrderByWithRelationInput | ClientTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ClientTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientTasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ClientTasks
+    **/
+    _count?: true | ClientTaskCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ClientTaskMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ClientTaskMaxAggregateInputType
+  }
+
+  export type GetClientTaskAggregateType<T extends ClientTaskAggregateArgs> = {
+        [P in keyof T & keyof AggregateClientTask]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateClientTask[P]>
+      : GetScalarType<T[P], AggregateClientTask[P]>
+  }
+
+
+
+
+  export type ClientTaskGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientTaskWhereInput
+    orderBy?: ClientTaskOrderByWithAggregationInput | ClientTaskOrderByWithAggregationInput[]
+    by: ClientTaskScalarFieldEnum[] | ClientTaskScalarFieldEnum
+    having?: ClientTaskScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ClientTaskCountAggregateInputType | true
+    _min?: ClientTaskMinAggregateInputType
+    _max?: ClientTaskMaxAggregateInputType
+  }
+
+  export type ClientTaskGroupByOutputType = {
+    id: string
+    clientId: string
+    userId: string
+    title: string
+    dueDate: Date | null
+    status: string
+    createdAt: Date
+    updatedAt: Date
+    _count: ClientTaskCountAggregateOutputType | null
+    _min: ClientTaskMinAggregateOutputType | null
+    _max: ClientTaskMaxAggregateOutputType | null
+  }
+
+  type GetClientTaskGroupByPayload<T extends ClientTaskGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ClientTaskGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ClientTaskGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ClientTaskGroupByOutputType[P]>
+            : GetScalarType<T[P], ClientTaskGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ClientTaskSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clientId?: boolean
+    userId?: boolean
+    title?: boolean
+    dueDate?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    client?: boolean | ClientProfileDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clientTask"]>
+
+  export type ClientTaskSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clientId?: boolean
+    userId?: boolean
+    title?: boolean
+    dueDate?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    client?: boolean | ClientProfileDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clientTask"]>
+
+  export type ClientTaskSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clientId?: boolean
+    userId?: boolean
+    title?: boolean
+    dueDate?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    client?: boolean | ClientProfileDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clientTask"]>
+
+  export type ClientTaskSelectScalar = {
+    id?: boolean
+    clientId?: boolean
+    userId?: boolean
+    title?: boolean
+    dueDate?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ClientTaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "userId" | "title" | "dueDate" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["clientTask"]>
+  export type ClientTaskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | ClientProfileDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ClientTaskIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | ClientProfileDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ClientTaskIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | ClientProfileDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ClientTaskPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ClientTask"
+    objects: {
+      client: Prisma.$ClientProfilePayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      clientId: string
+      userId: string
+      title: string
+      dueDate: Date | null
+      status: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["clientTask"]>
+    composites: {}
+  }
+
+  type ClientTaskGetPayload<S extends boolean | null | undefined | ClientTaskDefaultArgs> = $Result.GetResult<Prisma.$ClientTaskPayload, S>
+
+  type ClientTaskCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ClientTaskFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ClientTaskCountAggregateInputType | true
+    }
+
+  export interface ClientTaskDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ClientTask'], meta: { name: 'ClientTask' } }
+    /**
+     * Find zero or one ClientTask that matches the filter.
+     * @param {ClientTaskFindUniqueArgs} args - Arguments to find a ClientTask
+     * @example
+     * // Get one ClientTask
+     * const clientTask = await prisma.clientTask.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ClientTaskFindUniqueArgs>(args: SelectSubset<T, ClientTaskFindUniqueArgs<ExtArgs>>): Prisma__ClientTaskClient<$Result.GetResult<Prisma.$ClientTaskPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ClientTask that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ClientTaskFindUniqueOrThrowArgs} args - Arguments to find a ClientTask
+     * @example
+     * // Get one ClientTask
+     * const clientTask = await prisma.clientTask.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ClientTaskFindUniqueOrThrowArgs>(args: SelectSubset<T, ClientTaskFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClientTaskClient<$Result.GetResult<Prisma.$ClientTaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ClientTask that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientTaskFindFirstArgs} args - Arguments to find a ClientTask
+     * @example
+     * // Get one ClientTask
+     * const clientTask = await prisma.clientTask.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ClientTaskFindFirstArgs>(args?: SelectSubset<T, ClientTaskFindFirstArgs<ExtArgs>>): Prisma__ClientTaskClient<$Result.GetResult<Prisma.$ClientTaskPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ClientTask that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientTaskFindFirstOrThrowArgs} args - Arguments to find a ClientTask
+     * @example
+     * // Get one ClientTask
+     * const clientTask = await prisma.clientTask.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ClientTaskFindFirstOrThrowArgs>(args?: SelectSubset<T, ClientTaskFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClientTaskClient<$Result.GetResult<Prisma.$ClientTaskPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ClientTasks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientTaskFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ClientTasks
+     * const clientTasks = await prisma.clientTask.findMany()
+     * 
+     * // Get first 10 ClientTasks
+     * const clientTasks = await prisma.clientTask.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const clientTaskWithIdOnly = await prisma.clientTask.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ClientTaskFindManyArgs>(args?: SelectSubset<T, ClientTaskFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ClientTask.
+     * @param {ClientTaskCreateArgs} args - Arguments to create a ClientTask.
+     * @example
+     * // Create one ClientTask
+     * const ClientTask = await prisma.clientTask.create({
+     *   data: {
+     *     // ... data to create a ClientTask
+     *   }
+     * })
+     * 
+     */
+    create<T extends ClientTaskCreateArgs>(args: SelectSubset<T, ClientTaskCreateArgs<ExtArgs>>): Prisma__ClientTaskClient<$Result.GetResult<Prisma.$ClientTaskPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ClientTasks.
+     * @param {ClientTaskCreateManyArgs} args - Arguments to create many ClientTasks.
+     * @example
+     * // Create many ClientTasks
+     * const clientTask = await prisma.clientTask.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ClientTaskCreateManyArgs>(args?: SelectSubset<T, ClientTaskCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ClientTasks and returns the data saved in the database.
+     * @param {ClientTaskCreateManyAndReturnArgs} args - Arguments to create many ClientTasks.
+     * @example
+     * // Create many ClientTasks
+     * const clientTask = await prisma.clientTask.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ClientTasks and only return the `id`
+     * const clientTaskWithIdOnly = await prisma.clientTask.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ClientTaskCreateManyAndReturnArgs>(args?: SelectSubset<T, ClientTaskCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientTaskPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ClientTask.
+     * @param {ClientTaskDeleteArgs} args - Arguments to delete one ClientTask.
+     * @example
+     * // Delete one ClientTask
+     * const ClientTask = await prisma.clientTask.delete({
+     *   where: {
+     *     // ... filter to delete one ClientTask
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ClientTaskDeleteArgs>(args: SelectSubset<T, ClientTaskDeleteArgs<ExtArgs>>): Prisma__ClientTaskClient<$Result.GetResult<Prisma.$ClientTaskPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ClientTask.
+     * @param {ClientTaskUpdateArgs} args - Arguments to update one ClientTask.
+     * @example
+     * // Update one ClientTask
+     * const clientTask = await prisma.clientTask.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ClientTaskUpdateArgs>(args: SelectSubset<T, ClientTaskUpdateArgs<ExtArgs>>): Prisma__ClientTaskClient<$Result.GetResult<Prisma.$ClientTaskPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ClientTasks.
+     * @param {ClientTaskDeleteManyArgs} args - Arguments to filter ClientTasks to delete.
+     * @example
+     * // Delete a few ClientTasks
+     * const { count } = await prisma.clientTask.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ClientTaskDeleteManyArgs>(args?: SelectSubset<T, ClientTaskDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ClientTasks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientTaskUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ClientTasks
+     * const clientTask = await prisma.clientTask.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ClientTaskUpdateManyArgs>(args: SelectSubset<T, ClientTaskUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ClientTasks and returns the data updated in the database.
+     * @param {ClientTaskUpdateManyAndReturnArgs} args - Arguments to update many ClientTasks.
+     * @example
+     * // Update many ClientTasks
+     * const clientTask = await prisma.clientTask.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ClientTasks and only return the `id`
+     * const clientTaskWithIdOnly = await prisma.clientTask.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ClientTaskUpdateManyAndReturnArgs>(args: SelectSubset<T, ClientTaskUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientTaskPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ClientTask.
+     * @param {ClientTaskUpsertArgs} args - Arguments to update or create a ClientTask.
+     * @example
+     * // Update or create a ClientTask
+     * const clientTask = await prisma.clientTask.upsert({
+     *   create: {
+     *     // ... data to create a ClientTask
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ClientTask we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ClientTaskUpsertArgs>(args: SelectSubset<T, ClientTaskUpsertArgs<ExtArgs>>): Prisma__ClientTaskClient<$Result.GetResult<Prisma.$ClientTaskPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ClientTasks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientTaskCountArgs} args - Arguments to filter ClientTasks to count.
+     * @example
+     * // Count the number of ClientTasks
+     * const count = await prisma.clientTask.count({
+     *   where: {
+     *     // ... the filter for the ClientTasks we want to count
+     *   }
+     * })
+    **/
+    count<T extends ClientTaskCountArgs>(
+      args?: Subset<T, ClientTaskCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ClientTaskCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ClientTask.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientTaskAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ClientTaskAggregateArgs>(args: Subset<T, ClientTaskAggregateArgs>): Prisma.PrismaPromise<GetClientTaskAggregateType<T>>
+
+    /**
+     * Group by ClientTask.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientTaskGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ClientTaskGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ClientTaskGroupByArgs['orderBy'] }
+        : { orderBy?: ClientTaskGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ClientTaskGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClientTaskGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ClientTask model
+   */
+  readonly fields: ClientTaskFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ClientTask.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ClientTaskClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends ClientProfileDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientProfileDefaultArgs<ExtArgs>>): Prisma__ClientProfileClient<$Result.GetResult<Prisma.$ClientProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ClientTask model
+   */
+  interface ClientTaskFieldRefs {
+    readonly id: FieldRef<"ClientTask", 'String'>
+    readonly clientId: FieldRef<"ClientTask", 'String'>
+    readonly userId: FieldRef<"ClientTask", 'String'>
+    readonly title: FieldRef<"ClientTask", 'String'>
+    readonly dueDate: FieldRef<"ClientTask", 'DateTime'>
+    readonly status: FieldRef<"ClientTask", 'String'>
+    readonly createdAt: FieldRef<"ClientTask", 'DateTime'>
+    readonly updatedAt: FieldRef<"ClientTask", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ClientTask findUnique
+   */
+  export type ClientTaskFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientTask
+     */
+    select?: ClientTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientTask
+     */
+    omit?: ClientTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientTask to fetch.
+     */
+    where: ClientTaskWhereUniqueInput
+  }
+
+  /**
+   * ClientTask findUniqueOrThrow
+   */
+  export type ClientTaskFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientTask
+     */
+    select?: ClientTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientTask
+     */
+    omit?: ClientTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientTask to fetch.
+     */
+    where: ClientTaskWhereUniqueInput
+  }
+
+  /**
+   * ClientTask findFirst
+   */
+  export type ClientTaskFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientTask
+     */
+    select?: ClientTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientTask
+     */
+    omit?: ClientTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientTask to fetch.
+     */
+    where?: ClientTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientTasks to fetch.
+     */
+    orderBy?: ClientTaskOrderByWithRelationInput | ClientTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClientTasks.
+     */
+    cursor?: ClientTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientTasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClientTasks.
+     */
+    distinct?: ClientTaskScalarFieldEnum | ClientTaskScalarFieldEnum[]
+  }
+
+  /**
+   * ClientTask findFirstOrThrow
+   */
+  export type ClientTaskFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientTask
+     */
+    select?: ClientTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientTask
+     */
+    omit?: ClientTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientTask to fetch.
+     */
+    where?: ClientTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientTasks to fetch.
+     */
+    orderBy?: ClientTaskOrderByWithRelationInput | ClientTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClientTasks.
+     */
+    cursor?: ClientTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientTasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClientTasks.
+     */
+    distinct?: ClientTaskScalarFieldEnum | ClientTaskScalarFieldEnum[]
+  }
+
+  /**
+   * ClientTask findMany
+   */
+  export type ClientTaskFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientTask
+     */
+    select?: ClientTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientTask
+     */
+    omit?: ClientTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientTasks to fetch.
+     */
+    where?: ClientTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientTasks to fetch.
+     */
+    orderBy?: ClientTaskOrderByWithRelationInput | ClientTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ClientTasks.
+     */
+    cursor?: ClientTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientTasks.
+     */
+    skip?: number
+    distinct?: ClientTaskScalarFieldEnum | ClientTaskScalarFieldEnum[]
+  }
+
+  /**
+   * ClientTask create
+   */
+  export type ClientTaskCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientTask
+     */
+    select?: ClientTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientTask
+     */
+    omit?: ClientTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTaskInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ClientTask.
+     */
+    data: XOR<ClientTaskCreateInput, ClientTaskUncheckedCreateInput>
+  }
+
+  /**
+   * ClientTask createMany
+   */
+  export type ClientTaskCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ClientTasks.
+     */
+    data: ClientTaskCreateManyInput | ClientTaskCreateManyInput[]
+  }
+
+  /**
+   * ClientTask createManyAndReturn
+   */
+  export type ClientTaskCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientTask
+     */
+    select?: ClientTaskSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientTask
+     */
+    omit?: ClientTaskOmit<ExtArgs> | null
+    /**
+     * The data used to create many ClientTasks.
+     */
+    data: ClientTaskCreateManyInput | ClientTaskCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTaskIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ClientTask update
+   */
+  export type ClientTaskUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientTask
+     */
+    select?: ClientTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientTask
+     */
+    omit?: ClientTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTaskInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ClientTask.
+     */
+    data: XOR<ClientTaskUpdateInput, ClientTaskUncheckedUpdateInput>
+    /**
+     * Choose, which ClientTask to update.
+     */
+    where: ClientTaskWhereUniqueInput
+  }
+
+  /**
+   * ClientTask updateMany
+   */
+  export type ClientTaskUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ClientTasks.
+     */
+    data: XOR<ClientTaskUpdateManyMutationInput, ClientTaskUncheckedUpdateManyInput>
+    /**
+     * Filter which ClientTasks to update
+     */
+    where?: ClientTaskWhereInput
+    /**
+     * Limit how many ClientTasks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ClientTask updateManyAndReturn
+   */
+  export type ClientTaskUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientTask
+     */
+    select?: ClientTaskSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientTask
+     */
+    omit?: ClientTaskOmit<ExtArgs> | null
+    /**
+     * The data used to update ClientTasks.
+     */
+    data: XOR<ClientTaskUpdateManyMutationInput, ClientTaskUncheckedUpdateManyInput>
+    /**
+     * Filter which ClientTasks to update
+     */
+    where?: ClientTaskWhereInput
+    /**
+     * Limit how many ClientTasks to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTaskIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ClientTask upsert
+   */
+  export type ClientTaskUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientTask
+     */
+    select?: ClientTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientTask
+     */
+    omit?: ClientTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTaskInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ClientTask to update in case it exists.
+     */
+    where: ClientTaskWhereUniqueInput
+    /**
+     * In case the ClientTask found by the `where` argument doesn't exist, create a new ClientTask with this data.
+     */
+    create: XOR<ClientTaskCreateInput, ClientTaskUncheckedCreateInput>
+    /**
+     * In case the ClientTask was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ClientTaskUpdateInput, ClientTaskUncheckedUpdateInput>
+  }
+
+  /**
+   * ClientTask delete
+   */
+  export type ClientTaskDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientTask
+     */
+    select?: ClientTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientTask
+     */
+    omit?: ClientTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTaskInclude<ExtArgs> | null
+    /**
+     * Filter which ClientTask to delete.
+     */
+    where: ClientTaskWhereUniqueInput
+  }
+
+  /**
+   * ClientTask deleteMany
+   */
+  export type ClientTaskDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClientTasks to delete
+     */
+    where?: ClientTaskWhereInput
+    /**
+     * Limit how many ClientTasks to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ClientTask without action
+   */
+  export type ClientTaskDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientTask
+     */
+    select?: ClientTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientTask
+     */
+    omit?: ClientTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTaskInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model StockCallout
+   */
+
+  export type AggregateStockCallout = {
+    _count: StockCalloutCountAggregateOutputType | null
+    _avg: StockCalloutAvgAggregateOutputType | null
+    _sum: StockCalloutSumAggregateOutputType | null
+    _min: StockCalloutMinAggregateOutputType | null
+    _max: StockCalloutMaxAggregateOutputType | null
+  }
+
+  export type StockCalloutAvgAggregateOutputType = {
+    currentStock: number | null
+    reorderPoint: number | null
+    requestedQty: number | null
+  }
+
+  export type StockCalloutSumAggregateOutputType = {
+    currentStock: number | null
+    reorderPoint: number | null
+    requestedQty: number | null
+  }
+
+  export type StockCalloutMinAggregateOutputType = {
+    id: string | null
+    storeId: string | null
+    sku: string | null
+    productName: string | null
+    currentStock: number | null
+    reorderPoint: number | null
+    requestedQty: number | null
+    urgency: string | null
+    status: string | null
+    reportedBy: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StockCalloutMaxAggregateOutputType = {
+    id: string | null
+    storeId: string | null
+    sku: string | null
+    productName: string | null
+    currentStock: number | null
+    reorderPoint: number | null
+    requestedQty: number | null
+    urgency: string | null
+    status: string | null
+    reportedBy: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StockCalloutCountAggregateOutputType = {
+    id: number
+    storeId: number
+    sku: number
+    productName: number
+    currentStock: number
+    reorderPoint: number
+    requestedQty: number
+    urgency: number
+    status: number
+    reportedBy: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type StockCalloutAvgAggregateInputType = {
+    currentStock?: true
+    reorderPoint?: true
+    requestedQty?: true
+  }
+
+  export type StockCalloutSumAggregateInputType = {
+    currentStock?: true
+    reorderPoint?: true
+    requestedQty?: true
+  }
+
+  export type StockCalloutMinAggregateInputType = {
+    id?: true
+    storeId?: true
+    sku?: true
+    productName?: true
+    currentStock?: true
+    reorderPoint?: true
+    requestedQty?: true
+    urgency?: true
+    status?: true
+    reportedBy?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type StockCalloutMaxAggregateInputType = {
+    id?: true
+    storeId?: true
+    sku?: true
+    productName?: true
+    currentStock?: true
+    reorderPoint?: true
+    requestedQty?: true
+    urgency?: true
+    status?: true
+    reportedBy?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type StockCalloutCountAggregateInputType = {
+    id?: true
+    storeId?: true
+    sku?: true
+    productName?: true
+    currentStock?: true
+    reorderPoint?: true
+    requestedQty?: true
+    urgency?: true
+    status?: true
+    reportedBy?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type StockCalloutAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StockCallout to aggregate.
+     */
+    where?: StockCalloutWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StockCallouts to fetch.
+     */
+    orderBy?: StockCalloutOrderByWithRelationInput | StockCalloutOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StockCalloutWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StockCallouts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StockCallouts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned StockCallouts
+    **/
+    _count?: true | StockCalloutCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: StockCalloutAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: StockCalloutSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StockCalloutMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StockCalloutMaxAggregateInputType
+  }
+
+  export type GetStockCalloutAggregateType<T extends StockCalloutAggregateArgs> = {
+        [P in keyof T & keyof AggregateStockCallout]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStockCallout[P]>
+      : GetScalarType<T[P], AggregateStockCallout[P]>
+  }
+
+
+
+
+  export type StockCalloutGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StockCalloutWhereInput
+    orderBy?: StockCalloutOrderByWithAggregationInput | StockCalloutOrderByWithAggregationInput[]
+    by: StockCalloutScalarFieldEnum[] | StockCalloutScalarFieldEnum
+    having?: StockCalloutScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StockCalloutCountAggregateInputType | true
+    _avg?: StockCalloutAvgAggregateInputType
+    _sum?: StockCalloutSumAggregateInputType
+    _min?: StockCalloutMinAggregateInputType
+    _max?: StockCalloutMaxAggregateInputType
+  }
+
+  export type StockCalloutGroupByOutputType = {
+    id: string
+    storeId: string
+    sku: string
+    productName: string
+    currentStock: number
+    reorderPoint: number
+    requestedQty: number
+    urgency: string
+    status: string
+    reportedBy: string
+    createdAt: Date
+    updatedAt: Date
+    _count: StockCalloutCountAggregateOutputType | null
+    _avg: StockCalloutAvgAggregateOutputType | null
+    _sum: StockCalloutSumAggregateOutputType | null
+    _min: StockCalloutMinAggregateOutputType | null
+    _max: StockCalloutMaxAggregateOutputType | null
+  }
+
+  type GetStockCalloutGroupByPayload<T extends StockCalloutGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StockCalloutGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StockCalloutGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StockCalloutGroupByOutputType[P]>
+            : GetScalarType<T[P], StockCalloutGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StockCalloutSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    storeId?: boolean
+    sku?: boolean
+    productName?: boolean
+    currentStock?: boolean
+    reorderPoint?: boolean
+    requestedQty?: boolean
+    urgency?: boolean
+    status?: boolean
+    reportedBy?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+    reporter?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["stockCallout"]>
+
+  export type StockCalloutSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    storeId?: boolean
+    sku?: boolean
+    productName?: boolean
+    currentStock?: boolean
+    reorderPoint?: boolean
+    requestedQty?: boolean
+    urgency?: boolean
+    status?: boolean
+    reportedBy?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+    reporter?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["stockCallout"]>
+
+  export type StockCalloutSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    storeId?: boolean
+    sku?: boolean
+    productName?: boolean
+    currentStock?: boolean
+    reorderPoint?: boolean
+    requestedQty?: boolean
+    urgency?: boolean
+    status?: boolean
+    reportedBy?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+    reporter?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["stockCallout"]>
+
+  export type StockCalloutSelectScalar = {
+    id?: boolean
+    storeId?: boolean
+    sku?: boolean
+    productName?: boolean
+    currentStock?: boolean
+    reorderPoint?: boolean
+    requestedQty?: boolean
+    urgency?: boolean
+    status?: boolean
+    reportedBy?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type StockCalloutOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "storeId" | "sku" | "productName" | "currentStock" | "reorderPoint" | "requestedQty" | "urgency" | "status" | "reportedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["stockCallout"]>
+  export type StockCalloutInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+    reporter?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type StockCalloutIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+    reporter?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type StockCalloutIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+    reporter?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $StockCalloutPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StockCallout"
+    objects: {
+      store: Prisma.$StorePayload<ExtArgs>
+      reporter: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      storeId: string
+      sku: string
+      productName: string
+      currentStock: number
+      reorderPoint: number
+      requestedQty: number
+      urgency: string
+      status: string
+      reportedBy: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["stockCallout"]>
+    composites: {}
+  }
+
+  type StockCalloutGetPayload<S extends boolean | null | undefined | StockCalloutDefaultArgs> = $Result.GetResult<Prisma.$StockCalloutPayload, S>
+
+  type StockCalloutCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<StockCalloutFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StockCalloutCountAggregateInputType | true
+    }
+
+  export interface StockCalloutDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StockCallout'], meta: { name: 'StockCallout' } }
+    /**
+     * Find zero or one StockCallout that matches the filter.
+     * @param {StockCalloutFindUniqueArgs} args - Arguments to find a StockCallout
+     * @example
+     * // Get one StockCallout
+     * const stockCallout = await prisma.stockCallout.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends StockCalloutFindUniqueArgs>(args: SelectSubset<T, StockCalloutFindUniqueArgs<ExtArgs>>): Prisma__StockCalloutClient<$Result.GetResult<Prisma.$StockCalloutPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one StockCallout that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {StockCalloutFindUniqueOrThrowArgs} args - Arguments to find a StockCallout
+     * @example
+     * // Get one StockCallout
+     * const stockCallout = await prisma.stockCallout.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends StockCalloutFindUniqueOrThrowArgs>(args: SelectSubset<T, StockCalloutFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StockCalloutClient<$Result.GetResult<Prisma.$StockCalloutPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StockCallout that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockCalloutFindFirstArgs} args - Arguments to find a StockCallout
+     * @example
+     * // Get one StockCallout
+     * const stockCallout = await prisma.stockCallout.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends StockCalloutFindFirstArgs>(args?: SelectSubset<T, StockCalloutFindFirstArgs<ExtArgs>>): Prisma__StockCalloutClient<$Result.GetResult<Prisma.$StockCalloutPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StockCallout that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockCalloutFindFirstOrThrowArgs} args - Arguments to find a StockCallout
+     * @example
+     * // Get one StockCallout
+     * const stockCallout = await prisma.stockCallout.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends StockCalloutFindFirstOrThrowArgs>(args?: SelectSubset<T, StockCalloutFindFirstOrThrowArgs<ExtArgs>>): Prisma__StockCalloutClient<$Result.GetResult<Prisma.$StockCalloutPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more StockCallouts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockCalloutFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all StockCallouts
+     * const stockCallouts = await prisma.stockCallout.findMany()
+     * 
+     * // Get first 10 StockCallouts
+     * const stockCallouts = await prisma.stockCallout.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const stockCalloutWithIdOnly = await prisma.stockCallout.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends StockCalloutFindManyArgs>(args?: SelectSubset<T, StockCalloutFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockCalloutPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a StockCallout.
+     * @param {StockCalloutCreateArgs} args - Arguments to create a StockCallout.
+     * @example
+     * // Create one StockCallout
+     * const StockCallout = await prisma.stockCallout.create({
+     *   data: {
+     *     // ... data to create a StockCallout
+     *   }
+     * })
+     * 
+     */
+    create<T extends StockCalloutCreateArgs>(args: SelectSubset<T, StockCalloutCreateArgs<ExtArgs>>): Prisma__StockCalloutClient<$Result.GetResult<Prisma.$StockCalloutPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many StockCallouts.
+     * @param {StockCalloutCreateManyArgs} args - Arguments to create many StockCallouts.
+     * @example
+     * // Create many StockCallouts
+     * const stockCallout = await prisma.stockCallout.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends StockCalloutCreateManyArgs>(args?: SelectSubset<T, StockCalloutCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many StockCallouts and returns the data saved in the database.
+     * @param {StockCalloutCreateManyAndReturnArgs} args - Arguments to create many StockCallouts.
+     * @example
+     * // Create many StockCallouts
+     * const stockCallout = await prisma.stockCallout.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many StockCallouts and only return the `id`
+     * const stockCalloutWithIdOnly = await prisma.stockCallout.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends StockCalloutCreateManyAndReturnArgs>(args?: SelectSubset<T, StockCalloutCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockCalloutPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a StockCallout.
+     * @param {StockCalloutDeleteArgs} args - Arguments to delete one StockCallout.
+     * @example
+     * // Delete one StockCallout
+     * const StockCallout = await prisma.stockCallout.delete({
+     *   where: {
+     *     // ... filter to delete one StockCallout
+     *   }
+     * })
+     * 
+     */
+    delete<T extends StockCalloutDeleteArgs>(args: SelectSubset<T, StockCalloutDeleteArgs<ExtArgs>>): Prisma__StockCalloutClient<$Result.GetResult<Prisma.$StockCalloutPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one StockCallout.
+     * @param {StockCalloutUpdateArgs} args - Arguments to update one StockCallout.
+     * @example
+     * // Update one StockCallout
+     * const stockCallout = await prisma.stockCallout.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends StockCalloutUpdateArgs>(args: SelectSubset<T, StockCalloutUpdateArgs<ExtArgs>>): Prisma__StockCalloutClient<$Result.GetResult<Prisma.$StockCalloutPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more StockCallouts.
+     * @param {StockCalloutDeleteManyArgs} args - Arguments to filter StockCallouts to delete.
+     * @example
+     * // Delete a few StockCallouts
+     * const { count } = await prisma.stockCallout.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends StockCalloutDeleteManyArgs>(args?: SelectSubset<T, StockCalloutDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StockCallouts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockCalloutUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many StockCallouts
+     * const stockCallout = await prisma.stockCallout.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends StockCalloutUpdateManyArgs>(args: SelectSubset<T, StockCalloutUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StockCallouts and returns the data updated in the database.
+     * @param {StockCalloutUpdateManyAndReturnArgs} args - Arguments to update many StockCallouts.
+     * @example
+     * // Update many StockCallouts
+     * const stockCallout = await prisma.stockCallout.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more StockCallouts and only return the `id`
+     * const stockCalloutWithIdOnly = await prisma.stockCallout.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends StockCalloutUpdateManyAndReturnArgs>(args: SelectSubset<T, StockCalloutUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StockCalloutPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one StockCallout.
+     * @param {StockCalloutUpsertArgs} args - Arguments to update or create a StockCallout.
+     * @example
+     * // Update or create a StockCallout
+     * const stockCallout = await prisma.stockCallout.upsert({
+     *   create: {
+     *     // ... data to create a StockCallout
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the StockCallout we want to update
+     *   }
+     * })
+     */
+    upsert<T extends StockCalloutUpsertArgs>(args: SelectSubset<T, StockCalloutUpsertArgs<ExtArgs>>): Prisma__StockCalloutClient<$Result.GetResult<Prisma.$StockCalloutPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of StockCallouts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockCalloutCountArgs} args - Arguments to filter StockCallouts to count.
+     * @example
+     * // Count the number of StockCallouts
+     * const count = await prisma.stockCallout.count({
+     *   where: {
+     *     // ... the filter for the StockCallouts we want to count
+     *   }
+     * })
+    **/
+    count<T extends StockCalloutCountArgs>(
+      args?: Subset<T, StockCalloutCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StockCalloutCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a StockCallout.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockCalloutAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StockCalloutAggregateArgs>(args: Subset<T, StockCalloutAggregateArgs>): Prisma.PrismaPromise<GetStockCalloutAggregateType<T>>
+
+    /**
+     * Group by StockCallout.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StockCalloutGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StockCalloutGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StockCalloutGroupByArgs['orderBy'] }
+        : { orderBy?: StockCalloutGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StockCalloutGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStockCalloutGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the StockCallout model
+   */
+  readonly fields: StockCalloutFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for StockCallout.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StockCalloutClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    store<T extends StoreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StoreDefaultArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    reporter<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the StockCallout model
+   */
+  interface StockCalloutFieldRefs {
+    readonly id: FieldRef<"StockCallout", 'String'>
+    readonly storeId: FieldRef<"StockCallout", 'String'>
+    readonly sku: FieldRef<"StockCallout", 'String'>
+    readonly productName: FieldRef<"StockCallout", 'String'>
+    readonly currentStock: FieldRef<"StockCallout", 'Int'>
+    readonly reorderPoint: FieldRef<"StockCallout", 'Int'>
+    readonly requestedQty: FieldRef<"StockCallout", 'Int'>
+    readonly urgency: FieldRef<"StockCallout", 'String'>
+    readonly status: FieldRef<"StockCallout", 'String'>
+    readonly reportedBy: FieldRef<"StockCallout", 'String'>
+    readonly createdAt: FieldRef<"StockCallout", 'DateTime'>
+    readonly updatedAt: FieldRef<"StockCallout", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * StockCallout findUnique
+   */
+  export type StockCalloutFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockCallout
+     */
+    select?: StockCalloutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StockCallout
+     */
+    omit?: StockCalloutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StockCalloutInclude<ExtArgs> | null
+    /**
+     * Filter, which StockCallout to fetch.
+     */
+    where: StockCalloutWhereUniqueInput
+  }
+
+  /**
+   * StockCallout findUniqueOrThrow
+   */
+  export type StockCalloutFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockCallout
+     */
+    select?: StockCalloutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StockCallout
+     */
+    omit?: StockCalloutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StockCalloutInclude<ExtArgs> | null
+    /**
+     * Filter, which StockCallout to fetch.
+     */
+    where: StockCalloutWhereUniqueInput
+  }
+
+  /**
+   * StockCallout findFirst
+   */
+  export type StockCalloutFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockCallout
+     */
+    select?: StockCalloutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StockCallout
+     */
+    omit?: StockCalloutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StockCalloutInclude<ExtArgs> | null
+    /**
+     * Filter, which StockCallout to fetch.
+     */
+    where?: StockCalloutWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StockCallouts to fetch.
+     */
+    orderBy?: StockCalloutOrderByWithRelationInput | StockCalloutOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StockCallouts.
+     */
+    cursor?: StockCalloutWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StockCallouts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StockCallouts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StockCallouts.
+     */
+    distinct?: StockCalloutScalarFieldEnum | StockCalloutScalarFieldEnum[]
+  }
+
+  /**
+   * StockCallout findFirstOrThrow
+   */
+  export type StockCalloutFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockCallout
+     */
+    select?: StockCalloutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StockCallout
+     */
+    omit?: StockCalloutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StockCalloutInclude<ExtArgs> | null
+    /**
+     * Filter, which StockCallout to fetch.
+     */
+    where?: StockCalloutWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StockCallouts to fetch.
+     */
+    orderBy?: StockCalloutOrderByWithRelationInput | StockCalloutOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StockCallouts.
+     */
+    cursor?: StockCalloutWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StockCallouts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StockCallouts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StockCallouts.
+     */
+    distinct?: StockCalloutScalarFieldEnum | StockCalloutScalarFieldEnum[]
+  }
+
+  /**
+   * StockCallout findMany
+   */
+  export type StockCalloutFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockCallout
+     */
+    select?: StockCalloutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StockCallout
+     */
+    omit?: StockCalloutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StockCalloutInclude<ExtArgs> | null
+    /**
+     * Filter, which StockCallouts to fetch.
+     */
+    where?: StockCalloutWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StockCallouts to fetch.
+     */
+    orderBy?: StockCalloutOrderByWithRelationInput | StockCalloutOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing StockCallouts.
+     */
+    cursor?: StockCalloutWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StockCallouts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StockCallouts.
+     */
+    skip?: number
+    distinct?: StockCalloutScalarFieldEnum | StockCalloutScalarFieldEnum[]
+  }
+
+  /**
+   * StockCallout create
+   */
+  export type StockCalloutCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockCallout
+     */
+    select?: StockCalloutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StockCallout
+     */
+    omit?: StockCalloutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StockCalloutInclude<ExtArgs> | null
+    /**
+     * The data needed to create a StockCallout.
+     */
+    data: XOR<StockCalloutCreateInput, StockCalloutUncheckedCreateInput>
+  }
+
+  /**
+   * StockCallout createMany
+   */
+  export type StockCalloutCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many StockCallouts.
+     */
+    data: StockCalloutCreateManyInput | StockCalloutCreateManyInput[]
+  }
+
+  /**
+   * StockCallout createManyAndReturn
+   */
+  export type StockCalloutCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockCallout
+     */
+    select?: StockCalloutSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StockCallout
+     */
+    omit?: StockCalloutOmit<ExtArgs> | null
+    /**
+     * The data used to create many StockCallouts.
+     */
+    data: StockCalloutCreateManyInput | StockCalloutCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StockCalloutIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StockCallout update
+   */
+  export type StockCalloutUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockCallout
+     */
+    select?: StockCalloutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StockCallout
+     */
+    omit?: StockCalloutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StockCalloutInclude<ExtArgs> | null
+    /**
+     * The data needed to update a StockCallout.
+     */
+    data: XOR<StockCalloutUpdateInput, StockCalloutUncheckedUpdateInput>
+    /**
+     * Choose, which StockCallout to update.
+     */
+    where: StockCalloutWhereUniqueInput
+  }
+
+  /**
+   * StockCallout updateMany
+   */
+  export type StockCalloutUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update StockCallouts.
+     */
+    data: XOR<StockCalloutUpdateManyMutationInput, StockCalloutUncheckedUpdateManyInput>
+    /**
+     * Filter which StockCallouts to update
+     */
+    where?: StockCalloutWhereInput
+    /**
+     * Limit how many StockCallouts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * StockCallout updateManyAndReturn
+   */
+  export type StockCalloutUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockCallout
+     */
+    select?: StockCalloutSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StockCallout
+     */
+    omit?: StockCalloutOmit<ExtArgs> | null
+    /**
+     * The data used to update StockCallouts.
+     */
+    data: XOR<StockCalloutUpdateManyMutationInput, StockCalloutUncheckedUpdateManyInput>
+    /**
+     * Filter which StockCallouts to update
+     */
+    where?: StockCalloutWhereInput
+    /**
+     * Limit how many StockCallouts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StockCalloutIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StockCallout upsert
+   */
+  export type StockCalloutUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockCallout
+     */
+    select?: StockCalloutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StockCallout
+     */
+    omit?: StockCalloutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StockCalloutInclude<ExtArgs> | null
+    /**
+     * The filter to search for the StockCallout to update in case it exists.
+     */
+    where: StockCalloutWhereUniqueInput
+    /**
+     * In case the StockCallout found by the `where` argument doesn't exist, create a new StockCallout with this data.
+     */
+    create: XOR<StockCalloutCreateInput, StockCalloutUncheckedCreateInput>
+    /**
+     * In case the StockCallout was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StockCalloutUpdateInput, StockCalloutUncheckedUpdateInput>
+  }
+
+  /**
+   * StockCallout delete
+   */
+  export type StockCalloutDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockCallout
+     */
+    select?: StockCalloutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StockCallout
+     */
+    omit?: StockCalloutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StockCalloutInclude<ExtArgs> | null
+    /**
+     * Filter which StockCallout to delete.
+     */
+    where: StockCalloutWhereUniqueInput
+  }
+
+  /**
+   * StockCallout deleteMany
+   */
+  export type StockCalloutDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StockCallouts to delete
+     */
+    where?: StockCalloutWhereInput
+    /**
+     * Limit how many StockCallouts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * StockCallout without action
+   */
+  export type StockCalloutDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StockCallout
+     */
+    select?: StockCalloutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StockCallout
+     */
+    omit?: StockCalloutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StockCalloutInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model CustomerOrder
+   */
+
+  export type AggregateCustomerOrder = {
+    _count: CustomerOrderCountAggregateOutputType | null
+    _min: CustomerOrderMinAggregateOutputType | null
+    _max: CustomerOrderMaxAggregateOutputType | null
+  }
+
+  export type CustomerOrderMinAggregateOutputType = {
+    id: string | null
+    storeId: string | null
+    orderNumber: string | null
+    customerName: string | null
+    customerEmail: string | null
+    status: string | null
+    trackingNumber: string | null
+    carrier: string | null
+    estimatedDelivery: Date | null
+    createdBy: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CustomerOrderMaxAggregateOutputType = {
+    id: string | null
+    storeId: string | null
+    orderNumber: string | null
+    customerName: string | null
+    customerEmail: string | null
+    status: string | null
+    trackingNumber: string | null
+    carrier: string | null
+    estimatedDelivery: Date | null
+    createdBy: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CustomerOrderCountAggregateOutputType = {
+    id: number
+    storeId: number
+    orderNumber: number
+    customerName: number
+    customerEmail: number
+    status: number
+    trackingNumber: number
+    carrier: number
+    estimatedDelivery: number
+    createdBy: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CustomerOrderMinAggregateInputType = {
+    id?: true
+    storeId?: true
+    orderNumber?: true
+    customerName?: true
+    customerEmail?: true
+    status?: true
+    trackingNumber?: true
+    carrier?: true
+    estimatedDelivery?: true
+    createdBy?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CustomerOrderMaxAggregateInputType = {
+    id?: true
+    storeId?: true
+    orderNumber?: true
+    customerName?: true
+    customerEmail?: true
+    status?: true
+    trackingNumber?: true
+    carrier?: true
+    estimatedDelivery?: true
+    createdBy?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CustomerOrderCountAggregateInputType = {
+    id?: true
+    storeId?: true
+    orderNumber?: true
+    customerName?: true
+    customerEmail?: true
+    status?: true
+    trackingNumber?: true
+    carrier?: true
+    estimatedDelivery?: true
+    createdBy?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CustomerOrderAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CustomerOrder to aggregate.
+     */
+    where?: CustomerOrderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomerOrders to fetch.
+     */
+    orderBy?: CustomerOrderOrderByWithRelationInput | CustomerOrderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CustomerOrderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomerOrders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomerOrders.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CustomerOrders
+    **/
+    _count?: true | CustomerOrderCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CustomerOrderMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CustomerOrderMaxAggregateInputType
+  }
+
+  export type GetCustomerOrderAggregateType<T extends CustomerOrderAggregateArgs> = {
+        [P in keyof T & keyof AggregateCustomerOrder]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCustomerOrder[P]>
+      : GetScalarType<T[P], AggregateCustomerOrder[P]>
+  }
+
+
+
+
+  export type CustomerOrderGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CustomerOrderWhereInput
+    orderBy?: CustomerOrderOrderByWithAggregationInput | CustomerOrderOrderByWithAggregationInput[]
+    by: CustomerOrderScalarFieldEnum[] | CustomerOrderScalarFieldEnum
+    having?: CustomerOrderScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CustomerOrderCountAggregateInputType | true
+    _min?: CustomerOrderMinAggregateInputType
+    _max?: CustomerOrderMaxAggregateInputType
+  }
+
+  export type CustomerOrderGroupByOutputType = {
+    id: string
+    storeId: string
+    orderNumber: string
+    customerName: string
+    customerEmail: string | null
+    status: string
+    trackingNumber: string | null
+    carrier: string | null
+    estimatedDelivery: Date | null
+    createdBy: string
+    createdAt: Date
+    updatedAt: Date
+    _count: CustomerOrderCountAggregateOutputType | null
+    _min: CustomerOrderMinAggregateOutputType | null
+    _max: CustomerOrderMaxAggregateOutputType | null
+  }
+
+  type GetCustomerOrderGroupByPayload<T extends CustomerOrderGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CustomerOrderGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CustomerOrderGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CustomerOrderGroupByOutputType[P]>
+            : GetScalarType<T[P], CustomerOrderGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CustomerOrderSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    storeId?: boolean
+    orderNumber?: boolean
+    customerName?: boolean
+    customerEmail?: boolean
+    status?: boolean
+    trackingNumber?: boolean
+    carrier?: boolean
+    estimatedDelivery?: boolean
+    createdBy?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+    creator?: boolean | UserDefaultArgs<ExtArgs>
+    statusUpdates?: boolean | CustomerOrder$statusUpdatesArgs<ExtArgs>
+    _count?: boolean | CustomerOrderCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["customerOrder"]>
+
+  export type CustomerOrderSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    storeId?: boolean
+    orderNumber?: boolean
+    customerName?: boolean
+    customerEmail?: boolean
+    status?: boolean
+    trackingNumber?: boolean
+    carrier?: boolean
+    estimatedDelivery?: boolean
+    createdBy?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+    creator?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["customerOrder"]>
+
+  export type CustomerOrderSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    storeId?: boolean
+    orderNumber?: boolean
+    customerName?: boolean
+    customerEmail?: boolean
+    status?: boolean
+    trackingNumber?: boolean
+    carrier?: boolean
+    estimatedDelivery?: boolean
+    createdBy?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+    creator?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["customerOrder"]>
+
+  export type CustomerOrderSelectScalar = {
+    id?: boolean
+    storeId?: boolean
+    orderNumber?: boolean
+    customerName?: boolean
+    customerEmail?: boolean
+    status?: boolean
+    trackingNumber?: boolean
+    carrier?: boolean
+    estimatedDelivery?: boolean
+    createdBy?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type CustomerOrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "storeId" | "orderNumber" | "customerName" | "customerEmail" | "status" | "trackingNumber" | "carrier" | "estimatedDelivery" | "createdBy" | "createdAt" | "updatedAt", ExtArgs["result"]["customerOrder"]>
+  export type CustomerOrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+    creator?: boolean | UserDefaultArgs<ExtArgs>
+    statusUpdates?: boolean | CustomerOrder$statusUpdatesArgs<ExtArgs>
+    _count?: boolean | CustomerOrderCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CustomerOrderIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+    creator?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CustomerOrderIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+    creator?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $CustomerOrderPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CustomerOrder"
+    objects: {
+      store: Prisma.$StorePayload<ExtArgs>
+      creator: Prisma.$UserPayload<ExtArgs>
+      statusUpdates: Prisma.$OrderStatusUpdatePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      storeId: string
+      orderNumber: string
+      customerName: string
+      customerEmail: string | null
+      status: string
+      trackingNumber: string | null
+      carrier: string | null
+      estimatedDelivery: Date | null
+      createdBy: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["customerOrder"]>
+    composites: {}
+  }
+
+  type CustomerOrderGetPayload<S extends boolean | null | undefined | CustomerOrderDefaultArgs> = $Result.GetResult<Prisma.$CustomerOrderPayload, S>
+
+  type CustomerOrderCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CustomerOrderFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CustomerOrderCountAggregateInputType | true
+    }
+
+  export interface CustomerOrderDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CustomerOrder'], meta: { name: 'CustomerOrder' } }
+    /**
+     * Find zero or one CustomerOrder that matches the filter.
+     * @param {CustomerOrderFindUniqueArgs} args - Arguments to find a CustomerOrder
+     * @example
+     * // Get one CustomerOrder
+     * const customerOrder = await prisma.customerOrder.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CustomerOrderFindUniqueArgs>(args: SelectSubset<T, CustomerOrderFindUniqueArgs<ExtArgs>>): Prisma__CustomerOrderClient<$Result.GetResult<Prisma.$CustomerOrderPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CustomerOrder that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CustomerOrderFindUniqueOrThrowArgs} args - Arguments to find a CustomerOrder
+     * @example
+     * // Get one CustomerOrder
+     * const customerOrder = await prisma.customerOrder.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CustomerOrderFindUniqueOrThrowArgs>(args: SelectSubset<T, CustomerOrderFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CustomerOrderClient<$Result.GetResult<Prisma.$CustomerOrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CustomerOrder that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomerOrderFindFirstArgs} args - Arguments to find a CustomerOrder
+     * @example
+     * // Get one CustomerOrder
+     * const customerOrder = await prisma.customerOrder.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CustomerOrderFindFirstArgs>(args?: SelectSubset<T, CustomerOrderFindFirstArgs<ExtArgs>>): Prisma__CustomerOrderClient<$Result.GetResult<Prisma.$CustomerOrderPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CustomerOrder that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomerOrderFindFirstOrThrowArgs} args - Arguments to find a CustomerOrder
+     * @example
+     * // Get one CustomerOrder
+     * const customerOrder = await prisma.customerOrder.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CustomerOrderFindFirstOrThrowArgs>(args?: SelectSubset<T, CustomerOrderFindFirstOrThrowArgs<ExtArgs>>): Prisma__CustomerOrderClient<$Result.GetResult<Prisma.$CustomerOrderPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CustomerOrders that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomerOrderFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CustomerOrders
+     * const customerOrders = await prisma.customerOrder.findMany()
+     * 
+     * // Get first 10 CustomerOrders
+     * const customerOrders = await prisma.customerOrder.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const customerOrderWithIdOnly = await prisma.customerOrder.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CustomerOrderFindManyArgs>(args?: SelectSubset<T, CustomerOrderFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomerOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CustomerOrder.
+     * @param {CustomerOrderCreateArgs} args - Arguments to create a CustomerOrder.
+     * @example
+     * // Create one CustomerOrder
+     * const CustomerOrder = await prisma.customerOrder.create({
+     *   data: {
+     *     // ... data to create a CustomerOrder
+     *   }
+     * })
+     * 
+     */
+    create<T extends CustomerOrderCreateArgs>(args: SelectSubset<T, CustomerOrderCreateArgs<ExtArgs>>): Prisma__CustomerOrderClient<$Result.GetResult<Prisma.$CustomerOrderPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CustomerOrders.
+     * @param {CustomerOrderCreateManyArgs} args - Arguments to create many CustomerOrders.
+     * @example
+     * // Create many CustomerOrders
+     * const customerOrder = await prisma.customerOrder.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CustomerOrderCreateManyArgs>(args?: SelectSubset<T, CustomerOrderCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CustomerOrders and returns the data saved in the database.
+     * @param {CustomerOrderCreateManyAndReturnArgs} args - Arguments to create many CustomerOrders.
+     * @example
+     * // Create many CustomerOrders
+     * const customerOrder = await prisma.customerOrder.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CustomerOrders and only return the `id`
+     * const customerOrderWithIdOnly = await prisma.customerOrder.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CustomerOrderCreateManyAndReturnArgs>(args?: SelectSubset<T, CustomerOrderCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomerOrderPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a CustomerOrder.
+     * @param {CustomerOrderDeleteArgs} args - Arguments to delete one CustomerOrder.
+     * @example
+     * // Delete one CustomerOrder
+     * const CustomerOrder = await prisma.customerOrder.delete({
+     *   where: {
+     *     // ... filter to delete one CustomerOrder
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CustomerOrderDeleteArgs>(args: SelectSubset<T, CustomerOrderDeleteArgs<ExtArgs>>): Prisma__CustomerOrderClient<$Result.GetResult<Prisma.$CustomerOrderPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CustomerOrder.
+     * @param {CustomerOrderUpdateArgs} args - Arguments to update one CustomerOrder.
+     * @example
+     * // Update one CustomerOrder
+     * const customerOrder = await prisma.customerOrder.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CustomerOrderUpdateArgs>(args: SelectSubset<T, CustomerOrderUpdateArgs<ExtArgs>>): Prisma__CustomerOrderClient<$Result.GetResult<Prisma.$CustomerOrderPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CustomerOrders.
+     * @param {CustomerOrderDeleteManyArgs} args - Arguments to filter CustomerOrders to delete.
+     * @example
+     * // Delete a few CustomerOrders
+     * const { count } = await prisma.customerOrder.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CustomerOrderDeleteManyArgs>(args?: SelectSubset<T, CustomerOrderDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CustomerOrders.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomerOrderUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CustomerOrders
+     * const customerOrder = await prisma.customerOrder.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CustomerOrderUpdateManyArgs>(args: SelectSubset<T, CustomerOrderUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CustomerOrders and returns the data updated in the database.
+     * @param {CustomerOrderUpdateManyAndReturnArgs} args - Arguments to update many CustomerOrders.
+     * @example
+     * // Update many CustomerOrders
+     * const customerOrder = await prisma.customerOrder.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CustomerOrders and only return the `id`
+     * const customerOrderWithIdOnly = await prisma.customerOrder.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CustomerOrderUpdateManyAndReturnArgs>(args: SelectSubset<T, CustomerOrderUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomerOrderPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one CustomerOrder.
+     * @param {CustomerOrderUpsertArgs} args - Arguments to update or create a CustomerOrder.
+     * @example
+     * // Update or create a CustomerOrder
+     * const customerOrder = await prisma.customerOrder.upsert({
+     *   create: {
+     *     // ... data to create a CustomerOrder
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CustomerOrder we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CustomerOrderUpsertArgs>(args: SelectSubset<T, CustomerOrderUpsertArgs<ExtArgs>>): Prisma__CustomerOrderClient<$Result.GetResult<Prisma.$CustomerOrderPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CustomerOrders.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomerOrderCountArgs} args - Arguments to filter CustomerOrders to count.
+     * @example
+     * // Count the number of CustomerOrders
+     * const count = await prisma.customerOrder.count({
+     *   where: {
+     *     // ... the filter for the CustomerOrders we want to count
+     *   }
+     * })
+    **/
+    count<T extends CustomerOrderCountArgs>(
+      args?: Subset<T, CustomerOrderCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CustomerOrderCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CustomerOrder.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomerOrderAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CustomerOrderAggregateArgs>(args: Subset<T, CustomerOrderAggregateArgs>): Prisma.PrismaPromise<GetCustomerOrderAggregateType<T>>
+
+    /**
+     * Group by CustomerOrder.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomerOrderGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CustomerOrderGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CustomerOrderGroupByArgs['orderBy'] }
+        : { orderBy?: CustomerOrderGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CustomerOrderGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCustomerOrderGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CustomerOrder model
+   */
+  readonly fields: CustomerOrderFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CustomerOrder.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CustomerOrderClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    store<T extends StoreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StoreDefaultArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    creator<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    statusUpdates<T extends CustomerOrder$statusUpdatesArgs<ExtArgs> = {}>(args?: Subset<T, CustomerOrder$statusUpdatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderStatusUpdatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CustomerOrder model
+   */
+  interface CustomerOrderFieldRefs {
+    readonly id: FieldRef<"CustomerOrder", 'String'>
+    readonly storeId: FieldRef<"CustomerOrder", 'String'>
+    readonly orderNumber: FieldRef<"CustomerOrder", 'String'>
+    readonly customerName: FieldRef<"CustomerOrder", 'String'>
+    readonly customerEmail: FieldRef<"CustomerOrder", 'String'>
+    readonly status: FieldRef<"CustomerOrder", 'String'>
+    readonly trackingNumber: FieldRef<"CustomerOrder", 'String'>
+    readonly carrier: FieldRef<"CustomerOrder", 'String'>
+    readonly estimatedDelivery: FieldRef<"CustomerOrder", 'DateTime'>
+    readonly createdBy: FieldRef<"CustomerOrder", 'String'>
+    readonly createdAt: FieldRef<"CustomerOrder", 'DateTime'>
+    readonly updatedAt: FieldRef<"CustomerOrder", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CustomerOrder findUnique
+   */
+  export type CustomerOrderFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerOrder
+     */
+    select?: CustomerOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerOrder
+     */
+    omit?: CustomerOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerOrderInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomerOrder to fetch.
+     */
+    where: CustomerOrderWhereUniqueInput
+  }
+
+  /**
+   * CustomerOrder findUniqueOrThrow
+   */
+  export type CustomerOrderFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerOrder
+     */
+    select?: CustomerOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerOrder
+     */
+    omit?: CustomerOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerOrderInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomerOrder to fetch.
+     */
+    where: CustomerOrderWhereUniqueInput
+  }
+
+  /**
+   * CustomerOrder findFirst
+   */
+  export type CustomerOrderFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerOrder
+     */
+    select?: CustomerOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerOrder
+     */
+    omit?: CustomerOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerOrderInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomerOrder to fetch.
+     */
+    where?: CustomerOrderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomerOrders to fetch.
+     */
+    orderBy?: CustomerOrderOrderByWithRelationInput | CustomerOrderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CustomerOrders.
+     */
+    cursor?: CustomerOrderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomerOrders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomerOrders.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CustomerOrders.
+     */
+    distinct?: CustomerOrderScalarFieldEnum | CustomerOrderScalarFieldEnum[]
+  }
+
+  /**
+   * CustomerOrder findFirstOrThrow
+   */
+  export type CustomerOrderFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerOrder
+     */
+    select?: CustomerOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerOrder
+     */
+    omit?: CustomerOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerOrderInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomerOrder to fetch.
+     */
+    where?: CustomerOrderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomerOrders to fetch.
+     */
+    orderBy?: CustomerOrderOrderByWithRelationInput | CustomerOrderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CustomerOrders.
+     */
+    cursor?: CustomerOrderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomerOrders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomerOrders.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CustomerOrders.
+     */
+    distinct?: CustomerOrderScalarFieldEnum | CustomerOrderScalarFieldEnum[]
+  }
+
+  /**
+   * CustomerOrder findMany
+   */
+  export type CustomerOrderFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerOrder
+     */
+    select?: CustomerOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerOrder
+     */
+    omit?: CustomerOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerOrderInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomerOrders to fetch.
+     */
+    where?: CustomerOrderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomerOrders to fetch.
+     */
+    orderBy?: CustomerOrderOrderByWithRelationInput | CustomerOrderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CustomerOrders.
+     */
+    cursor?: CustomerOrderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomerOrders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomerOrders.
+     */
+    skip?: number
+    distinct?: CustomerOrderScalarFieldEnum | CustomerOrderScalarFieldEnum[]
+  }
+
+  /**
+   * CustomerOrder create
+   */
+  export type CustomerOrderCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerOrder
+     */
+    select?: CustomerOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerOrder
+     */
+    omit?: CustomerOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerOrderInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CustomerOrder.
+     */
+    data: XOR<CustomerOrderCreateInput, CustomerOrderUncheckedCreateInput>
+  }
+
+  /**
+   * CustomerOrder createMany
+   */
+  export type CustomerOrderCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CustomerOrders.
+     */
+    data: CustomerOrderCreateManyInput | CustomerOrderCreateManyInput[]
+  }
+
+  /**
+   * CustomerOrder createManyAndReturn
+   */
+  export type CustomerOrderCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerOrder
+     */
+    select?: CustomerOrderSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerOrder
+     */
+    omit?: CustomerOrderOmit<ExtArgs> | null
+    /**
+     * The data used to create many CustomerOrders.
+     */
+    data: CustomerOrderCreateManyInput | CustomerOrderCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerOrderIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CustomerOrder update
+   */
+  export type CustomerOrderUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerOrder
+     */
+    select?: CustomerOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerOrder
+     */
+    omit?: CustomerOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerOrderInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CustomerOrder.
+     */
+    data: XOR<CustomerOrderUpdateInput, CustomerOrderUncheckedUpdateInput>
+    /**
+     * Choose, which CustomerOrder to update.
+     */
+    where: CustomerOrderWhereUniqueInput
+  }
+
+  /**
+   * CustomerOrder updateMany
+   */
+  export type CustomerOrderUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CustomerOrders.
+     */
+    data: XOR<CustomerOrderUpdateManyMutationInput, CustomerOrderUncheckedUpdateManyInput>
+    /**
+     * Filter which CustomerOrders to update
+     */
+    where?: CustomerOrderWhereInput
+    /**
+     * Limit how many CustomerOrders to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CustomerOrder updateManyAndReturn
+   */
+  export type CustomerOrderUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerOrder
+     */
+    select?: CustomerOrderSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerOrder
+     */
+    omit?: CustomerOrderOmit<ExtArgs> | null
+    /**
+     * The data used to update CustomerOrders.
+     */
+    data: XOR<CustomerOrderUpdateManyMutationInput, CustomerOrderUncheckedUpdateManyInput>
+    /**
+     * Filter which CustomerOrders to update
+     */
+    where?: CustomerOrderWhereInput
+    /**
+     * Limit how many CustomerOrders to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerOrderIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CustomerOrder upsert
+   */
+  export type CustomerOrderUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerOrder
+     */
+    select?: CustomerOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerOrder
+     */
+    omit?: CustomerOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerOrderInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CustomerOrder to update in case it exists.
+     */
+    where: CustomerOrderWhereUniqueInput
+    /**
+     * In case the CustomerOrder found by the `where` argument doesn't exist, create a new CustomerOrder with this data.
+     */
+    create: XOR<CustomerOrderCreateInput, CustomerOrderUncheckedCreateInput>
+    /**
+     * In case the CustomerOrder was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CustomerOrderUpdateInput, CustomerOrderUncheckedUpdateInput>
+  }
+
+  /**
+   * CustomerOrder delete
+   */
+  export type CustomerOrderDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerOrder
+     */
+    select?: CustomerOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerOrder
+     */
+    omit?: CustomerOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerOrderInclude<ExtArgs> | null
+    /**
+     * Filter which CustomerOrder to delete.
+     */
+    where: CustomerOrderWhereUniqueInput
+  }
+
+  /**
+   * CustomerOrder deleteMany
+   */
+  export type CustomerOrderDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CustomerOrders to delete
+     */
+    where?: CustomerOrderWhereInput
+    /**
+     * Limit how many CustomerOrders to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * CustomerOrder.statusUpdates
+   */
+  export type CustomerOrder$statusUpdatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusUpdate
+     */
+    select?: OrderStatusUpdateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderStatusUpdate
+     */
+    omit?: OrderStatusUpdateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusUpdateInclude<ExtArgs> | null
+    where?: OrderStatusUpdateWhereInput
+    orderBy?: OrderStatusUpdateOrderByWithRelationInput | OrderStatusUpdateOrderByWithRelationInput[]
+    cursor?: OrderStatusUpdateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OrderStatusUpdateScalarFieldEnum | OrderStatusUpdateScalarFieldEnum[]
+  }
+
+  /**
+   * CustomerOrder without action
+   */
+  export type CustomerOrderDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerOrder
+     */
+    select?: CustomerOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerOrder
+     */
+    omit?: CustomerOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerOrderInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model OrderStatusUpdate
+   */
+
+  export type AggregateOrderStatusUpdate = {
+    _count: OrderStatusUpdateCountAggregateOutputType | null
+    _min: OrderStatusUpdateMinAggregateOutputType | null
+    _max: OrderStatusUpdateMaxAggregateOutputType | null
+  }
+
+  export type OrderStatusUpdateMinAggregateOutputType = {
+    id: string | null
+    orderId: string | null
+    status: string | null
+    updatedBy: string | null
+    notes: string | null
+    createdAt: Date | null
+  }
+
+  export type OrderStatusUpdateMaxAggregateOutputType = {
+    id: string | null
+    orderId: string | null
+    status: string | null
+    updatedBy: string | null
+    notes: string | null
+    createdAt: Date | null
+  }
+
+  export type OrderStatusUpdateCountAggregateOutputType = {
+    id: number
+    orderId: number
+    status: number
+    updatedBy: number
+    notes: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type OrderStatusUpdateMinAggregateInputType = {
+    id?: true
+    orderId?: true
+    status?: true
+    updatedBy?: true
+    notes?: true
+    createdAt?: true
+  }
+
+  export type OrderStatusUpdateMaxAggregateInputType = {
+    id?: true
+    orderId?: true
+    status?: true
+    updatedBy?: true
+    notes?: true
+    createdAt?: true
+  }
+
+  export type OrderStatusUpdateCountAggregateInputType = {
+    id?: true
+    orderId?: true
+    status?: true
+    updatedBy?: true
+    notes?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type OrderStatusUpdateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OrderStatusUpdate to aggregate.
+     */
+    where?: OrderStatusUpdateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OrderStatusUpdates to fetch.
+     */
+    orderBy?: OrderStatusUpdateOrderByWithRelationInput | OrderStatusUpdateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OrderStatusUpdateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OrderStatusUpdates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OrderStatusUpdates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned OrderStatusUpdates
+    **/
+    _count?: true | OrderStatusUpdateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OrderStatusUpdateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OrderStatusUpdateMaxAggregateInputType
+  }
+
+  export type GetOrderStatusUpdateAggregateType<T extends OrderStatusUpdateAggregateArgs> = {
+        [P in keyof T & keyof AggregateOrderStatusUpdate]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOrderStatusUpdate[P]>
+      : GetScalarType<T[P], AggregateOrderStatusUpdate[P]>
+  }
+
+
+
+
+  export type OrderStatusUpdateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrderStatusUpdateWhereInput
+    orderBy?: OrderStatusUpdateOrderByWithAggregationInput | OrderStatusUpdateOrderByWithAggregationInput[]
+    by: OrderStatusUpdateScalarFieldEnum[] | OrderStatusUpdateScalarFieldEnum
+    having?: OrderStatusUpdateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OrderStatusUpdateCountAggregateInputType | true
+    _min?: OrderStatusUpdateMinAggregateInputType
+    _max?: OrderStatusUpdateMaxAggregateInputType
+  }
+
+  export type OrderStatusUpdateGroupByOutputType = {
+    id: string
+    orderId: string
+    status: string
+    updatedBy: string
+    notes: string | null
+    createdAt: Date
+    _count: OrderStatusUpdateCountAggregateOutputType | null
+    _min: OrderStatusUpdateMinAggregateOutputType | null
+    _max: OrderStatusUpdateMaxAggregateOutputType | null
+  }
+
+  type GetOrderStatusUpdateGroupByPayload<T extends OrderStatusUpdateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OrderStatusUpdateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OrderStatusUpdateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OrderStatusUpdateGroupByOutputType[P]>
+            : GetScalarType<T[P], OrderStatusUpdateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OrderStatusUpdateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    orderId?: boolean
+    status?: boolean
+    updatedBy?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    order?: boolean | CustomerOrderDefaultArgs<ExtArgs>
+    updater?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["orderStatusUpdate"]>
+
+  export type OrderStatusUpdateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    orderId?: boolean
+    status?: boolean
+    updatedBy?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    order?: boolean | CustomerOrderDefaultArgs<ExtArgs>
+    updater?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["orderStatusUpdate"]>
+
+  export type OrderStatusUpdateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    orderId?: boolean
+    status?: boolean
+    updatedBy?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    order?: boolean | CustomerOrderDefaultArgs<ExtArgs>
+    updater?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["orderStatusUpdate"]>
+
+  export type OrderStatusUpdateSelectScalar = {
+    id?: boolean
+    orderId?: boolean
+    status?: boolean
+    updatedBy?: boolean
+    notes?: boolean
+    createdAt?: boolean
+  }
+
+  export type OrderStatusUpdateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderId" | "status" | "updatedBy" | "notes" | "createdAt", ExtArgs["result"]["orderStatusUpdate"]>
+  export type OrderStatusUpdateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    order?: boolean | CustomerOrderDefaultArgs<ExtArgs>
+    updater?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type OrderStatusUpdateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    order?: boolean | CustomerOrderDefaultArgs<ExtArgs>
+    updater?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type OrderStatusUpdateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    order?: boolean | CustomerOrderDefaultArgs<ExtArgs>
+    updater?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $OrderStatusUpdatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "OrderStatusUpdate"
+    objects: {
+      order: Prisma.$CustomerOrderPayload<ExtArgs>
+      updater: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      orderId: string
+      status: string
+      updatedBy: string
+      notes: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["orderStatusUpdate"]>
+    composites: {}
+  }
+
+  type OrderStatusUpdateGetPayload<S extends boolean | null | undefined | OrderStatusUpdateDefaultArgs> = $Result.GetResult<Prisma.$OrderStatusUpdatePayload, S>
+
+  type OrderStatusUpdateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<OrderStatusUpdateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: OrderStatusUpdateCountAggregateInputType | true
+    }
+
+  export interface OrderStatusUpdateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OrderStatusUpdate'], meta: { name: 'OrderStatusUpdate' } }
+    /**
+     * Find zero or one OrderStatusUpdate that matches the filter.
+     * @param {OrderStatusUpdateFindUniqueArgs} args - Arguments to find a OrderStatusUpdate
+     * @example
+     * // Get one OrderStatusUpdate
+     * const orderStatusUpdate = await prisma.orderStatusUpdate.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends OrderStatusUpdateFindUniqueArgs>(args: SelectSubset<T, OrderStatusUpdateFindUniqueArgs<ExtArgs>>): Prisma__OrderStatusUpdateClient<$Result.GetResult<Prisma.$OrderStatusUpdatePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one OrderStatusUpdate that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {OrderStatusUpdateFindUniqueOrThrowArgs} args - Arguments to find a OrderStatusUpdate
+     * @example
+     * // Get one OrderStatusUpdate
+     * const orderStatusUpdate = await prisma.orderStatusUpdate.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends OrderStatusUpdateFindUniqueOrThrowArgs>(args: SelectSubset<T, OrderStatusUpdateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OrderStatusUpdateClient<$Result.GetResult<Prisma.$OrderStatusUpdatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OrderStatusUpdate that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrderStatusUpdateFindFirstArgs} args - Arguments to find a OrderStatusUpdate
+     * @example
+     * // Get one OrderStatusUpdate
+     * const orderStatusUpdate = await prisma.orderStatusUpdate.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends OrderStatusUpdateFindFirstArgs>(args?: SelectSubset<T, OrderStatusUpdateFindFirstArgs<ExtArgs>>): Prisma__OrderStatusUpdateClient<$Result.GetResult<Prisma.$OrderStatusUpdatePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OrderStatusUpdate that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrderStatusUpdateFindFirstOrThrowArgs} args - Arguments to find a OrderStatusUpdate
+     * @example
+     * // Get one OrderStatusUpdate
+     * const orderStatusUpdate = await prisma.orderStatusUpdate.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends OrderStatusUpdateFindFirstOrThrowArgs>(args?: SelectSubset<T, OrderStatusUpdateFindFirstOrThrowArgs<ExtArgs>>): Prisma__OrderStatusUpdateClient<$Result.GetResult<Prisma.$OrderStatusUpdatePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more OrderStatusUpdates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrderStatusUpdateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all OrderStatusUpdates
+     * const orderStatusUpdates = await prisma.orderStatusUpdate.findMany()
+     * 
+     * // Get first 10 OrderStatusUpdates
+     * const orderStatusUpdates = await prisma.orderStatusUpdate.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const orderStatusUpdateWithIdOnly = await prisma.orderStatusUpdate.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends OrderStatusUpdateFindManyArgs>(args?: SelectSubset<T, OrderStatusUpdateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderStatusUpdatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a OrderStatusUpdate.
+     * @param {OrderStatusUpdateCreateArgs} args - Arguments to create a OrderStatusUpdate.
+     * @example
+     * // Create one OrderStatusUpdate
+     * const OrderStatusUpdate = await prisma.orderStatusUpdate.create({
+     *   data: {
+     *     // ... data to create a OrderStatusUpdate
+     *   }
+     * })
+     * 
+     */
+    create<T extends OrderStatusUpdateCreateArgs>(args: SelectSubset<T, OrderStatusUpdateCreateArgs<ExtArgs>>): Prisma__OrderStatusUpdateClient<$Result.GetResult<Prisma.$OrderStatusUpdatePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many OrderStatusUpdates.
+     * @param {OrderStatusUpdateCreateManyArgs} args - Arguments to create many OrderStatusUpdates.
+     * @example
+     * // Create many OrderStatusUpdates
+     * const orderStatusUpdate = await prisma.orderStatusUpdate.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends OrderStatusUpdateCreateManyArgs>(args?: SelectSubset<T, OrderStatusUpdateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many OrderStatusUpdates and returns the data saved in the database.
+     * @param {OrderStatusUpdateCreateManyAndReturnArgs} args - Arguments to create many OrderStatusUpdates.
+     * @example
+     * // Create many OrderStatusUpdates
+     * const orderStatusUpdate = await prisma.orderStatusUpdate.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many OrderStatusUpdates and only return the `id`
+     * const orderStatusUpdateWithIdOnly = await prisma.orderStatusUpdate.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends OrderStatusUpdateCreateManyAndReturnArgs>(args?: SelectSubset<T, OrderStatusUpdateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderStatusUpdatePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a OrderStatusUpdate.
+     * @param {OrderStatusUpdateDeleteArgs} args - Arguments to delete one OrderStatusUpdate.
+     * @example
+     * // Delete one OrderStatusUpdate
+     * const OrderStatusUpdate = await prisma.orderStatusUpdate.delete({
+     *   where: {
+     *     // ... filter to delete one OrderStatusUpdate
+     *   }
+     * })
+     * 
+     */
+    delete<T extends OrderStatusUpdateDeleteArgs>(args: SelectSubset<T, OrderStatusUpdateDeleteArgs<ExtArgs>>): Prisma__OrderStatusUpdateClient<$Result.GetResult<Prisma.$OrderStatusUpdatePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one OrderStatusUpdate.
+     * @param {OrderStatusUpdateUpdateArgs} args - Arguments to update one OrderStatusUpdate.
+     * @example
+     * // Update one OrderStatusUpdate
+     * const orderStatusUpdate = await prisma.orderStatusUpdate.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends OrderStatusUpdateUpdateArgs>(args: SelectSubset<T, OrderStatusUpdateUpdateArgs<ExtArgs>>): Prisma__OrderStatusUpdateClient<$Result.GetResult<Prisma.$OrderStatusUpdatePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more OrderStatusUpdates.
+     * @param {OrderStatusUpdateDeleteManyArgs} args - Arguments to filter OrderStatusUpdates to delete.
+     * @example
+     * // Delete a few OrderStatusUpdates
+     * const { count } = await prisma.orderStatusUpdate.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends OrderStatusUpdateDeleteManyArgs>(args?: SelectSubset<T, OrderStatusUpdateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OrderStatusUpdates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrderStatusUpdateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many OrderStatusUpdates
+     * const orderStatusUpdate = await prisma.orderStatusUpdate.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends OrderStatusUpdateUpdateManyArgs>(args: SelectSubset<T, OrderStatusUpdateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OrderStatusUpdates and returns the data updated in the database.
+     * @param {OrderStatusUpdateUpdateManyAndReturnArgs} args - Arguments to update many OrderStatusUpdates.
+     * @example
+     * // Update many OrderStatusUpdates
+     * const orderStatusUpdate = await prisma.orderStatusUpdate.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more OrderStatusUpdates and only return the `id`
+     * const orderStatusUpdateWithIdOnly = await prisma.orderStatusUpdate.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends OrderStatusUpdateUpdateManyAndReturnArgs>(args: SelectSubset<T, OrderStatusUpdateUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderStatusUpdatePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one OrderStatusUpdate.
+     * @param {OrderStatusUpdateUpsertArgs} args - Arguments to update or create a OrderStatusUpdate.
+     * @example
+     * // Update or create a OrderStatusUpdate
+     * const orderStatusUpdate = await prisma.orderStatusUpdate.upsert({
+     *   create: {
+     *     // ... data to create a OrderStatusUpdate
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the OrderStatusUpdate we want to update
+     *   }
+     * })
+     */
+    upsert<T extends OrderStatusUpdateUpsertArgs>(args: SelectSubset<T, OrderStatusUpdateUpsertArgs<ExtArgs>>): Prisma__OrderStatusUpdateClient<$Result.GetResult<Prisma.$OrderStatusUpdatePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of OrderStatusUpdates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrderStatusUpdateCountArgs} args - Arguments to filter OrderStatusUpdates to count.
+     * @example
+     * // Count the number of OrderStatusUpdates
+     * const count = await prisma.orderStatusUpdate.count({
+     *   where: {
+     *     // ... the filter for the OrderStatusUpdates we want to count
+     *   }
+     * })
+    **/
+    count<T extends OrderStatusUpdateCountArgs>(
+      args?: Subset<T, OrderStatusUpdateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OrderStatusUpdateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a OrderStatusUpdate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrderStatusUpdateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OrderStatusUpdateAggregateArgs>(args: Subset<T, OrderStatusUpdateAggregateArgs>): Prisma.PrismaPromise<GetOrderStatusUpdateAggregateType<T>>
+
+    /**
+     * Group by OrderStatusUpdate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrderStatusUpdateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OrderStatusUpdateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OrderStatusUpdateGroupByArgs['orderBy'] }
+        : { orderBy?: OrderStatusUpdateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OrderStatusUpdateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOrderStatusUpdateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the OrderStatusUpdate model
+   */
+  readonly fields: OrderStatusUpdateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for OrderStatusUpdate.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OrderStatusUpdateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    order<T extends CustomerOrderDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CustomerOrderDefaultArgs<ExtArgs>>): Prisma__CustomerOrderClient<$Result.GetResult<Prisma.$CustomerOrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    updater<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the OrderStatusUpdate model
+   */
+  interface OrderStatusUpdateFieldRefs {
+    readonly id: FieldRef<"OrderStatusUpdate", 'String'>
+    readonly orderId: FieldRef<"OrderStatusUpdate", 'String'>
+    readonly status: FieldRef<"OrderStatusUpdate", 'String'>
+    readonly updatedBy: FieldRef<"OrderStatusUpdate", 'String'>
+    readonly notes: FieldRef<"OrderStatusUpdate", 'String'>
+    readonly createdAt: FieldRef<"OrderStatusUpdate", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * OrderStatusUpdate findUnique
+   */
+  export type OrderStatusUpdateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusUpdate
+     */
+    select?: OrderStatusUpdateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderStatusUpdate
+     */
+    omit?: OrderStatusUpdateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusUpdateInclude<ExtArgs> | null
+    /**
+     * Filter, which OrderStatusUpdate to fetch.
+     */
+    where: OrderStatusUpdateWhereUniqueInput
+  }
+
+  /**
+   * OrderStatusUpdate findUniqueOrThrow
+   */
+  export type OrderStatusUpdateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusUpdate
+     */
+    select?: OrderStatusUpdateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderStatusUpdate
+     */
+    omit?: OrderStatusUpdateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusUpdateInclude<ExtArgs> | null
+    /**
+     * Filter, which OrderStatusUpdate to fetch.
+     */
+    where: OrderStatusUpdateWhereUniqueInput
+  }
+
+  /**
+   * OrderStatusUpdate findFirst
+   */
+  export type OrderStatusUpdateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusUpdate
+     */
+    select?: OrderStatusUpdateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderStatusUpdate
+     */
+    omit?: OrderStatusUpdateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusUpdateInclude<ExtArgs> | null
+    /**
+     * Filter, which OrderStatusUpdate to fetch.
+     */
+    where?: OrderStatusUpdateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OrderStatusUpdates to fetch.
+     */
+    orderBy?: OrderStatusUpdateOrderByWithRelationInput | OrderStatusUpdateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OrderStatusUpdates.
+     */
+    cursor?: OrderStatusUpdateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OrderStatusUpdates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OrderStatusUpdates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OrderStatusUpdates.
+     */
+    distinct?: OrderStatusUpdateScalarFieldEnum | OrderStatusUpdateScalarFieldEnum[]
+  }
+
+  /**
+   * OrderStatusUpdate findFirstOrThrow
+   */
+  export type OrderStatusUpdateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusUpdate
+     */
+    select?: OrderStatusUpdateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderStatusUpdate
+     */
+    omit?: OrderStatusUpdateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusUpdateInclude<ExtArgs> | null
+    /**
+     * Filter, which OrderStatusUpdate to fetch.
+     */
+    where?: OrderStatusUpdateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OrderStatusUpdates to fetch.
+     */
+    orderBy?: OrderStatusUpdateOrderByWithRelationInput | OrderStatusUpdateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OrderStatusUpdates.
+     */
+    cursor?: OrderStatusUpdateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OrderStatusUpdates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OrderStatusUpdates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OrderStatusUpdates.
+     */
+    distinct?: OrderStatusUpdateScalarFieldEnum | OrderStatusUpdateScalarFieldEnum[]
+  }
+
+  /**
+   * OrderStatusUpdate findMany
+   */
+  export type OrderStatusUpdateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusUpdate
+     */
+    select?: OrderStatusUpdateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderStatusUpdate
+     */
+    omit?: OrderStatusUpdateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusUpdateInclude<ExtArgs> | null
+    /**
+     * Filter, which OrderStatusUpdates to fetch.
+     */
+    where?: OrderStatusUpdateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OrderStatusUpdates to fetch.
+     */
+    orderBy?: OrderStatusUpdateOrderByWithRelationInput | OrderStatusUpdateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing OrderStatusUpdates.
+     */
+    cursor?: OrderStatusUpdateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OrderStatusUpdates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OrderStatusUpdates.
+     */
+    skip?: number
+    distinct?: OrderStatusUpdateScalarFieldEnum | OrderStatusUpdateScalarFieldEnum[]
+  }
+
+  /**
+   * OrderStatusUpdate create
+   */
+  export type OrderStatusUpdateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusUpdate
+     */
+    select?: OrderStatusUpdateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderStatusUpdate
+     */
+    omit?: OrderStatusUpdateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusUpdateInclude<ExtArgs> | null
+    /**
+     * The data needed to create a OrderStatusUpdate.
+     */
+    data: XOR<OrderStatusUpdateCreateInput, OrderStatusUpdateUncheckedCreateInput>
+  }
+
+  /**
+   * OrderStatusUpdate createMany
+   */
+  export type OrderStatusUpdateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many OrderStatusUpdates.
+     */
+    data: OrderStatusUpdateCreateManyInput | OrderStatusUpdateCreateManyInput[]
+  }
+
+  /**
+   * OrderStatusUpdate createManyAndReturn
+   */
+  export type OrderStatusUpdateCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusUpdate
+     */
+    select?: OrderStatusUpdateSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderStatusUpdate
+     */
+    omit?: OrderStatusUpdateOmit<ExtArgs> | null
+    /**
+     * The data used to create many OrderStatusUpdates.
+     */
+    data: OrderStatusUpdateCreateManyInput | OrderStatusUpdateCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusUpdateIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * OrderStatusUpdate update
+   */
+  export type OrderStatusUpdateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusUpdate
+     */
+    select?: OrderStatusUpdateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderStatusUpdate
+     */
+    omit?: OrderStatusUpdateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusUpdateInclude<ExtArgs> | null
+    /**
+     * The data needed to update a OrderStatusUpdate.
+     */
+    data: XOR<OrderStatusUpdateUpdateInput, OrderStatusUpdateUncheckedUpdateInput>
+    /**
+     * Choose, which OrderStatusUpdate to update.
+     */
+    where: OrderStatusUpdateWhereUniqueInput
+  }
+
+  /**
+   * OrderStatusUpdate updateMany
+   */
+  export type OrderStatusUpdateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update OrderStatusUpdates.
+     */
+    data: XOR<OrderStatusUpdateUpdateManyMutationInput, OrderStatusUpdateUncheckedUpdateManyInput>
+    /**
+     * Filter which OrderStatusUpdates to update
+     */
+    where?: OrderStatusUpdateWhereInput
+    /**
+     * Limit how many OrderStatusUpdates to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * OrderStatusUpdate updateManyAndReturn
+   */
+  export type OrderStatusUpdateUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusUpdate
+     */
+    select?: OrderStatusUpdateSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderStatusUpdate
+     */
+    omit?: OrderStatusUpdateOmit<ExtArgs> | null
+    /**
+     * The data used to update OrderStatusUpdates.
+     */
+    data: XOR<OrderStatusUpdateUpdateManyMutationInput, OrderStatusUpdateUncheckedUpdateManyInput>
+    /**
+     * Filter which OrderStatusUpdates to update
+     */
+    where?: OrderStatusUpdateWhereInput
+    /**
+     * Limit how many OrderStatusUpdates to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusUpdateIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * OrderStatusUpdate upsert
+   */
+  export type OrderStatusUpdateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusUpdate
+     */
+    select?: OrderStatusUpdateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderStatusUpdate
+     */
+    omit?: OrderStatusUpdateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusUpdateInclude<ExtArgs> | null
+    /**
+     * The filter to search for the OrderStatusUpdate to update in case it exists.
+     */
+    where: OrderStatusUpdateWhereUniqueInput
+    /**
+     * In case the OrderStatusUpdate found by the `where` argument doesn't exist, create a new OrderStatusUpdate with this data.
+     */
+    create: XOR<OrderStatusUpdateCreateInput, OrderStatusUpdateUncheckedCreateInput>
+    /**
+     * In case the OrderStatusUpdate was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OrderStatusUpdateUpdateInput, OrderStatusUpdateUncheckedUpdateInput>
+  }
+
+  /**
+   * OrderStatusUpdate delete
+   */
+  export type OrderStatusUpdateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusUpdate
+     */
+    select?: OrderStatusUpdateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderStatusUpdate
+     */
+    omit?: OrderStatusUpdateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusUpdateInclude<ExtArgs> | null
+    /**
+     * Filter which OrderStatusUpdate to delete.
+     */
+    where: OrderStatusUpdateWhereUniqueInput
+  }
+
+  /**
+   * OrderStatusUpdate deleteMany
+   */
+  export type OrderStatusUpdateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OrderStatusUpdates to delete
+     */
+    where?: OrderStatusUpdateWhereInput
+    /**
+     * Limit how many OrderStatusUpdates to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * OrderStatusUpdate without action
+   */
+  export type OrderStatusUpdateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderStatusUpdate
+     */
+    select?: OrderStatusUpdateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderStatusUpdate
+     */
+    omit?: OrderStatusUpdateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderStatusUpdateInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -103889,6 +113046,114 @@ export namespace Prisma {
   export type NewsletterViewScalarFieldEnum = (typeof NewsletterViewScalarFieldEnum)[keyof typeof NewsletterViewScalarFieldEnum]
 
 
+  export const ConversionGoalScalarFieldEnum: {
+    id: 'id',
+    storeId: 'storeId',
+    period: 'period',
+    targetConversion: 'targetConversion',
+    targetAvgBasket: 'targetAvgBasket',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ConversionGoalScalarFieldEnum = (typeof ConversionGoalScalarFieldEnum)[keyof typeof ConversionGoalScalarFieldEnum]
+
+
+  export const ClientProfileScalarFieldEnum: {
+    id: 'id',
+    storeId: 'storeId',
+    firstName: 'firstName',
+    lastName: 'lastName',
+    email: 'email',
+    phone: 'phone',
+    preferences: 'preferences',
+    vipLevel: 'vipLevel',
+    totalPurchases: 'totalPurchases',
+    lastVisit: 'lastVisit',
+    createdBy: 'createdBy',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ClientProfileScalarFieldEnum = (typeof ClientProfileScalarFieldEnum)[keyof typeof ClientProfileScalarFieldEnum]
+
+
+  export const ClientInteractionScalarFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    userId: 'userId',
+    type: 'type',
+    date: 'date',
+    notes: 'notes',
+    purchaseAmount: 'purchaseAmount',
+    createdAt: 'createdAt'
+  };
+
+  export type ClientInteractionScalarFieldEnum = (typeof ClientInteractionScalarFieldEnum)[keyof typeof ClientInteractionScalarFieldEnum]
+
+
+  export const ClientTaskScalarFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    userId: 'userId',
+    title: 'title',
+    dueDate: 'dueDate',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ClientTaskScalarFieldEnum = (typeof ClientTaskScalarFieldEnum)[keyof typeof ClientTaskScalarFieldEnum]
+
+
+  export const StockCalloutScalarFieldEnum: {
+    id: 'id',
+    storeId: 'storeId',
+    sku: 'sku',
+    productName: 'productName',
+    currentStock: 'currentStock',
+    reorderPoint: 'reorderPoint',
+    requestedQty: 'requestedQty',
+    urgency: 'urgency',
+    status: 'status',
+    reportedBy: 'reportedBy',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type StockCalloutScalarFieldEnum = (typeof StockCalloutScalarFieldEnum)[keyof typeof StockCalloutScalarFieldEnum]
+
+
+  export const CustomerOrderScalarFieldEnum: {
+    id: 'id',
+    storeId: 'storeId',
+    orderNumber: 'orderNumber',
+    customerName: 'customerName',
+    customerEmail: 'customerEmail',
+    status: 'status',
+    trackingNumber: 'trackingNumber',
+    carrier: 'carrier',
+    estimatedDelivery: 'estimatedDelivery',
+    createdBy: 'createdBy',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CustomerOrderScalarFieldEnum = (typeof CustomerOrderScalarFieldEnum)[keyof typeof CustomerOrderScalarFieldEnum]
+
+
+  export const OrderStatusUpdateScalarFieldEnum: {
+    id: 'id',
+    orderId: 'orderId',
+    status: 'status',
+    updatedBy: 'updatedBy',
+    notes: 'notes',
+    createdAt: 'createdAt'
+  };
+
+  export type OrderStatusUpdateScalarFieldEnum = (typeof OrderStatusUpdateScalarFieldEnum)[keyof typeof OrderStatusUpdateScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -104007,6 +113272,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadListRelationFilter
     newslettersCreated?: NewsletterListRelationFilter
     newsletterViews?: NewsletterViewListRelationFilter
+    clientsCreated?: ClientProfileListRelationFilter
+    clientInteractions?: ClientInteractionListRelationFilter
+    clientTasks?: ClientTaskListRelationFilter
+    stockCallouts?: StockCalloutListRelationFilter
+    ordersCreated?: CustomerOrderListRelationFilter
+    orderStatusUpdates?: OrderStatusUpdateListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -104065,6 +113336,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadOrderByRelationAggregateInput
     newslettersCreated?: NewsletterOrderByRelationAggregateInput
     newsletterViews?: NewsletterViewOrderByRelationAggregateInput
+    clientsCreated?: ClientProfileOrderByRelationAggregateInput
+    clientInteractions?: ClientInteractionOrderByRelationAggregateInput
+    clientTasks?: ClientTaskOrderByRelationAggregateInput
+    stockCallouts?: StockCalloutOrderByRelationAggregateInput
+    ordersCreated?: CustomerOrderOrderByRelationAggregateInput
+    orderStatusUpdates?: OrderStatusUpdateOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -104126,6 +113403,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadListRelationFilter
     newslettersCreated?: NewsletterListRelationFilter
     newsletterViews?: NewsletterViewListRelationFilter
+    clientsCreated?: ClientProfileListRelationFilter
+    clientInteractions?: ClientInteractionListRelationFilter
+    clientTasks?: ClientTaskListRelationFilter
+    stockCallouts?: StockCalloutListRelationFilter
+    ordersCreated?: CustomerOrderListRelationFilter
+    orderStatusUpdates?: OrderStatusUpdateListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -104476,6 +113759,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInListRelationFilter
     briefings?: BriefingListRelationFilter
     handovers?: HandoverListRelationFilter
+    conversionGoals?: ConversionGoalListRelationFilter
+    clientProfiles?: ClientProfileListRelationFilter
+    stockCallouts?: StockCalloutListRelationFilter
+    customerOrders?: CustomerOrderListRelationFilter
   }
 
   export type StoreOrderByWithRelationInput = {
@@ -104518,6 +113805,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInOrderByRelationAggregateInput
     briefings?: BriefingOrderByRelationAggregateInput
     handovers?: HandoverOrderByRelationAggregateInput
+    conversionGoals?: ConversionGoalOrderByRelationAggregateInput
+    clientProfiles?: ClientProfileOrderByRelationAggregateInput
+    stockCallouts?: StockCalloutOrderByRelationAggregateInput
+    customerOrders?: CustomerOrderOrderByRelationAggregateInput
   }
 
   export type StoreWhereUniqueInput = Prisma.AtLeast<{
@@ -104563,6 +113854,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInListRelationFilter
     briefings?: BriefingListRelationFilter
     handovers?: HandoverListRelationFilter
+    conversionGoals?: ConversionGoalListRelationFilter
+    clientProfiles?: ClientProfileListRelationFilter
+    stockCallouts?: StockCalloutListRelationFilter
+    customerOrders?: CustomerOrderListRelationFilter
   }, "id">
 
   export type StoreOrderByWithAggregationInput = {
@@ -110681,6 +119976,582 @@ export namespace Prisma {
     viewedAt?: DateTimeWithAggregatesFilter<"NewsletterView"> | Date | string
   }
 
+  export type ConversionGoalWhereInput = {
+    AND?: ConversionGoalWhereInput | ConversionGoalWhereInput[]
+    OR?: ConversionGoalWhereInput[]
+    NOT?: ConversionGoalWhereInput | ConversionGoalWhereInput[]
+    id?: StringFilter<"ConversionGoal"> | string
+    storeId?: StringFilter<"ConversionGoal"> | string
+    period?: StringFilter<"ConversionGoal"> | string
+    targetConversion?: FloatNullableFilter<"ConversionGoal"> | number | null
+    targetAvgBasket?: FloatNullableFilter<"ConversionGoal"> | number | null
+    createdAt?: DateTimeFilter<"ConversionGoal"> | Date | string
+    updatedAt?: DateTimeFilter<"ConversionGoal"> | Date | string
+    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
+  }
+
+  export type ConversionGoalOrderByWithRelationInput = {
+    id?: SortOrder
+    storeId?: SortOrder
+    period?: SortOrder
+    targetConversion?: SortOrderInput | SortOrder
+    targetAvgBasket?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    store?: StoreOrderByWithRelationInput
+  }
+
+  export type ConversionGoalWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    storeId_period?: ConversionGoalStoreIdPeriodCompoundUniqueInput
+    AND?: ConversionGoalWhereInput | ConversionGoalWhereInput[]
+    OR?: ConversionGoalWhereInput[]
+    NOT?: ConversionGoalWhereInput | ConversionGoalWhereInput[]
+    storeId?: StringFilter<"ConversionGoal"> | string
+    period?: StringFilter<"ConversionGoal"> | string
+    targetConversion?: FloatNullableFilter<"ConversionGoal"> | number | null
+    targetAvgBasket?: FloatNullableFilter<"ConversionGoal"> | number | null
+    createdAt?: DateTimeFilter<"ConversionGoal"> | Date | string
+    updatedAt?: DateTimeFilter<"ConversionGoal"> | Date | string
+    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
+  }, "id" | "storeId_period">
+
+  export type ConversionGoalOrderByWithAggregationInput = {
+    id?: SortOrder
+    storeId?: SortOrder
+    period?: SortOrder
+    targetConversion?: SortOrderInput | SortOrder
+    targetAvgBasket?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ConversionGoalCountOrderByAggregateInput
+    _avg?: ConversionGoalAvgOrderByAggregateInput
+    _max?: ConversionGoalMaxOrderByAggregateInput
+    _min?: ConversionGoalMinOrderByAggregateInput
+    _sum?: ConversionGoalSumOrderByAggregateInput
+  }
+
+  export type ConversionGoalScalarWhereWithAggregatesInput = {
+    AND?: ConversionGoalScalarWhereWithAggregatesInput | ConversionGoalScalarWhereWithAggregatesInput[]
+    OR?: ConversionGoalScalarWhereWithAggregatesInput[]
+    NOT?: ConversionGoalScalarWhereWithAggregatesInput | ConversionGoalScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ConversionGoal"> | string
+    storeId?: StringWithAggregatesFilter<"ConversionGoal"> | string
+    period?: StringWithAggregatesFilter<"ConversionGoal"> | string
+    targetConversion?: FloatNullableWithAggregatesFilter<"ConversionGoal"> | number | null
+    targetAvgBasket?: FloatNullableWithAggregatesFilter<"ConversionGoal"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"ConversionGoal"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ConversionGoal"> | Date | string
+  }
+
+  export type ClientProfileWhereInput = {
+    AND?: ClientProfileWhereInput | ClientProfileWhereInput[]
+    OR?: ClientProfileWhereInput[]
+    NOT?: ClientProfileWhereInput | ClientProfileWhereInput[]
+    id?: StringFilter<"ClientProfile"> | string
+    storeId?: StringFilter<"ClientProfile"> | string
+    firstName?: StringFilter<"ClientProfile"> | string
+    lastName?: StringFilter<"ClientProfile"> | string
+    email?: StringNullableFilter<"ClientProfile"> | string | null
+    phone?: StringNullableFilter<"ClientProfile"> | string | null
+    preferences?: StringNullableFilter<"ClientProfile"> | string | null
+    vipLevel?: StringNullableFilter<"ClientProfile"> | string | null
+    totalPurchases?: FloatFilter<"ClientProfile"> | number
+    lastVisit?: DateTimeNullableFilter<"ClientProfile"> | Date | string | null
+    createdBy?: StringFilter<"ClientProfile"> | string
+    createdAt?: DateTimeFilter<"ClientProfile"> | Date | string
+    updatedAt?: DateTimeFilter<"ClientProfile"> | Date | string
+    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
+    creator?: XOR<UserScalarRelationFilter, UserWhereInput>
+    interactions?: ClientInteractionListRelationFilter
+    tasks?: ClientTaskListRelationFilter
+  }
+
+  export type ClientProfileOrderByWithRelationInput = {
+    id?: SortOrder
+    storeId?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    email?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    preferences?: SortOrderInput | SortOrder
+    vipLevel?: SortOrderInput | SortOrder
+    totalPurchases?: SortOrder
+    lastVisit?: SortOrderInput | SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    store?: StoreOrderByWithRelationInput
+    creator?: UserOrderByWithRelationInput
+    interactions?: ClientInteractionOrderByRelationAggregateInput
+    tasks?: ClientTaskOrderByRelationAggregateInput
+  }
+
+  export type ClientProfileWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ClientProfileWhereInput | ClientProfileWhereInput[]
+    OR?: ClientProfileWhereInput[]
+    NOT?: ClientProfileWhereInput | ClientProfileWhereInput[]
+    storeId?: StringFilter<"ClientProfile"> | string
+    firstName?: StringFilter<"ClientProfile"> | string
+    lastName?: StringFilter<"ClientProfile"> | string
+    email?: StringNullableFilter<"ClientProfile"> | string | null
+    phone?: StringNullableFilter<"ClientProfile"> | string | null
+    preferences?: StringNullableFilter<"ClientProfile"> | string | null
+    vipLevel?: StringNullableFilter<"ClientProfile"> | string | null
+    totalPurchases?: FloatFilter<"ClientProfile"> | number
+    lastVisit?: DateTimeNullableFilter<"ClientProfile"> | Date | string | null
+    createdBy?: StringFilter<"ClientProfile"> | string
+    createdAt?: DateTimeFilter<"ClientProfile"> | Date | string
+    updatedAt?: DateTimeFilter<"ClientProfile"> | Date | string
+    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
+    creator?: XOR<UserScalarRelationFilter, UserWhereInput>
+    interactions?: ClientInteractionListRelationFilter
+    tasks?: ClientTaskListRelationFilter
+  }, "id">
+
+  export type ClientProfileOrderByWithAggregationInput = {
+    id?: SortOrder
+    storeId?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    email?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    preferences?: SortOrderInput | SortOrder
+    vipLevel?: SortOrderInput | SortOrder
+    totalPurchases?: SortOrder
+    lastVisit?: SortOrderInput | SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ClientProfileCountOrderByAggregateInput
+    _avg?: ClientProfileAvgOrderByAggregateInput
+    _max?: ClientProfileMaxOrderByAggregateInput
+    _min?: ClientProfileMinOrderByAggregateInput
+    _sum?: ClientProfileSumOrderByAggregateInput
+  }
+
+  export type ClientProfileScalarWhereWithAggregatesInput = {
+    AND?: ClientProfileScalarWhereWithAggregatesInput | ClientProfileScalarWhereWithAggregatesInput[]
+    OR?: ClientProfileScalarWhereWithAggregatesInput[]
+    NOT?: ClientProfileScalarWhereWithAggregatesInput | ClientProfileScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ClientProfile"> | string
+    storeId?: StringWithAggregatesFilter<"ClientProfile"> | string
+    firstName?: StringWithAggregatesFilter<"ClientProfile"> | string
+    lastName?: StringWithAggregatesFilter<"ClientProfile"> | string
+    email?: StringNullableWithAggregatesFilter<"ClientProfile"> | string | null
+    phone?: StringNullableWithAggregatesFilter<"ClientProfile"> | string | null
+    preferences?: StringNullableWithAggregatesFilter<"ClientProfile"> | string | null
+    vipLevel?: StringNullableWithAggregatesFilter<"ClientProfile"> | string | null
+    totalPurchases?: FloatWithAggregatesFilter<"ClientProfile"> | number
+    lastVisit?: DateTimeNullableWithAggregatesFilter<"ClientProfile"> | Date | string | null
+    createdBy?: StringWithAggregatesFilter<"ClientProfile"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"ClientProfile"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ClientProfile"> | Date | string
+  }
+
+  export type ClientInteractionWhereInput = {
+    AND?: ClientInteractionWhereInput | ClientInteractionWhereInput[]
+    OR?: ClientInteractionWhereInput[]
+    NOT?: ClientInteractionWhereInput | ClientInteractionWhereInput[]
+    id?: StringFilter<"ClientInteraction"> | string
+    clientId?: StringFilter<"ClientInteraction"> | string
+    userId?: StringFilter<"ClientInteraction"> | string
+    type?: StringFilter<"ClientInteraction"> | string
+    date?: DateTimeFilter<"ClientInteraction"> | Date | string
+    notes?: StringNullableFilter<"ClientInteraction"> | string | null
+    purchaseAmount?: FloatNullableFilter<"ClientInteraction"> | number | null
+    createdAt?: DateTimeFilter<"ClientInteraction"> | Date | string
+    client?: XOR<ClientProfileScalarRelationFilter, ClientProfileWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type ClientInteractionOrderByWithRelationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    date?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    purchaseAmount?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    client?: ClientProfileOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type ClientInteractionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ClientInteractionWhereInput | ClientInteractionWhereInput[]
+    OR?: ClientInteractionWhereInput[]
+    NOT?: ClientInteractionWhereInput | ClientInteractionWhereInput[]
+    clientId?: StringFilter<"ClientInteraction"> | string
+    userId?: StringFilter<"ClientInteraction"> | string
+    type?: StringFilter<"ClientInteraction"> | string
+    date?: DateTimeFilter<"ClientInteraction"> | Date | string
+    notes?: StringNullableFilter<"ClientInteraction"> | string | null
+    purchaseAmount?: FloatNullableFilter<"ClientInteraction"> | number | null
+    createdAt?: DateTimeFilter<"ClientInteraction"> | Date | string
+    client?: XOR<ClientProfileScalarRelationFilter, ClientProfileWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type ClientInteractionOrderByWithAggregationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    date?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    purchaseAmount?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: ClientInteractionCountOrderByAggregateInput
+    _avg?: ClientInteractionAvgOrderByAggregateInput
+    _max?: ClientInteractionMaxOrderByAggregateInput
+    _min?: ClientInteractionMinOrderByAggregateInput
+    _sum?: ClientInteractionSumOrderByAggregateInput
+  }
+
+  export type ClientInteractionScalarWhereWithAggregatesInput = {
+    AND?: ClientInteractionScalarWhereWithAggregatesInput | ClientInteractionScalarWhereWithAggregatesInput[]
+    OR?: ClientInteractionScalarWhereWithAggregatesInput[]
+    NOT?: ClientInteractionScalarWhereWithAggregatesInput | ClientInteractionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ClientInteraction"> | string
+    clientId?: StringWithAggregatesFilter<"ClientInteraction"> | string
+    userId?: StringWithAggregatesFilter<"ClientInteraction"> | string
+    type?: StringWithAggregatesFilter<"ClientInteraction"> | string
+    date?: DateTimeWithAggregatesFilter<"ClientInteraction"> | Date | string
+    notes?: StringNullableWithAggregatesFilter<"ClientInteraction"> | string | null
+    purchaseAmount?: FloatNullableWithAggregatesFilter<"ClientInteraction"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"ClientInteraction"> | Date | string
+  }
+
+  export type ClientTaskWhereInput = {
+    AND?: ClientTaskWhereInput | ClientTaskWhereInput[]
+    OR?: ClientTaskWhereInput[]
+    NOT?: ClientTaskWhereInput | ClientTaskWhereInput[]
+    id?: StringFilter<"ClientTask"> | string
+    clientId?: StringFilter<"ClientTask"> | string
+    userId?: StringFilter<"ClientTask"> | string
+    title?: StringFilter<"ClientTask"> | string
+    dueDate?: DateTimeNullableFilter<"ClientTask"> | Date | string | null
+    status?: StringFilter<"ClientTask"> | string
+    createdAt?: DateTimeFilter<"ClientTask"> | Date | string
+    updatedAt?: DateTimeFilter<"ClientTask"> | Date | string
+    client?: XOR<ClientProfileScalarRelationFilter, ClientProfileWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type ClientTaskOrderByWithRelationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    dueDate?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    client?: ClientProfileOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type ClientTaskWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ClientTaskWhereInput | ClientTaskWhereInput[]
+    OR?: ClientTaskWhereInput[]
+    NOT?: ClientTaskWhereInput | ClientTaskWhereInput[]
+    clientId?: StringFilter<"ClientTask"> | string
+    userId?: StringFilter<"ClientTask"> | string
+    title?: StringFilter<"ClientTask"> | string
+    dueDate?: DateTimeNullableFilter<"ClientTask"> | Date | string | null
+    status?: StringFilter<"ClientTask"> | string
+    createdAt?: DateTimeFilter<"ClientTask"> | Date | string
+    updatedAt?: DateTimeFilter<"ClientTask"> | Date | string
+    client?: XOR<ClientProfileScalarRelationFilter, ClientProfileWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type ClientTaskOrderByWithAggregationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    dueDate?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ClientTaskCountOrderByAggregateInput
+    _max?: ClientTaskMaxOrderByAggregateInput
+    _min?: ClientTaskMinOrderByAggregateInput
+  }
+
+  export type ClientTaskScalarWhereWithAggregatesInput = {
+    AND?: ClientTaskScalarWhereWithAggregatesInput | ClientTaskScalarWhereWithAggregatesInput[]
+    OR?: ClientTaskScalarWhereWithAggregatesInput[]
+    NOT?: ClientTaskScalarWhereWithAggregatesInput | ClientTaskScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ClientTask"> | string
+    clientId?: StringWithAggregatesFilter<"ClientTask"> | string
+    userId?: StringWithAggregatesFilter<"ClientTask"> | string
+    title?: StringWithAggregatesFilter<"ClientTask"> | string
+    dueDate?: DateTimeNullableWithAggregatesFilter<"ClientTask"> | Date | string | null
+    status?: StringWithAggregatesFilter<"ClientTask"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"ClientTask"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ClientTask"> | Date | string
+  }
+
+  export type StockCalloutWhereInput = {
+    AND?: StockCalloutWhereInput | StockCalloutWhereInput[]
+    OR?: StockCalloutWhereInput[]
+    NOT?: StockCalloutWhereInput | StockCalloutWhereInput[]
+    id?: StringFilter<"StockCallout"> | string
+    storeId?: StringFilter<"StockCallout"> | string
+    sku?: StringFilter<"StockCallout"> | string
+    productName?: StringFilter<"StockCallout"> | string
+    currentStock?: IntFilter<"StockCallout"> | number
+    reorderPoint?: IntFilter<"StockCallout"> | number
+    requestedQty?: IntFilter<"StockCallout"> | number
+    urgency?: StringFilter<"StockCallout"> | string
+    status?: StringFilter<"StockCallout"> | string
+    reportedBy?: StringFilter<"StockCallout"> | string
+    createdAt?: DateTimeFilter<"StockCallout"> | Date | string
+    updatedAt?: DateTimeFilter<"StockCallout"> | Date | string
+    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
+    reporter?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type StockCalloutOrderByWithRelationInput = {
+    id?: SortOrder
+    storeId?: SortOrder
+    sku?: SortOrder
+    productName?: SortOrder
+    currentStock?: SortOrder
+    reorderPoint?: SortOrder
+    requestedQty?: SortOrder
+    urgency?: SortOrder
+    status?: SortOrder
+    reportedBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    store?: StoreOrderByWithRelationInput
+    reporter?: UserOrderByWithRelationInput
+  }
+
+  export type StockCalloutWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: StockCalloutWhereInput | StockCalloutWhereInput[]
+    OR?: StockCalloutWhereInput[]
+    NOT?: StockCalloutWhereInput | StockCalloutWhereInput[]
+    storeId?: StringFilter<"StockCallout"> | string
+    sku?: StringFilter<"StockCallout"> | string
+    productName?: StringFilter<"StockCallout"> | string
+    currentStock?: IntFilter<"StockCallout"> | number
+    reorderPoint?: IntFilter<"StockCallout"> | number
+    requestedQty?: IntFilter<"StockCallout"> | number
+    urgency?: StringFilter<"StockCallout"> | string
+    status?: StringFilter<"StockCallout"> | string
+    reportedBy?: StringFilter<"StockCallout"> | string
+    createdAt?: DateTimeFilter<"StockCallout"> | Date | string
+    updatedAt?: DateTimeFilter<"StockCallout"> | Date | string
+    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
+    reporter?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type StockCalloutOrderByWithAggregationInput = {
+    id?: SortOrder
+    storeId?: SortOrder
+    sku?: SortOrder
+    productName?: SortOrder
+    currentStock?: SortOrder
+    reorderPoint?: SortOrder
+    requestedQty?: SortOrder
+    urgency?: SortOrder
+    status?: SortOrder
+    reportedBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: StockCalloutCountOrderByAggregateInput
+    _avg?: StockCalloutAvgOrderByAggregateInput
+    _max?: StockCalloutMaxOrderByAggregateInput
+    _min?: StockCalloutMinOrderByAggregateInput
+    _sum?: StockCalloutSumOrderByAggregateInput
+  }
+
+  export type StockCalloutScalarWhereWithAggregatesInput = {
+    AND?: StockCalloutScalarWhereWithAggregatesInput | StockCalloutScalarWhereWithAggregatesInput[]
+    OR?: StockCalloutScalarWhereWithAggregatesInput[]
+    NOT?: StockCalloutScalarWhereWithAggregatesInput | StockCalloutScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"StockCallout"> | string
+    storeId?: StringWithAggregatesFilter<"StockCallout"> | string
+    sku?: StringWithAggregatesFilter<"StockCallout"> | string
+    productName?: StringWithAggregatesFilter<"StockCallout"> | string
+    currentStock?: IntWithAggregatesFilter<"StockCallout"> | number
+    reorderPoint?: IntWithAggregatesFilter<"StockCallout"> | number
+    requestedQty?: IntWithAggregatesFilter<"StockCallout"> | number
+    urgency?: StringWithAggregatesFilter<"StockCallout"> | string
+    status?: StringWithAggregatesFilter<"StockCallout"> | string
+    reportedBy?: StringWithAggregatesFilter<"StockCallout"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"StockCallout"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"StockCallout"> | Date | string
+  }
+
+  export type CustomerOrderWhereInput = {
+    AND?: CustomerOrderWhereInput | CustomerOrderWhereInput[]
+    OR?: CustomerOrderWhereInput[]
+    NOT?: CustomerOrderWhereInput | CustomerOrderWhereInput[]
+    id?: StringFilter<"CustomerOrder"> | string
+    storeId?: StringFilter<"CustomerOrder"> | string
+    orderNumber?: StringFilter<"CustomerOrder"> | string
+    customerName?: StringFilter<"CustomerOrder"> | string
+    customerEmail?: StringNullableFilter<"CustomerOrder"> | string | null
+    status?: StringFilter<"CustomerOrder"> | string
+    trackingNumber?: StringNullableFilter<"CustomerOrder"> | string | null
+    carrier?: StringNullableFilter<"CustomerOrder"> | string | null
+    estimatedDelivery?: DateTimeNullableFilter<"CustomerOrder"> | Date | string | null
+    createdBy?: StringFilter<"CustomerOrder"> | string
+    createdAt?: DateTimeFilter<"CustomerOrder"> | Date | string
+    updatedAt?: DateTimeFilter<"CustomerOrder"> | Date | string
+    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
+    creator?: XOR<UserScalarRelationFilter, UserWhereInput>
+    statusUpdates?: OrderStatusUpdateListRelationFilter
+  }
+
+  export type CustomerOrderOrderByWithRelationInput = {
+    id?: SortOrder
+    storeId?: SortOrder
+    orderNumber?: SortOrder
+    customerName?: SortOrder
+    customerEmail?: SortOrderInput | SortOrder
+    status?: SortOrder
+    trackingNumber?: SortOrderInput | SortOrder
+    carrier?: SortOrderInput | SortOrder
+    estimatedDelivery?: SortOrderInput | SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    store?: StoreOrderByWithRelationInput
+    creator?: UserOrderByWithRelationInput
+    statusUpdates?: OrderStatusUpdateOrderByRelationAggregateInput
+  }
+
+  export type CustomerOrderWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CustomerOrderWhereInput | CustomerOrderWhereInput[]
+    OR?: CustomerOrderWhereInput[]
+    NOT?: CustomerOrderWhereInput | CustomerOrderWhereInput[]
+    storeId?: StringFilter<"CustomerOrder"> | string
+    orderNumber?: StringFilter<"CustomerOrder"> | string
+    customerName?: StringFilter<"CustomerOrder"> | string
+    customerEmail?: StringNullableFilter<"CustomerOrder"> | string | null
+    status?: StringFilter<"CustomerOrder"> | string
+    trackingNumber?: StringNullableFilter<"CustomerOrder"> | string | null
+    carrier?: StringNullableFilter<"CustomerOrder"> | string | null
+    estimatedDelivery?: DateTimeNullableFilter<"CustomerOrder"> | Date | string | null
+    createdBy?: StringFilter<"CustomerOrder"> | string
+    createdAt?: DateTimeFilter<"CustomerOrder"> | Date | string
+    updatedAt?: DateTimeFilter<"CustomerOrder"> | Date | string
+    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
+    creator?: XOR<UserScalarRelationFilter, UserWhereInput>
+    statusUpdates?: OrderStatusUpdateListRelationFilter
+  }, "id">
+
+  export type CustomerOrderOrderByWithAggregationInput = {
+    id?: SortOrder
+    storeId?: SortOrder
+    orderNumber?: SortOrder
+    customerName?: SortOrder
+    customerEmail?: SortOrderInput | SortOrder
+    status?: SortOrder
+    trackingNumber?: SortOrderInput | SortOrder
+    carrier?: SortOrderInput | SortOrder
+    estimatedDelivery?: SortOrderInput | SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: CustomerOrderCountOrderByAggregateInput
+    _max?: CustomerOrderMaxOrderByAggregateInput
+    _min?: CustomerOrderMinOrderByAggregateInput
+  }
+
+  export type CustomerOrderScalarWhereWithAggregatesInput = {
+    AND?: CustomerOrderScalarWhereWithAggregatesInput | CustomerOrderScalarWhereWithAggregatesInput[]
+    OR?: CustomerOrderScalarWhereWithAggregatesInput[]
+    NOT?: CustomerOrderScalarWhereWithAggregatesInput | CustomerOrderScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CustomerOrder"> | string
+    storeId?: StringWithAggregatesFilter<"CustomerOrder"> | string
+    orderNumber?: StringWithAggregatesFilter<"CustomerOrder"> | string
+    customerName?: StringWithAggregatesFilter<"CustomerOrder"> | string
+    customerEmail?: StringNullableWithAggregatesFilter<"CustomerOrder"> | string | null
+    status?: StringWithAggregatesFilter<"CustomerOrder"> | string
+    trackingNumber?: StringNullableWithAggregatesFilter<"CustomerOrder"> | string | null
+    carrier?: StringNullableWithAggregatesFilter<"CustomerOrder"> | string | null
+    estimatedDelivery?: DateTimeNullableWithAggregatesFilter<"CustomerOrder"> | Date | string | null
+    createdBy?: StringWithAggregatesFilter<"CustomerOrder"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"CustomerOrder"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"CustomerOrder"> | Date | string
+  }
+
+  export type OrderStatusUpdateWhereInput = {
+    AND?: OrderStatusUpdateWhereInput | OrderStatusUpdateWhereInput[]
+    OR?: OrderStatusUpdateWhereInput[]
+    NOT?: OrderStatusUpdateWhereInput | OrderStatusUpdateWhereInput[]
+    id?: StringFilter<"OrderStatusUpdate"> | string
+    orderId?: StringFilter<"OrderStatusUpdate"> | string
+    status?: StringFilter<"OrderStatusUpdate"> | string
+    updatedBy?: StringFilter<"OrderStatusUpdate"> | string
+    notes?: StringNullableFilter<"OrderStatusUpdate"> | string | null
+    createdAt?: DateTimeFilter<"OrderStatusUpdate"> | Date | string
+    order?: XOR<CustomerOrderScalarRelationFilter, CustomerOrderWhereInput>
+    updater?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type OrderStatusUpdateOrderByWithRelationInput = {
+    id?: SortOrder
+    orderId?: SortOrder
+    status?: SortOrder
+    updatedBy?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    order?: CustomerOrderOrderByWithRelationInput
+    updater?: UserOrderByWithRelationInput
+  }
+
+  export type OrderStatusUpdateWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: OrderStatusUpdateWhereInput | OrderStatusUpdateWhereInput[]
+    OR?: OrderStatusUpdateWhereInput[]
+    NOT?: OrderStatusUpdateWhereInput | OrderStatusUpdateWhereInput[]
+    orderId?: StringFilter<"OrderStatusUpdate"> | string
+    status?: StringFilter<"OrderStatusUpdate"> | string
+    updatedBy?: StringFilter<"OrderStatusUpdate"> | string
+    notes?: StringNullableFilter<"OrderStatusUpdate"> | string | null
+    createdAt?: DateTimeFilter<"OrderStatusUpdate"> | Date | string
+    order?: XOR<CustomerOrderScalarRelationFilter, CustomerOrderWhereInput>
+    updater?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type OrderStatusUpdateOrderByWithAggregationInput = {
+    id?: SortOrder
+    orderId?: SortOrder
+    status?: SortOrder
+    updatedBy?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: OrderStatusUpdateCountOrderByAggregateInput
+    _max?: OrderStatusUpdateMaxOrderByAggregateInput
+    _min?: OrderStatusUpdateMinOrderByAggregateInput
+  }
+
+  export type OrderStatusUpdateScalarWhereWithAggregatesInput = {
+    AND?: OrderStatusUpdateScalarWhereWithAggregatesInput | OrderStatusUpdateScalarWhereWithAggregatesInput[]
+    OR?: OrderStatusUpdateScalarWhereWithAggregatesInput[]
+    NOT?: OrderStatusUpdateScalarWhereWithAggregatesInput | OrderStatusUpdateScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"OrderStatusUpdate"> | string
+    orderId?: StringWithAggregatesFilter<"OrderStatusUpdate"> | string
+    status?: StringWithAggregatesFilter<"OrderStatusUpdate"> | string
+    updatedBy?: StringWithAggregatesFilter<"OrderStatusUpdate"> | string
+    notes?: StringNullableWithAggregatesFilter<"OrderStatusUpdate"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"OrderStatusUpdate"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -110736,6 +120607,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -110793,6 +120670,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUpdateInput = {
@@ -110850,6 +120733,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -110907,6 +120796,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -111315,6 +121210,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateInput = {
@@ -111355,6 +121254,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUpdateInput = {
@@ -111395,6 +121298,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateInput = {
@@ -111435,6 +121342,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreCreateManyInput = {
@@ -117829,6 +127740,614 @@ export namespace Prisma {
     viewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ConversionGoalCreateInput = {
+    id?: string
+    period: string
+    targetConversion?: number | null
+    targetAvgBasket?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    store: StoreCreateNestedOneWithoutConversionGoalsInput
+  }
+
+  export type ConversionGoalUncheckedCreateInput = {
+    id?: string
+    storeId: string
+    period: string
+    targetConversion?: number | null
+    targetAvgBasket?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ConversionGoalUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    period?: StringFieldUpdateOperationsInput | string
+    targetConversion?: NullableFloatFieldUpdateOperationsInput | number | null
+    targetAvgBasket?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    store?: StoreUpdateOneRequiredWithoutConversionGoalsNestedInput
+  }
+
+  export type ConversionGoalUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    storeId?: StringFieldUpdateOperationsInput | string
+    period?: StringFieldUpdateOperationsInput | string
+    targetConversion?: NullableFloatFieldUpdateOperationsInput | number | null
+    targetAvgBasket?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversionGoalCreateManyInput = {
+    id?: string
+    storeId: string
+    period: string
+    targetConversion?: number | null
+    targetAvgBasket?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ConversionGoalUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    period?: StringFieldUpdateOperationsInput | string
+    targetConversion?: NullableFloatFieldUpdateOperationsInput | number | null
+    targetAvgBasket?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversionGoalUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    storeId?: StringFieldUpdateOperationsInput | string
+    period?: StringFieldUpdateOperationsInput | string
+    targetConversion?: NullableFloatFieldUpdateOperationsInput | number | null
+    targetAvgBasket?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientProfileCreateInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email?: string | null
+    phone?: string | null
+    preferences?: string | null
+    vipLevel?: string | null
+    totalPurchases?: number
+    lastVisit?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    store: StoreCreateNestedOneWithoutClientProfilesInput
+    creator: UserCreateNestedOneWithoutClientsCreatedInput
+    interactions?: ClientInteractionCreateNestedManyWithoutClientInput
+    tasks?: ClientTaskCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientProfileUncheckedCreateInput = {
+    id?: string
+    storeId: string
+    firstName: string
+    lastName: string
+    email?: string | null
+    phone?: string | null
+    preferences?: string | null
+    vipLevel?: string | null
+    totalPurchases?: number
+    lastVisit?: Date | string | null
+    createdBy: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    interactions?: ClientInteractionUncheckedCreateNestedManyWithoutClientInput
+    tasks?: ClientTaskUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientProfileUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableStringFieldUpdateOperationsInput | string | null
+    vipLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    totalPurchases?: FloatFieldUpdateOperationsInput | number
+    lastVisit?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    store?: StoreUpdateOneRequiredWithoutClientProfilesNestedInput
+    creator?: UserUpdateOneRequiredWithoutClientsCreatedNestedInput
+    interactions?: ClientInteractionUpdateManyWithoutClientNestedInput
+    tasks?: ClientTaskUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientProfileUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    storeId?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableStringFieldUpdateOperationsInput | string | null
+    vipLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    totalPurchases?: FloatFieldUpdateOperationsInput | number
+    lastVisit?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    interactions?: ClientInteractionUncheckedUpdateManyWithoutClientNestedInput
+    tasks?: ClientTaskUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientProfileCreateManyInput = {
+    id?: string
+    storeId: string
+    firstName: string
+    lastName: string
+    email?: string | null
+    phone?: string | null
+    preferences?: string | null
+    vipLevel?: string | null
+    totalPurchases?: number
+    lastVisit?: Date | string | null
+    createdBy: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClientProfileUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableStringFieldUpdateOperationsInput | string | null
+    vipLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    totalPurchases?: FloatFieldUpdateOperationsInput | number
+    lastVisit?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientProfileUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    storeId?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableStringFieldUpdateOperationsInput | string | null
+    vipLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    totalPurchases?: FloatFieldUpdateOperationsInput | number
+    lastVisit?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientInteractionCreateInput = {
+    id?: string
+    type?: string
+    date?: Date | string
+    notes?: string | null
+    purchaseAmount?: number | null
+    createdAt?: Date | string
+    client: ClientProfileCreateNestedOneWithoutInteractionsInput
+    user: UserCreateNestedOneWithoutClientInteractionsInput
+  }
+
+  export type ClientInteractionUncheckedCreateInput = {
+    id?: string
+    clientId: string
+    userId: string
+    type?: string
+    date?: Date | string
+    notes?: string | null
+    purchaseAmount?: number | null
+    createdAt?: Date | string
+  }
+
+  export type ClientInteractionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    purchaseAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientProfileUpdateOneRequiredWithoutInteractionsNestedInput
+    user?: UserUpdateOneRequiredWithoutClientInteractionsNestedInput
+  }
+
+  export type ClientInteractionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    purchaseAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientInteractionCreateManyInput = {
+    id?: string
+    clientId: string
+    userId: string
+    type?: string
+    date?: Date | string
+    notes?: string | null
+    purchaseAmount?: number | null
+    createdAt?: Date | string
+  }
+
+  export type ClientInteractionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    purchaseAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientInteractionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    purchaseAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientTaskCreateInput = {
+    id?: string
+    title: string
+    dueDate?: Date | string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientProfileCreateNestedOneWithoutTasksInput
+    user: UserCreateNestedOneWithoutClientTasksInput
+  }
+
+  export type ClientTaskUncheckedCreateInput = {
+    id?: string
+    clientId: string
+    userId: string
+    title: string
+    dueDate?: Date | string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClientTaskUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientProfileUpdateOneRequiredWithoutTasksNestedInput
+    user?: UserUpdateOneRequiredWithoutClientTasksNestedInput
+  }
+
+  export type ClientTaskUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientTaskCreateManyInput = {
+    id?: string
+    clientId: string
+    userId: string
+    title: string
+    dueDate?: Date | string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClientTaskUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientTaskUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StockCalloutCreateInput = {
+    id?: string
+    sku: string
+    productName: string
+    currentStock?: number
+    reorderPoint?: number
+    requestedQty?: number
+    urgency?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    store: StoreCreateNestedOneWithoutStockCalloutsInput
+    reporter: UserCreateNestedOneWithoutStockCalloutsInput
+  }
+
+  export type StockCalloutUncheckedCreateInput = {
+    id?: string
+    storeId: string
+    sku: string
+    productName: string
+    currentStock?: number
+    reorderPoint?: number
+    requestedQty?: number
+    urgency?: string
+    status?: string
+    reportedBy: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StockCalloutUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    productName?: StringFieldUpdateOperationsInput | string
+    currentStock?: IntFieldUpdateOperationsInput | number
+    reorderPoint?: IntFieldUpdateOperationsInput | number
+    requestedQty?: IntFieldUpdateOperationsInput | number
+    urgency?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    store?: StoreUpdateOneRequiredWithoutStockCalloutsNestedInput
+    reporter?: UserUpdateOneRequiredWithoutStockCalloutsNestedInput
+  }
+
+  export type StockCalloutUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    storeId?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    productName?: StringFieldUpdateOperationsInput | string
+    currentStock?: IntFieldUpdateOperationsInput | number
+    reorderPoint?: IntFieldUpdateOperationsInput | number
+    requestedQty?: IntFieldUpdateOperationsInput | number
+    urgency?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    reportedBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StockCalloutCreateManyInput = {
+    id?: string
+    storeId: string
+    sku: string
+    productName: string
+    currentStock?: number
+    reorderPoint?: number
+    requestedQty?: number
+    urgency?: string
+    status?: string
+    reportedBy: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StockCalloutUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    productName?: StringFieldUpdateOperationsInput | string
+    currentStock?: IntFieldUpdateOperationsInput | number
+    reorderPoint?: IntFieldUpdateOperationsInput | number
+    requestedQty?: IntFieldUpdateOperationsInput | number
+    urgency?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StockCalloutUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    storeId?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    productName?: StringFieldUpdateOperationsInput | string
+    currentStock?: IntFieldUpdateOperationsInput | number
+    reorderPoint?: IntFieldUpdateOperationsInput | number
+    requestedQty?: IntFieldUpdateOperationsInput | number
+    urgency?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    reportedBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomerOrderCreateInput = {
+    id?: string
+    orderNumber: string
+    customerName: string
+    customerEmail?: string | null
+    status?: string
+    trackingNumber?: string | null
+    carrier?: string | null
+    estimatedDelivery?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    store: StoreCreateNestedOneWithoutCustomerOrdersInput
+    creator: UserCreateNestedOneWithoutOrdersCreatedInput
+    statusUpdates?: OrderStatusUpdateCreateNestedManyWithoutOrderInput
+  }
+
+  export type CustomerOrderUncheckedCreateInput = {
+    id?: string
+    storeId: string
+    orderNumber: string
+    customerName: string
+    customerEmail?: string | null
+    status?: string
+    trackingNumber?: string | null
+    carrier?: string | null
+    estimatedDelivery?: Date | string | null
+    createdBy: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    statusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutOrderInput
+  }
+
+  export type CustomerOrderUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    customerName?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    trackingNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    carrier?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    store?: StoreUpdateOneRequiredWithoutCustomerOrdersNestedInput
+    creator?: UserUpdateOneRequiredWithoutOrdersCreatedNestedInput
+    statusUpdates?: OrderStatusUpdateUpdateManyWithoutOrderNestedInput
+  }
+
+  export type CustomerOrderUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    storeId?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    customerName?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    trackingNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    carrier?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    statusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutOrderNestedInput
+  }
+
+  export type CustomerOrderCreateManyInput = {
+    id?: string
+    storeId: string
+    orderNumber: string
+    customerName: string
+    customerEmail?: string | null
+    status?: string
+    trackingNumber?: string | null
+    carrier?: string | null
+    estimatedDelivery?: Date | string | null
+    createdBy: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CustomerOrderUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    customerName?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    trackingNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    carrier?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomerOrderUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    storeId?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    customerName?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    trackingNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    carrier?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrderStatusUpdateCreateInput = {
+    id?: string
+    status: string
+    notes?: string | null
+    createdAt?: Date | string
+    order: CustomerOrderCreateNestedOneWithoutStatusUpdatesInput
+    updater: UserCreateNestedOneWithoutOrderStatusUpdatesInput
+  }
+
+  export type OrderStatusUpdateUncheckedCreateInput = {
+    id?: string
+    orderId: string
+    status: string
+    updatedBy: string
+    notes?: string | null
+    createdAt?: Date | string
+  }
+
+  export type OrderStatusUpdateUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: CustomerOrderUpdateOneRequiredWithoutStatusUpdatesNestedInput
+    updater?: UserUpdateOneRequiredWithoutOrderStatusUpdatesNestedInput
+  }
+
+  export type OrderStatusUpdateUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orderId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    updatedBy?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrderStatusUpdateCreateManyInput = {
+    id?: string
+    orderId: string
+    status: string
+    updatedBy: string
+    notes?: string | null
+    createdAt?: Date | string
+  }
+
+  export type OrderStatusUpdateUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrderStatusUpdateUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orderId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    updatedBy?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -118099,6 +128618,42 @@ export namespace Prisma {
     none?: NewsletterViewWhereInput
   }
 
+  export type ClientProfileListRelationFilter = {
+    every?: ClientProfileWhereInput
+    some?: ClientProfileWhereInput
+    none?: ClientProfileWhereInput
+  }
+
+  export type ClientInteractionListRelationFilter = {
+    every?: ClientInteractionWhereInput
+    some?: ClientInteractionWhereInput
+    none?: ClientInteractionWhereInput
+  }
+
+  export type ClientTaskListRelationFilter = {
+    every?: ClientTaskWhereInput
+    some?: ClientTaskWhereInput
+    none?: ClientTaskWhereInput
+  }
+
+  export type StockCalloutListRelationFilter = {
+    every?: StockCalloutWhereInput
+    some?: StockCalloutWhereInput
+    none?: StockCalloutWhereInput
+  }
+
+  export type CustomerOrderListRelationFilter = {
+    every?: CustomerOrderWhereInput
+    some?: CustomerOrderWhereInput
+    none?: CustomerOrderWhereInput
+  }
+
+  export type OrderStatusUpdateListRelationFilter = {
+    every?: OrderStatusUpdateWhereInput
+    some?: OrderStatusUpdateWhereInput
+    none?: OrderStatusUpdateWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -118241,6 +128796,30 @@ export namespace Prisma {
   }
 
   export type NewsletterViewOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ClientProfileOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ClientInteractionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ClientTaskOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type StockCalloutOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CustomerOrderOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type OrderStatusUpdateOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -118670,6 +129249,12 @@ export namespace Prisma {
     none?: PulseResponseWhereInput
   }
 
+  export type ConversionGoalListRelationFilter = {
+    every?: ConversionGoalWhereInput
+    some?: ConversionGoalWhereInput
+    none?: ConversionGoalWhereInput
+  }
+
   export type StoreToolAssignmentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -118683,6 +129268,10 @@ export namespace Prisma {
   }
 
   export type PulseResponseOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ConversionGoalOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -122454,6 +133043,320 @@ export namespace Prisma {
     viewedAt?: SortOrder
   }
 
+  export type ConversionGoalStoreIdPeriodCompoundUniqueInput = {
+    storeId: string
+    period: string
+  }
+
+  export type ConversionGoalCountOrderByAggregateInput = {
+    id?: SortOrder
+    storeId?: SortOrder
+    period?: SortOrder
+    targetConversion?: SortOrder
+    targetAvgBasket?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ConversionGoalAvgOrderByAggregateInput = {
+    targetConversion?: SortOrder
+    targetAvgBasket?: SortOrder
+  }
+
+  export type ConversionGoalMaxOrderByAggregateInput = {
+    id?: SortOrder
+    storeId?: SortOrder
+    period?: SortOrder
+    targetConversion?: SortOrder
+    targetAvgBasket?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ConversionGoalMinOrderByAggregateInput = {
+    id?: SortOrder
+    storeId?: SortOrder
+    period?: SortOrder
+    targetConversion?: SortOrder
+    targetAvgBasket?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ConversionGoalSumOrderByAggregateInput = {
+    targetConversion?: SortOrder
+    targetAvgBasket?: SortOrder
+  }
+
+  export type ClientProfileCountOrderByAggregateInput = {
+    id?: SortOrder
+    storeId?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    preferences?: SortOrder
+    vipLevel?: SortOrder
+    totalPurchases?: SortOrder
+    lastVisit?: SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ClientProfileAvgOrderByAggregateInput = {
+    totalPurchases?: SortOrder
+  }
+
+  export type ClientProfileMaxOrderByAggregateInput = {
+    id?: SortOrder
+    storeId?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    preferences?: SortOrder
+    vipLevel?: SortOrder
+    totalPurchases?: SortOrder
+    lastVisit?: SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ClientProfileMinOrderByAggregateInput = {
+    id?: SortOrder
+    storeId?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    preferences?: SortOrder
+    vipLevel?: SortOrder
+    totalPurchases?: SortOrder
+    lastVisit?: SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ClientProfileSumOrderByAggregateInput = {
+    totalPurchases?: SortOrder
+  }
+
+  export type ClientProfileScalarRelationFilter = {
+    is?: ClientProfileWhereInput
+    isNot?: ClientProfileWhereInput
+  }
+
+  export type ClientInteractionCountOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    date?: SortOrder
+    notes?: SortOrder
+    purchaseAmount?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ClientInteractionAvgOrderByAggregateInput = {
+    purchaseAmount?: SortOrder
+  }
+
+  export type ClientInteractionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    date?: SortOrder
+    notes?: SortOrder
+    purchaseAmount?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ClientInteractionMinOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    date?: SortOrder
+    notes?: SortOrder
+    purchaseAmount?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ClientInteractionSumOrderByAggregateInput = {
+    purchaseAmount?: SortOrder
+  }
+
+  export type ClientTaskCountOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    dueDate?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ClientTaskMaxOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    dueDate?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ClientTaskMinOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    dueDate?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StockCalloutCountOrderByAggregateInput = {
+    id?: SortOrder
+    storeId?: SortOrder
+    sku?: SortOrder
+    productName?: SortOrder
+    currentStock?: SortOrder
+    reorderPoint?: SortOrder
+    requestedQty?: SortOrder
+    urgency?: SortOrder
+    status?: SortOrder
+    reportedBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StockCalloutAvgOrderByAggregateInput = {
+    currentStock?: SortOrder
+    reorderPoint?: SortOrder
+    requestedQty?: SortOrder
+  }
+
+  export type StockCalloutMaxOrderByAggregateInput = {
+    id?: SortOrder
+    storeId?: SortOrder
+    sku?: SortOrder
+    productName?: SortOrder
+    currentStock?: SortOrder
+    reorderPoint?: SortOrder
+    requestedQty?: SortOrder
+    urgency?: SortOrder
+    status?: SortOrder
+    reportedBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StockCalloutMinOrderByAggregateInput = {
+    id?: SortOrder
+    storeId?: SortOrder
+    sku?: SortOrder
+    productName?: SortOrder
+    currentStock?: SortOrder
+    reorderPoint?: SortOrder
+    requestedQty?: SortOrder
+    urgency?: SortOrder
+    status?: SortOrder
+    reportedBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StockCalloutSumOrderByAggregateInput = {
+    currentStock?: SortOrder
+    reorderPoint?: SortOrder
+    requestedQty?: SortOrder
+  }
+
+  export type CustomerOrderCountOrderByAggregateInput = {
+    id?: SortOrder
+    storeId?: SortOrder
+    orderNumber?: SortOrder
+    customerName?: SortOrder
+    customerEmail?: SortOrder
+    status?: SortOrder
+    trackingNumber?: SortOrder
+    carrier?: SortOrder
+    estimatedDelivery?: SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CustomerOrderMaxOrderByAggregateInput = {
+    id?: SortOrder
+    storeId?: SortOrder
+    orderNumber?: SortOrder
+    customerName?: SortOrder
+    customerEmail?: SortOrder
+    status?: SortOrder
+    trackingNumber?: SortOrder
+    carrier?: SortOrder
+    estimatedDelivery?: SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CustomerOrderMinOrderByAggregateInput = {
+    id?: SortOrder
+    storeId?: SortOrder
+    orderNumber?: SortOrder
+    customerName?: SortOrder
+    customerEmail?: SortOrder
+    status?: SortOrder
+    trackingNumber?: SortOrder
+    carrier?: SortOrder
+    estimatedDelivery?: SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CustomerOrderScalarRelationFilter = {
+    is?: CustomerOrderWhereInput
+    isNot?: CustomerOrderWhereInput
+  }
+
+  export type OrderStatusUpdateCountOrderByAggregateInput = {
+    id?: SortOrder
+    orderId?: SortOrder
+    status?: SortOrder
+    updatedBy?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type OrderStatusUpdateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    orderId?: SortOrder
+    status?: SortOrder
+    updatedBy?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type OrderStatusUpdateMinOrderByAggregateInput = {
+    id?: SortOrder
+    orderId?: SortOrder
+    status?: SortOrder
+    updatedBy?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+  }
+
   export type TenantCreateNestedOneWithoutUsersInput = {
     create?: XOR<TenantCreateWithoutUsersInput, TenantUncheckedCreateWithoutUsersInput>
     connectOrCreate?: TenantCreateOrConnectWithoutUsersInput
@@ -122768,6 +133671,48 @@ export namespace Prisma {
     connect?: NewsletterViewWhereUniqueInput | NewsletterViewWhereUniqueInput[]
   }
 
+  export type ClientProfileCreateNestedManyWithoutCreatorInput = {
+    create?: XOR<ClientProfileCreateWithoutCreatorInput, ClientProfileUncheckedCreateWithoutCreatorInput> | ClientProfileCreateWithoutCreatorInput[] | ClientProfileUncheckedCreateWithoutCreatorInput[]
+    connectOrCreate?: ClientProfileCreateOrConnectWithoutCreatorInput | ClientProfileCreateOrConnectWithoutCreatorInput[]
+    createMany?: ClientProfileCreateManyCreatorInputEnvelope
+    connect?: ClientProfileWhereUniqueInput | ClientProfileWhereUniqueInput[]
+  }
+
+  export type ClientInteractionCreateNestedManyWithoutUserInput = {
+    create?: XOR<ClientInteractionCreateWithoutUserInput, ClientInteractionUncheckedCreateWithoutUserInput> | ClientInteractionCreateWithoutUserInput[] | ClientInteractionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ClientInteractionCreateOrConnectWithoutUserInput | ClientInteractionCreateOrConnectWithoutUserInput[]
+    createMany?: ClientInteractionCreateManyUserInputEnvelope
+    connect?: ClientInteractionWhereUniqueInput | ClientInteractionWhereUniqueInput[]
+  }
+
+  export type ClientTaskCreateNestedManyWithoutUserInput = {
+    create?: XOR<ClientTaskCreateWithoutUserInput, ClientTaskUncheckedCreateWithoutUserInput> | ClientTaskCreateWithoutUserInput[] | ClientTaskUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ClientTaskCreateOrConnectWithoutUserInput | ClientTaskCreateOrConnectWithoutUserInput[]
+    createMany?: ClientTaskCreateManyUserInputEnvelope
+    connect?: ClientTaskWhereUniqueInput | ClientTaskWhereUniqueInput[]
+  }
+
+  export type StockCalloutCreateNestedManyWithoutReporterInput = {
+    create?: XOR<StockCalloutCreateWithoutReporterInput, StockCalloutUncheckedCreateWithoutReporterInput> | StockCalloutCreateWithoutReporterInput[] | StockCalloutUncheckedCreateWithoutReporterInput[]
+    connectOrCreate?: StockCalloutCreateOrConnectWithoutReporterInput | StockCalloutCreateOrConnectWithoutReporterInput[]
+    createMany?: StockCalloutCreateManyReporterInputEnvelope
+    connect?: StockCalloutWhereUniqueInput | StockCalloutWhereUniqueInput[]
+  }
+
+  export type CustomerOrderCreateNestedManyWithoutCreatorInput = {
+    create?: XOR<CustomerOrderCreateWithoutCreatorInput, CustomerOrderUncheckedCreateWithoutCreatorInput> | CustomerOrderCreateWithoutCreatorInput[] | CustomerOrderUncheckedCreateWithoutCreatorInput[]
+    connectOrCreate?: CustomerOrderCreateOrConnectWithoutCreatorInput | CustomerOrderCreateOrConnectWithoutCreatorInput[]
+    createMany?: CustomerOrderCreateManyCreatorInputEnvelope
+    connect?: CustomerOrderWhereUniqueInput | CustomerOrderWhereUniqueInput[]
+  }
+
+  export type OrderStatusUpdateCreateNestedManyWithoutUpdaterInput = {
+    create?: XOR<OrderStatusUpdateCreateWithoutUpdaterInput, OrderStatusUpdateUncheckedCreateWithoutUpdaterInput> | OrderStatusUpdateCreateWithoutUpdaterInput[] | OrderStatusUpdateUncheckedCreateWithoutUpdaterInput[]
+    connectOrCreate?: OrderStatusUpdateCreateOrConnectWithoutUpdaterInput | OrderStatusUpdateCreateOrConnectWithoutUpdaterInput[]
+    createMany?: OrderStatusUpdateCreateManyUpdaterInputEnvelope
+    connect?: OrderStatusUpdateWhereUniqueInput | OrderStatusUpdateWhereUniqueInput[]
+  }
+
   export type UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<UserStoreAssignmentCreateWithoutUserInput, UserStoreAssignmentUncheckedCreateWithoutUserInput> | UserStoreAssignmentCreateWithoutUserInput[] | UserStoreAssignmentUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserStoreAssignmentCreateOrConnectWithoutUserInput | UserStoreAssignmentCreateOrConnectWithoutUserInput[]
@@ -123074,6 +134019,48 @@ export namespace Prisma {
     connectOrCreate?: NewsletterViewCreateOrConnectWithoutUserInput | NewsletterViewCreateOrConnectWithoutUserInput[]
     createMany?: NewsletterViewCreateManyUserInputEnvelope
     connect?: NewsletterViewWhereUniqueInput | NewsletterViewWhereUniqueInput[]
+  }
+
+  export type ClientProfileUncheckedCreateNestedManyWithoutCreatorInput = {
+    create?: XOR<ClientProfileCreateWithoutCreatorInput, ClientProfileUncheckedCreateWithoutCreatorInput> | ClientProfileCreateWithoutCreatorInput[] | ClientProfileUncheckedCreateWithoutCreatorInput[]
+    connectOrCreate?: ClientProfileCreateOrConnectWithoutCreatorInput | ClientProfileCreateOrConnectWithoutCreatorInput[]
+    createMany?: ClientProfileCreateManyCreatorInputEnvelope
+    connect?: ClientProfileWhereUniqueInput | ClientProfileWhereUniqueInput[]
+  }
+
+  export type ClientInteractionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ClientInteractionCreateWithoutUserInput, ClientInteractionUncheckedCreateWithoutUserInput> | ClientInteractionCreateWithoutUserInput[] | ClientInteractionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ClientInteractionCreateOrConnectWithoutUserInput | ClientInteractionCreateOrConnectWithoutUserInput[]
+    createMany?: ClientInteractionCreateManyUserInputEnvelope
+    connect?: ClientInteractionWhereUniqueInput | ClientInteractionWhereUniqueInput[]
+  }
+
+  export type ClientTaskUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ClientTaskCreateWithoutUserInput, ClientTaskUncheckedCreateWithoutUserInput> | ClientTaskCreateWithoutUserInput[] | ClientTaskUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ClientTaskCreateOrConnectWithoutUserInput | ClientTaskCreateOrConnectWithoutUserInput[]
+    createMany?: ClientTaskCreateManyUserInputEnvelope
+    connect?: ClientTaskWhereUniqueInput | ClientTaskWhereUniqueInput[]
+  }
+
+  export type StockCalloutUncheckedCreateNestedManyWithoutReporterInput = {
+    create?: XOR<StockCalloutCreateWithoutReporterInput, StockCalloutUncheckedCreateWithoutReporterInput> | StockCalloutCreateWithoutReporterInput[] | StockCalloutUncheckedCreateWithoutReporterInput[]
+    connectOrCreate?: StockCalloutCreateOrConnectWithoutReporterInput | StockCalloutCreateOrConnectWithoutReporterInput[]
+    createMany?: StockCalloutCreateManyReporterInputEnvelope
+    connect?: StockCalloutWhereUniqueInput | StockCalloutWhereUniqueInput[]
+  }
+
+  export type CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput = {
+    create?: XOR<CustomerOrderCreateWithoutCreatorInput, CustomerOrderUncheckedCreateWithoutCreatorInput> | CustomerOrderCreateWithoutCreatorInput[] | CustomerOrderUncheckedCreateWithoutCreatorInput[]
+    connectOrCreate?: CustomerOrderCreateOrConnectWithoutCreatorInput | CustomerOrderCreateOrConnectWithoutCreatorInput[]
+    createMany?: CustomerOrderCreateManyCreatorInputEnvelope
+    connect?: CustomerOrderWhereUniqueInput | CustomerOrderWhereUniqueInput[]
+  }
+
+  export type OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput = {
+    create?: XOR<OrderStatusUpdateCreateWithoutUpdaterInput, OrderStatusUpdateUncheckedCreateWithoutUpdaterInput> | OrderStatusUpdateCreateWithoutUpdaterInput[] | OrderStatusUpdateUncheckedCreateWithoutUpdaterInput[]
+    connectOrCreate?: OrderStatusUpdateCreateOrConnectWithoutUpdaterInput | OrderStatusUpdateCreateOrConnectWithoutUpdaterInput[]
+    createMany?: OrderStatusUpdateCreateManyUpdaterInputEnvelope
+    connect?: OrderStatusUpdateWhereUniqueInput | OrderStatusUpdateWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -123718,6 +134705,90 @@ export namespace Prisma {
     deleteMany?: NewsletterViewScalarWhereInput | NewsletterViewScalarWhereInput[]
   }
 
+  export type ClientProfileUpdateManyWithoutCreatorNestedInput = {
+    create?: XOR<ClientProfileCreateWithoutCreatorInput, ClientProfileUncheckedCreateWithoutCreatorInput> | ClientProfileCreateWithoutCreatorInput[] | ClientProfileUncheckedCreateWithoutCreatorInput[]
+    connectOrCreate?: ClientProfileCreateOrConnectWithoutCreatorInput | ClientProfileCreateOrConnectWithoutCreatorInput[]
+    upsert?: ClientProfileUpsertWithWhereUniqueWithoutCreatorInput | ClientProfileUpsertWithWhereUniqueWithoutCreatorInput[]
+    createMany?: ClientProfileCreateManyCreatorInputEnvelope
+    set?: ClientProfileWhereUniqueInput | ClientProfileWhereUniqueInput[]
+    disconnect?: ClientProfileWhereUniqueInput | ClientProfileWhereUniqueInput[]
+    delete?: ClientProfileWhereUniqueInput | ClientProfileWhereUniqueInput[]
+    connect?: ClientProfileWhereUniqueInput | ClientProfileWhereUniqueInput[]
+    update?: ClientProfileUpdateWithWhereUniqueWithoutCreatorInput | ClientProfileUpdateWithWhereUniqueWithoutCreatorInput[]
+    updateMany?: ClientProfileUpdateManyWithWhereWithoutCreatorInput | ClientProfileUpdateManyWithWhereWithoutCreatorInput[]
+    deleteMany?: ClientProfileScalarWhereInput | ClientProfileScalarWhereInput[]
+  }
+
+  export type ClientInteractionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ClientInteractionCreateWithoutUserInput, ClientInteractionUncheckedCreateWithoutUserInput> | ClientInteractionCreateWithoutUserInput[] | ClientInteractionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ClientInteractionCreateOrConnectWithoutUserInput | ClientInteractionCreateOrConnectWithoutUserInput[]
+    upsert?: ClientInteractionUpsertWithWhereUniqueWithoutUserInput | ClientInteractionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ClientInteractionCreateManyUserInputEnvelope
+    set?: ClientInteractionWhereUniqueInput | ClientInteractionWhereUniqueInput[]
+    disconnect?: ClientInteractionWhereUniqueInput | ClientInteractionWhereUniqueInput[]
+    delete?: ClientInteractionWhereUniqueInput | ClientInteractionWhereUniqueInput[]
+    connect?: ClientInteractionWhereUniqueInput | ClientInteractionWhereUniqueInput[]
+    update?: ClientInteractionUpdateWithWhereUniqueWithoutUserInput | ClientInteractionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ClientInteractionUpdateManyWithWhereWithoutUserInput | ClientInteractionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ClientInteractionScalarWhereInput | ClientInteractionScalarWhereInput[]
+  }
+
+  export type ClientTaskUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ClientTaskCreateWithoutUserInput, ClientTaskUncheckedCreateWithoutUserInput> | ClientTaskCreateWithoutUserInput[] | ClientTaskUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ClientTaskCreateOrConnectWithoutUserInput | ClientTaskCreateOrConnectWithoutUserInput[]
+    upsert?: ClientTaskUpsertWithWhereUniqueWithoutUserInput | ClientTaskUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ClientTaskCreateManyUserInputEnvelope
+    set?: ClientTaskWhereUniqueInput | ClientTaskWhereUniqueInput[]
+    disconnect?: ClientTaskWhereUniqueInput | ClientTaskWhereUniqueInput[]
+    delete?: ClientTaskWhereUniqueInput | ClientTaskWhereUniqueInput[]
+    connect?: ClientTaskWhereUniqueInput | ClientTaskWhereUniqueInput[]
+    update?: ClientTaskUpdateWithWhereUniqueWithoutUserInput | ClientTaskUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ClientTaskUpdateManyWithWhereWithoutUserInput | ClientTaskUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ClientTaskScalarWhereInput | ClientTaskScalarWhereInput[]
+  }
+
+  export type StockCalloutUpdateManyWithoutReporterNestedInput = {
+    create?: XOR<StockCalloutCreateWithoutReporterInput, StockCalloutUncheckedCreateWithoutReporterInput> | StockCalloutCreateWithoutReporterInput[] | StockCalloutUncheckedCreateWithoutReporterInput[]
+    connectOrCreate?: StockCalloutCreateOrConnectWithoutReporterInput | StockCalloutCreateOrConnectWithoutReporterInput[]
+    upsert?: StockCalloutUpsertWithWhereUniqueWithoutReporterInput | StockCalloutUpsertWithWhereUniqueWithoutReporterInput[]
+    createMany?: StockCalloutCreateManyReporterInputEnvelope
+    set?: StockCalloutWhereUniqueInput | StockCalloutWhereUniqueInput[]
+    disconnect?: StockCalloutWhereUniqueInput | StockCalloutWhereUniqueInput[]
+    delete?: StockCalloutWhereUniqueInput | StockCalloutWhereUniqueInput[]
+    connect?: StockCalloutWhereUniqueInput | StockCalloutWhereUniqueInput[]
+    update?: StockCalloutUpdateWithWhereUniqueWithoutReporterInput | StockCalloutUpdateWithWhereUniqueWithoutReporterInput[]
+    updateMany?: StockCalloutUpdateManyWithWhereWithoutReporterInput | StockCalloutUpdateManyWithWhereWithoutReporterInput[]
+    deleteMany?: StockCalloutScalarWhereInput | StockCalloutScalarWhereInput[]
+  }
+
+  export type CustomerOrderUpdateManyWithoutCreatorNestedInput = {
+    create?: XOR<CustomerOrderCreateWithoutCreatorInput, CustomerOrderUncheckedCreateWithoutCreatorInput> | CustomerOrderCreateWithoutCreatorInput[] | CustomerOrderUncheckedCreateWithoutCreatorInput[]
+    connectOrCreate?: CustomerOrderCreateOrConnectWithoutCreatorInput | CustomerOrderCreateOrConnectWithoutCreatorInput[]
+    upsert?: CustomerOrderUpsertWithWhereUniqueWithoutCreatorInput | CustomerOrderUpsertWithWhereUniqueWithoutCreatorInput[]
+    createMany?: CustomerOrderCreateManyCreatorInputEnvelope
+    set?: CustomerOrderWhereUniqueInput | CustomerOrderWhereUniqueInput[]
+    disconnect?: CustomerOrderWhereUniqueInput | CustomerOrderWhereUniqueInput[]
+    delete?: CustomerOrderWhereUniqueInput | CustomerOrderWhereUniqueInput[]
+    connect?: CustomerOrderWhereUniqueInput | CustomerOrderWhereUniqueInput[]
+    update?: CustomerOrderUpdateWithWhereUniqueWithoutCreatorInput | CustomerOrderUpdateWithWhereUniqueWithoutCreatorInput[]
+    updateMany?: CustomerOrderUpdateManyWithWhereWithoutCreatorInput | CustomerOrderUpdateManyWithWhereWithoutCreatorInput[]
+    deleteMany?: CustomerOrderScalarWhereInput | CustomerOrderScalarWhereInput[]
+  }
+
+  export type OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput = {
+    create?: XOR<OrderStatusUpdateCreateWithoutUpdaterInput, OrderStatusUpdateUncheckedCreateWithoutUpdaterInput> | OrderStatusUpdateCreateWithoutUpdaterInput[] | OrderStatusUpdateUncheckedCreateWithoutUpdaterInput[]
+    connectOrCreate?: OrderStatusUpdateCreateOrConnectWithoutUpdaterInput | OrderStatusUpdateCreateOrConnectWithoutUpdaterInput[]
+    upsert?: OrderStatusUpdateUpsertWithWhereUniqueWithoutUpdaterInput | OrderStatusUpdateUpsertWithWhereUniqueWithoutUpdaterInput[]
+    createMany?: OrderStatusUpdateCreateManyUpdaterInputEnvelope
+    set?: OrderStatusUpdateWhereUniqueInput | OrderStatusUpdateWhereUniqueInput[]
+    disconnect?: OrderStatusUpdateWhereUniqueInput | OrderStatusUpdateWhereUniqueInput[]
+    delete?: OrderStatusUpdateWhereUniqueInput | OrderStatusUpdateWhereUniqueInput[]
+    connect?: OrderStatusUpdateWhereUniqueInput | OrderStatusUpdateWhereUniqueInput[]
+    update?: OrderStatusUpdateUpdateWithWhereUniqueWithoutUpdaterInput | OrderStatusUpdateUpdateWithWhereUniqueWithoutUpdaterInput[]
+    updateMany?: OrderStatusUpdateUpdateManyWithWhereWithoutUpdaterInput | OrderStatusUpdateUpdateManyWithWhereWithoutUpdaterInput[]
+    deleteMany?: OrderStatusUpdateScalarWhereInput | OrderStatusUpdateScalarWhereInput[]
+  }
+
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
   }
@@ -124336,6 +135407,90 @@ export namespace Prisma {
     update?: NewsletterViewUpdateWithWhereUniqueWithoutUserInput | NewsletterViewUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: NewsletterViewUpdateManyWithWhereWithoutUserInput | NewsletterViewUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: NewsletterViewScalarWhereInput | NewsletterViewScalarWhereInput[]
+  }
+
+  export type ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput = {
+    create?: XOR<ClientProfileCreateWithoutCreatorInput, ClientProfileUncheckedCreateWithoutCreatorInput> | ClientProfileCreateWithoutCreatorInput[] | ClientProfileUncheckedCreateWithoutCreatorInput[]
+    connectOrCreate?: ClientProfileCreateOrConnectWithoutCreatorInput | ClientProfileCreateOrConnectWithoutCreatorInput[]
+    upsert?: ClientProfileUpsertWithWhereUniqueWithoutCreatorInput | ClientProfileUpsertWithWhereUniqueWithoutCreatorInput[]
+    createMany?: ClientProfileCreateManyCreatorInputEnvelope
+    set?: ClientProfileWhereUniqueInput | ClientProfileWhereUniqueInput[]
+    disconnect?: ClientProfileWhereUniqueInput | ClientProfileWhereUniqueInput[]
+    delete?: ClientProfileWhereUniqueInput | ClientProfileWhereUniqueInput[]
+    connect?: ClientProfileWhereUniqueInput | ClientProfileWhereUniqueInput[]
+    update?: ClientProfileUpdateWithWhereUniqueWithoutCreatorInput | ClientProfileUpdateWithWhereUniqueWithoutCreatorInput[]
+    updateMany?: ClientProfileUpdateManyWithWhereWithoutCreatorInput | ClientProfileUpdateManyWithWhereWithoutCreatorInput[]
+    deleteMany?: ClientProfileScalarWhereInput | ClientProfileScalarWhereInput[]
+  }
+
+  export type ClientInteractionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ClientInteractionCreateWithoutUserInput, ClientInteractionUncheckedCreateWithoutUserInput> | ClientInteractionCreateWithoutUserInput[] | ClientInteractionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ClientInteractionCreateOrConnectWithoutUserInput | ClientInteractionCreateOrConnectWithoutUserInput[]
+    upsert?: ClientInteractionUpsertWithWhereUniqueWithoutUserInput | ClientInteractionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ClientInteractionCreateManyUserInputEnvelope
+    set?: ClientInteractionWhereUniqueInput | ClientInteractionWhereUniqueInput[]
+    disconnect?: ClientInteractionWhereUniqueInput | ClientInteractionWhereUniqueInput[]
+    delete?: ClientInteractionWhereUniqueInput | ClientInteractionWhereUniqueInput[]
+    connect?: ClientInteractionWhereUniqueInput | ClientInteractionWhereUniqueInput[]
+    update?: ClientInteractionUpdateWithWhereUniqueWithoutUserInput | ClientInteractionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ClientInteractionUpdateManyWithWhereWithoutUserInput | ClientInteractionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ClientInteractionScalarWhereInput | ClientInteractionScalarWhereInput[]
+  }
+
+  export type ClientTaskUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ClientTaskCreateWithoutUserInput, ClientTaskUncheckedCreateWithoutUserInput> | ClientTaskCreateWithoutUserInput[] | ClientTaskUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ClientTaskCreateOrConnectWithoutUserInput | ClientTaskCreateOrConnectWithoutUserInput[]
+    upsert?: ClientTaskUpsertWithWhereUniqueWithoutUserInput | ClientTaskUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ClientTaskCreateManyUserInputEnvelope
+    set?: ClientTaskWhereUniqueInput | ClientTaskWhereUniqueInput[]
+    disconnect?: ClientTaskWhereUniqueInput | ClientTaskWhereUniqueInput[]
+    delete?: ClientTaskWhereUniqueInput | ClientTaskWhereUniqueInput[]
+    connect?: ClientTaskWhereUniqueInput | ClientTaskWhereUniqueInput[]
+    update?: ClientTaskUpdateWithWhereUniqueWithoutUserInput | ClientTaskUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ClientTaskUpdateManyWithWhereWithoutUserInput | ClientTaskUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ClientTaskScalarWhereInput | ClientTaskScalarWhereInput[]
+  }
+
+  export type StockCalloutUncheckedUpdateManyWithoutReporterNestedInput = {
+    create?: XOR<StockCalloutCreateWithoutReporterInput, StockCalloutUncheckedCreateWithoutReporterInput> | StockCalloutCreateWithoutReporterInput[] | StockCalloutUncheckedCreateWithoutReporterInput[]
+    connectOrCreate?: StockCalloutCreateOrConnectWithoutReporterInput | StockCalloutCreateOrConnectWithoutReporterInput[]
+    upsert?: StockCalloutUpsertWithWhereUniqueWithoutReporterInput | StockCalloutUpsertWithWhereUniqueWithoutReporterInput[]
+    createMany?: StockCalloutCreateManyReporterInputEnvelope
+    set?: StockCalloutWhereUniqueInput | StockCalloutWhereUniqueInput[]
+    disconnect?: StockCalloutWhereUniqueInput | StockCalloutWhereUniqueInput[]
+    delete?: StockCalloutWhereUniqueInput | StockCalloutWhereUniqueInput[]
+    connect?: StockCalloutWhereUniqueInput | StockCalloutWhereUniqueInput[]
+    update?: StockCalloutUpdateWithWhereUniqueWithoutReporterInput | StockCalloutUpdateWithWhereUniqueWithoutReporterInput[]
+    updateMany?: StockCalloutUpdateManyWithWhereWithoutReporterInput | StockCalloutUpdateManyWithWhereWithoutReporterInput[]
+    deleteMany?: StockCalloutScalarWhereInput | StockCalloutScalarWhereInput[]
+  }
+
+  export type CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput = {
+    create?: XOR<CustomerOrderCreateWithoutCreatorInput, CustomerOrderUncheckedCreateWithoutCreatorInput> | CustomerOrderCreateWithoutCreatorInput[] | CustomerOrderUncheckedCreateWithoutCreatorInput[]
+    connectOrCreate?: CustomerOrderCreateOrConnectWithoutCreatorInput | CustomerOrderCreateOrConnectWithoutCreatorInput[]
+    upsert?: CustomerOrderUpsertWithWhereUniqueWithoutCreatorInput | CustomerOrderUpsertWithWhereUniqueWithoutCreatorInput[]
+    createMany?: CustomerOrderCreateManyCreatorInputEnvelope
+    set?: CustomerOrderWhereUniqueInput | CustomerOrderWhereUniqueInput[]
+    disconnect?: CustomerOrderWhereUniqueInput | CustomerOrderWhereUniqueInput[]
+    delete?: CustomerOrderWhereUniqueInput | CustomerOrderWhereUniqueInput[]
+    connect?: CustomerOrderWhereUniqueInput | CustomerOrderWhereUniqueInput[]
+    update?: CustomerOrderUpdateWithWhereUniqueWithoutCreatorInput | CustomerOrderUpdateWithWhereUniqueWithoutCreatorInput[]
+    updateMany?: CustomerOrderUpdateManyWithWhereWithoutCreatorInput | CustomerOrderUpdateManyWithWhereWithoutCreatorInput[]
+    deleteMany?: CustomerOrderScalarWhereInput | CustomerOrderScalarWhereInput[]
+  }
+
+  export type OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput = {
+    create?: XOR<OrderStatusUpdateCreateWithoutUpdaterInput, OrderStatusUpdateUncheckedCreateWithoutUpdaterInput> | OrderStatusUpdateCreateWithoutUpdaterInput[] | OrderStatusUpdateUncheckedCreateWithoutUpdaterInput[]
+    connectOrCreate?: OrderStatusUpdateCreateOrConnectWithoutUpdaterInput | OrderStatusUpdateCreateOrConnectWithoutUpdaterInput[]
+    upsert?: OrderStatusUpdateUpsertWithWhereUniqueWithoutUpdaterInput | OrderStatusUpdateUpsertWithWhereUniqueWithoutUpdaterInput[]
+    createMany?: OrderStatusUpdateCreateManyUpdaterInputEnvelope
+    set?: OrderStatusUpdateWhereUniqueInput | OrderStatusUpdateWhereUniqueInput[]
+    disconnect?: OrderStatusUpdateWhereUniqueInput | OrderStatusUpdateWhereUniqueInput[]
+    delete?: OrderStatusUpdateWhereUniqueInput | OrderStatusUpdateWhereUniqueInput[]
+    connect?: OrderStatusUpdateWhereUniqueInput | OrderStatusUpdateWhereUniqueInput[]
+    update?: OrderStatusUpdateUpdateWithWhereUniqueWithoutUpdaterInput | OrderStatusUpdateUpdateWithWhereUniqueWithoutUpdaterInput[]
+    updateMany?: OrderStatusUpdateUpdateManyWithWhereWithoutUpdaterInput | OrderStatusUpdateUpdateManyWithWhereWithoutUpdaterInput[]
+    deleteMany?: OrderStatusUpdateScalarWhereInput | OrderStatusUpdateScalarWhereInput[]
   }
 
   export type UserCreateNestedManyWithoutTenantInput = {
@@ -126196,6 +137351,34 @@ export namespace Prisma {
     connect?: HandoverWhereUniqueInput | HandoverWhereUniqueInput[]
   }
 
+  export type ConversionGoalCreateNestedManyWithoutStoreInput = {
+    create?: XOR<ConversionGoalCreateWithoutStoreInput, ConversionGoalUncheckedCreateWithoutStoreInput> | ConversionGoalCreateWithoutStoreInput[] | ConversionGoalUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: ConversionGoalCreateOrConnectWithoutStoreInput | ConversionGoalCreateOrConnectWithoutStoreInput[]
+    createMany?: ConversionGoalCreateManyStoreInputEnvelope
+    connect?: ConversionGoalWhereUniqueInput | ConversionGoalWhereUniqueInput[]
+  }
+
+  export type ClientProfileCreateNestedManyWithoutStoreInput = {
+    create?: XOR<ClientProfileCreateWithoutStoreInput, ClientProfileUncheckedCreateWithoutStoreInput> | ClientProfileCreateWithoutStoreInput[] | ClientProfileUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: ClientProfileCreateOrConnectWithoutStoreInput | ClientProfileCreateOrConnectWithoutStoreInput[]
+    createMany?: ClientProfileCreateManyStoreInputEnvelope
+    connect?: ClientProfileWhereUniqueInput | ClientProfileWhereUniqueInput[]
+  }
+
+  export type StockCalloutCreateNestedManyWithoutStoreInput = {
+    create?: XOR<StockCalloutCreateWithoutStoreInput, StockCalloutUncheckedCreateWithoutStoreInput> | StockCalloutCreateWithoutStoreInput[] | StockCalloutUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: StockCalloutCreateOrConnectWithoutStoreInput | StockCalloutCreateOrConnectWithoutStoreInput[]
+    createMany?: StockCalloutCreateManyStoreInputEnvelope
+    connect?: StockCalloutWhereUniqueInput | StockCalloutWhereUniqueInput[]
+  }
+
+  export type CustomerOrderCreateNestedManyWithoutStoreInput = {
+    create?: XOR<CustomerOrderCreateWithoutStoreInput, CustomerOrderUncheckedCreateWithoutStoreInput> | CustomerOrderCreateWithoutStoreInput[] | CustomerOrderUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: CustomerOrderCreateOrConnectWithoutStoreInput | CustomerOrderCreateOrConnectWithoutStoreInput[]
+    createMany?: CustomerOrderCreateManyStoreInputEnvelope
+    connect?: CustomerOrderWhereUniqueInput | CustomerOrderWhereUniqueInput[]
+  }
+
   export type StoreToolAssignmentUncheckedCreateNestedManyWithoutStoreInput = {
     create?: XOR<StoreToolAssignmentCreateWithoutStoreInput, StoreToolAssignmentUncheckedCreateWithoutStoreInput> | StoreToolAssignmentCreateWithoutStoreInput[] | StoreToolAssignmentUncheckedCreateWithoutStoreInput[]
     connectOrCreate?: StoreToolAssignmentCreateOrConnectWithoutStoreInput | StoreToolAssignmentCreateOrConnectWithoutStoreInput[]
@@ -126390,6 +137573,34 @@ export namespace Prisma {
     connectOrCreate?: HandoverCreateOrConnectWithoutStoreInput | HandoverCreateOrConnectWithoutStoreInput[]
     createMany?: HandoverCreateManyStoreInputEnvelope
     connect?: HandoverWhereUniqueInput | HandoverWhereUniqueInput[]
+  }
+
+  export type ConversionGoalUncheckedCreateNestedManyWithoutStoreInput = {
+    create?: XOR<ConversionGoalCreateWithoutStoreInput, ConversionGoalUncheckedCreateWithoutStoreInput> | ConversionGoalCreateWithoutStoreInput[] | ConversionGoalUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: ConversionGoalCreateOrConnectWithoutStoreInput | ConversionGoalCreateOrConnectWithoutStoreInput[]
+    createMany?: ConversionGoalCreateManyStoreInputEnvelope
+    connect?: ConversionGoalWhereUniqueInput | ConversionGoalWhereUniqueInput[]
+  }
+
+  export type ClientProfileUncheckedCreateNestedManyWithoutStoreInput = {
+    create?: XOR<ClientProfileCreateWithoutStoreInput, ClientProfileUncheckedCreateWithoutStoreInput> | ClientProfileCreateWithoutStoreInput[] | ClientProfileUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: ClientProfileCreateOrConnectWithoutStoreInput | ClientProfileCreateOrConnectWithoutStoreInput[]
+    createMany?: ClientProfileCreateManyStoreInputEnvelope
+    connect?: ClientProfileWhereUniqueInput | ClientProfileWhereUniqueInput[]
+  }
+
+  export type StockCalloutUncheckedCreateNestedManyWithoutStoreInput = {
+    create?: XOR<StockCalloutCreateWithoutStoreInput, StockCalloutUncheckedCreateWithoutStoreInput> | StockCalloutCreateWithoutStoreInput[] | StockCalloutUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: StockCalloutCreateOrConnectWithoutStoreInput | StockCalloutCreateOrConnectWithoutStoreInput[]
+    createMany?: StockCalloutCreateManyStoreInputEnvelope
+    connect?: StockCalloutWhereUniqueInput | StockCalloutWhereUniqueInput[]
+  }
+
+  export type CustomerOrderUncheckedCreateNestedManyWithoutStoreInput = {
+    create?: XOR<CustomerOrderCreateWithoutStoreInput, CustomerOrderUncheckedCreateWithoutStoreInput> | CustomerOrderCreateWithoutStoreInput[] | CustomerOrderUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: CustomerOrderCreateOrConnectWithoutStoreInput | CustomerOrderCreateOrConnectWithoutStoreInput[]
+    createMany?: CustomerOrderCreateManyStoreInputEnvelope
+    connect?: CustomerOrderWhereUniqueInput | CustomerOrderWhereUniqueInput[]
   }
 
   export type TenantUpdateOneRequiredWithoutStoresNestedInput = {
@@ -126802,6 +138013,62 @@ export namespace Prisma {
     deleteMany?: HandoverScalarWhereInput | HandoverScalarWhereInput[]
   }
 
+  export type ConversionGoalUpdateManyWithoutStoreNestedInput = {
+    create?: XOR<ConversionGoalCreateWithoutStoreInput, ConversionGoalUncheckedCreateWithoutStoreInput> | ConversionGoalCreateWithoutStoreInput[] | ConversionGoalUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: ConversionGoalCreateOrConnectWithoutStoreInput | ConversionGoalCreateOrConnectWithoutStoreInput[]
+    upsert?: ConversionGoalUpsertWithWhereUniqueWithoutStoreInput | ConversionGoalUpsertWithWhereUniqueWithoutStoreInput[]
+    createMany?: ConversionGoalCreateManyStoreInputEnvelope
+    set?: ConversionGoalWhereUniqueInput | ConversionGoalWhereUniqueInput[]
+    disconnect?: ConversionGoalWhereUniqueInput | ConversionGoalWhereUniqueInput[]
+    delete?: ConversionGoalWhereUniqueInput | ConversionGoalWhereUniqueInput[]
+    connect?: ConversionGoalWhereUniqueInput | ConversionGoalWhereUniqueInput[]
+    update?: ConversionGoalUpdateWithWhereUniqueWithoutStoreInput | ConversionGoalUpdateWithWhereUniqueWithoutStoreInput[]
+    updateMany?: ConversionGoalUpdateManyWithWhereWithoutStoreInput | ConversionGoalUpdateManyWithWhereWithoutStoreInput[]
+    deleteMany?: ConversionGoalScalarWhereInput | ConversionGoalScalarWhereInput[]
+  }
+
+  export type ClientProfileUpdateManyWithoutStoreNestedInput = {
+    create?: XOR<ClientProfileCreateWithoutStoreInput, ClientProfileUncheckedCreateWithoutStoreInput> | ClientProfileCreateWithoutStoreInput[] | ClientProfileUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: ClientProfileCreateOrConnectWithoutStoreInput | ClientProfileCreateOrConnectWithoutStoreInput[]
+    upsert?: ClientProfileUpsertWithWhereUniqueWithoutStoreInput | ClientProfileUpsertWithWhereUniqueWithoutStoreInput[]
+    createMany?: ClientProfileCreateManyStoreInputEnvelope
+    set?: ClientProfileWhereUniqueInput | ClientProfileWhereUniqueInput[]
+    disconnect?: ClientProfileWhereUniqueInput | ClientProfileWhereUniqueInput[]
+    delete?: ClientProfileWhereUniqueInput | ClientProfileWhereUniqueInput[]
+    connect?: ClientProfileWhereUniqueInput | ClientProfileWhereUniqueInput[]
+    update?: ClientProfileUpdateWithWhereUniqueWithoutStoreInput | ClientProfileUpdateWithWhereUniqueWithoutStoreInput[]
+    updateMany?: ClientProfileUpdateManyWithWhereWithoutStoreInput | ClientProfileUpdateManyWithWhereWithoutStoreInput[]
+    deleteMany?: ClientProfileScalarWhereInput | ClientProfileScalarWhereInput[]
+  }
+
+  export type StockCalloutUpdateManyWithoutStoreNestedInput = {
+    create?: XOR<StockCalloutCreateWithoutStoreInput, StockCalloutUncheckedCreateWithoutStoreInput> | StockCalloutCreateWithoutStoreInput[] | StockCalloutUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: StockCalloutCreateOrConnectWithoutStoreInput | StockCalloutCreateOrConnectWithoutStoreInput[]
+    upsert?: StockCalloutUpsertWithWhereUniqueWithoutStoreInput | StockCalloutUpsertWithWhereUniqueWithoutStoreInput[]
+    createMany?: StockCalloutCreateManyStoreInputEnvelope
+    set?: StockCalloutWhereUniqueInput | StockCalloutWhereUniqueInput[]
+    disconnect?: StockCalloutWhereUniqueInput | StockCalloutWhereUniqueInput[]
+    delete?: StockCalloutWhereUniqueInput | StockCalloutWhereUniqueInput[]
+    connect?: StockCalloutWhereUniqueInput | StockCalloutWhereUniqueInput[]
+    update?: StockCalloutUpdateWithWhereUniqueWithoutStoreInput | StockCalloutUpdateWithWhereUniqueWithoutStoreInput[]
+    updateMany?: StockCalloutUpdateManyWithWhereWithoutStoreInput | StockCalloutUpdateManyWithWhereWithoutStoreInput[]
+    deleteMany?: StockCalloutScalarWhereInput | StockCalloutScalarWhereInput[]
+  }
+
+  export type CustomerOrderUpdateManyWithoutStoreNestedInput = {
+    create?: XOR<CustomerOrderCreateWithoutStoreInput, CustomerOrderUncheckedCreateWithoutStoreInput> | CustomerOrderCreateWithoutStoreInput[] | CustomerOrderUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: CustomerOrderCreateOrConnectWithoutStoreInput | CustomerOrderCreateOrConnectWithoutStoreInput[]
+    upsert?: CustomerOrderUpsertWithWhereUniqueWithoutStoreInput | CustomerOrderUpsertWithWhereUniqueWithoutStoreInput[]
+    createMany?: CustomerOrderCreateManyStoreInputEnvelope
+    set?: CustomerOrderWhereUniqueInput | CustomerOrderWhereUniqueInput[]
+    disconnect?: CustomerOrderWhereUniqueInput | CustomerOrderWhereUniqueInput[]
+    delete?: CustomerOrderWhereUniqueInput | CustomerOrderWhereUniqueInput[]
+    connect?: CustomerOrderWhereUniqueInput | CustomerOrderWhereUniqueInput[]
+    update?: CustomerOrderUpdateWithWhereUniqueWithoutStoreInput | CustomerOrderUpdateWithWhereUniqueWithoutStoreInput[]
+    updateMany?: CustomerOrderUpdateManyWithWhereWithoutStoreInput | CustomerOrderUpdateManyWithWhereWithoutStoreInput[]
+    deleteMany?: CustomerOrderScalarWhereInput | CustomerOrderScalarWhereInput[]
+  }
+
   export type StoreToolAssignmentUncheckedUpdateManyWithoutStoreNestedInput = {
     create?: XOR<StoreToolAssignmentCreateWithoutStoreInput, StoreToolAssignmentUncheckedCreateWithoutStoreInput> | StoreToolAssignmentCreateWithoutStoreInput[] | StoreToolAssignmentUncheckedCreateWithoutStoreInput[]
     connectOrCreate?: StoreToolAssignmentCreateOrConnectWithoutStoreInput | StoreToolAssignmentCreateOrConnectWithoutStoreInput[]
@@ -127192,6 +138459,62 @@ export namespace Prisma {
     update?: HandoverUpdateWithWhereUniqueWithoutStoreInput | HandoverUpdateWithWhereUniqueWithoutStoreInput[]
     updateMany?: HandoverUpdateManyWithWhereWithoutStoreInput | HandoverUpdateManyWithWhereWithoutStoreInput[]
     deleteMany?: HandoverScalarWhereInput | HandoverScalarWhereInput[]
+  }
+
+  export type ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput = {
+    create?: XOR<ConversionGoalCreateWithoutStoreInput, ConversionGoalUncheckedCreateWithoutStoreInput> | ConversionGoalCreateWithoutStoreInput[] | ConversionGoalUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: ConversionGoalCreateOrConnectWithoutStoreInput | ConversionGoalCreateOrConnectWithoutStoreInput[]
+    upsert?: ConversionGoalUpsertWithWhereUniqueWithoutStoreInput | ConversionGoalUpsertWithWhereUniqueWithoutStoreInput[]
+    createMany?: ConversionGoalCreateManyStoreInputEnvelope
+    set?: ConversionGoalWhereUniqueInput | ConversionGoalWhereUniqueInput[]
+    disconnect?: ConversionGoalWhereUniqueInput | ConversionGoalWhereUniqueInput[]
+    delete?: ConversionGoalWhereUniqueInput | ConversionGoalWhereUniqueInput[]
+    connect?: ConversionGoalWhereUniqueInput | ConversionGoalWhereUniqueInput[]
+    update?: ConversionGoalUpdateWithWhereUniqueWithoutStoreInput | ConversionGoalUpdateWithWhereUniqueWithoutStoreInput[]
+    updateMany?: ConversionGoalUpdateManyWithWhereWithoutStoreInput | ConversionGoalUpdateManyWithWhereWithoutStoreInput[]
+    deleteMany?: ConversionGoalScalarWhereInput | ConversionGoalScalarWhereInput[]
+  }
+
+  export type ClientProfileUncheckedUpdateManyWithoutStoreNestedInput = {
+    create?: XOR<ClientProfileCreateWithoutStoreInput, ClientProfileUncheckedCreateWithoutStoreInput> | ClientProfileCreateWithoutStoreInput[] | ClientProfileUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: ClientProfileCreateOrConnectWithoutStoreInput | ClientProfileCreateOrConnectWithoutStoreInput[]
+    upsert?: ClientProfileUpsertWithWhereUniqueWithoutStoreInput | ClientProfileUpsertWithWhereUniqueWithoutStoreInput[]
+    createMany?: ClientProfileCreateManyStoreInputEnvelope
+    set?: ClientProfileWhereUniqueInput | ClientProfileWhereUniqueInput[]
+    disconnect?: ClientProfileWhereUniqueInput | ClientProfileWhereUniqueInput[]
+    delete?: ClientProfileWhereUniqueInput | ClientProfileWhereUniqueInput[]
+    connect?: ClientProfileWhereUniqueInput | ClientProfileWhereUniqueInput[]
+    update?: ClientProfileUpdateWithWhereUniqueWithoutStoreInput | ClientProfileUpdateWithWhereUniqueWithoutStoreInput[]
+    updateMany?: ClientProfileUpdateManyWithWhereWithoutStoreInput | ClientProfileUpdateManyWithWhereWithoutStoreInput[]
+    deleteMany?: ClientProfileScalarWhereInput | ClientProfileScalarWhereInput[]
+  }
+
+  export type StockCalloutUncheckedUpdateManyWithoutStoreNestedInput = {
+    create?: XOR<StockCalloutCreateWithoutStoreInput, StockCalloutUncheckedCreateWithoutStoreInput> | StockCalloutCreateWithoutStoreInput[] | StockCalloutUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: StockCalloutCreateOrConnectWithoutStoreInput | StockCalloutCreateOrConnectWithoutStoreInput[]
+    upsert?: StockCalloutUpsertWithWhereUniqueWithoutStoreInput | StockCalloutUpsertWithWhereUniqueWithoutStoreInput[]
+    createMany?: StockCalloutCreateManyStoreInputEnvelope
+    set?: StockCalloutWhereUniqueInput | StockCalloutWhereUniqueInput[]
+    disconnect?: StockCalloutWhereUniqueInput | StockCalloutWhereUniqueInput[]
+    delete?: StockCalloutWhereUniqueInput | StockCalloutWhereUniqueInput[]
+    connect?: StockCalloutWhereUniqueInput | StockCalloutWhereUniqueInput[]
+    update?: StockCalloutUpdateWithWhereUniqueWithoutStoreInput | StockCalloutUpdateWithWhereUniqueWithoutStoreInput[]
+    updateMany?: StockCalloutUpdateManyWithWhereWithoutStoreInput | StockCalloutUpdateManyWithWhereWithoutStoreInput[]
+    deleteMany?: StockCalloutScalarWhereInput | StockCalloutScalarWhereInput[]
+  }
+
+  export type CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput = {
+    create?: XOR<CustomerOrderCreateWithoutStoreInput, CustomerOrderUncheckedCreateWithoutStoreInput> | CustomerOrderCreateWithoutStoreInput[] | CustomerOrderUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: CustomerOrderCreateOrConnectWithoutStoreInput | CustomerOrderCreateOrConnectWithoutStoreInput[]
+    upsert?: CustomerOrderUpsertWithWhereUniqueWithoutStoreInput | CustomerOrderUpsertWithWhereUniqueWithoutStoreInput[]
+    createMany?: CustomerOrderCreateManyStoreInputEnvelope
+    set?: CustomerOrderWhereUniqueInput | CustomerOrderWhereUniqueInput[]
+    disconnect?: CustomerOrderWhereUniqueInput | CustomerOrderWhereUniqueInput[]
+    delete?: CustomerOrderWhereUniqueInput | CustomerOrderWhereUniqueInput[]
+    connect?: CustomerOrderWhereUniqueInput | CustomerOrderWhereUniqueInput[]
+    update?: CustomerOrderUpdateWithWhereUniqueWithoutStoreInput | CustomerOrderUpdateWithWhereUniqueWithoutStoreInput[]
+    updateMany?: CustomerOrderUpdateManyWithWhereWithoutStoreInput | CustomerOrderUpdateManyWithWhereWithoutStoreInput[]
+    deleteMany?: CustomerOrderScalarWhereInput | CustomerOrderScalarWhereInput[]
   }
 
   export type StoreToolAssignmentCreateNestedManyWithoutToolInput = {
@@ -131040,6 +142363,314 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNewsletterViewsInput, UserUpdateWithoutNewsletterViewsInput>, UserUncheckedUpdateWithoutNewsletterViewsInput>
   }
 
+  export type StoreCreateNestedOneWithoutConversionGoalsInput = {
+    create?: XOR<StoreCreateWithoutConversionGoalsInput, StoreUncheckedCreateWithoutConversionGoalsInput>
+    connectOrCreate?: StoreCreateOrConnectWithoutConversionGoalsInput
+    connect?: StoreWhereUniqueInput
+  }
+
+  export type StoreUpdateOneRequiredWithoutConversionGoalsNestedInput = {
+    create?: XOR<StoreCreateWithoutConversionGoalsInput, StoreUncheckedCreateWithoutConversionGoalsInput>
+    connectOrCreate?: StoreCreateOrConnectWithoutConversionGoalsInput
+    upsert?: StoreUpsertWithoutConversionGoalsInput
+    connect?: StoreWhereUniqueInput
+    update?: XOR<XOR<StoreUpdateToOneWithWhereWithoutConversionGoalsInput, StoreUpdateWithoutConversionGoalsInput>, StoreUncheckedUpdateWithoutConversionGoalsInput>
+  }
+
+  export type StoreCreateNestedOneWithoutClientProfilesInput = {
+    create?: XOR<StoreCreateWithoutClientProfilesInput, StoreUncheckedCreateWithoutClientProfilesInput>
+    connectOrCreate?: StoreCreateOrConnectWithoutClientProfilesInput
+    connect?: StoreWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutClientsCreatedInput = {
+    create?: XOR<UserCreateWithoutClientsCreatedInput, UserUncheckedCreateWithoutClientsCreatedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutClientsCreatedInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ClientInteractionCreateNestedManyWithoutClientInput = {
+    create?: XOR<ClientInteractionCreateWithoutClientInput, ClientInteractionUncheckedCreateWithoutClientInput> | ClientInteractionCreateWithoutClientInput[] | ClientInteractionUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ClientInteractionCreateOrConnectWithoutClientInput | ClientInteractionCreateOrConnectWithoutClientInput[]
+    createMany?: ClientInteractionCreateManyClientInputEnvelope
+    connect?: ClientInteractionWhereUniqueInput | ClientInteractionWhereUniqueInput[]
+  }
+
+  export type ClientTaskCreateNestedManyWithoutClientInput = {
+    create?: XOR<ClientTaskCreateWithoutClientInput, ClientTaskUncheckedCreateWithoutClientInput> | ClientTaskCreateWithoutClientInput[] | ClientTaskUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ClientTaskCreateOrConnectWithoutClientInput | ClientTaskCreateOrConnectWithoutClientInput[]
+    createMany?: ClientTaskCreateManyClientInputEnvelope
+    connect?: ClientTaskWhereUniqueInput | ClientTaskWhereUniqueInput[]
+  }
+
+  export type ClientInteractionUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<ClientInteractionCreateWithoutClientInput, ClientInteractionUncheckedCreateWithoutClientInput> | ClientInteractionCreateWithoutClientInput[] | ClientInteractionUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ClientInteractionCreateOrConnectWithoutClientInput | ClientInteractionCreateOrConnectWithoutClientInput[]
+    createMany?: ClientInteractionCreateManyClientInputEnvelope
+    connect?: ClientInteractionWhereUniqueInput | ClientInteractionWhereUniqueInput[]
+  }
+
+  export type ClientTaskUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<ClientTaskCreateWithoutClientInput, ClientTaskUncheckedCreateWithoutClientInput> | ClientTaskCreateWithoutClientInput[] | ClientTaskUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ClientTaskCreateOrConnectWithoutClientInput | ClientTaskCreateOrConnectWithoutClientInput[]
+    createMany?: ClientTaskCreateManyClientInputEnvelope
+    connect?: ClientTaskWhereUniqueInput | ClientTaskWhereUniqueInput[]
+  }
+
+  export type StoreUpdateOneRequiredWithoutClientProfilesNestedInput = {
+    create?: XOR<StoreCreateWithoutClientProfilesInput, StoreUncheckedCreateWithoutClientProfilesInput>
+    connectOrCreate?: StoreCreateOrConnectWithoutClientProfilesInput
+    upsert?: StoreUpsertWithoutClientProfilesInput
+    connect?: StoreWhereUniqueInput
+    update?: XOR<XOR<StoreUpdateToOneWithWhereWithoutClientProfilesInput, StoreUpdateWithoutClientProfilesInput>, StoreUncheckedUpdateWithoutClientProfilesInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutClientsCreatedNestedInput = {
+    create?: XOR<UserCreateWithoutClientsCreatedInput, UserUncheckedCreateWithoutClientsCreatedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutClientsCreatedInput
+    upsert?: UserUpsertWithoutClientsCreatedInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutClientsCreatedInput, UserUpdateWithoutClientsCreatedInput>, UserUncheckedUpdateWithoutClientsCreatedInput>
+  }
+
+  export type ClientInteractionUpdateManyWithoutClientNestedInput = {
+    create?: XOR<ClientInteractionCreateWithoutClientInput, ClientInteractionUncheckedCreateWithoutClientInput> | ClientInteractionCreateWithoutClientInput[] | ClientInteractionUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ClientInteractionCreateOrConnectWithoutClientInput | ClientInteractionCreateOrConnectWithoutClientInput[]
+    upsert?: ClientInteractionUpsertWithWhereUniqueWithoutClientInput | ClientInteractionUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: ClientInteractionCreateManyClientInputEnvelope
+    set?: ClientInteractionWhereUniqueInput | ClientInteractionWhereUniqueInput[]
+    disconnect?: ClientInteractionWhereUniqueInput | ClientInteractionWhereUniqueInput[]
+    delete?: ClientInteractionWhereUniqueInput | ClientInteractionWhereUniqueInput[]
+    connect?: ClientInteractionWhereUniqueInput | ClientInteractionWhereUniqueInput[]
+    update?: ClientInteractionUpdateWithWhereUniqueWithoutClientInput | ClientInteractionUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: ClientInteractionUpdateManyWithWhereWithoutClientInput | ClientInteractionUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: ClientInteractionScalarWhereInput | ClientInteractionScalarWhereInput[]
+  }
+
+  export type ClientTaskUpdateManyWithoutClientNestedInput = {
+    create?: XOR<ClientTaskCreateWithoutClientInput, ClientTaskUncheckedCreateWithoutClientInput> | ClientTaskCreateWithoutClientInput[] | ClientTaskUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ClientTaskCreateOrConnectWithoutClientInput | ClientTaskCreateOrConnectWithoutClientInput[]
+    upsert?: ClientTaskUpsertWithWhereUniqueWithoutClientInput | ClientTaskUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: ClientTaskCreateManyClientInputEnvelope
+    set?: ClientTaskWhereUniqueInput | ClientTaskWhereUniqueInput[]
+    disconnect?: ClientTaskWhereUniqueInput | ClientTaskWhereUniqueInput[]
+    delete?: ClientTaskWhereUniqueInput | ClientTaskWhereUniqueInput[]
+    connect?: ClientTaskWhereUniqueInput | ClientTaskWhereUniqueInput[]
+    update?: ClientTaskUpdateWithWhereUniqueWithoutClientInput | ClientTaskUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: ClientTaskUpdateManyWithWhereWithoutClientInput | ClientTaskUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: ClientTaskScalarWhereInput | ClientTaskScalarWhereInput[]
+  }
+
+  export type ClientInteractionUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<ClientInteractionCreateWithoutClientInput, ClientInteractionUncheckedCreateWithoutClientInput> | ClientInteractionCreateWithoutClientInput[] | ClientInteractionUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ClientInteractionCreateOrConnectWithoutClientInput | ClientInteractionCreateOrConnectWithoutClientInput[]
+    upsert?: ClientInteractionUpsertWithWhereUniqueWithoutClientInput | ClientInteractionUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: ClientInteractionCreateManyClientInputEnvelope
+    set?: ClientInteractionWhereUniqueInput | ClientInteractionWhereUniqueInput[]
+    disconnect?: ClientInteractionWhereUniqueInput | ClientInteractionWhereUniqueInput[]
+    delete?: ClientInteractionWhereUniqueInput | ClientInteractionWhereUniqueInput[]
+    connect?: ClientInteractionWhereUniqueInput | ClientInteractionWhereUniqueInput[]
+    update?: ClientInteractionUpdateWithWhereUniqueWithoutClientInput | ClientInteractionUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: ClientInteractionUpdateManyWithWhereWithoutClientInput | ClientInteractionUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: ClientInteractionScalarWhereInput | ClientInteractionScalarWhereInput[]
+  }
+
+  export type ClientTaskUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<ClientTaskCreateWithoutClientInput, ClientTaskUncheckedCreateWithoutClientInput> | ClientTaskCreateWithoutClientInput[] | ClientTaskUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: ClientTaskCreateOrConnectWithoutClientInput | ClientTaskCreateOrConnectWithoutClientInput[]
+    upsert?: ClientTaskUpsertWithWhereUniqueWithoutClientInput | ClientTaskUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: ClientTaskCreateManyClientInputEnvelope
+    set?: ClientTaskWhereUniqueInput | ClientTaskWhereUniqueInput[]
+    disconnect?: ClientTaskWhereUniqueInput | ClientTaskWhereUniqueInput[]
+    delete?: ClientTaskWhereUniqueInput | ClientTaskWhereUniqueInput[]
+    connect?: ClientTaskWhereUniqueInput | ClientTaskWhereUniqueInput[]
+    update?: ClientTaskUpdateWithWhereUniqueWithoutClientInput | ClientTaskUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: ClientTaskUpdateManyWithWhereWithoutClientInput | ClientTaskUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: ClientTaskScalarWhereInput | ClientTaskScalarWhereInput[]
+  }
+
+  export type ClientProfileCreateNestedOneWithoutInteractionsInput = {
+    create?: XOR<ClientProfileCreateWithoutInteractionsInput, ClientProfileUncheckedCreateWithoutInteractionsInput>
+    connectOrCreate?: ClientProfileCreateOrConnectWithoutInteractionsInput
+    connect?: ClientProfileWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutClientInteractionsInput = {
+    create?: XOR<UserCreateWithoutClientInteractionsInput, UserUncheckedCreateWithoutClientInteractionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutClientInteractionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ClientProfileUpdateOneRequiredWithoutInteractionsNestedInput = {
+    create?: XOR<ClientProfileCreateWithoutInteractionsInput, ClientProfileUncheckedCreateWithoutInteractionsInput>
+    connectOrCreate?: ClientProfileCreateOrConnectWithoutInteractionsInput
+    upsert?: ClientProfileUpsertWithoutInteractionsInput
+    connect?: ClientProfileWhereUniqueInput
+    update?: XOR<XOR<ClientProfileUpdateToOneWithWhereWithoutInteractionsInput, ClientProfileUpdateWithoutInteractionsInput>, ClientProfileUncheckedUpdateWithoutInteractionsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutClientInteractionsNestedInput = {
+    create?: XOR<UserCreateWithoutClientInteractionsInput, UserUncheckedCreateWithoutClientInteractionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutClientInteractionsInput
+    upsert?: UserUpsertWithoutClientInteractionsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutClientInteractionsInput, UserUpdateWithoutClientInteractionsInput>, UserUncheckedUpdateWithoutClientInteractionsInput>
+  }
+
+  export type ClientProfileCreateNestedOneWithoutTasksInput = {
+    create?: XOR<ClientProfileCreateWithoutTasksInput, ClientProfileUncheckedCreateWithoutTasksInput>
+    connectOrCreate?: ClientProfileCreateOrConnectWithoutTasksInput
+    connect?: ClientProfileWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutClientTasksInput = {
+    create?: XOR<UserCreateWithoutClientTasksInput, UserUncheckedCreateWithoutClientTasksInput>
+    connectOrCreate?: UserCreateOrConnectWithoutClientTasksInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ClientProfileUpdateOneRequiredWithoutTasksNestedInput = {
+    create?: XOR<ClientProfileCreateWithoutTasksInput, ClientProfileUncheckedCreateWithoutTasksInput>
+    connectOrCreate?: ClientProfileCreateOrConnectWithoutTasksInput
+    upsert?: ClientProfileUpsertWithoutTasksInput
+    connect?: ClientProfileWhereUniqueInput
+    update?: XOR<XOR<ClientProfileUpdateToOneWithWhereWithoutTasksInput, ClientProfileUpdateWithoutTasksInput>, ClientProfileUncheckedUpdateWithoutTasksInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutClientTasksNestedInput = {
+    create?: XOR<UserCreateWithoutClientTasksInput, UserUncheckedCreateWithoutClientTasksInput>
+    connectOrCreate?: UserCreateOrConnectWithoutClientTasksInput
+    upsert?: UserUpsertWithoutClientTasksInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutClientTasksInput, UserUpdateWithoutClientTasksInput>, UserUncheckedUpdateWithoutClientTasksInput>
+  }
+
+  export type StoreCreateNestedOneWithoutStockCalloutsInput = {
+    create?: XOR<StoreCreateWithoutStockCalloutsInput, StoreUncheckedCreateWithoutStockCalloutsInput>
+    connectOrCreate?: StoreCreateOrConnectWithoutStockCalloutsInput
+    connect?: StoreWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutStockCalloutsInput = {
+    create?: XOR<UserCreateWithoutStockCalloutsInput, UserUncheckedCreateWithoutStockCalloutsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStockCalloutsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type StoreUpdateOneRequiredWithoutStockCalloutsNestedInput = {
+    create?: XOR<StoreCreateWithoutStockCalloutsInput, StoreUncheckedCreateWithoutStockCalloutsInput>
+    connectOrCreate?: StoreCreateOrConnectWithoutStockCalloutsInput
+    upsert?: StoreUpsertWithoutStockCalloutsInput
+    connect?: StoreWhereUniqueInput
+    update?: XOR<XOR<StoreUpdateToOneWithWhereWithoutStockCalloutsInput, StoreUpdateWithoutStockCalloutsInput>, StoreUncheckedUpdateWithoutStockCalloutsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutStockCalloutsNestedInput = {
+    create?: XOR<UserCreateWithoutStockCalloutsInput, UserUncheckedCreateWithoutStockCalloutsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStockCalloutsInput
+    upsert?: UserUpsertWithoutStockCalloutsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStockCalloutsInput, UserUpdateWithoutStockCalloutsInput>, UserUncheckedUpdateWithoutStockCalloutsInput>
+  }
+
+  export type StoreCreateNestedOneWithoutCustomerOrdersInput = {
+    create?: XOR<StoreCreateWithoutCustomerOrdersInput, StoreUncheckedCreateWithoutCustomerOrdersInput>
+    connectOrCreate?: StoreCreateOrConnectWithoutCustomerOrdersInput
+    connect?: StoreWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutOrdersCreatedInput = {
+    create?: XOR<UserCreateWithoutOrdersCreatedInput, UserUncheckedCreateWithoutOrdersCreatedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOrdersCreatedInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type OrderStatusUpdateCreateNestedManyWithoutOrderInput = {
+    create?: XOR<OrderStatusUpdateCreateWithoutOrderInput, OrderStatusUpdateUncheckedCreateWithoutOrderInput> | OrderStatusUpdateCreateWithoutOrderInput[] | OrderStatusUpdateUncheckedCreateWithoutOrderInput[]
+    connectOrCreate?: OrderStatusUpdateCreateOrConnectWithoutOrderInput | OrderStatusUpdateCreateOrConnectWithoutOrderInput[]
+    createMany?: OrderStatusUpdateCreateManyOrderInputEnvelope
+    connect?: OrderStatusUpdateWhereUniqueInput | OrderStatusUpdateWhereUniqueInput[]
+  }
+
+  export type OrderStatusUpdateUncheckedCreateNestedManyWithoutOrderInput = {
+    create?: XOR<OrderStatusUpdateCreateWithoutOrderInput, OrderStatusUpdateUncheckedCreateWithoutOrderInput> | OrderStatusUpdateCreateWithoutOrderInput[] | OrderStatusUpdateUncheckedCreateWithoutOrderInput[]
+    connectOrCreate?: OrderStatusUpdateCreateOrConnectWithoutOrderInput | OrderStatusUpdateCreateOrConnectWithoutOrderInput[]
+    createMany?: OrderStatusUpdateCreateManyOrderInputEnvelope
+    connect?: OrderStatusUpdateWhereUniqueInput | OrderStatusUpdateWhereUniqueInput[]
+  }
+
+  export type StoreUpdateOneRequiredWithoutCustomerOrdersNestedInput = {
+    create?: XOR<StoreCreateWithoutCustomerOrdersInput, StoreUncheckedCreateWithoutCustomerOrdersInput>
+    connectOrCreate?: StoreCreateOrConnectWithoutCustomerOrdersInput
+    upsert?: StoreUpsertWithoutCustomerOrdersInput
+    connect?: StoreWhereUniqueInput
+    update?: XOR<XOR<StoreUpdateToOneWithWhereWithoutCustomerOrdersInput, StoreUpdateWithoutCustomerOrdersInput>, StoreUncheckedUpdateWithoutCustomerOrdersInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutOrdersCreatedNestedInput = {
+    create?: XOR<UserCreateWithoutOrdersCreatedInput, UserUncheckedCreateWithoutOrdersCreatedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOrdersCreatedInput
+    upsert?: UserUpsertWithoutOrdersCreatedInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOrdersCreatedInput, UserUpdateWithoutOrdersCreatedInput>, UserUncheckedUpdateWithoutOrdersCreatedInput>
+  }
+
+  export type OrderStatusUpdateUpdateManyWithoutOrderNestedInput = {
+    create?: XOR<OrderStatusUpdateCreateWithoutOrderInput, OrderStatusUpdateUncheckedCreateWithoutOrderInput> | OrderStatusUpdateCreateWithoutOrderInput[] | OrderStatusUpdateUncheckedCreateWithoutOrderInput[]
+    connectOrCreate?: OrderStatusUpdateCreateOrConnectWithoutOrderInput | OrderStatusUpdateCreateOrConnectWithoutOrderInput[]
+    upsert?: OrderStatusUpdateUpsertWithWhereUniqueWithoutOrderInput | OrderStatusUpdateUpsertWithWhereUniqueWithoutOrderInput[]
+    createMany?: OrderStatusUpdateCreateManyOrderInputEnvelope
+    set?: OrderStatusUpdateWhereUniqueInput | OrderStatusUpdateWhereUniqueInput[]
+    disconnect?: OrderStatusUpdateWhereUniqueInput | OrderStatusUpdateWhereUniqueInput[]
+    delete?: OrderStatusUpdateWhereUniqueInput | OrderStatusUpdateWhereUniqueInput[]
+    connect?: OrderStatusUpdateWhereUniqueInput | OrderStatusUpdateWhereUniqueInput[]
+    update?: OrderStatusUpdateUpdateWithWhereUniqueWithoutOrderInput | OrderStatusUpdateUpdateWithWhereUniqueWithoutOrderInput[]
+    updateMany?: OrderStatusUpdateUpdateManyWithWhereWithoutOrderInput | OrderStatusUpdateUpdateManyWithWhereWithoutOrderInput[]
+    deleteMany?: OrderStatusUpdateScalarWhereInput | OrderStatusUpdateScalarWhereInput[]
+  }
+
+  export type OrderStatusUpdateUncheckedUpdateManyWithoutOrderNestedInput = {
+    create?: XOR<OrderStatusUpdateCreateWithoutOrderInput, OrderStatusUpdateUncheckedCreateWithoutOrderInput> | OrderStatusUpdateCreateWithoutOrderInput[] | OrderStatusUpdateUncheckedCreateWithoutOrderInput[]
+    connectOrCreate?: OrderStatusUpdateCreateOrConnectWithoutOrderInput | OrderStatusUpdateCreateOrConnectWithoutOrderInput[]
+    upsert?: OrderStatusUpdateUpsertWithWhereUniqueWithoutOrderInput | OrderStatusUpdateUpsertWithWhereUniqueWithoutOrderInput[]
+    createMany?: OrderStatusUpdateCreateManyOrderInputEnvelope
+    set?: OrderStatusUpdateWhereUniqueInput | OrderStatusUpdateWhereUniqueInput[]
+    disconnect?: OrderStatusUpdateWhereUniqueInput | OrderStatusUpdateWhereUniqueInput[]
+    delete?: OrderStatusUpdateWhereUniqueInput | OrderStatusUpdateWhereUniqueInput[]
+    connect?: OrderStatusUpdateWhereUniqueInput | OrderStatusUpdateWhereUniqueInput[]
+    update?: OrderStatusUpdateUpdateWithWhereUniqueWithoutOrderInput | OrderStatusUpdateUpdateWithWhereUniqueWithoutOrderInput[]
+    updateMany?: OrderStatusUpdateUpdateManyWithWhereWithoutOrderInput | OrderStatusUpdateUpdateManyWithWhereWithoutOrderInput[]
+    deleteMany?: OrderStatusUpdateScalarWhereInput | OrderStatusUpdateScalarWhereInput[]
+  }
+
+  export type CustomerOrderCreateNestedOneWithoutStatusUpdatesInput = {
+    create?: XOR<CustomerOrderCreateWithoutStatusUpdatesInput, CustomerOrderUncheckedCreateWithoutStatusUpdatesInput>
+    connectOrCreate?: CustomerOrderCreateOrConnectWithoutStatusUpdatesInput
+    connect?: CustomerOrderWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutOrderStatusUpdatesInput = {
+    create?: XOR<UserCreateWithoutOrderStatusUpdatesInput, UserUncheckedCreateWithoutOrderStatusUpdatesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOrderStatusUpdatesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type CustomerOrderUpdateOneRequiredWithoutStatusUpdatesNestedInput = {
+    create?: XOR<CustomerOrderCreateWithoutStatusUpdatesInput, CustomerOrderUncheckedCreateWithoutStatusUpdatesInput>
+    connectOrCreate?: CustomerOrderCreateOrConnectWithoutStatusUpdatesInput
+    upsert?: CustomerOrderUpsertWithoutStatusUpdatesInput
+    connect?: CustomerOrderWhereUniqueInput
+    update?: XOR<XOR<CustomerOrderUpdateToOneWithWhereWithoutStatusUpdatesInput, CustomerOrderUpdateWithoutStatusUpdatesInput>, CustomerOrderUncheckedUpdateWithoutStatusUpdatesInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutOrderStatusUpdatesNestedInput = {
+    create?: XOR<UserCreateWithoutOrderStatusUpdatesInput, UserUncheckedCreateWithoutOrderStatusUpdatesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOrderStatusUpdatesInput
+    upsert?: UserUpsertWithoutOrderStatusUpdatesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOrderStatusUpdatesInput, UserUpdateWithoutOrderStatusUpdatesInput>, UserUncheckedUpdateWithoutOrderStatusUpdatesInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -132987,6 +144618,208 @@ export namespace Prisma {
     data: NewsletterViewCreateManyUserInput | NewsletterViewCreateManyUserInput[]
   }
 
+  export type ClientProfileCreateWithoutCreatorInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email?: string | null
+    phone?: string | null
+    preferences?: string | null
+    vipLevel?: string | null
+    totalPurchases?: number
+    lastVisit?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    store: StoreCreateNestedOneWithoutClientProfilesInput
+    interactions?: ClientInteractionCreateNestedManyWithoutClientInput
+    tasks?: ClientTaskCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientProfileUncheckedCreateWithoutCreatorInput = {
+    id?: string
+    storeId: string
+    firstName: string
+    lastName: string
+    email?: string | null
+    phone?: string | null
+    preferences?: string | null
+    vipLevel?: string | null
+    totalPurchases?: number
+    lastVisit?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    interactions?: ClientInteractionUncheckedCreateNestedManyWithoutClientInput
+    tasks?: ClientTaskUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientProfileCreateOrConnectWithoutCreatorInput = {
+    where: ClientProfileWhereUniqueInput
+    create: XOR<ClientProfileCreateWithoutCreatorInput, ClientProfileUncheckedCreateWithoutCreatorInput>
+  }
+
+  export type ClientProfileCreateManyCreatorInputEnvelope = {
+    data: ClientProfileCreateManyCreatorInput | ClientProfileCreateManyCreatorInput[]
+  }
+
+  export type ClientInteractionCreateWithoutUserInput = {
+    id?: string
+    type?: string
+    date?: Date | string
+    notes?: string | null
+    purchaseAmount?: number | null
+    createdAt?: Date | string
+    client: ClientProfileCreateNestedOneWithoutInteractionsInput
+  }
+
+  export type ClientInteractionUncheckedCreateWithoutUserInput = {
+    id?: string
+    clientId: string
+    type?: string
+    date?: Date | string
+    notes?: string | null
+    purchaseAmount?: number | null
+    createdAt?: Date | string
+  }
+
+  export type ClientInteractionCreateOrConnectWithoutUserInput = {
+    where: ClientInteractionWhereUniqueInput
+    create: XOR<ClientInteractionCreateWithoutUserInput, ClientInteractionUncheckedCreateWithoutUserInput>
+  }
+
+  export type ClientInteractionCreateManyUserInputEnvelope = {
+    data: ClientInteractionCreateManyUserInput | ClientInteractionCreateManyUserInput[]
+  }
+
+  export type ClientTaskCreateWithoutUserInput = {
+    id?: string
+    title: string
+    dueDate?: Date | string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientProfileCreateNestedOneWithoutTasksInput
+  }
+
+  export type ClientTaskUncheckedCreateWithoutUserInput = {
+    id?: string
+    clientId: string
+    title: string
+    dueDate?: Date | string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClientTaskCreateOrConnectWithoutUserInput = {
+    where: ClientTaskWhereUniqueInput
+    create: XOR<ClientTaskCreateWithoutUserInput, ClientTaskUncheckedCreateWithoutUserInput>
+  }
+
+  export type ClientTaskCreateManyUserInputEnvelope = {
+    data: ClientTaskCreateManyUserInput | ClientTaskCreateManyUserInput[]
+  }
+
+  export type StockCalloutCreateWithoutReporterInput = {
+    id?: string
+    sku: string
+    productName: string
+    currentStock?: number
+    reorderPoint?: number
+    requestedQty?: number
+    urgency?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    store: StoreCreateNestedOneWithoutStockCalloutsInput
+  }
+
+  export type StockCalloutUncheckedCreateWithoutReporterInput = {
+    id?: string
+    storeId: string
+    sku: string
+    productName: string
+    currentStock?: number
+    reorderPoint?: number
+    requestedQty?: number
+    urgency?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StockCalloutCreateOrConnectWithoutReporterInput = {
+    where: StockCalloutWhereUniqueInput
+    create: XOR<StockCalloutCreateWithoutReporterInput, StockCalloutUncheckedCreateWithoutReporterInput>
+  }
+
+  export type StockCalloutCreateManyReporterInputEnvelope = {
+    data: StockCalloutCreateManyReporterInput | StockCalloutCreateManyReporterInput[]
+  }
+
+  export type CustomerOrderCreateWithoutCreatorInput = {
+    id?: string
+    orderNumber: string
+    customerName: string
+    customerEmail?: string | null
+    status?: string
+    trackingNumber?: string | null
+    carrier?: string | null
+    estimatedDelivery?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    store: StoreCreateNestedOneWithoutCustomerOrdersInput
+    statusUpdates?: OrderStatusUpdateCreateNestedManyWithoutOrderInput
+  }
+
+  export type CustomerOrderUncheckedCreateWithoutCreatorInput = {
+    id?: string
+    storeId: string
+    orderNumber: string
+    customerName: string
+    customerEmail?: string | null
+    status?: string
+    trackingNumber?: string | null
+    carrier?: string | null
+    estimatedDelivery?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    statusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutOrderInput
+  }
+
+  export type CustomerOrderCreateOrConnectWithoutCreatorInput = {
+    where: CustomerOrderWhereUniqueInput
+    create: XOR<CustomerOrderCreateWithoutCreatorInput, CustomerOrderUncheckedCreateWithoutCreatorInput>
+  }
+
+  export type CustomerOrderCreateManyCreatorInputEnvelope = {
+    data: CustomerOrderCreateManyCreatorInput | CustomerOrderCreateManyCreatorInput[]
+  }
+
+  export type OrderStatusUpdateCreateWithoutUpdaterInput = {
+    id?: string
+    status: string
+    notes?: string | null
+    createdAt?: Date | string
+    order: CustomerOrderCreateNestedOneWithoutStatusUpdatesInput
+  }
+
+  export type OrderStatusUpdateUncheckedCreateWithoutUpdaterInput = {
+    id?: string
+    orderId: string
+    status: string
+    notes?: string | null
+    createdAt?: Date | string
+  }
+
+  export type OrderStatusUpdateCreateOrConnectWithoutUpdaterInput = {
+    where: OrderStatusUpdateWhereUniqueInput
+    create: XOR<OrderStatusUpdateCreateWithoutUpdaterInput, OrderStatusUpdateUncheckedCreateWithoutUpdaterInput>
+  }
+
+  export type OrderStatusUpdateCreateManyUpdaterInputEnvelope = {
+    data: OrderStatusUpdateCreateManyUpdaterInput | OrderStatusUpdateCreateManyUpdaterInput[]
+  }
+
   export type TenantUpsertWithoutUsersInput = {
     update: XOR<TenantUpdateWithoutUsersInput, TenantUncheckedUpdateWithoutUsersInput>
     create: XOR<TenantCreateWithoutUsersInput, TenantUncheckedCreateWithoutUsersInput>
@@ -134378,6 +146211,197 @@ export namespace Prisma {
     viewedAt?: DateTimeFilter<"NewsletterView"> | Date | string
   }
 
+  export type ClientProfileUpsertWithWhereUniqueWithoutCreatorInput = {
+    where: ClientProfileWhereUniqueInput
+    update: XOR<ClientProfileUpdateWithoutCreatorInput, ClientProfileUncheckedUpdateWithoutCreatorInput>
+    create: XOR<ClientProfileCreateWithoutCreatorInput, ClientProfileUncheckedCreateWithoutCreatorInput>
+  }
+
+  export type ClientProfileUpdateWithWhereUniqueWithoutCreatorInput = {
+    where: ClientProfileWhereUniqueInput
+    data: XOR<ClientProfileUpdateWithoutCreatorInput, ClientProfileUncheckedUpdateWithoutCreatorInput>
+  }
+
+  export type ClientProfileUpdateManyWithWhereWithoutCreatorInput = {
+    where: ClientProfileScalarWhereInput
+    data: XOR<ClientProfileUpdateManyMutationInput, ClientProfileUncheckedUpdateManyWithoutCreatorInput>
+  }
+
+  export type ClientProfileScalarWhereInput = {
+    AND?: ClientProfileScalarWhereInput | ClientProfileScalarWhereInput[]
+    OR?: ClientProfileScalarWhereInput[]
+    NOT?: ClientProfileScalarWhereInput | ClientProfileScalarWhereInput[]
+    id?: StringFilter<"ClientProfile"> | string
+    storeId?: StringFilter<"ClientProfile"> | string
+    firstName?: StringFilter<"ClientProfile"> | string
+    lastName?: StringFilter<"ClientProfile"> | string
+    email?: StringNullableFilter<"ClientProfile"> | string | null
+    phone?: StringNullableFilter<"ClientProfile"> | string | null
+    preferences?: StringNullableFilter<"ClientProfile"> | string | null
+    vipLevel?: StringNullableFilter<"ClientProfile"> | string | null
+    totalPurchases?: FloatFilter<"ClientProfile"> | number
+    lastVisit?: DateTimeNullableFilter<"ClientProfile"> | Date | string | null
+    createdBy?: StringFilter<"ClientProfile"> | string
+    createdAt?: DateTimeFilter<"ClientProfile"> | Date | string
+    updatedAt?: DateTimeFilter<"ClientProfile"> | Date | string
+  }
+
+  export type ClientInteractionUpsertWithWhereUniqueWithoutUserInput = {
+    where: ClientInteractionWhereUniqueInput
+    update: XOR<ClientInteractionUpdateWithoutUserInput, ClientInteractionUncheckedUpdateWithoutUserInput>
+    create: XOR<ClientInteractionCreateWithoutUserInput, ClientInteractionUncheckedCreateWithoutUserInput>
+  }
+
+  export type ClientInteractionUpdateWithWhereUniqueWithoutUserInput = {
+    where: ClientInteractionWhereUniqueInput
+    data: XOR<ClientInteractionUpdateWithoutUserInput, ClientInteractionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ClientInteractionUpdateManyWithWhereWithoutUserInput = {
+    where: ClientInteractionScalarWhereInput
+    data: XOR<ClientInteractionUpdateManyMutationInput, ClientInteractionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ClientInteractionScalarWhereInput = {
+    AND?: ClientInteractionScalarWhereInput | ClientInteractionScalarWhereInput[]
+    OR?: ClientInteractionScalarWhereInput[]
+    NOT?: ClientInteractionScalarWhereInput | ClientInteractionScalarWhereInput[]
+    id?: StringFilter<"ClientInteraction"> | string
+    clientId?: StringFilter<"ClientInteraction"> | string
+    userId?: StringFilter<"ClientInteraction"> | string
+    type?: StringFilter<"ClientInteraction"> | string
+    date?: DateTimeFilter<"ClientInteraction"> | Date | string
+    notes?: StringNullableFilter<"ClientInteraction"> | string | null
+    purchaseAmount?: FloatNullableFilter<"ClientInteraction"> | number | null
+    createdAt?: DateTimeFilter<"ClientInteraction"> | Date | string
+  }
+
+  export type ClientTaskUpsertWithWhereUniqueWithoutUserInput = {
+    where: ClientTaskWhereUniqueInput
+    update: XOR<ClientTaskUpdateWithoutUserInput, ClientTaskUncheckedUpdateWithoutUserInput>
+    create: XOR<ClientTaskCreateWithoutUserInput, ClientTaskUncheckedCreateWithoutUserInput>
+  }
+
+  export type ClientTaskUpdateWithWhereUniqueWithoutUserInput = {
+    where: ClientTaskWhereUniqueInput
+    data: XOR<ClientTaskUpdateWithoutUserInput, ClientTaskUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ClientTaskUpdateManyWithWhereWithoutUserInput = {
+    where: ClientTaskScalarWhereInput
+    data: XOR<ClientTaskUpdateManyMutationInput, ClientTaskUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ClientTaskScalarWhereInput = {
+    AND?: ClientTaskScalarWhereInput | ClientTaskScalarWhereInput[]
+    OR?: ClientTaskScalarWhereInput[]
+    NOT?: ClientTaskScalarWhereInput | ClientTaskScalarWhereInput[]
+    id?: StringFilter<"ClientTask"> | string
+    clientId?: StringFilter<"ClientTask"> | string
+    userId?: StringFilter<"ClientTask"> | string
+    title?: StringFilter<"ClientTask"> | string
+    dueDate?: DateTimeNullableFilter<"ClientTask"> | Date | string | null
+    status?: StringFilter<"ClientTask"> | string
+    createdAt?: DateTimeFilter<"ClientTask"> | Date | string
+    updatedAt?: DateTimeFilter<"ClientTask"> | Date | string
+  }
+
+  export type StockCalloutUpsertWithWhereUniqueWithoutReporterInput = {
+    where: StockCalloutWhereUniqueInput
+    update: XOR<StockCalloutUpdateWithoutReporterInput, StockCalloutUncheckedUpdateWithoutReporterInput>
+    create: XOR<StockCalloutCreateWithoutReporterInput, StockCalloutUncheckedCreateWithoutReporterInput>
+  }
+
+  export type StockCalloutUpdateWithWhereUniqueWithoutReporterInput = {
+    where: StockCalloutWhereUniqueInput
+    data: XOR<StockCalloutUpdateWithoutReporterInput, StockCalloutUncheckedUpdateWithoutReporterInput>
+  }
+
+  export type StockCalloutUpdateManyWithWhereWithoutReporterInput = {
+    where: StockCalloutScalarWhereInput
+    data: XOR<StockCalloutUpdateManyMutationInput, StockCalloutUncheckedUpdateManyWithoutReporterInput>
+  }
+
+  export type StockCalloutScalarWhereInput = {
+    AND?: StockCalloutScalarWhereInput | StockCalloutScalarWhereInput[]
+    OR?: StockCalloutScalarWhereInput[]
+    NOT?: StockCalloutScalarWhereInput | StockCalloutScalarWhereInput[]
+    id?: StringFilter<"StockCallout"> | string
+    storeId?: StringFilter<"StockCallout"> | string
+    sku?: StringFilter<"StockCallout"> | string
+    productName?: StringFilter<"StockCallout"> | string
+    currentStock?: IntFilter<"StockCallout"> | number
+    reorderPoint?: IntFilter<"StockCallout"> | number
+    requestedQty?: IntFilter<"StockCallout"> | number
+    urgency?: StringFilter<"StockCallout"> | string
+    status?: StringFilter<"StockCallout"> | string
+    reportedBy?: StringFilter<"StockCallout"> | string
+    createdAt?: DateTimeFilter<"StockCallout"> | Date | string
+    updatedAt?: DateTimeFilter<"StockCallout"> | Date | string
+  }
+
+  export type CustomerOrderUpsertWithWhereUniqueWithoutCreatorInput = {
+    where: CustomerOrderWhereUniqueInput
+    update: XOR<CustomerOrderUpdateWithoutCreatorInput, CustomerOrderUncheckedUpdateWithoutCreatorInput>
+    create: XOR<CustomerOrderCreateWithoutCreatorInput, CustomerOrderUncheckedCreateWithoutCreatorInput>
+  }
+
+  export type CustomerOrderUpdateWithWhereUniqueWithoutCreatorInput = {
+    where: CustomerOrderWhereUniqueInput
+    data: XOR<CustomerOrderUpdateWithoutCreatorInput, CustomerOrderUncheckedUpdateWithoutCreatorInput>
+  }
+
+  export type CustomerOrderUpdateManyWithWhereWithoutCreatorInput = {
+    where: CustomerOrderScalarWhereInput
+    data: XOR<CustomerOrderUpdateManyMutationInput, CustomerOrderUncheckedUpdateManyWithoutCreatorInput>
+  }
+
+  export type CustomerOrderScalarWhereInput = {
+    AND?: CustomerOrderScalarWhereInput | CustomerOrderScalarWhereInput[]
+    OR?: CustomerOrderScalarWhereInput[]
+    NOT?: CustomerOrderScalarWhereInput | CustomerOrderScalarWhereInput[]
+    id?: StringFilter<"CustomerOrder"> | string
+    storeId?: StringFilter<"CustomerOrder"> | string
+    orderNumber?: StringFilter<"CustomerOrder"> | string
+    customerName?: StringFilter<"CustomerOrder"> | string
+    customerEmail?: StringNullableFilter<"CustomerOrder"> | string | null
+    status?: StringFilter<"CustomerOrder"> | string
+    trackingNumber?: StringNullableFilter<"CustomerOrder"> | string | null
+    carrier?: StringNullableFilter<"CustomerOrder"> | string | null
+    estimatedDelivery?: DateTimeNullableFilter<"CustomerOrder"> | Date | string | null
+    createdBy?: StringFilter<"CustomerOrder"> | string
+    createdAt?: DateTimeFilter<"CustomerOrder"> | Date | string
+    updatedAt?: DateTimeFilter<"CustomerOrder"> | Date | string
+  }
+
+  export type OrderStatusUpdateUpsertWithWhereUniqueWithoutUpdaterInput = {
+    where: OrderStatusUpdateWhereUniqueInput
+    update: XOR<OrderStatusUpdateUpdateWithoutUpdaterInput, OrderStatusUpdateUncheckedUpdateWithoutUpdaterInput>
+    create: XOR<OrderStatusUpdateCreateWithoutUpdaterInput, OrderStatusUpdateUncheckedCreateWithoutUpdaterInput>
+  }
+
+  export type OrderStatusUpdateUpdateWithWhereUniqueWithoutUpdaterInput = {
+    where: OrderStatusUpdateWhereUniqueInput
+    data: XOR<OrderStatusUpdateUpdateWithoutUpdaterInput, OrderStatusUpdateUncheckedUpdateWithoutUpdaterInput>
+  }
+
+  export type OrderStatusUpdateUpdateManyWithWhereWithoutUpdaterInput = {
+    where: OrderStatusUpdateScalarWhereInput
+    data: XOR<OrderStatusUpdateUpdateManyMutationInput, OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterInput>
+  }
+
+  export type OrderStatusUpdateScalarWhereInput = {
+    AND?: OrderStatusUpdateScalarWhereInput | OrderStatusUpdateScalarWhereInput[]
+    OR?: OrderStatusUpdateScalarWhereInput[]
+    NOT?: OrderStatusUpdateScalarWhereInput | OrderStatusUpdateScalarWhereInput[]
+    id?: StringFilter<"OrderStatusUpdate"> | string
+    orderId?: StringFilter<"OrderStatusUpdate"> | string
+    status?: StringFilter<"OrderStatusUpdate"> | string
+    updatedBy?: StringFilter<"OrderStatusUpdate"> | string
+    notes?: StringNullableFilter<"OrderStatusUpdate"> | string | null
+    createdAt?: DateTimeFilter<"OrderStatusUpdate"> | Date | string
+  }
+
   export type UserCreateWithoutTenantInput = {
     id?: string
     email: string
@@ -134432,6 +146456,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutTenantInput = {
@@ -134488,6 +146518,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutTenantInput = {
@@ -134536,6 +146572,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutTenantInput = {
@@ -134575,6 +146615,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutTenantInput = {
@@ -136864,6 +148908,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutRegionInput = {
@@ -136903,6 +148951,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutRegionInput = {
@@ -138250,6 +150302,152 @@ export namespace Prisma {
     data: HandoverCreateManyStoreInput | HandoverCreateManyStoreInput[]
   }
 
+  export type ConversionGoalCreateWithoutStoreInput = {
+    id?: string
+    period: string
+    targetConversion?: number | null
+    targetAvgBasket?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ConversionGoalUncheckedCreateWithoutStoreInput = {
+    id?: string
+    period: string
+    targetConversion?: number | null
+    targetAvgBasket?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ConversionGoalCreateOrConnectWithoutStoreInput = {
+    where: ConversionGoalWhereUniqueInput
+    create: XOR<ConversionGoalCreateWithoutStoreInput, ConversionGoalUncheckedCreateWithoutStoreInput>
+  }
+
+  export type ConversionGoalCreateManyStoreInputEnvelope = {
+    data: ConversionGoalCreateManyStoreInput | ConversionGoalCreateManyStoreInput[]
+  }
+
+  export type ClientProfileCreateWithoutStoreInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email?: string | null
+    phone?: string | null
+    preferences?: string | null
+    vipLevel?: string | null
+    totalPurchases?: number
+    lastVisit?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    creator: UserCreateNestedOneWithoutClientsCreatedInput
+    interactions?: ClientInteractionCreateNestedManyWithoutClientInput
+    tasks?: ClientTaskCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientProfileUncheckedCreateWithoutStoreInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email?: string | null
+    phone?: string | null
+    preferences?: string | null
+    vipLevel?: string | null
+    totalPurchases?: number
+    lastVisit?: Date | string | null
+    createdBy: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    interactions?: ClientInteractionUncheckedCreateNestedManyWithoutClientInput
+    tasks?: ClientTaskUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientProfileCreateOrConnectWithoutStoreInput = {
+    where: ClientProfileWhereUniqueInput
+    create: XOR<ClientProfileCreateWithoutStoreInput, ClientProfileUncheckedCreateWithoutStoreInput>
+  }
+
+  export type ClientProfileCreateManyStoreInputEnvelope = {
+    data: ClientProfileCreateManyStoreInput | ClientProfileCreateManyStoreInput[]
+  }
+
+  export type StockCalloutCreateWithoutStoreInput = {
+    id?: string
+    sku: string
+    productName: string
+    currentStock?: number
+    reorderPoint?: number
+    requestedQty?: number
+    urgency?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reporter: UserCreateNestedOneWithoutStockCalloutsInput
+  }
+
+  export type StockCalloutUncheckedCreateWithoutStoreInput = {
+    id?: string
+    sku: string
+    productName: string
+    currentStock?: number
+    reorderPoint?: number
+    requestedQty?: number
+    urgency?: string
+    status?: string
+    reportedBy: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StockCalloutCreateOrConnectWithoutStoreInput = {
+    where: StockCalloutWhereUniqueInput
+    create: XOR<StockCalloutCreateWithoutStoreInput, StockCalloutUncheckedCreateWithoutStoreInput>
+  }
+
+  export type StockCalloutCreateManyStoreInputEnvelope = {
+    data: StockCalloutCreateManyStoreInput | StockCalloutCreateManyStoreInput[]
+  }
+
+  export type CustomerOrderCreateWithoutStoreInput = {
+    id?: string
+    orderNumber: string
+    customerName: string
+    customerEmail?: string | null
+    status?: string
+    trackingNumber?: string | null
+    carrier?: string | null
+    estimatedDelivery?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    creator: UserCreateNestedOneWithoutOrdersCreatedInput
+    statusUpdates?: OrderStatusUpdateCreateNestedManyWithoutOrderInput
+  }
+
+  export type CustomerOrderUncheckedCreateWithoutStoreInput = {
+    id?: string
+    orderNumber: string
+    customerName: string
+    customerEmail?: string | null
+    status?: string
+    trackingNumber?: string | null
+    carrier?: string | null
+    estimatedDelivery?: Date | string | null
+    createdBy: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    statusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutOrderInput
+  }
+
+  export type CustomerOrderCreateOrConnectWithoutStoreInput = {
+    where: CustomerOrderWhereUniqueInput
+    create: XOR<CustomerOrderCreateWithoutStoreInput, CustomerOrderUncheckedCreateWithoutStoreInput>
+  }
+
+  export type CustomerOrderCreateManyStoreInputEnvelope = {
+    data: CustomerOrderCreateManyStoreInput | CustomerOrderCreateManyStoreInput[]
+  }
+
   export type TenantUpsertWithoutStoresInput = {
     update: XOR<TenantUpdateWithoutStoresInput, TenantUncheckedUpdateWithoutStoresInput>
     create: XOR<TenantCreateWithoutStoresInput, TenantUncheckedCreateWithoutStoresInput>
@@ -138902,6 +151100,83 @@ export namespace Prisma {
     data: XOR<HandoverUpdateManyMutationInput, HandoverUncheckedUpdateManyWithoutStoreInput>
   }
 
+  export type ConversionGoalUpsertWithWhereUniqueWithoutStoreInput = {
+    where: ConversionGoalWhereUniqueInput
+    update: XOR<ConversionGoalUpdateWithoutStoreInput, ConversionGoalUncheckedUpdateWithoutStoreInput>
+    create: XOR<ConversionGoalCreateWithoutStoreInput, ConversionGoalUncheckedCreateWithoutStoreInput>
+  }
+
+  export type ConversionGoalUpdateWithWhereUniqueWithoutStoreInput = {
+    where: ConversionGoalWhereUniqueInput
+    data: XOR<ConversionGoalUpdateWithoutStoreInput, ConversionGoalUncheckedUpdateWithoutStoreInput>
+  }
+
+  export type ConversionGoalUpdateManyWithWhereWithoutStoreInput = {
+    where: ConversionGoalScalarWhereInput
+    data: XOR<ConversionGoalUpdateManyMutationInput, ConversionGoalUncheckedUpdateManyWithoutStoreInput>
+  }
+
+  export type ConversionGoalScalarWhereInput = {
+    AND?: ConversionGoalScalarWhereInput | ConversionGoalScalarWhereInput[]
+    OR?: ConversionGoalScalarWhereInput[]
+    NOT?: ConversionGoalScalarWhereInput | ConversionGoalScalarWhereInput[]
+    id?: StringFilter<"ConversionGoal"> | string
+    storeId?: StringFilter<"ConversionGoal"> | string
+    period?: StringFilter<"ConversionGoal"> | string
+    targetConversion?: FloatNullableFilter<"ConversionGoal"> | number | null
+    targetAvgBasket?: FloatNullableFilter<"ConversionGoal"> | number | null
+    createdAt?: DateTimeFilter<"ConversionGoal"> | Date | string
+    updatedAt?: DateTimeFilter<"ConversionGoal"> | Date | string
+  }
+
+  export type ClientProfileUpsertWithWhereUniqueWithoutStoreInput = {
+    where: ClientProfileWhereUniqueInput
+    update: XOR<ClientProfileUpdateWithoutStoreInput, ClientProfileUncheckedUpdateWithoutStoreInput>
+    create: XOR<ClientProfileCreateWithoutStoreInput, ClientProfileUncheckedCreateWithoutStoreInput>
+  }
+
+  export type ClientProfileUpdateWithWhereUniqueWithoutStoreInput = {
+    where: ClientProfileWhereUniqueInput
+    data: XOR<ClientProfileUpdateWithoutStoreInput, ClientProfileUncheckedUpdateWithoutStoreInput>
+  }
+
+  export type ClientProfileUpdateManyWithWhereWithoutStoreInput = {
+    where: ClientProfileScalarWhereInput
+    data: XOR<ClientProfileUpdateManyMutationInput, ClientProfileUncheckedUpdateManyWithoutStoreInput>
+  }
+
+  export type StockCalloutUpsertWithWhereUniqueWithoutStoreInput = {
+    where: StockCalloutWhereUniqueInput
+    update: XOR<StockCalloutUpdateWithoutStoreInput, StockCalloutUncheckedUpdateWithoutStoreInput>
+    create: XOR<StockCalloutCreateWithoutStoreInput, StockCalloutUncheckedCreateWithoutStoreInput>
+  }
+
+  export type StockCalloutUpdateWithWhereUniqueWithoutStoreInput = {
+    where: StockCalloutWhereUniqueInput
+    data: XOR<StockCalloutUpdateWithoutStoreInput, StockCalloutUncheckedUpdateWithoutStoreInput>
+  }
+
+  export type StockCalloutUpdateManyWithWhereWithoutStoreInput = {
+    where: StockCalloutScalarWhereInput
+    data: XOR<StockCalloutUpdateManyMutationInput, StockCalloutUncheckedUpdateManyWithoutStoreInput>
+  }
+
+  export type CustomerOrderUpsertWithWhereUniqueWithoutStoreInput = {
+    where: CustomerOrderWhereUniqueInput
+    update: XOR<CustomerOrderUpdateWithoutStoreInput, CustomerOrderUncheckedUpdateWithoutStoreInput>
+    create: XOR<CustomerOrderCreateWithoutStoreInput, CustomerOrderUncheckedCreateWithoutStoreInput>
+  }
+
+  export type CustomerOrderUpdateWithWhereUniqueWithoutStoreInput = {
+    where: CustomerOrderWhereUniqueInput
+    data: XOR<CustomerOrderUpdateWithoutStoreInput, CustomerOrderUncheckedUpdateWithoutStoreInput>
+  }
+
+  export type CustomerOrderUpdateManyWithWhereWithoutStoreInput = {
+    where: CustomerOrderScalarWhereInput
+    data: XOR<CustomerOrderUpdateManyMutationInput, CustomerOrderUncheckedUpdateManyWithoutStoreInput>
+  }
+
   export type StoreToolAssignmentCreateWithoutToolInput = {
     id?: string
     isActive?: boolean
@@ -138980,6 +151255,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutToolsInput = {
@@ -139019,6 +151298,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutToolsInput = {
@@ -139109,6 +151392,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutToolsInput = {
@@ -139148,6 +151435,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type ToolDefinitionUpsertWithoutAssignmentsInput = {
@@ -139245,6 +151536,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutStoreAssignmentsInput = {
@@ -139301,6 +151598,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutStoreAssignmentsInput = {
@@ -139345,6 +151648,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutUserAssignmentsInput = {
@@ -139384,6 +151691,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutUserAssignmentsInput = {
@@ -139456,6 +151767,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutStoreAssignmentsInput = {
@@ -139512,6 +151829,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type StoreUpsertWithoutUserAssignmentsInput = {
@@ -139562,6 +151885,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutUserAssignmentsInput = {
@@ -139601,6 +151928,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type TenantCreateWithoutSubscriptionInput = {
@@ -140089,6 +152420,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutRegionAssignmentsInput = {
@@ -140145,6 +152482,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutRegionAssignmentsInput = {
@@ -140246,6 +152589,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRegionAssignmentsInput = {
@@ -140302,6 +152651,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type RegionUpsertWithoutUserAssignmentsInput = {
@@ -140732,6 +153087,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutAuditSessionsInput = {
@@ -140771,6 +153130,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutAuditSessionsInput = {
@@ -140890,6 +153253,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutAuditSessionsInput = {
@@ -140929,6 +153296,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type AuditTemplateUpsertWithoutSessionsInput = {
@@ -141813,6 +154184,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutChecklistSessionsInput = {
@@ -141852,6 +154227,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutChecklistSessionsInput = {
@@ -141946,6 +154325,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutChecklistSessionsInput = {
@@ -142002,6 +154387,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutChecklistSessionsInput = {
@@ -142199,6 +154590,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutChecklistSessionsInput = {
@@ -142238,6 +154633,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type ChecklistTemplateUpsertWithoutSessionsInput = {
@@ -142344,6 +154743,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChecklistSessionsInput = {
@@ -142400,6 +154805,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type ChecklistEntryUpsertWithWhereUniqueWithoutSessionInput = {
@@ -142989,6 +155400,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutCreatedSopsInput = {
@@ -143045,6 +155462,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutCreatedSopsInput = {
@@ -143276,6 +155699,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedSopsInput = {
@@ -143332,6 +155761,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type SopAcknowledgmentUpsertWithWhereUniqueWithoutSopInput = {
@@ -143439,6 +155874,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutSopAcknowledgmentsInput = {
@@ -143495,6 +155936,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutSopAcknowledgmentsInput = {
@@ -143608,6 +156055,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSopAcknowledgmentsInput = {
@@ -143664,6 +156117,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type TenantCreateWithoutVmGuidelinesInput = {
@@ -144108,6 +156567,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutVmSubmissionsInput = {
@@ -144147,6 +156610,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutVmSubmissionsInput = {
@@ -144208,6 +156675,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutVmSubmissionsInput = {
@@ -144264,6 +156737,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutVmSubmissionsInput = {
@@ -144325,6 +156804,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutVmReviewsInput = {
@@ -144381,6 +156866,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutVmReviewsInput = {
@@ -144586,6 +157077,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutVmSubmissionsInput = {
@@ -144625,6 +157120,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type UserUpsertWithoutVmSubmissionsInput = {
@@ -144692,6 +157191,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVmSubmissionsInput = {
@@ -144748,6 +157253,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUpsertWithoutVmReviewsInput = {
@@ -144815,6 +157326,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVmReviewsInput = {
@@ -144871,6 +157388,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type TenantCreateWithoutStandardCategoriesInput = {
@@ -145608,6 +158131,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutStandardEvaluationsInput = {
@@ -145647,6 +158174,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutStandardEvaluationsInput = {
@@ -145708,6 +158239,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutStandardEvaluationsInput = {
@@ -145764,6 +158301,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutStandardEvaluationsInput = {
@@ -145957,6 +158500,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutStandardEvaluationsInput = {
@@ -145996,6 +158543,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type UserUpsertWithoutStandardEvaluationsInput = {
@@ -146063,6 +158614,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutStandardEvaluationsInput = {
@@ -146119,6 +158676,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type StandardScoreUpsertWithWhereUniqueWithoutEvaluationInput = {
@@ -146419,6 +158982,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutKpiEntriesInput = {
@@ -146458,6 +159025,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutKpiEntriesInput = {
@@ -146519,6 +159090,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutKpiEntriesInput = {
@@ -146575,6 +159152,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutKpiEntriesInput = {
@@ -146741,6 +159324,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutKpiEntriesInput = {
@@ -146780,6 +159367,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type UserUpsertWithoutKpiEntriesInput = {
@@ -146847,6 +159438,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutKpiEntriesInput = {
@@ -146903,6 +159500,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type TenantCreateWithoutBudgetPeriodsInput = {
@@ -147047,6 +159650,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutBudgetPeriodsInput = {
@@ -147086,6 +159693,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutBudgetPeriodsInput = {
@@ -147147,6 +159758,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutBudgetPeriodsInput = {
@@ -147203,6 +159820,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutBudgetPeriodsInput = {
@@ -147398,6 +160021,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutBudgetPeriodsInput = {
@@ -147437,6 +160064,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type UserUpsertWithoutBudgetPeriodsInput = {
@@ -147504,6 +160135,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBudgetPeriodsInput = {
@@ -147560,6 +160197,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type BudgetActualUpsertWithWhereUniqueWithoutBudgetPeriodInput = {
@@ -147822,6 +160465,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutForecastsInput = {
@@ -147861,6 +160508,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutForecastsInput = {
@@ -147922,6 +160573,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutForecastsInput = {
@@ -147978,6 +160635,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutForecastsInput = {
@@ -148144,6 +160807,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutForecastsInput = {
@@ -148183,6 +160850,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type UserUpsertWithoutForecastsInput = {
@@ -148250,6 +160921,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutForecastsInput = {
@@ -148306,6 +160983,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type TenantCreateWithoutLossIncidentsInput = {
@@ -148450,6 +161133,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutLossIncidentsInput = {
@@ -148489,6 +161176,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutLossIncidentsInput = {
@@ -148550,6 +161241,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutLossReportsInput = {
@@ -148606,6 +161303,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutLossReportsInput = {
@@ -148667,6 +161370,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutLossAssignmentsInput = {
@@ -148723,6 +161432,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutLossAssignmentsInput = {
@@ -148889,6 +161604,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutLossIncidentsInput = {
@@ -148928,6 +161647,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type UserUpsertWithoutLossReportsInput = {
@@ -148995,6 +161718,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLossReportsInput = {
@@ -149051,6 +161780,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUpsertWithoutLossAssignmentsInput = {
@@ -149118,6 +161853,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLossAssignmentsInput = {
@@ -149174,6 +161915,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type TenantCreateWithoutInventoryCountsInput = {
@@ -149318,6 +162065,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutInventoryCountsInput = {
@@ -149357,6 +162108,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutInventoryCountsInput = {
@@ -149418,6 +162173,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutInventoryCountsInput = {
@@ -149474,6 +162235,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutInventoryCountsInput = {
@@ -149677,6 +162444,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutInventoryCountsInput = {
@@ -149716,6 +162487,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type UserUpsertWithoutInventoryCountsInput = {
@@ -149783,6 +162558,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInventoryCountsInput = {
@@ -149839,6 +162620,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type InventoryItemUpsertWithWhereUniqueWithoutCountInput = {
@@ -150105,6 +162892,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutFloorZonesInput = {
@@ -150144,6 +162935,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutFloorZonesInput = {
@@ -150351,6 +163146,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutFloorZonesInput = {
@@ -150390,6 +163189,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type FloorStaffPositionUpsertWithWhereUniqueWithoutZoneInput = {
@@ -150550,6 +163353,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutFloorPositionsInput = {
@@ -150589,6 +163396,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutFloorPositionsInput = {
@@ -150679,6 +163490,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutFloorPositionsInput = {
@@ -150735,6 +163552,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutFloorPositionsInput = {
@@ -150796,6 +163619,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutFloorUpdatesInput = {
@@ -150852,6 +163681,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutFloorUpdatesInput = {
@@ -151018,6 +163853,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutFloorPositionsInput = {
@@ -151057,6 +163896,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type FloorZoneUpsertWithoutPositionsInput = {
@@ -151159,6 +164002,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFloorPositionsInput = {
@@ -151215,6 +164064,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUpsertWithoutFloorUpdatesInput = {
@@ -151282,6 +164137,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFloorUpdatesInput = {
@@ -151338,6 +164199,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type TenantCreateWithoutFootfallEntriesInput = {
@@ -151482,6 +164349,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutFootfallEntriesInput = {
@@ -151521,6 +164392,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutFootfallEntriesInput = {
@@ -151687,6 +164562,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutFootfallEntriesInput = {
@@ -151726,6 +164605,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type TenantCreateWithoutVmGuidelineDocsInput = {
@@ -152219,6 +165102,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutMaintenanceRequestsInput = {
@@ -152258,6 +165145,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutMaintenanceRequestsInput = {
@@ -152319,6 +165210,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutMaintenanceReportsInput = {
@@ -152375,6 +165272,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutMaintenanceReportsInput = {
@@ -152436,6 +165339,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutMaintenanceAssignmentsInput = {
@@ -152492,6 +165401,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutMaintenanceAssignmentsInput = {
@@ -152658,6 +165573,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutMaintenanceRequestsInput = {
@@ -152697,6 +165616,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type UserUpsertWithoutMaintenanceReportsInput = {
@@ -152764,6 +165687,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMaintenanceReportsInput = {
@@ -152820,6 +165749,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUpsertWithoutMaintenanceAssignmentsInput = {
@@ -152887,6 +165822,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMaintenanceAssignmentsInput = {
@@ -152943,6 +165884,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type TenantCreateWithoutCoursesInput = {
@@ -153104,6 +166051,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutCourseCreationsInput = {
@@ -153160,6 +166113,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutCourseCreationsInput = {
@@ -153407,6 +166366,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCourseCreationsInput = {
@@ -153463,6 +166428,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type CourseModuleUpsertWithWhereUniqueWithoutCourseInput = {
@@ -153676,6 +166647,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutCourseEnrollmentsInput = {
@@ -153732,6 +166709,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutCourseEnrollmentsInput = {
@@ -153776,6 +166759,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutCourseEnrollmentsInput = {
@@ -153815,6 +166802,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutCourseEnrollmentsInput = {
@@ -153949,6 +166940,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCourseEnrollmentsInput = {
@@ -154005,6 +167002,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type StoreUpsertWithoutCourseEnrollmentsInput = {
@@ -154055,6 +167058,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutCourseEnrollmentsInput = {
@@ -154094,6 +167101,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type CertificateUpsertWithoutEnrollmentInput = {
@@ -154208,6 +167219,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutCertificatesInput = {
@@ -154264,6 +167281,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutCertificatesInput = {
@@ -154373,6 +167396,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCertificatesInput = {
@@ -154429,6 +167458,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type TenantCreateWithoutTrainingLogsInput = {
@@ -154573,6 +167608,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutTrainingLogsInput = {
@@ -154612,6 +167651,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutTrainingLogsInput = {
@@ -154673,6 +167716,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutTrainingLogsInput = {
@@ -154729,6 +167778,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutTrainingLogsInput = {
@@ -154895,6 +167950,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutTrainingLogsInput = {
@@ -154934,6 +167993,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type UserUpsertWithoutTrainingLogsInput = {
@@ -155001,6 +168064,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTrainingLogsInput = {
@@ -155057,6 +168126,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type TenantCreateWithoutChallengesInput = {
@@ -155218,6 +168293,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutChallengeCreationsInput = {
@@ -155274,6 +168355,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutChallengeCreationsInput = {
@@ -155488,6 +168575,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChallengeCreationsInput = {
@@ -155544,6 +168637,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type ChallengeParticipantUpsertWithWhereUniqueWithoutChallengeInput = {
@@ -155655,6 +168754,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutChallengeParticipationsInput = {
@@ -155711,6 +168816,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutChallengeParticipationsInput = {
@@ -155755,6 +168866,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutChallengeParticipantsInput = {
@@ -155794,6 +168909,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutChallengeParticipantsInput = {
@@ -155911,6 +169030,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChallengeParticipationsInput = {
@@ -155967,6 +169092,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type StoreUpsertWithoutChallengeParticipantsInput = {
@@ -156017,6 +169148,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutChallengeParticipantsInput = {
@@ -156056,6 +169191,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type TenantCreateWithoutOnboardingTemplatesInput = {
@@ -156694,6 +169833,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutOnboardingJourneysInput = {
@@ -156733,6 +169876,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutOnboardingJourneysInput = {
@@ -156794,6 +169941,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutOnboardingJourneysInput = {
@@ -156850,6 +170003,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutOnboardingJourneysInput = {
@@ -156911,6 +170070,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutOnboardingMentoringInput = {
@@ -156967,6 +170132,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutOnboardingMentoringInput = {
@@ -157201,6 +170372,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutOnboardingJourneysInput = {
@@ -157240,6 +170415,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type UserUpsertWithoutOnboardingJourneysInput = {
@@ -157307,6 +170486,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOnboardingJourneysInput = {
@@ -157363,6 +170548,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUpsertWithoutOnboardingMentoringInput = {
@@ -157430,6 +170621,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOnboardingMentoringInput = {
@@ -157486,6 +170683,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type OnboardingProgressUpsertWithWhereUniqueWithoutJourneyInput = {
@@ -157782,6 +170985,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutCoachingSessionsInput = {
@@ -157821,6 +171028,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutCoachingSessionsInput = {
@@ -157882,6 +171093,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutCoachSessionsInput = {
@@ -157938,6 +171155,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutCoachSessionsInput = {
@@ -157999,6 +171222,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutCoacheeSessionsInput = {
@@ -158055,6 +171284,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutCoacheeSessionsInput = {
@@ -158221,6 +171456,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutCoachingSessionsInput = {
@@ -158260,6 +171499,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type UserUpsertWithoutCoachSessionsInput = {
@@ -158327,6 +171570,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCoachSessionsInput = {
@@ -158383,6 +171632,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUpsertWithoutCoacheeSessionsInput = {
@@ -158450,6 +171705,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCoacheeSessionsInput = {
@@ -158506,6 +171767,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type TenantCreateWithoutDevelopmentPlansInput = {
@@ -158650,6 +171917,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutDevelopmentPlansInput = {
@@ -158689,6 +171960,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutDevelopmentPlansInput = {
@@ -158750,6 +172025,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutDevPlansAsUserInput = {
@@ -158806,6 +172087,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutDevPlansAsUserInput = {
@@ -158867,6 +172154,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutDevPlansAsManagerInput = {
@@ -158923,6 +172216,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutDevPlansAsManagerInput = {
@@ -159147,6 +172446,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutDevelopmentPlansInput = {
@@ -159186,6 +172489,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type UserUpsertWithoutDevPlansAsUserInput = {
@@ -159253,6 +172560,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDevPlansAsUserInput = {
@@ -159309,6 +172622,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUpsertWithoutDevPlansAsManagerInput = {
@@ -159376,6 +172695,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDevPlansAsManagerInput = {
@@ -159432,6 +172757,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type DevelopmentGoalUpsertWithWhereUniqueWithoutPlanInput = {
@@ -159652,6 +172983,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutDevReviewsInput = {
@@ -159708,6 +173045,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutDevReviewsInput = {
@@ -159823,6 +173166,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDevReviewsInput = {
@@ -159879,6 +173228,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type TenantCreateWithoutAppraisalCyclesInput = {
@@ -160224,6 +173579,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutAppraisalsInput = {
@@ -160263,6 +173622,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutAppraisalsInput = {
@@ -160324,6 +173687,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutAppraisalsAsEmployeeInput = {
@@ -160380,6 +173749,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutAppraisalsAsEmployeeInput = {
@@ -160441,6 +173816,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutAppraisalsAsManagerInput = {
@@ -160497,6 +173878,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutAppraisalsAsManagerInput = {
@@ -160587,6 +173974,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutAppraisalsInput = {
@@ -160626,6 +174017,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type UserUpsertWithoutAppraisalsAsEmployeeInput = {
@@ -160693,6 +174088,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAppraisalsAsEmployeeInput = {
@@ -160749,6 +174150,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUpsertWithoutAppraisalsAsManagerInput = {
@@ -160816,6 +174223,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAppraisalsAsManagerInput = {
@@ -160872,6 +174285,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type StoreCreateWithoutShiftTemplatesInput = {
@@ -160911,6 +174330,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutShiftTemplatesInput = {
@@ -160950,6 +174373,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutShiftTemplatesInput = {
@@ -161005,6 +174432,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutShiftTemplatesInput = {
@@ -161044,6 +174475,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreCreateWithoutShiftEntriesInput = {
@@ -161083,6 +174518,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutShiftEntriesInput = {
@@ -161122,6 +174561,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutShiftEntriesInput = {
@@ -161183,6 +174626,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutShiftEntriesInput = {
@@ -161239,6 +174688,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutShiftEntriesInput = {
@@ -161323,6 +174778,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutShiftEntriesInput = {
@@ -161362,6 +174821,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type UserUpsertWithoutShiftEntriesInput = {
@@ -161429,6 +174892,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutShiftEntriesInput = {
@@ -161485,6 +174954,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type ShiftSwapRequestUpsertWithWhereUniqueWithoutShiftEntryInput = {
@@ -161590,6 +175065,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutSwapRequestsInput = {
@@ -161646,6 +175127,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutSwapRequestsInput = {
@@ -161757,6 +175244,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSwapRequestsInput = {
@@ -161813,6 +175306,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type TenantCreateWithoutPulseSurveysInput = {
@@ -162322,6 +175821,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutPulseResponsesInput = {
@@ -162361,6 +175864,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutPulseResponsesInput = {
@@ -162480,6 +175987,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutPulseResponsesInput = {
@@ -162519,6 +176030,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type PulseAnswerUpsertWithWhereUniqueWithoutResponseInput = {
@@ -162779,6 +176294,10 @@ export namespace Prisma {
     pulseResponses?: PulseResponseCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutWellbeingCheckInsInput = {
@@ -162818,6 +176337,10 @@ export namespace Prisma {
     pulseResponses?: PulseResponseUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutWellbeingCheckInsInput = {
@@ -162879,6 +176402,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutWellbeingCheckInsInput = {
@@ -162935,6 +176464,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutWellbeingCheckInsInput = {
@@ -163101,6 +176636,10 @@ export namespace Prisma {
     pulseResponses?: PulseResponseUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutWellbeingCheckInsInput = {
@@ -163140,6 +176679,10 @@ export namespace Prisma {
     pulseResponses?: PulseResponseUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type UserUpsertWithoutWellbeingCheckInsInput = {
@@ -163207,6 +176750,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWellbeingCheckInsInput = {
@@ -163263,6 +176812,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type TenantCreateWithoutWellbeingResourcesInput = {
@@ -163518,6 +177073,10 @@ export namespace Prisma {
     pulseResponses?: PulseResponseCreateNestedManyWithoutStoreInput
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutBriefingsInput = {
@@ -163557,6 +177116,10 @@ export namespace Prisma {
     pulseResponses?: PulseResponseUncheckedCreateNestedManyWithoutStoreInput
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutBriefingsInput = {
@@ -163618,6 +177181,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutBriefingsCreatedInput = {
@@ -163674,6 +177243,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutBriefingsCreatedInput = {
@@ -163750,6 +177325,10 @@ export namespace Prisma {
     pulseResponses?: PulseResponseUpdateManyWithoutStoreNestedInput
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutBriefingsInput = {
@@ -163789,6 +177368,10 @@ export namespace Prisma {
     pulseResponses?: PulseResponseUncheckedUpdateManyWithoutStoreNestedInput
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type UserUpsertWithoutBriefingsCreatedInput = {
@@ -163856,6 +177439,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBriefingsCreatedInput = {
@@ -163912,6 +177501,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type BriefingAcknowledgmentUpsertWithWhereUniqueWithoutBriefingInput = {
@@ -164015,6 +177610,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutBriefingAcksInput = {
@@ -164071,6 +177672,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutBriefingAcksInput = {
@@ -164180,6 +177787,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBriefingAcksInput = {
@@ -164236,6 +177849,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type StoreCreateWithoutHandoversInput = {
@@ -164275,6 +177894,10 @@ export namespace Prisma {
     pulseResponses?: PulseResponseCreateNestedManyWithoutStoreInput
     wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
     briefings?: BriefingCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutHandoversInput = {
@@ -164314,6 +177937,10 @@ export namespace Prisma {
     pulseResponses?: PulseResponseUncheckedCreateNestedManyWithoutStoreInput
     wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
     briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutHandoversInput = {
@@ -164375,6 +178002,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutHandoversFromInput = {
@@ -164431,6 +178064,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutHandoversFromInput = {
@@ -164492,6 +178131,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutHandoversToInput = {
@@ -164548,6 +178193,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutHandoversToInput = {
@@ -164603,6 +178254,10 @@ export namespace Prisma {
     pulseResponses?: PulseResponseUpdateManyWithoutStoreNestedInput
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutHandoversInput = {
@@ -164642,6 +178297,10 @@ export namespace Prisma {
     pulseResponses?: PulseResponseUncheckedUpdateManyWithoutStoreNestedInput
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type UserUpsertWithoutHandoversFromInput = {
@@ -164709,6 +178368,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutHandoversFromInput = {
@@ -164765,6 +178430,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUpsertWithoutHandoversToInput = {
@@ -164832,6 +178503,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutHandoversToInput = {
@@ -164888,6 +178565,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type TenantCreateWithoutTeamMessagesInput = {
@@ -165049,6 +178732,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutTeamMessagesSentInput = {
@@ -165105,6 +178794,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutTeamMessagesSentInput = {
@@ -165309,6 +179004,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTeamMessagesSentInput = {
@@ -165365,6 +179066,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type TeamMessageReadUpsertWithWhereUniqueWithoutMessageInput = {
@@ -165466,6 +179173,12 @@ export namespace Prisma {
     teamMessagesSent?: TeamMessageCreateNestedManyWithoutSenderInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutTeamMessageReadsInput = {
@@ -165522,6 +179235,12 @@ export namespace Prisma {
     teamMessagesSent?: TeamMessageUncheckedCreateNestedManyWithoutSenderInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutTeamMessageReadsInput = {
@@ -165629,6 +179348,12 @@ export namespace Prisma {
     teamMessagesSent?: TeamMessageUpdateManyWithoutSenderNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTeamMessageReadsInput = {
@@ -165685,6 +179410,12 @@ export namespace Prisma {
     teamMessagesSent?: TeamMessageUncheckedUpdateManyWithoutSenderNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type TenantCreateWithoutNewslettersInput = {
@@ -165846,6 +179577,12 @@ export namespace Prisma {
     teamMessagesSent?: TeamMessageCreateNestedManyWithoutSenderInput
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutNewslettersCreatedInput = {
@@ -165902,6 +179639,12 @@ export namespace Prisma {
     teamMessagesSent?: TeamMessageUncheckedCreateNestedManyWithoutSenderInput
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutNewslettersCreatedInput = {
@@ -166129,6 +179872,12 @@ export namespace Prisma {
     teamMessagesSent?: TeamMessageUpdateManyWithoutSenderNestedInput
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNewslettersCreatedInput = {
@@ -166185,6 +179934,12 @@ export namespace Prisma {
     teamMessagesSent?: TeamMessageUncheckedUpdateManyWithoutSenderNestedInput
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type NewsletterSectionUpsertWithWhereUniqueWithoutNewsletterInput = {
@@ -166389,6 +180144,12 @@ export namespace Prisma {
     teamMessagesSent?: TeamMessageCreateNestedManyWithoutSenderInput
     teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserUncheckedCreateWithoutNewsletterViewsInput = {
@@ -166445,6 +180206,12 @@ export namespace Prisma {
     teamMessagesSent?: TeamMessageUncheckedCreateNestedManyWithoutSenderInput
     teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
     newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
   }
 
   export type UserCreateOrConnectWithoutNewsletterViewsInput = {
@@ -166556,6 +180323,12 @@ export namespace Prisma {
     teamMessagesSent?: TeamMessageUpdateManyWithoutSenderNestedInput
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNewsletterViewsInput = {
@@ -166612,6 +180385,2723 @@ export namespace Prisma {
     teamMessagesSent?: TeamMessageUncheckedUpdateManyWithoutSenderNestedInput
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
+  }
+
+  export type StoreCreateWithoutConversionGoalsInput = {
+    id?: string
+    name: string
+    city?: string | null
+    address?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutStoresInput
+    region?: RegionCreateNestedOneWithoutStoresInput
+    tools?: StoreToolAssignmentCreateNestedManyWithoutStoreInput
+    userAssignments?: UserStoreAssignmentCreateNestedManyWithoutStoreInput
+    auditSessions?: AuditSessionCreateNestedManyWithoutStoreInput
+    checklistSessions?: ChecklistSessionCreateNestedManyWithoutStoreInput
+    vmSubmissions?: VmSubmissionCreateNestedManyWithoutStoreInput
+    standardEvaluations?: StandardEvaluationCreateNestedManyWithoutStoreInput
+    kpiEntries?: KpiEntryCreateNestedManyWithoutStoreInput
+    budgetPeriods?: BudgetPeriodCreateNestedManyWithoutStoreInput
+    forecasts?: ForecastCreateNestedManyWithoutStoreInput
+    lossIncidents?: LossIncidentCreateNestedManyWithoutStoreInput
+    inventoryCounts?: InventoryCountCreateNestedManyWithoutStoreInput
+    floorZones?: FloorZoneCreateNestedManyWithoutStoreInput
+    floorPositions?: FloorStaffPositionCreateNestedManyWithoutStoreInput
+    footfallEntries?: FootfallEntryCreateNestedManyWithoutStoreInput
+    maintenanceRequests?: MaintenanceRequestCreateNestedManyWithoutStoreInput
+    courseEnrollments?: CourseEnrollmentCreateNestedManyWithoutStoreInput
+    trainingLogs?: TrainingLogCreateNestedManyWithoutStoreInput
+    challengeParticipants?: ChallengeParticipantCreateNestedManyWithoutStoreInput
+    onboardingJourneys?: OnboardingJourneyCreateNestedManyWithoutStoreInput
+    coachingSessions?: CoachingSessionCreateNestedManyWithoutStoreInput
+    developmentPlans?: DevelopmentPlanCreateNestedManyWithoutStoreInput
+    appraisals?: AppraisalCreateNestedManyWithoutStoreInput
+    shiftTemplates?: ShiftTemplateCreateNestedManyWithoutStoreInput
+    shiftEntries?: ShiftEntryCreateNestedManyWithoutStoreInput
+    pulseResponses?: PulseResponseCreateNestedManyWithoutStoreInput
+    wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
+    briefings?: BriefingCreateNestedManyWithoutStoreInput
+    handovers?: HandoverCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
+  }
+
+  export type StoreUncheckedCreateWithoutConversionGoalsInput = {
+    id?: string
+    tenantId: string
+    regionId?: string | null
+    name: string
+    city?: string | null
+    address?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tools?: StoreToolAssignmentUncheckedCreateNestedManyWithoutStoreInput
+    userAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutStoreInput
+    auditSessions?: AuditSessionUncheckedCreateNestedManyWithoutStoreInput
+    checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutStoreInput
+    vmSubmissions?: VmSubmissionUncheckedCreateNestedManyWithoutStoreInput
+    standardEvaluations?: StandardEvaluationUncheckedCreateNestedManyWithoutStoreInput
+    kpiEntries?: KpiEntryUncheckedCreateNestedManyWithoutStoreInput
+    budgetPeriods?: BudgetPeriodUncheckedCreateNestedManyWithoutStoreInput
+    forecasts?: ForecastUncheckedCreateNestedManyWithoutStoreInput
+    lossIncidents?: LossIncidentUncheckedCreateNestedManyWithoutStoreInput
+    inventoryCounts?: InventoryCountUncheckedCreateNestedManyWithoutStoreInput
+    floorZones?: FloorZoneUncheckedCreateNestedManyWithoutStoreInput
+    floorPositions?: FloorStaffPositionUncheckedCreateNestedManyWithoutStoreInput
+    footfallEntries?: FootfallEntryUncheckedCreateNestedManyWithoutStoreInput
+    maintenanceRequests?: MaintenanceRequestUncheckedCreateNestedManyWithoutStoreInput
+    courseEnrollments?: CourseEnrollmentUncheckedCreateNestedManyWithoutStoreInput
+    trainingLogs?: TrainingLogUncheckedCreateNestedManyWithoutStoreInput
+    challengeParticipants?: ChallengeParticipantUncheckedCreateNestedManyWithoutStoreInput
+    onboardingJourneys?: OnboardingJourneyUncheckedCreateNestedManyWithoutStoreInput
+    coachingSessions?: CoachingSessionUncheckedCreateNestedManyWithoutStoreInput
+    developmentPlans?: DevelopmentPlanUncheckedCreateNestedManyWithoutStoreInput
+    appraisals?: AppraisalUncheckedCreateNestedManyWithoutStoreInput
+    shiftTemplates?: ShiftTemplateUncheckedCreateNestedManyWithoutStoreInput
+    shiftEntries?: ShiftEntryUncheckedCreateNestedManyWithoutStoreInput
+    pulseResponses?: PulseResponseUncheckedCreateNestedManyWithoutStoreInput
+    wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
+    briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
+    handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
+  }
+
+  export type StoreCreateOrConnectWithoutConversionGoalsInput = {
+    where: StoreWhereUniqueInput
+    create: XOR<StoreCreateWithoutConversionGoalsInput, StoreUncheckedCreateWithoutConversionGoalsInput>
+  }
+
+  export type StoreUpsertWithoutConversionGoalsInput = {
+    update: XOR<StoreUpdateWithoutConversionGoalsInput, StoreUncheckedUpdateWithoutConversionGoalsInput>
+    create: XOR<StoreCreateWithoutConversionGoalsInput, StoreUncheckedCreateWithoutConversionGoalsInput>
+    where?: StoreWhereInput
+  }
+
+  export type StoreUpdateToOneWithWhereWithoutConversionGoalsInput = {
+    where?: StoreWhereInput
+    data: XOR<StoreUpdateWithoutConversionGoalsInput, StoreUncheckedUpdateWithoutConversionGoalsInput>
+  }
+
+  export type StoreUpdateWithoutConversionGoalsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutStoresNestedInput
+    region?: RegionUpdateOneWithoutStoresNestedInput
+    tools?: StoreToolAssignmentUpdateManyWithoutStoreNestedInput
+    userAssignments?: UserStoreAssignmentUpdateManyWithoutStoreNestedInput
+    auditSessions?: AuditSessionUpdateManyWithoutStoreNestedInput
+    checklistSessions?: ChecklistSessionUpdateManyWithoutStoreNestedInput
+    vmSubmissions?: VmSubmissionUpdateManyWithoutStoreNestedInput
+    standardEvaluations?: StandardEvaluationUpdateManyWithoutStoreNestedInput
+    kpiEntries?: KpiEntryUpdateManyWithoutStoreNestedInput
+    budgetPeriods?: BudgetPeriodUpdateManyWithoutStoreNestedInput
+    forecasts?: ForecastUpdateManyWithoutStoreNestedInput
+    lossIncidents?: LossIncidentUpdateManyWithoutStoreNestedInput
+    inventoryCounts?: InventoryCountUpdateManyWithoutStoreNestedInput
+    floorZones?: FloorZoneUpdateManyWithoutStoreNestedInput
+    floorPositions?: FloorStaffPositionUpdateManyWithoutStoreNestedInput
+    footfallEntries?: FootfallEntryUpdateManyWithoutStoreNestedInput
+    maintenanceRequests?: MaintenanceRequestUpdateManyWithoutStoreNestedInput
+    courseEnrollments?: CourseEnrollmentUpdateManyWithoutStoreNestedInput
+    trainingLogs?: TrainingLogUpdateManyWithoutStoreNestedInput
+    challengeParticipants?: ChallengeParticipantUpdateManyWithoutStoreNestedInput
+    onboardingJourneys?: OnboardingJourneyUpdateManyWithoutStoreNestedInput
+    coachingSessions?: CoachingSessionUpdateManyWithoutStoreNestedInput
+    developmentPlans?: DevelopmentPlanUpdateManyWithoutStoreNestedInput
+    appraisals?: AppraisalUpdateManyWithoutStoreNestedInput
+    shiftTemplates?: ShiftTemplateUpdateManyWithoutStoreNestedInput
+    shiftEntries?: ShiftEntryUpdateManyWithoutStoreNestedInput
+    pulseResponses?: PulseResponseUpdateManyWithoutStoreNestedInput
+    wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
+    briefings?: BriefingUpdateManyWithoutStoreNestedInput
+    handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
+  }
+
+  export type StoreUncheckedUpdateWithoutConversionGoalsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    regionId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tools?: StoreToolAssignmentUncheckedUpdateManyWithoutStoreNestedInput
+    userAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutStoreNestedInput
+    auditSessions?: AuditSessionUncheckedUpdateManyWithoutStoreNestedInput
+    checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutStoreNestedInput
+    vmSubmissions?: VmSubmissionUncheckedUpdateManyWithoutStoreNestedInput
+    standardEvaluations?: StandardEvaluationUncheckedUpdateManyWithoutStoreNestedInput
+    kpiEntries?: KpiEntryUncheckedUpdateManyWithoutStoreNestedInput
+    budgetPeriods?: BudgetPeriodUncheckedUpdateManyWithoutStoreNestedInput
+    forecasts?: ForecastUncheckedUpdateManyWithoutStoreNestedInput
+    lossIncidents?: LossIncidentUncheckedUpdateManyWithoutStoreNestedInput
+    inventoryCounts?: InventoryCountUncheckedUpdateManyWithoutStoreNestedInput
+    floorZones?: FloorZoneUncheckedUpdateManyWithoutStoreNestedInput
+    floorPositions?: FloorStaffPositionUncheckedUpdateManyWithoutStoreNestedInput
+    footfallEntries?: FootfallEntryUncheckedUpdateManyWithoutStoreNestedInput
+    maintenanceRequests?: MaintenanceRequestUncheckedUpdateManyWithoutStoreNestedInput
+    courseEnrollments?: CourseEnrollmentUncheckedUpdateManyWithoutStoreNestedInput
+    trainingLogs?: TrainingLogUncheckedUpdateManyWithoutStoreNestedInput
+    challengeParticipants?: ChallengeParticipantUncheckedUpdateManyWithoutStoreNestedInput
+    onboardingJourneys?: OnboardingJourneyUncheckedUpdateManyWithoutStoreNestedInput
+    coachingSessions?: CoachingSessionUncheckedUpdateManyWithoutStoreNestedInput
+    developmentPlans?: DevelopmentPlanUncheckedUpdateManyWithoutStoreNestedInput
+    appraisals?: AppraisalUncheckedUpdateManyWithoutStoreNestedInput
+    shiftTemplates?: ShiftTemplateUncheckedUpdateManyWithoutStoreNestedInput
+    shiftEntries?: ShiftEntryUncheckedUpdateManyWithoutStoreNestedInput
+    pulseResponses?: PulseResponseUncheckedUpdateManyWithoutStoreNestedInput
+    wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
+    briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
+    handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
+  }
+
+  export type StoreCreateWithoutClientProfilesInput = {
+    id?: string
+    name: string
+    city?: string | null
+    address?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutStoresInput
+    region?: RegionCreateNestedOneWithoutStoresInput
+    tools?: StoreToolAssignmentCreateNestedManyWithoutStoreInput
+    userAssignments?: UserStoreAssignmentCreateNestedManyWithoutStoreInput
+    auditSessions?: AuditSessionCreateNestedManyWithoutStoreInput
+    checklistSessions?: ChecklistSessionCreateNestedManyWithoutStoreInput
+    vmSubmissions?: VmSubmissionCreateNestedManyWithoutStoreInput
+    standardEvaluations?: StandardEvaluationCreateNestedManyWithoutStoreInput
+    kpiEntries?: KpiEntryCreateNestedManyWithoutStoreInput
+    budgetPeriods?: BudgetPeriodCreateNestedManyWithoutStoreInput
+    forecasts?: ForecastCreateNestedManyWithoutStoreInput
+    lossIncidents?: LossIncidentCreateNestedManyWithoutStoreInput
+    inventoryCounts?: InventoryCountCreateNestedManyWithoutStoreInput
+    floorZones?: FloorZoneCreateNestedManyWithoutStoreInput
+    floorPositions?: FloorStaffPositionCreateNestedManyWithoutStoreInput
+    footfallEntries?: FootfallEntryCreateNestedManyWithoutStoreInput
+    maintenanceRequests?: MaintenanceRequestCreateNestedManyWithoutStoreInput
+    courseEnrollments?: CourseEnrollmentCreateNestedManyWithoutStoreInput
+    trainingLogs?: TrainingLogCreateNestedManyWithoutStoreInput
+    challengeParticipants?: ChallengeParticipantCreateNestedManyWithoutStoreInput
+    onboardingJourneys?: OnboardingJourneyCreateNestedManyWithoutStoreInput
+    coachingSessions?: CoachingSessionCreateNestedManyWithoutStoreInput
+    developmentPlans?: DevelopmentPlanCreateNestedManyWithoutStoreInput
+    appraisals?: AppraisalCreateNestedManyWithoutStoreInput
+    shiftTemplates?: ShiftTemplateCreateNestedManyWithoutStoreInput
+    shiftEntries?: ShiftEntryCreateNestedManyWithoutStoreInput
+    pulseResponses?: PulseResponseCreateNestedManyWithoutStoreInput
+    wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
+    briefings?: BriefingCreateNestedManyWithoutStoreInput
+    handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
+  }
+
+  export type StoreUncheckedCreateWithoutClientProfilesInput = {
+    id?: string
+    tenantId: string
+    regionId?: string | null
+    name: string
+    city?: string | null
+    address?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tools?: StoreToolAssignmentUncheckedCreateNestedManyWithoutStoreInput
+    userAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutStoreInput
+    auditSessions?: AuditSessionUncheckedCreateNestedManyWithoutStoreInput
+    checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutStoreInput
+    vmSubmissions?: VmSubmissionUncheckedCreateNestedManyWithoutStoreInput
+    standardEvaluations?: StandardEvaluationUncheckedCreateNestedManyWithoutStoreInput
+    kpiEntries?: KpiEntryUncheckedCreateNestedManyWithoutStoreInput
+    budgetPeriods?: BudgetPeriodUncheckedCreateNestedManyWithoutStoreInput
+    forecasts?: ForecastUncheckedCreateNestedManyWithoutStoreInput
+    lossIncidents?: LossIncidentUncheckedCreateNestedManyWithoutStoreInput
+    inventoryCounts?: InventoryCountUncheckedCreateNestedManyWithoutStoreInput
+    floorZones?: FloorZoneUncheckedCreateNestedManyWithoutStoreInput
+    floorPositions?: FloorStaffPositionUncheckedCreateNestedManyWithoutStoreInput
+    footfallEntries?: FootfallEntryUncheckedCreateNestedManyWithoutStoreInput
+    maintenanceRequests?: MaintenanceRequestUncheckedCreateNestedManyWithoutStoreInput
+    courseEnrollments?: CourseEnrollmentUncheckedCreateNestedManyWithoutStoreInput
+    trainingLogs?: TrainingLogUncheckedCreateNestedManyWithoutStoreInput
+    challengeParticipants?: ChallengeParticipantUncheckedCreateNestedManyWithoutStoreInput
+    onboardingJourneys?: OnboardingJourneyUncheckedCreateNestedManyWithoutStoreInput
+    coachingSessions?: CoachingSessionUncheckedCreateNestedManyWithoutStoreInput
+    developmentPlans?: DevelopmentPlanUncheckedCreateNestedManyWithoutStoreInput
+    appraisals?: AppraisalUncheckedCreateNestedManyWithoutStoreInput
+    shiftTemplates?: ShiftTemplateUncheckedCreateNestedManyWithoutStoreInput
+    shiftEntries?: ShiftEntryUncheckedCreateNestedManyWithoutStoreInput
+    pulseResponses?: PulseResponseUncheckedCreateNestedManyWithoutStoreInput
+    wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
+    briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
+    handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
+  }
+
+  export type StoreCreateOrConnectWithoutClientProfilesInput = {
+    where: StoreWhereUniqueInput
+    create: XOR<StoreCreateWithoutClientProfilesInput, StoreUncheckedCreateWithoutClientProfilesInput>
+  }
+
+  export type UserCreateWithoutClientsCreatedInput = {
+    id?: string
+    email: string
+    name: string
+    passwordHash: string
+    role?: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant?: TenantCreateNestedOneWithoutUsersInput
+    storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
+    regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
+    checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
+    createdSops?: SopCreateNestedManyWithoutCreatorInput
+    sopAcknowledgments?: SopAcknowledgmentCreateNestedManyWithoutUserInput
+    vmSubmissions?: VmSubmissionCreateNestedManyWithoutSubmitterInput
+    vmReviews?: VmSubmissionCreateNestedManyWithoutReviewerInput
+    standardEvaluations?: StandardEvaluationCreateNestedManyWithoutEvaluatorInput
+    kpiEntries?: KpiEntryCreateNestedManyWithoutUserInput
+    budgetPeriods?: BudgetPeriodCreateNestedManyWithoutUserInput
+    forecasts?: ForecastCreateNestedManyWithoutUserInput
+    lossReports?: LossIncidentCreateNestedManyWithoutReporterInput
+    lossAssignments?: LossIncidentCreateNestedManyWithoutAssigneeInput
+    inventoryCounts?: InventoryCountCreateNestedManyWithoutConductorInput
+    floorPositions?: FloorStaffPositionCreateNestedManyWithoutUserInput
+    floorUpdates?: FloorStaffPositionCreateNestedManyWithoutUpdaterInput
+    maintenanceReports?: MaintenanceRequestCreateNestedManyWithoutReporterInput
+    maintenanceAssignments?: MaintenanceRequestCreateNestedManyWithoutAssigneeInput
+    courseCreations?: CourseCreateNestedManyWithoutCreatorInput
+    courseEnrollments?: CourseEnrollmentCreateNestedManyWithoutUserInput
+    certificates?: CertificateCreateNestedManyWithoutUserInput
+    trainingLogs?: TrainingLogCreateNestedManyWithoutUserInput
+    challengeCreations?: ChallengeCreateNestedManyWithoutCreatorInput
+    challengeParticipations?: ChallengeParticipantCreateNestedManyWithoutUserInput
+    onboardingJourneys?: OnboardingJourneyCreateNestedManyWithoutUserInput
+    onboardingMentoring?: OnboardingJourneyCreateNestedManyWithoutMentorInput
+    coachSessions?: CoachingSessionCreateNestedManyWithoutCoachInput
+    coacheeSessions?: CoachingSessionCreateNestedManyWithoutCoacheeInput
+    devPlansAsUser?: DevelopmentPlanCreateNestedManyWithoutUserInput
+    devPlansAsManager?: DevelopmentPlanCreateNestedManyWithoutManagerInput
+    devReviews?: DevelopmentReviewCreateNestedManyWithoutReviewerInput
+    appraisalsAsEmployee?: AppraisalCreateNestedManyWithoutEmployeeInput
+    appraisalsAsManager?: AppraisalCreateNestedManyWithoutManagerInput
+    shiftEntries?: ShiftEntryCreateNestedManyWithoutUserInput
+    swapRequests?: ShiftSwapRequestCreateNestedManyWithoutRequesterInput
+    wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutUserInput
+    briefingsCreated?: BriefingCreateNestedManyWithoutCreatorInput
+    briefingAcks?: BriefingAcknowledgmentCreateNestedManyWithoutUserInput
+    handoversFrom?: HandoverCreateNestedManyWithoutFromUserInput
+    handoversTo?: HandoverCreateNestedManyWithoutToUserInput
+    teamMessagesSent?: TeamMessageCreateNestedManyWithoutSenderInput
+    teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
+    newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
+    newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
+  }
+
+  export type UserUncheckedCreateWithoutClientsCreatedInput = {
+    id?: string
+    email: string
+    name: string
+    passwordHash: string
+    role?: string
+    tenantId?: string | null
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
+    regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
+    checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
+    createdSops?: SopUncheckedCreateNestedManyWithoutCreatorInput
+    sopAcknowledgments?: SopAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+    vmSubmissions?: VmSubmissionUncheckedCreateNestedManyWithoutSubmitterInput
+    vmReviews?: VmSubmissionUncheckedCreateNestedManyWithoutReviewerInput
+    standardEvaluations?: StandardEvaluationUncheckedCreateNestedManyWithoutEvaluatorInput
+    kpiEntries?: KpiEntryUncheckedCreateNestedManyWithoutUserInput
+    budgetPeriods?: BudgetPeriodUncheckedCreateNestedManyWithoutUserInput
+    forecasts?: ForecastUncheckedCreateNestedManyWithoutUserInput
+    lossReports?: LossIncidentUncheckedCreateNestedManyWithoutReporterInput
+    lossAssignments?: LossIncidentUncheckedCreateNestedManyWithoutAssigneeInput
+    inventoryCounts?: InventoryCountUncheckedCreateNestedManyWithoutConductorInput
+    floorPositions?: FloorStaffPositionUncheckedCreateNestedManyWithoutUserInput
+    floorUpdates?: FloorStaffPositionUncheckedCreateNestedManyWithoutUpdaterInput
+    maintenanceReports?: MaintenanceRequestUncheckedCreateNestedManyWithoutReporterInput
+    maintenanceAssignments?: MaintenanceRequestUncheckedCreateNestedManyWithoutAssigneeInput
+    courseCreations?: CourseUncheckedCreateNestedManyWithoutCreatorInput
+    courseEnrollments?: CourseEnrollmentUncheckedCreateNestedManyWithoutUserInput
+    certificates?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    trainingLogs?: TrainingLogUncheckedCreateNestedManyWithoutUserInput
+    challengeCreations?: ChallengeUncheckedCreateNestedManyWithoutCreatorInput
+    challengeParticipations?: ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+    onboardingJourneys?: OnboardingJourneyUncheckedCreateNestedManyWithoutUserInput
+    onboardingMentoring?: OnboardingJourneyUncheckedCreateNestedManyWithoutMentorInput
+    coachSessions?: CoachingSessionUncheckedCreateNestedManyWithoutCoachInput
+    coacheeSessions?: CoachingSessionUncheckedCreateNestedManyWithoutCoacheeInput
+    devPlansAsUser?: DevelopmentPlanUncheckedCreateNestedManyWithoutUserInput
+    devPlansAsManager?: DevelopmentPlanUncheckedCreateNestedManyWithoutManagerInput
+    devReviews?: DevelopmentReviewUncheckedCreateNestedManyWithoutReviewerInput
+    appraisalsAsEmployee?: AppraisalUncheckedCreateNestedManyWithoutEmployeeInput
+    appraisalsAsManager?: AppraisalUncheckedCreateNestedManyWithoutManagerInput
+    shiftEntries?: ShiftEntryUncheckedCreateNestedManyWithoutUserInput
+    swapRequests?: ShiftSwapRequestUncheckedCreateNestedManyWithoutRequesterInput
+    wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutUserInput
+    briefingsCreated?: BriefingUncheckedCreateNestedManyWithoutCreatorInput
+    briefingAcks?: BriefingAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+    handoversFrom?: HandoverUncheckedCreateNestedManyWithoutFromUserInput
+    handoversTo?: HandoverUncheckedCreateNestedManyWithoutToUserInput
+    teamMessagesSent?: TeamMessageUncheckedCreateNestedManyWithoutSenderInput
+    teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
+    newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
+    newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
+  }
+
+  export type UserCreateOrConnectWithoutClientsCreatedInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutClientsCreatedInput, UserUncheckedCreateWithoutClientsCreatedInput>
+  }
+
+  export type ClientInteractionCreateWithoutClientInput = {
+    id?: string
+    type?: string
+    date?: Date | string
+    notes?: string | null
+    purchaseAmount?: number | null
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutClientInteractionsInput
+  }
+
+  export type ClientInteractionUncheckedCreateWithoutClientInput = {
+    id?: string
+    userId: string
+    type?: string
+    date?: Date | string
+    notes?: string | null
+    purchaseAmount?: number | null
+    createdAt?: Date | string
+  }
+
+  export type ClientInteractionCreateOrConnectWithoutClientInput = {
+    where: ClientInteractionWhereUniqueInput
+    create: XOR<ClientInteractionCreateWithoutClientInput, ClientInteractionUncheckedCreateWithoutClientInput>
+  }
+
+  export type ClientInteractionCreateManyClientInputEnvelope = {
+    data: ClientInteractionCreateManyClientInput | ClientInteractionCreateManyClientInput[]
+  }
+
+  export type ClientTaskCreateWithoutClientInput = {
+    id?: string
+    title: string
+    dueDate?: Date | string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutClientTasksInput
+  }
+
+  export type ClientTaskUncheckedCreateWithoutClientInput = {
+    id?: string
+    userId: string
+    title: string
+    dueDate?: Date | string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClientTaskCreateOrConnectWithoutClientInput = {
+    where: ClientTaskWhereUniqueInput
+    create: XOR<ClientTaskCreateWithoutClientInput, ClientTaskUncheckedCreateWithoutClientInput>
+  }
+
+  export type ClientTaskCreateManyClientInputEnvelope = {
+    data: ClientTaskCreateManyClientInput | ClientTaskCreateManyClientInput[]
+  }
+
+  export type StoreUpsertWithoutClientProfilesInput = {
+    update: XOR<StoreUpdateWithoutClientProfilesInput, StoreUncheckedUpdateWithoutClientProfilesInput>
+    create: XOR<StoreCreateWithoutClientProfilesInput, StoreUncheckedCreateWithoutClientProfilesInput>
+    where?: StoreWhereInput
+  }
+
+  export type StoreUpdateToOneWithWhereWithoutClientProfilesInput = {
+    where?: StoreWhereInput
+    data: XOR<StoreUpdateWithoutClientProfilesInput, StoreUncheckedUpdateWithoutClientProfilesInput>
+  }
+
+  export type StoreUpdateWithoutClientProfilesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutStoresNestedInput
+    region?: RegionUpdateOneWithoutStoresNestedInput
+    tools?: StoreToolAssignmentUpdateManyWithoutStoreNestedInput
+    userAssignments?: UserStoreAssignmentUpdateManyWithoutStoreNestedInput
+    auditSessions?: AuditSessionUpdateManyWithoutStoreNestedInput
+    checklistSessions?: ChecklistSessionUpdateManyWithoutStoreNestedInput
+    vmSubmissions?: VmSubmissionUpdateManyWithoutStoreNestedInput
+    standardEvaluations?: StandardEvaluationUpdateManyWithoutStoreNestedInput
+    kpiEntries?: KpiEntryUpdateManyWithoutStoreNestedInput
+    budgetPeriods?: BudgetPeriodUpdateManyWithoutStoreNestedInput
+    forecasts?: ForecastUpdateManyWithoutStoreNestedInput
+    lossIncidents?: LossIncidentUpdateManyWithoutStoreNestedInput
+    inventoryCounts?: InventoryCountUpdateManyWithoutStoreNestedInput
+    floorZones?: FloorZoneUpdateManyWithoutStoreNestedInput
+    floorPositions?: FloorStaffPositionUpdateManyWithoutStoreNestedInput
+    footfallEntries?: FootfallEntryUpdateManyWithoutStoreNestedInput
+    maintenanceRequests?: MaintenanceRequestUpdateManyWithoutStoreNestedInput
+    courseEnrollments?: CourseEnrollmentUpdateManyWithoutStoreNestedInput
+    trainingLogs?: TrainingLogUpdateManyWithoutStoreNestedInput
+    challengeParticipants?: ChallengeParticipantUpdateManyWithoutStoreNestedInput
+    onboardingJourneys?: OnboardingJourneyUpdateManyWithoutStoreNestedInput
+    coachingSessions?: CoachingSessionUpdateManyWithoutStoreNestedInput
+    developmentPlans?: DevelopmentPlanUpdateManyWithoutStoreNestedInput
+    appraisals?: AppraisalUpdateManyWithoutStoreNestedInput
+    shiftTemplates?: ShiftTemplateUpdateManyWithoutStoreNestedInput
+    shiftEntries?: ShiftEntryUpdateManyWithoutStoreNestedInput
+    pulseResponses?: PulseResponseUpdateManyWithoutStoreNestedInput
+    wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
+    briefings?: BriefingUpdateManyWithoutStoreNestedInput
+    handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
+  }
+
+  export type StoreUncheckedUpdateWithoutClientProfilesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    regionId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tools?: StoreToolAssignmentUncheckedUpdateManyWithoutStoreNestedInput
+    userAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutStoreNestedInput
+    auditSessions?: AuditSessionUncheckedUpdateManyWithoutStoreNestedInput
+    checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutStoreNestedInput
+    vmSubmissions?: VmSubmissionUncheckedUpdateManyWithoutStoreNestedInput
+    standardEvaluations?: StandardEvaluationUncheckedUpdateManyWithoutStoreNestedInput
+    kpiEntries?: KpiEntryUncheckedUpdateManyWithoutStoreNestedInput
+    budgetPeriods?: BudgetPeriodUncheckedUpdateManyWithoutStoreNestedInput
+    forecasts?: ForecastUncheckedUpdateManyWithoutStoreNestedInput
+    lossIncidents?: LossIncidentUncheckedUpdateManyWithoutStoreNestedInput
+    inventoryCounts?: InventoryCountUncheckedUpdateManyWithoutStoreNestedInput
+    floorZones?: FloorZoneUncheckedUpdateManyWithoutStoreNestedInput
+    floorPositions?: FloorStaffPositionUncheckedUpdateManyWithoutStoreNestedInput
+    footfallEntries?: FootfallEntryUncheckedUpdateManyWithoutStoreNestedInput
+    maintenanceRequests?: MaintenanceRequestUncheckedUpdateManyWithoutStoreNestedInput
+    courseEnrollments?: CourseEnrollmentUncheckedUpdateManyWithoutStoreNestedInput
+    trainingLogs?: TrainingLogUncheckedUpdateManyWithoutStoreNestedInput
+    challengeParticipants?: ChallengeParticipantUncheckedUpdateManyWithoutStoreNestedInput
+    onboardingJourneys?: OnboardingJourneyUncheckedUpdateManyWithoutStoreNestedInput
+    coachingSessions?: CoachingSessionUncheckedUpdateManyWithoutStoreNestedInput
+    developmentPlans?: DevelopmentPlanUncheckedUpdateManyWithoutStoreNestedInput
+    appraisals?: AppraisalUncheckedUpdateManyWithoutStoreNestedInput
+    shiftTemplates?: ShiftTemplateUncheckedUpdateManyWithoutStoreNestedInput
+    shiftEntries?: ShiftEntryUncheckedUpdateManyWithoutStoreNestedInput
+    pulseResponses?: PulseResponseUncheckedUpdateManyWithoutStoreNestedInput
+    wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
+    briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
+    handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
+  }
+
+  export type UserUpsertWithoutClientsCreatedInput = {
+    update: XOR<UserUpdateWithoutClientsCreatedInput, UserUncheckedUpdateWithoutClientsCreatedInput>
+    create: XOR<UserCreateWithoutClientsCreatedInput, UserUncheckedCreateWithoutClientsCreatedInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutClientsCreatedInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutClientsCreatedInput, UserUncheckedUpdateWithoutClientsCreatedInput>
+  }
+
+  export type UserUpdateWithoutClientsCreatedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneWithoutUsersNestedInput
+    storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
+    regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
+    checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
+    createdSops?: SopUpdateManyWithoutCreatorNestedInput
+    sopAcknowledgments?: SopAcknowledgmentUpdateManyWithoutUserNestedInput
+    vmSubmissions?: VmSubmissionUpdateManyWithoutSubmitterNestedInput
+    vmReviews?: VmSubmissionUpdateManyWithoutReviewerNestedInput
+    standardEvaluations?: StandardEvaluationUpdateManyWithoutEvaluatorNestedInput
+    kpiEntries?: KpiEntryUpdateManyWithoutUserNestedInput
+    budgetPeriods?: BudgetPeriodUpdateManyWithoutUserNestedInput
+    forecasts?: ForecastUpdateManyWithoutUserNestedInput
+    lossReports?: LossIncidentUpdateManyWithoutReporterNestedInput
+    lossAssignments?: LossIncidentUpdateManyWithoutAssigneeNestedInput
+    inventoryCounts?: InventoryCountUpdateManyWithoutConductorNestedInput
+    floorPositions?: FloorStaffPositionUpdateManyWithoutUserNestedInput
+    floorUpdates?: FloorStaffPositionUpdateManyWithoutUpdaterNestedInput
+    maintenanceReports?: MaintenanceRequestUpdateManyWithoutReporterNestedInput
+    maintenanceAssignments?: MaintenanceRequestUpdateManyWithoutAssigneeNestedInput
+    courseCreations?: CourseUpdateManyWithoutCreatorNestedInput
+    courseEnrollments?: CourseEnrollmentUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUpdateManyWithoutUserNestedInput
+    trainingLogs?: TrainingLogUpdateManyWithoutUserNestedInput
+    challengeCreations?: ChallengeUpdateManyWithoutCreatorNestedInput
+    challengeParticipations?: ChallengeParticipantUpdateManyWithoutUserNestedInput
+    onboardingJourneys?: OnboardingJourneyUpdateManyWithoutUserNestedInput
+    onboardingMentoring?: OnboardingJourneyUpdateManyWithoutMentorNestedInput
+    coachSessions?: CoachingSessionUpdateManyWithoutCoachNestedInput
+    coacheeSessions?: CoachingSessionUpdateManyWithoutCoacheeNestedInput
+    devPlansAsUser?: DevelopmentPlanUpdateManyWithoutUserNestedInput
+    devPlansAsManager?: DevelopmentPlanUpdateManyWithoutManagerNestedInput
+    devReviews?: DevelopmentReviewUpdateManyWithoutReviewerNestedInput
+    appraisalsAsEmployee?: AppraisalUpdateManyWithoutEmployeeNestedInput
+    appraisalsAsManager?: AppraisalUpdateManyWithoutManagerNestedInput
+    shiftEntries?: ShiftEntryUpdateManyWithoutUserNestedInput
+    swapRequests?: ShiftSwapRequestUpdateManyWithoutRequesterNestedInput
+    wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutUserNestedInput
+    briefingsCreated?: BriefingUpdateManyWithoutCreatorNestedInput
+    briefingAcks?: BriefingAcknowledgmentUpdateManyWithoutUserNestedInput
+    handoversFrom?: HandoverUpdateManyWithoutFromUserNestedInput
+    handoversTo?: HandoverUpdateManyWithoutToUserNestedInput
+    teamMessagesSent?: TeamMessageUpdateManyWithoutSenderNestedInput
+    teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
+    newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
+    newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutClientsCreatedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    tenantId?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
+    createdSops?: SopUncheckedUpdateManyWithoutCreatorNestedInput
+    sopAcknowledgments?: SopAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+    vmSubmissions?: VmSubmissionUncheckedUpdateManyWithoutSubmitterNestedInput
+    vmReviews?: VmSubmissionUncheckedUpdateManyWithoutReviewerNestedInput
+    standardEvaluations?: StandardEvaluationUncheckedUpdateManyWithoutEvaluatorNestedInput
+    kpiEntries?: KpiEntryUncheckedUpdateManyWithoutUserNestedInput
+    budgetPeriods?: BudgetPeriodUncheckedUpdateManyWithoutUserNestedInput
+    forecasts?: ForecastUncheckedUpdateManyWithoutUserNestedInput
+    lossReports?: LossIncidentUncheckedUpdateManyWithoutReporterNestedInput
+    lossAssignments?: LossIncidentUncheckedUpdateManyWithoutAssigneeNestedInput
+    inventoryCounts?: InventoryCountUncheckedUpdateManyWithoutConductorNestedInput
+    floorPositions?: FloorStaffPositionUncheckedUpdateManyWithoutUserNestedInput
+    floorUpdates?: FloorStaffPositionUncheckedUpdateManyWithoutUpdaterNestedInput
+    maintenanceReports?: MaintenanceRequestUncheckedUpdateManyWithoutReporterNestedInput
+    maintenanceAssignments?: MaintenanceRequestUncheckedUpdateManyWithoutAssigneeNestedInput
+    courseCreations?: CourseUncheckedUpdateManyWithoutCreatorNestedInput
+    courseEnrollments?: CourseEnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    trainingLogs?: TrainingLogUncheckedUpdateManyWithoutUserNestedInput
+    challengeCreations?: ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
+    challengeParticipations?: ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+    onboardingJourneys?: OnboardingJourneyUncheckedUpdateManyWithoutUserNestedInput
+    onboardingMentoring?: OnboardingJourneyUncheckedUpdateManyWithoutMentorNestedInput
+    coachSessions?: CoachingSessionUncheckedUpdateManyWithoutCoachNestedInput
+    coacheeSessions?: CoachingSessionUncheckedUpdateManyWithoutCoacheeNestedInput
+    devPlansAsUser?: DevelopmentPlanUncheckedUpdateManyWithoutUserNestedInput
+    devPlansAsManager?: DevelopmentPlanUncheckedUpdateManyWithoutManagerNestedInput
+    devReviews?: DevelopmentReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    appraisalsAsEmployee?: AppraisalUncheckedUpdateManyWithoutEmployeeNestedInput
+    appraisalsAsManager?: AppraisalUncheckedUpdateManyWithoutManagerNestedInput
+    shiftEntries?: ShiftEntryUncheckedUpdateManyWithoutUserNestedInput
+    swapRequests?: ShiftSwapRequestUncheckedUpdateManyWithoutRequesterNestedInput
+    wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutUserNestedInput
+    briefingsCreated?: BriefingUncheckedUpdateManyWithoutCreatorNestedInput
+    briefingAcks?: BriefingAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+    handoversFrom?: HandoverUncheckedUpdateManyWithoutFromUserNestedInput
+    handoversTo?: HandoverUncheckedUpdateManyWithoutToUserNestedInput
+    teamMessagesSent?: TeamMessageUncheckedUpdateManyWithoutSenderNestedInput
+    teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
+    newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
+    newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
+  }
+
+  export type ClientInteractionUpsertWithWhereUniqueWithoutClientInput = {
+    where: ClientInteractionWhereUniqueInput
+    update: XOR<ClientInteractionUpdateWithoutClientInput, ClientInteractionUncheckedUpdateWithoutClientInput>
+    create: XOR<ClientInteractionCreateWithoutClientInput, ClientInteractionUncheckedCreateWithoutClientInput>
+  }
+
+  export type ClientInteractionUpdateWithWhereUniqueWithoutClientInput = {
+    where: ClientInteractionWhereUniqueInput
+    data: XOR<ClientInteractionUpdateWithoutClientInput, ClientInteractionUncheckedUpdateWithoutClientInput>
+  }
+
+  export type ClientInteractionUpdateManyWithWhereWithoutClientInput = {
+    where: ClientInteractionScalarWhereInput
+    data: XOR<ClientInteractionUpdateManyMutationInput, ClientInteractionUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type ClientTaskUpsertWithWhereUniqueWithoutClientInput = {
+    where: ClientTaskWhereUniqueInput
+    update: XOR<ClientTaskUpdateWithoutClientInput, ClientTaskUncheckedUpdateWithoutClientInput>
+    create: XOR<ClientTaskCreateWithoutClientInput, ClientTaskUncheckedCreateWithoutClientInput>
+  }
+
+  export type ClientTaskUpdateWithWhereUniqueWithoutClientInput = {
+    where: ClientTaskWhereUniqueInput
+    data: XOR<ClientTaskUpdateWithoutClientInput, ClientTaskUncheckedUpdateWithoutClientInput>
+  }
+
+  export type ClientTaskUpdateManyWithWhereWithoutClientInput = {
+    where: ClientTaskScalarWhereInput
+    data: XOR<ClientTaskUpdateManyMutationInput, ClientTaskUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type ClientProfileCreateWithoutInteractionsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email?: string | null
+    phone?: string | null
+    preferences?: string | null
+    vipLevel?: string | null
+    totalPurchases?: number
+    lastVisit?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    store: StoreCreateNestedOneWithoutClientProfilesInput
+    creator: UserCreateNestedOneWithoutClientsCreatedInput
+    tasks?: ClientTaskCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientProfileUncheckedCreateWithoutInteractionsInput = {
+    id?: string
+    storeId: string
+    firstName: string
+    lastName: string
+    email?: string | null
+    phone?: string | null
+    preferences?: string | null
+    vipLevel?: string | null
+    totalPurchases?: number
+    lastVisit?: Date | string | null
+    createdBy: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: ClientTaskUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientProfileCreateOrConnectWithoutInteractionsInput = {
+    where: ClientProfileWhereUniqueInput
+    create: XOR<ClientProfileCreateWithoutInteractionsInput, ClientProfileUncheckedCreateWithoutInteractionsInput>
+  }
+
+  export type UserCreateWithoutClientInteractionsInput = {
+    id?: string
+    email: string
+    name: string
+    passwordHash: string
+    role?: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant?: TenantCreateNestedOneWithoutUsersInput
+    storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
+    regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
+    checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
+    createdSops?: SopCreateNestedManyWithoutCreatorInput
+    sopAcknowledgments?: SopAcknowledgmentCreateNestedManyWithoutUserInput
+    vmSubmissions?: VmSubmissionCreateNestedManyWithoutSubmitterInput
+    vmReviews?: VmSubmissionCreateNestedManyWithoutReviewerInput
+    standardEvaluations?: StandardEvaluationCreateNestedManyWithoutEvaluatorInput
+    kpiEntries?: KpiEntryCreateNestedManyWithoutUserInput
+    budgetPeriods?: BudgetPeriodCreateNestedManyWithoutUserInput
+    forecasts?: ForecastCreateNestedManyWithoutUserInput
+    lossReports?: LossIncidentCreateNestedManyWithoutReporterInput
+    lossAssignments?: LossIncidentCreateNestedManyWithoutAssigneeInput
+    inventoryCounts?: InventoryCountCreateNestedManyWithoutConductorInput
+    floorPositions?: FloorStaffPositionCreateNestedManyWithoutUserInput
+    floorUpdates?: FloorStaffPositionCreateNestedManyWithoutUpdaterInput
+    maintenanceReports?: MaintenanceRequestCreateNestedManyWithoutReporterInput
+    maintenanceAssignments?: MaintenanceRequestCreateNestedManyWithoutAssigneeInput
+    courseCreations?: CourseCreateNestedManyWithoutCreatorInput
+    courseEnrollments?: CourseEnrollmentCreateNestedManyWithoutUserInput
+    certificates?: CertificateCreateNestedManyWithoutUserInput
+    trainingLogs?: TrainingLogCreateNestedManyWithoutUserInput
+    challengeCreations?: ChallengeCreateNestedManyWithoutCreatorInput
+    challengeParticipations?: ChallengeParticipantCreateNestedManyWithoutUserInput
+    onboardingJourneys?: OnboardingJourneyCreateNestedManyWithoutUserInput
+    onboardingMentoring?: OnboardingJourneyCreateNestedManyWithoutMentorInput
+    coachSessions?: CoachingSessionCreateNestedManyWithoutCoachInput
+    coacheeSessions?: CoachingSessionCreateNestedManyWithoutCoacheeInput
+    devPlansAsUser?: DevelopmentPlanCreateNestedManyWithoutUserInput
+    devPlansAsManager?: DevelopmentPlanCreateNestedManyWithoutManagerInput
+    devReviews?: DevelopmentReviewCreateNestedManyWithoutReviewerInput
+    appraisalsAsEmployee?: AppraisalCreateNestedManyWithoutEmployeeInput
+    appraisalsAsManager?: AppraisalCreateNestedManyWithoutManagerInput
+    shiftEntries?: ShiftEntryCreateNestedManyWithoutUserInput
+    swapRequests?: ShiftSwapRequestCreateNestedManyWithoutRequesterInput
+    wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutUserInput
+    briefingsCreated?: BriefingCreateNestedManyWithoutCreatorInput
+    briefingAcks?: BriefingAcknowledgmentCreateNestedManyWithoutUserInput
+    handoversFrom?: HandoverCreateNestedManyWithoutFromUserInput
+    handoversTo?: HandoverCreateNestedManyWithoutToUserInput
+    teamMessagesSent?: TeamMessageCreateNestedManyWithoutSenderInput
+    teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
+    newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
+    newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
+  }
+
+  export type UserUncheckedCreateWithoutClientInteractionsInput = {
+    id?: string
+    email: string
+    name: string
+    passwordHash: string
+    role?: string
+    tenantId?: string | null
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
+    regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
+    checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
+    createdSops?: SopUncheckedCreateNestedManyWithoutCreatorInput
+    sopAcknowledgments?: SopAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+    vmSubmissions?: VmSubmissionUncheckedCreateNestedManyWithoutSubmitterInput
+    vmReviews?: VmSubmissionUncheckedCreateNestedManyWithoutReviewerInput
+    standardEvaluations?: StandardEvaluationUncheckedCreateNestedManyWithoutEvaluatorInput
+    kpiEntries?: KpiEntryUncheckedCreateNestedManyWithoutUserInput
+    budgetPeriods?: BudgetPeriodUncheckedCreateNestedManyWithoutUserInput
+    forecasts?: ForecastUncheckedCreateNestedManyWithoutUserInput
+    lossReports?: LossIncidentUncheckedCreateNestedManyWithoutReporterInput
+    lossAssignments?: LossIncidentUncheckedCreateNestedManyWithoutAssigneeInput
+    inventoryCounts?: InventoryCountUncheckedCreateNestedManyWithoutConductorInput
+    floorPositions?: FloorStaffPositionUncheckedCreateNestedManyWithoutUserInput
+    floorUpdates?: FloorStaffPositionUncheckedCreateNestedManyWithoutUpdaterInput
+    maintenanceReports?: MaintenanceRequestUncheckedCreateNestedManyWithoutReporterInput
+    maintenanceAssignments?: MaintenanceRequestUncheckedCreateNestedManyWithoutAssigneeInput
+    courseCreations?: CourseUncheckedCreateNestedManyWithoutCreatorInput
+    courseEnrollments?: CourseEnrollmentUncheckedCreateNestedManyWithoutUserInput
+    certificates?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    trainingLogs?: TrainingLogUncheckedCreateNestedManyWithoutUserInput
+    challengeCreations?: ChallengeUncheckedCreateNestedManyWithoutCreatorInput
+    challengeParticipations?: ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+    onboardingJourneys?: OnboardingJourneyUncheckedCreateNestedManyWithoutUserInput
+    onboardingMentoring?: OnboardingJourneyUncheckedCreateNestedManyWithoutMentorInput
+    coachSessions?: CoachingSessionUncheckedCreateNestedManyWithoutCoachInput
+    coacheeSessions?: CoachingSessionUncheckedCreateNestedManyWithoutCoacheeInput
+    devPlansAsUser?: DevelopmentPlanUncheckedCreateNestedManyWithoutUserInput
+    devPlansAsManager?: DevelopmentPlanUncheckedCreateNestedManyWithoutManagerInput
+    devReviews?: DevelopmentReviewUncheckedCreateNestedManyWithoutReviewerInput
+    appraisalsAsEmployee?: AppraisalUncheckedCreateNestedManyWithoutEmployeeInput
+    appraisalsAsManager?: AppraisalUncheckedCreateNestedManyWithoutManagerInput
+    shiftEntries?: ShiftEntryUncheckedCreateNestedManyWithoutUserInput
+    swapRequests?: ShiftSwapRequestUncheckedCreateNestedManyWithoutRequesterInput
+    wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutUserInput
+    briefingsCreated?: BriefingUncheckedCreateNestedManyWithoutCreatorInput
+    briefingAcks?: BriefingAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+    handoversFrom?: HandoverUncheckedCreateNestedManyWithoutFromUserInput
+    handoversTo?: HandoverUncheckedCreateNestedManyWithoutToUserInput
+    teamMessagesSent?: TeamMessageUncheckedCreateNestedManyWithoutSenderInput
+    teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
+    newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
+    newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
+  }
+
+  export type UserCreateOrConnectWithoutClientInteractionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutClientInteractionsInput, UserUncheckedCreateWithoutClientInteractionsInput>
+  }
+
+  export type ClientProfileUpsertWithoutInteractionsInput = {
+    update: XOR<ClientProfileUpdateWithoutInteractionsInput, ClientProfileUncheckedUpdateWithoutInteractionsInput>
+    create: XOR<ClientProfileCreateWithoutInteractionsInput, ClientProfileUncheckedCreateWithoutInteractionsInput>
+    where?: ClientProfileWhereInput
+  }
+
+  export type ClientProfileUpdateToOneWithWhereWithoutInteractionsInput = {
+    where?: ClientProfileWhereInput
+    data: XOR<ClientProfileUpdateWithoutInteractionsInput, ClientProfileUncheckedUpdateWithoutInteractionsInput>
+  }
+
+  export type ClientProfileUpdateWithoutInteractionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableStringFieldUpdateOperationsInput | string | null
+    vipLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    totalPurchases?: FloatFieldUpdateOperationsInput | number
+    lastVisit?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    store?: StoreUpdateOneRequiredWithoutClientProfilesNestedInput
+    creator?: UserUpdateOneRequiredWithoutClientsCreatedNestedInput
+    tasks?: ClientTaskUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientProfileUncheckedUpdateWithoutInteractionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    storeId?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableStringFieldUpdateOperationsInput | string | null
+    vipLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    totalPurchases?: FloatFieldUpdateOperationsInput | number
+    lastVisit?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: ClientTaskUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type UserUpsertWithoutClientInteractionsInput = {
+    update: XOR<UserUpdateWithoutClientInteractionsInput, UserUncheckedUpdateWithoutClientInteractionsInput>
+    create: XOR<UserCreateWithoutClientInteractionsInput, UserUncheckedCreateWithoutClientInteractionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutClientInteractionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutClientInteractionsInput, UserUncheckedUpdateWithoutClientInteractionsInput>
+  }
+
+  export type UserUpdateWithoutClientInteractionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneWithoutUsersNestedInput
+    storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
+    regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
+    checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
+    createdSops?: SopUpdateManyWithoutCreatorNestedInput
+    sopAcknowledgments?: SopAcknowledgmentUpdateManyWithoutUserNestedInput
+    vmSubmissions?: VmSubmissionUpdateManyWithoutSubmitterNestedInput
+    vmReviews?: VmSubmissionUpdateManyWithoutReviewerNestedInput
+    standardEvaluations?: StandardEvaluationUpdateManyWithoutEvaluatorNestedInput
+    kpiEntries?: KpiEntryUpdateManyWithoutUserNestedInput
+    budgetPeriods?: BudgetPeriodUpdateManyWithoutUserNestedInput
+    forecasts?: ForecastUpdateManyWithoutUserNestedInput
+    lossReports?: LossIncidentUpdateManyWithoutReporterNestedInput
+    lossAssignments?: LossIncidentUpdateManyWithoutAssigneeNestedInput
+    inventoryCounts?: InventoryCountUpdateManyWithoutConductorNestedInput
+    floorPositions?: FloorStaffPositionUpdateManyWithoutUserNestedInput
+    floorUpdates?: FloorStaffPositionUpdateManyWithoutUpdaterNestedInput
+    maintenanceReports?: MaintenanceRequestUpdateManyWithoutReporterNestedInput
+    maintenanceAssignments?: MaintenanceRequestUpdateManyWithoutAssigneeNestedInput
+    courseCreations?: CourseUpdateManyWithoutCreatorNestedInput
+    courseEnrollments?: CourseEnrollmentUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUpdateManyWithoutUserNestedInput
+    trainingLogs?: TrainingLogUpdateManyWithoutUserNestedInput
+    challengeCreations?: ChallengeUpdateManyWithoutCreatorNestedInput
+    challengeParticipations?: ChallengeParticipantUpdateManyWithoutUserNestedInput
+    onboardingJourneys?: OnboardingJourneyUpdateManyWithoutUserNestedInput
+    onboardingMentoring?: OnboardingJourneyUpdateManyWithoutMentorNestedInput
+    coachSessions?: CoachingSessionUpdateManyWithoutCoachNestedInput
+    coacheeSessions?: CoachingSessionUpdateManyWithoutCoacheeNestedInput
+    devPlansAsUser?: DevelopmentPlanUpdateManyWithoutUserNestedInput
+    devPlansAsManager?: DevelopmentPlanUpdateManyWithoutManagerNestedInput
+    devReviews?: DevelopmentReviewUpdateManyWithoutReviewerNestedInput
+    appraisalsAsEmployee?: AppraisalUpdateManyWithoutEmployeeNestedInput
+    appraisalsAsManager?: AppraisalUpdateManyWithoutManagerNestedInput
+    shiftEntries?: ShiftEntryUpdateManyWithoutUserNestedInput
+    swapRequests?: ShiftSwapRequestUpdateManyWithoutRequesterNestedInput
+    wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutUserNestedInput
+    briefingsCreated?: BriefingUpdateManyWithoutCreatorNestedInput
+    briefingAcks?: BriefingAcknowledgmentUpdateManyWithoutUserNestedInput
+    handoversFrom?: HandoverUpdateManyWithoutFromUserNestedInput
+    handoversTo?: HandoverUpdateManyWithoutToUserNestedInput
+    teamMessagesSent?: TeamMessageUpdateManyWithoutSenderNestedInput
+    teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
+    newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
+    newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutClientInteractionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    tenantId?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
+    createdSops?: SopUncheckedUpdateManyWithoutCreatorNestedInput
+    sopAcknowledgments?: SopAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+    vmSubmissions?: VmSubmissionUncheckedUpdateManyWithoutSubmitterNestedInput
+    vmReviews?: VmSubmissionUncheckedUpdateManyWithoutReviewerNestedInput
+    standardEvaluations?: StandardEvaluationUncheckedUpdateManyWithoutEvaluatorNestedInput
+    kpiEntries?: KpiEntryUncheckedUpdateManyWithoutUserNestedInput
+    budgetPeriods?: BudgetPeriodUncheckedUpdateManyWithoutUserNestedInput
+    forecasts?: ForecastUncheckedUpdateManyWithoutUserNestedInput
+    lossReports?: LossIncidentUncheckedUpdateManyWithoutReporterNestedInput
+    lossAssignments?: LossIncidentUncheckedUpdateManyWithoutAssigneeNestedInput
+    inventoryCounts?: InventoryCountUncheckedUpdateManyWithoutConductorNestedInput
+    floorPositions?: FloorStaffPositionUncheckedUpdateManyWithoutUserNestedInput
+    floorUpdates?: FloorStaffPositionUncheckedUpdateManyWithoutUpdaterNestedInput
+    maintenanceReports?: MaintenanceRequestUncheckedUpdateManyWithoutReporterNestedInput
+    maintenanceAssignments?: MaintenanceRequestUncheckedUpdateManyWithoutAssigneeNestedInput
+    courseCreations?: CourseUncheckedUpdateManyWithoutCreatorNestedInput
+    courseEnrollments?: CourseEnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    trainingLogs?: TrainingLogUncheckedUpdateManyWithoutUserNestedInput
+    challengeCreations?: ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
+    challengeParticipations?: ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+    onboardingJourneys?: OnboardingJourneyUncheckedUpdateManyWithoutUserNestedInput
+    onboardingMentoring?: OnboardingJourneyUncheckedUpdateManyWithoutMentorNestedInput
+    coachSessions?: CoachingSessionUncheckedUpdateManyWithoutCoachNestedInput
+    coacheeSessions?: CoachingSessionUncheckedUpdateManyWithoutCoacheeNestedInput
+    devPlansAsUser?: DevelopmentPlanUncheckedUpdateManyWithoutUserNestedInput
+    devPlansAsManager?: DevelopmentPlanUncheckedUpdateManyWithoutManagerNestedInput
+    devReviews?: DevelopmentReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    appraisalsAsEmployee?: AppraisalUncheckedUpdateManyWithoutEmployeeNestedInput
+    appraisalsAsManager?: AppraisalUncheckedUpdateManyWithoutManagerNestedInput
+    shiftEntries?: ShiftEntryUncheckedUpdateManyWithoutUserNestedInput
+    swapRequests?: ShiftSwapRequestUncheckedUpdateManyWithoutRequesterNestedInput
+    wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutUserNestedInput
+    briefingsCreated?: BriefingUncheckedUpdateManyWithoutCreatorNestedInput
+    briefingAcks?: BriefingAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+    handoversFrom?: HandoverUncheckedUpdateManyWithoutFromUserNestedInput
+    handoversTo?: HandoverUncheckedUpdateManyWithoutToUserNestedInput
+    teamMessagesSent?: TeamMessageUncheckedUpdateManyWithoutSenderNestedInput
+    teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
+    newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
+    newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
+  }
+
+  export type ClientProfileCreateWithoutTasksInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email?: string | null
+    phone?: string | null
+    preferences?: string | null
+    vipLevel?: string | null
+    totalPurchases?: number
+    lastVisit?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    store: StoreCreateNestedOneWithoutClientProfilesInput
+    creator: UserCreateNestedOneWithoutClientsCreatedInput
+    interactions?: ClientInteractionCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientProfileUncheckedCreateWithoutTasksInput = {
+    id?: string
+    storeId: string
+    firstName: string
+    lastName: string
+    email?: string | null
+    phone?: string | null
+    preferences?: string | null
+    vipLevel?: string | null
+    totalPurchases?: number
+    lastVisit?: Date | string | null
+    createdBy: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    interactions?: ClientInteractionUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientProfileCreateOrConnectWithoutTasksInput = {
+    where: ClientProfileWhereUniqueInput
+    create: XOR<ClientProfileCreateWithoutTasksInput, ClientProfileUncheckedCreateWithoutTasksInput>
+  }
+
+  export type UserCreateWithoutClientTasksInput = {
+    id?: string
+    email: string
+    name: string
+    passwordHash: string
+    role?: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant?: TenantCreateNestedOneWithoutUsersInput
+    storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
+    regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
+    checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
+    createdSops?: SopCreateNestedManyWithoutCreatorInput
+    sopAcknowledgments?: SopAcknowledgmentCreateNestedManyWithoutUserInput
+    vmSubmissions?: VmSubmissionCreateNestedManyWithoutSubmitterInput
+    vmReviews?: VmSubmissionCreateNestedManyWithoutReviewerInput
+    standardEvaluations?: StandardEvaluationCreateNestedManyWithoutEvaluatorInput
+    kpiEntries?: KpiEntryCreateNestedManyWithoutUserInput
+    budgetPeriods?: BudgetPeriodCreateNestedManyWithoutUserInput
+    forecasts?: ForecastCreateNestedManyWithoutUserInput
+    lossReports?: LossIncidentCreateNestedManyWithoutReporterInput
+    lossAssignments?: LossIncidentCreateNestedManyWithoutAssigneeInput
+    inventoryCounts?: InventoryCountCreateNestedManyWithoutConductorInput
+    floorPositions?: FloorStaffPositionCreateNestedManyWithoutUserInput
+    floorUpdates?: FloorStaffPositionCreateNestedManyWithoutUpdaterInput
+    maintenanceReports?: MaintenanceRequestCreateNestedManyWithoutReporterInput
+    maintenanceAssignments?: MaintenanceRequestCreateNestedManyWithoutAssigneeInput
+    courseCreations?: CourseCreateNestedManyWithoutCreatorInput
+    courseEnrollments?: CourseEnrollmentCreateNestedManyWithoutUserInput
+    certificates?: CertificateCreateNestedManyWithoutUserInput
+    trainingLogs?: TrainingLogCreateNestedManyWithoutUserInput
+    challengeCreations?: ChallengeCreateNestedManyWithoutCreatorInput
+    challengeParticipations?: ChallengeParticipantCreateNestedManyWithoutUserInput
+    onboardingJourneys?: OnboardingJourneyCreateNestedManyWithoutUserInput
+    onboardingMentoring?: OnboardingJourneyCreateNestedManyWithoutMentorInput
+    coachSessions?: CoachingSessionCreateNestedManyWithoutCoachInput
+    coacheeSessions?: CoachingSessionCreateNestedManyWithoutCoacheeInput
+    devPlansAsUser?: DevelopmentPlanCreateNestedManyWithoutUserInput
+    devPlansAsManager?: DevelopmentPlanCreateNestedManyWithoutManagerInput
+    devReviews?: DevelopmentReviewCreateNestedManyWithoutReviewerInput
+    appraisalsAsEmployee?: AppraisalCreateNestedManyWithoutEmployeeInput
+    appraisalsAsManager?: AppraisalCreateNestedManyWithoutManagerInput
+    shiftEntries?: ShiftEntryCreateNestedManyWithoutUserInput
+    swapRequests?: ShiftSwapRequestCreateNestedManyWithoutRequesterInput
+    wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutUserInput
+    briefingsCreated?: BriefingCreateNestedManyWithoutCreatorInput
+    briefingAcks?: BriefingAcknowledgmentCreateNestedManyWithoutUserInput
+    handoversFrom?: HandoverCreateNestedManyWithoutFromUserInput
+    handoversTo?: HandoverCreateNestedManyWithoutToUserInput
+    teamMessagesSent?: TeamMessageCreateNestedManyWithoutSenderInput
+    teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
+    newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
+    newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
+  }
+
+  export type UserUncheckedCreateWithoutClientTasksInput = {
+    id?: string
+    email: string
+    name: string
+    passwordHash: string
+    role?: string
+    tenantId?: string | null
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
+    regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
+    checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
+    createdSops?: SopUncheckedCreateNestedManyWithoutCreatorInput
+    sopAcknowledgments?: SopAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+    vmSubmissions?: VmSubmissionUncheckedCreateNestedManyWithoutSubmitterInput
+    vmReviews?: VmSubmissionUncheckedCreateNestedManyWithoutReviewerInput
+    standardEvaluations?: StandardEvaluationUncheckedCreateNestedManyWithoutEvaluatorInput
+    kpiEntries?: KpiEntryUncheckedCreateNestedManyWithoutUserInput
+    budgetPeriods?: BudgetPeriodUncheckedCreateNestedManyWithoutUserInput
+    forecasts?: ForecastUncheckedCreateNestedManyWithoutUserInput
+    lossReports?: LossIncidentUncheckedCreateNestedManyWithoutReporterInput
+    lossAssignments?: LossIncidentUncheckedCreateNestedManyWithoutAssigneeInput
+    inventoryCounts?: InventoryCountUncheckedCreateNestedManyWithoutConductorInput
+    floorPositions?: FloorStaffPositionUncheckedCreateNestedManyWithoutUserInput
+    floorUpdates?: FloorStaffPositionUncheckedCreateNestedManyWithoutUpdaterInput
+    maintenanceReports?: MaintenanceRequestUncheckedCreateNestedManyWithoutReporterInput
+    maintenanceAssignments?: MaintenanceRequestUncheckedCreateNestedManyWithoutAssigneeInput
+    courseCreations?: CourseUncheckedCreateNestedManyWithoutCreatorInput
+    courseEnrollments?: CourseEnrollmentUncheckedCreateNestedManyWithoutUserInput
+    certificates?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    trainingLogs?: TrainingLogUncheckedCreateNestedManyWithoutUserInput
+    challengeCreations?: ChallengeUncheckedCreateNestedManyWithoutCreatorInput
+    challengeParticipations?: ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+    onboardingJourneys?: OnboardingJourneyUncheckedCreateNestedManyWithoutUserInput
+    onboardingMentoring?: OnboardingJourneyUncheckedCreateNestedManyWithoutMentorInput
+    coachSessions?: CoachingSessionUncheckedCreateNestedManyWithoutCoachInput
+    coacheeSessions?: CoachingSessionUncheckedCreateNestedManyWithoutCoacheeInput
+    devPlansAsUser?: DevelopmentPlanUncheckedCreateNestedManyWithoutUserInput
+    devPlansAsManager?: DevelopmentPlanUncheckedCreateNestedManyWithoutManagerInput
+    devReviews?: DevelopmentReviewUncheckedCreateNestedManyWithoutReviewerInput
+    appraisalsAsEmployee?: AppraisalUncheckedCreateNestedManyWithoutEmployeeInput
+    appraisalsAsManager?: AppraisalUncheckedCreateNestedManyWithoutManagerInput
+    shiftEntries?: ShiftEntryUncheckedCreateNestedManyWithoutUserInput
+    swapRequests?: ShiftSwapRequestUncheckedCreateNestedManyWithoutRequesterInput
+    wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutUserInput
+    briefingsCreated?: BriefingUncheckedCreateNestedManyWithoutCreatorInput
+    briefingAcks?: BriefingAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+    handoversFrom?: HandoverUncheckedCreateNestedManyWithoutFromUserInput
+    handoversTo?: HandoverUncheckedCreateNestedManyWithoutToUserInput
+    teamMessagesSent?: TeamMessageUncheckedCreateNestedManyWithoutSenderInput
+    teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
+    newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
+    newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
+  }
+
+  export type UserCreateOrConnectWithoutClientTasksInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutClientTasksInput, UserUncheckedCreateWithoutClientTasksInput>
+  }
+
+  export type ClientProfileUpsertWithoutTasksInput = {
+    update: XOR<ClientProfileUpdateWithoutTasksInput, ClientProfileUncheckedUpdateWithoutTasksInput>
+    create: XOR<ClientProfileCreateWithoutTasksInput, ClientProfileUncheckedCreateWithoutTasksInput>
+    where?: ClientProfileWhereInput
+  }
+
+  export type ClientProfileUpdateToOneWithWhereWithoutTasksInput = {
+    where?: ClientProfileWhereInput
+    data: XOR<ClientProfileUpdateWithoutTasksInput, ClientProfileUncheckedUpdateWithoutTasksInput>
+  }
+
+  export type ClientProfileUpdateWithoutTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableStringFieldUpdateOperationsInput | string | null
+    vipLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    totalPurchases?: FloatFieldUpdateOperationsInput | number
+    lastVisit?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    store?: StoreUpdateOneRequiredWithoutClientProfilesNestedInput
+    creator?: UserUpdateOneRequiredWithoutClientsCreatedNestedInput
+    interactions?: ClientInteractionUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientProfileUncheckedUpdateWithoutTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    storeId?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableStringFieldUpdateOperationsInput | string | null
+    vipLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    totalPurchases?: FloatFieldUpdateOperationsInput | number
+    lastVisit?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    interactions?: ClientInteractionUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type UserUpsertWithoutClientTasksInput = {
+    update: XOR<UserUpdateWithoutClientTasksInput, UserUncheckedUpdateWithoutClientTasksInput>
+    create: XOR<UserCreateWithoutClientTasksInput, UserUncheckedCreateWithoutClientTasksInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutClientTasksInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutClientTasksInput, UserUncheckedUpdateWithoutClientTasksInput>
+  }
+
+  export type UserUpdateWithoutClientTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneWithoutUsersNestedInput
+    storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
+    regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
+    checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
+    createdSops?: SopUpdateManyWithoutCreatorNestedInput
+    sopAcknowledgments?: SopAcknowledgmentUpdateManyWithoutUserNestedInput
+    vmSubmissions?: VmSubmissionUpdateManyWithoutSubmitterNestedInput
+    vmReviews?: VmSubmissionUpdateManyWithoutReviewerNestedInput
+    standardEvaluations?: StandardEvaluationUpdateManyWithoutEvaluatorNestedInput
+    kpiEntries?: KpiEntryUpdateManyWithoutUserNestedInput
+    budgetPeriods?: BudgetPeriodUpdateManyWithoutUserNestedInput
+    forecasts?: ForecastUpdateManyWithoutUserNestedInput
+    lossReports?: LossIncidentUpdateManyWithoutReporterNestedInput
+    lossAssignments?: LossIncidentUpdateManyWithoutAssigneeNestedInput
+    inventoryCounts?: InventoryCountUpdateManyWithoutConductorNestedInput
+    floorPositions?: FloorStaffPositionUpdateManyWithoutUserNestedInput
+    floorUpdates?: FloorStaffPositionUpdateManyWithoutUpdaterNestedInput
+    maintenanceReports?: MaintenanceRequestUpdateManyWithoutReporterNestedInput
+    maintenanceAssignments?: MaintenanceRequestUpdateManyWithoutAssigneeNestedInput
+    courseCreations?: CourseUpdateManyWithoutCreatorNestedInput
+    courseEnrollments?: CourseEnrollmentUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUpdateManyWithoutUserNestedInput
+    trainingLogs?: TrainingLogUpdateManyWithoutUserNestedInput
+    challengeCreations?: ChallengeUpdateManyWithoutCreatorNestedInput
+    challengeParticipations?: ChallengeParticipantUpdateManyWithoutUserNestedInput
+    onboardingJourneys?: OnboardingJourneyUpdateManyWithoutUserNestedInput
+    onboardingMentoring?: OnboardingJourneyUpdateManyWithoutMentorNestedInput
+    coachSessions?: CoachingSessionUpdateManyWithoutCoachNestedInput
+    coacheeSessions?: CoachingSessionUpdateManyWithoutCoacheeNestedInput
+    devPlansAsUser?: DevelopmentPlanUpdateManyWithoutUserNestedInput
+    devPlansAsManager?: DevelopmentPlanUpdateManyWithoutManagerNestedInput
+    devReviews?: DevelopmentReviewUpdateManyWithoutReviewerNestedInput
+    appraisalsAsEmployee?: AppraisalUpdateManyWithoutEmployeeNestedInput
+    appraisalsAsManager?: AppraisalUpdateManyWithoutManagerNestedInput
+    shiftEntries?: ShiftEntryUpdateManyWithoutUserNestedInput
+    swapRequests?: ShiftSwapRequestUpdateManyWithoutRequesterNestedInput
+    wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutUserNestedInput
+    briefingsCreated?: BriefingUpdateManyWithoutCreatorNestedInput
+    briefingAcks?: BriefingAcknowledgmentUpdateManyWithoutUserNestedInput
+    handoversFrom?: HandoverUpdateManyWithoutFromUserNestedInput
+    handoversTo?: HandoverUpdateManyWithoutToUserNestedInput
+    teamMessagesSent?: TeamMessageUpdateManyWithoutSenderNestedInput
+    teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
+    newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
+    newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutClientTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    tenantId?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
+    createdSops?: SopUncheckedUpdateManyWithoutCreatorNestedInput
+    sopAcknowledgments?: SopAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+    vmSubmissions?: VmSubmissionUncheckedUpdateManyWithoutSubmitterNestedInput
+    vmReviews?: VmSubmissionUncheckedUpdateManyWithoutReviewerNestedInput
+    standardEvaluations?: StandardEvaluationUncheckedUpdateManyWithoutEvaluatorNestedInput
+    kpiEntries?: KpiEntryUncheckedUpdateManyWithoutUserNestedInput
+    budgetPeriods?: BudgetPeriodUncheckedUpdateManyWithoutUserNestedInput
+    forecasts?: ForecastUncheckedUpdateManyWithoutUserNestedInput
+    lossReports?: LossIncidentUncheckedUpdateManyWithoutReporterNestedInput
+    lossAssignments?: LossIncidentUncheckedUpdateManyWithoutAssigneeNestedInput
+    inventoryCounts?: InventoryCountUncheckedUpdateManyWithoutConductorNestedInput
+    floorPositions?: FloorStaffPositionUncheckedUpdateManyWithoutUserNestedInput
+    floorUpdates?: FloorStaffPositionUncheckedUpdateManyWithoutUpdaterNestedInput
+    maintenanceReports?: MaintenanceRequestUncheckedUpdateManyWithoutReporterNestedInput
+    maintenanceAssignments?: MaintenanceRequestUncheckedUpdateManyWithoutAssigneeNestedInput
+    courseCreations?: CourseUncheckedUpdateManyWithoutCreatorNestedInput
+    courseEnrollments?: CourseEnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    trainingLogs?: TrainingLogUncheckedUpdateManyWithoutUserNestedInput
+    challengeCreations?: ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
+    challengeParticipations?: ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+    onboardingJourneys?: OnboardingJourneyUncheckedUpdateManyWithoutUserNestedInput
+    onboardingMentoring?: OnboardingJourneyUncheckedUpdateManyWithoutMentorNestedInput
+    coachSessions?: CoachingSessionUncheckedUpdateManyWithoutCoachNestedInput
+    coacheeSessions?: CoachingSessionUncheckedUpdateManyWithoutCoacheeNestedInput
+    devPlansAsUser?: DevelopmentPlanUncheckedUpdateManyWithoutUserNestedInput
+    devPlansAsManager?: DevelopmentPlanUncheckedUpdateManyWithoutManagerNestedInput
+    devReviews?: DevelopmentReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    appraisalsAsEmployee?: AppraisalUncheckedUpdateManyWithoutEmployeeNestedInput
+    appraisalsAsManager?: AppraisalUncheckedUpdateManyWithoutManagerNestedInput
+    shiftEntries?: ShiftEntryUncheckedUpdateManyWithoutUserNestedInput
+    swapRequests?: ShiftSwapRequestUncheckedUpdateManyWithoutRequesterNestedInput
+    wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutUserNestedInput
+    briefingsCreated?: BriefingUncheckedUpdateManyWithoutCreatorNestedInput
+    briefingAcks?: BriefingAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+    handoversFrom?: HandoverUncheckedUpdateManyWithoutFromUserNestedInput
+    handoversTo?: HandoverUncheckedUpdateManyWithoutToUserNestedInput
+    teamMessagesSent?: TeamMessageUncheckedUpdateManyWithoutSenderNestedInput
+    teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
+    newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
+    newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
+  }
+
+  export type StoreCreateWithoutStockCalloutsInput = {
+    id?: string
+    name: string
+    city?: string | null
+    address?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutStoresInput
+    region?: RegionCreateNestedOneWithoutStoresInput
+    tools?: StoreToolAssignmentCreateNestedManyWithoutStoreInput
+    userAssignments?: UserStoreAssignmentCreateNestedManyWithoutStoreInput
+    auditSessions?: AuditSessionCreateNestedManyWithoutStoreInput
+    checklistSessions?: ChecklistSessionCreateNestedManyWithoutStoreInput
+    vmSubmissions?: VmSubmissionCreateNestedManyWithoutStoreInput
+    standardEvaluations?: StandardEvaluationCreateNestedManyWithoutStoreInput
+    kpiEntries?: KpiEntryCreateNestedManyWithoutStoreInput
+    budgetPeriods?: BudgetPeriodCreateNestedManyWithoutStoreInput
+    forecasts?: ForecastCreateNestedManyWithoutStoreInput
+    lossIncidents?: LossIncidentCreateNestedManyWithoutStoreInput
+    inventoryCounts?: InventoryCountCreateNestedManyWithoutStoreInput
+    floorZones?: FloorZoneCreateNestedManyWithoutStoreInput
+    floorPositions?: FloorStaffPositionCreateNestedManyWithoutStoreInput
+    footfallEntries?: FootfallEntryCreateNestedManyWithoutStoreInput
+    maintenanceRequests?: MaintenanceRequestCreateNestedManyWithoutStoreInput
+    courseEnrollments?: CourseEnrollmentCreateNestedManyWithoutStoreInput
+    trainingLogs?: TrainingLogCreateNestedManyWithoutStoreInput
+    challengeParticipants?: ChallengeParticipantCreateNestedManyWithoutStoreInput
+    onboardingJourneys?: OnboardingJourneyCreateNestedManyWithoutStoreInput
+    coachingSessions?: CoachingSessionCreateNestedManyWithoutStoreInput
+    developmentPlans?: DevelopmentPlanCreateNestedManyWithoutStoreInput
+    appraisals?: AppraisalCreateNestedManyWithoutStoreInput
+    shiftTemplates?: ShiftTemplateCreateNestedManyWithoutStoreInput
+    shiftEntries?: ShiftEntryCreateNestedManyWithoutStoreInput
+    pulseResponses?: PulseResponseCreateNestedManyWithoutStoreInput
+    wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
+    briefings?: BriefingCreateNestedManyWithoutStoreInput
+    handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderCreateNestedManyWithoutStoreInput
+  }
+
+  export type StoreUncheckedCreateWithoutStockCalloutsInput = {
+    id?: string
+    tenantId: string
+    regionId?: string | null
+    name: string
+    city?: string | null
+    address?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tools?: StoreToolAssignmentUncheckedCreateNestedManyWithoutStoreInput
+    userAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutStoreInput
+    auditSessions?: AuditSessionUncheckedCreateNestedManyWithoutStoreInput
+    checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutStoreInput
+    vmSubmissions?: VmSubmissionUncheckedCreateNestedManyWithoutStoreInput
+    standardEvaluations?: StandardEvaluationUncheckedCreateNestedManyWithoutStoreInput
+    kpiEntries?: KpiEntryUncheckedCreateNestedManyWithoutStoreInput
+    budgetPeriods?: BudgetPeriodUncheckedCreateNestedManyWithoutStoreInput
+    forecasts?: ForecastUncheckedCreateNestedManyWithoutStoreInput
+    lossIncidents?: LossIncidentUncheckedCreateNestedManyWithoutStoreInput
+    inventoryCounts?: InventoryCountUncheckedCreateNestedManyWithoutStoreInput
+    floorZones?: FloorZoneUncheckedCreateNestedManyWithoutStoreInput
+    floorPositions?: FloorStaffPositionUncheckedCreateNestedManyWithoutStoreInput
+    footfallEntries?: FootfallEntryUncheckedCreateNestedManyWithoutStoreInput
+    maintenanceRequests?: MaintenanceRequestUncheckedCreateNestedManyWithoutStoreInput
+    courseEnrollments?: CourseEnrollmentUncheckedCreateNestedManyWithoutStoreInput
+    trainingLogs?: TrainingLogUncheckedCreateNestedManyWithoutStoreInput
+    challengeParticipants?: ChallengeParticipantUncheckedCreateNestedManyWithoutStoreInput
+    onboardingJourneys?: OnboardingJourneyUncheckedCreateNestedManyWithoutStoreInput
+    coachingSessions?: CoachingSessionUncheckedCreateNestedManyWithoutStoreInput
+    developmentPlans?: DevelopmentPlanUncheckedCreateNestedManyWithoutStoreInput
+    appraisals?: AppraisalUncheckedCreateNestedManyWithoutStoreInput
+    shiftTemplates?: ShiftTemplateUncheckedCreateNestedManyWithoutStoreInput
+    shiftEntries?: ShiftEntryUncheckedCreateNestedManyWithoutStoreInput
+    pulseResponses?: PulseResponseUncheckedCreateNestedManyWithoutStoreInput
+    wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
+    briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
+    handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    customerOrders?: CustomerOrderUncheckedCreateNestedManyWithoutStoreInput
+  }
+
+  export type StoreCreateOrConnectWithoutStockCalloutsInput = {
+    where: StoreWhereUniqueInput
+    create: XOR<StoreCreateWithoutStockCalloutsInput, StoreUncheckedCreateWithoutStockCalloutsInput>
+  }
+
+  export type UserCreateWithoutStockCalloutsInput = {
+    id?: string
+    email: string
+    name: string
+    passwordHash: string
+    role?: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant?: TenantCreateNestedOneWithoutUsersInput
+    storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
+    regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
+    checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
+    createdSops?: SopCreateNestedManyWithoutCreatorInput
+    sopAcknowledgments?: SopAcknowledgmentCreateNestedManyWithoutUserInput
+    vmSubmissions?: VmSubmissionCreateNestedManyWithoutSubmitterInput
+    vmReviews?: VmSubmissionCreateNestedManyWithoutReviewerInput
+    standardEvaluations?: StandardEvaluationCreateNestedManyWithoutEvaluatorInput
+    kpiEntries?: KpiEntryCreateNestedManyWithoutUserInput
+    budgetPeriods?: BudgetPeriodCreateNestedManyWithoutUserInput
+    forecasts?: ForecastCreateNestedManyWithoutUserInput
+    lossReports?: LossIncidentCreateNestedManyWithoutReporterInput
+    lossAssignments?: LossIncidentCreateNestedManyWithoutAssigneeInput
+    inventoryCounts?: InventoryCountCreateNestedManyWithoutConductorInput
+    floorPositions?: FloorStaffPositionCreateNestedManyWithoutUserInput
+    floorUpdates?: FloorStaffPositionCreateNestedManyWithoutUpdaterInput
+    maintenanceReports?: MaintenanceRequestCreateNestedManyWithoutReporterInput
+    maintenanceAssignments?: MaintenanceRequestCreateNestedManyWithoutAssigneeInput
+    courseCreations?: CourseCreateNestedManyWithoutCreatorInput
+    courseEnrollments?: CourseEnrollmentCreateNestedManyWithoutUserInput
+    certificates?: CertificateCreateNestedManyWithoutUserInput
+    trainingLogs?: TrainingLogCreateNestedManyWithoutUserInput
+    challengeCreations?: ChallengeCreateNestedManyWithoutCreatorInput
+    challengeParticipations?: ChallengeParticipantCreateNestedManyWithoutUserInput
+    onboardingJourneys?: OnboardingJourneyCreateNestedManyWithoutUserInput
+    onboardingMentoring?: OnboardingJourneyCreateNestedManyWithoutMentorInput
+    coachSessions?: CoachingSessionCreateNestedManyWithoutCoachInput
+    coacheeSessions?: CoachingSessionCreateNestedManyWithoutCoacheeInput
+    devPlansAsUser?: DevelopmentPlanCreateNestedManyWithoutUserInput
+    devPlansAsManager?: DevelopmentPlanCreateNestedManyWithoutManagerInput
+    devReviews?: DevelopmentReviewCreateNestedManyWithoutReviewerInput
+    appraisalsAsEmployee?: AppraisalCreateNestedManyWithoutEmployeeInput
+    appraisalsAsManager?: AppraisalCreateNestedManyWithoutManagerInput
+    shiftEntries?: ShiftEntryCreateNestedManyWithoutUserInput
+    swapRequests?: ShiftSwapRequestCreateNestedManyWithoutRequesterInput
+    wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutUserInput
+    briefingsCreated?: BriefingCreateNestedManyWithoutCreatorInput
+    briefingAcks?: BriefingAcknowledgmentCreateNestedManyWithoutUserInput
+    handoversFrom?: HandoverCreateNestedManyWithoutFromUserInput
+    handoversTo?: HandoverCreateNestedManyWithoutToUserInput
+    teamMessagesSent?: TeamMessageCreateNestedManyWithoutSenderInput
+    teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
+    newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
+    newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
+  }
+
+  export type UserUncheckedCreateWithoutStockCalloutsInput = {
+    id?: string
+    email: string
+    name: string
+    passwordHash: string
+    role?: string
+    tenantId?: string | null
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
+    regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
+    checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
+    createdSops?: SopUncheckedCreateNestedManyWithoutCreatorInput
+    sopAcknowledgments?: SopAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+    vmSubmissions?: VmSubmissionUncheckedCreateNestedManyWithoutSubmitterInput
+    vmReviews?: VmSubmissionUncheckedCreateNestedManyWithoutReviewerInput
+    standardEvaluations?: StandardEvaluationUncheckedCreateNestedManyWithoutEvaluatorInput
+    kpiEntries?: KpiEntryUncheckedCreateNestedManyWithoutUserInput
+    budgetPeriods?: BudgetPeriodUncheckedCreateNestedManyWithoutUserInput
+    forecasts?: ForecastUncheckedCreateNestedManyWithoutUserInput
+    lossReports?: LossIncidentUncheckedCreateNestedManyWithoutReporterInput
+    lossAssignments?: LossIncidentUncheckedCreateNestedManyWithoutAssigneeInput
+    inventoryCounts?: InventoryCountUncheckedCreateNestedManyWithoutConductorInput
+    floorPositions?: FloorStaffPositionUncheckedCreateNestedManyWithoutUserInput
+    floorUpdates?: FloorStaffPositionUncheckedCreateNestedManyWithoutUpdaterInput
+    maintenanceReports?: MaintenanceRequestUncheckedCreateNestedManyWithoutReporterInput
+    maintenanceAssignments?: MaintenanceRequestUncheckedCreateNestedManyWithoutAssigneeInput
+    courseCreations?: CourseUncheckedCreateNestedManyWithoutCreatorInput
+    courseEnrollments?: CourseEnrollmentUncheckedCreateNestedManyWithoutUserInput
+    certificates?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    trainingLogs?: TrainingLogUncheckedCreateNestedManyWithoutUserInput
+    challengeCreations?: ChallengeUncheckedCreateNestedManyWithoutCreatorInput
+    challengeParticipations?: ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+    onboardingJourneys?: OnboardingJourneyUncheckedCreateNestedManyWithoutUserInput
+    onboardingMentoring?: OnboardingJourneyUncheckedCreateNestedManyWithoutMentorInput
+    coachSessions?: CoachingSessionUncheckedCreateNestedManyWithoutCoachInput
+    coacheeSessions?: CoachingSessionUncheckedCreateNestedManyWithoutCoacheeInput
+    devPlansAsUser?: DevelopmentPlanUncheckedCreateNestedManyWithoutUserInput
+    devPlansAsManager?: DevelopmentPlanUncheckedCreateNestedManyWithoutManagerInput
+    devReviews?: DevelopmentReviewUncheckedCreateNestedManyWithoutReviewerInput
+    appraisalsAsEmployee?: AppraisalUncheckedCreateNestedManyWithoutEmployeeInput
+    appraisalsAsManager?: AppraisalUncheckedCreateNestedManyWithoutManagerInput
+    shiftEntries?: ShiftEntryUncheckedCreateNestedManyWithoutUserInput
+    swapRequests?: ShiftSwapRequestUncheckedCreateNestedManyWithoutRequesterInput
+    wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutUserInput
+    briefingsCreated?: BriefingUncheckedCreateNestedManyWithoutCreatorInput
+    briefingAcks?: BriefingAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+    handoversFrom?: HandoverUncheckedCreateNestedManyWithoutFromUserInput
+    handoversTo?: HandoverUncheckedCreateNestedManyWithoutToUserInput
+    teamMessagesSent?: TeamMessageUncheckedCreateNestedManyWithoutSenderInput
+    teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
+    newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
+    newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
+  }
+
+  export type UserCreateOrConnectWithoutStockCalloutsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutStockCalloutsInput, UserUncheckedCreateWithoutStockCalloutsInput>
+  }
+
+  export type StoreUpsertWithoutStockCalloutsInput = {
+    update: XOR<StoreUpdateWithoutStockCalloutsInput, StoreUncheckedUpdateWithoutStockCalloutsInput>
+    create: XOR<StoreCreateWithoutStockCalloutsInput, StoreUncheckedCreateWithoutStockCalloutsInput>
+    where?: StoreWhereInput
+  }
+
+  export type StoreUpdateToOneWithWhereWithoutStockCalloutsInput = {
+    where?: StoreWhereInput
+    data: XOR<StoreUpdateWithoutStockCalloutsInput, StoreUncheckedUpdateWithoutStockCalloutsInput>
+  }
+
+  export type StoreUpdateWithoutStockCalloutsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutStoresNestedInput
+    region?: RegionUpdateOneWithoutStoresNestedInput
+    tools?: StoreToolAssignmentUpdateManyWithoutStoreNestedInput
+    userAssignments?: UserStoreAssignmentUpdateManyWithoutStoreNestedInput
+    auditSessions?: AuditSessionUpdateManyWithoutStoreNestedInput
+    checklistSessions?: ChecklistSessionUpdateManyWithoutStoreNestedInput
+    vmSubmissions?: VmSubmissionUpdateManyWithoutStoreNestedInput
+    standardEvaluations?: StandardEvaluationUpdateManyWithoutStoreNestedInput
+    kpiEntries?: KpiEntryUpdateManyWithoutStoreNestedInput
+    budgetPeriods?: BudgetPeriodUpdateManyWithoutStoreNestedInput
+    forecasts?: ForecastUpdateManyWithoutStoreNestedInput
+    lossIncidents?: LossIncidentUpdateManyWithoutStoreNestedInput
+    inventoryCounts?: InventoryCountUpdateManyWithoutStoreNestedInput
+    floorZones?: FloorZoneUpdateManyWithoutStoreNestedInput
+    floorPositions?: FloorStaffPositionUpdateManyWithoutStoreNestedInput
+    footfallEntries?: FootfallEntryUpdateManyWithoutStoreNestedInput
+    maintenanceRequests?: MaintenanceRequestUpdateManyWithoutStoreNestedInput
+    courseEnrollments?: CourseEnrollmentUpdateManyWithoutStoreNestedInput
+    trainingLogs?: TrainingLogUpdateManyWithoutStoreNestedInput
+    challengeParticipants?: ChallengeParticipantUpdateManyWithoutStoreNestedInput
+    onboardingJourneys?: OnboardingJourneyUpdateManyWithoutStoreNestedInput
+    coachingSessions?: CoachingSessionUpdateManyWithoutStoreNestedInput
+    developmentPlans?: DevelopmentPlanUpdateManyWithoutStoreNestedInput
+    appraisals?: AppraisalUpdateManyWithoutStoreNestedInput
+    shiftTemplates?: ShiftTemplateUpdateManyWithoutStoreNestedInput
+    shiftEntries?: ShiftEntryUpdateManyWithoutStoreNestedInput
+    pulseResponses?: PulseResponseUpdateManyWithoutStoreNestedInput
+    wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
+    briefings?: BriefingUpdateManyWithoutStoreNestedInput
+    handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
+  }
+
+  export type StoreUncheckedUpdateWithoutStockCalloutsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    regionId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tools?: StoreToolAssignmentUncheckedUpdateManyWithoutStoreNestedInput
+    userAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutStoreNestedInput
+    auditSessions?: AuditSessionUncheckedUpdateManyWithoutStoreNestedInput
+    checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutStoreNestedInput
+    vmSubmissions?: VmSubmissionUncheckedUpdateManyWithoutStoreNestedInput
+    standardEvaluations?: StandardEvaluationUncheckedUpdateManyWithoutStoreNestedInput
+    kpiEntries?: KpiEntryUncheckedUpdateManyWithoutStoreNestedInput
+    budgetPeriods?: BudgetPeriodUncheckedUpdateManyWithoutStoreNestedInput
+    forecasts?: ForecastUncheckedUpdateManyWithoutStoreNestedInput
+    lossIncidents?: LossIncidentUncheckedUpdateManyWithoutStoreNestedInput
+    inventoryCounts?: InventoryCountUncheckedUpdateManyWithoutStoreNestedInput
+    floorZones?: FloorZoneUncheckedUpdateManyWithoutStoreNestedInput
+    floorPositions?: FloorStaffPositionUncheckedUpdateManyWithoutStoreNestedInput
+    footfallEntries?: FootfallEntryUncheckedUpdateManyWithoutStoreNestedInput
+    maintenanceRequests?: MaintenanceRequestUncheckedUpdateManyWithoutStoreNestedInput
+    courseEnrollments?: CourseEnrollmentUncheckedUpdateManyWithoutStoreNestedInput
+    trainingLogs?: TrainingLogUncheckedUpdateManyWithoutStoreNestedInput
+    challengeParticipants?: ChallengeParticipantUncheckedUpdateManyWithoutStoreNestedInput
+    onboardingJourneys?: OnboardingJourneyUncheckedUpdateManyWithoutStoreNestedInput
+    coachingSessions?: CoachingSessionUncheckedUpdateManyWithoutStoreNestedInput
+    developmentPlans?: DevelopmentPlanUncheckedUpdateManyWithoutStoreNestedInput
+    appraisals?: AppraisalUncheckedUpdateManyWithoutStoreNestedInput
+    shiftTemplates?: ShiftTemplateUncheckedUpdateManyWithoutStoreNestedInput
+    shiftEntries?: ShiftEntryUncheckedUpdateManyWithoutStoreNestedInput
+    pulseResponses?: PulseResponseUncheckedUpdateManyWithoutStoreNestedInput
+    wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
+    briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
+    handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
+  }
+
+  export type UserUpsertWithoutStockCalloutsInput = {
+    update: XOR<UserUpdateWithoutStockCalloutsInput, UserUncheckedUpdateWithoutStockCalloutsInput>
+    create: XOR<UserCreateWithoutStockCalloutsInput, UserUncheckedCreateWithoutStockCalloutsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutStockCalloutsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutStockCalloutsInput, UserUncheckedUpdateWithoutStockCalloutsInput>
+  }
+
+  export type UserUpdateWithoutStockCalloutsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneWithoutUsersNestedInput
+    storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
+    regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
+    checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
+    createdSops?: SopUpdateManyWithoutCreatorNestedInput
+    sopAcknowledgments?: SopAcknowledgmentUpdateManyWithoutUserNestedInput
+    vmSubmissions?: VmSubmissionUpdateManyWithoutSubmitterNestedInput
+    vmReviews?: VmSubmissionUpdateManyWithoutReviewerNestedInput
+    standardEvaluations?: StandardEvaluationUpdateManyWithoutEvaluatorNestedInput
+    kpiEntries?: KpiEntryUpdateManyWithoutUserNestedInput
+    budgetPeriods?: BudgetPeriodUpdateManyWithoutUserNestedInput
+    forecasts?: ForecastUpdateManyWithoutUserNestedInput
+    lossReports?: LossIncidentUpdateManyWithoutReporterNestedInput
+    lossAssignments?: LossIncidentUpdateManyWithoutAssigneeNestedInput
+    inventoryCounts?: InventoryCountUpdateManyWithoutConductorNestedInput
+    floorPositions?: FloorStaffPositionUpdateManyWithoutUserNestedInput
+    floorUpdates?: FloorStaffPositionUpdateManyWithoutUpdaterNestedInput
+    maintenanceReports?: MaintenanceRequestUpdateManyWithoutReporterNestedInput
+    maintenanceAssignments?: MaintenanceRequestUpdateManyWithoutAssigneeNestedInput
+    courseCreations?: CourseUpdateManyWithoutCreatorNestedInput
+    courseEnrollments?: CourseEnrollmentUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUpdateManyWithoutUserNestedInput
+    trainingLogs?: TrainingLogUpdateManyWithoutUserNestedInput
+    challengeCreations?: ChallengeUpdateManyWithoutCreatorNestedInput
+    challengeParticipations?: ChallengeParticipantUpdateManyWithoutUserNestedInput
+    onboardingJourneys?: OnboardingJourneyUpdateManyWithoutUserNestedInput
+    onboardingMentoring?: OnboardingJourneyUpdateManyWithoutMentorNestedInput
+    coachSessions?: CoachingSessionUpdateManyWithoutCoachNestedInput
+    coacheeSessions?: CoachingSessionUpdateManyWithoutCoacheeNestedInput
+    devPlansAsUser?: DevelopmentPlanUpdateManyWithoutUserNestedInput
+    devPlansAsManager?: DevelopmentPlanUpdateManyWithoutManagerNestedInput
+    devReviews?: DevelopmentReviewUpdateManyWithoutReviewerNestedInput
+    appraisalsAsEmployee?: AppraisalUpdateManyWithoutEmployeeNestedInput
+    appraisalsAsManager?: AppraisalUpdateManyWithoutManagerNestedInput
+    shiftEntries?: ShiftEntryUpdateManyWithoutUserNestedInput
+    swapRequests?: ShiftSwapRequestUpdateManyWithoutRequesterNestedInput
+    wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutUserNestedInput
+    briefingsCreated?: BriefingUpdateManyWithoutCreatorNestedInput
+    briefingAcks?: BriefingAcknowledgmentUpdateManyWithoutUserNestedInput
+    handoversFrom?: HandoverUpdateManyWithoutFromUserNestedInput
+    handoversTo?: HandoverUpdateManyWithoutToUserNestedInput
+    teamMessagesSent?: TeamMessageUpdateManyWithoutSenderNestedInput
+    teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
+    newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
+    newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutStockCalloutsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    tenantId?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
+    createdSops?: SopUncheckedUpdateManyWithoutCreatorNestedInput
+    sopAcknowledgments?: SopAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+    vmSubmissions?: VmSubmissionUncheckedUpdateManyWithoutSubmitterNestedInput
+    vmReviews?: VmSubmissionUncheckedUpdateManyWithoutReviewerNestedInput
+    standardEvaluations?: StandardEvaluationUncheckedUpdateManyWithoutEvaluatorNestedInput
+    kpiEntries?: KpiEntryUncheckedUpdateManyWithoutUserNestedInput
+    budgetPeriods?: BudgetPeriodUncheckedUpdateManyWithoutUserNestedInput
+    forecasts?: ForecastUncheckedUpdateManyWithoutUserNestedInput
+    lossReports?: LossIncidentUncheckedUpdateManyWithoutReporterNestedInput
+    lossAssignments?: LossIncidentUncheckedUpdateManyWithoutAssigneeNestedInput
+    inventoryCounts?: InventoryCountUncheckedUpdateManyWithoutConductorNestedInput
+    floorPositions?: FloorStaffPositionUncheckedUpdateManyWithoutUserNestedInput
+    floorUpdates?: FloorStaffPositionUncheckedUpdateManyWithoutUpdaterNestedInput
+    maintenanceReports?: MaintenanceRequestUncheckedUpdateManyWithoutReporterNestedInput
+    maintenanceAssignments?: MaintenanceRequestUncheckedUpdateManyWithoutAssigneeNestedInput
+    courseCreations?: CourseUncheckedUpdateManyWithoutCreatorNestedInput
+    courseEnrollments?: CourseEnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    trainingLogs?: TrainingLogUncheckedUpdateManyWithoutUserNestedInput
+    challengeCreations?: ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
+    challengeParticipations?: ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+    onboardingJourneys?: OnboardingJourneyUncheckedUpdateManyWithoutUserNestedInput
+    onboardingMentoring?: OnboardingJourneyUncheckedUpdateManyWithoutMentorNestedInput
+    coachSessions?: CoachingSessionUncheckedUpdateManyWithoutCoachNestedInput
+    coacheeSessions?: CoachingSessionUncheckedUpdateManyWithoutCoacheeNestedInput
+    devPlansAsUser?: DevelopmentPlanUncheckedUpdateManyWithoutUserNestedInput
+    devPlansAsManager?: DevelopmentPlanUncheckedUpdateManyWithoutManagerNestedInput
+    devReviews?: DevelopmentReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    appraisalsAsEmployee?: AppraisalUncheckedUpdateManyWithoutEmployeeNestedInput
+    appraisalsAsManager?: AppraisalUncheckedUpdateManyWithoutManagerNestedInput
+    shiftEntries?: ShiftEntryUncheckedUpdateManyWithoutUserNestedInput
+    swapRequests?: ShiftSwapRequestUncheckedUpdateManyWithoutRequesterNestedInput
+    wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutUserNestedInput
+    briefingsCreated?: BriefingUncheckedUpdateManyWithoutCreatorNestedInput
+    briefingAcks?: BriefingAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+    handoversFrom?: HandoverUncheckedUpdateManyWithoutFromUserNestedInput
+    handoversTo?: HandoverUncheckedUpdateManyWithoutToUserNestedInput
+    teamMessagesSent?: TeamMessageUncheckedUpdateManyWithoutSenderNestedInput
+    teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
+    newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
+    newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
+  }
+
+  export type StoreCreateWithoutCustomerOrdersInput = {
+    id?: string
+    name: string
+    city?: string | null
+    address?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutStoresInput
+    region?: RegionCreateNestedOneWithoutStoresInput
+    tools?: StoreToolAssignmentCreateNestedManyWithoutStoreInput
+    userAssignments?: UserStoreAssignmentCreateNestedManyWithoutStoreInput
+    auditSessions?: AuditSessionCreateNestedManyWithoutStoreInput
+    checklistSessions?: ChecklistSessionCreateNestedManyWithoutStoreInput
+    vmSubmissions?: VmSubmissionCreateNestedManyWithoutStoreInput
+    standardEvaluations?: StandardEvaluationCreateNestedManyWithoutStoreInput
+    kpiEntries?: KpiEntryCreateNestedManyWithoutStoreInput
+    budgetPeriods?: BudgetPeriodCreateNestedManyWithoutStoreInput
+    forecasts?: ForecastCreateNestedManyWithoutStoreInput
+    lossIncidents?: LossIncidentCreateNestedManyWithoutStoreInput
+    inventoryCounts?: InventoryCountCreateNestedManyWithoutStoreInput
+    floorZones?: FloorZoneCreateNestedManyWithoutStoreInput
+    floorPositions?: FloorStaffPositionCreateNestedManyWithoutStoreInput
+    footfallEntries?: FootfallEntryCreateNestedManyWithoutStoreInput
+    maintenanceRequests?: MaintenanceRequestCreateNestedManyWithoutStoreInput
+    courseEnrollments?: CourseEnrollmentCreateNestedManyWithoutStoreInput
+    trainingLogs?: TrainingLogCreateNestedManyWithoutStoreInput
+    challengeParticipants?: ChallengeParticipantCreateNestedManyWithoutStoreInput
+    onboardingJourneys?: OnboardingJourneyCreateNestedManyWithoutStoreInput
+    coachingSessions?: CoachingSessionCreateNestedManyWithoutStoreInput
+    developmentPlans?: DevelopmentPlanCreateNestedManyWithoutStoreInput
+    appraisals?: AppraisalCreateNestedManyWithoutStoreInput
+    shiftTemplates?: ShiftTemplateCreateNestedManyWithoutStoreInput
+    shiftEntries?: ShiftEntryCreateNestedManyWithoutStoreInput
+    pulseResponses?: PulseResponseCreateNestedManyWithoutStoreInput
+    wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutStoreInput
+    briefings?: BriefingCreateNestedManyWithoutStoreInput
+    handovers?: HandoverCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutStoreInput
+  }
+
+  export type StoreUncheckedCreateWithoutCustomerOrdersInput = {
+    id?: string
+    tenantId: string
+    regionId?: string | null
+    name: string
+    city?: string | null
+    address?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tools?: StoreToolAssignmentUncheckedCreateNestedManyWithoutStoreInput
+    userAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutStoreInput
+    auditSessions?: AuditSessionUncheckedCreateNestedManyWithoutStoreInput
+    checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutStoreInput
+    vmSubmissions?: VmSubmissionUncheckedCreateNestedManyWithoutStoreInput
+    standardEvaluations?: StandardEvaluationUncheckedCreateNestedManyWithoutStoreInput
+    kpiEntries?: KpiEntryUncheckedCreateNestedManyWithoutStoreInput
+    budgetPeriods?: BudgetPeriodUncheckedCreateNestedManyWithoutStoreInput
+    forecasts?: ForecastUncheckedCreateNestedManyWithoutStoreInput
+    lossIncidents?: LossIncidentUncheckedCreateNestedManyWithoutStoreInput
+    inventoryCounts?: InventoryCountUncheckedCreateNestedManyWithoutStoreInput
+    floorZones?: FloorZoneUncheckedCreateNestedManyWithoutStoreInput
+    floorPositions?: FloorStaffPositionUncheckedCreateNestedManyWithoutStoreInput
+    footfallEntries?: FootfallEntryUncheckedCreateNestedManyWithoutStoreInput
+    maintenanceRequests?: MaintenanceRequestUncheckedCreateNestedManyWithoutStoreInput
+    courseEnrollments?: CourseEnrollmentUncheckedCreateNestedManyWithoutStoreInput
+    trainingLogs?: TrainingLogUncheckedCreateNestedManyWithoutStoreInput
+    challengeParticipants?: ChallengeParticipantUncheckedCreateNestedManyWithoutStoreInput
+    onboardingJourneys?: OnboardingJourneyUncheckedCreateNestedManyWithoutStoreInput
+    coachingSessions?: CoachingSessionUncheckedCreateNestedManyWithoutStoreInput
+    developmentPlans?: DevelopmentPlanUncheckedCreateNestedManyWithoutStoreInput
+    appraisals?: AppraisalUncheckedCreateNestedManyWithoutStoreInput
+    shiftTemplates?: ShiftTemplateUncheckedCreateNestedManyWithoutStoreInput
+    shiftEntries?: ShiftEntryUncheckedCreateNestedManyWithoutStoreInput
+    pulseResponses?: PulseResponseUncheckedCreateNestedManyWithoutStoreInput
+    wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutStoreInput
+    briefings?: BriefingUncheckedCreateNestedManyWithoutStoreInput
+    handovers?: HandoverUncheckedCreateNestedManyWithoutStoreInput
+    conversionGoals?: ConversionGoalUncheckedCreateNestedManyWithoutStoreInput
+    clientProfiles?: ClientProfileUncheckedCreateNestedManyWithoutStoreInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutStoreInput
+  }
+
+  export type StoreCreateOrConnectWithoutCustomerOrdersInput = {
+    where: StoreWhereUniqueInput
+    create: XOR<StoreCreateWithoutCustomerOrdersInput, StoreUncheckedCreateWithoutCustomerOrdersInput>
+  }
+
+  export type UserCreateWithoutOrdersCreatedInput = {
+    id?: string
+    email: string
+    name: string
+    passwordHash: string
+    role?: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant?: TenantCreateNestedOneWithoutUsersInput
+    storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
+    regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
+    checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
+    createdSops?: SopCreateNestedManyWithoutCreatorInput
+    sopAcknowledgments?: SopAcknowledgmentCreateNestedManyWithoutUserInput
+    vmSubmissions?: VmSubmissionCreateNestedManyWithoutSubmitterInput
+    vmReviews?: VmSubmissionCreateNestedManyWithoutReviewerInput
+    standardEvaluations?: StandardEvaluationCreateNestedManyWithoutEvaluatorInput
+    kpiEntries?: KpiEntryCreateNestedManyWithoutUserInput
+    budgetPeriods?: BudgetPeriodCreateNestedManyWithoutUserInput
+    forecasts?: ForecastCreateNestedManyWithoutUserInput
+    lossReports?: LossIncidentCreateNestedManyWithoutReporterInput
+    lossAssignments?: LossIncidentCreateNestedManyWithoutAssigneeInput
+    inventoryCounts?: InventoryCountCreateNestedManyWithoutConductorInput
+    floorPositions?: FloorStaffPositionCreateNestedManyWithoutUserInput
+    floorUpdates?: FloorStaffPositionCreateNestedManyWithoutUpdaterInput
+    maintenanceReports?: MaintenanceRequestCreateNestedManyWithoutReporterInput
+    maintenanceAssignments?: MaintenanceRequestCreateNestedManyWithoutAssigneeInput
+    courseCreations?: CourseCreateNestedManyWithoutCreatorInput
+    courseEnrollments?: CourseEnrollmentCreateNestedManyWithoutUserInput
+    certificates?: CertificateCreateNestedManyWithoutUserInput
+    trainingLogs?: TrainingLogCreateNestedManyWithoutUserInput
+    challengeCreations?: ChallengeCreateNestedManyWithoutCreatorInput
+    challengeParticipations?: ChallengeParticipantCreateNestedManyWithoutUserInput
+    onboardingJourneys?: OnboardingJourneyCreateNestedManyWithoutUserInput
+    onboardingMentoring?: OnboardingJourneyCreateNestedManyWithoutMentorInput
+    coachSessions?: CoachingSessionCreateNestedManyWithoutCoachInput
+    coacheeSessions?: CoachingSessionCreateNestedManyWithoutCoacheeInput
+    devPlansAsUser?: DevelopmentPlanCreateNestedManyWithoutUserInput
+    devPlansAsManager?: DevelopmentPlanCreateNestedManyWithoutManagerInput
+    devReviews?: DevelopmentReviewCreateNestedManyWithoutReviewerInput
+    appraisalsAsEmployee?: AppraisalCreateNestedManyWithoutEmployeeInput
+    appraisalsAsManager?: AppraisalCreateNestedManyWithoutManagerInput
+    shiftEntries?: ShiftEntryCreateNestedManyWithoutUserInput
+    swapRequests?: ShiftSwapRequestCreateNestedManyWithoutRequesterInput
+    wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutUserInput
+    briefingsCreated?: BriefingCreateNestedManyWithoutCreatorInput
+    briefingAcks?: BriefingAcknowledgmentCreateNestedManyWithoutUserInput
+    handoversFrom?: HandoverCreateNestedManyWithoutFromUserInput
+    handoversTo?: HandoverCreateNestedManyWithoutToUserInput
+    teamMessagesSent?: TeamMessageCreateNestedManyWithoutSenderInput
+    teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
+    newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
+    newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
+  }
+
+  export type UserUncheckedCreateWithoutOrdersCreatedInput = {
+    id?: string
+    email: string
+    name: string
+    passwordHash: string
+    role?: string
+    tenantId?: string | null
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
+    regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
+    checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
+    createdSops?: SopUncheckedCreateNestedManyWithoutCreatorInput
+    sopAcknowledgments?: SopAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+    vmSubmissions?: VmSubmissionUncheckedCreateNestedManyWithoutSubmitterInput
+    vmReviews?: VmSubmissionUncheckedCreateNestedManyWithoutReviewerInput
+    standardEvaluations?: StandardEvaluationUncheckedCreateNestedManyWithoutEvaluatorInput
+    kpiEntries?: KpiEntryUncheckedCreateNestedManyWithoutUserInput
+    budgetPeriods?: BudgetPeriodUncheckedCreateNestedManyWithoutUserInput
+    forecasts?: ForecastUncheckedCreateNestedManyWithoutUserInput
+    lossReports?: LossIncidentUncheckedCreateNestedManyWithoutReporterInput
+    lossAssignments?: LossIncidentUncheckedCreateNestedManyWithoutAssigneeInput
+    inventoryCounts?: InventoryCountUncheckedCreateNestedManyWithoutConductorInput
+    floorPositions?: FloorStaffPositionUncheckedCreateNestedManyWithoutUserInput
+    floorUpdates?: FloorStaffPositionUncheckedCreateNestedManyWithoutUpdaterInput
+    maintenanceReports?: MaintenanceRequestUncheckedCreateNestedManyWithoutReporterInput
+    maintenanceAssignments?: MaintenanceRequestUncheckedCreateNestedManyWithoutAssigneeInput
+    courseCreations?: CourseUncheckedCreateNestedManyWithoutCreatorInput
+    courseEnrollments?: CourseEnrollmentUncheckedCreateNestedManyWithoutUserInput
+    certificates?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    trainingLogs?: TrainingLogUncheckedCreateNestedManyWithoutUserInput
+    challengeCreations?: ChallengeUncheckedCreateNestedManyWithoutCreatorInput
+    challengeParticipations?: ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+    onboardingJourneys?: OnboardingJourneyUncheckedCreateNestedManyWithoutUserInput
+    onboardingMentoring?: OnboardingJourneyUncheckedCreateNestedManyWithoutMentorInput
+    coachSessions?: CoachingSessionUncheckedCreateNestedManyWithoutCoachInput
+    coacheeSessions?: CoachingSessionUncheckedCreateNestedManyWithoutCoacheeInput
+    devPlansAsUser?: DevelopmentPlanUncheckedCreateNestedManyWithoutUserInput
+    devPlansAsManager?: DevelopmentPlanUncheckedCreateNestedManyWithoutManagerInput
+    devReviews?: DevelopmentReviewUncheckedCreateNestedManyWithoutReviewerInput
+    appraisalsAsEmployee?: AppraisalUncheckedCreateNestedManyWithoutEmployeeInput
+    appraisalsAsManager?: AppraisalUncheckedCreateNestedManyWithoutManagerInput
+    shiftEntries?: ShiftEntryUncheckedCreateNestedManyWithoutUserInput
+    swapRequests?: ShiftSwapRequestUncheckedCreateNestedManyWithoutRequesterInput
+    wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutUserInput
+    briefingsCreated?: BriefingUncheckedCreateNestedManyWithoutCreatorInput
+    briefingAcks?: BriefingAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+    handoversFrom?: HandoverUncheckedCreateNestedManyWithoutFromUserInput
+    handoversTo?: HandoverUncheckedCreateNestedManyWithoutToUserInput
+    teamMessagesSent?: TeamMessageUncheckedCreateNestedManyWithoutSenderInput
+    teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
+    newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
+    newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
+  }
+
+  export type UserCreateOrConnectWithoutOrdersCreatedInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutOrdersCreatedInput, UserUncheckedCreateWithoutOrdersCreatedInput>
+  }
+
+  export type OrderStatusUpdateCreateWithoutOrderInput = {
+    id?: string
+    status: string
+    notes?: string | null
+    createdAt?: Date | string
+    updater: UserCreateNestedOneWithoutOrderStatusUpdatesInput
+  }
+
+  export type OrderStatusUpdateUncheckedCreateWithoutOrderInput = {
+    id?: string
+    status: string
+    updatedBy: string
+    notes?: string | null
+    createdAt?: Date | string
+  }
+
+  export type OrderStatusUpdateCreateOrConnectWithoutOrderInput = {
+    where: OrderStatusUpdateWhereUniqueInput
+    create: XOR<OrderStatusUpdateCreateWithoutOrderInput, OrderStatusUpdateUncheckedCreateWithoutOrderInput>
+  }
+
+  export type OrderStatusUpdateCreateManyOrderInputEnvelope = {
+    data: OrderStatusUpdateCreateManyOrderInput | OrderStatusUpdateCreateManyOrderInput[]
+  }
+
+  export type StoreUpsertWithoutCustomerOrdersInput = {
+    update: XOR<StoreUpdateWithoutCustomerOrdersInput, StoreUncheckedUpdateWithoutCustomerOrdersInput>
+    create: XOR<StoreCreateWithoutCustomerOrdersInput, StoreUncheckedCreateWithoutCustomerOrdersInput>
+    where?: StoreWhereInput
+  }
+
+  export type StoreUpdateToOneWithWhereWithoutCustomerOrdersInput = {
+    where?: StoreWhereInput
+    data: XOR<StoreUpdateWithoutCustomerOrdersInput, StoreUncheckedUpdateWithoutCustomerOrdersInput>
+  }
+
+  export type StoreUpdateWithoutCustomerOrdersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutStoresNestedInput
+    region?: RegionUpdateOneWithoutStoresNestedInput
+    tools?: StoreToolAssignmentUpdateManyWithoutStoreNestedInput
+    userAssignments?: UserStoreAssignmentUpdateManyWithoutStoreNestedInput
+    auditSessions?: AuditSessionUpdateManyWithoutStoreNestedInput
+    checklistSessions?: ChecklistSessionUpdateManyWithoutStoreNestedInput
+    vmSubmissions?: VmSubmissionUpdateManyWithoutStoreNestedInput
+    standardEvaluations?: StandardEvaluationUpdateManyWithoutStoreNestedInput
+    kpiEntries?: KpiEntryUpdateManyWithoutStoreNestedInput
+    budgetPeriods?: BudgetPeriodUpdateManyWithoutStoreNestedInput
+    forecasts?: ForecastUpdateManyWithoutStoreNestedInput
+    lossIncidents?: LossIncidentUpdateManyWithoutStoreNestedInput
+    inventoryCounts?: InventoryCountUpdateManyWithoutStoreNestedInput
+    floorZones?: FloorZoneUpdateManyWithoutStoreNestedInput
+    floorPositions?: FloorStaffPositionUpdateManyWithoutStoreNestedInput
+    footfallEntries?: FootfallEntryUpdateManyWithoutStoreNestedInput
+    maintenanceRequests?: MaintenanceRequestUpdateManyWithoutStoreNestedInput
+    courseEnrollments?: CourseEnrollmentUpdateManyWithoutStoreNestedInput
+    trainingLogs?: TrainingLogUpdateManyWithoutStoreNestedInput
+    challengeParticipants?: ChallengeParticipantUpdateManyWithoutStoreNestedInput
+    onboardingJourneys?: OnboardingJourneyUpdateManyWithoutStoreNestedInput
+    coachingSessions?: CoachingSessionUpdateManyWithoutStoreNestedInput
+    developmentPlans?: DevelopmentPlanUpdateManyWithoutStoreNestedInput
+    appraisals?: AppraisalUpdateManyWithoutStoreNestedInput
+    shiftTemplates?: ShiftTemplateUpdateManyWithoutStoreNestedInput
+    shiftEntries?: ShiftEntryUpdateManyWithoutStoreNestedInput
+    pulseResponses?: PulseResponseUpdateManyWithoutStoreNestedInput
+    wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
+    briefings?: BriefingUpdateManyWithoutStoreNestedInput
+    handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+  }
+
+  export type StoreUncheckedUpdateWithoutCustomerOrdersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    regionId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tools?: StoreToolAssignmentUncheckedUpdateManyWithoutStoreNestedInput
+    userAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutStoreNestedInput
+    auditSessions?: AuditSessionUncheckedUpdateManyWithoutStoreNestedInput
+    checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutStoreNestedInput
+    vmSubmissions?: VmSubmissionUncheckedUpdateManyWithoutStoreNestedInput
+    standardEvaluations?: StandardEvaluationUncheckedUpdateManyWithoutStoreNestedInput
+    kpiEntries?: KpiEntryUncheckedUpdateManyWithoutStoreNestedInput
+    budgetPeriods?: BudgetPeriodUncheckedUpdateManyWithoutStoreNestedInput
+    forecasts?: ForecastUncheckedUpdateManyWithoutStoreNestedInput
+    lossIncidents?: LossIncidentUncheckedUpdateManyWithoutStoreNestedInput
+    inventoryCounts?: InventoryCountUncheckedUpdateManyWithoutStoreNestedInput
+    floorZones?: FloorZoneUncheckedUpdateManyWithoutStoreNestedInput
+    floorPositions?: FloorStaffPositionUncheckedUpdateManyWithoutStoreNestedInput
+    footfallEntries?: FootfallEntryUncheckedUpdateManyWithoutStoreNestedInput
+    maintenanceRequests?: MaintenanceRequestUncheckedUpdateManyWithoutStoreNestedInput
+    courseEnrollments?: CourseEnrollmentUncheckedUpdateManyWithoutStoreNestedInput
+    trainingLogs?: TrainingLogUncheckedUpdateManyWithoutStoreNestedInput
+    challengeParticipants?: ChallengeParticipantUncheckedUpdateManyWithoutStoreNestedInput
+    onboardingJourneys?: OnboardingJourneyUncheckedUpdateManyWithoutStoreNestedInput
+    coachingSessions?: CoachingSessionUncheckedUpdateManyWithoutStoreNestedInput
+    developmentPlans?: DevelopmentPlanUncheckedUpdateManyWithoutStoreNestedInput
+    appraisals?: AppraisalUncheckedUpdateManyWithoutStoreNestedInput
+    shiftTemplates?: ShiftTemplateUncheckedUpdateManyWithoutStoreNestedInput
+    shiftEntries?: ShiftEntryUncheckedUpdateManyWithoutStoreNestedInput
+    pulseResponses?: PulseResponseUncheckedUpdateManyWithoutStoreNestedInput
+    wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
+    briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
+    handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+  }
+
+  export type UserUpsertWithoutOrdersCreatedInput = {
+    update: XOR<UserUpdateWithoutOrdersCreatedInput, UserUncheckedUpdateWithoutOrdersCreatedInput>
+    create: XOR<UserCreateWithoutOrdersCreatedInput, UserUncheckedCreateWithoutOrdersCreatedInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutOrdersCreatedInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutOrdersCreatedInput, UserUncheckedUpdateWithoutOrdersCreatedInput>
+  }
+
+  export type UserUpdateWithoutOrdersCreatedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneWithoutUsersNestedInput
+    storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
+    regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
+    checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
+    createdSops?: SopUpdateManyWithoutCreatorNestedInput
+    sopAcknowledgments?: SopAcknowledgmentUpdateManyWithoutUserNestedInput
+    vmSubmissions?: VmSubmissionUpdateManyWithoutSubmitterNestedInput
+    vmReviews?: VmSubmissionUpdateManyWithoutReviewerNestedInput
+    standardEvaluations?: StandardEvaluationUpdateManyWithoutEvaluatorNestedInput
+    kpiEntries?: KpiEntryUpdateManyWithoutUserNestedInput
+    budgetPeriods?: BudgetPeriodUpdateManyWithoutUserNestedInput
+    forecasts?: ForecastUpdateManyWithoutUserNestedInput
+    lossReports?: LossIncidentUpdateManyWithoutReporterNestedInput
+    lossAssignments?: LossIncidentUpdateManyWithoutAssigneeNestedInput
+    inventoryCounts?: InventoryCountUpdateManyWithoutConductorNestedInput
+    floorPositions?: FloorStaffPositionUpdateManyWithoutUserNestedInput
+    floorUpdates?: FloorStaffPositionUpdateManyWithoutUpdaterNestedInput
+    maintenanceReports?: MaintenanceRequestUpdateManyWithoutReporterNestedInput
+    maintenanceAssignments?: MaintenanceRequestUpdateManyWithoutAssigneeNestedInput
+    courseCreations?: CourseUpdateManyWithoutCreatorNestedInput
+    courseEnrollments?: CourseEnrollmentUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUpdateManyWithoutUserNestedInput
+    trainingLogs?: TrainingLogUpdateManyWithoutUserNestedInput
+    challengeCreations?: ChallengeUpdateManyWithoutCreatorNestedInput
+    challengeParticipations?: ChallengeParticipantUpdateManyWithoutUserNestedInput
+    onboardingJourneys?: OnboardingJourneyUpdateManyWithoutUserNestedInput
+    onboardingMentoring?: OnboardingJourneyUpdateManyWithoutMentorNestedInput
+    coachSessions?: CoachingSessionUpdateManyWithoutCoachNestedInput
+    coacheeSessions?: CoachingSessionUpdateManyWithoutCoacheeNestedInput
+    devPlansAsUser?: DevelopmentPlanUpdateManyWithoutUserNestedInput
+    devPlansAsManager?: DevelopmentPlanUpdateManyWithoutManagerNestedInput
+    devReviews?: DevelopmentReviewUpdateManyWithoutReviewerNestedInput
+    appraisalsAsEmployee?: AppraisalUpdateManyWithoutEmployeeNestedInput
+    appraisalsAsManager?: AppraisalUpdateManyWithoutManagerNestedInput
+    shiftEntries?: ShiftEntryUpdateManyWithoutUserNestedInput
+    swapRequests?: ShiftSwapRequestUpdateManyWithoutRequesterNestedInput
+    wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutUserNestedInput
+    briefingsCreated?: BriefingUpdateManyWithoutCreatorNestedInput
+    briefingAcks?: BriefingAcknowledgmentUpdateManyWithoutUserNestedInput
+    handoversFrom?: HandoverUpdateManyWithoutFromUserNestedInput
+    handoversTo?: HandoverUpdateManyWithoutToUserNestedInput
+    teamMessagesSent?: TeamMessageUpdateManyWithoutSenderNestedInput
+    teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
+    newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
+    newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutOrdersCreatedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    tenantId?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
+    createdSops?: SopUncheckedUpdateManyWithoutCreatorNestedInput
+    sopAcknowledgments?: SopAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+    vmSubmissions?: VmSubmissionUncheckedUpdateManyWithoutSubmitterNestedInput
+    vmReviews?: VmSubmissionUncheckedUpdateManyWithoutReviewerNestedInput
+    standardEvaluations?: StandardEvaluationUncheckedUpdateManyWithoutEvaluatorNestedInput
+    kpiEntries?: KpiEntryUncheckedUpdateManyWithoutUserNestedInput
+    budgetPeriods?: BudgetPeriodUncheckedUpdateManyWithoutUserNestedInput
+    forecasts?: ForecastUncheckedUpdateManyWithoutUserNestedInput
+    lossReports?: LossIncidentUncheckedUpdateManyWithoutReporterNestedInput
+    lossAssignments?: LossIncidentUncheckedUpdateManyWithoutAssigneeNestedInput
+    inventoryCounts?: InventoryCountUncheckedUpdateManyWithoutConductorNestedInput
+    floorPositions?: FloorStaffPositionUncheckedUpdateManyWithoutUserNestedInput
+    floorUpdates?: FloorStaffPositionUncheckedUpdateManyWithoutUpdaterNestedInput
+    maintenanceReports?: MaintenanceRequestUncheckedUpdateManyWithoutReporterNestedInput
+    maintenanceAssignments?: MaintenanceRequestUncheckedUpdateManyWithoutAssigneeNestedInput
+    courseCreations?: CourseUncheckedUpdateManyWithoutCreatorNestedInput
+    courseEnrollments?: CourseEnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    trainingLogs?: TrainingLogUncheckedUpdateManyWithoutUserNestedInput
+    challengeCreations?: ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
+    challengeParticipations?: ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+    onboardingJourneys?: OnboardingJourneyUncheckedUpdateManyWithoutUserNestedInput
+    onboardingMentoring?: OnboardingJourneyUncheckedUpdateManyWithoutMentorNestedInput
+    coachSessions?: CoachingSessionUncheckedUpdateManyWithoutCoachNestedInput
+    coacheeSessions?: CoachingSessionUncheckedUpdateManyWithoutCoacheeNestedInput
+    devPlansAsUser?: DevelopmentPlanUncheckedUpdateManyWithoutUserNestedInput
+    devPlansAsManager?: DevelopmentPlanUncheckedUpdateManyWithoutManagerNestedInput
+    devReviews?: DevelopmentReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    appraisalsAsEmployee?: AppraisalUncheckedUpdateManyWithoutEmployeeNestedInput
+    appraisalsAsManager?: AppraisalUncheckedUpdateManyWithoutManagerNestedInput
+    shiftEntries?: ShiftEntryUncheckedUpdateManyWithoutUserNestedInput
+    swapRequests?: ShiftSwapRequestUncheckedUpdateManyWithoutRequesterNestedInput
+    wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutUserNestedInput
+    briefingsCreated?: BriefingUncheckedUpdateManyWithoutCreatorNestedInput
+    briefingAcks?: BriefingAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+    handoversFrom?: HandoverUncheckedUpdateManyWithoutFromUserNestedInput
+    handoversTo?: HandoverUncheckedUpdateManyWithoutToUserNestedInput
+    teamMessagesSent?: TeamMessageUncheckedUpdateManyWithoutSenderNestedInput
+    teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
+    newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
+    newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
+  }
+
+  export type OrderStatusUpdateUpsertWithWhereUniqueWithoutOrderInput = {
+    where: OrderStatusUpdateWhereUniqueInput
+    update: XOR<OrderStatusUpdateUpdateWithoutOrderInput, OrderStatusUpdateUncheckedUpdateWithoutOrderInput>
+    create: XOR<OrderStatusUpdateCreateWithoutOrderInput, OrderStatusUpdateUncheckedCreateWithoutOrderInput>
+  }
+
+  export type OrderStatusUpdateUpdateWithWhereUniqueWithoutOrderInput = {
+    where: OrderStatusUpdateWhereUniqueInput
+    data: XOR<OrderStatusUpdateUpdateWithoutOrderInput, OrderStatusUpdateUncheckedUpdateWithoutOrderInput>
+  }
+
+  export type OrderStatusUpdateUpdateManyWithWhereWithoutOrderInput = {
+    where: OrderStatusUpdateScalarWhereInput
+    data: XOR<OrderStatusUpdateUpdateManyMutationInput, OrderStatusUpdateUncheckedUpdateManyWithoutOrderInput>
+  }
+
+  export type CustomerOrderCreateWithoutStatusUpdatesInput = {
+    id?: string
+    orderNumber: string
+    customerName: string
+    customerEmail?: string | null
+    status?: string
+    trackingNumber?: string | null
+    carrier?: string | null
+    estimatedDelivery?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    store: StoreCreateNestedOneWithoutCustomerOrdersInput
+    creator: UserCreateNestedOneWithoutOrdersCreatedInput
+  }
+
+  export type CustomerOrderUncheckedCreateWithoutStatusUpdatesInput = {
+    id?: string
+    storeId: string
+    orderNumber: string
+    customerName: string
+    customerEmail?: string | null
+    status?: string
+    trackingNumber?: string | null
+    carrier?: string | null
+    estimatedDelivery?: Date | string | null
+    createdBy: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CustomerOrderCreateOrConnectWithoutStatusUpdatesInput = {
+    where: CustomerOrderWhereUniqueInput
+    create: XOR<CustomerOrderCreateWithoutStatusUpdatesInput, CustomerOrderUncheckedCreateWithoutStatusUpdatesInput>
+  }
+
+  export type UserCreateWithoutOrderStatusUpdatesInput = {
+    id?: string
+    email: string
+    name: string
+    passwordHash: string
+    role?: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant?: TenantCreateNestedOneWithoutUsersInput
+    storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
+    regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
+    checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
+    createdSops?: SopCreateNestedManyWithoutCreatorInput
+    sopAcknowledgments?: SopAcknowledgmentCreateNestedManyWithoutUserInput
+    vmSubmissions?: VmSubmissionCreateNestedManyWithoutSubmitterInput
+    vmReviews?: VmSubmissionCreateNestedManyWithoutReviewerInput
+    standardEvaluations?: StandardEvaluationCreateNestedManyWithoutEvaluatorInput
+    kpiEntries?: KpiEntryCreateNestedManyWithoutUserInput
+    budgetPeriods?: BudgetPeriodCreateNestedManyWithoutUserInput
+    forecasts?: ForecastCreateNestedManyWithoutUserInput
+    lossReports?: LossIncidentCreateNestedManyWithoutReporterInput
+    lossAssignments?: LossIncidentCreateNestedManyWithoutAssigneeInput
+    inventoryCounts?: InventoryCountCreateNestedManyWithoutConductorInput
+    floorPositions?: FloorStaffPositionCreateNestedManyWithoutUserInput
+    floorUpdates?: FloorStaffPositionCreateNestedManyWithoutUpdaterInput
+    maintenanceReports?: MaintenanceRequestCreateNestedManyWithoutReporterInput
+    maintenanceAssignments?: MaintenanceRequestCreateNestedManyWithoutAssigneeInput
+    courseCreations?: CourseCreateNestedManyWithoutCreatorInput
+    courseEnrollments?: CourseEnrollmentCreateNestedManyWithoutUserInput
+    certificates?: CertificateCreateNestedManyWithoutUserInput
+    trainingLogs?: TrainingLogCreateNestedManyWithoutUserInput
+    challengeCreations?: ChallengeCreateNestedManyWithoutCreatorInput
+    challengeParticipations?: ChallengeParticipantCreateNestedManyWithoutUserInput
+    onboardingJourneys?: OnboardingJourneyCreateNestedManyWithoutUserInput
+    onboardingMentoring?: OnboardingJourneyCreateNestedManyWithoutMentorInput
+    coachSessions?: CoachingSessionCreateNestedManyWithoutCoachInput
+    coacheeSessions?: CoachingSessionCreateNestedManyWithoutCoacheeInput
+    devPlansAsUser?: DevelopmentPlanCreateNestedManyWithoutUserInput
+    devPlansAsManager?: DevelopmentPlanCreateNestedManyWithoutManagerInput
+    devReviews?: DevelopmentReviewCreateNestedManyWithoutReviewerInput
+    appraisalsAsEmployee?: AppraisalCreateNestedManyWithoutEmployeeInput
+    appraisalsAsManager?: AppraisalCreateNestedManyWithoutManagerInput
+    shiftEntries?: ShiftEntryCreateNestedManyWithoutUserInput
+    swapRequests?: ShiftSwapRequestCreateNestedManyWithoutRequesterInput
+    wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutUserInput
+    briefingsCreated?: BriefingCreateNestedManyWithoutCreatorInput
+    briefingAcks?: BriefingAcknowledgmentCreateNestedManyWithoutUserInput
+    handoversFrom?: HandoverCreateNestedManyWithoutFromUserInput
+    handoversTo?: HandoverCreateNestedManyWithoutToUserInput
+    teamMessagesSent?: TeamMessageCreateNestedManyWithoutSenderInput
+    teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
+    newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
+    newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
+  }
+
+  export type UserUncheckedCreateWithoutOrderStatusUpdatesInput = {
+    id?: string
+    email: string
+    name: string
+    passwordHash: string
+    role?: string
+    tenantId?: string | null
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
+    regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
+    checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
+    createdSops?: SopUncheckedCreateNestedManyWithoutCreatorInput
+    sopAcknowledgments?: SopAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+    vmSubmissions?: VmSubmissionUncheckedCreateNestedManyWithoutSubmitterInput
+    vmReviews?: VmSubmissionUncheckedCreateNestedManyWithoutReviewerInput
+    standardEvaluations?: StandardEvaluationUncheckedCreateNestedManyWithoutEvaluatorInput
+    kpiEntries?: KpiEntryUncheckedCreateNestedManyWithoutUserInput
+    budgetPeriods?: BudgetPeriodUncheckedCreateNestedManyWithoutUserInput
+    forecasts?: ForecastUncheckedCreateNestedManyWithoutUserInput
+    lossReports?: LossIncidentUncheckedCreateNestedManyWithoutReporterInput
+    lossAssignments?: LossIncidentUncheckedCreateNestedManyWithoutAssigneeInput
+    inventoryCounts?: InventoryCountUncheckedCreateNestedManyWithoutConductorInput
+    floorPositions?: FloorStaffPositionUncheckedCreateNestedManyWithoutUserInput
+    floorUpdates?: FloorStaffPositionUncheckedCreateNestedManyWithoutUpdaterInput
+    maintenanceReports?: MaintenanceRequestUncheckedCreateNestedManyWithoutReporterInput
+    maintenanceAssignments?: MaintenanceRequestUncheckedCreateNestedManyWithoutAssigneeInput
+    courseCreations?: CourseUncheckedCreateNestedManyWithoutCreatorInput
+    courseEnrollments?: CourseEnrollmentUncheckedCreateNestedManyWithoutUserInput
+    certificates?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    trainingLogs?: TrainingLogUncheckedCreateNestedManyWithoutUserInput
+    challengeCreations?: ChallengeUncheckedCreateNestedManyWithoutCreatorInput
+    challengeParticipations?: ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+    onboardingJourneys?: OnboardingJourneyUncheckedCreateNestedManyWithoutUserInput
+    onboardingMentoring?: OnboardingJourneyUncheckedCreateNestedManyWithoutMentorInput
+    coachSessions?: CoachingSessionUncheckedCreateNestedManyWithoutCoachInput
+    coacheeSessions?: CoachingSessionUncheckedCreateNestedManyWithoutCoacheeInput
+    devPlansAsUser?: DevelopmentPlanUncheckedCreateNestedManyWithoutUserInput
+    devPlansAsManager?: DevelopmentPlanUncheckedCreateNestedManyWithoutManagerInput
+    devReviews?: DevelopmentReviewUncheckedCreateNestedManyWithoutReviewerInput
+    appraisalsAsEmployee?: AppraisalUncheckedCreateNestedManyWithoutEmployeeInput
+    appraisalsAsManager?: AppraisalUncheckedCreateNestedManyWithoutManagerInput
+    shiftEntries?: ShiftEntryUncheckedCreateNestedManyWithoutUserInput
+    swapRequests?: ShiftSwapRequestUncheckedCreateNestedManyWithoutRequesterInput
+    wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutUserInput
+    briefingsCreated?: BriefingUncheckedCreateNestedManyWithoutCreatorInput
+    briefingAcks?: BriefingAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
+    handoversFrom?: HandoverUncheckedCreateNestedManyWithoutFromUserInput
+    handoversTo?: HandoverUncheckedCreateNestedManyWithoutToUserInput
+    teamMessagesSent?: TeamMessageUncheckedCreateNestedManyWithoutSenderInput
+    teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
+    newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
+    newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
+    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
+    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
+    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
+    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
+    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
+  }
+
+  export type UserCreateOrConnectWithoutOrderStatusUpdatesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutOrderStatusUpdatesInput, UserUncheckedCreateWithoutOrderStatusUpdatesInput>
+  }
+
+  export type CustomerOrderUpsertWithoutStatusUpdatesInput = {
+    update: XOR<CustomerOrderUpdateWithoutStatusUpdatesInput, CustomerOrderUncheckedUpdateWithoutStatusUpdatesInput>
+    create: XOR<CustomerOrderCreateWithoutStatusUpdatesInput, CustomerOrderUncheckedCreateWithoutStatusUpdatesInput>
+    where?: CustomerOrderWhereInput
+  }
+
+  export type CustomerOrderUpdateToOneWithWhereWithoutStatusUpdatesInput = {
+    where?: CustomerOrderWhereInput
+    data: XOR<CustomerOrderUpdateWithoutStatusUpdatesInput, CustomerOrderUncheckedUpdateWithoutStatusUpdatesInput>
+  }
+
+  export type CustomerOrderUpdateWithoutStatusUpdatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    customerName?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    trackingNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    carrier?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    store?: StoreUpdateOneRequiredWithoutCustomerOrdersNestedInput
+    creator?: UserUpdateOneRequiredWithoutOrdersCreatedNestedInput
+  }
+
+  export type CustomerOrderUncheckedUpdateWithoutStatusUpdatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    storeId?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    customerName?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    trackingNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    carrier?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpsertWithoutOrderStatusUpdatesInput = {
+    update: XOR<UserUpdateWithoutOrderStatusUpdatesInput, UserUncheckedUpdateWithoutOrderStatusUpdatesInput>
+    create: XOR<UserCreateWithoutOrderStatusUpdatesInput, UserUncheckedCreateWithoutOrderStatusUpdatesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutOrderStatusUpdatesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutOrderStatusUpdatesInput, UserUncheckedUpdateWithoutOrderStatusUpdatesInput>
+  }
+
+  export type UserUpdateWithoutOrderStatusUpdatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneWithoutUsersNestedInput
+    storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
+    regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
+    checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
+    createdSops?: SopUpdateManyWithoutCreatorNestedInput
+    sopAcknowledgments?: SopAcknowledgmentUpdateManyWithoutUserNestedInput
+    vmSubmissions?: VmSubmissionUpdateManyWithoutSubmitterNestedInput
+    vmReviews?: VmSubmissionUpdateManyWithoutReviewerNestedInput
+    standardEvaluations?: StandardEvaluationUpdateManyWithoutEvaluatorNestedInput
+    kpiEntries?: KpiEntryUpdateManyWithoutUserNestedInput
+    budgetPeriods?: BudgetPeriodUpdateManyWithoutUserNestedInput
+    forecasts?: ForecastUpdateManyWithoutUserNestedInput
+    lossReports?: LossIncidentUpdateManyWithoutReporterNestedInput
+    lossAssignments?: LossIncidentUpdateManyWithoutAssigneeNestedInput
+    inventoryCounts?: InventoryCountUpdateManyWithoutConductorNestedInput
+    floorPositions?: FloorStaffPositionUpdateManyWithoutUserNestedInput
+    floorUpdates?: FloorStaffPositionUpdateManyWithoutUpdaterNestedInput
+    maintenanceReports?: MaintenanceRequestUpdateManyWithoutReporterNestedInput
+    maintenanceAssignments?: MaintenanceRequestUpdateManyWithoutAssigneeNestedInput
+    courseCreations?: CourseUpdateManyWithoutCreatorNestedInput
+    courseEnrollments?: CourseEnrollmentUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUpdateManyWithoutUserNestedInput
+    trainingLogs?: TrainingLogUpdateManyWithoutUserNestedInput
+    challengeCreations?: ChallengeUpdateManyWithoutCreatorNestedInput
+    challengeParticipations?: ChallengeParticipantUpdateManyWithoutUserNestedInput
+    onboardingJourneys?: OnboardingJourneyUpdateManyWithoutUserNestedInput
+    onboardingMentoring?: OnboardingJourneyUpdateManyWithoutMentorNestedInput
+    coachSessions?: CoachingSessionUpdateManyWithoutCoachNestedInput
+    coacheeSessions?: CoachingSessionUpdateManyWithoutCoacheeNestedInput
+    devPlansAsUser?: DevelopmentPlanUpdateManyWithoutUserNestedInput
+    devPlansAsManager?: DevelopmentPlanUpdateManyWithoutManagerNestedInput
+    devReviews?: DevelopmentReviewUpdateManyWithoutReviewerNestedInput
+    appraisalsAsEmployee?: AppraisalUpdateManyWithoutEmployeeNestedInput
+    appraisalsAsManager?: AppraisalUpdateManyWithoutManagerNestedInput
+    shiftEntries?: ShiftEntryUpdateManyWithoutUserNestedInput
+    swapRequests?: ShiftSwapRequestUpdateManyWithoutRequesterNestedInput
+    wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutUserNestedInput
+    briefingsCreated?: BriefingUpdateManyWithoutCreatorNestedInput
+    briefingAcks?: BriefingAcknowledgmentUpdateManyWithoutUserNestedInput
+    handoversFrom?: HandoverUpdateManyWithoutFromUserNestedInput
+    handoversTo?: HandoverUpdateManyWithoutToUserNestedInput
+    teamMessagesSent?: TeamMessageUpdateManyWithoutSenderNestedInput
+    teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
+    newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
+    newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutOrderStatusUpdatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    tenantId?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
+    createdSops?: SopUncheckedUpdateManyWithoutCreatorNestedInput
+    sopAcknowledgments?: SopAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+    vmSubmissions?: VmSubmissionUncheckedUpdateManyWithoutSubmitterNestedInput
+    vmReviews?: VmSubmissionUncheckedUpdateManyWithoutReviewerNestedInput
+    standardEvaluations?: StandardEvaluationUncheckedUpdateManyWithoutEvaluatorNestedInput
+    kpiEntries?: KpiEntryUncheckedUpdateManyWithoutUserNestedInput
+    budgetPeriods?: BudgetPeriodUncheckedUpdateManyWithoutUserNestedInput
+    forecasts?: ForecastUncheckedUpdateManyWithoutUserNestedInput
+    lossReports?: LossIncidentUncheckedUpdateManyWithoutReporterNestedInput
+    lossAssignments?: LossIncidentUncheckedUpdateManyWithoutAssigneeNestedInput
+    inventoryCounts?: InventoryCountUncheckedUpdateManyWithoutConductorNestedInput
+    floorPositions?: FloorStaffPositionUncheckedUpdateManyWithoutUserNestedInput
+    floorUpdates?: FloorStaffPositionUncheckedUpdateManyWithoutUpdaterNestedInput
+    maintenanceReports?: MaintenanceRequestUncheckedUpdateManyWithoutReporterNestedInput
+    maintenanceAssignments?: MaintenanceRequestUncheckedUpdateManyWithoutAssigneeNestedInput
+    courseCreations?: CourseUncheckedUpdateManyWithoutCreatorNestedInput
+    courseEnrollments?: CourseEnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    trainingLogs?: TrainingLogUncheckedUpdateManyWithoutUserNestedInput
+    challengeCreations?: ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
+    challengeParticipations?: ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+    onboardingJourneys?: OnboardingJourneyUncheckedUpdateManyWithoutUserNestedInput
+    onboardingMentoring?: OnboardingJourneyUncheckedUpdateManyWithoutMentorNestedInput
+    coachSessions?: CoachingSessionUncheckedUpdateManyWithoutCoachNestedInput
+    coacheeSessions?: CoachingSessionUncheckedUpdateManyWithoutCoacheeNestedInput
+    devPlansAsUser?: DevelopmentPlanUncheckedUpdateManyWithoutUserNestedInput
+    devPlansAsManager?: DevelopmentPlanUncheckedUpdateManyWithoutManagerNestedInput
+    devReviews?: DevelopmentReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    appraisalsAsEmployee?: AppraisalUncheckedUpdateManyWithoutEmployeeNestedInput
+    appraisalsAsManager?: AppraisalUncheckedUpdateManyWithoutManagerNestedInput
+    shiftEntries?: ShiftEntryUncheckedUpdateManyWithoutUserNestedInput
+    swapRequests?: ShiftSwapRequestUncheckedUpdateManyWithoutRequesterNestedInput
+    wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutUserNestedInput
+    briefingsCreated?: BriefingUncheckedUpdateManyWithoutCreatorNestedInput
+    briefingAcks?: BriefingAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
+    handoversFrom?: HandoverUncheckedUpdateManyWithoutFromUserNestedInput
+    handoversTo?: HandoverUncheckedUpdateManyWithoutToUserNestedInput
+    teamMessagesSent?: TeamMessageUncheckedUpdateManyWithoutSenderNestedInput
+    teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
+    newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
+    newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
   }
 
   export type UserStoreAssignmentCreateManyUserInput = {
@@ -167192,6 +183682,77 @@ export namespace Prisma {
     id?: string
     newsletterId: string
     viewedAt?: Date | string
+  }
+
+  export type ClientProfileCreateManyCreatorInput = {
+    id?: string
+    storeId: string
+    firstName: string
+    lastName: string
+    email?: string | null
+    phone?: string | null
+    preferences?: string | null
+    vipLevel?: string | null
+    totalPurchases?: number
+    lastVisit?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClientInteractionCreateManyUserInput = {
+    id?: string
+    clientId: string
+    type?: string
+    date?: Date | string
+    notes?: string | null
+    purchaseAmount?: number | null
+    createdAt?: Date | string
+  }
+
+  export type ClientTaskCreateManyUserInput = {
+    id?: string
+    clientId: string
+    title: string
+    dueDate?: Date | string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StockCalloutCreateManyReporterInput = {
+    id?: string
+    storeId: string
+    sku: string
+    productName: string
+    currentStock?: number
+    reorderPoint?: number
+    requestedQty?: number
+    urgency?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CustomerOrderCreateManyCreatorInput = {
+    id?: string
+    storeId: string
+    orderNumber: string
+    customerName: string
+    customerEmail?: string | null
+    status?: string
+    trackingNumber?: string | null
+    carrier?: string | null
+    estimatedDelivery?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OrderStatusUpdateCreateManyUpdaterInput = {
+    id?: string
+    orderId: string
+    status: string
+    notes?: string | null
+    createdAt?: Date | string
   }
 
   export type UserStoreAssignmentUpdateWithoutUserInput = {
@@ -168974,6 +185535,225 @@ export namespace Prisma {
     viewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ClientProfileUpdateWithoutCreatorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableStringFieldUpdateOperationsInput | string | null
+    vipLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    totalPurchases?: FloatFieldUpdateOperationsInput | number
+    lastVisit?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    store?: StoreUpdateOneRequiredWithoutClientProfilesNestedInput
+    interactions?: ClientInteractionUpdateManyWithoutClientNestedInput
+    tasks?: ClientTaskUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientProfileUncheckedUpdateWithoutCreatorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    storeId?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableStringFieldUpdateOperationsInput | string | null
+    vipLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    totalPurchases?: FloatFieldUpdateOperationsInput | number
+    lastVisit?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    interactions?: ClientInteractionUncheckedUpdateManyWithoutClientNestedInput
+    tasks?: ClientTaskUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientProfileUncheckedUpdateManyWithoutCreatorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    storeId?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableStringFieldUpdateOperationsInput | string | null
+    vipLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    totalPurchases?: FloatFieldUpdateOperationsInput | number
+    lastVisit?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientInteractionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    purchaseAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientProfileUpdateOneRequiredWithoutInteractionsNestedInput
+  }
+
+  export type ClientInteractionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    purchaseAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientInteractionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    purchaseAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientTaskUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientProfileUpdateOneRequiredWithoutTasksNestedInput
+  }
+
+  export type ClientTaskUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientTaskUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StockCalloutUpdateWithoutReporterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    productName?: StringFieldUpdateOperationsInput | string
+    currentStock?: IntFieldUpdateOperationsInput | number
+    reorderPoint?: IntFieldUpdateOperationsInput | number
+    requestedQty?: IntFieldUpdateOperationsInput | number
+    urgency?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    store?: StoreUpdateOneRequiredWithoutStockCalloutsNestedInput
+  }
+
+  export type StockCalloutUncheckedUpdateWithoutReporterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    storeId?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    productName?: StringFieldUpdateOperationsInput | string
+    currentStock?: IntFieldUpdateOperationsInput | number
+    reorderPoint?: IntFieldUpdateOperationsInput | number
+    requestedQty?: IntFieldUpdateOperationsInput | number
+    urgency?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StockCalloutUncheckedUpdateManyWithoutReporterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    storeId?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    productName?: StringFieldUpdateOperationsInput | string
+    currentStock?: IntFieldUpdateOperationsInput | number
+    reorderPoint?: IntFieldUpdateOperationsInput | number
+    requestedQty?: IntFieldUpdateOperationsInput | number
+    urgency?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomerOrderUpdateWithoutCreatorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    customerName?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    trackingNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    carrier?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    store?: StoreUpdateOneRequiredWithoutCustomerOrdersNestedInput
+    statusUpdates?: OrderStatusUpdateUpdateManyWithoutOrderNestedInput
+  }
+
+  export type CustomerOrderUncheckedUpdateWithoutCreatorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    storeId?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    customerName?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    trackingNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    carrier?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    statusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutOrderNestedInput
+  }
+
+  export type CustomerOrderUncheckedUpdateManyWithoutCreatorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    storeId?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    customerName?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    trackingNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    carrier?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrderStatusUpdateUpdateWithoutUpdaterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: CustomerOrderUpdateOneRequiredWithoutStatusUpdatesNestedInput
+  }
+
+  export type OrderStatusUpdateUncheckedUpdateWithoutUpdaterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orderId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orderId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateManyTenantInput = {
     id?: string
     email: string
@@ -169500,6 +186280,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTenantInput = {
@@ -169556,6 +186342,12 @@ export namespace Prisma {
     teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
     newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
     newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
+    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
+    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
+    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
+    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
+    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutTenantInput = {
@@ -169607,6 +186399,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutTenantInput = {
@@ -169646,6 +186442,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateManyWithoutTenantInput = {
@@ -171118,6 +187918,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutRegionInput = {
@@ -171157,6 +187961,10 @@ export namespace Prisma {
     wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutStoreNestedInput
     briefings?: BriefingUncheckedUpdateManyWithoutStoreNestedInput
     handovers?: HandoverUncheckedUpdateManyWithoutStoreNestedInput
+    conversionGoals?: ConversionGoalUncheckedUpdateManyWithoutStoreNestedInput
+    clientProfiles?: ClientProfileUncheckedUpdateManyWithoutStoreNestedInput
+    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutStoreNestedInput
+    customerOrders?: CustomerOrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateManyWithoutRegionInput = {
@@ -171564,6 +188372,58 @@ export namespace Prisma {
     customerNotes?: string | null
     stockNotes?: string | null
     generalNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ConversionGoalCreateManyStoreInput = {
+    id?: string
+    period: string
+    targetConversion?: number | null
+    targetAvgBasket?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClientProfileCreateManyStoreInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email?: string | null
+    phone?: string | null
+    preferences?: string | null
+    vipLevel?: string | null
+    totalPurchases?: number
+    lastVisit?: Date | string | null
+    createdBy: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StockCalloutCreateManyStoreInput = {
+    id?: string
+    sku: string
+    productName: string
+    currentStock?: number
+    reorderPoint?: number
+    requestedQty?: number
+    urgency?: string
+    status?: string
+    reportedBy: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CustomerOrderCreateManyStoreInput = {
+    id?: string
+    orderNumber: string
+    customerName: string
+    customerEmail?: string | null
+    status?: string
+    trackingNumber?: string | null
+    carrier?: string | null
+    estimatedDelivery?: Date | string | null
+    createdBy: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -172730,6 +189590,168 @@ export namespace Prisma {
     customerNotes?: NullableStringFieldUpdateOperationsInput | string | null
     stockNotes?: NullableStringFieldUpdateOperationsInput | string | null
     generalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversionGoalUpdateWithoutStoreInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    period?: StringFieldUpdateOperationsInput | string
+    targetConversion?: NullableFloatFieldUpdateOperationsInput | number | null
+    targetAvgBasket?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversionGoalUncheckedUpdateWithoutStoreInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    period?: StringFieldUpdateOperationsInput | string
+    targetConversion?: NullableFloatFieldUpdateOperationsInput | number | null
+    targetAvgBasket?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversionGoalUncheckedUpdateManyWithoutStoreInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    period?: StringFieldUpdateOperationsInput | string
+    targetConversion?: NullableFloatFieldUpdateOperationsInput | number | null
+    targetAvgBasket?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientProfileUpdateWithoutStoreInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableStringFieldUpdateOperationsInput | string | null
+    vipLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    totalPurchases?: FloatFieldUpdateOperationsInput | number
+    lastVisit?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creator?: UserUpdateOneRequiredWithoutClientsCreatedNestedInput
+    interactions?: ClientInteractionUpdateManyWithoutClientNestedInput
+    tasks?: ClientTaskUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientProfileUncheckedUpdateWithoutStoreInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableStringFieldUpdateOperationsInput | string | null
+    vipLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    totalPurchases?: FloatFieldUpdateOperationsInput | number
+    lastVisit?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    interactions?: ClientInteractionUncheckedUpdateManyWithoutClientNestedInput
+    tasks?: ClientTaskUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientProfileUncheckedUpdateManyWithoutStoreInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableStringFieldUpdateOperationsInput | string | null
+    vipLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    totalPurchases?: FloatFieldUpdateOperationsInput | number
+    lastVisit?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StockCalloutUpdateWithoutStoreInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    productName?: StringFieldUpdateOperationsInput | string
+    currentStock?: IntFieldUpdateOperationsInput | number
+    reorderPoint?: IntFieldUpdateOperationsInput | number
+    requestedQty?: IntFieldUpdateOperationsInput | number
+    urgency?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reporter?: UserUpdateOneRequiredWithoutStockCalloutsNestedInput
+  }
+
+  export type StockCalloutUncheckedUpdateWithoutStoreInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    productName?: StringFieldUpdateOperationsInput | string
+    currentStock?: IntFieldUpdateOperationsInput | number
+    reorderPoint?: IntFieldUpdateOperationsInput | number
+    requestedQty?: IntFieldUpdateOperationsInput | number
+    urgency?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    reportedBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StockCalloutUncheckedUpdateManyWithoutStoreInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    productName?: StringFieldUpdateOperationsInput | string
+    currentStock?: IntFieldUpdateOperationsInput | number
+    reorderPoint?: IntFieldUpdateOperationsInput | number
+    requestedQty?: IntFieldUpdateOperationsInput | number
+    urgency?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    reportedBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomerOrderUpdateWithoutStoreInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    customerName?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    trackingNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    carrier?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creator?: UserUpdateOneRequiredWithoutOrdersCreatedNestedInput
+    statusUpdates?: OrderStatusUpdateUpdateManyWithoutOrderNestedInput
+  }
+
+  export type CustomerOrderUncheckedUpdateWithoutStoreInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    customerName?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    trackingNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    carrier?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    statusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutOrderNestedInput
+  }
+
+  export type CustomerOrderUncheckedUpdateManyWithoutStoreInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    customerName?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    trackingNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    carrier?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -174378,6 +191400,118 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     viewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientInteractionCreateManyClientInput = {
+    id?: string
+    userId: string
+    type?: string
+    date?: Date | string
+    notes?: string | null
+    purchaseAmount?: number | null
+    createdAt?: Date | string
+  }
+
+  export type ClientTaskCreateManyClientInput = {
+    id?: string
+    userId: string
+    title: string
+    dueDate?: Date | string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClientInteractionUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    purchaseAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutClientInteractionsNestedInput
+  }
+
+  export type ClientInteractionUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    purchaseAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientInteractionUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    purchaseAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientTaskUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutClientTasksNestedInput
+  }
+
+  export type ClientTaskUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientTaskUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrderStatusUpdateCreateManyOrderInput = {
+    id?: string
+    status: string
+    updatedBy: string
+    notes?: string | null
+    createdAt?: Date | string
+  }
+
+  export type OrderStatusUpdateUpdateWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updater?: UserUpdateOneRequiredWithoutOrderStatusUpdatesNestedInput
+  }
+
+  export type OrderStatusUpdateUncheckedUpdateWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    updatedBy?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrderStatusUpdateUncheckedUpdateManyWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    updatedBy?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

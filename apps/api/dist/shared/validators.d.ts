@@ -2048,4 +2048,179 @@ export declare const newsletterSectionSchema: z.ZodObject<{
     content: string;
     sortOrder?: number | undefined;
 }>;
+export declare const conversionGoalSchema: z.ZodObject<{
+    period: z.ZodString;
+    targetConversion: z.ZodOptional<z.ZodNumber>;
+    targetAvgBasket: z.ZodOptional<z.ZodNumber>;
+}, "strip", z.ZodTypeAny, {
+    period: string;
+    targetConversion?: number | undefined;
+    targetAvgBasket?: number | undefined;
+}, {
+    period: string;
+    targetConversion?: number | undefined;
+    targetAvgBasket?: number | undefined;
+}>;
+export declare const clientProfileCreateSchema: z.ZodObject<{
+    firstName: z.ZodString;
+    lastName: z.ZodString;
+    email: z.ZodOptional<z.ZodString>;
+    phone: z.ZodOptional<z.ZodString>;
+    preferences: z.ZodOptional<z.ZodString>;
+    vipLevel: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    firstName: string;
+    lastName: string;
+    email?: string | undefined;
+    phone?: string | undefined;
+    preferences?: string | undefined;
+    vipLevel?: string | undefined;
+}, {
+    firstName: string;
+    lastName: string;
+    email?: string | undefined;
+    phone?: string | undefined;
+    preferences?: string | undefined;
+    vipLevel?: string | undefined;
+}>;
+export declare const clientProfileUpdateSchema: z.ZodObject<{
+    firstName: z.ZodOptional<z.ZodString>;
+    lastName: z.ZodOptional<z.ZodString>;
+    email: z.ZodOptional<z.ZodString>;
+    phone: z.ZodOptional<z.ZodString>;
+    preferences: z.ZodOptional<z.ZodString>;
+    vipLevel: z.ZodOptional<z.ZodString>;
+    totalPurchases: z.ZodOptional<z.ZodNumber>;
+    lastVisit: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    email?: string | undefined;
+    firstName?: string | undefined;
+    lastName?: string | undefined;
+    phone?: string | undefined;
+    preferences?: string | undefined;
+    vipLevel?: string | undefined;
+    totalPurchases?: number | undefined;
+    lastVisit?: string | undefined;
+}, {
+    email?: string | undefined;
+    firstName?: string | undefined;
+    lastName?: string | undefined;
+    phone?: string | undefined;
+    preferences?: string | undefined;
+    vipLevel?: string | undefined;
+    totalPurchases?: number | undefined;
+    lastVisit?: string | undefined;
+}>;
+export declare const clientInteractionSchema: z.ZodObject<{
+    type: z.ZodOptional<z.ZodEnum<["VISIT", "CALL", "EMAIL", "EVENT"]>>;
+    notes: z.ZodOptional<z.ZodString>;
+    purchaseAmount: z.ZodOptional<z.ZodNumber>;
+}, "strip", z.ZodTypeAny, {
+    type?: "VISIT" | "CALL" | "EMAIL" | "EVENT" | undefined;
+    notes?: string | undefined;
+    purchaseAmount?: number | undefined;
+}, {
+    type?: "VISIT" | "CALL" | "EMAIL" | "EVENT" | undefined;
+    notes?: string | undefined;
+    purchaseAmount?: number | undefined;
+}>;
+export declare const clientTaskSchema: z.ZodObject<{
+    title: z.ZodString;
+    dueDate: z.ZodOptional<z.ZodString>;
+    status: z.ZodOptional<z.ZodEnum<["OPEN", "DONE", "CANCELLED"]>>;
+}, "strip", z.ZodTypeAny, {
+    title: string;
+    status?: "OPEN" | "CANCELLED" | "DONE" | undefined;
+    dueDate?: string | undefined;
+}, {
+    title: string;
+    status?: "OPEN" | "CANCELLED" | "DONE" | undefined;
+    dueDate?: string | undefined;
+}>;
+export declare const stockCalloutCreateSchema: z.ZodObject<{
+    sku: z.ZodString;
+    productName: z.ZodString;
+    currentStock: z.ZodOptional<z.ZodNumber>;
+    reorderPoint: z.ZodOptional<z.ZodNumber>;
+    requestedQty: z.ZodNumber;
+    urgency: z.ZodOptional<z.ZodEnum<["LOW", "NORMAL", "HIGH", "CRITICAL"]>>;
+}, "strip", z.ZodTypeAny, {
+    sku: string;
+    productName: string;
+    requestedQty: number;
+    currentStock?: number | undefined;
+    reorderPoint?: number | undefined;
+    urgency?: "LOW" | "HIGH" | "CRITICAL" | "NORMAL" | undefined;
+}, {
+    sku: string;
+    productName: string;
+    requestedQty: number;
+    currentStock?: number | undefined;
+    reorderPoint?: number | undefined;
+    urgency?: "LOW" | "HIGH" | "CRITICAL" | "NORMAL" | undefined;
+}>;
+export declare const stockCalloutUpdateSchema: z.ZodObject<{
+    status: z.ZodOptional<z.ZodEnum<["OPEN", "ORDERED", "RECEIVED", "CANCELLED"]>>;
+    currentStock: z.ZodOptional<z.ZodNumber>;
+    requestedQty: z.ZodOptional<z.ZodNumber>;
+    urgency: z.ZodOptional<z.ZodEnum<["LOW", "NORMAL", "HIGH", "CRITICAL"]>>;
+}, "strip", z.ZodTypeAny, {
+    status?: "OPEN" | "CANCELLED" | "ORDERED" | "RECEIVED" | undefined;
+    currentStock?: number | undefined;
+    requestedQty?: number | undefined;
+    urgency?: "LOW" | "HIGH" | "CRITICAL" | "NORMAL" | undefined;
+}, {
+    status?: "OPEN" | "CANCELLED" | "ORDERED" | "RECEIVED" | undefined;
+    currentStock?: number | undefined;
+    requestedQty?: number | undefined;
+    urgency?: "LOW" | "HIGH" | "CRITICAL" | "NORMAL" | undefined;
+}>;
+export declare const customerOrderCreateSchema: z.ZodObject<{
+    orderNumber: z.ZodString;
+    customerName: z.ZodString;
+    customerEmail: z.ZodOptional<z.ZodString>;
+    trackingNumber: z.ZodOptional<z.ZodString>;
+    carrier: z.ZodOptional<z.ZodString>;
+    estimatedDelivery: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    orderNumber: string;
+    customerName: string;
+    customerEmail?: string | undefined;
+    trackingNumber?: string | undefined;
+    carrier?: string | undefined;
+    estimatedDelivery?: string | undefined;
+}, {
+    orderNumber: string;
+    customerName: string;
+    customerEmail?: string | undefined;
+    trackingNumber?: string | undefined;
+    carrier?: string | undefined;
+    estimatedDelivery?: string | undefined;
+}>;
+export declare const customerOrderUpdateSchema: z.ZodObject<{
+    status: z.ZodOptional<z.ZodEnum<["ORDERED", "SHIPPED", "IN_TRANSIT", "DELIVERED", "RETURNED"]>>;
+    trackingNumber: z.ZodOptional<z.ZodString>;
+    carrier: z.ZodOptional<z.ZodString>;
+    estimatedDelivery: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    status?: "ORDERED" | "SHIPPED" | "IN_TRANSIT" | "DELIVERED" | "RETURNED" | undefined;
+    trackingNumber?: string | undefined;
+    carrier?: string | undefined;
+    estimatedDelivery?: string | undefined;
+}, {
+    status?: "ORDERED" | "SHIPPED" | "IN_TRANSIT" | "DELIVERED" | "RETURNED" | undefined;
+    trackingNumber?: string | undefined;
+    carrier?: string | undefined;
+    estimatedDelivery?: string | undefined;
+}>;
+export declare const orderStatusUpdateSchema: z.ZodObject<{
+    status: z.ZodString;
+    notes: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    status: string;
+    notes?: string | undefined;
+}, {
+    status: string;
+    notes?: string | undefined;
+}>;
 //# sourceMappingURL=validators.d.ts.map
