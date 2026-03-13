@@ -45,6 +45,9 @@ export const TOOL_ROUTES: Record<string, string> = {
   'customer.clienteling_crm': '/tools/clienteling',
   'customer.stock_callouts': '/tools/stock-callouts',
   'customer.track_trace': '/tools/track-trace',
+  // Regional Insights
+  'regional.multi_store_view': '/tools/multi-store',
+  'regional.rm_dashboard': '/tools/rm-dashboard',
 };
 
 /**

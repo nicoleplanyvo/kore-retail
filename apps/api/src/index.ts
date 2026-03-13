@@ -47,6 +47,8 @@ import { frConversionRouter } from './routes/tools/fr-conversion/index.js';
 import { clientelingRouter } from './routes/tools/clienteling/index.js';
 import { stockCalloutsRouter } from './routes/tools/stock-callouts/index.js';
 import { trackTraceRouter } from './routes/tools/track-trace/index.js';
+import { multiStoreRouter } from './routes/tools/multi-store/index.js';
+import { rmDashboardRouter } from './routes/tools/rm-dashboard/index.js';
 import { toolsRouter } from './routes/tools/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -161,6 +163,10 @@ app.use('/api/tools/clienteling', clientelingRouter);
 app.use('/api/tools/stock-callouts', stockCalloutsRouter);
 // Tools — Track & Trace
 app.use('/api/tools/track-trace', trackTraceRouter);
+// Tools — Multi-Store View
+app.use('/api/tools/multi-store', multiStoreRouter);
+// Tools — RM Dashboard
+app.use('/api/tools/rm-dashboard', rmDashboardRouter);
 
 // Statische Uploads mit Auth-Schutz
 const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? path.join(process.cwd(), 'uploads');

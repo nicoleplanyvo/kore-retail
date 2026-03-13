@@ -47,6 +47,8 @@ import FrConversionRoutes from './tools/fr-conversion/index';
 import ClientelingRoutes from './tools/clienteling/index';
 import StockCalloutsRoutes from './tools/stock-callouts/index';
 import TrackTraceRoutes from './tools/track-trace/index';
+import MultiStoreRoutes from './tools/multi-store/index';
+import RmDashboardRoutes from './tools/rm-dashboard/index';
 
 export function App() {
   return (
@@ -107,6 +109,10 @@ export function App() {
           <Route path="/tools/clienteling/*" element={<ClientelingRoutes />} />
           <Route path="/tools/stock-callouts/*" element={<StockCalloutsRoutes />} />
           <Route path="/tools/track-trace/*" element={<TrackTraceRoutes />} />
+
+          {/* Tools — Regional Insights */}
+          <Route path="/tools/multi-store/*" element={<MultiStoreRoutes />} />
+          <Route path="/tools/rm-dashboard/*" element={<RmDashboardRoutes />} />
 
           {/* === Verwaltung (Admin) === */}
 
