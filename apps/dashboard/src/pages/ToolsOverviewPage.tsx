@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
 import { Badge } from '@kore/ui';
-import { useTools, useToolStats } from '../hooks/useTools';
+import { useTools, useToolStats, useToggleToolAssignment } from '../hooks/useTools';
 import { TOOL_CATEGORIES, CATEGORY_ORDER } from '../lib/moduleCategories';
-import { getToolRoute } from '../lib/toolRoutes';
-import { Euro, Wrench, BarChart3, ChevronRight } from 'lucide-react';
+import { Euro, Wrench, BarChart3 } from 'lucide-react';
+import { useStores, useStoreTools } from '../hooks/useStores';
+import { useState } from 'react';
 import t from '../locales/de.json';
 
 function StatsCard({ icon: Icon, label, value, color }: { icon: React.ElementType; label: string; value: string | number; color?: string }) {
@@ -23,6 +23,12 @@ function StatsCard({ icon: Icon, label, value, color }: { icon: React.ElementTyp
 export function ToolsOverviewPage() {
   const { data: toolsData, isLoading } = useTools();
   const { data: stats } = useToolStats();
+  const { data: storesData } = useStores();
+  const [selectedStore, setSelectedStore] = useState<string>('');
+  const { data: storeToolsData } = useStoreTools(selectedStore || undefined);
+  const toggleMutation = useToggleToolAssignment();
+
+  const stores = storesData || [];
 
   const formatPrice = (cents: number) =>
     new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(cents / 100);
@@ -31,9 +37,25 @@ export function ToolsOverviewPage() {
     return <p className="text-kore-mid font-body">{t.common.loading}</p>;
   }
 
+  // Tool-IDs die der ausgewaehlte Store hat (aus useStoreTools)
+  const assignedToolIds = new Set<string>(
+    (storeToolsData?.tools || [])
+      .filter((t) => t.assigned)
+      .map((t) => t.id)
+  );
+
+  const handleToggle = (toolId: string, isActive: boolean) => {
+    if (!selectedStore) return;
+    toggleMutation.mutate({
+      toolId,
+      storeId: selectedStore,
+      action: isActive ? 'unassign' : 'assign',
+    });
+  };
+
   return (
     <div>
-      <h1 className="font-display text-h2 sm:text-h1 text-kore-ink mb-lg sm:mb-xl">{t.tools.title}</h1>
+      <h1 className="font-display text-h2 sm:text-h1 text-kore-ink mb-lg sm:mb-xl">Tool-Buchung</h1>
 
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-lg mb-2xl">
@@ -42,7 +64,26 @@ export function ToolsOverviewPage() {
         <StatsCard icon={Euro} label={t.tools.mrr} value={formatPrice(stats?.mrr ?? 0)} color="rgba(158, 132, 96, 0.15)" />
       </div>
 
-      {/* Categories */}
+      {/* Store-Auswahl */}
+      <div className="bg-kore-white border border-kore-border p-xl mb-xl">
+        <label className="font-body text-caption text-kore-mid uppercase tracking-[0.14em] block mb-md">
+          Store auswaehlen
+        </label>
+        <select
+          value={selectedStore}
+          onChange={(e) => setSelectedStore(e.target.value)}
+          className="w-full max-w-[400px] px-md py-md-sm border border-kore-border bg-kore-white font-body text-body text-kore-ink"
+        >
+          <option value="">— Bitte Store waehlen —</option>
+          {stores.map((store) => (
+            <option key={store.id} value={store.id}>
+              {store.name} ({store.city || 'Unbekannt'})
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Tool-Liste mit Toggles */}
       <div className="flex flex-col gap-xl">
         {CATEGORY_ORDER.map((catKey) => {
           const catInfo = TOOL_CATEGORIES[catKey];
@@ -57,38 +98,44 @@ export function ToolsOverviewPage() {
               </div>
               <div className="divide-y divide-kore-border">
                 {catTools.map((tool) => {
-                  const route = getToolRoute(tool.key);
-                  const content = (
-                    <>
+                  const isActive = assignedToolIds.has(tool.id);
+
+                  return (
+                    <div
+                      key={tool.id}
+                      className="px-md sm:px-xl py-md flex items-center justify-between gap-md"
+                    >
                       <div className="min-w-0">
                         <p className="font-body text-body text-kore-ink font-normal">{tool.name}</p>
                         <p className="font-body text-small text-kore-mid truncate">{tool.description}</p>
                       </div>
                       <div className="flex items-center gap-md flex-shrink-0">
-                        <Badge variant="brass">
-                          {tool._count.assignments} Stores
-                        </Badge>
                         <span className="font-body text-small text-kore-ink whitespace-nowrap">
                           {formatPrice(tool.priceMonthly)}
                         </span>
-                        {route && (
-                          <ChevronRight size={16} className="text-kore-brass" />
+                        <Badge variant="brass">
+                          {tool._count.assignments} Stores
+                        </Badge>
+                        {selectedStore ? (
+                          <button
+                            onClick={() => handleToggle(tool.id, isActive)}
+                            disabled={toggleMutation.isPending}
+                            className={`relative inline-flex h-[24px] w-[44px] items-center rounded-full transition-colors ${
+                              isActive ? 'bg-kore-olive' : 'bg-kore-border'
+                            }`}
+                          >
+                            <span
+                              className={`inline-block h-[18px] w-[18px] rounded-full bg-kore-white transition-transform ${
+                                isActive ? 'translate-x-[22px]' : 'translate-x-[3px]'
+                              }`}
+                            />
+                          </button>
+                        ) : (
+                          <span className="font-body text-[0.65rem] text-kore-mid">
+                            Store waehlen
+                          </span>
                         )}
                       </div>
-                    </>
-                  );
-
-                  return route ? (
-                    <Link
-                      key={tool.id}
-                      to={route}
-                      className="px-md sm:px-xl py-md flex items-center justify-between gap-md hover:bg-kore-surface transition-colors duration-150"
-                    >
-                      {content}
-                    </Link>
-                  ) : (
-                    <div key={tool.id} className="px-md sm:px-xl py-md flex items-center justify-between gap-md opacity-60">
-                      {content}
                     </div>
                   );
                 })}

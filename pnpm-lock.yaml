@@ -169,6 +169,9 @@ importers:
       '@kore/validators':
         specifier: workspace:*
         version: link:../../packages/validators
+      '@tanstack/react-query':
+        specifier: ^5.64.0
+        version: 5.90.21(react@19.2.4)
       lucide-react:
         specifier: ^0.468.0
         version: 0.468.0(react@19.2.4)
@@ -187,6 +190,9 @@ importers:
       zod:
         specifier: ^3.24.0
         version: 3.25.76
+      zustand:
+        specifier: ^5.0.0
+        version: 5.0.11(@types/react@19.2.14)(react@19.2.4)
     devDependencies:
       '@eslint/js':
         specifier: ^9.39.1

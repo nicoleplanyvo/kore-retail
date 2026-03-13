@@ -1,51 +1,13 @@
 import {
-  Building2, Store, Wrench, TrendingUp, Euro,
-  ClipboardCheck, Award, Camera, BookOpen, BarChart3, Wallet,
-  LineChart, Package, Monitor, Activity, Palette, GraduationCap,
-  Clock, Trophy, UserPlus, MessageSquare, Compass, Star, CalendarDays,
-  Heart, Smile, FileText, ArrowLeftRight, Bell, Mail, Navigation,
-  Map, LayoutDashboard, PackageSearch, Shield, type LucideIcon,
+  Building2, Store, Wrench, TrendingUp, Euro, ExternalLink,
+  type LucideIcon,
 } from 'lucide-react';
 import { useDashboardStats, useTenants } from '../hooks/useTenants';
-import { useMyTools } from '../hooks/useMyTools';
 import { useAuthStore } from '../stores/authStore';
 import { hasMinRole, type UserRole } from '@kore/types';
 import { Badge } from '@kore/ui';
 import { useNavigate } from 'react-router-dom';
 import t from '../locales/de.json';
-
-// Icon-Mapping: icon-String aus DB -> Lucide-Komponente
-const iconMap: Record<string, LucideIcon> = {
-  ClipboardCheck, Award, TrendingUp, Camera, BookOpen,
-  BarChart3, Wallet, LineChart, Shield, Package,
-  Monitor, Activity, Palette, Wrench,
-  GraduationCap, Clock, Trophy, UserPlus,
-  MessageSquare, Compass, Star, CalendarDays, Heart, Smile,
-  FileText, ArrowLeftRight, Bell, Mail,
-  PackageSearch, Navigation,
-  Map, LayoutDashboard,
-};
-
-// Tool-Key -> Route-Mapping (nur Tools mit Route)
-const toolRoutes: Record<string, string> = {
-  'standards.excellence_tracker': '/tools/sea',
-  'standards.checklisten': '/tools/checklisten',
-  'standards.sop_bibliothek': '/tools/sop',
-  'standards.vm_foto_compliance': '/tools/vm-compliance',
-  'standards.store_standards': '/tools/store-standards',
-};
-
-// Kategorie-Labels
-const categoryLabels: Record<string, string> = {
-  STANDARDS_COMPLIANCE: 'Standards & Compliance',
-  PERFORMANCE: 'Performance & Sichtbarkeit',
-  FLOOR: 'Floor in Echtzeit',
-  TRAINING: 'Training & Entwicklung',
-  COACHING_PEOPLE: 'Coaching & People',
-  KOMMUNIKATION: 'Kommunikation & Signal',
-  CUSTOMER_STOCK: 'Customer, Clienteling & Stock',
-  REGIONAL_INSIGHTS: 'Regional Insights',
-};
 
 function StatsCard({
   icon: Icon,
@@ -163,95 +125,10 @@ function KoreAdminDashboard() {
   );
 }
 
-/** Tool-Cards Grid für alle Rollen */
-function ToolCardsGrid() {
-  const { data: myTools, isLoading } = useMyTools();
-  const navigate = useNavigate();
-
-  if (isLoading) {
-    return (
-      <div className="py-xl text-center">
-        <p className="font-body text-kore-mid">Tools werden geladen...</p>
-      </div>
-    );
-  }
-
-  if (!myTools || myTools.length === 0) {
-    return (
-      <div className="bg-kore-white border border-kore-border p-2xl text-center">
-        <Wrench size={32} className="text-kore-mid/30 mx-auto mb-md" />
-        <p className="font-body text-kore-mid">Keine Tools zugewiesen.</p>
-        <p className="font-body text-small text-kore-mid/60 mt-xs">
-          Kontaktieren Sie Ihren Administrator, um Tools freizuschalten.
-        </p>
-      </div>
-    );
-  }
-
-  // Gruppiere nach Kategorie
-  const grouped: Record<string, typeof myTools> = {};
-  for (const assignment of myTools) {
-    const cat = assignment.tool.category;
-    if (!grouped[cat]) grouped[cat] = [];
-    grouped[cat]!.push(assignment);
-  }
-
-  return (
-    <div className="space-y-xl">
-      {Object.entries(grouped).map(([category, assignments]) => (
-        <div key={category}>
-          <h3 className="font-body text-caption text-kore-mid uppercase tracking-[0.14em] mb-md">
-            {categoryLabels[category] || category}
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md">
-            {assignments.map((assignment) => {
-              const tool = assignment.tool;
-              const Icon = iconMap[tool.icon || ''] || Wrench;
-              const route = toolRoutes[tool.key];
-
-              return (
-                <div
-                  key={tool.id}
-                  className={`bg-kore-white border border-kore-border p-lg flex items-start gap-md transition-colors ${
-                    route
-                      ? 'cursor-pointer hover:border-kore-brass/40 hover:bg-kore-surface'
-                      : 'opacity-60'
-                  }`}
-                  onClick={() => route && navigate(route)}
-                >
-                  <div className="w-[36px] h-[36px] bg-kore-surface flex items-center justify-center flex-shrink-0">
-                    <Icon size={18} className="text-kore-ink" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="font-body text-small text-kore-ink font-normal truncate">
-                      {tool.name}
-                    </p>
-                    {tool.description && (
-                      <p className="font-body text-[0.65rem] text-kore-mid mt-xs line-clamp-2">
-                        {tool.description}
-                      </p>
-                    )}
-                    {!route && (
-                      <p className="font-body text-[0.6rem] text-kore-brass mt-xs">
-                        Bald verfügbar
-                      </p>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 export function DashboardPage() {
   const { user } = useAuthStore();
   const userRole = (user?.role || 'learner') as UserRole;
 
-  // Rollenbasierter Greeting
   const roleLabels: Record<string, string> = {
     kore_admin: 'Plattform-Admin',
     tenant_admin: 'Administrator',
@@ -263,27 +140,37 @@ export function DashboardPage() {
 
   return (
     <div>
-      {/* Header mit Begrüßung */}
+      {/* Header */}
       <div className="mb-lg sm:mb-xl">
         <h1 className="font-display text-h2 sm:text-h1 text-kore-ink">
           Hallo, {user?.name?.split(' ')[0] || 'User'}
         </h1>
         <p className="font-body text-small text-kore-mid mt-xs">
           {roleLabels[userRole] || userRole}
-          {user?.tenantId && ' — '}
         </p>
       </div>
 
-      {/* kore_admin: Plattform-Stats */}
-      {userRole === 'kore_admin' && <KoreAdminDashboard />}
-
-      {/* Alle Rollen: Tool-Cards */}
-      <div className={userRole === 'kore_admin' ? 'mt-2xl' : ''}>
-        <h2 className="font-display text-h3 text-kore-ink mb-lg">
-          {hasMinRole(userRole, 'store_manager') ? 'Meine Tools' : 'Verfügbare Tools'}
-        </h2>
-        <ToolCardsGrid />
+      {/* Link zur KORE App */}
+      <div className="bg-kore-white border border-kore-border p-xl mb-xl flex items-center justify-between">
+        <div>
+          <h2 className="font-display text-h3 text-kore-ink">KORE App</h2>
+          <p className="font-body text-small text-kore-mid mt-xs">
+            Tools nutzen, Daten erfassen, Performance tracken
+          </p>
+        </div>
+        <a
+          href="/app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-md-sm px-lg py-md bg-kore-ink text-kore-white font-body text-small hover:bg-kore-ink/90 transition-colors"
+        >
+          <span>Zur App</span>
+          <ExternalLink size={16} />
+        </a>
       </div>
+
+      {/* kore_admin: Plattform-Stats */}
+      {hasMinRole(userRole, 'kore_admin') && <KoreAdminDashboard />}
     </div>
   );
 }

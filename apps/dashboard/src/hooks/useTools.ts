@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../lib/api';
 
 interface ToolDefinitionWithCount {
@@ -37,5 +37,20 @@ export function useToolStats() {
   return useQuery<ToolStats>({
     queryKey: ['tools', 'stats'],
     queryFn: () => api('/api/admin/tools/stats'),
+  });
+}
+
+export function useToggleToolAssignment() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ toolId, storeId, action }: { toolId: string; storeId: string; action: 'assign' | 'unassign' }) =>
+      api(`/api/admin/stores/${storeId}/tools/${action}`, {
+        method: 'POST',
+        body: JSON.stringify({ toolId }),
+      }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['tools'] });
+      qc.invalidateQueries({ queryKey: ['stores'] });
+    },
   });
 }
