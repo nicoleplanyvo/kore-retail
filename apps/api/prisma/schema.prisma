@@ -40,6 +40,14 @@ model User {
   floorUpdates      FloorStaffPosition[] @relation("FloorPositionUpdater")
   maintenanceReports MaintenanceRequest[] @relation("MaintenanceReporter")
   maintenanceAssignments MaintenanceRequest[] @relation("MaintenanceAssignee")
+  courseCreations    Course[]             @relation("CourseCreator")
+  courseEnrollments  CourseEnrollment[]   @relation("CourseEnrollments")
+  certificates      Certificate[]        @relation("Certificates")
+  trainingLogs      TrainingLog[]        @relation("TrainingLogs")
+  challengeCreations Challenge[]         @relation("ChallengeCreator")
+  challengeParticipations ChallengeParticipant[] @relation("ChallengeParticipants")
+  onboardingJourneys OnboardingJourney[] @relation("OnboardingJourneys")
+  onboardingMentoring OnboardingJourney[] @relation("OnboardingMentors")
 
   @@index([tenantId])
 }
@@ -81,6 +89,11 @@ model Tenant {
   footfallEntries    FootfallEntry[]
   vmGuidelineDocs    VmGuidelineDoc[]
   maintenanceRequests MaintenanceRequest[]
+  courses            Course[]
+  trainingLogs       TrainingLog[]
+  challenges         Challenge[]
+  onboardingTemplates OnboardingTemplate[]
+  onboardingJourneys  OnboardingJourney[]
 }
 
 model Region {
@@ -128,6 +141,10 @@ model Store {
   floorPositions    FloorStaffPosition[]
   footfallEntries   FootfallEntry[]
   maintenanceRequests MaintenanceRequest[]
+  courseEnrollments   CourseEnrollment[]
+  trainingLogs       TrainingLog[]
+  challengeParticipants ChallengeParticipant[]
+  onboardingJourneys  OnboardingJourney[]
 
   @@index([tenantId])
   @@index([regionId])
@@ -907,4 +924,233 @@ model MaintenanceRequest {
   @@index([storeId])
   @@index([status])
   @@index([priority])
+}
+
+// ============================================================
+// Training Hub / LMS
+// ============================================================
+
+model Course {
+  id             String   @id @default(cuid())
+  tenantId       String
+  tenant         Tenant   @relation(fields: [tenantId], references: [id])
+  title          String
+  description    String?
+  category       String?
+  durationMinutes Int     @default(0)
+  isRequired     Boolean  @default(false)
+  status         String   @default("DRAFT") // DRAFT, PUBLISHED, ARCHIVED
+  createdBy      String
+  creator        User     @relation("CourseCreator", fields: [createdBy], references: [id])
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  modules     CourseModule[]
+  enrollments CourseEnrollment[]
+
+  @@index([tenantId])
+  @@index([status])
+}
+
+model CourseModule {
+  id             String   @id @default(cuid())
+  courseId        String
+  course         Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title          String
+  content        String?  // Markdown
+  sortOrder      Int      @default(0)
+  durationMinutes Int     @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([courseId])
+}
+
+model CourseEnrollment {
+  id            String    @id @default(cuid())
+  courseId       String
+  course        Course    @relation(fields: [courseId], references: [id])
+  userId        String
+  user          User      @relation("CourseEnrollments", fields: [userId], references: [id])
+  storeId       String
+  store         Store     @relation(fields: [storeId], references: [id])
+  status        String    @default("ENROLLED") // ENROLLED, IN_PROGRESS, COMPLETED
+  progress      Int       @default(0) // 0-100
+  completedAt   DateTime?
+  certificateId String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  certificate Certificate?
+
+  @@unique([courseId, userId])
+  @@index([userId])
+  @@index([storeId])
+}
+
+model Certificate {
+  id           String    @id @default(cuid())
+  enrollmentId String    @unique
+  enrollment   CourseEnrollment @relation(fields: [enrollmentId], references: [id])
+  userId       String
+  user         User      @relation("Certificates", fields: [userId], references: [id])
+  courseName   String
+  issuedAt     DateTime  @default(now())
+  expiresAt    DateTime?
+
+  @@index([userId])
+}
+
+// ============================================================
+// Training Hours
+// ============================================================
+
+model TrainingLog {
+  id             String   @id @default(cuid())
+  tenantId       String
+  tenant         Tenant   @relation(fields: [tenantId], references: [id])
+  storeId        String
+  store          Store    @relation(fields: [storeId], references: [id])
+  userId         String
+  user           User     @relation("TrainingLogs", fields: [userId], references: [id])
+  date           String   // ISO date
+  durationMinutes Int
+  category       String   @default("OTHER") // PRODUCT, SALES, SERVICE, COMPLIANCE, ONBOARDING, OTHER
+  topic          String?
+  notes          String?
+  verifiedBy     String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([tenantId])
+  @@index([storeId])
+  @@index([userId])
+  @@index([date])
+}
+
+// ============================================================
+// Challenges
+// ============================================================
+
+model Challenge {
+  id           String    @id @default(cuid())
+  tenantId     String
+  tenant       Tenant    @relation(fields: [tenantId], references: [id])
+  title        String
+  description  String?
+  type         String    @default("INDIVIDUAL") // INDIVIDUAL, TEAM, STORE
+  metric       String?
+  targetValue  Float?
+  startDate    String
+  endDate      String
+  reward       String?
+  status       String    @default("DRAFT") // DRAFT, ACTIVE, COMPLETED, CANCELLED
+  createdBy    String
+  creator      User      @relation("ChallengeCreator", fields: [createdBy], references: [id])
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  participants ChallengeParticipant[]
+
+  @@index([tenantId])
+  @@index([status])
+}
+
+model ChallengeParticipant {
+  id           String    @id @default(cuid())
+  challengeId  String
+  challenge    Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  userId       String
+  user         User      @relation("ChallengeParticipants", fields: [userId], references: [id])
+  storeId      String?
+  store        Store?    @relation(fields: [storeId], references: [id])
+  currentValue Float     @default(0)
+  rank         Int?
+  completedAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@unique([challengeId, userId])
+  @@index([userId])
+}
+
+// ============================================================
+// Onboarding
+// ============================================================
+
+model OnboardingTemplate {
+  id           String   @id @default(cuid())
+  tenantId     String
+  tenant       Tenant   @relation(fields: [tenantId], references: [id])
+  name         String
+  role         String?  // Target role for this template
+  durationDays Int      @default(30)
+  isDefault    Boolean  @default(false)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  steps    OnboardingStep[]
+  journeys OnboardingJourney[]
+
+  @@index([tenantId])
+}
+
+model OnboardingStep {
+  id           String             @id @default(cuid())
+  templateId   String
+  template     OnboardingTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  title        String
+  description  String?
+  category     String?
+  dayNumber    Int      @default(1)
+  sortOrder    Int      @default(0)
+  isRequired   Boolean  @default(true)
+  createdAt    DateTime @default(now())
+
+  progress OnboardingProgress[]
+
+  @@index([templateId])
+}
+
+model OnboardingJourney {
+  id           String              @id @default(cuid())
+  templateId   String
+  template     OnboardingTemplate  @relation(fields: [templateId], references: [id])
+  tenantId     String
+  tenant       Tenant              @relation(fields: [tenantId], references: [id])
+  storeId      String
+  store        Store               @relation(fields: [storeId], references: [id])
+  userId       String
+  user         User                @relation("OnboardingJourneys", fields: [userId], references: [id])
+  mentorId     String?
+  mentor       User?               @relation("OnboardingMentors", fields: [mentorId], references: [id])
+  startDate    String
+  status       String    @default("IN_PROGRESS") // IN_PROGRESS, COMPLETED, CANCELLED
+  completedAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  progress OnboardingProgress[]
+
+  @@index([tenantId])
+  @@index([storeId])
+  @@index([userId])
+}
+
+model OnboardingProgress {
+  id           String            @id @default(cuid())
+  journeyId    String
+  journey      OnboardingJourney @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  stepId       String
+  step         OnboardingStep    @relation(fields: [stepId], references: [id])
+  status       String  @default("PENDING") // PENDING, IN_PROGRESS, COMPLETED, SKIPPED
+  completedAt  DateTime?
+  notes        String?
+  verifiedBy   String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([journeyId, stepId])
+  @@index([journeyId])
 }

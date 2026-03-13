@@ -732,4 +732,195 @@ export interface MaintenanceRequest {
         city: string | null;
     };
 }
+export type CourseStatus = 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
+export type EnrollmentProgressStatus = 'ENROLLED' | 'IN_PROGRESS' | 'COMPLETED';
+export interface Course {
+    id: string;
+    tenantId: string;
+    title: string;
+    description: string | null;
+    category: string | null;
+    durationMinutes: number;
+    isRequired: boolean;
+    status: CourseStatus;
+    createdBy: string;
+    createdAt: string;
+    updatedAt: string;
+    modules?: CourseModule[];
+    enrollments?: CourseEnrollment[];
+    _count?: {
+        modules: number;
+        enrollments: number;
+    };
+}
+export interface CourseModule {
+    id: string;
+    courseId: string;
+    title: string;
+    content: string | null;
+    sortOrder: number;
+    durationMinutes: number;
+}
+export interface CourseEnrollment {
+    id: string;
+    courseId: string;
+    userId: string;
+    storeId: string;
+    status: EnrollmentProgressStatus;
+    progress: number;
+    completedAt: string | null;
+    certificateId: string | null;
+    createdAt: string;
+    updatedAt: string;
+    course?: {
+        id: string;
+        title: string;
+    };
+    user?: {
+        id: string;
+        name: string;
+    };
+    store?: {
+        id: string;
+        name: string;
+    };
+}
+export interface Certificate {
+    id: string;
+    enrollmentId: string;
+    userId: string;
+    courseName: string;
+    issuedAt: string;
+    expiresAt: string | null;
+}
+export type TrainingCategory = 'PRODUCT' | 'SALES' | 'SERVICE' | 'COMPLIANCE' | 'ONBOARDING' | 'OTHER';
+export interface TrainingLog {
+    id: string;
+    tenantId: string;
+    storeId: string;
+    userId: string;
+    date: string;
+    durationMinutes: number;
+    category: TrainingCategory;
+    topic: string | null;
+    notes: string | null;
+    verifiedBy: string | null;
+    createdAt: string;
+    updatedAt: string;
+    user?: {
+        id: string;
+        name: string;
+    };
+    store?: {
+        id: string;
+        name: string;
+    };
+}
+export type ChallengeType = 'INDIVIDUAL' | 'TEAM' | 'STORE';
+export type ChallengeStatus = 'DRAFT' | 'ACTIVE' | 'COMPLETED' | 'CANCELLED';
+export interface Challenge {
+    id: string;
+    tenantId: string;
+    title: string;
+    description: string | null;
+    type: ChallengeType;
+    metric: string | null;
+    targetValue: number | null;
+    startDate: string;
+    endDate: string;
+    reward: string | null;
+    status: ChallengeStatus;
+    createdBy: string;
+    createdAt: string;
+    updatedAt: string;
+    participants?: ChallengeParticipant[];
+    _count?: {
+        participants: number;
+    };
+}
+export interface ChallengeParticipant {
+    id: string;
+    challengeId: string;
+    userId: string;
+    storeId: string | null;
+    currentValue: number;
+    rank: number | null;
+    completedAt: string | null;
+    user?: {
+        id: string;
+        name: string;
+    };
+    store?: {
+        id: string;
+        name: string;
+    } | null;
+}
+export type OnboardingJourneyStatus = 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED';
+export type OnboardingProgressStatus = 'PENDING' | 'IN_PROGRESS' | 'COMPLETED' | 'SKIPPED';
+export interface OnboardingTemplate {
+    id: string;
+    tenantId: string;
+    name: string;
+    role: string | null;
+    durationDays: number;
+    isDefault: boolean;
+    isActive: boolean;
+    createdAt: string;
+    updatedAt: string;
+    steps?: OnboardingStep[];
+    _count?: {
+        steps: number;
+        journeys: number;
+    };
+}
+export interface OnboardingStep {
+    id: string;
+    templateId: string;
+    title: string;
+    description: string | null;
+    category: string | null;
+    dayNumber: number;
+    sortOrder: number;
+    isRequired: boolean;
+}
+export interface OnboardingJourney {
+    id: string;
+    templateId: string;
+    tenantId: string;
+    storeId: string;
+    userId: string;
+    mentorId: string | null;
+    startDate: string;
+    status: OnboardingJourneyStatus;
+    completedAt: string | null;
+    createdAt: string;
+    updatedAt: string;
+    template?: {
+        id: string;
+        name: string;
+    };
+    user?: {
+        id: string;
+        name: string;
+    };
+    mentor?: {
+        id: string;
+        name: string;
+    } | null;
+    store?: {
+        id: string;
+        name: string;
+    };
+    progress?: OnboardingProgress[];
+}
+export interface OnboardingProgress {
+    id: string;
+    journeyId: string;
+    stepId: string;
+    status: OnboardingProgressStatus;
+    completedAt: string | null;
+    notes: string | null;
+    verifiedBy: string | null;
+    step?: OnboardingStep;
+}
 //# sourceMappingURL=types.d.ts.map

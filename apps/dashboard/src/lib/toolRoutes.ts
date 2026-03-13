@@ -23,6 +23,11 @@ export const TOOL_ROUTES: Record<string, string> = {
   'floor.fr_tracking': '/tools/fr-tracking',
   'floor.vm_guidelines': '/tools/vm-guidelines',
   'floor.maintenance': '/tools/maintenance',
+  // Training & Entwicklung
+  'training.training_hub_lms': '/tools/training-hub',
+  'training.training_hours': '/tools/training-hours',
+  'training.challenges': '/tools/challenges',
+  'training.onboarding': '/tools/onboarding',
 };
 
 /**

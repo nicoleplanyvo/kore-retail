@@ -657,6 +657,147 @@ exports.Prisma.MaintenanceRequestScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.CourseScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  title: 'title',
+  description: 'description',
+  category: 'category',
+  durationMinutes: 'durationMinutes',
+  isRequired: 'isRequired',
+  status: 'status',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CourseModuleScalarFieldEnum = {
+  id: 'id',
+  courseId: 'courseId',
+  title: 'title',
+  content: 'content',
+  sortOrder: 'sortOrder',
+  durationMinutes: 'durationMinutes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CourseEnrollmentScalarFieldEnum = {
+  id: 'id',
+  courseId: 'courseId',
+  userId: 'userId',
+  storeId: 'storeId',
+  status: 'status',
+  progress: 'progress',
+  completedAt: 'completedAt',
+  certificateId: 'certificateId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CertificateScalarFieldEnum = {
+  id: 'id',
+  enrollmentId: 'enrollmentId',
+  userId: 'userId',
+  courseName: 'courseName',
+  issuedAt: 'issuedAt',
+  expiresAt: 'expiresAt'
+};
+
+exports.Prisma.TrainingLogScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  storeId: 'storeId',
+  userId: 'userId',
+  date: 'date',
+  durationMinutes: 'durationMinutes',
+  category: 'category',
+  topic: 'topic',
+  notes: 'notes',
+  verifiedBy: 'verifiedBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ChallengeScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  title: 'title',
+  description: 'description',
+  type: 'type',
+  metric: 'metric',
+  targetValue: 'targetValue',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  reward: 'reward',
+  status: 'status',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ChallengeParticipantScalarFieldEnum = {
+  id: 'id',
+  challengeId: 'challengeId',
+  userId: 'userId',
+  storeId: 'storeId',
+  currentValue: 'currentValue',
+  rank: 'rank',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OnboardingTemplateScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  role: 'role',
+  durationDays: 'durationDays',
+  isDefault: 'isDefault',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OnboardingStepScalarFieldEnum = {
+  id: 'id',
+  templateId: 'templateId',
+  title: 'title',
+  description: 'description',
+  category: 'category',
+  dayNumber: 'dayNumber',
+  sortOrder: 'sortOrder',
+  isRequired: 'isRequired',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.OnboardingJourneyScalarFieldEnum = {
+  id: 'id',
+  templateId: 'templateId',
+  tenantId: 'tenantId',
+  storeId: 'storeId',
+  userId: 'userId',
+  mentorId: 'mentorId',
+  startDate: 'startDate',
+  status: 'status',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OnboardingProgressScalarFieldEnum = {
+  id: 'id',
+  journeyId: 'journeyId',
+  stepId: 'stepId',
+  status: 'status',
+  completedAt: 'completedAt',
+  notes: 'notes',
+  verifiedBy: 'verifiedBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -711,7 +852,18 @@ exports.Prisma.ModelName = {
   FootfallEntry: 'FootfallEntry',
   VmGuidelineDoc: 'VmGuidelineDoc',
   VmGuidelineImage: 'VmGuidelineImage',
-  MaintenanceRequest: 'MaintenanceRequest'
+  MaintenanceRequest: 'MaintenanceRequest',
+  Course: 'Course',
+  CourseModule: 'CourseModule',
+  CourseEnrollment: 'CourseEnrollment',
+  Certificate: 'Certificate',
+  TrainingLog: 'TrainingLog',
+  Challenge: 'Challenge',
+  ChallengeParticipant: 'ChallengeParticipant',
+  OnboardingTemplate: 'OnboardingTemplate',
+  OnboardingStep: 'OnboardingStep',
+  OnboardingJourney: 'OnboardingJourney',
+  OnboardingProgress: 'OnboardingProgress'
 };
 
 /**

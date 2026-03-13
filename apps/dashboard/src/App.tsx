@@ -29,6 +29,10 @@ import LiveFloorRoutes from './tools/live-floor/index';
 import FrTrackingRoutes from './tools/fr-tracking/index';
 import VmGuidelinesRoutes from './tools/vm-guidelines/index';
 import MaintenanceRoutes from './tools/maintenance/index';
+import TrainingHubRoutes from './tools/training-hub/index';
+import TrainingHoursRoutes from './tools/training-hours/index';
+import ChallengesRoutes from './tools/challenges/index';
+import OnboardingRoutes from './tools/onboarding/index';
 
 export function App() {
   return (
@@ -63,6 +67,12 @@ export function App() {
           <Route path="/tools/fr-tracking/*" element={<FrTrackingRoutes />} />
           <Route path="/tools/vm-guidelines/*" element={<VmGuidelinesRoutes />} />
           <Route path="/tools/maintenance/*" element={<MaintenanceRoutes />} />
+
+          {/* Tools — Training & Entwicklung */}
+          <Route path="/tools/training-hub/*" element={<TrainingHubRoutes />} />
+          <Route path="/tools/training-hours/*" element={<TrainingHoursRoutes />} />
+          <Route path="/tools/challenges/*" element={<ChallengesRoutes />} />
+          <Route path="/tools/onboarding/*" element={<OnboardingRoutes />} />
 
           {/* === Verwaltung (Admin) === */}
 

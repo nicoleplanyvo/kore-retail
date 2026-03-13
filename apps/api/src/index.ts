@@ -29,6 +29,10 @@ import { liveFloorRouter } from './routes/tools/live-floor/index.js';
 import { frTrackingRouter } from './routes/tools/fr-tracking/index.js';
 import { vmGuidelinesRouter } from './routes/tools/vm-guidelines/index.js';
 import { maintenanceRouter } from './routes/tools/maintenance/index.js';
+import { trainingHubRouter } from './routes/tools/training-hub/index.js';
+import { trainingHoursRouter } from './routes/tools/training-hours/index.js';
+import { challengesRouter } from './routes/tools/challenges/index.js';
+import { onboardingRouter } from './routes/tools/onboarding/index.js';
 import { toolsRouter } from './routes/tools/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -107,6 +111,14 @@ app.use('/api/tools/fr-tracking', frTrackingRouter);
 app.use('/api/tools/vm-guidelines', vmGuidelinesRouter);
 // Tools — Maintenance
 app.use('/api/tools/maintenance', maintenanceRouter);
+// Tools — Training Hub / LMS
+app.use('/api/tools/training-hub', trainingHubRouter);
+// Tools — Training Hours
+app.use('/api/tools/training-hours', trainingHoursRouter);
+// Tools — Challenges
+app.use('/api/tools/challenges', challengesRouter);
+// Tools — Onboarding
+app.use('/api/tools/onboarding', onboardingRouter);
 
 // Statische Uploads mit Auth-Schutz
 const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? path.join(process.cwd(), 'uploads');
@@ -115,7 +127,6 @@ app.use('/api/uploads', authenticate, express.static(UPLOAD_DIR));
 // ── Production Static File Serving ────────────────
 if (isProduction) {
   const dashboardDist = path.resolve(__dirname, '../../dashboard/dist');
-  const webDist = path.resolve(__dirname, '../../web/dist');
 
   // Dashboard (dashboard.kore-retail.de) — wenn als eigene Domain gehostet
   app.use('/dashboard', express.static(dashboardDist));

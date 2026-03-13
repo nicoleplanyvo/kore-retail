@@ -18,8 +18,8 @@ export const loginSchema = z.object({
     email: z.string().email(),
     password: z.string().min(8),
 });
-// === Courses (Train) ===
-export const courseCreateSchema = z.object({
+// === Courses (Train) — Legacy ===
+export const legacyCourseCreateSchema = z.object({
     title: z.string().min(3).max(100),
     description: z.string().max(500).optional(),
     estimatedMins: z.number().int().min(1).max(600).optional(),
@@ -431,5 +431,109 @@ export const maintenanceRequestUpdateSchema = z.object({
     estimatedCost: z.number().min(0).optional(),
     actualCost: z.number().min(0).optional(),
     resolution: z.string().max(2000).optional(),
+});
+// ============================================================
+// Training Hub / LMS — Validators
+// ============================================================
+export const courseCreateSchema = z.object({
+    title: z.string().min(2).max(200),
+    description: z.string().max(2000).optional(),
+    category: z.string().max(50).optional(),
+    durationMinutes: z.number().int().min(0).default(0),
+    isRequired: z.boolean().default(false),
+});
+export const courseUpdateSchema = z.object({
+    title: z.string().min(2).max(200).optional(),
+    description: z.string().max(2000).optional(),
+    category: z.string().max(50).optional(),
+    durationMinutes: z.number().int().min(0).optional(),
+    isRequired: z.boolean().optional(),
+    status: z.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED']).optional(),
+});
+export const courseModuleCreateSchema = z.object({
+    title: z.string().min(1).max(200),
+    content: z.string().optional(),
+    sortOrder: z.number().int().min(0).default(0),
+    durationMinutes: z.number().int().min(0).default(0),
+});
+export const enrollmentCreateSchema = z.object({
+    courseId: z.string().min(1),
+    userId: z.string().min(1),
+    storeId: z.string().min(1),
+});
+export const enrollmentProgressSchema = z.object({
+    progress: z.number().int().min(0).max(100),
+    status: z.enum(['ENROLLED', 'IN_PROGRESS', 'COMPLETED']).optional(),
+});
+// ============================================================
+// Training Hours — Validators
+// ============================================================
+export const trainingLogCreateSchema = z.object({
+    storeId: z.string().min(1),
+    userId: z.string().min(1),
+    date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    durationMinutes: z.number().int().min(1).max(480),
+    category: z.enum(['PRODUCT', 'SALES', 'SERVICE', 'COMPLIANCE', 'ONBOARDING', 'OTHER']).default('OTHER'),
+    topic: z.string().max(200).optional(),
+    notes: z.string().max(2000).optional(),
+});
+export const trainingLogUpdateSchema = z.object({
+    durationMinutes: z.number().int().min(1).max(480).optional(),
+    category: z.enum(['PRODUCT', 'SALES', 'SERVICE', 'COMPLIANCE', 'ONBOARDING', 'OTHER']).optional(),
+    topic: z.string().max(200).optional(),
+    notes: z.string().max(2000).optional(),
+    verifiedBy: z.string().min(1).optional(),
+});
+// ============================================================
+// Challenges — Validators
+// ============================================================
+export const challengeCreateSchema = z.object({
+    title: z.string().min(2).max(200),
+    description: z.string().max(2000).optional(),
+    type: z.enum(['INDIVIDUAL', 'TEAM', 'STORE']).default('INDIVIDUAL'),
+    metric: z.string().max(100).optional(),
+    targetValue: z.number().optional(),
+    startDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    endDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    reward: z.string().max(500).optional(),
+});
+export const challengeUpdateSchema = z.object({
+    title: z.string().min(2).max(200).optional(),
+    description: z.string().max(2000).optional(),
+    status: z.enum(['DRAFT', 'ACTIVE', 'COMPLETED', 'CANCELLED']).optional(),
+    targetValue: z.number().optional(),
+    reward: z.string().max(500).optional(),
+});
+export const challengeProgressSchema = z.object({
+    currentValue: z.number(),
+});
+// ============================================================
+// Onboarding — Validators
+// ============================================================
+export const onboardingTemplateCreateSchema = z.object({
+    name: z.string().min(2).max(100),
+    role: z.string().max(50).optional(),
+    durationDays: z.number().int().min(1).max(365).default(30),
+    isDefault: z.boolean().default(false),
+    steps: z.array(z.object({
+        title: z.string().min(1).max(200),
+        description: z.string().max(2000).optional(),
+        category: z.string().max(50).optional(),
+        dayNumber: z.number().int().min(1).default(1),
+        sortOrder: z.number().int().min(0).default(0),
+        isRequired: z.boolean().default(true),
+    })).optional(),
+});
+export const onboardingJourneyCreateSchema = z.object({
+    templateId: z.string().min(1),
+    storeId: z.string().min(1),
+    userId: z.string().min(1),
+    mentorId: z.string().min(1).optional(),
+    startDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+});
+export const onboardingStepUpdateSchema = z.object({
+    status: z.enum(['PENDING', 'IN_PROGRESS', 'COMPLETED', 'SKIPPED']),
+    notes: z.string().max(2000).optional(),
+    verifiedBy: z.string().min(1).optional(),
 });
 //# sourceMappingURL=validators.js.map

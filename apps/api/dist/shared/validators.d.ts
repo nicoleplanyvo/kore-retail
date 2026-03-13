@@ -44,7 +44,7 @@ export declare const loginSchema: z.ZodObject<{
     email: string;
     password: string;
 }>;
-export declare const courseCreateSchema: z.ZodObject<{
+export declare const legacyCourseCreateSchema: z.ZodObject<{
     title: z.ZodString;
     description: z.ZodOptional<z.ZodString>;
     estimatedMins: z.ZodOptional<z.ZodNumber>;
@@ -502,7 +502,7 @@ export declare const auditResponseSchema: z.ZodObject<{
 export type AuditRequestInput = z.infer<typeof auditRequestSchema>;
 export type ContactFormInput = z.infer<typeof contactFormSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
-export type CourseCreateInput = z.infer<typeof courseCreateSchema>;
+export type LegacyCourseCreateInput = z.infer<typeof legacyCourseCreateSchema>;
 export type KPIEntryInput = z.infer<typeof kpiEntrySchema>;
 export type TenantCreateInput = z.infer<typeof tenantCreateSchema>;
 export type TenantUpdateInput = z.infer<typeof tenantUpdateSchema>;
@@ -1247,4 +1247,281 @@ export type VmGuidelineDocCreateInput = z.infer<typeof vmGuidelineDocCreateSchem
 export type VmGuidelineDocUpdateInput = z.infer<typeof vmGuidelineDocUpdateSchema>;
 export type MaintenanceRequestCreateInput = z.infer<typeof maintenanceRequestCreateSchema>;
 export type MaintenanceRequestUpdateInput = z.infer<typeof maintenanceRequestUpdateSchema>;
+export declare const courseCreateSchema: z.ZodObject<{
+    title: z.ZodString;
+    description: z.ZodOptional<z.ZodString>;
+    category: z.ZodOptional<z.ZodString>;
+    durationMinutes: z.ZodDefault<z.ZodNumber>;
+    isRequired: z.ZodDefault<z.ZodBoolean>;
+}, "strip", z.ZodTypeAny, {
+    title: string;
+    isRequired: boolean;
+    durationMinutes: number;
+    description?: string | undefined;
+    category?: string | undefined;
+}, {
+    title: string;
+    description?: string | undefined;
+    isRequired?: boolean | undefined;
+    category?: string | undefined;
+    durationMinutes?: number | undefined;
+}>;
+export declare const courseUpdateSchema: z.ZodObject<{
+    title: z.ZodOptional<z.ZodString>;
+    description: z.ZodOptional<z.ZodString>;
+    category: z.ZodOptional<z.ZodString>;
+    durationMinutes: z.ZodOptional<z.ZodNumber>;
+    isRequired: z.ZodOptional<z.ZodBoolean>;
+    status: z.ZodOptional<z.ZodEnum<["DRAFT", "PUBLISHED", "ARCHIVED"]>>;
+}, "strip", z.ZodTypeAny, {
+    status?: "DRAFT" | "PUBLISHED" | "ARCHIVED" | undefined;
+    title?: string | undefined;
+    description?: string | undefined;
+    isRequired?: boolean | undefined;
+    category?: string | undefined;
+    durationMinutes?: number | undefined;
+}, {
+    status?: "DRAFT" | "PUBLISHED" | "ARCHIVED" | undefined;
+    title?: string | undefined;
+    description?: string | undefined;
+    isRequired?: boolean | undefined;
+    category?: string | undefined;
+    durationMinutes?: number | undefined;
+}>;
+export declare const courseModuleCreateSchema: z.ZodObject<{
+    title: z.ZodString;
+    content: z.ZodOptional<z.ZodString>;
+    sortOrder: z.ZodDefault<z.ZodNumber>;
+    durationMinutes: z.ZodDefault<z.ZodNumber>;
+}, "strip", z.ZodTypeAny, {
+    title: string;
+    sortOrder: number;
+    durationMinutes: number;
+    content?: string | undefined;
+}, {
+    title: string;
+    content?: string | undefined;
+    sortOrder?: number | undefined;
+    durationMinutes?: number | undefined;
+}>;
+export declare const enrollmentCreateSchema: z.ZodObject<{
+    courseId: z.ZodString;
+    userId: z.ZodString;
+    storeId: z.ZodString;
+}, "strip", z.ZodTypeAny, {
+    storeId: string;
+    userId: string;
+    courseId: string;
+}, {
+    storeId: string;
+    userId: string;
+    courseId: string;
+}>;
+export declare const enrollmentProgressSchema: z.ZodObject<{
+    progress: z.ZodNumber;
+    status: z.ZodOptional<z.ZodEnum<["ENROLLED", "IN_PROGRESS", "COMPLETED"]>>;
+}, "strip", z.ZodTypeAny, {
+    progress: number;
+    status?: "IN_PROGRESS" | "ENROLLED" | "COMPLETED" | undefined;
+}, {
+    progress: number;
+    status?: "IN_PROGRESS" | "ENROLLED" | "COMPLETED" | undefined;
+}>;
+export declare const trainingLogCreateSchema: z.ZodObject<{
+    storeId: z.ZodString;
+    userId: z.ZodString;
+    date: z.ZodString;
+    durationMinutes: z.ZodNumber;
+    category: z.ZodDefault<z.ZodEnum<["PRODUCT", "SALES", "SERVICE", "COMPLIANCE", "ONBOARDING", "OTHER"]>>;
+    topic: z.ZodOptional<z.ZodString>;
+    notes: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    date: string;
+    storeId: string;
+    category: "OTHER" | "PRODUCT" | "SALES" | "SERVICE" | "COMPLIANCE" | "ONBOARDING";
+    userId: string;
+    durationMinutes: number;
+    notes?: string | undefined;
+    topic?: string | undefined;
+}, {
+    date: string;
+    storeId: string;
+    userId: string;
+    durationMinutes: number;
+    notes?: string | undefined;
+    category?: "OTHER" | "PRODUCT" | "SALES" | "SERVICE" | "COMPLIANCE" | "ONBOARDING" | undefined;
+    topic?: string | undefined;
+}>;
+export declare const trainingLogUpdateSchema: z.ZodObject<{
+    durationMinutes: z.ZodOptional<z.ZodNumber>;
+    category: z.ZodOptional<z.ZodEnum<["PRODUCT", "SALES", "SERVICE", "COMPLIANCE", "ONBOARDING", "OTHER"]>>;
+    topic: z.ZodOptional<z.ZodString>;
+    notes: z.ZodOptional<z.ZodString>;
+    verifiedBy: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    notes?: string | undefined;
+    category?: "OTHER" | "PRODUCT" | "SALES" | "SERVICE" | "COMPLIANCE" | "ONBOARDING" | undefined;
+    durationMinutes?: number | undefined;
+    topic?: string | undefined;
+    verifiedBy?: string | undefined;
+}, {
+    notes?: string | undefined;
+    category?: "OTHER" | "PRODUCT" | "SALES" | "SERVICE" | "COMPLIANCE" | "ONBOARDING" | undefined;
+    durationMinutes?: number | undefined;
+    topic?: string | undefined;
+    verifiedBy?: string | undefined;
+}>;
+export declare const challengeCreateSchema: z.ZodObject<{
+    title: z.ZodString;
+    description: z.ZodOptional<z.ZodString>;
+    type: z.ZodDefault<z.ZodEnum<["INDIVIDUAL", "TEAM", "STORE"]>>;
+    metric: z.ZodOptional<z.ZodString>;
+    targetValue: z.ZodOptional<z.ZodNumber>;
+    startDate: z.ZodString;
+    endDate: z.ZodString;
+    reward: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    type: "INDIVIDUAL" | "TEAM" | "STORE";
+    title: string;
+    startDate: string;
+    endDate: string;
+    description?: string | undefined;
+    targetValue?: number | undefined;
+    metric?: string | undefined;
+    reward?: string | undefined;
+}, {
+    title: string;
+    startDate: string;
+    endDate: string;
+    type?: "INDIVIDUAL" | "TEAM" | "STORE" | undefined;
+    description?: string | undefined;
+    targetValue?: number | undefined;
+    metric?: string | undefined;
+    reward?: string | undefined;
+}>;
+export declare const challengeUpdateSchema: z.ZodObject<{
+    title: z.ZodOptional<z.ZodString>;
+    description: z.ZodOptional<z.ZodString>;
+    status: z.ZodOptional<z.ZodEnum<["DRAFT", "ACTIVE", "COMPLETED", "CANCELLED"]>>;
+    targetValue: z.ZodOptional<z.ZodNumber>;
+    reward: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    status?: "DRAFT" | "COMPLETED" | "ACTIVE" | "CANCELLED" | undefined;
+    title?: string | undefined;
+    description?: string | undefined;
+    targetValue?: number | undefined;
+    reward?: string | undefined;
+}, {
+    status?: "DRAFT" | "COMPLETED" | "ACTIVE" | "CANCELLED" | undefined;
+    title?: string | undefined;
+    description?: string | undefined;
+    targetValue?: number | undefined;
+    reward?: string | undefined;
+}>;
+export declare const challengeProgressSchema: z.ZodObject<{
+    currentValue: z.ZodNumber;
+}, "strip", z.ZodTypeAny, {
+    currentValue: number;
+}, {
+    currentValue: number;
+}>;
+export declare const onboardingTemplateCreateSchema: z.ZodObject<{
+    name: z.ZodString;
+    role: z.ZodOptional<z.ZodString>;
+    durationDays: z.ZodDefault<z.ZodNumber>;
+    isDefault: z.ZodDefault<z.ZodBoolean>;
+    steps: z.ZodOptional<z.ZodArray<z.ZodObject<{
+        title: z.ZodString;
+        description: z.ZodOptional<z.ZodString>;
+        category: z.ZodOptional<z.ZodString>;
+        dayNumber: z.ZodDefault<z.ZodNumber>;
+        sortOrder: z.ZodDefault<z.ZodNumber>;
+        isRequired: z.ZodDefault<z.ZodBoolean>;
+    }, "strip", z.ZodTypeAny, {
+        title: string;
+        sortOrder: number;
+        isRequired: boolean;
+        dayNumber: number;
+        description?: string | undefined;
+        category?: string | undefined;
+    }, {
+        title: string;
+        description?: string | undefined;
+        sortOrder?: number | undefined;
+        isRequired?: boolean | undefined;
+        category?: string | undefined;
+        dayNumber?: number | undefined;
+    }>, "many">>;
+}, "strip", z.ZodTypeAny, {
+    name: string;
+    durationDays: number;
+    isDefault: boolean;
+    role?: string | undefined;
+    steps?: {
+        title: string;
+        sortOrder: number;
+        isRequired: boolean;
+        dayNumber: number;
+        description?: string | undefined;
+        category?: string | undefined;
+    }[] | undefined;
+}, {
+    name: string;
+    role?: string | undefined;
+    durationDays?: number | undefined;
+    isDefault?: boolean | undefined;
+    steps?: {
+        title: string;
+        description?: string | undefined;
+        sortOrder?: number | undefined;
+        isRequired?: boolean | undefined;
+        category?: string | undefined;
+        dayNumber?: number | undefined;
+    }[] | undefined;
+}>;
+export declare const onboardingJourneyCreateSchema: z.ZodObject<{
+    templateId: z.ZodString;
+    storeId: z.ZodString;
+    userId: z.ZodString;
+    mentorId: z.ZodOptional<z.ZodString>;
+    startDate: z.ZodString;
+}, "strip", z.ZodTypeAny, {
+    storeId: string;
+    templateId: string;
+    userId: string;
+    startDate: string;
+    mentorId?: string | undefined;
+}, {
+    storeId: string;
+    templateId: string;
+    userId: string;
+    startDate: string;
+    mentorId?: string | undefined;
+}>;
+export declare const onboardingStepUpdateSchema: z.ZodObject<{
+    status: z.ZodEnum<["PENDING", "IN_PROGRESS", "COMPLETED", "SKIPPED"]>;
+    notes: z.ZodOptional<z.ZodString>;
+    verifiedBy: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    status: "IN_PROGRESS" | "COMPLETED" | "PENDING" | "SKIPPED";
+    notes?: string | undefined;
+    verifiedBy?: string | undefined;
+}, {
+    status: "IN_PROGRESS" | "COMPLETED" | "PENDING" | "SKIPPED";
+    notes?: string | undefined;
+    verifiedBy?: string | undefined;
+}>;
+export type CourseCreateInput2 = z.infer<typeof courseCreateSchema>;
+export type CourseUpdateInput = z.infer<typeof courseUpdateSchema>;
+export type CourseModuleCreateInput = z.infer<typeof courseModuleCreateSchema>;
+export type EnrollmentCreateInput = z.infer<typeof enrollmentCreateSchema>;
+export type EnrollmentProgressInput = z.infer<typeof enrollmentProgressSchema>;
+export type TrainingLogCreateInput = z.infer<typeof trainingLogCreateSchema>;
+export type TrainingLogUpdateInput = z.infer<typeof trainingLogUpdateSchema>;
+export type ChallengeCreateInput = z.infer<typeof challengeCreateSchema>;
+export type ChallengeUpdateInput = z.infer<typeof challengeUpdateSchema>;
+export type ChallengeProgressInput = z.infer<typeof challengeProgressSchema>;
+export type OnboardingTemplateCreateInput = z.infer<typeof onboardingTemplateCreateSchema>;
+export type OnboardingJourneyCreateInput = z.infer<typeof onboardingJourneyCreateSchema>;
+export type OnboardingStepUpdateInput = z.infer<typeof onboardingStepUpdateSchema>;
 //# sourceMappingURL=validators.d.ts.map
