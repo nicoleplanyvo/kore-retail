@@ -33,6 +33,12 @@ import { trainingHubRouter } from './routes/tools/training-hub/index.js';
 import { trainingHoursRouter } from './routes/tools/training-hours/index.js';
 import { challengesRouter } from './routes/tools/challenges/index.js';
 import { onboardingRouter } from './routes/tools/onboarding/index.js';
+import { coachingRouter } from './routes/tools/coaching/index.js';
+import { pdpPipRouter } from './routes/tools/pdp-pip/index.js';
+import { appraisalsRouter } from './routes/tools/appraisals/index.js';
+import { shiftPlanningRouter } from './routes/tools/shift-planning/index.js';
+import { pulseSurveyRouter } from './routes/tools/pulse-survey/index.js';
+import { wellbeingRouter } from './routes/tools/wellbeing/index.js';
 import { toolsRouter } from './routes/tools/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -119,6 +125,18 @@ app.use('/api/tools/training-hours', trainingHoursRouter);
 app.use('/api/tools/challenges', challengesRouter);
 // Tools — Onboarding
 app.use('/api/tools/onboarding', onboardingRouter);
+// Tools — 1:1 Coaching
+app.use('/api/tools/coaching', coachingRouter);
+// Tools — PDP / PIP
+app.use('/api/tools/pdp-pip', pdpPipRouter);
+// Tools — Appraisals
+app.use('/api/tools/appraisals', appraisalsRouter);
+// Tools — Shift Planning
+app.use('/api/tools/shift-planning', shiftPlanningRouter);
+// Tools — Pulse Survey
+app.use('/api/tools/pulse-survey', pulseSurveyRouter);
+// Tools — Wellbeing
+app.use('/api/tools/wellbeing', wellbeingRouter);
 
 // Statische Uploads mit Auth-Schutz
 const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? path.join(process.cwd(), 'uploads');
@@ -127,14 +145,10 @@ app.use('/api/uploads', authenticate, express.static(UPLOAD_DIR));
 // ── Production Static File Serving ────────────────
 if (isProduction) {
   const dashboardDist = path.resolve(__dirname, '../../dashboard/dist');
-
-  // Dashboard (dashboard.kore-retail.de) — wenn als eigene Domain gehostet
   app.use('/dashboard', express.static(dashboardDist));
   app.get('/dashboard/*', (_req, res) => {
     res.sendFile(path.join(dashboardDist, 'index.html'));
   });
-
-  // Unified mode: Alle Nicht-API-Routen → Dashboard SPA
   app.use(express.static(dashboardDist));
   app.get('*', (req, res, next) => {
     if (req.path.startsWith('/api/') || req.path === '/health') return next();

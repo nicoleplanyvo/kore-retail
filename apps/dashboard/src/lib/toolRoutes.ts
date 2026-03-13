@@ -28,6 +28,13 @@ export const TOOL_ROUTES: Record<string, string> = {
   'training.training_hours': '/tools/training-hours',
   'training.challenges': '/tools/challenges',
   'training.onboarding': '/tools/onboarding',
+  // Coaching & People
+  'coaching.one_on_one': '/tools/coaching',
+  'coaching.pdp_pip': '/tools/pdp-pip',
+  'coaching.appraisals': '/tools/appraisals',
+  'coaching.shift_planning': '/tools/shift-planning',
+  'coaching.pulse_survey': '/tools/pulse-survey',
+  'coaching.wellbeing': '/tools/wellbeing',
 };
 
 /**

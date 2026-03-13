@@ -726,3 +726,181 @@ export type ChallengeProgressInput = z.infer<typeof challengeProgressSchema>;
 export type OnboardingTemplateCreateInput = z.infer<typeof onboardingTemplateCreateSchema>;
 export type OnboardingJourneyCreateInput = z.infer<typeof onboardingJourneyCreateSchema>;
 export type OnboardingStepUpdateInput = z.infer<typeof onboardingStepUpdateSchema>;
+
+// ============================================================
+// 1:1 Coaching — Validators
+// ============================================================
+
+export const coachingSessionCreateSchema = z.object({
+  storeId: z.string().min(1),
+  coacheeId: z.string().min(1),
+  scheduledAt: z.string().min(1),
+  duration: z.number().int().min(5).max(480).default(30),
+  type: z.enum(['REGULAR', 'AD_HOC', 'FOLLOW_UP']).default('REGULAR'),
+  notes: z.string().max(5000).optional(),
+  actionItems: z.string().max(5000).optional(),
+  mood: z.number().int().min(1).max(5).optional(),
+  followUpDate: z.string().optional(),
+});
+
+export const coachingSessionUpdateSchema = z.object({
+  scheduledAt: z.string().optional(),
+  duration: z.number().int().min(5).max(480).optional(),
+  type: z.enum(['REGULAR', 'AD_HOC', 'FOLLOW_UP']).optional(),
+  status: z.enum(['SCHEDULED', 'COMPLETED', 'CANCELLED']).optional(),
+  notes: z.string().max(5000).optional(),
+  actionItems: z.string().max(5000).optional(),
+  mood: z.number().int().min(1).max(5).optional(),
+  followUpDate: z.string().optional(),
+});
+
+// ============================================================
+// PDP / PIP — Validators
+// ============================================================
+
+export const developmentPlanCreateSchema = z.object({
+  storeId: z.string().optional(),
+  userId: z.string().min(1),
+  type: z.enum(['PDP', 'PIP']),
+  title: z.string().min(2).max(200),
+  targetDate: z.string().optional(),
+});
+
+export const developmentGoalCreateSchema = z.object({
+  title: z.string().min(2).max(200),
+  measureOfSuccess: z.string().max(500).optional(),
+  targetDate: z.string().optional(),
+});
+
+export const developmentGoalUpdateSchema = z.object({
+  title: z.string().min(2).max(200).optional(),
+  measureOfSuccess: z.string().max(500).optional(),
+  targetDate: z.string().optional(),
+  status: z.enum(['NOT_STARTED', 'IN_PROGRESS', 'COMPLETED']).optional(),
+  progress: z.number().int().min(0).max(100).optional(),
+});
+
+export const developmentReviewCreateSchema = z.object({
+  overallProgress: z.number().int().min(0).max(100).default(0),
+  comments: z.string().max(5000).optional(),
+});
+
+// ============================================================
+// Appraisals — Validators
+// ============================================================
+
+export const appraisalCycleCreateSchema = z.object({
+  name: z.string().min(2).max(200),
+  period: z.string().max(50).optional(),
+  startDate: z.string().min(1),
+  endDate: z.string().min(1),
+});
+
+export const appraisalCreateSchema = z.object({
+  cycleId: z.string().min(1),
+  storeId: z.string().optional(),
+  employeeId: z.string().min(1),
+  managerId: z.string().min(1),
+});
+
+export const appraisalUpdateSchema = z.object({
+  status: z.enum(['PENDING', 'SELF_REVIEW', 'MANAGER_REVIEW', 'COMPLETED']).optional(),
+  selfRating: z.number().int().min(1).max(5).optional(),
+  managerRating: z.number().int().min(1).max(5).optional(),
+  overallRating: z.number().int().min(1).max(5).optional(),
+  strengths: z.string().max(5000).optional(),
+  improvements: z.string().max(5000).optional(),
+  goals: z.string().max(5000).optional(),
+  meetingNotes: z.string().max(5000).optional(),
+});
+
+// ============================================================
+// Shift Planning — Validators
+// ============================================================
+
+export const shiftTemplateCreateSchema = z.object({
+  storeId: z.string().min(1),
+  name: z.string().min(1).max(100),
+  dayOfWeek: z.number().int().min(0).max(6),
+  startTime: z.string().min(1),
+  endTime: z.string().min(1),
+  minStaff: z.number().int().min(1).default(1),
+  role: z.string().max(50).optional(),
+});
+
+export const shiftEntryCreateSchema = z.object({
+  storeId: z.string().min(1),
+  userId: z.string().min(1),
+  date: z.string().min(1),
+  startTime: z.string().min(1),
+  endTime: z.string().min(1),
+  role: z.string().max(50).optional(),
+});
+
+export const shiftEntryUpdateSchema = z.object({
+  startTime: z.string().optional(),
+  endTime: z.string().optional(),
+  role: z.string().max(50).optional(),
+  status: z.enum(['PLANNED', 'CONFIRMED', 'SWAPPED', 'CANCELLED']).optional(),
+});
+
+export const shiftSwapRequestSchema = z.object({
+  swapWithUserId: z.string().optional(),
+});
+
+// ============================================================
+// Pulse Survey — Validators
+// ============================================================
+
+export const pulseSurveyCreateSchema = z.object({
+  title: z.string().min(2).max(200),
+  startDate: z.string().optional(),
+  endDate: z.string().optional(),
+  isAnonymous: z.boolean().default(true),
+});
+
+export const pulseQuestionCreateSchema = z.object({
+  text: z.string().min(2).max(500),
+  type: z.enum(['RATING', 'TEXT', 'CHOICE']).default('RATING'),
+  options: z.string().max(2000).optional(),
+  sortOrder: z.number().int().min(0).default(0),
+});
+
+export const pulseRespondSchema = z.object({
+  storeId: z.string().optional(),
+  answers: z.array(z.object({
+    questionId: z.string().min(1),
+    valueRating: z.number().int().min(1).max(5).optional(),
+    valueText: z.string().max(2000).optional(),
+    valueChoice: z.string().max(500).optional(),
+  })),
+});
+
+// ============================================================
+// Wellbeing — Validators
+// ============================================================
+
+export const wellbeingCheckInCreateSchema = z.object({
+  storeId: z.string().optional(),
+  moodScore: z.number().int().min(1).max(5),
+  energyLevel: z.number().int().min(1).max(5),
+  stressLevel: z.number().int().min(1).max(5),
+  workloadRating: z.number().int().min(1).max(5),
+  notes: z.string().max(2000).optional(),
+  isAnonymous: z.boolean().default(false),
+});
+
+export const wellbeingResourceCreateSchema = z.object({
+  title: z.string().min(2).max(200),
+  category: z.string().max(50).optional(),
+  description: z.string().max(2000).optional(),
+  url: z.string().max(500).optional(),
+});
+
+export const wellbeingResourceUpdateSchema = z.object({
+  title: z.string().min(2).max(200).optional(),
+  category: z.string().max(50).optional(),
+  description: z.string().max(2000).optional(),
+  url: z.string().max(500).optional(),
+  isActive: z.boolean().optional(),
+});

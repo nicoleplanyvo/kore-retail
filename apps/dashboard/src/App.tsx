@@ -33,6 +33,12 @@ import TrainingHubRoutes from './tools/training-hub/index';
 import TrainingHoursRoutes from './tools/training-hours/index';
 import ChallengesRoutes from './tools/challenges/index';
 import OnboardingRoutes from './tools/onboarding/index';
+import CoachingRoutes from './tools/coaching/index';
+import PdpPipRoutes from './tools/pdp-pip/index';
+import AppraisalsRoutes from './tools/appraisals/index';
+import ShiftPlanningRoutes from './tools/shift-planning/index';
+import PulseSurveyRoutes from './tools/pulse-survey/index';
+import WellbeingRoutes from './tools/wellbeing/index';
 
 export function App() {
   return (
@@ -73,6 +79,14 @@ export function App() {
           <Route path="/tools/training-hours/*" element={<TrainingHoursRoutes />} />
           <Route path="/tools/challenges/*" element={<ChallengesRoutes />} />
           <Route path="/tools/onboarding/*" element={<OnboardingRoutes />} />
+
+          {/* Tools — Coaching & People */}
+          <Route path="/tools/coaching/*" element={<CoachingRoutes />} />
+          <Route path="/tools/pdp-pip/*" element={<PdpPipRoutes />} />
+          <Route path="/tools/appraisals/*" element={<AppraisalsRoutes />} />
+          <Route path="/tools/shift-planning/*" element={<ShiftPlanningRoutes />} />
+          <Route path="/tools/pulse-survey/*" element={<PulseSurveyRoutes />} />
+          <Route path="/tools/wellbeing/*" element={<WellbeingRoutes />} />
 
           {/* === Verwaltung (Admin) === */}
 

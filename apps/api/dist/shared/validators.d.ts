@@ -1524,4 +1524,381 @@ export type ChallengeProgressInput = z.infer<typeof challengeProgressSchema>;
 export type OnboardingTemplateCreateInput = z.infer<typeof onboardingTemplateCreateSchema>;
 export type OnboardingJourneyCreateInput = z.infer<typeof onboardingJourneyCreateSchema>;
 export type OnboardingStepUpdateInput = z.infer<typeof onboardingStepUpdateSchema>;
+export declare const coachingSessionCreateSchema: z.ZodObject<{
+    storeId: z.ZodString;
+    coacheeId: z.ZodString;
+    scheduledAt: z.ZodString;
+    duration: z.ZodDefault<z.ZodNumber>;
+    type: z.ZodDefault<z.ZodEnum<["REGULAR", "AD_HOC", "FOLLOW_UP"]>>;
+    notes: z.ZodOptional<z.ZodString>;
+    actionItems: z.ZodOptional<z.ZodString>;
+    mood: z.ZodOptional<z.ZodNumber>;
+    followUpDate: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    type: "REGULAR" | "AD_HOC" | "FOLLOW_UP";
+    storeId: string;
+    coacheeId: string;
+    scheduledAt: string;
+    duration: number;
+    notes?: string | undefined;
+    actionItems?: string | undefined;
+    mood?: number | undefined;
+    followUpDate?: string | undefined;
+}, {
+    storeId: string;
+    coacheeId: string;
+    scheduledAt: string;
+    type?: "REGULAR" | "AD_HOC" | "FOLLOW_UP" | undefined;
+    notes?: string | undefined;
+    duration?: number | undefined;
+    actionItems?: string | undefined;
+    mood?: number | undefined;
+    followUpDate?: string | undefined;
+}>;
+export declare const coachingSessionUpdateSchema: z.ZodObject<{
+    scheduledAt: z.ZodOptional<z.ZodString>;
+    duration: z.ZodOptional<z.ZodNumber>;
+    type: z.ZodOptional<z.ZodEnum<["REGULAR", "AD_HOC", "FOLLOW_UP"]>>;
+    status: z.ZodOptional<z.ZodEnum<["SCHEDULED", "COMPLETED", "CANCELLED"]>>;
+    notes: z.ZodOptional<z.ZodString>;
+    actionItems: z.ZodOptional<z.ZodString>;
+    mood: z.ZodOptional<z.ZodNumber>;
+    followUpDate: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    type?: "REGULAR" | "AD_HOC" | "FOLLOW_UP" | undefined;
+    status?: "COMPLETED" | "CANCELLED" | "SCHEDULED" | undefined;
+    notes?: string | undefined;
+    scheduledAt?: string | undefined;
+    duration?: number | undefined;
+    actionItems?: string | undefined;
+    mood?: number | undefined;
+    followUpDate?: string | undefined;
+}, {
+    type?: "REGULAR" | "AD_HOC" | "FOLLOW_UP" | undefined;
+    status?: "COMPLETED" | "CANCELLED" | "SCHEDULED" | undefined;
+    notes?: string | undefined;
+    scheduledAt?: string | undefined;
+    duration?: number | undefined;
+    actionItems?: string | undefined;
+    mood?: number | undefined;
+    followUpDate?: string | undefined;
+}>;
+export declare const developmentPlanCreateSchema: z.ZodObject<{
+    storeId: z.ZodOptional<z.ZodString>;
+    userId: z.ZodString;
+    type: z.ZodEnum<["PDP", "PIP"]>;
+    title: z.ZodString;
+    targetDate: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    type: "PDP" | "PIP";
+    title: string;
+    userId: string;
+    storeId?: string | undefined;
+    targetDate?: string | undefined;
+}, {
+    type: "PDP" | "PIP";
+    title: string;
+    userId: string;
+    storeId?: string | undefined;
+    targetDate?: string | undefined;
+}>;
+export declare const developmentGoalCreateSchema: z.ZodObject<{
+    title: z.ZodString;
+    measureOfSuccess: z.ZodOptional<z.ZodString>;
+    targetDate: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    title: string;
+    targetDate?: string | undefined;
+    measureOfSuccess?: string | undefined;
+}, {
+    title: string;
+    targetDate?: string | undefined;
+    measureOfSuccess?: string | undefined;
+}>;
+export declare const developmentGoalUpdateSchema: z.ZodObject<{
+    title: z.ZodOptional<z.ZodString>;
+    measureOfSuccess: z.ZodOptional<z.ZodString>;
+    targetDate: z.ZodOptional<z.ZodString>;
+    status: z.ZodOptional<z.ZodEnum<["NOT_STARTED", "IN_PROGRESS", "COMPLETED"]>>;
+    progress: z.ZodOptional<z.ZodNumber>;
+}, "strip", z.ZodTypeAny, {
+    status?: "IN_PROGRESS" | "COMPLETED" | "NOT_STARTED" | undefined;
+    title?: string | undefined;
+    progress?: number | undefined;
+    targetDate?: string | undefined;
+    measureOfSuccess?: string | undefined;
+}, {
+    status?: "IN_PROGRESS" | "COMPLETED" | "NOT_STARTED" | undefined;
+    title?: string | undefined;
+    progress?: number | undefined;
+    targetDate?: string | undefined;
+    measureOfSuccess?: string | undefined;
+}>;
+export declare const developmentReviewCreateSchema: z.ZodObject<{
+    overallProgress: z.ZodDefault<z.ZodNumber>;
+    comments: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    overallProgress: number;
+    comments?: string | undefined;
+}, {
+    overallProgress?: number | undefined;
+    comments?: string | undefined;
+}>;
+export declare const appraisalCycleCreateSchema: z.ZodObject<{
+    name: z.ZodString;
+    period: z.ZodOptional<z.ZodString>;
+    startDate: z.ZodString;
+    endDate: z.ZodString;
+}, "strip", z.ZodTypeAny, {
+    name: string;
+    startDate: string;
+    endDate: string;
+    period?: string | undefined;
+}, {
+    name: string;
+    startDate: string;
+    endDate: string;
+    period?: string | undefined;
+}>;
+export declare const appraisalCreateSchema: z.ZodObject<{
+    cycleId: z.ZodString;
+    storeId: z.ZodOptional<z.ZodString>;
+    employeeId: z.ZodString;
+    managerId: z.ZodString;
+}, "strip", z.ZodTypeAny, {
+    cycleId: string;
+    employeeId: string;
+    managerId: string;
+    storeId?: string | undefined;
+}, {
+    cycleId: string;
+    employeeId: string;
+    managerId: string;
+    storeId?: string | undefined;
+}>;
+export declare const appraisalUpdateSchema: z.ZodObject<{
+    status: z.ZodOptional<z.ZodEnum<["PENDING", "SELF_REVIEW", "MANAGER_REVIEW", "COMPLETED"]>>;
+    selfRating: z.ZodOptional<z.ZodNumber>;
+    managerRating: z.ZodOptional<z.ZodNumber>;
+    overallRating: z.ZodOptional<z.ZodNumber>;
+    strengths: z.ZodOptional<z.ZodString>;
+    improvements: z.ZodOptional<z.ZodString>;
+    goals: z.ZodOptional<z.ZodString>;
+    meetingNotes: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    status?: "COMPLETED" | "PENDING" | "SELF_REVIEW" | "MANAGER_REVIEW" | undefined;
+    selfRating?: number | undefined;
+    managerRating?: number | undefined;
+    overallRating?: number | undefined;
+    strengths?: string | undefined;
+    improvements?: string | undefined;
+    goals?: string | undefined;
+    meetingNotes?: string | undefined;
+}, {
+    status?: "COMPLETED" | "PENDING" | "SELF_REVIEW" | "MANAGER_REVIEW" | undefined;
+    selfRating?: number | undefined;
+    managerRating?: number | undefined;
+    overallRating?: number | undefined;
+    strengths?: string | undefined;
+    improvements?: string | undefined;
+    goals?: string | undefined;
+    meetingNotes?: string | undefined;
+}>;
+export declare const shiftTemplateCreateSchema: z.ZodObject<{
+    storeId: z.ZodString;
+    name: z.ZodString;
+    dayOfWeek: z.ZodNumber;
+    startTime: z.ZodString;
+    endTime: z.ZodString;
+    minStaff: z.ZodDefault<z.ZodNumber>;
+    role: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    name: string;
+    storeId: string;
+    dayOfWeek: number;
+    startTime: string;
+    endTime: string;
+    minStaff: number;
+    role?: string | undefined;
+}, {
+    name: string;
+    storeId: string;
+    dayOfWeek: number;
+    startTime: string;
+    endTime: string;
+    role?: string | undefined;
+    minStaff?: number | undefined;
+}>;
+export declare const shiftEntryCreateSchema: z.ZodObject<{
+    storeId: z.ZodString;
+    userId: z.ZodString;
+    date: z.ZodString;
+    startTime: z.ZodString;
+    endTime: z.ZodString;
+    role: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    date: string;
+    storeId: string;
+    userId: string;
+    startTime: string;
+    endTime: string;
+    role?: string | undefined;
+}, {
+    date: string;
+    storeId: string;
+    userId: string;
+    startTime: string;
+    endTime: string;
+    role?: string | undefined;
+}>;
+export declare const shiftEntryUpdateSchema: z.ZodObject<{
+    startTime: z.ZodOptional<z.ZodString>;
+    endTime: z.ZodOptional<z.ZodString>;
+    role: z.ZodOptional<z.ZodString>;
+    status: z.ZodOptional<z.ZodEnum<["PLANNED", "CONFIRMED", "SWAPPED", "CANCELLED"]>>;
+}, "strip", z.ZodTypeAny, {
+    status?: "CANCELLED" | "PLANNED" | "CONFIRMED" | "SWAPPED" | undefined;
+    role?: string | undefined;
+    startTime?: string | undefined;
+    endTime?: string | undefined;
+}, {
+    status?: "CANCELLED" | "PLANNED" | "CONFIRMED" | "SWAPPED" | undefined;
+    role?: string | undefined;
+    startTime?: string | undefined;
+    endTime?: string | undefined;
+}>;
+export declare const shiftSwapRequestSchema: z.ZodObject<{
+    swapWithUserId: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    swapWithUserId?: string | undefined;
+}, {
+    swapWithUserId?: string | undefined;
+}>;
+export declare const pulseSurveyCreateSchema: z.ZodObject<{
+    title: z.ZodString;
+    startDate: z.ZodOptional<z.ZodString>;
+    endDate: z.ZodOptional<z.ZodString>;
+    isAnonymous: z.ZodDefault<z.ZodBoolean>;
+}, "strip", z.ZodTypeAny, {
+    title: string;
+    isAnonymous: boolean;
+    startDate?: string | undefined;
+    endDate?: string | undefined;
+}, {
+    title: string;
+    startDate?: string | undefined;
+    endDate?: string | undefined;
+    isAnonymous?: boolean | undefined;
+}>;
+export declare const pulseQuestionCreateSchema: z.ZodObject<{
+    text: z.ZodString;
+    type: z.ZodDefault<z.ZodEnum<["RATING", "TEXT", "CHOICE"]>>;
+    options: z.ZodOptional<z.ZodString>;
+    sortOrder: z.ZodDefault<z.ZodNumber>;
+}, "strip", z.ZodTypeAny, {
+    type: "TEXT" | "RATING" | "CHOICE";
+    sortOrder: number;
+    text: string;
+    options?: string | undefined;
+}, {
+    text: string;
+    options?: string | undefined;
+    type?: "TEXT" | "RATING" | "CHOICE" | undefined;
+    sortOrder?: number | undefined;
+}>;
+export declare const pulseRespondSchema: z.ZodObject<{
+    storeId: z.ZodOptional<z.ZodString>;
+    answers: z.ZodArray<z.ZodObject<{
+        questionId: z.ZodString;
+        valueRating: z.ZodOptional<z.ZodNumber>;
+        valueText: z.ZodOptional<z.ZodString>;
+        valueChoice: z.ZodOptional<z.ZodString>;
+    }, "strip", z.ZodTypeAny, {
+        questionId: string;
+        valueText?: string | undefined;
+        valueRating?: number | undefined;
+        valueChoice?: string | undefined;
+    }, {
+        questionId: string;
+        valueText?: string | undefined;
+        valueRating?: number | undefined;
+        valueChoice?: string | undefined;
+    }>, "many">;
+}, "strip", z.ZodTypeAny, {
+    answers: {
+        questionId: string;
+        valueText?: string | undefined;
+        valueRating?: number | undefined;
+        valueChoice?: string | undefined;
+    }[];
+    storeId?: string | undefined;
+}, {
+    answers: {
+        questionId: string;
+        valueText?: string | undefined;
+        valueRating?: number | undefined;
+        valueChoice?: string | undefined;
+    }[];
+    storeId?: string | undefined;
+}>;
+export declare const wellbeingCheckInCreateSchema: z.ZodObject<{
+    storeId: z.ZodOptional<z.ZodString>;
+    moodScore: z.ZodNumber;
+    energyLevel: z.ZodNumber;
+    stressLevel: z.ZodNumber;
+    workloadRating: z.ZodNumber;
+    notes: z.ZodOptional<z.ZodString>;
+    isAnonymous: z.ZodDefault<z.ZodBoolean>;
+}, "strip", z.ZodTypeAny, {
+    isAnonymous: boolean;
+    moodScore: number;
+    energyLevel: number;
+    stressLevel: number;
+    workloadRating: number;
+    storeId?: string | undefined;
+    notes?: string | undefined;
+}, {
+    moodScore: number;
+    energyLevel: number;
+    stressLevel: number;
+    workloadRating: number;
+    storeId?: string | undefined;
+    notes?: string | undefined;
+    isAnonymous?: boolean | undefined;
+}>;
+export declare const wellbeingResourceCreateSchema: z.ZodObject<{
+    title: z.ZodString;
+    category: z.ZodOptional<z.ZodString>;
+    description: z.ZodOptional<z.ZodString>;
+    url: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    title: string;
+    description?: string | undefined;
+    category?: string | undefined;
+    url?: string | undefined;
+}, {
+    title: string;
+    description?: string | undefined;
+    category?: string | undefined;
+    url?: string | undefined;
+}>;
+export declare const wellbeingResourceUpdateSchema: z.ZodObject<{
+    title: z.ZodOptional<z.ZodString>;
+    category: z.ZodOptional<z.ZodString>;
+    description: z.ZodOptional<z.ZodString>;
+    url: z.ZodOptional<z.ZodString>;
+    isActive: z.ZodOptional<z.ZodBoolean>;
+}, "strip", z.ZodTypeAny, {
+    title?: string | undefined;
+    description?: string | undefined;
+    isActive?: boolean | undefined;
+    category?: string | undefined;
+    url?: string | undefined;
+}, {
+    title?: string | undefined;
+    description?: string | undefined;
+    isActive?: boolean | undefined;
+    category?: string | undefined;
+    url?: string | undefined;
+}>;
 //# sourceMappingURL=validators.d.ts.map

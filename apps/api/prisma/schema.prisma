@@ -48,6 +48,16 @@ model User {
   challengeParticipations ChallengeParticipant[] @relation("ChallengeParticipants")
   onboardingJourneys OnboardingJourney[] @relation("OnboardingJourneys")
   onboardingMentoring OnboardingJourney[] @relation("OnboardingMentors")
+  coachSessions    CoachingSession[] @relation("CoachSessions")
+  coacheeSessions  CoachingSession[] @relation("CoacheeSessions")
+  devPlansAsUser   DevelopmentPlan[] @relation("DevelopmentPlanUser")
+  devPlansAsManager DevelopmentPlan[] @relation("DevelopmentPlanManager")
+  devReviews       DevelopmentReview[] @relation("DevelopmentReviewer")
+  appraisalsAsEmployee Appraisal[] @relation("AppraisalEmployee")
+  appraisalsAsManager  Appraisal[] @relation("AppraisalManager")
+  shiftEntries     ShiftEntry[]
+  swapRequests     ShiftSwapRequest[] @relation("SwapRequester")
+  wellbeingCheckIns WellbeingCheckIn[]
 
   @@index([tenantId])
 }
@@ -94,6 +104,12 @@ model Tenant {
   challenges         Challenge[]
   onboardingTemplates OnboardingTemplate[]
   onboardingJourneys  OnboardingJourney[]
+  coachingSessions CoachingSession[]
+  developmentPlans DevelopmentPlan[]
+  appraisalCycles  AppraisalCycle[]
+  pulseSurveys     PulseSurvey[]
+  wellbeingCheckIns WellbeingCheckIn[]
+  wellbeingResources WellbeingResource[]
 }
 
 model Region {
@@ -145,6 +161,13 @@ model Store {
   trainingLogs       TrainingLog[]
   challengeParticipants ChallengeParticipant[]
   onboardingJourneys  OnboardingJourney[]
+  coachingSessions  CoachingSession[]
+  developmentPlans  DevelopmentPlan[]
+  appraisals        Appraisal[]
+  shiftTemplates    ShiftTemplate[]
+  shiftEntries      ShiftEntry[]
+  pulseResponses    PulseResponse[]
+  wellbeingCheckIns WellbeingCheckIn[]
 
   @@index([tenantId])
   @@index([regionId])
@@ -1153,4 +1176,268 @@ model OnboardingProgress {
 
   @@unique([journeyId, stepId])
   @@index([journeyId])
+}
+
+// ============================================================
+// Coaching & Development
+// ============================================================
+
+model CoachingSession {
+  id          String   @id @default(cuid())
+  tenantId    String
+  storeId     String
+  coachId     String
+  coacheeId   String
+  scheduledAt DateTime
+  duration    Int      @default(30)
+  type        String   @default("REGULAR") // REGULAR, AD_HOC, FOLLOW_UP
+  status      String   @default("SCHEDULED") // SCHEDULED, COMPLETED, CANCELLED
+  notes       String?
+  actionItems String?
+  mood        Int?     // 1-5
+  followUpDate DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tenant  Tenant @relation(fields: [tenantId], references: [id])
+  store   Store  @relation(fields: [storeId], references: [id])
+  coach   User   @relation("CoachSessions", fields: [coachId], references: [id])
+  coachee User   @relation("CoacheeSessions", fields: [coacheeId], references: [id])
+}
+
+model DevelopmentPlan {
+  id         String   @id @default(cuid())
+  tenantId   String
+  storeId    String?
+  userId     String
+  managerId  String
+  type       String   // PDP, PIP
+  title      String
+  status     String   @default("ACTIVE") // ACTIVE, COMPLETED, CANCELLED
+  startDate  DateTime @default(now())
+  targetDate DateTime?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  tenant  Tenant             @relation(fields: [tenantId], references: [id])
+  store   Store?             @relation(fields: [storeId], references: [id])
+  user    User               @relation("DevelopmentPlanUser", fields: [userId], references: [id])
+  manager User               @relation("DevelopmentPlanManager", fields: [managerId], references: [id])
+  goals   DevelopmentGoal[]
+  reviews DevelopmentReview[]
+}
+
+model DevelopmentGoal {
+  id               String   @id @default(cuid())
+  planId           String
+  title            String
+  measureOfSuccess String?
+  targetDate       DateTime?
+  status           String   @default("NOT_STARTED") // NOT_STARTED, IN_PROGRESS, COMPLETED
+  progress         Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  plan DevelopmentPlan @relation(fields: [planId], references: [id])
+}
+
+model DevelopmentReview {
+  id              String   @id @default(cuid())
+  planId          String
+  reviewedBy      String
+  reviewDate      DateTime @default(now())
+  overallProgress Int      @default(0)
+  comments        String?
+  createdAt       DateTime @default(now())
+
+  plan     DevelopmentPlan @relation(fields: [planId], references: [id])
+  reviewer User            @relation("DevelopmentReviewer", fields: [reviewedBy], references: [id])
+}
+
+// ============================================================
+// Appraisals / Performance Reviews
+// ============================================================
+
+model AppraisalCycle {
+  id        String   @id @default(cuid())
+  tenantId  String
+  name      String
+  period    String?  // e.g. "Q1 2025", "H1 2025"
+  startDate DateTime
+  endDate   DateTime
+  status    String   @default("DRAFT") // DRAFT, ACTIVE, COMPLETED
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tenant     Tenant      @relation(fields: [tenantId], references: [id])
+  appraisals Appraisal[]
+}
+
+model Appraisal {
+  id            String   @id @default(cuid())
+  cycleId       String
+  storeId       String?
+  employeeId    String
+  managerId     String
+  status        String   @default("PENDING") // PENDING, SELF_REVIEW, MANAGER_REVIEW, COMPLETED
+  selfRating    Int?
+  managerRating Int?
+  overallRating Int?
+  strengths     String?
+  improvements  String?
+  goals         String?
+  meetingNotes  String?
+  completedAt   DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  cycle    AppraisalCycle @relation(fields: [cycleId], references: [id])
+  store    Store?         @relation(fields: [storeId], references: [id])
+  employee User           @relation("AppraisalEmployee", fields: [employeeId], references: [id])
+  manager  User           @relation("AppraisalManager", fields: [managerId], references: [id])
+}
+
+// ============================================================
+// Shift Planning / Scheduling
+// ============================================================
+
+model ShiftTemplate {
+  id        String   @id @default(cuid())
+  storeId   String
+  name      String
+  dayOfWeek Int      // 0=Sun, 1=Mon ... 6=Sat
+  startTime String   // "09:00"
+  endTime   String   // "17:00"
+  minStaff  Int      @default(1)
+  role      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  store Store @relation(fields: [storeId], references: [id])
+}
+
+model ShiftEntry {
+  id        String   @id @default(cuid())
+  storeId   String
+  userId    String
+  date      DateTime
+  startTime String
+  endTime   String
+  role      String?
+  status    String   @default("PLANNED") // PLANNED, CONFIRMED, SWAPPED, CANCELLED
+  createdBy String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  store Store            @relation(fields: [storeId], references: [id])
+  user  User             @relation(fields: [userId], references: [id])
+  swaps ShiftSwapRequest[]
+}
+
+model ShiftSwapRequest {
+  id             String   @id @default(cuid())
+  shiftEntryId   String
+  requestedBy    String
+  swapWithUserId String?
+  status         String   @default("PENDING") // PENDING, APPROVED, REJECTED
+  approvedBy     String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  shiftEntry ShiftEntry @relation(fields: [shiftEntryId], references: [id])
+  requester  User       @relation("SwapRequester", fields: [requestedBy], references: [id])
+}
+
+// ============================================================
+// Pulse Surveys
+// ============================================================
+
+model PulseSurvey {
+  id          String   @id @default(cuid())
+  tenantId    String
+  title       String
+  status      String   @default("DRAFT") // DRAFT, ACTIVE, CLOSED
+  startDate   DateTime?
+  endDate     DateTime?
+  isAnonymous Boolean  @default(true)
+  createdBy   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tenant    Tenant          @relation(fields: [tenantId], references: [id])
+  questions PulseQuestion[]
+  responses PulseResponse[]
+}
+
+model PulseQuestion {
+  id       String @id @default(cuid())
+  surveyId String
+  text     String
+  type     String @default("RATING") // RATING, TEXT, CHOICE
+  options  String? // JSON string for choices
+  sortOrder Int   @default(0)
+
+  survey  PulseSurvey  @relation(fields: [surveyId], references: [id])
+  answers PulseAnswer[]
+}
+
+model PulseResponse {
+  id           String   @id @default(cuid())
+  surveyId     String
+  storeId      String?
+  respondentId String?
+  submittedAt  DateTime @default(now())
+
+  survey    PulseSurvey   @relation(fields: [surveyId], references: [id])
+  store     Store?        @relation(fields: [storeId], references: [id])
+  answers   PulseAnswer[]
+}
+
+model PulseAnswer {
+  id          String  @id @default(cuid())
+  responseId  String
+  questionId  String
+  valueRating Int?
+  valueText   String?
+  valueChoice String?
+
+  response PulseResponse @relation(fields: [responseId], references: [id])
+  question PulseQuestion @relation(fields: [questionId], references: [id])
+}
+
+// ============================================================
+// Wellbeing
+// ============================================================
+
+model WellbeingCheckIn {
+  id              String   @id @default(cuid())
+  tenantId        String
+  storeId         String?
+  userId          String?
+  date            DateTime @default(now())
+  moodScore       Int      // 1-5
+  energyLevel     Int      // 1-5
+  stressLevel     Int      // 1-5
+  workloadRating  Int      // 1-5
+  notes           String?
+  isAnonymous     Boolean  @default(false)
+  createdAt       DateTime @default(now())
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  store  Store? @relation(fields: [storeId], references: [id])
+  user   User?  @relation(fields: [userId], references: [id])
+}
+
+model WellbeingResource {
+  id          String   @id @default(cuid())
+  tenantId    String
+  title       String
+  category    String?
+  description String?
+  url         String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
 }

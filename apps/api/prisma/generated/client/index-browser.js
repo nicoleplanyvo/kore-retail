@@ -798,6 +798,196 @@ exports.Prisma.OnboardingProgressScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.CoachingSessionScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  storeId: 'storeId',
+  coachId: 'coachId',
+  coacheeId: 'coacheeId',
+  scheduledAt: 'scheduledAt',
+  duration: 'duration',
+  type: 'type',
+  status: 'status',
+  notes: 'notes',
+  actionItems: 'actionItems',
+  mood: 'mood',
+  followUpDate: 'followUpDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DevelopmentPlanScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  storeId: 'storeId',
+  userId: 'userId',
+  managerId: 'managerId',
+  type: 'type',
+  title: 'title',
+  status: 'status',
+  startDate: 'startDate',
+  targetDate: 'targetDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DevelopmentGoalScalarFieldEnum = {
+  id: 'id',
+  planId: 'planId',
+  title: 'title',
+  measureOfSuccess: 'measureOfSuccess',
+  targetDate: 'targetDate',
+  status: 'status',
+  progress: 'progress',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DevelopmentReviewScalarFieldEnum = {
+  id: 'id',
+  planId: 'planId',
+  reviewedBy: 'reviewedBy',
+  reviewDate: 'reviewDate',
+  overallProgress: 'overallProgress',
+  comments: 'comments',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.AppraisalCycleScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  period: 'period',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AppraisalScalarFieldEnum = {
+  id: 'id',
+  cycleId: 'cycleId',
+  storeId: 'storeId',
+  employeeId: 'employeeId',
+  managerId: 'managerId',
+  status: 'status',
+  selfRating: 'selfRating',
+  managerRating: 'managerRating',
+  overallRating: 'overallRating',
+  strengths: 'strengths',
+  improvements: 'improvements',
+  goals: 'goals',
+  meetingNotes: 'meetingNotes',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ShiftTemplateScalarFieldEnum = {
+  id: 'id',
+  storeId: 'storeId',
+  name: 'name',
+  dayOfWeek: 'dayOfWeek',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  minStaff: 'minStaff',
+  role: 'role',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ShiftEntryScalarFieldEnum = {
+  id: 'id',
+  storeId: 'storeId',
+  userId: 'userId',
+  date: 'date',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  role: 'role',
+  status: 'status',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ShiftSwapRequestScalarFieldEnum = {
+  id: 'id',
+  shiftEntryId: 'shiftEntryId',
+  requestedBy: 'requestedBy',
+  swapWithUserId: 'swapWithUserId',
+  status: 'status',
+  approvedBy: 'approvedBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PulseSurveyScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  title: 'title',
+  status: 'status',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  isAnonymous: 'isAnonymous',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PulseQuestionScalarFieldEnum = {
+  id: 'id',
+  surveyId: 'surveyId',
+  text: 'text',
+  type: 'type',
+  options: 'options',
+  sortOrder: 'sortOrder'
+};
+
+exports.Prisma.PulseResponseScalarFieldEnum = {
+  id: 'id',
+  surveyId: 'surveyId',
+  storeId: 'storeId',
+  respondentId: 'respondentId',
+  submittedAt: 'submittedAt'
+};
+
+exports.Prisma.PulseAnswerScalarFieldEnum = {
+  id: 'id',
+  responseId: 'responseId',
+  questionId: 'questionId',
+  valueRating: 'valueRating',
+  valueText: 'valueText',
+  valueChoice: 'valueChoice'
+};
+
+exports.Prisma.WellbeingCheckInScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  storeId: 'storeId',
+  userId: 'userId',
+  date: 'date',
+  moodScore: 'moodScore',
+  energyLevel: 'energyLevel',
+  stressLevel: 'stressLevel',
+  workloadRating: 'workloadRating',
+  notes: 'notes',
+  isAnonymous: 'isAnonymous',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.WellbeingResourceScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  title: 'title',
+  category: 'category',
+  description: 'description',
+  url: 'url',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -863,7 +1053,22 @@ exports.Prisma.ModelName = {
   OnboardingTemplate: 'OnboardingTemplate',
   OnboardingStep: 'OnboardingStep',
   OnboardingJourney: 'OnboardingJourney',
-  OnboardingProgress: 'OnboardingProgress'
+  OnboardingProgress: 'OnboardingProgress',
+  CoachingSession: 'CoachingSession',
+  DevelopmentPlan: 'DevelopmentPlan',
+  DevelopmentGoal: 'DevelopmentGoal',
+  DevelopmentReview: 'DevelopmentReview',
+  AppraisalCycle: 'AppraisalCycle',
+  Appraisal: 'Appraisal',
+  ShiftTemplate: 'ShiftTemplate',
+  ShiftEntry: 'ShiftEntry',
+  ShiftSwapRequest: 'ShiftSwapRequest',
+  PulseSurvey: 'PulseSurvey',
+  PulseQuestion: 'PulseQuestion',
+  PulseResponse: 'PulseResponse',
+  PulseAnswer: 'PulseAnswer',
+  WellbeingCheckIn: 'WellbeingCheckIn',
+  WellbeingResource: 'WellbeingResource'
 };
 
 /**

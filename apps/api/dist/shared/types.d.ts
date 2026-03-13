@@ -923,4 +923,256 @@ export interface OnboardingProgress {
     verifiedBy: string | null;
     step?: OnboardingStep;
 }
+export type CoachingSessionType = 'REGULAR' | 'AD_HOC' | 'FOLLOW_UP';
+export type CoachingSessionStatus = 'SCHEDULED' | 'COMPLETED' | 'CANCELLED';
+export interface CoachingSession {
+    id: string;
+    tenantId: string;
+    storeId: string;
+    coachId: string;
+    coacheeId: string;
+    scheduledAt: string;
+    duration: number;
+    type: CoachingSessionType;
+    status: CoachingSessionStatus;
+    notes: string | null;
+    actionItems: string | null;
+    mood: number | null;
+    followUpDate: string | null;
+    createdAt: string;
+    updatedAt: string;
+    store?: {
+        id: string;
+        name: string;
+    };
+    coach?: {
+        id: string;
+        name: string;
+    };
+    coachee?: {
+        id: string;
+        name: string;
+    };
+}
+export type DevelopmentPlanType = 'PDP' | 'PIP';
+export type DevelopmentPlanStatus = 'ACTIVE' | 'COMPLETED' | 'CANCELLED';
+export type DevelopmentGoalStatus = 'NOT_STARTED' | 'IN_PROGRESS' | 'COMPLETED';
+export interface DevelopmentPlan {
+    id: string;
+    tenantId: string;
+    storeId: string | null;
+    userId: string;
+    managerId: string;
+    type: DevelopmentPlanType;
+    title: string;
+    status: DevelopmentPlanStatus;
+    startDate: string;
+    targetDate: string | null;
+    createdAt: string;
+    updatedAt: string;
+    user?: {
+        id: string;
+        name: string;
+    };
+    manager?: {
+        id: string;
+        name: string;
+    };
+    store?: {
+        id: string;
+        name: string;
+    } | null;
+    goals?: DevelopmentGoal[];
+    reviews?: DevelopmentReview[];
+}
+export interface DevelopmentGoal {
+    id: string;
+    planId: string;
+    title: string;
+    measureOfSuccess: string | null;
+    targetDate: string | null;
+    status: DevelopmentGoalStatus;
+    progress: number;
+}
+export interface DevelopmentReview {
+    id: string;
+    planId: string;
+    reviewedBy: string;
+    reviewDate: string;
+    overallProgress: number;
+    comments: string | null;
+    reviewer?: {
+        id: string;
+        name: string;
+    };
+}
+export type AppraisalCycleStatus = 'DRAFT' | 'ACTIVE' | 'COMPLETED';
+export type AppraisalStatus = 'PENDING' | 'SELF_REVIEW' | 'MANAGER_REVIEW' | 'COMPLETED';
+export interface AppraisalCycle {
+    id: string;
+    tenantId: string;
+    name: string;
+    period: string | null;
+    startDate: string;
+    endDate: string;
+    status: AppraisalCycleStatus;
+    createdAt: string;
+    updatedAt: string;
+    _count?: {
+        appraisals: number;
+    };
+}
+export interface Appraisal {
+    id: string;
+    cycleId: string;
+    storeId: string | null;
+    employeeId: string;
+    managerId: string;
+    status: AppraisalStatus;
+    selfRating: number | null;
+    managerRating: number | null;
+    overallRating: number | null;
+    strengths: string | null;
+    improvements: string | null;
+    goals: string | null;
+    meetingNotes: string | null;
+    completedAt: string | null;
+    createdAt: string;
+    updatedAt: string;
+    cycle?: {
+        id: string;
+        name: string;
+    };
+    store?: {
+        id: string;
+        name: string;
+    } | null;
+    employee?: {
+        id: string;
+        name: string;
+    };
+    manager?: {
+        id: string;
+        name: string;
+    };
+}
+export type ShiftEntryStatus = 'PLANNED' | 'CONFIRMED' | 'SWAPPED' | 'CANCELLED';
+export type ShiftSwapStatus = 'PENDING' | 'APPROVED' | 'REJECTED';
+export interface ShiftTemplate {
+    id: string;
+    storeId: string;
+    name: string;
+    dayOfWeek: number;
+    startTime: string;
+    endTime: string;
+    minStaff: number;
+    role: string | null;
+}
+export interface ShiftEntry {
+    id: string;
+    storeId: string;
+    userId: string;
+    date: string;
+    startTime: string;
+    endTime: string;
+    role: string | null;
+    status: ShiftEntryStatus;
+    createdBy: string | null;
+    user?: {
+        id: string;
+        name: string;
+    };
+    store?: {
+        id: string;
+        name: string;
+    };
+}
+export interface ShiftSwapRequest {
+    id: string;
+    shiftEntryId: string;
+    requestedBy: string;
+    swapWithUserId: string | null;
+    status: ShiftSwapStatus;
+    approvedBy: string | null;
+    requester?: {
+        id: string;
+        name: string;
+    };
+}
+export type PulseSurveyStatus = 'DRAFT' | 'ACTIVE' | 'CLOSED';
+export type PulseQuestionType = 'RATING' | 'TEXT' | 'CHOICE';
+export interface PulseSurvey {
+    id: string;
+    tenantId: string;
+    title: string;
+    status: PulseSurveyStatus;
+    startDate: string | null;
+    endDate: string | null;
+    isAnonymous: boolean;
+    createdBy: string | null;
+    createdAt: string;
+    updatedAt: string;
+    questions?: PulseQuestion[];
+    _count?: {
+        questions: number;
+        responses: number;
+    };
+}
+export interface PulseQuestion {
+    id: string;
+    surveyId: string;
+    text: string;
+    type: PulseQuestionType;
+    options: string | null;
+    sortOrder: number;
+}
+export interface PulseResponse {
+    id: string;
+    surveyId: string;
+    storeId: string | null;
+    respondentId: string | null;
+    submittedAt: string;
+    answers?: PulseAnswer[];
+}
+export interface PulseAnswer {
+    id: string;
+    responseId: string;
+    questionId: string;
+    valueRating: number | null;
+    valueText: string | null;
+    valueChoice: string | null;
+}
+export interface WellbeingCheckIn {
+    id: string;
+    tenantId: string;
+    storeId: string | null;
+    userId: string | null;
+    date: string;
+    moodScore: number;
+    energyLevel: number;
+    stressLevel: number;
+    workloadRating: number;
+    notes: string | null;
+    isAnonymous: boolean;
+    createdAt: string;
+    user?: {
+        id: string;
+        name: string;
+    } | null;
+    store?: {
+        id: string;
+        name: string;
+    } | null;
+}
+export interface WellbeingResource {
+    id: string;
+    tenantId: string;
+    title: string;
+    category: string | null;
+    description: string | null;
+    url: string | null;
+    isActive: boolean;
+    createdAt: string;
+    updatedAt: string;
+}
 //# sourceMappingURL=types.d.ts.map
