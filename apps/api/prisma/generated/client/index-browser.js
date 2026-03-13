@@ -988,6 +988,91 @@ exports.Prisma.WellbeingResourceScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.BriefingScalarFieldEnum = {
+  id: 'id',
+  storeId: 'storeId',
+  title: 'title',
+  content: 'content',
+  date: 'date',
+  type: 'type',
+  createdBy: 'createdBy',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BriefingAcknowledgmentScalarFieldEnum = {
+  id: 'id',
+  briefingId: 'briefingId',
+  userId: 'userId',
+  readAt: 'readAt'
+};
+
+exports.Prisma.HandoverScalarFieldEnum = {
+  id: 'id',
+  storeId: 'storeId',
+  fromUserId: 'fromUserId',
+  toUserId: 'toUserId',
+  shiftDate: 'shiftDate',
+  shiftType: 'shiftType',
+  status: 'status',
+  salesUpdate: 'salesUpdate',
+  openTasks: 'openTasks',
+  incidents: 'incidents',
+  customerNotes: 'customerNotes',
+  stockNotes: 'stockNotes',
+  generalNotes: 'generalNotes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TeamMessageScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  title: 'title',
+  body: 'body',
+  priority: 'priority',
+  targetType: 'targetType',
+  targetStoreIds: 'targetStoreIds',
+  sentBy: 'sentBy',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.TeamMessageReadScalarFieldEnum = {
+  id: 'id',
+  messageId: 'messageId',
+  userId: 'userId',
+  readAt: 'readAt'
+};
+
+exports.Prisma.NewsletterScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  title: 'title',
+  content: 'content',
+  coverImagePath: 'coverImagePath',
+  status: 'status',
+  publishedAt: 'publishedAt',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.NewsletterSectionScalarFieldEnum = {
+  id: 'id',
+  newsletterId: 'newsletterId',
+  title: 'title',
+  content: 'content',
+  sortOrder: 'sortOrder'
+};
+
+exports.Prisma.NewsletterViewScalarFieldEnum = {
+  id: 'id',
+  newsletterId: 'newsletterId',
+  userId: 'userId',
+  viewedAt: 'viewedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1068,7 +1153,15 @@ exports.Prisma.ModelName = {
   PulseResponse: 'PulseResponse',
   PulseAnswer: 'PulseAnswer',
   WellbeingCheckIn: 'WellbeingCheckIn',
-  WellbeingResource: 'WellbeingResource'
+  WellbeingResource: 'WellbeingResource',
+  Briefing: 'Briefing',
+  BriefingAcknowledgment: 'BriefingAcknowledgment',
+  Handover: 'Handover',
+  TeamMessage: 'TeamMessage',
+  TeamMessageRead: 'TeamMessageRead',
+  Newsletter: 'Newsletter',
+  NewsletterSection: 'NewsletterSection',
+  NewsletterView: 'NewsletterView'
 };
 
 /**

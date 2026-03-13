@@ -35,6 +35,11 @@ export const TOOL_ROUTES: Record<string, string> = {
   'coaching.shift_planning': '/tools/shift-planning',
   'coaching.pulse_survey': '/tools/pulse-survey',
   'coaching.wellbeing': '/tools/wellbeing',
+  // Kommunikation & Signal
+  'komm.briefings': '/tools/briefings',
+  'komm.handover': '/tools/handover',
+  'komm.team_push': '/tools/team-push',
+  'komm.team_newsletter': '/tools/newsletter',
 };
 
 /**

@@ -39,6 +39,10 @@ import { appraisalsRouter } from './routes/tools/appraisals/index.js';
 import { shiftPlanningRouter } from './routes/tools/shift-planning/index.js';
 import { pulseSurveyRouter } from './routes/tools/pulse-survey/index.js';
 import { wellbeingRouter } from './routes/tools/wellbeing/index.js';
+import { briefingsRouter } from './routes/tools/briefings/index.js';
+import { handoverRouter } from './routes/tools/handover/index.js';
+import { teamPushRouter } from './routes/tools/team-push/index.js';
+import { newsletterRouter } from './routes/tools/newsletter/index.js';
 import { toolsRouter } from './routes/tools/index.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -128,6 +132,14 @@ app.use('/api/tools/shift-planning', shiftPlanningRouter);
 app.use('/api/tools/pulse-survey', pulseSurveyRouter);
 // Tools — Wellbeing
 app.use('/api/tools/wellbeing', wellbeingRouter);
+// Tools — Briefings
+app.use('/api/tools/briefings', briefingsRouter);
+// Tools — Handover
+app.use('/api/tools/handover', handoverRouter);
+// Tools — Team Push
+app.use('/api/tools/team-push', teamPushRouter);
+// Tools — Newsletter
+app.use('/api/tools/newsletter', newsletterRouter);
 // Statische Uploads mit Auth-Schutz
 const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? path.join(process.cwd(), 'uploads');
 app.use('/api/uploads', authenticate, express.static(UPLOAD_DIR));

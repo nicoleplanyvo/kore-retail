@@ -1175,4 +1175,79 @@ export interface WellbeingResource {
     createdAt: string;
     updatedAt: string;
 }
+export type BriefingType = 'MORNING' | 'EVENING' | 'SPECIAL';
+export type HandoverStatus = 'DRAFT' | 'SUBMITTED' | 'ACKNOWLEDGED';
+export type MessagePriority = 'NORMAL' | 'HIGH' | 'URGENT';
+export type MessageTargetType = 'ALL' | 'STORE' | 'ROLE';
+export type NewsletterStatus = 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
+export interface Briefing {
+    id: string;
+    storeId: string;
+    title: string;
+    content: string;
+    date: string;
+    type: BriefingType;
+    createdBy: string;
+    publishedAt: string | null;
+}
+export interface BriefingAcknowledgment {
+    id: string;
+    briefingId: string;
+    userId: string;
+    readAt: string;
+}
+export interface Handover {
+    id: string;
+    storeId: string;
+    fromUserId: string;
+    toUserId: string | null;
+    shiftDate: string;
+    shiftType: string | null;
+    status: HandoverStatus;
+    salesUpdate: string | null;
+    openTasks: string | null;
+    incidents: string | null;
+    customerNotes: string | null;
+    stockNotes: string | null;
+    generalNotes: string | null;
+}
+export interface TeamMessage {
+    id: string;
+    tenantId: string;
+    title: string;
+    body: string;
+    priority: MessagePriority;
+    targetType: MessageTargetType;
+    targetStoreIds: string | null;
+    sentBy: string;
+}
+export interface TeamMessageRead {
+    id: string;
+    messageId: string;
+    userId: string;
+    readAt: string;
+}
+export interface Newsletter {
+    id: string;
+    tenantId: string;
+    title: string;
+    content: string | null;
+    coverImagePath: string | null;
+    status: NewsletterStatus;
+    publishedAt: string | null;
+    createdBy: string;
+}
+export interface NewsletterSection {
+    id: string;
+    newsletterId: string;
+    title: string;
+    content: string;
+    sortOrder: number;
+}
+export interface NewsletterView {
+    id: string;
+    newsletterId: string;
+    userId: string;
+    viewedAt: string;
+}
 //# sourceMappingURL=types.d.ts.map

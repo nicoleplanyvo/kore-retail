@@ -27,37 +27,45 @@ model User {
   checklistSessions       ChecklistSession[]
   createdSops             Sop[]
   sopAcknowledgments      SopAcknowledgment[]
-  vmSubmissions           VmSubmission[]         @relation("VmSubmitter")
-  vmReviews               VmSubmission[]         @relation("VmReviewer")
+  vmSubmissions           VmSubmission[]           @relation("VmSubmitter")
+  vmReviews               VmSubmission[]           @relation("VmReviewer")
   standardEvaluations     StandardEvaluation[]
-  kpiEntries              KpiEntry[]             @relation("KpiEntries")
-  budgetPeriods           BudgetPeriod[]         @relation("BudgetPeriods")
-  forecasts               Forecast[]             @relation("Forecasts")
-  lossReports             LossIncident[]         @relation("LossReporter")
-  lossAssignments         LossIncident[]         @relation("LossAssignee")
-  inventoryCounts         InventoryCount[]       @relation("InventoryConductor")
-  floorPositions          FloorStaffPosition[]   @relation("FloorPositionUser")
-  floorUpdates            FloorStaffPosition[]   @relation("FloorPositionUpdater")
-  maintenanceReports      MaintenanceRequest[]   @relation("MaintenanceReporter")
-  maintenanceAssignments  MaintenanceRequest[]   @relation("MaintenanceAssignee")
-  courseCreations         Course[]               @relation("CourseCreator")
-  courseEnrollments       CourseEnrollment[]     @relation("CourseEnrollments")
-  certificates            Certificate[]          @relation("Certificates")
-  trainingLogs            TrainingLog[]          @relation("TrainingLogs")
-  challengeCreations      Challenge[]            @relation("ChallengeCreator")
-  challengeParticipations ChallengeParticipant[] @relation("ChallengeParticipants")
-  onboardingJourneys      OnboardingJourney[]    @relation("OnboardingJourneys")
-  onboardingMentoring     OnboardingJourney[]    @relation("OnboardingMentors")
-  coachSessions           CoachingSession[]      @relation("CoachSessions")
-  coacheeSessions         CoachingSession[]      @relation("CoacheeSessions")
-  devPlansAsUser          DevelopmentPlan[]      @relation("DevelopmentPlanUser")
-  devPlansAsManager       DevelopmentPlan[]      @relation("DevelopmentPlanManager")
-  devReviews              DevelopmentReview[]    @relation("DevelopmentReviewer")
-  appraisalsAsEmployee    Appraisal[]            @relation("AppraisalEmployee")
-  appraisalsAsManager     Appraisal[]            @relation("AppraisalManager")
+  kpiEntries              KpiEntry[]               @relation("KpiEntries")
+  budgetPeriods           BudgetPeriod[]           @relation("BudgetPeriods")
+  forecasts               Forecast[]               @relation("Forecasts")
+  lossReports             LossIncident[]           @relation("LossReporter")
+  lossAssignments         LossIncident[]           @relation("LossAssignee")
+  inventoryCounts         InventoryCount[]         @relation("InventoryConductor")
+  floorPositions          FloorStaffPosition[]     @relation("FloorPositionUser")
+  floorUpdates            FloorStaffPosition[]     @relation("FloorPositionUpdater")
+  maintenanceReports      MaintenanceRequest[]     @relation("MaintenanceReporter")
+  maintenanceAssignments  MaintenanceRequest[]     @relation("MaintenanceAssignee")
+  courseCreations         Course[]                 @relation("CourseCreator")
+  courseEnrollments       CourseEnrollment[]       @relation("CourseEnrollments")
+  certificates            Certificate[]            @relation("Certificates")
+  trainingLogs            TrainingLog[]            @relation("TrainingLogs")
+  challengeCreations      Challenge[]              @relation("ChallengeCreator")
+  challengeParticipations ChallengeParticipant[]   @relation("ChallengeParticipants")
+  onboardingJourneys      OnboardingJourney[]      @relation("OnboardingJourneys")
+  onboardingMentoring     OnboardingJourney[]      @relation("OnboardingMentors")
+  coachSessions           CoachingSession[]        @relation("CoachSessions")
+  coacheeSessions         CoachingSession[]        @relation("CoacheeSessions")
+  devPlansAsUser          DevelopmentPlan[]        @relation("DevelopmentPlanUser")
+  devPlansAsManager       DevelopmentPlan[]        @relation("DevelopmentPlanManager")
+  devReviews              DevelopmentReview[]      @relation("DevelopmentReviewer")
+  appraisalsAsEmployee    Appraisal[]              @relation("AppraisalEmployee")
+  appraisalsAsManager     Appraisal[]              @relation("AppraisalManager")
   shiftEntries            ShiftEntry[]
-  swapRequests            ShiftSwapRequest[]     @relation("SwapRequester")
+  swapRequests            ShiftSwapRequest[]       @relation("SwapRequester")
   wellbeingCheckIns       WellbeingCheckIn[]
+  briefingsCreated        Briefing[]               @relation("BriefingCreator")
+  briefingAcks            BriefingAcknowledgment[] @relation("BriefingAcknowledgments")
+  handoversFrom           Handover[]               @relation("HandoverFrom")
+  handoversTo             Handover[]               @relation("HandoverTo")
+  teamMessagesSent        TeamMessage[]            @relation("TeamMessageSender")
+  teamMessageReads        TeamMessageRead[]        @relation("TeamMessageReads")
+  newslettersCreated      Newsletter[]             @relation("NewsletterCreator")
+  newsletterViews         NewsletterView[]         @relation("NewsletterViews")
 
   @@index([tenantId])
 }
@@ -110,6 +118,8 @@ model Tenant {
   pulseSurveys        PulseSurvey[]
   wellbeingCheckIns   WellbeingCheckIn[]
   wellbeingResources  WellbeingResource[]
+  teamMessages        TeamMessage[]
+  newsletters         Newsletter[]
 }
 
 model Region {
@@ -168,6 +178,8 @@ model Store {
   shiftEntries          ShiftEntry[]
   pulseResponses        PulseResponse[]
   wellbeingCheckIns     WellbeingCheckIn[]
+  briefings             Briefing[]
+  handovers             Handover[]
 
   @@index([tenantId])
   @@index([regionId])
@@ -1440,4 +1452,117 @@ model WellbeingResource {
   updatedAt   DateTime @updatedAt
 
   tenant Tenant @relation(fields: [tenantId], references: [id])
+}
+
+// ── Kat.6: Kommunikation & Signal ─────────────────
+
+model Briefing {
+  id              String                   @id @default(cuid())
+  storeId         String
+  store           Store                    @relation(fields: [storeId], references: [id])
+  title           String
+  content         String
+  date            String
+  type            String                   @default("MORNING") // MORNING, EVENING, SPECIAL
+  createdBy       String
+  creator         User                     @relation("BriefingCreator", fields: [createdBy], references: [id])
+  publishedAt     DateTime?
+  acknowledgments BriefingAcknowledgment[]
+  createdAt       DateTime                 @default(now())
+  updatedAt       DateTime                 @updatedAt
+}
+
+model BriefingAcknowledgment {
+  id         String   @id @default(cuid())
+  briefingId String
+  briefing   Briefing @relation(fields: [briefingId], references: [id])
+  userId     String
+  user       User     @relation("BriefingAcknowledgments", fields: [userId], references: [id])
+  readAt     DateTime @default(now())
+
+  @@unique([briefingId, userId])
+}
+
+model Handover {
+  id            String   @id @default(cuid())
+  storeId       String
+  store         Store    @relation(fields: [storeId], references: [id])
+  fromUserId    String
+  fromUser      User     @relation("HandoverFrom", fields: [fromUserId], references: [id])
+  toUserId      String?
+  toUser        User?    @relation("HandoverTo", fields: [toUserId], references: [id])
+  shiftDate     String
+  shiftType     String?
+  status        String   @default("DRAFT") // DRAFT, SUBMITTED, ACKNOWLEDGED
+  salesUpdate   String?
+  openTasks     String?
+  incidents     String?
+  customerNotes String?
+  stockNotes    String?
+  generalNotes  String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model TeamMessage {
+  id             String            @id @default(cuid())
+  tenantId       String
+  tenant         Tenant            @relation(fields: [tenantId], references: [id])
+  title          String
+  body           String
+  priority       String            @default("NORMAL") // NORMAL, HIGH, URGENT
+  targetType     String            @default("ALL") // ALL, STORE, ROLE
+  targetStoreIds String?
+  sentBy         String
+  sender         User              @relation("TeamMessageSender", fields: [sentBy], references: [id])
+  reads          TeamMessageRead[]
+  createdAt      DateTime          @default(now())
+}
+
+model TeamMessageRead {
+  id        String      @id @default(cuid())
+  messageId String
+  message   TeamMessage @relation(fields: [messageId], references: [id])
+  userId    String
+  user      User        @relation("TeamMessageReads", fields: [userId], references: [id])
+  readAt    DateTime    @default(now())
+
+  @@unique([messageId, userId])
+}
+
+model Newsletter {
+  id             String              @id @default(cuid())
+  tenantId       String
+  tenant         Tenant              @relation(fields: [tenantId], references: [id])
+  title          String
+  content        String?
+  coverImagePath String?
+  status         String              @default("DRAFT") // DRAFT, PUBLISHED, ARCHIVED
+  publishedAt    DateTime?
+  createdBy      String
+  creator        User                @relation("NewsletterCreator", fields: [createdBy], references: [id])
+  sections       NewsletterSection[]
+  views          NewsletterView[]
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+}
+
+model NewsletterSection {
+  id           String     @id @default(cuid())
+  newsletterId String
+  newsletter   Newsletter @relation(fields: [newsletterId], references: [id])
+  title        String
+  content      String
+  sortOrder    Int        @default(0)
+}
+
+model NewsletterView {
+  id           String     @id @default(cuid())
+  newsletterId String
+  newsletter   Newsletter @relation(fields: [newsletterId], references: [id])
+  userId       String
+  user         User       @relation("NewsletterViews", fields: [userId], references: [id])
+  viewedAt     DateTime   @default(now())
+
+  @@unique([newsletterId, userId])
 }

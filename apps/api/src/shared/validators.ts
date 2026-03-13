@@ -904,3 +904,27 @@ export const wellbeingResourceUpdateSchema = z.object({
   url: z.string().max(500).optional(),
   isActive: z.boolean().optional(),
 });
+
+// ============================================================
+// Kat.6: Kommunikation & Signal — Validators
+// ============================================================
+
+export const briefingCreateSchema = z.object({ title: z.string().min(1), content: z.string().min(1), date: z.string().min(1), type: z.enum(['MORNING', 'EVENING', 'SPECIAL']).optional() });
+export type BriefingCreateInput = z.infer<typeof briefingCreateSchema>;
+
+export const briefingUpdateSchema = z.object({ title: z.string().min(1).optional(), content: z.string().min(1).optional(), type: z.enum(['MORNING', 'EVENING', 'SPECIAL']).optional() });
+
+export const handoverCreateSchema = z.object({ toUserId: z.string().optional(), shiftDate: z.string().min(1), shiftType: z.string().optional(), salesUpdate: z.string().optional(), openTasks: z.string().optional(), incidents: z.string().optional(), customerNotes: z.string().optional(), stockNotes: z.string().optional(), generalNotes: z.string().optional() });
+export type HandoverCreateInput = z.infer<typeof handoverCreateSchema>;
+
+export const handoverUpdateSchema = z.object({ toUserId: z.string().optional(), status: z.enum(['DRAFT', 'SUBMITTED', 'ACKNOWLEDGED']).optional(), salesUpdate: z.string().optional(), openTasks: z.string().optional(), incidents: z.string().optional(), customerNotes: z.string().optional(), stockNotes: z.string().optional(), generalNotes: z.string().optional() });
+
+export const teamMessageCreateSchema = z.object({ title: z.string().min(1), body: z.string().min(1), priority: z.enum(['NORMAL', 'HIGH', 'URGENT']).optional(), targetType: z.enum(['ALL', 'STORE', 'ROLE']).optional(), targetStoreIds: z.string().optional() });
+export type TeamMessageCreateInput = z.infer<typeof teamMessageCreateSchema>;
+
+export const newsletterCreateSchema = z.object({ title: z.string().min(1), content: z.string().optional() });
+export type NewsletterCreateInput = z.infer<typeof newsletterCreateSchema>;
+
+export const newsletterUpdateSchema = z.object({ title: z.string().min(1).optional(), content: z.string().optional(), status: z.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED']).optional() });
+
+export const newsletterSectionSchema = z.object({ title: z.string().min(1), content: z.string().min(1), sortOrder: z.number().int().optional() });

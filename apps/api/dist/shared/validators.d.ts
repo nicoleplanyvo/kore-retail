@@ -1901,4 +1901,151 @@ export declare const wellbeingResourceUpdateSchema: z.ZodObject<{
     category?: string | undefined;
     url?: string | undefined;
 }>;
+export declare const briefingCreateSchema: z.ZodObject<{
+    title: z.ZodString;
+    content: z.ZodString;
+    date: z.ZodString;
+    type: z.ZodOptional<z.ZodEnum<["MORNING", "EVENING", "SPECIAL"]>>;
+}, "strip", z.ZodTypeAny, {
+    title: string;
+    date: string;
+    content: string;
+    type?: "MORNING" | "EVENING" | "SPECIAL" | undefined;
+}, {
+    title: string;
+    date: string;
+    content: string;
+    type?: "MORNING" | "EVENING" | "SPECIAL" | undefined;
+}>;
+export type BriefingCreateInput = z.infer<typeof briefingCreateSchema>;
+export declare const briefingUpdateSchema: z.ZodObject<{
+    title: z.ZodOptional<z.ZodString>;
+    content: z.ZodOptional<z.ZodString>;
+    type: z.ZodOptional<z.ZodEnum<["MORNING", "EVENING", "SPECIAL"]>>;
+}, "strip", z.ZodTypeAny, {
+    type?: "MORNING" | "EVENING" | "SPECIAL" | undefined;
+    title?: string | undefined;
+    content?: string | undefined;
+}, {
+    type?: "MORNING" | "EVENING" | "SPECIAL" | undefined;
+    title?: string | undefined;
+    content?: string | undefined;
+}>;
+export declare const handoverCreateSchema: z.ZodObject<{
+    toUserId: z.ZodOptional<z.ZodString>;
+    shiftDate: z.ZodString;
+    shiftType: z.ZodOptional<z.ZodString>;
+    salesUpdate: z.ZodOptional<z.ZodString>;
+    openTasks: z.ZodOptional<z.ZodString>;
+    incidents: z.ZodOptional<z.ZodString>;
+    customerNotes: z.ZodOptional<z.ZodString>;
+    stockNotes: z.ZodOptional<z.ZodString>;
+    generalNotes: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    shiftDate: string;
+    toUserId?: string | undefined;
+    shiftType?: string | undefined;
+    salesUpdate?: string | undefined;
+    openTasks?: string | undefined;
+    incidents?: string | undefined;
+    customerNotes?: string | undefined;
+    stockNotes?: string | undefined;
+    generalNotes?: string | undefined;
+}, {
+    shiftDate: string;
+    toUserId?: string | undefined;
+    shiftType?: string | undefined;
+    salesUpdate?: string | undefined;
+    openTasks?: string | undefined;
+    incidents?: string | undefined;
+    customerNotes?: string | undefined;
+    stockNotes?: string | undefined;
+    generalNotes?: string | undefined;
+}>;
+export type HandoverCreateInput = z.infer<typeof handoverCreateSchema>;
+export declare const handoverUpdateSchema: z.ZodObject<{
+    toUserId: z.ZodOptional<z.ZodString>;
+    status: z.ZodOptional<z.ZodEnum<["DRAFT", "SUBMITTED", "ACKNOWLEDGED"]>>;
+    salesUpdate: z.ZodOptional<z.ZodString>;
+    openTasks: z.ZodOptional<z.ZodString>;
+    incidents: z.ZodOptional<z.ZodString>;
+    customerNotes: z.ZodOptional<z.ZodString>;
+    stockNotes: z.ZodOptional<z.ZodString>;
+    generalNotes: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    status?: "DRAFT" | "SUBMITTED" | "ACKNOWLEDGED" | undefined;
+    toUserId?: string | undefined;
+    salesUpdate?: string | undefined;
+    openTasks?: string | undefined;
+    incidents?: string | undefined;
+    customerNotes?: string | undefined;
+    stockNotes?: string | undefined;
+    generalNotes?: string | undefined;
+}, {
+    status?: "DRAFT" | "SUBMITTED" | "ACKNOWLEDGED" | undefined;
+    toUserId?: string | undefined;
+    salesUpdate?: string | undefined;
+    openTasks?: string | undefined;
+    incidents?: string | undefined;
+    customerNotes?: string | undefined;
+    stockNotes?: string | undefined;
+    generalNotes?: string | undefined;
+}>;
+export declare const teamMessageCreateSchema: z.ZodObject<{
+    title: z.ZodString;
+    body: z.ZodString;
+    priority: z.ZodOptional<z.ZodEnum<["NORMAL", "HIGH", "URGENT"]>>;
+    targetType: z.ZodOptional<z.ZodEnum<["ALL", "STORE", "ROLE"]>>;
+    targetStoreIds: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    title: string;
+    body: string;
+    priority?: "HIGH" | "URGENT" | "NORMAL" | undefined;
+    targetType?: "STORE" | "ALL" | "ROLE" | undefined;
+    targetStoreIds?: string | undefined;
+}, {
+    title: string;
+    body: string;
+    priority?: "HIGH" | "URGENT" | "NORMAL" | undefined;
+    targetType?: "STORE" | "ALL" | "ROLE" | undefined;
+    targetStoreIds?: string | undefined;
+}>;
+export type TeamMessageCreateInput = z.infer<typeof teamMessageCreateSchema>;
+export declare const newsletterCreateSchema: z.ZodObject<{
+    title: z.ZodString;
+    content: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    title: string;
+    content?: string | undefined;
+}, {
+    title: string;
+    content?: string | undefined;
+}>;
+export type NewsletterCreateInput = z.infer<typeof newsletterCreateSchema>;
+export declare const newsletterUpdateSchema: z.ZodObject<{
+    title: z.ZodOptional<z.ZodString>;
+    content: z.ZodOptional<z.ZodString>;
+    status: z.ZodOptional<z.ZodEnum<["DRAFT", "PUBLISHED", "ARCHIVED"]>>;
+}, "strip", z.ZodTypeAny, {
+    status?: "DRAFT" | "PUBLISHED" | "ARCHIVED" | undefined;
+    title?: string | undefined;
+    content?: string | undefined;
+}, {
+    status?: "DRAFT" | "PUBLISHED" | "ARCHIVED" | undefined;
+    title?: string | undefined;
+    content?: string | undefined;
+}>;
+export declare const newsletterSectionSchema: z.ZodObject<{
+    title: z.ZodString;
+    content: z.ZodString;
+    sortOrder: z.ZodOptional<z.ZodNumber>;
+}, "strip", z.ZodTypeAny, {
+    title: string;
+    content: string;
+    sortOrder?: number | undefined;
+}, {
+    title: string;
+    content: string;
+    sortOrder?: number | undefined;
+}>;
 //# sourceMappingURL=validators.d.ts.map

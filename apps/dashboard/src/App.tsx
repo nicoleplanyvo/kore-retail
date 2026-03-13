@@ -39,6 +39,10 @@ import AppraisalsRoutes from './tools/appraisals/index';
 import ShiftPlanningRoutes from './tools/shift-planning/index';
 import PulseSurveyRoutes from './tools/pulse-survey/index';
 import WellbeingRoutes from './tools/wellbeing/index';
+import BriefingsRoutes from './tools/briefings/index';
+import HandoverRoutes from './tools/handover/index';
+import TeamPushRoutes from './tools/team-push/index';
+import NewsletterRoutes from './tools/newsletter/index';
 
 export function App() {
   return (
@@ -87,6 +91,12 @@ export function App() {
           <Route path="/tools/shift-planning/*" element={<ShiftPlanningRoutes />} />
           <Route path="/tools/pulse-survey/*" element={<PulseSurveyRoutes />} />
           <Route path="/tools/wellbeing/*" element={<WellbeingRoutes />} />
+
+          {/* Tools — Kommunikation & Signal */}
+          <Route path="/tools/briefings/*" element={<BriefingsRoutes />} />
+          <Route path="/tools/handover/*" element={<HandoverRoutes />} />
+          <Route path="/tools/team-push/*" element={<TeamPushRoutes />} />
+          <Route path="/tools/newsletter/*" element={<NewsletterRoutes />} />
 
           {/* === Verwaltung (Admin) === */}
 
