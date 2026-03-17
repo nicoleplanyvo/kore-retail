@@ -141,7 +141,7 @@ async function main() {
     { key: 'komm.team_newsletter', name: 'Team Newsletter', category: 'KOMMUNIKATION', description: 'Interne Newsletter für Teams erstellen', icon: 'Mail', priceMonthly: 1500, sortOrder: 4 },
 
     // CUSTOMER, CLIENTELING & STOCK
-    { key: 'customer.fr_conversion', name: 'FR Conversion', category: 'CUSTOMER_STOCK', description: 'Footfall-to-Revenue Conversion optimieren', icon: 'TrendingUp', priceMonthly: 1900, sortOrder: 1 },
+    { key: 'customer.fr_conversion', name: 'FR Conversion', category: 'CUSTOMER_STOCK', description: 'Fitting Room Management — Umkleidekabinen live verwalten', icon: 'DoorOpen', priceMonthly: 1900, sortOrder: 1 },
     { key: 'customer.clienteling_crm', name: 'Clienteling / CRM', category: 'CUSTOMER_STOCK', description: 'Kundenbeziehungsmanagement und VIP-Betreuung', icon: 'Users', priceMonthly: 2500, sortOrder: 2 },
     { key: 'customer.stock_callouts', name: 'Stock Callouts', category: 'CUSTOMER_STOCK', description: 'Bestandsmeldungen und Nachbestellungen', icon: 'PackageSearch', priceMonthly: 1500, sortOrder: 3 },
     { key: 'customer.track_trace', name: 'Track & Trace', category: 'CUSTOMER_STOCK', description: 'Warenverfolgung und Lieferstatus für Kunden', icon: 'Navigation', priceMonthly: 1900, sortOrder: 4 },
@@ -174,6 +174,7 @@ async function main() {
     'training.training_hub_lms', 'training.training_hours',
     'coaching.shift_planning', 'coaching.appraisals',
     'komm.briefings',
+    'customer.fr_conversion',
   ];
 
   // Boutique Schmidt — kleines Paket (5 Tools)
@@ -709,6 +710,98 @@ Alle Mitarbeiter, Koordination durch Store Manager
     console.log('✓ Store Standards: Kategorie "Basis Standards" + 5 Definitionen erstellt');
   } else {
     console.log('✓ Store Standards Default-Daten bereits vorhanden');
+  }
+
+  // === FR Conversion Seed (Fitting Room Management) ===
+  const firstMuellerStore = muellerStoreIds[0];
+  const existingFRSettings = await prisma.fRSettings.findUnique({ where: { storeId: firstMuellerStore } });
+  if (!existingFRSettings) {
+    // Settings
+    await prisma.fRSettings.create({
+      data: { storeId: firstMuellerStore, maxItems: 8, warningMinutes: 15, alertMinutes: 20 },
+    });
+
+    // 6 Fitting Rooms
+    const frRoomData = [];
+    for (let i = 1; i <= 6; i++) {
+      frRoomData.push({ storeId: firstMuellerStore, number: i, name: i === 6 ? 'VIP' : null, status: 'active' });
+    }
+    const frRooms = [];
+    for (const r of frRoomData) {
+      const room = await prisma.fRRoom.create({ data: r });
+      frRooms.push(room);
+    }
+
+    // Get demo users for staff assignment
+    const smUser = await prisma.user.findFirst({ where: { email: 'sm@modehouse.de' } });
+    const learner = await prisma.user.findFirst({ where: { email: 'learner@modehouse.de' } });
+    const taUser = await prisma.user.findFirst({ where: { email: 'ta@modehouse.de' } });
+
+    // 8 completed sessions (varied data)
+    const sessionData = [
+      { roomIdx: 0, staffId: smUser?.id, itemsIn: 5, itemsReturned: 3, itemsPurchased: 2, notes: null, hoursAgo: 6 },
+      { roomIdx: 1, staffId: learner?.id, itemsIn: 3, itemsReturned: 3, itemsPurchased: 0, notes: 'Nichts passte', hoursAgo: 5 },
+      { roomIdx: 2, staffId: smUser?.id, itemsIn: 8, itemsReturned: 5, itemsPurchased: 3, notes: 'VIP Kunde', hoursAgo: 4 },
+      { roomIdx: 3, staffId: learner?.id, itemsIn: 4, itemsReturned: 2, itemsPurchased: 1, notes: null, hoursAgo: 3 },
+      { roomIdx: 0, staffId: smUser?.id, itemsIn: 6, itemsReturned: 4, itemsPurchased: 2, notes: null, hoursAgo: 2 },
+      { roomIdx: 1, staffId: null, itemsIn: 2, itemsReturned: 2, itemsPurchased: 0, notes: null, hoursAgo: 2 },
+      { roomIdx: 4, staffId: learner?.id, itemsIn: 7, itemsReturned: 3, itemsPurchased: 3, notes: 'Sale-Artikel', hoursAgo: 1 },
+      { roomIdx: 2, staffId: smUser?.id, itemsIn: 4, itemsReturned: 3, itemsPurchased: 1, notes: null, hoursAgo: 1 },
+    ];
+
+    for (const s of sessionData) {
+      const checkInAt = new Date(Date.now() - s.hoursAgo * 3600000);
+      const checkOutAt = new Date(checkInAt.getTime() + (10 + Math.random() * 20) * 60000);
+      const shrinkage = s.itemsIn - (s.itemsReturned ?? 0) - (s.itemsPurchased ?? 0);
+      const conversion = s.itemsIn > 0 ? Math.round(((s.itemsPurchased ?? 0) / s.itemsIn) * 100) : 0;
+      await prisma.fRSession.create({
+        data: {
+          storeId: firstMuellerStore,
+          roomId: frRooms[s.roomIdx].id,
+          staffId: s.staffId || null,
+          status: 'completed',
+          itemsIn: s.itemsIn,
+          itemsReturned: s.itemsReturned,
+          itemsPurchased: s.itemsPurchased,
+          itemsShrinkage: shrinkage,
+          conversionRate: conversion,
+          notes: s.notes,
+          checkInAt,
+          checkOutAt,
+          checkedInBy: taUser?.id || smUser?.id || '',
+        },
+      });
+    }
+
+    // 2 active sessions
+    await prisma.fRSession.create({
+      data: {
+        storeId: firstMuellerStore,
+        roomId: frRooms[3].id,
+        staffId: learner?.id || null,
+        status: 'active',
+        itemsIn: 4,
+        notes: 'Sucht Größe 38',
+        checkInAt: new Date(Date.now() - 12 * 60000), // 12 min ago
+        checkedInBy: taUser?.id || '',
+      },
+    });
+    await prisma.fRSession.create({
+      data: {
+        storeId: firstMuellerStore,
+        roomId: frRooms[5].id,
+        staffId: smUser?.id || null,
+        status: 'active',
+        itemsIn: 6,
+        notes: 'VIP',
+        checkInAt: new Date(Date.now() - 22 * 60000), // 22 min ago → alert!
+        checkedInBy: taUser?.id || '',
+      },
+    });
+
+    console.log('✓ FR Conversion: Settings + 6 Kabinen + 10 Sessions erstellt');
+  } else {
+    console.log('✓ FR Conversion Seed-Daten bereits vorhanden');
   }
 }
 

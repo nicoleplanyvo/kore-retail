@@ -576,9 +576,25 @@ exports.Prisma.FloorZoneScalarFieldEnum = {
   name: 'name',
   description: 'description',
   sortOrder: 'sortOrder',
+  minStaff: 'minStaff',
+  maxStaff: 'maxStaff',
+  customerCount: 'customerCount',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FloorFrequencyLogScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  storeId: 'storeId',
+  zoneId: 'zoneId',
+  customerCount: 'customerCount',
+  staffCount: 'staffCount',
+  hour: 'hour',
+  date: 'date',
+  recordedBy: 'recordedBy',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.FloorStaffPositionScalarFieldEnum = {
@@ -724,12 +740,16 @@ exports.Prisma.ChallengeScalarFieldEnum = {
   tenantId: 'tenantId',
   title: 'title',
   description: 'description',
+  mode: 'mode',
   type: 'type',
   metric: 'metric',
   targetValue: 'targetValue',
   startDate: 'startDate',
   endDate: 'endDate',
+  recurring: 'recurring',
   reward: 'reward',
+  rewardType: 'rewardType',
+  anonymized: 'anonymized',
   status: 'status',
   createdBy: 'createdBy',
   createdAt: 'createdAt',
@@ -746,6 +766,23 @@ exports.Prisma.ChallengeParticipantScalarFieldEnum = {
   completedAt: 'completedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ChallengeEntryScalarFieldEnum = {
+  id: 'id',
+  challengeId: 'challengeId',
+  userId: 'userId',
+  value: 'value',
+  note: 'note',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ChallengeVoteScalarFieldEnum = {
+  id: 'id',
+  challengeId: 'challengeId',
+  voterId: 'voterId',
+  targetUserId: 'targetUserId',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.OnboardingTemplateScalarFieldEnum = {
@@ -808,10 +845,38 @@ exports.Prisma.CoachingSessionScalarFieldEnum = {
   duration: 'duration',
   type: 'type',
   status: 'status',
+  framework: 'framework',
+  topic: 'topic',
+  category: 'category',
+  goalText: 'goalText',
+  realityText: 'realityText',
+  optionsText: 'optionsText',
+  wayForwardText: 'wayForwardText',
+  timelineText: 'timelineText',
   notes: 'notes',
   actionItems: 'actionItems',
   mood: 'mood',
   followUpDate: 'followUpDate',
+  templateId: 'templateId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CoachingTemplateScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  framework: 'framework',
+  topic: 'topic',
+  category: 'category',
+  goalText: 'goalText',
+  realityText: 'realityText',
+  optionsText: 'optionsText',
+  wayForwardText: 'wayForwardText',
+  timelineText: 'timelineText',
+  notes: 'notes',
+  createdBy: 'createdBy',
+  isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -922,6 +987,44 @@ exports.Prisma.ShiftSwapRequestScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ShiftAvailabilityScalarFieldEnum = {
+  id: 'id',
+  storeId: 'storeId',
+  userId: 'userId',
+  date: 'date',
+  type: 'type',
+  wishStart: 'wishStart',
+  wishEnd: 'wishEnd',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ShiftTimeEntryScalarFieldEnum = {
+  id: 'id',
+  storeId: 'storeId',
+  userId: 'userId',
+  date: 'date',
+  clockIn: 'clockIn',
+  clockOut: 'clockOut',
+  pauseMin: 'pauseMin',
+  note: 'note',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ShiftWeekStatusScalarFieldEnum = {
+  id: 'id',
+  storeId: 'storeId',
+  weekStart: 'weekStart',
+  status: 'status',
+  publishedBy: 'publishedBy',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.PulseSurveyScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
@@ -993,8 +1096,10 @@ exports.Prisma.BriefingScalarFieldEnum = {
   storeId: 'storeId',
   title: 'title',
   content: 'content',
+  sections: 'sections',
   date: 'date',
   type: 'type',
+  scheduledFor: 'scheduledFor',
   createdBy: 'createdBy',
   publishedAt: 'publishedAt',
   createdAt: 'createdAt',
@@ -1090,9 +1195,19 @@ exports.Prisma.ClientProfileScalarFieldEnum = {
   lastName: 'lastName',
   email: 'email',
   phone: 'phone',
+  whatsapp: 'whatsapp',
   preferences: 'preferences',
+  sizes: 'sizes',
+  birthday: 'birthday',
   vipLevel: 'vipLevel',
+  loyaltyPoints: 'loyaltyPoints',
   totalPurchases: 'totalPurchases',
+  totalSpent: 'totalSpent',
+  notes: 'notes',
+  consentEmail: 'consentEmail',
+  consentSms: 'consentSms',
+  consentWhatsapp: 'consentWhatsapp',
+  consentGeneral: 'consentGeneral',
   lastVisit: 'lastVisit',
   createdBy: 'createdBy',
   createdAt: 'createdAt',
@@ -1104,6 +1219,7 @@ exports.Prisma.ClientInteractionScalarFieldEnum = {
   clientId: 'clientId',
   userId: 'userId',
   type: 'type',
+  channel: 'channel',
   date: 'date',
   notes: 'notes',
   purchaseAmount: 'purchaseAmount',
@@ -1160,6 +1276,70 @@ exports.Prisma.OrderStatusUpdateScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.ClientAppointmentScalarFieldEnum = {
+  id: 'id',
+  storeId: 'storeId',
+  clientId: 'clientId',
+  advisorId: 'advisorId',
+  type: 'type',
+  title: 'title',
+  notes: 'notes',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BudgetScenarioScalarFieldEnum = {
+  id: 'id',
+  storeId: 'storeId',
+  createdBy: 'createdBy',
+  name: 'name',
+  data: 'data',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FRSettingsScalarFieldEnum = {
+  id: 'id',
+  storeId: 'storeId',
+  maxItems: 'maxItems',
+  warningMinutes: 'warningMinutes',
+  alertMinutes: 'alertMinutes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FRRoomScalarFieldEnum = {
+  id: 'id',
+  storeId: 'storeId',
+  number: 'number',
+  name: 'name',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FRSessionScalarFieldEnum = {
+  id: 'id',
+  storeId: 'storeId',
+  roomId: 'roomId',
+  staffId: 'staffId',
+  itemsIn: 'itemsIn',
+  itemsReturned: 'itemsReturned',
+  itemsPurchased: 'itemsPurchased',
+  itemsShrinkage: 'itemsShrinkage',
+  conversionRate: 'conversionRate',
+  status: 'status',
+  notes: 'notes',
+  checkedInBy: 'checkedInBy',
+  checkInAt: 'checkInAt',
+  checkOutAt: 'checkOutAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1210,6 +1390,7 @@ exports.Prisma.ModelName = {
   InventoryCount: 'InventoryCount',
   InventoryItem: 'InventoryItem',
   FloorZone: 'FloorZone',
+  FloorFrequencyLog: 'FloorFrequencyLog',
   FloorStaffPosition: 'FloorStaffPosition',
   FootfallEntry: 'FootfallEntry',
   VmGuidelineDoc: 'VmGuidelineDoc',
@@ -1222,11 +1403,14 @@ exports.Prisma.ModelName = {
   TrainingLog: 'TrainingLog',
   Challenge: 'Challenge',
   ChallengeParticipant: 'ChallengeParticipant',
+  ChallengeEntry: 'ChallengeEntry',
+  ChallengeVote: 'ChallengeVote',
   OnboardingTemplate: 'OnboardingTemplate',
   OnboardingStep: 'OnboardingStep',
   OnboardingJourney: 'OnboardingJourney',
   OnboardingProgress: 'OnboardingProgress',
   CoachingSession: 'CoachingSession',
+  CoachingTemplate: 'CoachingTemplate',
   DevelopmentPlan: 'DevelopmentPlan',
   DevelopmentGoal: 'DevelopmentGoal',
   DevelopmentReview: 'DevelopmentReview',
@@ -1235,6 +1419,9 @@ exports.Prisma.ModelName = {
   ShiftTemplate: 'ShiftTemplate',
   ShiftEntry: 'ShiftEntry',
   ShiftSwapRequest: 'ShiftSwapRequest',
+  ShiftAvailability: 'ShiftAvailability',
+  ShiftTimeEntry: 'ShiftTimeEntry',
+  ShiftWeekStatus: 'ShiftWeekStatus',
   PulseSurvey: 'PulseSurvey',
   PulseQuestion: 'PulseQuestion',
   PulseResponse: 'PulseResponse',
@@ -1255,7 +1442,12 @@ exports.Prisma.ModelName = {
   ClientTask: 'ClientTask',
   StockCallout: 'StockCallout',
   CustomerOrder: 'CustomerOrder',
-  OrderStatusUpdate: 'OrderStatusUpdate'
+  OrderStatusUpdate: 'OrderStatusUpdate',
+  ClientAppointment: 'ClientAppointment',
+  BudgetScenario: 'BudgetScenario',
+  FRSettings: 'FRSettings',
+  FRRoom: 'FRRoom',
+  FRSession: 'FRSession'
 };
 
 /**

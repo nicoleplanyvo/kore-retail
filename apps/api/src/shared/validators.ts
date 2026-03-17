@@ -498,12 +498,19 @@ export type InventoryItemUpsertInput = z.infer<typeof inventoryItemUpsertSchema>
 export const floorZoneCreateSchema = z.object({
   storeId: z.string().min(1),
   name: z.string().min(1).max(100),
+  description: z.string().max(500).optional(),
   sortOrder: z.number().int().min(0).default(0),
+  minStaff: z.number().int().min(0).default(1),
+  maxStaff: z.number().int().min(1).default(5),
 });
 
 export const floorZoneUpdateSchema = z.object({
   name: z.string().min(1).max(100).optional(),
+  description: z.string().max(500).optional(),
   sortOrder: z.number().int().min(0).optional(),
+  minStaff: z.number().int().min(0).optional(),
+  maxStaff: z.number().int().min(1).optional(),
+  customerCount: z.number().int().min(0).optional(),
   isActive: z.boolean().optional(),
 });
 
@@ -521,6 +528,20 @@ export const floorPositionUpdateSchema = z.object({
   status: z.enum(['ON_FLOOR', 'ON_BREAK', 'OFF_FLOOR', 'CASHIER']).optional(),
   notes: z.string().max(500).optional(),
   endedAt: z.string().optional(),
+});
+
+export const floorFrequencyUpdateSchema = z.object({
+  customerCount: z.number().int().min(0),
+});
+
+export const floorBulkAssignSchema = z.object({
+  assignments: z.array(z.object({
+    userId: z.string().min(1),
+    userName: z.string().min(1).max(100),
+    zoneId: z.string().min(1).nullable(),
+    status: z.enum(['ON_FLOOR', 'ON_BREAK', 'OFF_FLOOR', 'CASHIER']).default('ON_FLOOR'),
+  })),
+  storeId: z.string().min(1),
 });
 
 // ============================================================
@@ -589,6 +610,8 @@ export type VmGuidelineDocCreateInput = z.infer<typeof vmGuidelineDocCreateSchem
 export type VmGuidelineDocUpdateInput = z.infer<typeof vmGuidelineDocUpdateSchema>;
 export type MaintenanceRequestCreateInput = z.infer<typeof maintenanceRequestCreateSchema>;
 export type MaintenanceRequestUpdateInput = z.infer<typeof maintenanceRequestUpdateSchema>;
+export type FloorFrequencyUpdateInput = z.infer<typeof floorFrequencyUpdateSchema>;
+export type FloorBulkAssignInput = z.infer<typeof floorBulkAssignSchema>;
 
 // ============================================================
 // Training Hub / LMS — Validators
@@ -658,12 +681,17 @@ export const trainingLogUpdateSchema = z.object({
 export const challengeCreateSchema = z.object({
   title: z.string().min(2).max(200),
   description: z.string().max(2000).optional(),
+  mode: z.enum(['KPI', 'VOTING']).default('KPI'),
   type: z.enum(['INDIVIDUAL', 'TEAM', 'STORE']).default('INDIVIDUAL'),
   metric: z.string().max(100).optional(),
   targetValue: z.number().optional(),
   startDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   endDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  recurring: z.enum(['NONE', 'WEEKLY', 'MONTHLY', 'QUARTERLY']).optional(),
   reward: z.string().max(500).optional(),
+  rewardType: z.enum(['HONOUR', 'PRIZE', 'POINTS', 'BADGE']).optional(),
+  anonymized: z.boolean().optional(),
+  storeIds: z.array(z.string()).optional(),
 });
 
 export const challengeUpdateSchema = z.object({
@@ -672,6 +700,17 @@ export const challengeUpdateSchema = z.object({
   status: z.enum(['DRAFT', 'ACTIVE', 'COMPLETED', 'CANCELLED']).optional(),
   targetValue: z.number().optional(),
   reward: z.string().max(500).optional(),
+  rewardType: z.enum(['HONOUR', 'PRIZE', 'POINTS', 'BADGE']).optional(),
+  anonymized: z.boolean().optional(),
+});
+
+export const challengeEntrySchema = z.object({
+  value: z.number(),
+  note: z.string().max(500).optional(),
+});
+
+export const challengeVoteSchema = z.object({
+  targetUserId: z.string().min(1),
 });
 
 export const challengeProgressSchema = z.object({
@@ -723,6 +762,8 @@ export type TrainingLogUpdateInput = z.infer<typeof trainingLogUpdateSchema>;
 export type ChallengeCreateInput = z.infer<typeof challengeCreateSchema>;
 export type ChallengeUpdateInput = z.infer<typeof challengeUpdateSchema>;
 export type ChallengeProgressInput = z.infer<typeof challengeProgressSchema>;
+export type ChallengeEntryInput = z.infer<typeof challengeEntrySchema>;
+export type ChallengeVoteInput = z.infer<typeof challengeVoteSchema>;
 export type OnboardingTemplateCreateInput = z.infer<typeof onboardingTemplateCreateSchema>;
 export type OnboardingJourneyCreateInput = z.infer<typeof onboardingJourneyCreateSchema>;
 export type OnboardingStepUpdateInput = z.infer<typeof onboardingStepUpdateSchema>;
@@ -737,10 +778,19 @@ export const coachingSessionCreateSchema = z.object({
   scheduledAt: z.string().min(1),
   duration: z.number().int().min(5).max(480).default(30),
   type: z.enum(['REGULAR', 'AD_HOC', 'FOLLOW_UP']).default('REGULAR'),
+  framework: z.enum(['GROW', 'SMART', 'FREE']).default('GROW'),
+  topic: z.string().max(100).optional(),
+  category: z.string().max(100).optional(),
+  goalText: z.string().max(5000).optional(),
+  realityText: z.string().max(5000).optional(),
+  optionsText: z.string().max(5000).optional(),
+  wayForwardText: z.string().max(5000).optional(),
+  timelineText: z.string().max(5000).optional(),
   notes: z.string().max(5000).optional(),
   actionItems: z.string().max(5000).optional(),
   mood: z.number().int().min(1).max(5).optional(),
   followUpDate: z.string().optional(),
+  templateId: z.string().optional(),
 });
 
 export const coachingSessionUpdateSchema = z.object({
@@ -748,10 +798,31 @@ export const coachingSessionUpdateSchema = z.object({
   duration: z.number().int().min(5).max(480).optional(),
   type: z.enum(['REGULAR', 'AD_HOC', 'FOLLOW_UP']).optional(),
   status: z.enum(['SCHEDULED', 'COMPLETED', 'CANCELLED']).optional(),
+  framework: z.enum(['GROW', 'SMART', 'FREE']).optional(),
+  topic: z.string().max(100).optional(),
+  category: z.string().max(100).optional(),
+  goalText: z.string().max(5000).optional(),
+  realityText: z.string().max(5000).optional(),
+  optionsText: z.string().max(5000).optional(),
+  wayForwardText: z.string().max(5000).optional(),
+  timelineText: z.string().max(5000).optional(),
   notes: z.string().max(5000).optional(),
   actionItems: z.string().max(5000).optional(),
   mood: z.number().int().min(1).max(5).optional(),
   followUpDate: z.string().optional(),
+});
+
+export const coachingTemplateCreateSchema = z.object({
+  name: z.string().min(2).max(200),
+  framework: z.enum(['GROW', 'SMART', 'FREE']).default('GROW'),
+  topic: z.string().max(100).optional(),
+  category: z.string().max(100).optional(),
+  goalText: z.string().max(5000).optional(),
+  realityText: z.string().max(5000).optional(),
+  optionsText: z.string().max(5000).optional(),
+  wayForwardText: z.string().max(5000).optional(),
+  timelineText: z.string().max(5000).optional(),
+  notes: z.string().max(5000).optional(),
 });
 
 // ============================================================
@@ -835,17 +906,37 @@ export const shiftEntryCreateSchema = z.object({
   startTime: z.string().min(1),
   endTime: z.string().min(1),
   role: z.string().max(50).optional(),
+  note: z.string().max(500).optional(),
 });
 
 export const shiftEntryUpdateSchema = z.object({
   startTime: z.string().optional(),
   endTime: z.string().optional(),
+  userId: z.string().optional(),
   role: z.string().max(50).optional(),
+  note: z.string().max(500).optional(),
   status: z.enum(['PLANNED', 'CONFIRMED', 'SWAPPED', 'CANCELLED']).optional(),
 });
 
 export const shiftSwapRequestSchema = z.object({
   swapWithUserId: z.string().optional(),
+  reason: z.string().max(500).optional(),
+});
+
+export const shiftAvailabilitySchema = z.object({
+  storeId: z.string().min(1),
+  userId: z.string().min(1),
+  date: z.string().min(1),
+  type: z.enum(['AVAILABLE', 'UNAVAILABLE', 'WISH', 'VACATION', 'SICK']),
+  wishStart: z.string().optional(),
+  wishEnd: z.string().optional(),
+  note: z.string().max(500).optional(),
+});
+
+export const shiftClockSchema = z.object({
+  storeId: z.string().min(1),
+  action: z.enum(['CLOCK_IN', 'CLOCK_OUT', 'PAUSE_START', 'PAUSE_END']),
+  note: z.string().max(500).optional(),
 });
 
 // ============================================================
@@ -909,10 +1000,11 @@ export const wellbeingResourceUpdateSchema = z.object({
 // Kat.6: Kommunikation & Signal — Validators
 // ============================================================
 
-export const briefingCreateSchema = z.object({ title: z.string().min(1), content: z.string().min(1), date: z.string().min(1), type: z.enum(['MORNING', 'EVENING', 'SPECIAL']).optional() });
+export const briefingSectionSchema = z.object({ title: z.string().min(1), content: z.string().min(1), sortOrder: z.number().int().min(0) });
+export const briefingCreateSchema = z.object({ title: z.string().min(1), content: z.string().optional().default(''), sections: z.array(briefingSectionSchema).optional().default([]), date: z.string().min(1), type: z.enum(['MORNING', 'EVENING', 'SPECIAL']).optional(), scheduledFor: z.string().optional(), storeId: z.string().min(1) });
 export type BriefingCreateInput = z.infer<typeof briefingCreateSchema>;
 
-export const briefingUpdateSchema = z.object({ title: z.string().min(1).optional(), content: z.string().min(1).optional(), type: z.enum(['MORNING', 'EVENING', 'SPECIAL']).optional() });
+export const briefingUpdateSchema = z.object({ title: z.string().min(1).optional(), content: z.string().optional(), sections: z.array(briefingSectionSchema).optional(), type: z.enum(['MORNING', 'EVENING', 'SPECIAL']).optional(), scheduledFor: z.string().nullable().optional() });
 
 export const handoverCreateSchema = z.object({ toUserId: z.string().optional(), shiftDate: z.string().min(1), shiftType: z.string().optional(), salesUpdate: z.string().optional(), openTasks: z.string().optional(), incidents: z.string().optional(), customerNotes: z.string().optional(), stockNotes: z.string().optional(), generalNotes: z.string().optional() });
 export type HandoverCreateInput = z.infer<typeof handoverCreateSchema>;
@@ -933,20 +1025,57 @@ export const newsletterSectionSchema = z.object({ title: z.string().min(1), cont
 
 export const conversionGoalSchema = z.object({ period: z.string().min(1), targetConversion: z.number().optional(), targetAvgBasket: z.number().optional() });
 
-export const clientProfileCreateSchema = z.object({ firstName: z.string().min(1), lastName: z.string().min(1), email: z.string().email().optional(), phone: z.string().optional(), preferences: z.string().optional(), vipLevel: z.string().optional() });
+export const clientProfileCreateSchema = z.object({ firstName: z.string().min(1), lastName: z.string().min(1), email: z.string().email().optional().or(z.literal('')), phone: z.string().optional(), whatsapp: z.string().optional(), preferences: z.string().optional(), sizes: z.string().optional(), birthday: z.string().optional(), vipLevel: z.string().optional(), notes: z.string().optional(), consentEmail: z.boolean().optional(), consentSms: z.boolean().optional(), consentWhatsapp: z.boolean().optional(), consentGeneral: z.boolean().optional() });
 
-export const clientProfileUpdateSchema = z.object({ firstName: z.string().min(1).optional(), lastName: z.string().min(1).optional(), email: z.string().email().optional(), phone: z.string().optional(), preferences: z.string().optional(), vipLevel: z.string().optional(), totalPurchases: z.number().optional(), lastVisit: z.string().optional() });
+export const clientProfileUpdateSchema = z.object({ firstName: z.string().min(1).optional(), lastName: z.string().min(1).optional(), email: z.string().email().optional().or(z.literal('')), phone: z.string().optional(), whatsapp: z.string().optional(), preferences: z.string().optional(), sizes: z.string().optional(), birthday: z.string().optional(), vipLevel: z.string().optional(), loyaltyPoints: z.number().int().optional(), totalPurchases: z.number().optional(), totalSpent: z.number().optional(), notes: z.string().optional(), consentEmail: z.boolean().optional(), consentSms: z.boolean().optional(), consentWhatsapp: z.boolean().optional(), consentGeneral: z.boolean().optional(), lastVisit: z.string().optional() });
 
-export const clientInteractionSchema = z.object({ type: z.enum(['VISIT', 'CALL', 'EMAIL', 'EVENT']).optional(), notes: z.string().optional(), purchaseAmount: z.number().optional() });
+export const clientInteractionSchema = z.object({ type: z.enum(['VISIT', 'CALL', 'EMAIL', 'SMS', 'WHATSAPP', 'EVENT']).optional(), channel: z.string().optional(), notes: z.string().optional(), purchaseAmount: z.number().optional(), date: z.string().optional() });
 
 export const clientTaskSchema = z.object({ title: z.string().min(1), dueDate: z.string().optional(), status: z.enum(['OPEN', 'DONE', 'CANCELLED']).optional() });
 
+export const clientAppointmentCreateSchema = z.object({ clientId: z.string().optional(), storeId: z.string().min(1), type: z.enum(['BERATUNG', 'STYLE_BERATUNG', 'VIP_EVENT', 'PERSONAL_SHOPPING', 'ANPROBE', 'SONSTIGES']).optional(), title: z.string().min(1), notes: z.string().optional(), startsAt: z.string().min(1), endsAt: z.string().min(1) });
+
+export const clientAppointmentUpdateSchema = z.object({ clientId: z.string().optional(), type: z.string().optional(), title: z.string().optional(), notes: z.string().optional(), startsAt: z.string().optional(), endsAt: z.string().optional(), status: z.enum(['GEPLANT', 'BESTAETIGT', 'ABGESCHLOSSEN', 'ABGESAGT']).optional() });
+
 export const stockCalloutCreateSchema = z.object({ sku: z.string().min(1), productName: z.string().min(1), currentStock: z.number().int().optional(), reorderPoint: z.number().int().optional(), requestedQty: z.number().int().min(1), urgency: z.enum(['LOW', 'NORMAL', 'HIGH', 'CRITICAL']).optional() });
 
-export const stockCalloutUpdateSchema = z.object({ status: z.enum(['OPEN', 'ORDERED', 'RECEIVED', 'CANCELLED']).optional(), currentStock: z.number().int().optional(), requestedQty: z.number().int().optional(), urgency: z.enum(['LOW', 'NORMAL', 'HIGH', 'CRITICAL']).optional() });
+export const stockCalloutUpdateSchema = z.object({ status: z.enum(['OPEN', 'ORDERED', 'RECEIVED', 'CANCELLED', 'OFFERED', 'TRANSFER', 'RESOLVED']).optional(), currentStock: z.number().int().optional(), requestedQty: z.number().int().optional(), urgency: z.enum(['LOW', 'NORMAL', 'HIGH', 'CRITICAL']).optional() });
+
+export const stockCalloutOfferSchema = z.object({ availableQty: z.number().int().min(1), notes: z.string().max(500).optional() });
+
+export const stockBoardItemCreateSchema = z.object({ sku: z.string().min(1), productName: z.string().min(1), availableQty: z.number().int().min(1), notes: z.string().max(500).optional() });
 
 export const customerOrderCreateSchema = z.object({ orderNumber: z.string().min(1), customerName: z.string().min(1), customerEmail: z.string().email().optional(), trackingNumber: z.string().optional(), carrier: z.string().optional(), estimatedDelivery: z.string().optional() });
 
 export const customerOrderUpdateSchema = z.object({ status: z.enum(['ORDERED', 'SHIPPED', 'IN_TRANSIT', 'DELIVERED', 'RETURNED']).optional(), trackingNumber: z.string().optional(), carrier: z.string().optional(), estimatedDelivery: z.string().optional() });
 
 export const orderStatusUpdateSchema = z.object({ status: z.string().min(1), notes: z.string().optional() });
+
+// ── FR Conversion (Fitting Room) ────────────────────
+
+export const frSettingsSchema = z.object({
+  maxItems: z.number().int().min(1).optional(),
+  warningMinutes: z.number().int().min(1).optional(),
+  alertMinutes: z.number().int().min(1).optional(),
+});
+
+export const frRoomCreateSchema = z.object({
+  number: z.number().int().min(1),
+  name: z.string().max(100).optional(),
+});
+
+export const frCheckInSchema = z.object({
+  roomId: z.string().min(1),
+  staffId: z.string().optional(),
+  itemsIn: z.number().int().min(0),
+  notes: z.string().max(500).optional(),
+});
+
+export const frCheckOutSchema = z.object({
+  itemsReturned: z.number().int().min(0),
+  itemsPurchased: z.number().int().min(0),
+});
+
+export const frAddItemsSchema = z.object({
+  additionalItems: z.number().int().min(1),
+});
