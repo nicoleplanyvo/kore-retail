@@ -63,7 +63,7 @@ const isProduction = NODE_ENV === 'production';
 // Alle Frontends muessen sich mit der API verbinden koennen
 const CORS_ORIGIN =
   process.env['CORS_ORIGIN'] ??
-  'http://localhost:5173,http://localhost:5174,http://localhost:5175,http://localhost:5176,https://kore-retail.de,https://dashboard.kore-retail.de,https://app.kore-retail.de';
+  'http://localhost:5173,http://localhost:5174,http://localhost:5175,http://localhost:5176,https://kore-retail.de,https://www.kore-retail.de,https://dashboard.kore-retail.de,https://app.kore-retail.de';
 const allowedOrigins = CORS_ORIGIN.split(',').map((o) => o.trim());
 
 app.use(
@@ -196,6 +196,6 @@ app.listen(PORT, () => {
   console.log(`✓ KORE API running on port ${PORT} (${NODE_ENV})`);
   console.log(`  CORS: ${allowedOrigins.join(', ')}`);
   console.log(
-    `  Resend: ${process.env['RESEND_API_KEY'] ? 'configured' : 'not configured (dev mode)'}`,
+    `  Lettermint: ${process.env['LETTERMINT_API_TOKEN'] ? 'configured' : 'not configured (dev mode)'}`,
   );
 });
