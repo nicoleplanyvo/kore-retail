@@ -1,18 +1,34 @@
 /**
- * E-Mail-Versand über Lettermint API
- * https://api.lettermint.co/v1/send
+ * E-Mail-Versand über Brevo SMTP
+ * Ersetzt Lettermint — nutzt nodemailer mit smtp-relay.brevo.com
  */
 
-const LETTERMINT_TOKEN = process.env['LETTERMINT_API_TOKEN'];
-if (!LETTERMINT_TOKEN) {
-  console.warn('⚠ LETTERMINT_API_TOKEN nicht gesetzt — E-Mails werden nur geloggt.');
-}
+import nodemailer from 'nodemailer';
+
+const SMTP_HOST = process.env['SMTP_HOST'] ?? 'smtp-relay.brevo.com';
+const SMTP_PORT = Number(process.env['SMTP_PORT'] ?? '587');
+const SMTP_USER = process.env['SMTP_USER'] ?? '';
+const SMTP_PASS = process.env['SMTP_PASS'] ?? '';
 
 const FROM = process.env['FROM_EMAIL'] ?? 'noreply@kore-retail.de';
-const NOTIFY = process.env['NOTIFICATION_EMAIL'] ?? 'info@kore-retail.de';
+const NOTIFY = process.env['NOTIFICATION_EMAIL'] ?? 'info@munozbonilla.de';
+
+const hasSmtp = !!(SMTP_USER && SMTP_PASS);
+if (!hasSmtp) {
+  console.warn('⚠ SMTP_USER/SMTP_PASS nicht gesetzt — E-Mails werden nur geloggt.');
+}
+
+const transporter = hasSmtp
+  ? nodemailer.createTransport({
+      host: SMTP_HOST,
+      port: SMTP_PORT,
+      secure: false,
+      auth: { user: SMTP_USER, pass: SMTP_PASS },
+    })
+  : null;
 
 // ──────────────────────────────────────────────
-// Lettermint Send
+// Brevo SMTP Send
 // ──────────────────────────────────────────────
 
 interface EmailPayload {
@@ -30,7 +46,7 @@ interface SendResult {
 }
 
 export async function sendEmail(payload: EmailPayload): Promise<SendResult> {
-  if (!LETTERMINT_TOKEN) {
+  if (!transporter) {
     console.log('[DEV] E-Mail (nur geloggt):', {
       from: payload.from,
       to: payload.to,
@@ -40,31 +56,18 @@ export async function sendEmail(payload: EmailPayload): Promise<SendResult> {
   }
 
   try {
-    const res = await fetch('https://api.lettermint.co/v1/send', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-lettermint-token': LETTERMINT_TOKEN,
-      },
-      body: JSON.stringify({
-        from: payload.from,
-        to: Array.isArray(payload.to) ? payload.to : [payload.to],
-        subject: payload.subject,
-        html: payload.html,
-        ...(payload.reply_to ? { reply_to: Array.isArray(payload.reply_to) ? payload.reply_to : [payload.reply_to] } : {}),
-      }),
+    const info = await transporter.sendMail({
+      from: payload.from,
+      to: Array.isArray(payload.to) ? payload.to.join(', ') : payload.to,
+      subject: payload.subject,
+      html: payload.html,
+      ...(payload.reply_to ? { replyTo: payload.reply_to } : {}),
     });
 
-    if (!res.ok) {
-      const body = await res.text();
-      console.error('Lettermint error:', res.status, body);
-      return { success: false, error: `Lettermint ${res.status}: ${body}` };
-    }
-
-    const data = (await res.json()) as { message_id?: string };
-    return { success: true, messageId: data.message_id };
+    console.log('[EMAIL] Gesendet:', info.messageId, '→', payload.to);
+    return { success: true, messageId: info.messageId };
   } catch (err) {
-    console.error('Lettermint fetch error:', err);
+    console.error('[EMAIL] Fehler:', err);
     return { success: false, error: String(err) };
   }
 }
@@ -223,7 +226,7 @@ export function blogApprovalEmail(data: {
 }): EmailPayload {
   return {
     from: `Lotta · KORE <${FROM}>`,
-    to: process.env['NOTIFICATION_EMAIL'] ?? 'nicole@kore-retail.de',
+    to: process.env['NOTIFICATION_EMAIL'] ?? 'info@munozbonilla.de',
     subject: `Blog-Vorschlag: ${data.title}`,
     html: baseLayout(`
       <h2>Neuer Blogbeitrag zur Freigabe</h2>

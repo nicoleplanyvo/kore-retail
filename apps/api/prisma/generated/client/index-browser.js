@@ -1340,6 +1340,21 @@ exports.Prisma.FRSessionScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.BlogPostScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  excerpt: 'excerpt',
+  content: 'content',
+  coverImageUrl: 'coverImageUrl',
+  author: 'author',
+  status: 'status',
+  approvalToken: 'approvalToken',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1447,7 +1462,8 @@ exports.Prisma.ModelName = {
   BudgetScenario: 'BudgetScenario',
   FRSettings: 'FRSettings',
   FRRoom: 'FRRoom',
-  FRSession: 'FRSession'
+  FRSession: 'FRSession',
+  BlogPost: 'BlogPost'
 };
 
 /**
