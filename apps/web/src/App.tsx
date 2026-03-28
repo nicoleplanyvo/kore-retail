@@ -11,6 +11,8 @@ import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { AuditPage } from './pages/AuditPage';
 import { LegalPage } from './pages/LegalPage';
+import { BlogListPage } from './pages/BlogListPage';
+import { BlogPostPage } from './pages/BlogPostPage';
 import { LoginPage } from './pages/LoginPage';
 import { ToolsHomePage } from './pages/ToolsHomePage';
 import { useAnalytics } from './hooks/useAnalytics';
@@ -69,6 +71,8 @@ export function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/audit" element={<AuditPage />} />
           <Route path="/legal" element={<LegalPage />} />
+          <Route path="/blog" element={<BlogListPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
         </Route>
 
         {/* Login */}

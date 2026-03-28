@@ -49,6 +49,7 @@ import { trackTraceRouter } from './routes/tools/track-trace/index.js';
 import { multiStoreRouter } from './routes/tools/multi-store/index.js';
 import { rmDashboardRouter } from './routes/tools/rm-dashboard/index.js';
 import { toolsRouter } from './routes/tools/index.js';
+import { blogRouter } from './routes/blog.js';
 
 const app = express();
 const PORT = parseInt(process.env['PORT'] ?? '3001', 10);
@@ -79,6 +80,9 @@ app.use(cookieParser());
 // Website-Formulare
 app.use('/api/contact', contactRouter);
 app.use('/api/audit', auditRouter);
+
+// Blog (öffentlich + Lotta API)
+app.use('/api/blog', blogRouter);
 
 // Auth
 app.use('/api/auth', authRouter);
