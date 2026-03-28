@@ -1,5 +1,4 @@
 import 'dotenv/config';
-import { fileURLToPath } from 'url';
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
@@ -50,14 +49,11 @@ import { trackTraceRouter } from './routes/tools/track-trace/index.js';
 import { multiStoreRouter } from './routes/tools/multi-store/index.js';
 import { rmDashboardRouter } from './routes/tools/rm-dashboard/index.js';
 import { toolsRouter } from './routes/tools/index.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import { blogRouter } from './routes/blog.js';
 
 const app = express();
 const PORT = parseInt(process.env['PORT'] ?? '3001', 10);
 const NODE_ENV = process.env['NODE_ENV'] ?? 'development';
-const isProduction = NODE_ENV === 'production';
 
 // ── CORS ──────────────────────────────────────────
 // Alle Frontends muessen sich mit der API verbinden koennen
@@ -84,6 +80,9 @@ app.use(cookieParser());
 // Website-Formulare
 app.use('/api/contact', contactRouter);
 app.use('/api/audit', auditRouter);
+
+// Blog (öffentlich + Lotta API)
+app.use('/api/blog', blogRouter);
 
 // Auth
 app.use('/api/auth', authRouter);
@@ -172,23 +171,9 @@ app.use('/api/tools/rm-dashboard', rmDashboardRouter);
 const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? path.join(process.cwd(), 'uploads');
 app.use('/api/uploads', authenticate, express.static(UPLOAD_DIR));
 
-// ── Production Static File Serving ────────────────
-if (isProduction) {
-  const dashboardDist = path.resolve(__dirname, '../../dashboard/dist');
-  app.use('/dashboard', express.static(dashboardDist));
-  app.get('/dashboard/*', (_req, res) => {
-    res.sendFile(path.join(dashboardDist, 'index.html'));
-  });
-  app.use(express.static(dashboardDist));
-  app.get('*', (req, res, next) => {
-    if (req.path.startsWith('/api/') || req.path === '/health') return next();
-    res.sendFile(path.join(dashboardDist, 'index.html'));
-  });
-}
-
 // Health Check
 app.get('/health', (_req, res) => {
-  res.json({ status: 'ok', service: 'kore-server', mode: NODE_ENV });
+  res.json({ status: 'ok', service: 'kore-api', mode: NODE_ENV });
 });
 
 // ── Start ─────────────────────────────────────────

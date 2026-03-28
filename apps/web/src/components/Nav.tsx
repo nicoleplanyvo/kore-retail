@@ -7,6 +7,7 @@ const navLinks = [
   { label: t.nav.consulting, href: '/consulting' },
   { label: t.nav.training, href: '/training' },
   { label: t.nav.suite, href: '/suite' },
+  { label: 'Blog', href: '/blog' },
   { label: t.nav.about, href: '/about' },
   { label: t.nav.contact, href: '/contact' },
 ];
