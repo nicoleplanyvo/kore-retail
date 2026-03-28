@@ -1,10 +1,10 @@
-import { Router } from 'express';
+import { Router, type Router as RouterType } from 'express';
 import crypto from 'crypto';
 import { PrismaClient } from '../../prisma/generated/client/index.js';
 import { sendEmail, blogApprovalEmail } from '../lib/email.js';
 
 const prisma = new PrismaClient();
-export const blogRouter = Router();
+export const blogRouter: RouterType = Router();
 
 const BLOG_API_KEY = process.env['BLOG_API_KEY'] ?? '';
 const PUBLIC_URL = process.env['PUBLIC_URL'] ?? 'https://kore-retail.de';
