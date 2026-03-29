@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { useKpiEntries, useKpiStores } from '../../../hooks/useKpi';
 import { Breadcrumb } from '../../../components/Breadcrumb';
+import { Pagination } from '../../../components/Pagination';
+import { usePagination } from '../../../hooks/usePagination';
 
 export function EntryListPage() {
-  const [page, setPage] = useState(1);
+  const page = usePagination();
   const [storeId, setStoreId] = useState('');
   const { data: stores } = useKpiStores();
   const { data, isLoading } = useKpiEntries(page, storeId || undefined);
@@ -27,7 +29,7 @@ export function EntryListPage() {
 
       {/* Filter */}
       <div className="flex gap-md mb-xl">
-        <select value={storeId} onChange={(e) => { setStoreId(e.target.value); setPage(1); }} className="border border-kore-border px-md py-sm text-small bg-kore-white">
+        <select value={storeId} onChange={(e) => { setStoreId(e.target.value); }} className="border border-kore-border px-md py-sm text-small bg-kore-white">
           <option value="">Alle Stores</option>
           {(stores ?? []).map((s: { id: string; name: string }) => <option key={s.id} value={s.id}>{s.name}</option>)}
         </select>
@@ -68,16 +70,7 @@ export function EntryListPage() {
             </table>
           </div>
 
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="flex items-center justify-between mt-xl">
-              <span className="text-small text-kore-mid">{total} Eintraege &middot; Seite {page} von {totalPages}</span>
-              <div className="flex gap-sm">
-                <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page <= 1} className="p-sm border border-kore-border hover:bg-kore-bg disabled:opacity-30"><ChevronLeft size={16} /></button>
-                <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page >= totalPages} className="p-sm border border-kore-border hover:bg-kore-bg disabled:opacity-30"><ChevronRight size={16} /></button>
-              </div>
-            </div>
-          )}
+          <Pagination totalPages={totalPages} />
         </>
       )}
     </div>

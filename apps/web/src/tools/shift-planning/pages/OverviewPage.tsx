@@ -110,10 +110,10 @@ export function OverviewPage() {
           </select>
         </div>
         <div className="flex items-center gap-sm">
-          <button onClick={() => setWeekOffset(w => w - 1)} className="p-sm border border-kore-border hover:bg-kore-bg transition-colors"><ChevronLeft size={16} /></button>
+          <button onClick={() => setWeekOffset(w => w - 1)} className="p-sm border border-kore-border hover:bg-kore-bg transition-colors" aria-label="Vorherige Woche"><ChevronLeft size={16} /></button>
           <button onClick={() => setWeekOffset(0)} className="px-md py-sm border border-kore-border text-small hover:bg-kore-bg transition-colors">Heute</button>
           <span className="text-body text-kore-ink font-medium min-w-[180px] text-center">{weekLabel}</span>
-          <button onClick={() => setWeekOffset(w => w + 1)} className="p-sm border border-kore-border hover:bg-kore-bg transition-colors"><ChevronRight size={16} /></button>
+          <button onClick={() => setWeekOffset(w => w + 1)} className="p-sm border border-kore-border hover:bg-kore-bg transition-colors" aria-label="Nächste Woche"><ChevronRight size={16} /></button>
         </div>
         <div className="flex items-center gap-sm">
           <button onClick={() => { setEditId(null); resetForm(); setShowForm(!showForm); }} className="flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90 transition-opacity">

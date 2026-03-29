@@ -1,22 +1,13 @@
 import { User, Menu } from 'lucide-react';
 import { useAuthStore } from '../stores/authStore';
 
-const ROLE_LABELS: Record<string, string> = {
-  kore_admin: 'Super Admin',
-  tenant_admin: 'Kunden-Admin',
-  regional_manager: 'Regional Manager',
-  multisite_manager: 'Multisite Manager',
-  store_manager: 'Store Manager',
-  learner: 'Mitarbeiter',
-};
-
-const ROLE_BADGE_STYLES: Record<string, string> = {
-  kore_admin:        'bg-kore-ink text-white',
-  tenant_admin:      'bg-amber-700 text-white',
-  regional_manager:  'bg-amber-700/10 text-amber-700 border border-amber-700/30',
-  multisite_manager: 'bg-amber-600/10 text-amber-600 border border-amber-600/30',
-  store_manager:     'bg-emerald-600/10 text-emerald-600 border border-emerald-600/30',
-  learner:           'bg-gray-100 text-gray-500 border border-gray-200',
+const ROLE_CONFIG: Record<string, { label: string; dot: string; bg: string; text: string }> = {
+  kore_admin:        { label: 'Admin',         dot: 'bg-kore-brass',    bg: 'bg-kore-brass/10',    text: 'text-kore-brass-dk' },
+  tenant_admin:      { label: 'Kunden-Admin',  dot: 'bg-purple-500',    bg: 'bg-purple-500/10',    text: 'text-purple-700' },
+  regional_manager:  { label: 'Regional',      dot: 'bg-blue-500',      bg: 'bg-blue-500/10',      text: 'text-blue-700' },
+  multisite_manager: { label: 'Multisite',     dot: 'bg-teal-500',      bg: 'bg-teal-500/10',      text: 'text-teal-700' },
+  store_manager:     { label: 'Store Manager', dot: 'bg-kore-success',  bg: 'bg-kore-success/10',  text: 'text-kore-success' },
+  learner:           { label: 'Mitarbeiter',   dot: 'bg-kore-mid',      bg: 'bg-kore-surface',     text: 'text-kore-mid' },
 };
 
 interface AppTopBarProps {
@@ -25,9 +16,10 @@ interface AppTopBarProps {
 
 export function AppTopBar({ onMenuToggle }: AppTopBarProps) {
   const { user } = useAuthStore();
+  const roleCfg = ROLE_CONFIG[user?.role || ''];
 
   return (
-    <header className="h-[56px] bg-kore-white border-b border-kore-border flex items-center justify-between px-md sm:px-xl flex-shrink-0">
+    <header className="h-[56px] bg-kore-white border-b border-kore-border flex items-center justify-between px-md sm:px-xl flex-shrink-0" role="banner">
       <button
         onClick={onMenuToggle}
         className="lg:hidden w-[36px] h-[36px] flex items-center justify-center rounded-sm hover:bg-kore-surface transition-colors"
@@ -40,14 +32,11 @@ export function AppTopBar({ onMenuToggle }: AppTopBarProps) {
       <div className="hidden lg:block" />
 
       <div className="flex items-center gap-md-sm">
-        {user?.role && (
-          <span className={`
-            inline-flex items-center px-2.5 py-0.5
-            font-body text-[0.65rem] font-medium uppercase tracking-widest
-            rounded-sm whitespace-nowrap
-            ${ROLE_BADGE_STYLES[user.role] || 'bg-gray-100 text-gray-500 border border-gray-200'}
-          `}>
-            {ROLE_LABELS[user.role] || user.role}
+        {/* Role Badge */}
+        {roleCfg && (
+          <span className={`hidden sm:inline-flex items-center gap-[5px] rounded-full px-2 py-0.5 font-body text-xs font-medium ${roleCfg.bg} ${roleCfg.text}`}>
+            <span className={`inline-block w-[6px] h-[6px] rounded-full ${roleCfg.dot}`} />
+            {roleCfg.label}
           </span>
         )}
         <div className="w-[32px] h-[32px] rounded-full bg-kore-surface flex items-center justify-center">

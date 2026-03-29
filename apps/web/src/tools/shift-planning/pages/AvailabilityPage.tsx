@@ -93,7 +93,7 @@ export function AvailabilityPage() {
 
   return (
     <div className="p-xl max-w-5xl">
-      <Link to="/app/tools/shift-planning" className="flex items-center gap-xs text-kore-mid hover:text-kore-ink text-small mb-lg"><ArrowLeft size={16} /> Zurueck zum Wochenplan</Link>
+      <Link to="/tools/shift-planning" className="flex items-center gap-xs text-kore-mid hover:text-kore-ink text-small mb-lg"><ArrowLeft size={16} /> Zurueck zum Wochenplan</Link>
 
       <h1 className="font-display text-h1 text-kore-ink mb-xs">Verfuegbarkeiten</h1>
       <p className="text-body text-kore-mid mb-xl">Tage markieren: verfuegbar, nicht verfuegbar, Wunsch-Schichten, Urlaub oder krank.</p>
@@ -136,17 +136,17 @@ export function AvailabilityPage() {
 
       {/* Month Navigation */}
       <div className="flex items-center justify-between mb-md">
-        <button onClick={() => setMonthOffset(m => m - 1)} className="p-sm border border-kore-border hover:bg-kore-bg"><ChevronLeft size={16} /></button>
+        <button onClick={() => setMonthOffset(m => m - 1)} className="p-sm border border-kore-border hover:bg-kore-bg" aria-label="Vorheriger Monat"><ChevronLeft size={16} /></button>
         <span className="font-display text-h3 text-kore-ink">{monthLabel}</span>
-        <button onClick={() => setMonthOffset(m => m + 1)} className="p-sm border border-kore-border hover:bg-kore-bg"><ChevronRight size={16} /></button>
+        <button onClick={() => setMonthOffset(m => m + 1)} className="p-sm border border-kore-border hover:bg-kore-bg" aria-label="Nächster Monat"><ChevronRight size={16} /></button>
       </div>
 
       {/* Calendar Grid */}
       {isLoading ? (
         <div className="text-body text-kore-mid py-xl text-center">Lade Verfuegbarkeiten...</div>
       ) : (
-        <div className="bg-kore-white border border-kore-border overflow-x-auto">
-          <div className="grid grid-cols-7 min-w-[640px]">
+        <div className="bg-kore-white border border-kore-border">
+          <div className="grid grid-cols-7">
             {DAYS.map(d => (
               <div key={d} className="p-sm text-center text-small text-kore-mid uppercase tracking-widest border-b border-kore-border bg-kore-bg">{d}</div>
             ))}

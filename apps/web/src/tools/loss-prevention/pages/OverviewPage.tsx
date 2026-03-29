@@ -1,16 +1,15 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import {
   ShieldAlert,
   Plus,
   BarChart3,
-  ChevronLeft,
-  ChevronRight,
   Filter,
-  Search,
 } from 'lucide-react';
 import { useLossIncidents, useLossStores, useLossDashboard } from '../../../hooks/useLossPrevention';
 import { Breadcrumb } from '../../../components/Breadcrumb';
+import { Pagination } from '../../../components/Pagination';
+import { usePagination } from '../../../hooks/usePagination';
 
 /* ── Maps ───────────────────────────────────────────────────── */
 
@@ -68,14 +67,21 @@ function formatEUR(val: number) {
 
 export function OverviewPage() {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [storeId, setStoreId] = useState('');
   const [category, setCategory] = useState('');
   const [status, setStatus] = useState('');
   const [severity, setSeverity] = useState('');
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
-  const [page, setPage] = useState(1);
+  const page = usePagination();
   const [showFilters, setShowFilters] = useState(false);
+
+  function resetPage() {
+    const next = new URLSearchParams(searchParams);
+    next.delete('page');
+    setSearchParams(next, { replace: true });
+  }
 
   const { data: stores } = useLossStores();
   const { data: dashboard } = useLossDashboard({ storeId: storeId || undefined });
@@ -157,7 +163,7 @@ export function OverviewPage() {
       <div className="flex flex-wrap items-center gap-md mb-xl">
         <select
           value={storeId}
-          onChange={(e) => { setStoreId(e.target.value); setPage(1); }}
+          onChange={(e) => { setStoreId(e.target.value); resetPage(); }}
           className={selectClass}
         >
           <option value="">Alle Stores</option>
@@ -179,7 +185,7 @@ export function OverviewPage() {
         <div className="flex flex-wrap items-center gap-md mb-xl bg-kore-white border border-kore-border p-lg">
           <select
             value={category}
-            onChange={(e) => { setCategory(e.target.value); setPage(1); }}
+            onChange={(e) => { setCategory(e.target.value); resetPage(); }}
             className={selectClass}
           >
             <option value="">Alle Kategorien</option>
@@ -192,7 +198,7 @@ export function OverviewPage() {
 
           <select
             value={status}
-            onChange={(e) => { setStatus(e.target.value); setPage(1); }}
+            onChange={(e) => { setStatus(e.target.value); resetPage(); }}
             className={selectClass}
           >
             <option value="">Alle Status</option>
@@ -204,7 +210,7 @@ export function OverviewPage() {
 
           <select
             value={severity}
-            onChange={(e) => { setSeverity(e.target.value); setPage(1); }}
+            onChange={(e) => { setSeverity(e.target.value); resetPage(); }}
             className={selectClass}
           >
             <option value="">Alle Schweregrade</option>
@@ -217,14 +223,14 @@ export function OverviewPage() {
           <input
             type="date"
             value={fromDate}
-            onChange={(e) => { setFromDate(e.target.value); setPage(1); }}
+            onChange={(e) => { setFromDate(e.target.value); resetPage(); }}
             className={selectClass}
             placeholder="Von"
           />
           <input
             type="date"
             value={toDate}
-            onChange={(e) => { setToDate(e.target.value); setPage(1); }}
+            onChange={(e) => { setToDate(e.target.value); resetPage(); }}
             className={selectClass}
             placeholder="Bis"
           />
@@ -237,7 +243,7 @@ export function OverviewPage() {
                 setSeverity('');
                 setFromDate('');
                 setToDate('');
-                setPage(1);
+                resetPage();
               }}
               className="text-small text-kore-mid hover:text-kore-ink underline"
             >
@@ -351,30 +357,7 @@ export function OverviewPage() {
             ))}
           </div>
 
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="flex items-center justify-between mt-xl">
-              <span className="text-small text-kore-mid">
-                {total} Vorfaelle &middot; Seite {page} von {totalPages}
-              </span>
-              <div className="flex gap-sm">
-                <button
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  disabled={page <= 1}
-                  className="p-sm border border-kore-border hover:bg-kore-bg disabled:opacity-30"
-                >
-                  <ChevronLeft size={16} />
-                </button>
-                <button
-                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                  disabled={page >= totalPages}
-                  className="p-sm border border-kore-border hover:bg-kore-bg disabled:opacity-30"
-                >
-                  <ChevronRight size={16} />
-                </button>
-              </div>
-            </div>
-          )}
+          <Pagination totalPages={totalPages} />
         </>
       )}
     </div>
