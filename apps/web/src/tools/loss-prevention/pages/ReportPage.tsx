@@ -114,7 +114,7 @@ export function ReportPage() {
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
         <Link
-          to="/tools/loss-prevention"
+          to="/app/tools/loss-prevention"
           className="text-kore-mid hover:text-kore-ink transition-colors"
         >
           <ArrowLeft size={20} />
@@ -342,7 +342,7 @@ export function ReportPage() {
             {createMutation.isPending ? 'Wird gespeichert...' : 'Vorfall melden'}
           </button>
           <Link
-            to="/tools/loss-prevention"
+            to="/app/tools/loss-prevention"
             className="px-xl py-md-sm text-small font-medium uppercase tracking-widest text-kore-mid hover:text-kore-ink transition-colors"
           >
             Abbrechen

@@ -28,7 +28,7 @@ export function CreatePage() {
   return (
     <div className="p-xl max-w-3xl">
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/appraisals" className="text-kore-mid hover:text-kore-ink transition-colors">
+        <Link to="/app/tools/appraisals" className="text-kore-mid hover:text-kore-ink transition-colors">
           <ArrowLeft size={20} />
         </Link>
         <div>
@@ -114,7 +114,7 @@ export function CreatePage() {
           >
             <UserPlus size={16} /> {create.isPending ? 'Erstelle...' : 'Beurteilung erstellen'}
           </button>
-          <Link to="/tools/appraisals" className="px-xl py-md-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors">
+          <Link to="/app/tools/appraisals" className="px-xl py-md-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors">
             Abbrechen
           </Link>
         </div>

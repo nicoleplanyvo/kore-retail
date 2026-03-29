@@ -12,7 +12,7 @@ export function DashboardPage() {
     <div className="p-xl max-w-5xl">
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/briefings" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+        <Link to="/app/tools/briefings" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div className="flex-1">
           <h1 className="font-display text-h1 text-kore-ink">Briefing Dashboard</h1>
           <p className="text-body text-kore-mid mt-xs">Lesequoten, Trends und Store-Vergleich.</p>

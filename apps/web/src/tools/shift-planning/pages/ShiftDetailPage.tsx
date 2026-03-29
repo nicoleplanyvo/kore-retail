@@ -47,7 +47,7 @@ export function ShiftDetailPage() {
   if (isLoading) return <div className="p-xl text-body text-kore-mid">Lade...</div>;
   if (!shift) return (
     <div className="p-xl max-w-3xl">
-      <Link to="/tools/shift-planning" className="flex items-center gap-xs text-kore-mid hover:text-kore-ink text-small mb-lg"><ArrowLeft size={16} /> Zurueck</Link>
+      <Link to="/app/tools/shift-planning" className="flex items-center gap-xs text-kore-mid hover:text-kore-ink text-small mb-lg"><ArrowLeft size={16} /> Zurueck</Link>
       <div className="bg-kore-white border border-kore-border p-2xl text-center text-body text-kore-mid">Schicht nicht gefunden.</div>
     </div>
   );
@@ -56,7 +56,7 @@ export function ShiftDetailPage() {
 
   return (
     <div className="p-xl max-w-3xl">
-      <Link to="/tools/shift-planning" className="flex items-center gap-xs text-kore-mid hover:text-kore-ink text-small mb-lg"><ArrowLeft size={16} /> Zurueck zum Wochenplan</Link>
+      <Link to="/app/tools/shift-planning" className="flex items-center gap-xs text-kore-mid hover:text-kore-ink text-small mb-lg"><ArrowLeft size={16} /> Zurueck zum Wochenplan</Link>
 
       <div className="bg-kore-white border border-kore-border p-xl mb-lg">
         <div className="flex items-start justify-between mb-lg">

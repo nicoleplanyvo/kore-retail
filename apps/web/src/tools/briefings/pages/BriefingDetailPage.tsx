@@ -30,7 +30,7 @@ export function BriefingDetailPage() {
     <div className="p-xl max-w-4xl">
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/briefings" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+        <Link to="/app/tools/briefings" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div className="flex-1">
           <div className="flex items-center gap-sm">
             {TYPE_ICONS[briefing.type] ?? <FileText size={20} className="text-kore-mid" />}

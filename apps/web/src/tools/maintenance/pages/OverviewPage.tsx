@@ -152,7 +152,7 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-md">
           <Link
-            to="/tools/maintenance/dashboard"
+            to="/app/tools/maintenance/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-kore-ink text-small hover:bg-kore-bg transition-colors"
           >
             <BarChart3 size={16} /> Dashboard

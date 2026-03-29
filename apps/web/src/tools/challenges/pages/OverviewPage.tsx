@@ -26,15 +26,15 @@ export function OverviewPage() {
     <div className="p-xl max-w-6xl">
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+        <Link to="/app/tools" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div className="flex-1">
           <h1 className="font-display text-h1 text-kore-ink">Challenges</h1>
           <p className="text-body text-kore-mid mt-xs">Wettbewerbe und Gamification fuer Ihr Team</p>
         </div>
-        <Link to="/tools/challenges/dashboard" className="flex items-center gap-sm border border-kore-border px-lg py-md-sm text-small text-kore-ink hover:bg-kore-bg transition-colors">
+        <Link to="/app/tools/challenges/dashboard" className="flex items-center gap-sm border border-kore-border px-lg py-md-sm text-small text-kore-ink hover:bg-kore-bg transition-colors">
           <Medal size={16} /> Dashboard
         </Link>
-        <Link to="/tools/challenges/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
+        <Link to="/app/tools/challenges/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
           <Plus size={16} /> Neue Challenge
         </Link>
       </div>
@@ -65,7 +65,7 @@ export function OverviewPage() {
           <Trophy size={48} className="text-kore-faint mb-lg" />
           <h2 className="font-display text-h2 text-kore-ink mb-md">Noch keine Challenges</h2>
           <p className="text-body text-kore-mid max-w-md mb-xl">Erstellen Sie Ihre erste Challenge, um Motivation und Wettbewerb im Team zu foerdern.</p>
-          <Link to="/tools/challenges/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
+          <Link to="/app/tools/challenges/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
             <Plus size={16} /> Challenge erstellen
           </Link>
         </div>

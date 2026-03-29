@@ -31,7 +31,7 @@ export function CreateCustomerPage() {
   return (
     <div className="p-xl max-w-4xl">
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/clienteling" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+        <Link to="/app/tools/clienteling" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div>
           <h1 className="font-display text-h1 text-kore-ink">Neuer Kunde</h1>
           <p className="text-body text-kore-mid mt-xs">Kundenprofil mit DSGVO-Einwilligung anlegen</p>
@@ -153,7 +153,7 @@ export function CreateCustomerPage() {
           <button type="submit" disabled={create.isPending || !form.firstName || !form.lastName} className="flex items-center gap-xs px-xl py-md-sm bg-kore-ink text-kore-white text-small font-medium uppercase tracking-widest hover:bg-kore-brass disabled:opacity-50 transition-colors">
             <Save size={16} /> {create.isPending ? 'Speichern...' : 'Kunden anlegen'}
           </button>
-          <Link to="/tools/clienteling" className="flex items-center gap-xs px-xl py-md-sm border border-kore-border text-kore-ink text-small font-medium uppercase tracking-widest hover:border-kore-ink transition-colors">
+          <Link to="/app/tools/clienteling" className="flex items-center gap-xs px-xl py-md-sm border border-kore-border text-kore-ink text-small font-medium uppercase tracking-widest hover:border-kore-ink transition-colors">
             Abbrechen
           </Link>
         </div>

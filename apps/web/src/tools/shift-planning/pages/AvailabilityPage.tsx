@@ -93,7 +93,7 @@ export function AvailabilityPage() {
 
   return (
     <div className="p-xl max-w-5xl">
-      <Link to="/tools/shift-planning" className="flex items-center gap-xs text-kore-mid hover:text-kore-ink text-small mb-lg"><ArrowLeft size={16} /> Zurueck zum Wochenplan</Link>
+      <Link to="/app/tools/shift-planning" className="flex items-center gap-xs text-kore-mid hover:text-kore-ink text-small mb-lg"><ArrowLeft size={16} /> Zurueck zum Wochenplan</Link>
 
       <h1 className="font-display text-h1 text-kore-ink mb-xs">Verfuegbarkeiten</h1>
       <p className="text-body text-kore-mid mb-xl">Tage markieren: verfuegbar, nicht verfuegbar, Wunsch-Schichten, Urlaub oder krank.</p>

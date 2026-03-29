@@ -26,7 +26,7 @@ export function ChecklistDetailPage() {
   return (
     <div className="p-xl max-w-4xl">
       {/* Back + Header */}
-      <Link to="/tools/checklisten" className="flex items-center gap-xs text-small text-kore-mid hover:text-kore-brass transition-colors mb-lg">
+      <Link to="/app/tools/checklisten" className="flex items-center gap-xs text-small text-kore-mid hover:text-kore-brass transition-colors mb-lg">
         <ArrowLeft size={14} />
         Zurueck
       </Link>

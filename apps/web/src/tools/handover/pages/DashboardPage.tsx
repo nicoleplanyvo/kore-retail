@@ -53,7 +53,7 @@ export function DashboardPage() {
     <div className="p-xl max-w-6xl">
       {/* Header */}
       <div className="flex items-center gap-md mb-lg">
-        <Link to="/tools/handover" className="text-kore-mid hover:text-kore-ink transition-colors">
+        <Link to="/app/tools/handover" className="text-kore-mid hover:text-kore-ink transition-colors">
           <ArrowLeft size={20} />
         </Link>
         <div>

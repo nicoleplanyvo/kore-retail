@@ -111,14 +111,14 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-md">
           <Link
-            to="/tools/loss-prevention/dashboard"
+            to="/app/tools/loss-prevention/dashboard"
             className="flex items-center gap-sm border border-kore-border px-lg py-md-sm text-small font-medium uppercase tracking-widest text-kore-ink hover:bg-kore-bg transition-colors"
           >
             <BarChart3 size={16} />
             Dashboard
           </Link>
           <Link
-            to="/tools/loss-prevention/report"
+            to="/app/tools/loss-prevention/report"
             className="flex items-center gap-sm bg-kore-ink text-kore-white px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"
           >
             <Plus size={16} />
@@ -256,7 +256,7 @@ export function OverviewPage() {
             Erfassen Sie Diebstaehle, Schaeden und andere Verluste, um Muster zu erkennen und Praevention zu verbessern.
           </p>
           <Link
-            to="/tools/loss-prevention/report"
+            to="/app/tools/loss-prevention/report"
             className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"
           >
             <Plus size={16} />

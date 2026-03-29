@@ -63,7 +63,7 @@ export function CreatePage() {
     <div className="p-xl max-w-3xl">
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/challenges" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+        <Link to="/app/tools/challenges" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div>
           <h1 className="font-display text-h1 text-kore-ink">Neue Challenge</h1>
           <p className="text-body text-kore-mid mt-xs">Erstellen Sie einen neuen Wettbewerb</p>
@@ -237,7 +237,7 @@ export function CreatePage() {
           >
             <Trophy size={16} /> Challenge erstellen
           </button>
-          <Link to="/tools/challenges" className="px-xl py-md-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors">Abbrechen</Link>
+          <Link to="/app/tools/challenges" className="px-xl py-md-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors">Abbrechen</Link>
         </div>
 
         {createChallenge.isError && (

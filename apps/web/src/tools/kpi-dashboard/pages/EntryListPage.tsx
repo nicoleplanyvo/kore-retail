@@ -16,7 +16,7 @@ export function EntryListPage() {
   return (
     <div className="p-xl max-w-5xl">
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/kpi" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+        <Link to="/app/tools/kpi" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div>
           <h1 className="font-display text-h1 text-kore-ink">KPI-Eintraege</h1>
           <p className="text-body text-kore-mid mt-xs">Taegliche Kennzahlen aller Stores</p>

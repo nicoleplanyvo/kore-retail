@@ -15,7 +15,7 @@ export function DashboardPage() {
     <div className="p-xl max-w-6xl">
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/clienteling" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+        <Link to="/app/tools/clienteling" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div className="flex-1">
           <h1 className="font-display text-h1 text-kore-ink">Clienteling Dashboard</h1>
           <p className="text-body text-kore-mid mt-xs">Kennzahlen, Top-Kunden und aktuelle Aktivitaeten</p>
@@ -112,7 +112,7 @@ export function DashboardPage() {
               ))}
             </div>
           )}
-          <Link to="/tools/clienteling/appointments" className="block text-center mt-lg text-small text-kore-brass hover:text-kore-ink transition-colors">Alle Termine anzeigen</Link>
+          <Link to="/app/tools/clienteling/appointments" className="block text-center mt-lg text-small text-kore-brass hover:text-kore-ink transition-colors">Alle Termine anzeigen</Link>
         </div>
       </div>
 

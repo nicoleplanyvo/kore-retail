@@ -78,13 +78,13 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-sm">
           <Link
-            to="/tools/handover/dashboard"
+            to="/app/tools/handover/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-kore-ink text-small hover:bg-kore-bg transition-colors"
           >
             <BarChart3 size={16} /> Dashboard
           </Link>
           <Link
-            to="/tools/handover/create"
+            to="/app/tools/handover/create"
             className="flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90"
           >
             <Plus size={16} /> Neue Uebergabe
@@ -140,7 +140,7 @@ export function OverviewPage() {
           <ArrowRightLeft size={32} className="mx-auto text-kore-mid mb-md" />
           <p className="text-body text-kore-mid">Noch keine Uebergaben vorhanden.</p>
           <Link
-            to="/tools/handover/create"
+            to="/app/tools/handover/create"
             className="inline-flex items-center gap-xs mt-md px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90"
           >
             <Plus size={16} /> Erste Uebergabe erstellen

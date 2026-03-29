@@ -92,9 +92,9 @@ export function OverviewPage() {
           <p className="text-body text-kore-mid mt-xs">Wochenplan: Schichten zuweisen, veroeffentlichen und verwalten</p>
         </div>
         <div className="flex gap-sm">
-          <Link to="/tools/shift-planning/availability" className="px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors">Verfuegbarkeiten</Link>
-          <Link to="/tools/shift-planning/time-tracking" className="px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors">Zeiterfassung</Link>
-          <Link to="/tools/shift-planning/dashboard" className="px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors">Dashboard</Link>
+          <Link to="/app/tools/shift-planning/availability" className="px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors">Verfuegbarkeiten</Link>
+          <Link to="/app/tools/shift-planning/time-tracking" className="px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors">Zeiterfassung</Link>
+          <Link to="/app/tools/shift-planning/dashboard" className="px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors">Dashboard</Link>
         </div>
       </div>
 

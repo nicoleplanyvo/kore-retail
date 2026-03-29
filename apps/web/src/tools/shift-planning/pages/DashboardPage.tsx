@@ -16,7 +16,7 @@ export function DashboardPage() {
 
   return (
     <div className="p-xl max-w-5xl">
-      <Link to="/tools/shift-planning" className="flex items-center gap-xs text-kore-mid hover:text-kore-ink text-small mb-lg"><ArrowLeft size={16} /> Zurueck zum Wochenplan</Link>
+      <Link to="/app/tools/shift-planning" className="flex items-center gap-xs text-kore-mid hover:text-kore-ink text-small mb-lg"><ArrowLeft size={16} /> Zurueck zum Wochenplan</Link>
 
       <div className="flex items-center justify-between mb-xl">
         <div>

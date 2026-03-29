@@ -115,7 +115,7 @@ export function OverviewPage() {
             </select>
           )}
           <Link
-            to="/tools/pdp-pip/dashboard"
+            to="/app/tools/pdp-pip/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink"
           >
             <BarChart3 size={14} /> Dashboard

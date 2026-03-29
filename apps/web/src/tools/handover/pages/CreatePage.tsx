@@ -162,7 +162,7 @@ export function CreatePage() {
     <div className="p-xl max-w-4xl">
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/handover" className="text-kore-mid hover:text-kore-ink transition-colors">
+        <Link to="/app/tools/handover" className="text-kore-mid hover:text-kore-ink transition-colors">
           <ArrowLeft size={20} />
         </Link>
         <div>
@@ -308,7 +308,7 @@ export function CreatePage() {
       {/* Actions */}
       <div className="flex items-center justify-between border-t border-kore-border pt-lg">
         <Link
-          to="/tools/handover"
+          to="/app/tools/handover"
           className="text-small text-kore-mid hover:text-kore-ink transition-colors"
         >
           Abbrechen

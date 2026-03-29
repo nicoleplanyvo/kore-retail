@@ -71,7 +71,7 @@ export function RespondPage() {
             {survey.isAnonymous && ' Die Teilnahme war anonym.'}
           </p>
           <Link
-            to="/tools/pulse-survey"
+            to="/app/tools/pulse-survey"
             className="px-lg py-sm bg-kore-ink text-kore-white text-small hover:opacity-90"
           >
             Zurueck zur Uebersicht

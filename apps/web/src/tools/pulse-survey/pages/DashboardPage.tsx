@@ -28,7 +28,7 @@ export function DashboardPage() {
     <div className="p-xl max-w-6xl">
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/pulse-survey" className="text-kore-mid hover:text-kore-ink">
+        <Link to="/app/tools/pulse-survey" className="text-kore-mid hover:text-kore-ink">
           <ArrowLeft size={20} />
         </Link>
         <div>
@@ -132,7 +132,7 @@ export function DashboardPage() {
             Erstellen Sie Ihre erste Mitarbeiterbefragung, um hier Ergebnisse zu sehen.
           </p>
           <Link
-            to="/tools/pulse-survey"
+            to="/app/tools/pulse-survey"
             className="flex items-center gap-xs px-lg py-sm bg-kore-ink text-kore-white text-small hover:opacity-90"
           >
             <TrendingUp size={16} /> Zur Uebersicht

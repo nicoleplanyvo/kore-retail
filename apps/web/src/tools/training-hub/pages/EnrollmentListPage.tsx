@@ -19,7 +19,7 @@ export function EnrollmentListPage() {
   return (
     <div className="p-xl max-w-5xl">
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/training-hub" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+        <Link to="/app/tools/training-hub" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div>
           <h1 className="font-display text-h1 text-kore-ink">Enrollments</h1>
           <p className="text-body text-kore-mid mt-xs">Kurseinschreibungen & Fortschritt</p>

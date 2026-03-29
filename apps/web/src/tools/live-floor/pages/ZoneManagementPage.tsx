@@ -66,7 +66,7 @@ export function ZoneManagementPage() {
   return (
     <div className="p-xl max-w-5xl">
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/live-floor" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+        <Link to="/app/tools/live-floor" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div>
           <h1 className="font-display text-h1 text-kore-ink">Zonen verwalten</h1>
           <p className="text-body text-kore-mid mt-xs">Zonen erstellen, Personal zuweisen, Kundenfrequenz pflegen</p>

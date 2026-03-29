@@ -79,7 +79,7 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-md">
           <Link
-            to="/tools/inventory/dashboard"
+            to="/app/tools/inventory/dashboard"
             className="flex items-center gap-sm border border-kore-border px-lg py-md-sm text-small font-medium uppercase tracking-widest text-kore-ink hover:bg-kore-bg transition-colors"
           >
             <BarChart3 size={16} /> Dashboard

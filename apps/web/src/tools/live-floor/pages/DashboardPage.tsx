@@ -21,7 +21,7 @@ export function DashboardPage() {
   return (
     <div className="p-xl max-w-6xl">
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/live-floor" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+        <Link to="/app/tools/live-floor" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div>
           <h1 className="font-display text-h1 text-kore-ink">Dashboard</h1>
           <p className="text-body text-kore-mid mt-xs">Live-Statistik, Tagesrueckblick und Trend-Analyse</p>

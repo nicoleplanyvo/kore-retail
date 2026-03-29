@@ -17,7 +17,7 @@ export function RankingPage() {
   return (
     <div className="p-xl max-w-5xl">
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/multi-store" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+        <Link to="/app/tools/multi-store" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div className="flex-1">
           <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm"><Trophy size={24} /> Store-Ranking</h1>
           <p className="text-body text-kore-mid mt-xs">Letzte 30 Tage — sortiert nach {METRIC_LABELS[metric] ?? metric}.</p>

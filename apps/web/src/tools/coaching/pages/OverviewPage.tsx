@@ -36,13 +36,13 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-sm">
           <Link
-            to="/tools/coaching/dashboard"
+            to="/app/tools/coaching/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-ink hover:bg-kore-bg transition-colors"
           >
             <BarChart3 size={16} /> Dashboard
           </Link>
           <Link
-            to="/tools/coaching/create"
+            to="/app/tools/coaching/create"
             className="flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"
           >
             <Plus size={16} /> Neue Session
@@ -92,7 +92,7 @@ export function OverviewPage() {
             Erstellen Sie Ihre erste Session, um strukturiert mit dem GROW- oder SMART-Framework zu coachen.
           </p>
           <Link
-            to="/tools/coaching/create"
+            to="/app/tools/coaching/create"
             className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"
           >
             <Plus size={16} /> Session erstellen

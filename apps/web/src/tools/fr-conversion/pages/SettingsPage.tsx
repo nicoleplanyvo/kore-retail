@@ -57,7 +57,7 @@ export function SettingsPage() {
   return (
     <div className="p-lg max-w-3xl">
       <div className="flex items-center gap-md mb-xl">
-        <Link to="/tools/fr-conversion" className="text-kore-mid hover:text-kore-ink"><ArrowLeft size={20} /></Link>
+        <Link to="/app/tools/fr-conversion" className="text-kore-mid hover:text-kore-ink"><ArrowLeft size={20} /></Link>
         <div className="flex-1">
           <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm"><Settings size={24} /> Einstellungen</h1>
         </div>

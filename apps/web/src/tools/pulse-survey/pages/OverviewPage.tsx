@@ -66,7 +66,7 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-md">
           <Link
-            to="/tools/pulse-survey/dashboard"
+            to="/app/tools/pulse-survey/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink"
           >
             <BarChart3 size={14} /> Dashboard

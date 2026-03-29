@@ -107,7 +107,7 @@ export function StoreDetailPage() {
     <div className="p-xl max-w-6xl">
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/rm-dashboard" className="text-kore-mid hover:text-kore-ink transition-colors">
+        <Link to="/app/tools/rm-dashboard" className="text-kore-mid hover:text-kore-ink transition-colors">
           <ArrowLeft size={20} />
         </Link>
         <div className="flex-1">
@@ -226,25 +226,25 @@ export function StoreDetailPage() {
               <h2 className="font-display text-h3 text-kore-ink mb-md">Direkt-Links</h2>
               <div className="grid grid-cols-2 gap-sm">
                 <Link
-                  to="/tools/kpi"
+                  to="/app/tools/kpi"
                   className="bg-kore-white border border-kore-border p-md text-small text-kore-ink hover:bg-kore-bg transition-colors flex items-center gap-sm"
                 >
                   <TrendingUp size={14} /> KPI Dashboard
                 </Link>
                 <Link
-                  to="/tools/forecast"
+                  to="/app/tools/forecast"
                   className="bg-kore-white border border-kore-border p-md text-small text-kore-ink hover:bg-kore-bg transition-colors flex items-center gap-sm"
                 >
                   <Target size={14} /> Forecast
                 </Link>
                 <Link
-                  to="/tools/loss-prevention"
+                  to="/app/tools/loss-prevention"
                   className="bg-kore-white border border-kore-border p-md text-small text-kore-ink hover:bg-kore-bg transition-colors flex items-center gap-sm"
                 >
                   <ShieldAlert size={14} /> Loss Prevention
                 </Link>
                 <Link
-                  to="/tools/maintenance"
+                  to="/app/tools/maintenance"
                   className="bg-kore-white border border-kore-border p-md text-small text-kore-ink hover:bg-kore-bg transition-colors flex items-center gap-sm"
                 >
                   <Wrench size={14} /> Wartung
