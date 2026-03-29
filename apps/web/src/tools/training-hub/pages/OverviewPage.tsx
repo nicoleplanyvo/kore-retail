@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, BookOpen, Users, Plus, Award } from 'lucide-react';
 import { useCourses, useCreateCourse, useCompletionReport } from '../../../hooks/useTrainingHub';
 import { Breadcrumb } from '../../../components/Breadcrumb';
+import { FormField } from '../../../components/FormField';
+import { LoadingButton } from '../../../components/LoadingButton';
 
 const STATUS_COLORS: Record<string, string> = { DRAFT: 'bg-kore-mid', PUBLISHED: 'bg-emerald-500', ARCHIVED: 'bg-amber-500' };
 const STATUS_LABELS: Record<string, string> = { DRAFT: 'Entwurf', PUBLISHED: 'Veröffentlicht', ARCHIVED: 'Archiviert' };
@@ -15,9 +17,18 @@ export function OverviewPage() {
   const createCourse = useCreateCourse();
   const [showCreate, setShowCreate] = useState(false);
   const [form, setForm] = useState({ title: '', description: '', category: '', durationMinutes: 0, isRequired: false });
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+
+  const validateForm = () => {
+    const errors: Record<string, string> = {};
+    if (!form.title.trim()) errors.title = 'Pflichtfeld';
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleCreate = () => {
-    createCourse.mutate(form, { onSuccess: () => { setShowCreate(false); setForm({ title: '', description: '', category: '', durationMinutes: 0, isRequired: false }); } });
+    if (!validateForm()) return;
+    createCourse.mutate(form, { onSuccess: () => { setShowCreate(false); setForm({ title: '', description: '', category: '', durationMinutes: 0, isRequired: false }); setFormErrors({}); } });
   };
 
   return (
@@ -67,15 +78,61 @@ export function OverviewPage() {
         <div className="bg-kore-white border border-kore-border p-lg mb-xl">
           <h3 className="font-medium text-kore-ink mb-md">Neuen Kurs anlegen</h3>
           <div className="grid grid-cols-2 gap-md mb-md">
-            <input placeholder="Titel" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} className="border border-kore-border px-md py-sm text-small" />
-            <input placeholder="Kategorie" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} className="border border-kore-border px-md py-sm text-small" />
-            <input type="number" placeholder="Dauer (Min)" value={form.durationMinutes || ''} onChange={(e) => setForm({ ...form, durationMinutes: Number(e.target.value) })} className="border border-kore-border px-md py-sm text-small" />
-            <label className="flex items-center gap-xs text-small"><input type="checkbox" checked={form.isRequired} onChange={(e) => setForm({ ...form, isRequired: e.target.checked })} /> Pflichtkurs</label>
+            <FormField label="Titel" required error={formErrors.title}>
+              <input
+                placeholder="Titel"
+                value={form.title}
+                onChange={(e) => { setForm({ ...form, title: e.target.value }); if (formErrors.title) setFormErrors((f) => ({ ...f, title: '' })); }}
+                className={`w-full border px-md py-sm text-small ${formErrors.title ? 'border-red-500' : 'border-kore-border'}`}
+              />
+            </FormField>
+            <FormField label="Kategorie">
+              <input
+                placeholder="Kategorie"
+                value={form.category}
+                onChange={(e) => setForm({ ...form, category: e.target.value })}
+                className="w-full border border-kore-border px-md py-sm text-small"
+              />
+            </FormField>
+            <FormField label="Dauer (Min)" hint="Wie lange dauert der Kurs?">
+              <input
+                type="number"
+                placeholder="Dauer (Min)"
+                value={form.durationMinutes || ''}
+                onChange={(e) => setForm({ ...form, durationMinutes: Number(e.target.value) })}
+                className="w-full border border-kore-border px-md py-sm text-small"
+              />
+            </FormField>
+            <div className="flex items-end">
+              <label className="flex items-center gap-xs text-small">
+                <input type="checkbox" checked={form.isRequired} onChange={(e) => setForm({ ...form, isRequired: e.target.checked })} />
+                Pflichtkurs
+              </label>
+            </div>
           </div>
-          <textarea placeholder="Beschreibung" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="w-full border border-kore-border px-md py-sm text-small mb-md" rows={2} />
-          <div className="flex gap-sm">
-            <button onClick={handleCreate} disabled={!form.title || createCourse.isPending} className="px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90 disabled:opacity-50">Erstellen</button>
-            <button onClick={() => setShowCreate(false)} className="px-md py-sm border border-kore-border text-small">Abbrechen</button>
+          <FormField label="Beschreibung">
+            <textarea
+              placeholder="Beschreibung"
+              value={form.description}
+              onChange={(e) => setForm({ ...form, description: e.target.value })}
+              className="w-full border border-kore-border px-md py-sm text-small"
+              rows={2}
+            />
+          </FormField>
+          <div className="flex gap-sm mt-md">
+            <LoadingButton
+              onClick={handleCreate}
+              isLoading={createCourse.isPending}
+              loadingText="Erstellen..."
+            >
+              Erstellen
+            </LoadingButton>
+            <LoadingButton
+              variant="secondary"
+              onClick={() => { setShowCreate(false); setFormErrors({}); }}
+            >
+              Abbrechen
+            </LoadingButton>
           </div>
         </div>
       )}

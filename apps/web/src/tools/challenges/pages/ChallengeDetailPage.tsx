@@ -192,7 +192,7 @@ export function ChallengeDetailPage() {
       {challenge.leaderboard?.length >= 3 && (
         <div className="mb-xl">
           <h2 className="font-display text-h3 text-kore-ink mb-lg flex items-center gap-sm"><Trophy size={20} /> Podium</h2>
-          <div className="grid grid-cols-3 gap-md">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-md">
             {/* Show 2nd, 1st, 3rd for visual podium effect */}
             {[1, 0, 2].map((idx) => {
               const p = challenge.leaderboard[idx];

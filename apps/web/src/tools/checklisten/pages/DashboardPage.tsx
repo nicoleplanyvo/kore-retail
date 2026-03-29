@@ -40,7 +40,7 @@ export function DashboardPage() {
       ) : dashboard ? (
         <>
           {/* KPI Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-xl mb-2xl">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-xl mb-2xl">
             {/* Today's Rate */}
             <div className="bg-kore-white border border-kore-border p-xl">
               <span className="text-caption text-kore-mid uppercase tracking-widest">Heute erledigt</span>

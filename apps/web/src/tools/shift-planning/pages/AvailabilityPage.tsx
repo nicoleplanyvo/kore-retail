@@ -145,8 +145,8 @@ export function AvailabilityPage() {
       {isLoading ? (
         <div className="text-body text-kore-mid py-xl text-center">Lade Verfuegbarkeiten...</div>
       ) : (
-        <div className="bg-kore-white border border-kore-border">
-          <div className="grid grid-cols-7">
+        <div className="bg-kore-white border border-kore-border overflow-x-auto">
+          <div className="grid grid-cols-7 min-w-[640px]">
             {DAYS.map(d => (
               <div key={d} className="p-sm text-center text-small text-kore-mid uppercase tracking-widest border-b border-kore-border bg-kore-bg">{d}</div>
             ))}

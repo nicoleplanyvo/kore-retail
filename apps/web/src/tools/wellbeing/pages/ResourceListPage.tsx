@@ -69,7 +69,7 @@ export function ResourceListPage() {
       {/* Create form */}
       {showForm && (
         <form onSubmit={handleSubmit} className="bg-kore-white border border-kore-border p-lg mb-xl space-y-md">
-          <div className="grid grid-cols-2 gap-md">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-md">
             <div>
               <label className="block text-small text-kore-mid mb-xs">Titel</label>
               <input

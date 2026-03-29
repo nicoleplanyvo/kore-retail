@@ -224,7 +224,7 @@ export function StoreDetailPage() {
             {/* Right: Quick Links to Tools */}
             <div>
               <h2 className="font-display text-h3 text-kore-ink mb-md">Direkt-Links</h2>
-              <div className="grid grid-cols-2 gap-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-sm">
                 <Link
                   to="/app/tools/kpi"
                   className="bg-kore-white border border-kore-border p-md text-small text-kore-ink hover:bg-kore-bg transition-colors flex items-center gap-sm"

@@ -26,7 +26,7 @@ export function DashboardPage() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-xl mb-2xl">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-xl mb-2xl">
         <div className="bg-kore-white border border-kore-border p-xl">
           <span className="text-caption text-kore-mid uppercase tracking-widest">Aktive Challenges</span>
           <div className="font-display text-h1 text-kore-ink mt-sm flex items-center gap-sm">

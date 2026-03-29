@@ -69,7 +69,7 @@ export function ShiftDetailPage() {
 
         {editing ? (
           <div className="space-y-md">
-            <div className="grid grid-cols-2 gap-md">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-md">
               <div>
                 <label className="block text-small text-kore-mid mb-xs">Beginn</label>
                 <input type="time" value={form.startTime} onChange={e => setForm({ ...form, startTime: e.target.value })} className="w-full border border-kore-border px-md py-sm text-body" />
@@ -94,7 +94,7 @@ export function ShiftDetailPage() {
           </div>
         ) : (
           <div className="space-y-md">
-            <div className="grid grid-cols-3 gap-lg">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-lg">
               <div>
                 <span className="text-caption text-kore-mid uppercase tracking-widest">Beginn</span>
                 <div className="font-display text-h3 text-kore-ink mt-xs flex items-center gap-xs"><Clock size={16} /> {shift.startTime}</div>
@@ -108,7 +108,7 @@ export function ShiftDetailPage() {
                 <div className="text-body text-kore-ink mt-xs">{shift.role || '---'}</div>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-lg">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-lg">
               <div>
                 <span className="text-caption text-kore-mid uppercase tracking-widest">Store</span>
                 <div className="text-body text-kore-ink mt-xs">{shift.store?.name ?? '---'}</div>

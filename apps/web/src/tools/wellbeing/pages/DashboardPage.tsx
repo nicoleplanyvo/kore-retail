@@ -295,7 +295,7 @@ export function DashboardPage() {
           </div>
 
           {/* Additional KPIs row */}
-          <div className="grid grid-cols-2 gap-xl mb-2xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-xl mb-2xl">
             <div className="bg-kore-white border border-kore-border p-xl">
               <div className="flex items-center gap-sm mb-sm">
                 <AlertTriangle size={16} className="text-red-500" />

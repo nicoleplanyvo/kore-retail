@@ -87,7 +87,7 @@ export function DashboardPage() {
       {kpis && kpis.totalGoals > 0 && (
         <div className="bg-kore-white border border-kore-border p-lg mb-xl">
           <h2 className="font-display text-h3 text-kore-ink mb-md">Ziel-Statistiken</h2>
-          <div className="grid grid-cols-3 gap-md mb-md">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-md mb-md">
             <div className="text-center">
               <div className="text-3xl font-bold text-kore-ink">{kpis.totalGoals}</div>
               <div className="text-xs text-kore-mid uppercase">Ziele gesamt</div>

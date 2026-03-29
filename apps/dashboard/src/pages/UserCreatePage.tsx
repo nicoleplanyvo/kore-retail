@@ -11,6 +11,8 @@ import { useTenants } from '../hooks/useTenants';
 import { useStores } from '../hooks/useStores';
 import { useRegions } from '../hooks/useRegions';
 import { canCreateRole, type UserRole } from '@kore/types';
+import { FormField } from '../components/FormField';
+import { LoadingButton } from '../components/LoadingButton';
 
 const ROLE_OPTIONS: { value: UserRole; label: string }[] = [
   { value: 'tenant_admin', label: 'Kunden-Admin' },
@@ -19,14 +21,6 @@ const ROLE_OPTIONS: { value: UserRole; label: string }[] = [
   { value: 'store_manager', label: 'Store Manager' },
   { value: 'learner', label: 'Mitarbeiter' },
 ];
-
-const ROLE_DESCRIPTIONS: Record<string, string> = {
-  tenant_admin: 'Kann Benutzer, Stores und Tools verwalten. Hat Zugriff auf Reporting und DSGVO.',
-  regional_manager: 'Ueberwacht die Performance einer Region. Kann Multi-Store-Vergleiche und RM-Dashboard nutzen.',
-  multisite_manager: 'Hat Einblick in mehrere zugewiesene Stores und deren KPIs.',
-  store_manager: 'Verwaltet ein Team, Schichtplaene und Store-KPIs. Kann Mitarbeiter anlegen.',
-  learner: 'Mitarbeiter mit Zugriff auf zugewiesene Tools und Trainings.',
-};
 
 export function UserCreatePage() {
   const navigate = useNavigate();
@@ -118,41 +112,30 @@ export function UserCreatePage() {
             error={errors.password?.message}
           />
 
-          <div>
-            <label className="block font-body text-small text-kore-mid mb-xs">Rolle</label>
+          <FormField label="Rolle" required error={errors.role?.message}>
             <select
               {...register('role')}
-              className="w-full px-md py-sm border border-kore-border bg-kore-white font-body text-small text-kore-ink focus:outline-none focus:border-kore-brass"
+              className={`w-full px-md py-sm border bg-kore-white font-body text-small text-kore-ink focus:outline-none focus:border-kore-brass ${errors.role ? 'border-red-500' : 'border-kore-border'}`}
             >
               {availableRoles.map((r) => (
                 <option key={r.value} value={r.value}>{r.label}</option>
               ))}
             </select>
-            {errors.role && <p className="font-body text-caption text-kore-error mt-xs">{errors.role.message}</p>}
-            {selectedRole && ROLE_DESCRIPTIONS[selectedRole] && (
-              <div className="mt-sm px-md py-sm bg-kore-surface/50 border border-kore-border/50 rounded-sm">
-                <p className="font-body text-caption text-kore-mid leading-relaxed">
-                  {ROLE_DESCRIPTIONS[selectedRole]}
-                </p>
-              </div>
-            )}
-          </div>
+          </FormField>
 
           {/* Tenant-Auswahl nur für kore_admin */}
           {isKoreAdmin && (
-            <div>
-              <label className="block font-body text-small text-kore-mid mb-xs">Mandant</label>
+            <FormField label="Mandant" required error={errors.tenantId?.message}>
               <select
                 {...register('tenantId')}
-                className="w-full px-md py-sm border border-kore-border bg-kore-white font-body text-small text-kore-ink focus:outline-none focus:border-kore-brass"
+                className={`w-full px-md py-sm border bg-kore-white font-body text-small text-kore-ink focus:outline-none focus:border-kore-brass ${errors.tenantId ? 'border-red-500' : 'border-kore-border'}`}
               >
                 <option value="">Mandant auswählen...</option>
                 {tenantsData?.data.map((t) => (
                   <option key={t.id} value={t.id}>{t.name}</option>
                 ))}
               </select>
-              {errors.tenantId && <p className="font-body text-caption text-kore-error mt-xs">{errors.tenantId.message}</p>}
-            </div>
+            </FormField>
           )}
 
           {/* Region-Zuweisungen (nur für regional_manager) */}
@@ -204,9 +187,14 @@ export function UserCreatePage() {
             <p className="font-body text-small text-kore-error">{serverError}</p>
           )}
 
-          <Button type="submit" disabled={isSubmitting} style={{ marginTop: '8px' }}>
-            {isSubmitting ? 'Erstelle...' : 'Benutzer anlegen'}
-          </Button>
+          <LoadingButton
+            type="submit"
+            isLoading={isSubmitting}
+            loadingText="Erstelle..."
+            className="mt-2"
+          >
+            Benutzer anlegen
+          </LoadingButton>
         </form>
       </div>
     </div>

@@ -242,7 +242,7 @@ export function EditorPage() {
       </div>
 
       {/* Stats Bar */}
-      <div className="grid grid-cols-3 gap-md mb-lg">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-md mb-lg">
         <div className="bg-kore-white border border-kore-border p-md text-center">
           <div className="text-xl font-bold text-purple-600 flex items-center justify-center gap-xs">
             <Eye size={16} /> {newsletter._count?.views ?? 0}

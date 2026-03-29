@@ -59,7 +59,7 @@ export function DashboardPage() {
       ) : (
         <>
           {/* Live-KPIs */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-lg mb-2xl">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-lg mb-2xl">
             <div className="bg-kore-white border border-kore-border p-xl">
               <div className="flex items-center gap-sm text-kore-mid mb-sm">
                 <Users size={16} />

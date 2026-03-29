@@ -105,7 +105,7 @@ export function MessageDetailPage() {
       </div>
 
       {/* Read Stats */}
-      <div className="grid grid-cols-3 gap-md mb-xl">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-md mb-xl">
         <div className="bg-kore-white border border-kore-border p-md text-center">
           <div className="text-2xl font-bold text-emerald-600">{readCount}</div>
           <div className="text-xs text-kore-mid uppercase mt-1">Gelesen</div>

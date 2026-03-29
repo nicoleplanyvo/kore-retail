@@ -71,7 +71,7 @@ export function SettingsPage() {
       {/* Store Settings */}
       <div className="bg-kore-white border border-kore-border p-lg mb-xl">
         <h2 className="font-display text-h3 text-kore-ink mb-md">Store-Einstellungen</h2>
-        <div className="grid grid-cols-3 gap-md mb-md">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-md mb-md">
           <div>
             <label className="block text-small text-kore-mid mb-xs">Max. Teile pro Kabine</label>
             <input type="number" value={maxItems} onChange={e => setMaxItems(parseInt(e.target.value) || 8)} min={1} max={30} className="w-full border border-kore-border px-md py-sm text-body" />

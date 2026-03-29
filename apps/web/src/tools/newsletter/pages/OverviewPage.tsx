@@ -9,6 +9,8 @@ import {
   useArchiveNewsletter, useDuplicateNewsletter,
 } from '../../../hooks/useNewsletter';
 import { Breadcrumb } from '../../../components/Breadcrumb';
+import { FormField } from '../../../components/FormField';
+import { LoadingButton } from '../../../components/LoadingButton';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -43,13 +45,23 @@ export function OverviewPage() {
 
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ title: '', content: '' });
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+
+  const validateForm = () => {
+    const errors: Record<string, string> = {};
+    if (!form.title.trim()) errors.title = 'Pflichtfeld';
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validateForm()) return;
     create.mutate(form, {
       onSuccess: (data: any) => {
         setShowForm(false);
         setForm({ title: '', content: '' });
+        setFormErrors({});
         if (data?.id) navigate(`/tools/newsletter/${data.id}`);
       },
     });
@@ -93,18 +105,15 @@ export function OverviewPage() {
       {/* Create Form */}
       {showForm && (
         <form onSubmit={handleSubmit} className="bg-kore-white border border-kore-border p-lg mb-lg space-y-md">
-          <div>
-            <label className="block text-small text-kore-mid mb-xs">Titel</label>
+          <FormField label="Titel" required error={formErrors.title}>
             <input
               value={form.title}
-              onChange={(e) => setForm({ ...form, title: e.target.value })}
+              onChange={(e) => { setForm({ ...form, title: e.target.value }); if (formErrors.title) setFormErrors((f) => ({ ...f, title: '' })); }}
               placeholder="Newsletter-Titel eingeben..."
-              className="w-full border border-kore-border px-md py-sm text-body"
-              required
+              className={`w-full border px-md py-sm text-body ${formErrors.title ? 'border-red-500' : 'border-kore-border'}`}
             />
-          </div>
-          <div>
-            <label className="block text-small text-kore-mid mb-xs">Einleitung (optional)</label>
+          </FormField>
+          <FormField label="Einleitung" hint="Optional - kurze Einleitung oder Zusammenfassung">
             <textarea
               value={form.content}
               onChange={(e) => setForm({ ...form, content: e.target.value })}
@@ -112,22 +121,22 @@ export function OverviewPage() {
               placeholder="Kurze Einleitung oder Zusammenfassung..."
               className="w-full border border-kore-border px-md py-sm text-body"
             />
-          </div>
+          </FormField>
           <div className="flex items-center gap-sm">
-            <button
+            <LoadingButton
               type="submit"
-              disabled={create.isPending}
-              className="px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90 disabled:opacity-50"
+              isLoading={create.isPending}
+              loadingText="Wird angelegt..."
             >
-              {create.isPending ? 'Wird angelegt...' : 'Newsletter anlegen'}
-            </button>
-            <button
+              Newsletter anlegen
+            </LoadingButton>
+            <LoadingButton
               type="button"
-              onClick={() => setShowForm(false)}
-              className="px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink"
+              variant="secondary"
+              onClick={() => { setShowForm(false); setFormErrors({}); }}
             >
               Abbrechen
-            </button>
+            </LoadingButton>
           </div>
         </form>
       )}

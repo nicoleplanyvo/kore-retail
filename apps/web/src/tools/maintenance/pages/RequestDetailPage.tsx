@@ -255,7 +255,7 @@ export function RequestDetailPage() {
       </div>
 
       {/* Cost section */}
-      <div className="grid grid-cols-2 gap-md mb-xl">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-md mb-xl">
         <div className="bg-kore-white border border-kore-border p-md">
           <div className="flex items-center gap-xs text-small text-kore-mid mb-xs">
             <Euro size={12} /> Geschaetzte Kosten

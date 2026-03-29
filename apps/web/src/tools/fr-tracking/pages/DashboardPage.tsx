@@ -68,7 +68,7 @@ export function DashboardPage() {
         {/* Today */}
         <div className="bg-kore-white border border-kore-border p-xl">
           <h2 className="font-display text-h3 text-kore-ink mb-lg flex items-center gap-sm"><BarChart3 size={18} /> Heute</h2>
-          <div className="grid grid-cols-3 gap-lg">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-lg">
             <div>
               <span className="text-caption text-kore-mid">Footfall</span>
               <div className="font-display text-h2 text-kore-ink">{dashboard.today?.footfall ?? 0}</div>

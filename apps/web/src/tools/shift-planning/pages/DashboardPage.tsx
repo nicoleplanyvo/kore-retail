@@ -36,7 +36,7 @@ export function DashboardPage() {
       ) : (
         <>
           {/* KPI Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-lg mb-xl">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-lg mb-xl">
             <div className="bg-kore-white border border-kore-border p-xl">
               <Calendar size={20} className="text-[#9E8460] mb-sm" />
               <span className="text-caption text-kore-mid uppercase tracking-widest">Schichten diese Woche</span>
@@ -99,7 +99,7 @@ export function DashboardPage() {
           {dashboard.shiftsByDay && Object.keys(dashboard.shiftsByDay).length > 0 && (
             <div className="bg-kore-white border border-kore-border p-xl">
               <h2 className="font-display text-h3 text-kore-ink mb-lg flex items-center gap-sm"><Calendar size={18} /> Besetzung nach Tag</h2>
-              <div className="grid grid-cols-7 gap-sm">
+              <div className="grid grid-cols-7 gap-sm min-w-[640px] overflow-x-auto">
                 {Object.entries(dashboard.shiftsByDay as Record<string, number>).sort().map(([dateStr, count], i) => {
                   const date = new Date(dateStr);
                   const isToday = dateStr === new Date().toISOString().split('T')[0];

@@ -1,3 +1,4 @@
+import { lazy, Suspense, type ReactNode } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Layout } from './layouts/Layout';
 import { AuthLayout } from './layouts/AuthLayout';
@@ -17,42 +18,47 @@ import { LoginPage } from './pages/LoginPage';
 import { ToolsHomePage } from './pages/ToolsHomePage';
 import { useAnalytics } from './hooks/useAnalytics';
 import { ScrollToTop } from './components/ScrollToTop';
+import { ListPageSkeleton } from './components/Skeleton';
 
-// Tool-Routes importieren
-import { StoreExcellenceAuditRoutes } from './tools/store-excellence-audit/index';
-import ChecklistenRoutes from './tools/checklisten/index';
-import SopBibliothekRoutes from './tools/sop-bibliothek/index';
-import VmComplianceRoutes from './tools/vm-compliance/index';
-import StoreStandardsRoutes from './tools/store-standards/index';
-import KpiDashboardRoutes from './tools/kpi-dashboard/index';
-import BudgetTrackerRoutes from './tools/budget-tracker/index';
-import ForecastRoutes from './tools/forecast/index';
-import LossPreventionRoutes from './tools/loss-prevention/index';
-import InventoryRoutes from './tools/inventory/index';
-import LiveFloorRoutes from './tools/live-floor/index';
-import FrTrackingRoutes from './tools/fr-tracking/index';
-import VmGuidelinesRoutes from './tools/vm-guidelines/index';
-import MaintenanceRoutes from './tools/maintenance/index';
-import TrainingHubRoutes from './tools/training-hub/index';
-import TrainingHoursRoutes from './tools/training-hours/index';
-import ChallengesRoutes from './tools/challenges/index';
-import OnboardingRoutes from './tools/onboarding/index';
-import CoachingRoutes from './tools/coaching/index';
-import PdpPipRoutes from './tools/pdp-pip/index';
-import AppraisalsRoutes from './tools/appraisals/index';
-import ShiftPlanningRoutes from './tools/shift-planning/index';
-import PulseSurveyRoutes from './tools/pulse-survey/index';
-import WellbeingRoutes from './tools/wellbeing/index';
-import BriefingsRoutes from './tools/briefings/index';
-import HandoverRoutes from './tools/handover/index';
-import TeamPushRoutes from './tools/team-push/index';
-import NewsletterRoutes from './tools/newsletter/index';
-import FrConversionRoutes from './tools/fr-conversion/index';
-import ClientelingRoutes from './tools/clienteling/index';
-import StockCalloutsRoutes from './tools/stock-callouts/index';
-import TrackTraceRoutes from './tools/track-trace/index';
-import MultiStoreRoutes from './tools/multi-store/index';
-import RmDashboardRoutes from './tools/rm-dashboard/index';
+// Lazy-loaded Tool-Routes (Code Splitting)
+function ToolSuspense({ children }: { children: ReactNode }) {
+  return <Suspense fallback={<div className="p-6"><ListPageSkeleton /></div>}>{children}</Suspense>;
+}
+
+const StoreExcellenceAuditRoutes = lazy(() => import('./tools/store-excellence-audit/index'));
+const ChecklistenRoutes = lazy(() => import('./tools/checklisten/index'));
+const SopBibliothekRoutes = lazy(() => import('./tools/sop-bibliothek/index'));
+const VmComplianceRoutes = lazy(() => import('./tools/vm-compliance/index'));
+const StoreStandardsRoutes = lazy(() => import('./tools/store-standards/index'));
+const KpiDashboardRoutes = lazy(() => import('./tools/kpi-dashboard/index'));
+const BudgetTrackerRoutes = lazy(() => import('./tools/budget-tracker/index'));
+const ForecastRoutes = lazy(() => import('./tools/forecast/index'));
+const LossPreventionRoutes = lazy(() => import('./tools/loss-prevention/index'));
+const InventoryRoutes = lazy(() => import('./tools/inventory/index'));
+const LiveFloorRoutes = lazy(() => import('./tools/live-floor/index'));
+const FrTrackingRoutes = lazy(() => import('./tools/fr-tracking/index'));
+const VmGuidelinesRoutes = lazy(() => import('./tools/vm-guidelines/index'));
+const MaintenanceRoutes = lazy(() => import('./tools/maintenance/index'));
+const TrainingHubRoutes = lazy(() => import('./tools/training-hub/index'));
+const TrainingHoursRoutes = lazy(() => import('./tools/training-hours/index'));
+const ChallengesRoutes = lazy(() => import('./tools/challenges/index'));
+const OnboardingRoutes = lazy(() => import('./tools/onboarding/index'));
+const CoachingRoutes = lazy(() => import('./tools/coaching/index'));
+const PdpPipRoutes = lazy(() => import('./tools/pdp-pip/index'));
+const AppraisalsRoutes = lazy(() => import('./tools/appraisals/index'));
+const ShiftPlanningRoutes = lazy(() => import('./tools/shift-planning/index'));
+const PulseSurveyRoutes = lazy(() => import('./tools/pulse-survey/index'));
+const WellbeingRoutes = lazy(() => import('./tools/wellbeing/index'));
+const BriefingsRoutes = lazy(() => import('./tools/briefings/index'));
+const HandoverRoutes = lazy(() => import('./tools/handover/index'));
+const TeamPushRoutes = lazy(() => import('./tools/team-push/index'));
+const NewsletterRoutes = lazy(() => import('./tools/newsletter/index'));
+const FrConversionRoutes = lazy(() => import('./tools/fr-conversion/index'));
+const ClientelingRoutes = lazy(() => import('./tools/clienteling/index'));
+const StockCalloutsRoutes = lazy(() => import('./tools/stock-callouts/index'));
+const TrackTraceRoutes = lazy(() => import('./tools/track-trace/index'));
+const MultiStoreRoutes = lazy(() => import('./tools/multi-store/index'));
+const RmDashboardRoutes = lazy(() => import('./tools/rm-dashboard/index'));
 
 export function App() {
   useAnalytics();
@@ -87,54 +93,54 @@ export function App() {
             <Route path="/app" element={<ToolsHomePage />} />
 
             {/* Standards & Compliance */}
-            <Route path="/app/tools/sea/*" element={<StoreExcellenceAuditRoutes />} />
-            <Route path="/app/tools/checklisten/*" element={<ChecklistenRoutes />} />
-            <Route path="/app/tools/sop/*" element={<SopBibliothekRoutes />} />
-            <Route path="/app/tools/vm-compliance/*" element={<VmComplianceRoutes />} />
-            <Route path="/app/tools/store-standards/*" element={<StoreStandardsRoutes />} />
+            <Route path="/app/tools/sea/*" element={<ToolSuspense><StoreExcellenceAuditRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/checklisten/*" element={<ToolSuspense><ChecklistenRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/sop/*" element={<ToolSuspense><SopBibliothekRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/vm-compliance/*" element={<ToolSuspense><VmComplianceRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/store-standards/*" element={<ToolSuspense><StoreStandardsRoutes /></ToolSuspense>} />
 
             {/* Performance & Sichtbarkeit */}
-            <Route path="/app/tools/kpi/*" element={<KpiDashboardRoutes />} />
-            <Route path="/app/tools/budget/*" element={<BudgetTrackerRoutes />} />
-            <Route path="/app/tools/forecast/*" element={<ForecastRoutes />} />
-            <Route path="/app/tools/loss-prevention/*" element={<LossPreventionRoutes />} />
-            <Route path="/app/tools/inventory/*" element={<InventoryRoutes />} />
+            <Route path="/app/tools/kpi/*" element={<ToolSuspense><KpiDashboardRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/budget/*" element={<ToolSuspense><BudgetTrackerRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/forecast/*" element={<ToolSuspense><ForecastRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/loss-prevention/*" element={<ToolSuspense><LossPreventionRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/inventory/*" element={<ToolSuspense><InventoryRoutes /></ToolSuspense>} />
 
             {/* Floor in Echtzeit */}
-            <Route path="/app/tools/live-floor/*" element={<LiveFloorRoutes />} />
-            <Route path="/app/tools/fr-tracking/*" element={<FrTrackingRoutes />} />
-            <Route path="/app/tools/vm-guidelines/*" element={<VmGuidelinesRoutes />} />
-            <Route path="/app/tools/maintenance/*" element={<MaintenanceRoutes />} />
+            <Route path="/app/tools/live-floor/*" element={<ToolSuspense><LiveFloorRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/fr-tracking/*" element={<ToolSuspense><FrTrackingRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/vm-guidelines/*" element={<ToolSuspense><VmGuidelinesRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/maintenance/*" element={<ToolSuspense><MaintenanceRoutes /></ToolSuspense>} />
 
             {/* Training & Entwicklung */}
-            <Route path="/app/tools/training-hub/*" element={<TrainingHubRoutes />} />
-            <Route path="/app/tools/training-hours/*" element={<TrainingHoursRoutes />} />
-            <Route path="/app/tools/challenges/*" element={<ChallengesRoutes />} />
-            <Route path="/app/tools/onboarding/*" element={<OnboardingRoutes />} />
+            <Route path="/app/tools/training-hub/*" element={<ToolSuspense><TrainingHubRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/training-hours/*" element={<ToolSuspense><TrainingHoursRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/challenges/*" element={<ToolSuspense><ChallengesRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/onboarding/*" element={<ToolSuspense><OnboardingRoutes /></ToolSuspense>} />
 
             {/* Coaching & People */}
-            <Route path="/app/tools/coaching/*" element={<CoachingRoutes />} />
-            <Route path="/app/tools/pdp-pip/*" element={<PdpPipRoutes />} />
-            <Route path="/app/tools/appraisals/*" element={<AppraisalsRoutes />} />
-            <Route path="/app/tools/shift-planning/*" element={<ShiftPlanningRoutes />} />
-            <Route path="/app/tools/pulse-survey/*" element={<PulseSurveyRoutes />} />
-            <Route path="/app/tools/wellbeing/*" element={<WellbeingRoutes />} />
+            <Route path="/app/tools/coaching/*" element={<ToolSuspense><CoachingRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/pdp-pip/*" element={<ToolSuspense><PdpPipRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/appraisals/*" element={<ToolSuspense><AppraisalsRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/shift-planning/*" element={<ToolSuspense><ShiftPlanningRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/pulse-survey/*" element={<ToolSuspense><PulseSurveyRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/wellbeing/*" element={<ToolSuspense><WellbeingRoutes /></ToolSuspense>} />
 
             {/* Kommunikation & Signal */}
-            <Route path="/app/tools/briefings/*" element={<BriefingsRoutes />} />
-            <Route path="/app/tools/handover/*" element={<HandoverRoutes />} />
-            <Route path="/app/tools/team-push/*" element={<TeamPushRoutes />} />
-            <Route path="/app/tools/newsletter/*" element={<NewsletterRoutes />} />
+            <Route path="/app/tools/briefings/*" element={<ToolSuspense><BriefingsRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/handover/*" element={<ToolSuspense><HandoverRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/team-push/*" element={<ToolSuspense><TeamPushRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/newsletter/*" element={<ToolSuspense><NewsletterRoutes /></ToolSuspense>} />
 
             {/* Customer, Clienteling & Stock */}
-            <Route path="/app/tools/fr-conversion/*" element={<FrConversionRoutes />} />
-            <Route path="/app/tools/clienteling/*" element={<ClientelingRoutes />} />
-            <Route path="/app/tools/stock-callouts/*" element={<StockCalloutsRoutes />} />
-            <Route path="/app/tools/track-trace/*" element={<TrackTraceRoutes />} />
+            <Route path="/app/tools/fr-conversion/*" element={<ToolSuspense><FrConversionRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/clienteling/*" element={<ToolSuspense><ClientelingRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/stock-callouts/*" element={<ToolSuspense><StockCalloutsRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/track-trace/*" element={<ToolSuspense><TrackTraceRoutes /></ToolSuspense>} />
 
             {/* Regional Insights */}
-            <Route path="/app/tools/multi-store/*" element={<MultiStoreRoutes />} />
-            <Route path="/app/tools/rm-dashboard/*" element={<RmDashboardRoutes />} />
+            <Route path="/app/tools/multi-store/*" element={<ToolSuspense><MultiStoreRoutes /></ToolSuspense>} />
+            <Route path="/app/tools/rm-dashboard/*" element={<ToolSuspense><RmDashboardRoutes /></ToolSuspense>} />
           </Route>
         </Route>
       </Routes>

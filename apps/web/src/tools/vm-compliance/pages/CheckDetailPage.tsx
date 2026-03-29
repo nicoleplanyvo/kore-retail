@@ -66,7 +66,7 @@ export function CheckDetailPage() {
       {/* Details */}
       <div className="bg-kore-white border border-kore-border p-xl mb-xl">
         <h2 className="font-display text-h3 text-kore-ink mb-lg">Details</h2>
-        <div className="grid grid-cols-2 gap-lg text-small">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-lg text-small">
           <div><span className="text-kore-mid">Eingereicht von:</span> <span className="text-kore-ink font-medium ml-sm">{check.submitter?.name || 'Unbekannt'}</span></div>
           <div><span className="text-kore-mid">Datum:</span> <span className="text-kore-ink font-medium ml-sm">{new Date(check.submittedAt).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</span></div>
           <div><span className="text-kore-mid">Kategorie:</span> <span className="text-kore-ink font-medium ml-sm">{check.guideline?.category || '-'}</span></div>

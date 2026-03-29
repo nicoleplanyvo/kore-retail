@@ -37,7 +37,7 @@ export function SummaryPage() {
         <div className="text-body text-kore-mid">Keine Daten verfügbar.</div>
       ) : (
         <>
-          <div className="grid grid-cols-2 gap-lg mb-xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-lg mb-xl">
             <div className="bg-kore-white border border-kore-border p-lg">
               <div className="text-small text-kore-mid mb-xs">Gesamt Stunden</div>
               <div className="text-h2 font-display text-kore-ink flex items-center gap-sm"><Clock size={20} /> {totalHours}h</div>

@@ -309,7 +309,7 @@ export function SurveyDetailPage() {
       {/* Survey Info */}
       <div className="bg-kore-white border border-kore-border p-lg">
         <h3 className="font-display text-h3 text-kore-ink mb-md">Umfrage-Details</h3>
-        <div className="grid grid-cols-2 gap-md text-small">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-md text-small">
           <div>
             <span className="text-kore-mid">Status</span>
             <div className="font-medium text-kore-ink mt-xs">{STATUS_LABELS[survey.status] ?? survey.status}</div>

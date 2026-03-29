@@ -201,7 +201,7 @@ export function AssociatesPage() {
       {/* Budget vs. Actual */}
       <h2 className="font-display text-h3 text-kore-ink mb-md">Budget vs. Soll</h2>
       <div className="bg-kore-white border border-kore-border p-lg">
-        <div className="grid grid-cols-3 gap-lg text-center">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-lg text-center">
           <div>
             <div className="text-small text-kore-mid mb-xs">Budget h/Woche</div>
             <p className="font-display text-h2 text-kore-ink">{weeklyHours.toFixed(1)}</p>

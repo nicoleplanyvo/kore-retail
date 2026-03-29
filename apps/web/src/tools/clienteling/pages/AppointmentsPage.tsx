@@ -106,7 +106,7 @@ export function AppointmentsPage() {
                 {(users ?? []).map((u: any) => <option key={u.id} value={u.id}>{u.name}</option>)}
               </select>
             </div>
-            <div className="grid grid-cols-2 gap-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-sm">
               <div>
                 <label className="block text-small text-kore-mid mb-xs">Beginn *</label>
                 <input type="datetime-local" value={form.startsAt} onChange={e => setForm({ ...form, startsAt: e.target.value })} className="w-full border border-kore-border px-md py-sm text-body" required />
