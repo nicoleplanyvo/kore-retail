@@ -44,3 +44,45 @@ export function useKpiTrends(storeId?: string, dateFrom?: string, dateTo?: strin
     },
   });
 }
+
+/* ── Year-over-Year Comparison ── */
+
+export interface KpiYoYChange {
+  value: number;
+  improved: boolean;
+}
+
+export interface KpiYoYMetrics {
+  revenue: number;
+  transactions: number;
+  conversionRate: number;
+  avgBasket: number;
+  unitsPerTransaction: number;
+  entryCount: number;
+}
+
+export interface KpiYoYSummary {
+  year: number;
+  prevYear: number;
+  currentYear: KpiYoYMetrics;
+  previousYear: KpiYoYMetrics;
+  changes: {
+    revenue: KpiYoYChange;
+    transactions: KpiYoYChange;
+    conversionRate: KpiYoYChange;
+    avgBasket: KpiYoYChange;
+    unitsPerTransaction: KpiYoYChange;
+  };
+}
+
+export function useKpiSummaryYoY(storeId: string, year?: number) {
+  return useQuery<KpiYoYSummary>({
+    queryKey: ['kpi', 'summary-yoy', storeId, year],
+    queryFn: () => {
+      const params = new URLSearchParams({ storeId });
+      if (year) params.set('year', String(year));
+      return api<KpiYoYSummary>(`/api/tools/kpi/summary/yoy?${params}`);
+    },
+    enabled: !!storeId,
+  });
+}
