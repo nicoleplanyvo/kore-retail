@@ -1,0 +1,36 @@
+name: Deploy to Hetzner
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script_stop: true
+          script: |
+            cd /var/www/kore/retail
+
+            echo ">>> Pulling latest changes..."
+            git pull origin main
+
+            echo ">>> Installing dependencies..."
+            pnpm install --frozen-lockfile || pnpm install
+
+            echo ">>> Generating Prisma client..."
+            cd apps/api
+            pnpm exec prisma generate
+            pnpm exec prisma db push --skip-generate
+            cd ../..
+
+            echo ">>> Building all packages..."
+            pnpm build
+
+            echo ">>> Deploy complete!"
