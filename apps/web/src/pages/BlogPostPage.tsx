@@ -96,7 +96,7 @@ export function BlogPostPage() {
           )}
 
           <div
-            className="blog-content prose prose-lg max-w-none text-kore-mid"
+            className="blog-content max-w-none text-kore-mid"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
         </div>

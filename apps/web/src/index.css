@@ -147,3 +147,110 @@
   background-image: radial-gradient(#D8D4CC 0.5px, transparent 0.5px);
   background-size: 24px 24px;
 }
+
+/* === Blog Content — Typografie für HTML-Inhalte === */
+.blog-content {
+  font-family: 'Jost', sans-serif;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #524E46;
+}
+
+.blog-content h1 {
+  font-family: 'Cormorant', serif;
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  line-height: 1.1;
+  font-weight: 300;
+  color: #1C1A17;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.blog-content h2 {
+  font-family: 'Cormorant', serif;
+  font-size: 1.8rem;
+  line-height: 1.2;
+  font-weight: 400;
+  color: #1C1A17;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.blog-content h3 {
+  font-family: 'Cormorant', serif;
+  font-size: 1.45rem;
+  line-height: 1.3;
+  font-weight: 600;
+  color: #1C1A17;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.blog-content p {
+  margin-bottom: 1.5rem;
+}
+
+.blog-content strong {
+  font-weight: 500;
+  color: #1C1A17;
+}
+
+.blog-content a {
+  color: #9E8460;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s;
+}
+
+.blog-content a:hover {
+  color: #7A6347;
+}
+
+.blog-content ul, .blog-content ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.blog-content ul {
+  list-style-type: disc;
+}
+
+.blog-content ol {
+  list-style-type: decimal;
+}
+
+.blog-content li {
+  margin-bottom: 0.5rem;
+  line-height: 1.7;
+}
+
+.blog-content blockquote {
+  border-left: 4px solid #9E8460;
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-family: 'Cormorant', serif;
+  font-size: 1.45rem;
+  line-height: 1.3;
+  color: #1C1A17;
+}
+
+.blog-content img {
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.blog-content hr {
+  border: none;
+  height: 1px;
+  background-color: #D8D4CC;
+  margin: 2.5rem 0;
+}
+
+/* Styled content blocks inside blog-content */
+.blog-content .bg-kore-surface {
+  background-color: #EDEAE4;
+}
+
+.blog-content > *:first-child {
+  margin-top: 0;
+}
