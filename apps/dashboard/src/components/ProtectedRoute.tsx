@@ -1,6 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuthStore } from '../stores/authStore';
 import { hasMinRole, type UserRole } from '@kore/types';
+import { AccessDeniedPage } from '../pages/AccessDeniedPage';
 
 interface ProtectedRouteProps {
   /** Erlaubte Rollen (exakt) */
@@ -26,11 +27,11 @@ export function ProtectedRoute({ allowedRoles, minRole }: ProtectedRouteProps) {
 
   // Rollenprüfung
   if (allowedRoles && !allowedRoles.includes(user.role)) {
-    return <Navigate to="/" replace />;
+    return <AccessDeniedPage />;
   }
 
   if (minRole && !hasMinRole(user.role, minRole)) {
-    return <Navigate to="/" replace />;
+    return <AccessDeniedPage />;
   }
 
   return <Outlet />;

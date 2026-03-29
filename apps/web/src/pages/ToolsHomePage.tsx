@@ -11,6 +11,7 @@ import { useAuthStore } from '../stores/authStore';
 import { useNavigate } from 'react-router-dom';
 import { TOOL_ROUTES } from '../lib/toolRoutes';
 import { CATEGORY_ORDER } from '../lib/moduleCategories';
+import { WelcomeBanner } from '../components/WelcomeBanner';
 
 // Icon-Mapping
 const iconMap: Record<string, LucideIcon> = {
@@ -70,6 +71,9 @@ export function ToolsHomePage() {
           {roleLabels[user?.role || ''] || user?.role}
         </p>
       </div>
+
+      {/* Welcome Banner */}
+      <WelcomeBanner />
 
       {/* Tool-Cards */}
       <h2 className="font-display text-h3 text-kore-ink mb-lg">Meine Tools</h2>
