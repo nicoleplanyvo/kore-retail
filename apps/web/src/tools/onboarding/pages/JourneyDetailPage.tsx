@@ -342,18 +342,18 @@ export function JourneyDetailPage() {
                       )}
 
                       {/* Note input for completion */}
-                      {noteInput?.stepId === p.step?.id && (
+                      {noteInput && noteInput.stepId === p.step?.id && (
                         <div className="flex gap-sm mt-sm">
                           <input
                             value={noteInput.value}
                             onChange={(e) =>
-                              setNoteInput({ ...noteInput, value: e.target.value })
+                              setNoteInput({ stepId: noteInput.stepId, value: e.target.value })
                             }
                             placeholder="Notiz (optional)"
                             className="flex-1 border border-kore-border px-sm py-xs text-small"
                           />
                           <button
-                            onClick={() => handleCompleteStep(p.step.id, noteInput.value)}
+                            onClick={() => handleCompleteStep(p.step.id, noteInput!.value)}
                             disabled={updateStep.isPending}
                             className="px-sm py-xs bg-emerald-600 text-kore-white text-small disabled:opacity-50"
                           >

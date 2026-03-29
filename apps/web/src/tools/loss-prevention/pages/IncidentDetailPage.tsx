@@ -267,7 +267,7 @@ export function IncidentDetailPage() {
         <div className="bg-amber-50 border border-amber-200 p-lg mb-xl">
           <span className="text-caption text-amber-700 uppercase tracking-widest font-medium">Eskalationshistorie</span>
           <div className="mt-sm space-y-xs">
-            {escalationMatch.map((esc, idx) => {
+            {escalationMatch.map((esc: string, idx: number) => {
               const dateMatch = esc.match(/\[ESKALIERT am ([^\]]+)\]/);
               return (
                 <div key={idx} className="flex items-center gap-sm text-small text-amber-700">
