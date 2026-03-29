@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, BookOpen, Plus, Users, Clock } from 'lucide-react';
 import { useCourse, useUpdateCourse, useCreateModule, useEnrollUser } from '../../../hooks/useTrainingHub';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const STATUS_LABELS: Record<string, string> = { DRAFT: 'Entwurf', PUBLISHED: 'Veröffentlicht', ARCHIVED: 'Archiviert' };
 
@@ -36,8 +37,9 @@ export function CourseDetailPage() {
 
   return (
     <div className="p-xl max-w-4xl">
+      <Breadcrumb items={[{ label: 'Training Hub', href: '/app/tools/training-hub' }, { label: 'Kurs' }]} />
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/app/tools/training-hub" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+        <Link to="/tools/training-hub" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div className="flex-1">
           <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm">
             <BookOpen size={24} /> {course.title}

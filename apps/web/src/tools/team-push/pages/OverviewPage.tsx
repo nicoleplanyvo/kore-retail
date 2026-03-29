@@ -7,6 +7,7 @@ import {
 import {
   useTeamMessages, useCreateTeamMessage, useTeamPushStores, useTeamPushUsers,
 } from '../../../hooks/useTeamPush';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const PRIORITY_ICONS: Record<string, React.ReactNode> = {
   NORMAL: null,
@@ -79,6 +80,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-5xl">
+      <Breadcrumb items={[{ label: 'Team Push' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-2xl">
         <div>
@@ -89,7 +91,7 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-sm">
           <Link
-            to="/app/tools/team-push/dashboard"
+            to="/tools/team-push/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink"
           >
             <BarChart3 size={14} /> Dashboard

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BookOpen, Search, Plus, BarChart3, Image } from 'lucide-react';
 import { useVmGuidelineDocs } from '../../../hooks/useVmGuidelines';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const CATEGORIES = ['Schaufenster', 'Tisch', 'Wand', 'Eingang', 'Saison'];
 const STATUS_LABELS: Record<string, string> = { DRAFT: 'Entwurf', PUBLISHED: 'Veroeffentlicht', ARCHIVED: 'Archiviert' };
@@ -24,6 +25,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-5xl">
+      <Breadcrumb items={[{ label: 'VM Guidelines' }]} />
       <div className="flex items-center justify-between mb-2xl">
         <div>
           <h1 className="font-display text-h1 text-kore-ink">VM Guidelines</h1>

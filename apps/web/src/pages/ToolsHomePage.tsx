@@ -1,5 +1,5 @@
 import {
-  Wrench, PackageOpen,
+  Wrench,
   ClipboardCheck, Award, TrendingUp, Camera, BookOpen, BarChart3, Wallet,
   LineChart, Package, Monitor, Activity, Palette, GraduationCap,
   Clock, Trophy, UserPlus, MessageSquare, Compass, Star, CalendarDays,
@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { TOOL_ROUTES } from '../lib/toolRoutes';
 import { CATEGORY_ORDER } from '../lib/moduleCategories';
 import { WelcomeBanner } from '../components/WelcomeBanner';
+import { CardGridSkeleton } from '../components/Skeleton';
 
 // Icon-Mapping
 const iconMap: Record<string, LucideIcon> = {
@@ -79,29 +80,13 @@ export function ToolsHomePage() {
       <h2 className="font-display text-h3 text-kore-ink mb-lg">Meine Tools</h2>
 
       {isLoading ? (
-        <div className="py-xl text-center">
-          <p className="font-body text-kore-mid">Tools werden geladen...</p>
-        </div>
+        <CardGridSkeleton count={8} cols="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" />
       ) : !myTools || myTools.length === 0 ? (
         <div className="bg-kore-white border border-kore-border p-2xl text-center">
-          <PackageOpen size={32} className="text-kore-mid/30 mx-auto mb-md" />
-          <p className="font-body text-kore-mid">
-            {user?.role === 'regional_manager'
-              ? 'Dir sind noch keine Regionen zugewiesen.'
-              : user?.role === 'store_manager' || user?.role === 'multisite_manager'
-                ? 'Dir sind noch keine Stores zugewiesen.'
-                : user?.role === 'learner'
-                  ? 'Dir wurden noch keine Tools freigeschaltet.'
-                  : 'Keine Tools gefunden.'}
-          </p>
+          <Wrench size={32} className="text-kore-mid/30 mx-auto mb-md" />
+          <p className="font-body text-kore-mid">Keine Tools zugewiesen.</p>
           <p className="font-body text-small text-kore-mid/60 mt-xs">
-            {user?.role === 'regional_manager'
-              ? 'Bitte wende dich an deinen Kunden-Admin.'
-              : user?.role === 'store_manager' || user?.role === 'multisite_manager'
-                ? 'Bitte wende dich an deinen Admin.'
-                : user?.role === 'learner'
-                  ? 'Bitte wende dich an deinen Store Manager.'
-                  : 'Bitte überprüfe die Tool-Zuweisungen im Dashboard.'}
+            Kontaktieren Sie Ihren Administrator, um Tools freizuschalten.
           </p>
         </div>
       ) : (

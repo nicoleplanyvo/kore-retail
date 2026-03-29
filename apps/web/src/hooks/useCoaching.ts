@@ -1,5 +1,6 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { api } from '../lib/api';
+import { useMutationWithToast } from './useMutationWithToast';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 const BASE = '/api/tools/coaching';
@@ -37,26 +38,29 @@ export function useCoachingSession(id?: string) {
 }
 
 export function useCreateCoachingSession() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (data: any) => api<any>(`${BASE}/sessions`, { method: 'POST', body: JSON.stringify(data) }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['coaching'] }); },
+    invalidateKeys: [['coaching']],
+    successMessage: 'Coaching-Session erstellt.',
+    errorMessage: 'Coaching-Session konnte nicht erstellt werden.',
   });
 }
 
 export function useUpdateCoachingSession() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: ({ id, ...data }: any) => api<any>(`${BASE}/sessions/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['coaching'] }); },
+    invalidateKeys: [['coaching']],
+    successMessage: 'Coaching-Session gespeichert.',
+    errorMessage: 'Coaching-Session konnte nicht gespeichert werden.',
   });
 }
 
 export function useDeleteCoachingSession() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (id: string) => api<any>(`${BASE}/sessions/${id}`, { method: 'DELETE' }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['coaching'] }); },
+    invalidateKeys: [['coaching']],
+    successMessage: 'Coaching-Session gelöscht.',
+    errorMessage: 'Coaching-Session konnte nicht gelöscht werden.',
   });
 }
 
@@ -68,10 +72,11 @@ export function useCoachingTemplates() {
 }
 
 export function useCreateCoachingTemplate() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (data: any) => api<any>(`${BASE}/templates`, { method: 'POST', body: JSON.stringify(data) }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['coaching', 'templates'] }); },
+    invalidateKeys: [['coaching', 'templates']],
+    successMessage: 'Vorlage erstellt.',
+    errorMessage: 'Vorlage konnte nicht erstellt werden.',
   });
 }
 

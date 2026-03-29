@@ -6,6 +6,7 @@ import {
   useBudgetForecast,
   useCreateActual,
 } from '../../../hooks/useBudget';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 function currentMonth(): string {
   const d = new Date();
@@ -54,6 +55,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-5xl">
+      <Breadcrumb items={[{ label: 'Umsatzplan-Tracking' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-2xl">
         <div>
@@ -66,13 +68,13 @@ export function OverviewPage() {
         </div>
         <div className="flex gap-sm">
           <Link
-            to="/app/tools/budget/detail"
+            to="/tools/budget/detail"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors"
           >
             <BarChart3 size={14} /> Detail
           </Link>
           <Link
-            to="/app/tools/budget/dashboard"
+            to="/tools/budget/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors"
           >
             <LayoutDashboard size={14} /> Dashboard
@@ -109,7 +111,7 @@ export function OverviewPage() {
             Erfassen Sie zuerst ein Soll-Ziel fuer diesen Monat in der Detailansicht.
           </p>
           <Link
-            to="/app/tools/budget/detail"
+            to="/tools/budget/detail"
             className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"
           >
             <BarChart3 size={16} /> Zur Detailansicht

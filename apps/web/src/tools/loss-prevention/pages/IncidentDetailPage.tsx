@@ -22,6 +22,7 @@ import {
   useResolveIncident,
   useUpdateIncident,
 } from '../../../hooks/useLossPrevention';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 /* ── Maps ───────────────────────────────────────────────────── */
 
@@ -136,10 +137,11 @@ export function IncidentDetailPage() {
 
   return (
     <div className="p-xl max-w-4xl">
+      <Breadcrumb items={[{ label: 'Loss Prevention', href: '/app/tools/loss-prevention' }, { label: 'Details' }]} />
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
         <Link
-          to="/app/tools/loss-prevention"
+          to="/tools/loss-prevention"
           className="text-kore-mid hover:text-kore-ink transition-colors"
         >
           <ArrowLeft size={20} />

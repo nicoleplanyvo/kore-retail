@@ -13,6 +13,7 @@ import {
   AlertTriangle,
 } from 'lucide-react';
 import { useMultiStoreOverview, useMultiStoreStores } from '../../../hooks/useMultiStore';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 export function OverviewPage() {
   const { data: overview, isLoading } = useMultiStoreOverview();
@@ -27,6 +28,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-6xl">
+      <Breadcrumb items={[{ label: 'Multi-Store Steuerung' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-lg">
         <div>
@@ -39,31 +41,31 @@ export function OverviewPage() {
         </div>
         <div className="flex gap-sm">
           <Link
-            to="/app/tools/multi-store/tasks"
+            to="/tools/multi-store/tasks"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors"
           >
             <ClipboardList size={16} /> Aufgaben
           </Link>
           <Link
-            to="/app/tools/multi-store/dashboard"
+            to="/tools/multi-store/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors"
           >
             <BarChart3 size={16} /> Dashboard
           </Link>
           <Link
-            to="/app/tools/multi-store/comparison"
+            to="/tools/multi-store/comparison"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors"
           >
             Vergleich
           </Link>
           <Link
-            to="/app/tools/multi-store/ranking"
+            to="/tools/multi-store/ranking"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors"
           >
             <Trophy size={16} /> Ranking
           </Link>
           <Link
-            to="/app/tools/multi-store/tasks/create"
+            to="/tools/multi-store/tasks/create"
             className="flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90"
           >
             <Plus size={16} /> Neue Aufgabe

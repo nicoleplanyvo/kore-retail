@@ -15,6 +15,7 @@ import {
   useWellbeingStores,
   useWellbeingSummary,
 } from '../../../hooks/useWellbeing';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const MOOD_LABELS = ['', 'Schlecht', 'Maessig', 'Ok', 'Gut', 'Sehr gut'];
 
@@ -38,6 +39,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-5xl">
+      <Breadcrumb items={[{ label: 'Wellbeing' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-2xl">
         <div>
@@ -50,25 +52,25 @@ export function OverviewPage() {
         </div>
         <div className="flex gap-sm">
           <Link
-            to="/app/tools/wellbeing/resources"
+            to="/tools/wellbeing/resources"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors"
           >
             <BookOpen size={16} /> Ressourcen
           </Link>
           <Link
-            to="/app/tools/wellbeing/trends"
+            to="/tools/wellbeing/trends"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors"
           >
             <TrendingUp size={16} /> Trends
           </Link>
           <Link
-            to="/app/tools/wellbeing/dashboard"
+            to="/tools/wellbeing/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors"
           >
             <BarChart3 size={16} /> Dashboard
           </Link>
           <Link
-            to="/app/tools/wellbeing/checkin"
+            to="/tools/wellbeing/checkin"
             className="flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90"
           >
             <Plus size={16} /> Check-In
@@ -105,7 +107,7 @@ export function OverviewPage() {
             Starten Sie den ersten Stimmungs-Check-In fuer Ihr Team.
           </p>
           <Link
-            to="/app/tools/wellbeing/checkin"
+            to="/tools/wellbeing/checkin"
             className="flex items-center gap-xs px-lg py-sm bg-kore-ink text-kore-white text-small hover:opacity-90"
           >
             <Plus size={16} /> Ersten Check-In starten

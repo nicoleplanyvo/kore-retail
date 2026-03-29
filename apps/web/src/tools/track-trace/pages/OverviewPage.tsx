@@ -16,6 +16,7 @@ import {
   useCreateOrder,
   useOrdersSummary,
 } from '../../../hooks/useTrackTrace';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 /* ── Status-Maps ──────────────────────────────────── */
 
@@ -139,6 +140,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-6xl">
+      <Breadcrumb items={[{ label: 'Track & Trace' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-2xl">
         <div>
@@ -151,7 +153,7 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-md">
           <Link
-            to="/app/tools/track-trace/dashboard"
+            to="/tools/track-trace/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-kore-ink text-small hover:bg-kore-bg transition-colors"
           >
             <BarChart3 size={16} /> Dashboard

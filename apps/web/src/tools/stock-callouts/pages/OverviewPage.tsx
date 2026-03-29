@@ -14,6 +14,7 @@ import {
   useConfirmTransfer,
   useResolveCallout,
 } from '../../../hooks/useStockCallouts';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const STATUS_LABELS: Record<string, string> = {
   OPEN: 'Offen',
@@ -130,6 +131,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-lg max-w-6xl">
+      <Breadcrumb items={[{ label: 'Stock Callouts' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-lg">
         <div>
@@ -144,7 +146,7 @@ export function OverviewPage() {
               {stores.map((s: any) => <option key={s.id} value={s.id}>{s.name}</option>)}
             </select>
           )}
-          <Link to="/app/tools/stock-callouts/dashboard" className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink">
+          <Link to="/tools/stock-callouts/dashboard" className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink">
             <BarChart3 size={14} /> Dashboard
           </Link>
           <button onClick={() => setShowForm(!showForm)} className="flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90">

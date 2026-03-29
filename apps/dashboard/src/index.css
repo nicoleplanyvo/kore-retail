@@ -36,3 +36,12 @@ body {
 h1, h2, h3, h4 {
   font-family: 'Cormorant', serif;
 }
+
+/* === Toast Slide-in Animation === */
+@keyframes toastSlideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.toast-slide-in {
+  animation: toastSlideIn 0.3s ease-out;
+}

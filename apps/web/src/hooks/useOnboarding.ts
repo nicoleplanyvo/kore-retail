@@ -1,5 +1,6 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { api } from '../lib/api';
+import { useMutationWithToast } from './useMutationWithToast';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 // ── Stores ──────────────────────────────────────────
@@ -38,35 +39,32 @@ export function useOnboardingTemplate(id?: string) {
 }
 
 export function useCreateOnboardingTemplate() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (data: any) =>
       api<any>('/api/tools/onboarding/templates', { method: 'POST', body: JSON.stringify(data) }),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ['onboarding'] });
-    },
+    invalidateKeys: [['onboarding']],
+    successMessage: 'Onboarding-Vorlage erstellt.',
+    errorMessage: 'Onboarding-Vorlage konnte nicht erstellt werden.',
   });
 }
 
 export function useUpdateOnboardingTemplate() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: ({ id, ...data }: any) =>
       api<any>(`/api/tools/onboarding/templates/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ['onboarding'] });
-    },
+    invalidateKeys: [['onboarding']],
+    successMessage: 'Onboarding-Vorlage gespeichert.',
+    errorMessage: 'Onboarding-Vorlage konnte nicht gespeichert werden.',
   });
 }
 
 export function useDeleteOnboardingTemplate() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (id: string) =>
       api<any>(`/api/tools/onboarding/templates/${id}`, { method: 'DELETE' }),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ['onboarding'] });
-    },
+    invalidateKeys: [['onboarding']],
+    successMessage: 'Onboarding-Vorlage gelöscht.',
+    errorMessage: 'Onboarding-Vorlage konnte nicht gelöscht werden.',
   });
 }
 
@@ -102,49 +100,45 @@ export function useOnboardingJourney(id?: string) {
 }
 
 export function useCreateOnboardingJourney() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (data: any) =>
       api<any>('/api/tools/onboarding/journeys', { method: 'POST', body: JSON.stringify(data) }),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ['onboarding'] });
-    },
+    invalidateKeys: [['onboarding']],
+    successMessage: 'Onboarding-Journey gestartet.',
+    errorMessage: 'Onboarding-Journey konnte nicht erstellt werden.',
   });
 }
 
 export function useUpdateJourneyStatus() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: ({ id, status }: { id: string; status: string }) =>
       api<any>(`/api/tools/onboarding/journeys/${id}/status`, { method: 'PUT', body: JSON.stringify({ status }) }),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ['onboarding'] });
-    },
+    invalidateKeys: [['onboarding']],
+    successMessage: 'Status aktualisiert.',
+    errorMessage: 'Status konnte nicht aktualisiert werden.',
   });
 }
 
 export function useAssignMentor() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: ({ id, mentorId }: { id: string; mentorId: string | null }) =>
       api<any>(`/api/tools/onboarding/journeys/${id}/mentor`, { method: 'PUT', body: JSON.stringify({ mentorId }) }),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ['onboarding'] });
-    },
+    invalidateKeys: [['onboarding']],
+    successMessage: 'Mentor zugewiesen.',
+    errorMessage: 'Mentor konnte nicht zugewiesen werden.',
   });
 }
 
 export function useUpdateOnboardingStep() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: ({ journeyId, stepId, ...data }: any) =>
       api<any>(`/api/tools/onboarding/journeys/${journeyId}/steps/${stepId}`, {
         method: 'PUT',
         body: JSON.stringify(data),
       }),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ['onboarding'] });
-    },
+    invalidateKeys: [['onboarding']],
+    successMessage: 'Schritt aktualisiert.',
+    errorMessage: 'Schritt konnte nicht aktualisiert werden.',
   });
 }
 

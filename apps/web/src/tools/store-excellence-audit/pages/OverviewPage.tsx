@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Plus, ClipboardCheck, TrendingUp, TrendingDown, Minus, List, BarChart3, Settings } from 'lucide-react';
 import { useAuditSessions, useAuditStores, useAuditSummary } from '../../../hooks/useAudit';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const STATUS_LABELS: Record<string, string> = {
   DRAFT: 'Entwurf',
@@ -40,6 +41,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-6xl">
+      <Breadcrumb items={[{ label: 'Store Excellence Audit' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-2xl">
         <div>

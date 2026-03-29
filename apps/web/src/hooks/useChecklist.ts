@@ -1,5 +1,6 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { api } from '../lib/api';
+import { useMutationWithToast } from './useMutationWithToast';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -23,26 +24,29 @@ export function useChecklistTemplates(storeId?: string) {
 }
 
 export function useCreateTemplate() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (data: any) => api('/api/tools/checklisten/templates', { method: 'POST', body: JSON.stringify(data) }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['checklisten', 'templates'] }); },
+    invalidateKeys: [['checklisten', 'templates']],
+    successMessage: 'Vorlage erstellt.',
+    errorMessage: 'Vorlage konnte nicht erstellt werden.',
   });
 }
 
 export function useUpdateTemplate() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: ({ id, ...data }: any) => api(`/api/tools/checklisten/templates/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['checklisten', 'templates'] }); },
+    invalidateKeys: [['checklisten', 'templates']],
+    successMessage: 'Vorlage gespeichert.',
+    errorMessage: 'Vorlage konnte nicht gespeichert werden.',
   });
 }
 
 export function useDeleteTemplate() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (id: string) => api(`/api/tools/checklisten/templates/${id}`, { method: 'DELETE' }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['checklisten', 'templates'] }); },
+    invalidateKeys: [['checklisten', 'templates']],
+    successMessage: 'Vorlage gelöscht.',
+    errorMessage: 'Vorlage konnte nicht gelöscht werden.',
   });
 }
 
@@ -69,23 +73,25 @@ export function useChecklist(id: string) {
 }
 
 export function useCreateChecklist() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (data: any) => api('/api/tools/checklisten/checklists', { method: 'POST', body: JSON.stringify(data) }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['checklisten'] }); },
+    invalidateKeys: [['checklisten']],
+    successMessage: 'Checkliste gestartet.',
+    errorMessage: 'Checkliste konnte nicht erstellt werden.',
   });
 }
 
 export function useToggleCheckItem() {
   const qc = useQueryClient();
-  return useMutation({
-    mutationFn: ({ checklistId, itemId }: { checklistId: string; itemId: string }) =>
+  return useMutationWithToast<any, Error, { checklistId: string; itemId: string }>({
+    mutationFn: ({ checklistId, itemId }) =>
       api(`/api/tools/checklisten/checklists/${checklistId}/items/${itemId}`, { method: 'PUT', body: '{}' }),
     onSuccess: (_data, vars) => {
       qc.invalidateQueries({ queryKey: ['checklisten', 'detail', vars.checklistId] });
       qc.invalidateQueries({ queryKey: ['checklisten', 'list'] });
       qc.invalidateQueries({ queryKey: ['checklisten', 'dashboard'] });
     },
+    errorMessage: 'Punkt konnte nicht aktualisiert werden.',
   });
 }
 

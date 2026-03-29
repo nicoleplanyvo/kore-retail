@@ -17,6 +17,7 @@ import {
   useApproveCount,
   useCancelCount,
 } from '../../../hooks/useInventory';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const STATUS_LABELS: Record<string, string> = {
   IN_PROGRESS: 'Laufend',
@@ -186,10 +187,11 @@ export function CountPage() {
 
   return (
     <div className="p-xl max-w-6xl">
+      <Breadcrumb items={[{ label: 'Inventur', href: '/app/tools/inventory' }, { label: 'Details' }]} />
       {/* Header */}
       <div className="flex items-center gap-md mb-xl">
         <Link
-          to="/app/tools/inventory"
+          to="/tools/inventory"
           className="text-kore-mid hover:text-kore-ink transition-colors"
         >
           <ArrowLeft size={20} />

@@ -254,3 +254,12 @@
 .blog-content > *:first-child {
   margin-top: 0;
 }
+
+/* === Toast Slide-in Animation === */
+@keyframes toastSlideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.toast-slide-in {
+  animation: toastSlideIn 0.3s ease-out;
+}

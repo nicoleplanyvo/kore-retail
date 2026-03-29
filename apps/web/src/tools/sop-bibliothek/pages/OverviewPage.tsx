@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BookOpen, Search, Plus, Filter, Eye, CheckCircle, Clock, FileText } from 'lucide-react';
 import { useSopDocuments, useSopCategories } from '../../../hooks/useSop';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const STATUS_LABELS: Record<string, string> = {
   DRAFT: 'Entwurf',
@@ -33,6 +34,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-6xl">
+      <Breadcrumb items={[{ label: 'SOP Bibliothek' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-2xl">
         <div>

@@ -7,6 +7,7 @@ import {
   useCoachingTemplates,
   useCreateCoachingSession,
 } from '../../../hooks/useCoaching';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const TOPICS = ['Verkauf', 'Kundenservice', 'Fuehrung', 'Produktwissen', 'Soft Skills'];
 
@@ -84,8 +85,9 @@ export function CreateSessionPage() {
 
   return (
     <div className="p-xl max-w-4xl">
+      <Breadcrumb items={[{ label: 'Coaching', href: '/app/tools/coaching' }, { label: 'Neue Session' }]} />
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/app/tools/coaching" className="text-kore-mid hover:text-kore-ink transition-colors">
+        <Link to="/tools/coaching" className="text-kore-mid hover:text-kore-ink transition-colors">
           <ArrowLeft size={20} />
         </Link>
         <div>
@@ -203,7 +205,7 @@ export function CreateSessionPage() {
           >
             <Save size={16} /> {create.isPending ? 'Erstellen...' : 'Session erstellen'}
           </button>
-          <Link to="/app/tools/coaching" className="px-lg py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink">
+          <Link to="/tools/coaching" className="px-lg py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink">
             Abbrechen
           </Link>
         </div>

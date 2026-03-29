@@ -20,6 +20,7 @@ import {
 import { useRmSummary, useRmRanking, useRmAlerts } from '../../../hooks/useRmDashboard';
 import { api } from '../../../lib/api';
 import type { RmExportRow } from '../../../hooks/useRmDashboard';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 type PeriodPreset = 'week' | 'month' | 'quarter' | 'year' | 'custom';
 const PERIOD_LABELS: Record<PeriodPreset, string> = {
@@ -102,6 +103,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-7xl">
+      <Breadcrumb items={[{ label: 'RM Dashboard' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-2xl">
         <div>
@@ -120,13 +122,13 @@ export function OverviewPage() {
             <Download size={14} /> CSV Export
           </button>
           <Link
-            to="/app/tools/rm-dashboard/ranking"
+            to="/tools/rm-dashboard/ranking"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors"
           >
             <Trophy size={14} /> Ranking
           </Link>
           <Link
-            to="/app/tools/rm-dashboard/alerts"
+            to="/tools/rm-dashboard/alerts"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors relative"
           >
             <AlertTriangle size={14} /> Alerts
@@ -137,7 +139,7 @@ export function OverviewPage() {
             )}
           </Link>
           <Link
-            to="/app/tools/rm-dashboard/trends"
+            to="/tools/rm-dashboard/trends"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors"
           >
             <TrendingUp size={14} /> Trends
@@ -300,7 +302,7 @@ export function OverviewPage() {
                 <option value="unitsSold">Stueck verkauft</option>
               </select>
               <Link
-                to="/app/tools/rm-dashboard/ranking"
+                to="/tools/rm-dashboard/ranking"
                 className="text-small text-kore-brass hover:text-kore-ink transition-colors"
               >
                 Alle anzeigen

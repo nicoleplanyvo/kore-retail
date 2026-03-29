@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Users, Plus, Search, Star, Calendar, MessageSquare, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useCustomers, useClientelingStores } from '../../../hooks/useClienteling';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const VIP_COLORS: Record<string, string> = {
   GOLD: 'bg-amber-100 text-amber-700',
@@ -30,6 +31,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-6xl">
+      <Breadcrumb items={[{ label: 'Clienteling' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-2xl">
         <div>
@@ -37,10 +39,10 @@ export function OverviewPage() {
           <p className="text-body text-kore-mid mt-xs">Kundenpflege, Kommunikation und Terminverwaltung</p>
         </div>
         <div className="flex items-center gap-sm">
-          <Link to="/app/tools/clienteling/appointments" className="flex items-center gap-xs px-lg py-md-sm bg-kore-white border border-kore-border text-kore-ink text-small font-medium uppercase tracking-widest hover:border-kore-ink transition-colors">
+          <Link to="/tools/clienteling/appointments" className="flex items-center gap-xs px-lg py-md-sm bg-kore-white border border-kore-border text-kore-ink text-small font-medium uppercase tracking-widest hover:border-kore-ink transition-colors">
             <Calendar size={16} /> Termine
           </Link>
-          <Link to="/app/tools/clienteling/customers/create" className="flex items-center gap-xs px-lg py-md-sm bg-kore-ink text-kore-white text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
+          <Link to="/tools/clienteling/customers/create" className="flex items-center gap-xs px-lg py-md-sm bg-kore-ink text-kore-white text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
             <Plus size={16} /> Neuer Kunde
           </Link>
         </div>
@@ -105,7 +107,7 @@ export function OverviewPage() {
           <Users size={48} className="text-kore-faint mb-lg" />
           <h2 className="font-display text-h2 text-kore-ink mb-md">Noch keine Kunden</h2>
           <p className="text-body text-kore-mid max-w-md mb-xl">Legen Sie Ihren ersten Kunden an, um mit dem Clienteling zu beginnen.</p>
-          <Link to="/app/tools/clienteling/customers/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
+          <Link to="/tools/clienteling/customers/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
             <Plus size={16} /> Kunden anlegen
           </Link>
         </div>

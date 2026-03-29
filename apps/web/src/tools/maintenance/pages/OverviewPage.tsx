@@ -17,6 +17,7 @@ import {
   useMaintenanceUsers,
   useCreateMaintenanceRequest,
 } from '../../../hooks/useMaintenance';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const CATEGORY_OPTIONS = [
   { value: 'ELECTRICAL', label: 'Elektrik' },
@@ -140,6 +141,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-6xl">
+      <Breadcrumb items={[{ label: 'Maintenance' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-2xl">
         <div>
@@ -152,7 +154,7 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-md">
           <Link
-            to="/app/tools/maintenance/dashboard"
+            to="/tools/maintenance/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-kore-ink text-small hover:bg-kore-bg transition-colors"
           >
             <BarChart3 size={16} /> Dashboard

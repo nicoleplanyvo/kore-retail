@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ClipboardCheck, Plus, CheckCircle2, Circle, Clock, AlertTriangle, ChevronRight } from 'lucide-react';
 import { useChecklists, useChecklistStores, useToggleCheckItem, useCreateChecklist, useChecklistTemplates } from '../../../hooks/useChecklist';
+import { ListItemSkeleton } from '../../../components/Skeleton';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 export function OverviewPage() {
   const [storeId, setStoreId] = useState('');
@@ -13,6 +15,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-5xl">
+      <Breadcrumb items={[{ label: 'Checklisten' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-2xl">
         <div>
@@ -21,13 +24,13 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-md">
           <Link
-            to="/app/tools/checklisten/dashboard"
+            to="/tools/checklisten/dashboard"
             className="flex items-center gap-sm border border-kore-border text-kore-ink px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors"
           >
             Dashboard
           </Link>
           <Link
-            to="/app/tools/checklisten/templates"
+            to="/tools/checklisten/templates"
             className="flex items-center gap-sm border border-kore-border text-kore-ink px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors"
           >
             Vorlagen
@@ -68,7 +71,7 @@ export function OverviewPage() {
 
       {/* Today's Checklists */}
       {isLoading ? (
-        <div className="text-body text-kore-mid">Lade Daten...</div>
+        <ListItemSkeleton count={4} />
       ) : result && result.data.length > 0 ? (
         <div className="space-y-lg">
           {result.data.map(cl => (

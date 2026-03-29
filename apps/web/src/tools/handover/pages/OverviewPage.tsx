@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { useHandovers, useHandoverStores, useAcknowledgeHandover } from '../../../hooks/useHandover';
 import { useAuthStore } from '../../../stores/authStore';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const STATUS_LABELS: Record<string, string> = {
   DRAFT: 'Entwurf',
@@ -66,6 +67,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-5xl">
+      <Breadcrumb items={[{ label: 'Schichtuebergabe' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-lg">
         <div>
@@ -78,13 +80,13 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-sm">
           <Link
-            to="/app/tools/handover/dashboard"
+            to="/tools/handover/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-kore-ink text-small hover:bg-kore-bg transition-colors"
           >
             <BarChart3 size={16} /> Dashboard
           </Link>
           <Link
-            to="/app/tools/handover/create"
+            to="/tools/handover/create"
             className="flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90"
           >
             <Plus size={16} /> Neue Uebergabe
@@ -140,7 +142,7 @@ export function OverviewPage() {
           <ArrowRightLeft size={32} className="mx-auto text-kore-mid mb-md" />
           <p className="text-body text-kore-mid">Noch keine Uebergaben vorhanden.</p>
           <Link
-            to="/app/tools/handover/create"
+            to="/tools/handover/create"
             className="inline-flex items-center gap-xs mt-md px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90"
           >
             <Plus size={16} /> Erste Uebergabe erstellen

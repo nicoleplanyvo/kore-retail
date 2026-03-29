@@ -1,5 +1,6 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { api } from '../lib/api';
+import { useMutationWithToast } from './useMutationWithToast';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 const BASE = '/api/tools/shift-planning';
@@ -29,34 +30,38 @@ export function useShifts(params?: { storeId?: string; weekStart?: string; weekE
 }
 
 export function useCreateShift() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (data: any) => api<any>(`${BASE}/shifts`, { method: 'POST', body: JSON.stringify(data) }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['shift'] }); },
+    invalidateKeys: [['shift']],
+    successMessage: 'Schicht erstellt.',
+    errorMessage: 'Schicht konnte nicht erstellt werden.',
   });
 }
 
 export function useUpdateShift() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: ({ id, ...data }: any) => api<any>(`${BASE}/shifts/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['shift'] }); },
+    invalidateKeys: [['shift']],
+    successMessage: 'Schicht gespeichert.',
+    errorMessage: 'Schicht konnte nicht gespeichert werden.',
   });
 }
 
 export function useDeleteShift() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (id: string) => api<any>(`${BASE}/shifts/${id}`, { method: 'DELETE' }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['shift'] }); },
+    invalidateKeys: [['shift']],
+    successMessage: 'Schicht gelöscht.',
+    errorMessage: 'Schicht konnte nicht gelöscht werden.',
   });
 }
 
 export function usePublishWeek() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (data: { storeId: string; weekStart: string }) => api<any>(`${BASE}/shifts/publish`, { method: 'POST', body: JSON.stringify(data) }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['shift'] }); },
+    invalidateKeys: [['shift']],
+    successMessage: 'Woche veröffentlicht.',
+    errorMessage: 'Woche konnte nicht veröffentlicht werden.',
   });
 }
 
@@ -74,36 +79,40 @@ export function useAvailability(params?: { storeId?: string; userId?: string; fr
 }
 
 export function useSetAvailability() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (data: any) => api<any>(`${BASE}/availability`, { method: 'PUT', body: JSON.stringify(data) }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['shift'] }); },
+    invalidateKeys: [['shift']],
+    successMessage: 'Verfügbarkeit gespeichert.',
+    errorMessage: 'Verfügbarkeit konnte nicht gespeichert werden.',
   });
 }
 
 // ── Swap Requests ────────────────────────────────────
 export function useCreateSwapRequest() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (data: any) => api<any>(`${BASE}/swap-requests`, { method: 'POST', body: JSON.stringify(data) }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['shift'] }); },
+    invalidateKeys: [['shift']],
+    successMessage: 'Tauschanfrage erstellt.',
+    errorMessage: 'Tauschanfrage konnte nicht erstellt werden.',
   });
 }
 
 export function useUpdateSwapRequest() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: ({ id, ...data }: any) => api<any>(`${BASE}/swap-requests/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['shift'] }); },
+    invalidateKeys: [['shift']],
+    successMessage: 'Tauschanfrage aktualisiert.',
+    errorMessage: 'Tauschanfrage konnte nicht aktualisiert werden.',
   });
 }
 
 // ── Time Tracking ────────────────────────────────────
 export function useClock() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (data: { storeId: string; action: string; note?: string }) => api<any>(`${BASE}/clock`, { method: 'POST', body: JSON.stringify(data) }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['shift'] }); },
+    invalidateKeys: [['shift']],
+    successMessage: 'Zeitstempel erfasst.',
+    errorMessage: 'Zeitstempel konnte nicht erfasst werden.',
   });
 }
 

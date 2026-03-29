@@ -4,6 +4,7 @@ import { Users, Plus, Search, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Badge } from '@kore/ui';
 import { useUsers } from '../hooks/useUsers';
 import { useAuthStore } from '../stores/authStore';
+import { TableSkeleton } from '../components/Skeleton';
 
 const ROLE_LABELS: Record<string, string> = {
   kore_admin: 'Super Admin',
@@ -88,7 +89,7 @@ export function UsersListPage() {
       {/* Table */}
       <div className="bg-kore-white border border-kore-border overflow-x-auto">
         {isLoading ? (
-          <div className="p-xl text-kore-mid font-body text-small">Lade Benutzer...</div>
+          <TableSkeleton rows={8} cols={5} />
         ) : data && data.data.length > 0 ? (
           <>
             <table className="w-full">

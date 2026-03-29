@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft, BarChart3, Users, TrendingUp, Award } from 'lucide-react';
 import { useCoachingDashboard } from '../../../hooks/useCoaching';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 export function DashboardPage() {
   const { data: db, isLoading } = useCoachingDashboard();
@@ -13,9 +14,10 @@ export function DashboardPage() {
 
   return (
     <div className="p-xl max-w-5xl">
+      <Breadcrumb items={[{ label: 'Coaching', href: '/app/tools/coaching' }, { label: 'Dashboard' }]} />
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/app/tools/coaching" className="text-kore-mid hover:text-kore-ink transition-colors">
+        <Link to="/tools/coaching" className="text-kore-mid hover:text-kore-ink transition-colors">
           <ArrowLeft size={20} />
         </Link>
         <div>

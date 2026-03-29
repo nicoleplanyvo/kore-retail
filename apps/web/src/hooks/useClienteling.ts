@@ -1,5 +1,6 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { api } from '../lib/api';
+import { useMutationWithToast } from './useMutationWithToast';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 const BASE = '/api/tools/clienteling';
@@ -28,34 +29,38 @@ export function useCustomer(id?: string) {
 }
 
 export function useCreateCustomer() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (data: any) => api<any>(`${BASE}/customers`, { method: 'POST', body: JSON.stringify(data) }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['clienteling'] }); },
+    invalidateKeys: [['clienteling']],
+    successMessage: 'Kunde erstellt.',
+    errorMessage: 'Kunde konnte nicht erstellt werden.',
   });
 }
 
 export function useUpdateCustomer() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: ({ id, ...data }: any) => api<any>(`${BASE}/customers/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['clienteling'] }); },
+    invalidateKeys: [['clienteling']],
+    successMessage: 'Kundendaten gespeichert.',
+    errorMessage: 'Kundendaten konnten nicht gespeichert werden.',
   });
 }
 
 export function useDeleteCustomer() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (id: string) => api<any>(`${BASE}/customers/${id}`, { method: 'DELETE' }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['clienteling'] }); },
+    invalidateKeys: [['clienteling']],
+    successMessage: 'Kunde gelöscht.',
+    errorMessage: 'Kunde konnte nicht gelöscht werden.',
   });
 }
 
 export function useAddInteraction() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: ({ customerId, ...data }: any) => api<any>(`${BASE}/customers/${customerId}/interactions`, { method: 'POST', body: JSON.stringify(data) }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['clienteling'] }); },
+    invalidateKeys: [['clienteling']],
+    successMessage: 'Interaktion hinzugefügt.',
+    errorMessage: 'Interaktion konnte nicht gespeichert werden.',
   });
 }
 
@@ -69,26 +74,29 @@ export function useAppointments(params?: { storeId?: string; from?: string; to?:
 }
 
 export function useCreateAppointment() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (data: any) => api<any>(`${BASE}/appointments`, { method: 'POST', body: JSON.stringify(data) }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['clienteling'] }); },
+    invalidateKeys: [['clienteling']],
+    successMessage: 'Termin erstellt.',
+    errorMessage: 'Termin konnte nicht erstellt werden.',
   });
 }
 
 export function useUpdateAppointment() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: ({ id, ...data }: any) => api<any>(`${BASE}/appointments/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['clienteling'] }); },
+    invalidateKeys: [['clienteling']],
+    successMessage: 'Termin aktualisiert.',
+    errorMessage: 'Termin konnte nicht aktualisiert werden.',
   });
 }
 
 export function useDeleteAppointment() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (id: string) => api<any>(`${BASE}/appointments/${id}`, { method: 'DELETE' }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['clienteling'] }); },
+    invalidateKeys: [['clienteling']],
+    successMessage: 'Termin gelöscht.',
+    errorMessage: 'Termin konnte nicht gelöscht werden.',
   });
 }
 

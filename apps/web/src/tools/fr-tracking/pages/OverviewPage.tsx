@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BarChart3, Users, TrendingUp, Activity } from 'lucide-react';
 import { useFrTrackingStores, useFrTrackingSessions, useFrTrackingDashboard } from '../../../hooks/useFrTracking';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 export function OverviewPage() {
   const [storeId, setStoreId] = useState('');
@@ -14,6 +15,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-5xl">
+      <Breadcrumb items={[{ label: 'FR Tracking' }]} />
       <div className="flex items-center justify-between mb-2xl">
         <div>
           <h1 className="font-display text-h1 text-kore-ink">FR Tracking</h1>

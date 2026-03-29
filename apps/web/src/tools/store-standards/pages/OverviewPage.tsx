@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Calculator, DollarSign, Clock, Percent, ChevronRight, Save, Trash2, FolderOpen, Plus, Store } from 'lucide-react';
 import { useBudgetStores, useBudgetScenarios, useBudgetScenario, useSaveScenario, useUpdateScenario, useDeleteScenario, calcSbBudget, calcTotalManagementCost, calcAssociateBlendedRate, calcAssociateBudget, calcAvailableHoursPerWeek } from '../../../hooks/useStoreStandards';
 import { useBudgetStore } from '../../../stores/budgetStore';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 export function OverviewPage() {
   const { storeId, setStoreId, scenarioId, setScenarioId, scenarioName, setScenarioName, state, loadState, resetState } = useBudgetStore();
@@ -66,6 +67,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-5xl">
+      <Breadcrumb items={[{ label: 'Personalkosten-Planer' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-2xl">
         <div>

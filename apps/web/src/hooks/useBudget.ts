@@ -1,5 +1,6 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { api } from '../lib/api';
+import { useMutationWithToast } from './useMutationWithToast';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -20,24 +21,26 @@ export function useBudgetTargets(storeId?: string, period?: string) {
 }
 
 export function useCreateTarget() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (data: any) => api<any>('/api/tools/budget/targets', {
       method: 'POST',
       body: JSON.stringify(data),
     }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['budget'] }); },
+    invalidateKeys: [['budget']],
+    successMessage: 'Budget-Ziel erstellt.',
+    errorMessage: 'Budget-Ziel konnte nicht erstellt werden.',
   });
 }
 
 export function useImportTargets() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (data: any) => api<any>('/api/tools/budget/targets/import', {
       method: 'POST',
       body: JSON.stringify(data),
     }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['budget'] }); },
+    invalidateKeys: [['budget']],
+    successMessage: 'Budget-Ziele importiert.',
+    errorMessage: 'Budget-Import fehlgeschlagen.',
   });
 }
 
@@ -57,24 +60,26 @@ export function useBudgetActuals(storeId?: string, from?: string, to?: string, g
 }
 
 export function useCreateActual() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: (data: any) => api<any>('/api/tools/budget/actuals', {
       method: 'POST',
       body: JSON.stringify(data),
     }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['budget'] }); },
+    invalidateKeys: [['budget']],
+    successMessage: 'Ist-Wert erfasst.',
+    errorMessage: 'Ist-Wert konnte nicht erfasst werden.',
   });
 }
 
 export function useUpdateActual() {
-  const qc = useQueryClient();
-  return useMutation({
+  return useMutationWithToast({
     mutationFn: ({ id, ...data }: any) => api<any>(`/api/tools/budget/actuals/${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
     }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['budget'] }); },
+    invalidateKeys: [['budget']],
+    successMessage: 'Ist-Wert aktualisiert.',
+    errorMessage: 'Ist-Wert konnte nicht aktualisiert werden.',
   });
 }
 

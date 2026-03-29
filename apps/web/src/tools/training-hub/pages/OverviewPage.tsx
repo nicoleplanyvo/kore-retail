@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, BookOpen, Users, Plus, Award } from 'lucide-react';
 import { useCourses, useCreateCourse, useCompletionReport } from '../../../hooks/useTrainingHub';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const STATUS_COLORS: Record<string, string> = { DRAFT: 'bg-kore-mid', PUBLISHED: 'bg-emerald-500', ARCHIVED: 'bg-amber-500' };
 const STATUS_LABELS: Record<string, string> = { DRAFT: 'Entwurf', PUBLISHED: 'Veröffentlicht', ARCHIVED: 'Archiviert' };
@@ -21,8 +22,9 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-5xl">
+      <Breadcrumb items={[{ label: 'Training Hub' }]} />
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/app/tools" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+        <Link to="/tools" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div>
           <h1 className="font-display text-h1 text-kore-ink">Training Hub</h1>
           <p className="text-body text-kore-mid mt-xs">Kurse, Module & Enrollments verwalten</p>
@@ -53,7 +55,7 @@ export function OverviewPage() {
           <option value="PUBLISHED">Veröffentlicht</option>
           <option value="ARCHIVED">Archiviert</option>
         </select>
-        <Link to="/app/tools/training-hub/enrollments" className="px-md py-sm border border-kore-border text-small hover:bg-kore-bg transition-colors flex items-center gap-xs">
+        <Link to="/tools/training-hub/enrollments" className="px-md py-sm border border-kore-border text-small hover:bg-kore-bg transition-colors flex items-center gap-xs">
           <Users size={14} /> Enrollments
         </Link>
         <button onClick={() => setShowCreate(true)} className="px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90 transition-opacity flex items-center gap-xs">

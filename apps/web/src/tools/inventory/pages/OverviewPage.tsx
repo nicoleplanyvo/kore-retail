@@ -18,6 +18,7 @@ import {
   useCreateInventoryCount,
   useBatchImportItems,
 } from '../../../hooks/useInventory';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const STATUS_LABELS: Record<string, string> = {
   IN_PROGRESS: 'Laufend',
@@ -69,6 +70,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-6xl">
+      <Breadcrumb items={[{ label: 'Inventur' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-2xl">
         <div>
@@ -79,7 +81,7 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-md">
           <Link
-            to="/app/tools/inventory/dashboard"
+            to="/tools/inventory/dashboard"
             className="flex items-center gap-sm border border-kore-border px-lg py-md-sm text-small font-medium uppercase tracking-widest text-kore-ink hover:bg-kore-bg transition-colors"
           >
             <BarChart3 size={16} /> Dashboard

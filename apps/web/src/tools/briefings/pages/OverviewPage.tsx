@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FileText, Plus, Sun, Moon, Star, CheckCircle, BarChart3 } from 'lucide-react';
 import { useBriefings, useBriefingStores, useMarkBriefingRead } from '../../../hooks/useBriefings';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const TYPE_ICONS: Record<string, React.ReactNode> = {
   MORNING: <Sun size={16} className="text-amber-500" />,
@@ -24,6 +25,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-5xl">
+      <Breadcrumb items={[{ label: 'Taegliches Store-Briefing' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-2xl">
         <div>
@@ -31,10 +33,10 @@ export function OverviewPage() {
           <p className="text-body text-kore-mid mt-xs">Strukturierte Tagesinformationen fuer das Team erstellen und lesen.</p>
         </div>
         <div className="flex items-center gap-md">
-          <Link to="/app/tools/briefings/dashboard" className="flex items-center gap-xs px-md py-sm border border-kore-border text-kore-ink text-small hover:border-kore-ink transition-colors">
+          <Link to="/tools/briefings/dashboard" className="flex items-center gap-xs px-md py-sm border border-kore-border text-kore-ink text-small hover:border-kore-ink transition-colors">
             <BarChart3 size={16} /> Dashboard
           </Link>
-          <Link to="/app/tools/briefings/create" className="flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90">
+          <Link to="/tools/briefings/create" className="flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90">
             <Plus size={16} /> Neues Briefing
           </Link>
         </div>
@@ -115,7 +117,7 @@ export function OverviewPage() {
           <FileText size={48} className="text-kore-faint mb-lg" />
           <h2 className="font-display text-h2 text-kore-ink mb-md">Noch keine Briefings</h2>
           <p className="text-body text-kore-mid max-w-md mb-xl">Erstellen Sie das erste Tages-Briefing fuer Ihr Team.</p>
-          <Link to="/app/tools/briefings/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
+          <Link to="/tools/briefings/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
             <Plus size={16} /> Briefing erstellen
           </Link>
         </div>

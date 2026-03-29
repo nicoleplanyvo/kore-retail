@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MessageSquare, Plus, Calendar, User, BarChart3, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useCoachingSessions, useCoachingStores, useCoachingDashboard } from '../../../hooks/useCoaching';
+import { Breadcrumb } from '../../../components/Breadcrumb';
+import { ListItemSkeleton } from '../../../components/Skeleton';
 
 const STATUS_LABELS: Record<string, string> = { SCHEDULED: 'Geplant', COMPLETED: 'Abgeschlossen', CANCELLED: 'Abgebrochen' };
 const STATUS_COLORS: Record<string, string> = { SCHEDULED: 'bg-blue-100 text-blue-700', COMPLETED: 'bg-emerald-100 text-emerald-700', CANCELLED: 'bg-red-100 text-red-700' };
@@ -24,6 +26,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-5xl">
+      <Breadcrumb items={[{ label: 'Coaching' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-2xl">
         <div>
@@ -36,13 +39,13 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-sm">
           <Link
-            to="/app/tools/coaching/dashboard"
+            to="/tools/coaching/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-ink hover:bg-kore-bg transition-colors"
           >
             <BarChart3 size={16} /> Dashboard
           </Link>
           <Link
-            to="/app/tools/coaching/create"
+            to="/tools/coaching/create"
             className="flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"
           >
             <Plus size={16} /> Neue Session
@@ -83,7 +86,7 @@ export function OverviewPage() {
       </div>
 
       {isLoading ? (
-        <div className="text-body text-kore-mid">Lade Sessions...</div>
+        <ListItemSkeleton count={4} />
       ) : !sessions?.data?.length ? (
         <div className="bg-kore-white border border-kore-border p-3xl flex flex-col items-center text-center">
           <MessageSquare size={48} className="text-kore-faint mb-lg" />
@@ -92,7 +95,7 @@ export function OverviewPage() {
             Erstellen Sie Ihre erste Session, um strukturiert mit dem GROW- oder SMART-Framework zu coachen.
           </p>
           <Link
-            to="/app/tools/coaching/create"
+            to="/tools/coaching/create"
             className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"
           >
             <Plus size={16} /> Session erstellen

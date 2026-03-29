@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useKpiEntries, useKpiStores } from '../../../hooks/useKpi';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 export function EntryListPage() {
   const [page, setPage] = useState(1);
@@ -15,8 +16,9 @@ export function EntryListPage() {
 
   return (
     <div className="p-xl max-w-5xl">
+      <Breadcrumb items={[{ label: 'KPI Dashboard', href: '/app/tools/kpi' }, { label: 'Eintraege' }]} />
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/app/tools/kpi" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+        <Link to="/tools/kpi" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div>
           <h1 className="font-display text-h1 text-kore-ink">KPI-Eintraege</h1>
           <p className="text-body text-kore-mid mt-xs">Taegliche Kennzahlen aller Stores</p>

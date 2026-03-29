@@ -8,6 +8,7 @@ import {
   useNewsletters, useCreateNewsletter, usePublishNewsletter,
   useArchiveNewsletter, useDuplicateNewsletter,
 } from '../../../hooks/useNewsletter';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -62,6 +63,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-lg max-w-6xl">
+      <Breadcrumb items={[{ label: 'Team Newsletter' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-lg">
         <div>
@@ -74,7 +76,7 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-sm">
           <Link
-            to="/app/tools/newsletter/dashboard"
+            to="/tools/newsletter/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink"
           >
             <BarChart3 size={14} /> Analytics

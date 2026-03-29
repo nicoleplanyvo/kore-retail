@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ClipboardList, Plus, BarChart3, Trash2, X } from 'lucide-react';
 import { usePulseSurveys, useCreatePulseSurvey, useDeletePulseSurvey, useUpdatePulseSurvey } from '../../../hooks/usePulseSurvey';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const STATUS_LABELS: Record<string, string> = { DRAFT: 'Entwurf', ACTIVE: 'Aktiv', CLOSED: 'Geschlossen' };
 const STATUS_COLORS: Record<string, string> = {
@@ -54,6 +55,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-5xl">
+      <Breadcrumb items={[{ label: 'Pulse Survey' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-2xl">
         <div>
@@ -66,7 +68,7 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-md">
           <Link
-            to="/app/tools/pulse-survey/dashboard"
+            to="/tools/pulse-survey/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink"
           >
             <BarChart3 size={14} /> Dashboard

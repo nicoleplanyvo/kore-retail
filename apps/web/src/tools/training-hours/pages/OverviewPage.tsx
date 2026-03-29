@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Clock, BarChart3, List, Plus } from 'lucide-react';
 import { useTrainingStores, useTrainingSummary, useCreateTrainingLog } from '../../../hooks/useTrainingHours';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const CATEGORIES = ['PRODUCT', 'SALES', 'SERVICE', 'COMPLIANCE', 'ONBOARDING', 'OTHER'];
 const CATEGORY_LABELS: Record<string, string> = { PRODUCT: 'Produkt', SALES: 'Verkauf', SERVICE: 'Service', COMPLIANCE: 'Compliance', ONBOARDING: 'Onboarding', OTHER: 'Sonstiges' };
@@ -24,8 +25,9 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-5xl">
+      <Breadcrumb items={[{ label: 'Training Hours' }]} />
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/app/tools" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+        <Link to="/tools" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div>
           <h1 className="font-display text-h1 text-kore-ink">Training Hours</h1>
           <p className="text-body text-kore-mid mt-xs">Schulungsstunden erfassen & auswerten</p>
@@ -37,10 +39,10 @@ export function OverviewPage() {
           <option value="">Alle Stores</option>
           {(stores ?? []).map((s: any) => <option key={s.id} value={s.id}>{s.name}</option>)}
         </select>
-        <Link to="/app/tools/training-hours/logs" className="px-md py-sm border border-kore-border text-small hover:bg-kore-bg transition-colors flex items-center gap-xs">
+        <Link to="/tools/training-hours/logs" className="px-md py-sm border border-kore-border text-small hover:bg-kore-bg transition-colors flex items-center gap-xs">
           <List size={14} /> Alle Einträge
         </Link>
-        <Link to="/app/tools/training-hours/summary" className="px-md py-sm border border-kore-border text-small hover:bg-kore-bg transition-colors flex items-center gap-xs">
+        <Link to="/tools/training-hours/summary" className="px-md py-sm border border-kore-border text-small hover:bg-kore-bg transition-colors flex items-center gap-xs">
           <BarChart3 size={14} /> Zusammenfassung
         </Link>
         <button onClick={() => setShowCreate(true)} className="px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90 transition-opacity flex items-center gap-xs">

@@ -9,6 +9,7 @@ import {
   useCheckIn, useCheckOut, useAddItems, useChangeStaff, useCancelSession,
   useFRUsers,
 } from '../../../hooks/useFrConversion';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 export function OverviewPage() {
   const { data: stores } = useFRStores();
@@ -162,6 +163,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-lg max-w-6xl">
+      <Breadcrumb items={[{ label: 'Fitting Room Management' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-lg">
         <div>
@@ -179,10 +181,10 @@ export function OverviewPage() {
           <button onClick={() => refetchSessions()} className="p-sm border border-kore-border text-kore-mid hover:text-kore-ink">
             <RefreshCw size={16} />
           </button>
-          <Link to="/app/tools/fr-conversion/dashboard" className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink">
+          <Link to="/tools/fr-conversion/dashboard" className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink">
             <BarChart3 size={14} /> Reports
           </Link>
-          <Link to="/app/tools/fr-conversion/settings" className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink">
+          <Link to="/tools/fr-conversion/settings" className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink">
             <Settings size={14} /> Einstellungen
           </Link>
         </div>
@@ -252,7 +254,7 @@ export function OverviewPage() {
       {!rooms?.length && (
         <div className="bg-kore-white border border-kore-border p-2xl text-center text-kore-mid mt-lg">
           Noch keine Kabinen angelegt.{' '}
-          <Link to="/app/tools/fr-conversion/settings" className="text-kore-brass underline">Einstellungen</Link>
+          <Link to="/tools/fr-conversion/settings" className="text-kore-brass underline">Einstellungen</Link>
         </div>
       )}
 

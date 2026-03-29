@@ -32,6 +32,50 @@ export function useKpiSummary(dateFrom?: string, dateTo?: string) {
   });
 }
 
+export interface YoYPeriodData {
+  totalRevenue: number;
+  totalTransactions: number;
+  totalFootfall: number;
+  totalUnits: number;
+  avgRevenue: number;
+  avgFootfall: number;
+  avgBasket: number;
+  avgConversion: number;
+  avgUpt: number;
+  storeCount: number;
+  totalEntries: number;
+}
+
+export interface YoYChanges {
+  revenue: number | null;
+  avgRevenue: number | null;
+  footfall: number | null;
+  conversion: number | null;
+  avgBasket: number | null;
+  upt: number | null;
+}
+
+export interface YoYResponse {
+  period: { from: string; to: string };
+  lastYearPeriod: { from: string; to: string };
+  current: YoYPeriodData;
+  lastYear: YoYPeriodData;
+  changes: YoYChanges;
+}
+
+export function useKpiSummaryYoY(dateFrom?: string, dateTo?: string, storeId?: string) {
+  return useQuery({
+    queryKey: ['kpi', 'summary-yoy', dateFrom, dateTo, storeId],
+    queryFn: () => {
+      const params = new URLSearchParams();
+      if (dateFrom) params.set('dateFrom', dateFrom);
+      if (dateTo) params.set('dateTo', dateTo);
+      if (storeId) params.set('storeId', storeId);
+      return api<YoYResponse>(`/api/tools/kpi/summary/yoy?${params}`);
+    },
+  });
+}
+
 export function useKpiTrends(storeId?: string, dateFrom?: string, dateTo?: string) {
   return useQuery({
     queryKey: ['kpi', 'trends', storeId, dateFrom, dateTo],
@@ -42,47 +86,5 @@ export function useKpiTrends(storeId?: string, dateFrom?: string, dateTo?: strin
       if (dateTo) params.set('dateTo', dateTo);
       return api<any[]>(`/api/tools/kpi/trends?${params}`);
     },
-  });
-}
-
-/* ── Year-over-Year Comparison ── */
-
-export interface KpiYoYChange {
-  value: number;
-  improved: boolean;
-}
-
-export interface KpiYoYMetrics {
-  revenue: number;
-  transactions: number;
-  conversionRate: number;
-  avgBasket: number;
-  unitsPerTransaction: number;
-  entryCount: number;
-}
-
-export interface KpiYoYSummary {
-  year: number;
-  prevYear: number;
-  currentYear: KpiYoYMetrics;
-  previousYear: KpiYoYMetrics;
-  changes: {
-    revenue: KpiYoYChange;
-    transactions: KpiYoYChange;
-    conversionRate: KpiYoYChange;
-    avgBasket: KpiYoYChange;
-    unitsPerTransaction: KpiYoYChange;
-  };
-}
-
-export function useKpiSummaryYoY(storeId: string, year?: number) {
-  return useQuery<KpiYoYSummary>({
-    queryKey: ['kpi', 'summary-yoy', storeId, year],
-    queryFn: () => {
-      const params = new URLSearchParams({ storeId });
-      if (year) params.set('year', String(year));
-      return api<KpiYoYSummary>(`/api/tools/kpi/summary/yoy?${params}`);
-    },
-    enabled: !!storeId,
   });
 }

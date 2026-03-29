@@ -16,6 +16,8 @@ import {
   useOnboardingDashboard,
   useOnboardingJourneys,
 } from '../../../hooks/useOnboarding';
+import { Breadcrumb } from '../../../components/Breadcrumb';
+import { StatCardsSkeleton, ListItemSkeleton } from '../../../components/Skeleton';
 
 const STATUS_COLORS: Record<string, string> = {
   IN_PROGRESS: 'bg-emerald-500',
@@ -42,10 +44,11 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-6xl">
+      <Breadcrumb items={[{ label: 'Onboarding' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-2xl">
         <div className="flex items-center gap-md">
-          <Link to="/app/tools" className="text-kore-mid hover:text-kore-ink transition-colors">
+          <Link to="/tools" className="text-kore-mid hover:text-kore-ink transition-colors">
             <ArrowLeft size={20} />
           </Link>
           <div>
@@ -57,13 +60,13 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-md">
           <Link
-            to="/app/tools/onboarding/dashboard"
+            to="/tools/onboarding/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-kore-ink text-small hover:bg-kore-bg transition-colors"
           >
             <BarChart3 size={16} /> Dashboard
           </Link>
           <Link
-            to="/app/tools/onboarding/journeys"
+            to="/tools/onboarding/journeys"
             className="flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90"
           >
             <Plus size={16} /> Alle Journeys
@@ -93,7 +96,9 @@ export function OverviewPage() {
 
       {/* KPI Tiles */}
       {dashLoading ? (
-        <div className="text-body text-kore-mid mb-xl">Lade...</div>
+        <div className="mb-2xl">
+          <StatCardsSkeleton count={4} />
+        </div>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-lg mb-2xl">
           <div className="bg-kore-white border border-kore-border p-lg">
@@ -146,7 +151,7 @@ export function OverviewPage() {
       {/* Navigation cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-lg mb-2xl">
         <Link
-          to="/app/tools/onboarding/templates"
+          to="/tools/onboarding/templates"
           className="bg-kore-white border border-kore-border p-lg hover:border-kore-ink transition-colors"
         >
           <FileText size={20} className="text-kore-brass mb-sm" />
@@ -156,7 +161,7 @@ export function OverviewPage() {
           </p>
         </Link>
         <Link
-          to="/app/tools/onboarding/journeys"
+          to="/tools/onboarding/journeys"
           className="bg-kore-white border border-kore-border p-lg hover:border-kore-ink transition-colors"
         >
           <UserPlus size={20} className="text-kore-brass mb-sm" />
@@ -166,7 +171,7 @@ export function OverviewPage() {
           </p>
         </Link>
         <Link
-          to="/app/tools/onboarding/dashboard"
+          to="/tools/onboarding/dashboard"
           className="bg-kore-white border border-kore-border p-lg hover:border-kore-ink transition-colors"
         >
           <BarChart3 size={20} className="text-kore-brass mb-sm" />
@@ -180,13 +185,13 @@ export function OverviewPage() {
       {/* Active journeys */}
       <h2 className="font-display text-h3 text-kore-ink mb-md">Aktive Einarbeitungen</h2>
       {jLoading ? (
-        <div className="text-body text-kore-mid">Lade...</div>
+        <ListItemSkeleton count={3} />
       ) : !journeys?.data?.length ? (
         <div className="bg-kore-white border border-kore-border p-xl text-center">
           <UserPlus size={36} className="text-kore-faint mx-auto mb-md" />
           <p className="text-body text-kore-mid">Keine aktiven Journeys vorhanden.</p>
           <Link
-            to="/app/tools/onboarding/journeys"
+            to="/tools/onboarding/journeys"
             className="inline-flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90 mt-md"
           >
             <Plus size={14} /> Neue Journey starten

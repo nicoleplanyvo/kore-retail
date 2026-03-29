@@ -8,6 +8,7 @@ import { hasMinRole, type UserRole } from '@kore/types';
 import { Badge } from '@kore/ui';
 import { useNavigate } from 'react-router-dom';
 import t from '../locales/de.json';
+import { StatCardsSkeleton, ListItemSkeleton } from '../components/Skeleton';
 
 function StatsCard({
   icon: Icon,
@@ -54,42 +55,48 @@ function KoreAdminDashboard() {
 
   return (
     <>
+      {statsLoading ? (
+        <div className="mb-2xl">
+          <StatCardsSkeleton count={6} />
+        </div>
+      ) : (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-lg mb-2xl">
         <StatsCard
           icon={Building2}
           label={t.dashboard.totalTenants}
-          value={statsLoading ? '...' : stats?.totalTenants ?? 0}
+          value={stats?.totalTenants ?? 0}
         />
         <StatsCard
           icon={Store}
           label={t.dashboard.totalStores}
-          value={statsLoading ? '...' : stats?.totalStores ?? 0}
+          value={stats?.totalStores ?? 0}
           color="rgba(107, 140, 107, 0.1)"
         />
         <StatsCard
           icon={Wrench}
           label={t.dashboard.totalToolBookings}
-          value={statsLoading ? '...' : stats?.totalToolBookings ?? 0}
+          value={stats?.totalToolBookings ?? 0}
           color="rgba(158, 132, 96, 0.1)"
         />
         <StatsCard
           icon={TrendingUp}
           label={t.dashboard.activeTenants}
-          value={statsLoading ? '...' : stats?.activeTenants ?? 0}
+          value={stats?.activeTenants ?? 0}
         />
         <StatsCard
           icon={Store}
           label={t.dashboard.activeStores}
-          value={statsLoading ? '...' : stats?.activeStores ?? 0}
+          value={stats?.activeStores ?? 0}
           color="rgba(107, 140, 107, 0.1)"
         />
         <StatsCard
           icon={Euro}
           label={t.dashboard.mrr}
-          value={statsLoading ? '...' : formatMrr(stats?.mrr ?? 0)}
+          value={formatMrr(stats?.mrr ?? 0)}
           color="rgba(158, 132, 96, 0.15)"
         />
       </div>
+      )}
 
       <div className="bg-kore-white border border-kore-border">
         <div className="px-xl py-lg border-b border-kore-border">

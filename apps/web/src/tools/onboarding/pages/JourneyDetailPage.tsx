@@ -18,6 +18,7 @@ import {
   useUpdateJourneyStatus,
   useAssignMentor,
 } from '../../../hooks/useOnboarding';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -123,10 +124,11 @@ export function JourneyDetailPage() {
 
   return (
     <div className="p-xl max-w-4xl">
+      <Breadcrumb items={[{ label: 'Onboarding', href: '/app/tools/onboarding' }, { label: 'Einarbeitungen', href: '/app/tools/onboarding/journeys' }, { label: 'Details' }]} />
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
         <Link
-          to="/app/tools/onboarding/journeys"
+          to="/tools/onboarding/journeys"
           className="text-kore-mid hover:text-kore-ink transition-colors"
         >
           <ArrowLeft size={20} />
@@ -353,7 +355,7 @@ export function JourneyDetailPage() {
                             className="flex-1 border border-kore-border px-sm py-xs text-small"
                           />
                           <button
-                            onClick={() => handleCompleteStep(p.step.id, noteInput!.value)}
+                            onClick={() => noteInput && handleCompleteStep(p.step.id, noteInput.value)}
                             disabled={updateStep.isPending}
                             className="px-sm py-xs bg-emerald-600 text-kore-white text-small disabled:opacity-50"
                           >

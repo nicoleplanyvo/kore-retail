@@ -8,6 +8,7 @@ import {
   useOnboardingUsers,
   useCreateOnboardingJourney,
 } from '../../../hooks/useOnboarding';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -74,9 +75,10 @@ export function JourneyListPage() {
 
   return (
     <div className="p-xl max-w-5xl">
+      <Breadcrumb items={[{ label: 'Onboarding', href: '/app/tools/onboarding' }, { label: 'Einarbeitungen' }]} />
       <div className="flex items-center gap-md mb-2xl">
         <Link
-          to="/app/tools/onboarding"
+          to="/tools/onboarding"
           className="text-kore-mid hover:text-kore-ink transition-colors"
         >
           <ArrowLeft size={20} />

@@ -7,6 +7,7 @@ import {
 import {
   usePdpStores, usePdpUsers, useDevelopmentPlans, useCreateDevelopmentPlan,
 } from '../../../hooks/usePdpPip';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const TYPE_LABELS: Record<string, string> = { PDP: 'Entwicklungsplan', PIP: 'Verbesserungsplan' };
 const STATUS_LABELS: Record<string, string> = { ACTIVE: 'Aktiv', COMPLETED: 'Abgeschlossen', CANCELLED: 'Abgebrochen' };
@@ -91,6 +92,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-lg max-w-6xl">
+      <Breadcrumb items={[{ label: 'PDP / PIP' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-lg">
         <div>
@@ -115,7 +117,7 @@ export function OverviewPage() {
             </select>
           )}
           <Link
-            to="/app/tools/pdp-pip/dashboard"
+            to="/tools/pdp-pip/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink"
           >
             <BarChart3 size={14} /> Dashboard

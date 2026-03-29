@@ -2,6 +2,8 @@ import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, ChevronLeft, ChevronRight, Plus, Send, Trash2, Edit3 } from 'lucide-react';
 import { useShifts, useShiftStores, useShiftUsers, useCreateShift, useDeleteShift, usePublishWeek, useUpdateShift } from '../../../hooks/useShiftPlanning';
+import { ShiftGridSkeleton } from '../../../components/Skeleton';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const DAYS = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
 const STATUS_COLORS: Record<string, string> = {
@@ -85,6 +87,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-7xl">
+      <Breadcrumb items={[{ label: 'Schichtplanung' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-xl">
         <div>
@@ -92,9 +95,9 @@ export function OverviewPage() {
           <p className="text-body text-kore-mid mt-xs">Wochenplan: Schichten zuweisen, veroeffentlichen und verwalten</p>
         </div>
         <div className="flex gap-sm">
-          <Link to="/app/tools/shift-planning/availability" className="px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors">Verfuegbarkeiten</Link>
-          <Link to="/app/tools/shift-planning/time-tracking" className="px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors">Zeiterfassung</Link>
-          <Link to="/app/tools/shift-planning/dashboard" className="px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors">Dashboard</Link>
+          <Link to="/tools/shift-planning/availability" className="px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors">Verfuegbarkeiten</Link>
+          <Link to="/tools/shift-planning/time-tracking" className="px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors">Zeiterfassung</Link>
+          <Link to="/tools/shift-planning/dashboard" className="px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors">Dashboard</Link>
         </div>
       </div>
 
@@ -164,7 +167,7 @@ export function OverviewPage() {
 
       {/* Week Grid */}
       {isLoading ? (
-        <div className="text-body text-kore-mid py-xl text-center">Lade Schichtplan...</div>
+        <ShiftGridSkeleton />
       ) : (
         <div className="bg-kore-white border border-kore-border overflow-x-auto">
           <table className="w-full border-collapse min-w-[800px]">

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ClipboardCheck, Plus, BarChart3, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useAppraisals, useAppraisalStores, useAppraisalDashboard } from '../../../hooks/useAppraisals';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const STATUS_LABELS: Record<string, string> = {
   PENDING: 'Entwurf',
@@ -37,6 +38,7 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-5xl">
+      <Breadcrumb items={[{ label: 'Mitarbeiterbeurteilungen' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-2xl">
         <div>
@@ -44,10 +46,10 @@ export function OverviewPage() {
           <p className="text-body text-kore-mid mt-xs">Beurteilungen verwalten, Selbsteinschaetzungen einholen und Gespraeche dokumentieren</p>
         </div>
         <div className="flex gap-sm">
-          <Link to="/app/tools/appraisals/dashboard" className="flex items-center gap-sm border border-kore-border px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors text-kore-ink">
+          <Link to="/tools/appraisals/dashboard" className="flex items-center gap-sm border border-kore-border px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors text-kore-ink">
             <BarChart3 size={16} /> Dashboard
           </Link>
-          <Link to="/app/tools/appraisals/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
+          <Link to="/tools/appraisals/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
             <Plus size={16} /> Neue Beurteilung
           </Link>
         </div>
@@ -99,7 +101,7 @@ export function OverviewPage() {
           <ClipboardCheck size={48} className="text-kore-faint mb-lg" />
           <h2 className="font-display text-h2 text-kore-ink mb-md">Keine Beurteilungen</h2>
           <p className="text-body text-kore-mid max-w-md mb-xl">Erstellen Sie eine neue Mitarbeiterbeurteilung, um den Bewertungsprozess zu starten.</p>
-          <Link to="/app/tools/appraisals/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
+          <Link to="/tools/appraisals/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
             <Plus size={16} /> Neue Beurteilung
           </Link>
         </div>

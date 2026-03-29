@@ -2,6 +2,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { ArrowLeft, MessageSquare, Save, Trash2, FileText } from 'lucide-react';
 import { useCoachingSession, useUpdateCoachingSession, useDeleteCoachingSession, useCreateCoachingTemplate } from '../../../hooks/useCoaching';
+import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const TYPE_LABELS: Record<string, string> = { REGULAR: 'Regulaer', AD_HOC: 'Ad-hoc', FOLLOW_UP: 'Follow-up' };
 const STATUS_LABELS: Record<string, string> = { SCHEDULED: 'Geplant', COMPLETED: 'Abgeschlossen', CANCELLED: 'Abgebrochen' };
@@ -100,9 +101,10 @@ export function SessionDetailPage() {
 
   return (
     <div className="p-xl max-w-4xl">
+      <Breadcrumb items={[{ label: 'Coaching', href: '/app/tools/coaching' }, { label: 'Session' }]} />
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/app/tools/coaching" className="text-kore-mid hover:text-kore-ink transition-colors">
+        <Link to="/tools/coaching" className="text-kore-mid hover:text-kore-ink transition-colors">
           <ArrowLeft size={20} />
         </Link>
         <div className="flex-1">
