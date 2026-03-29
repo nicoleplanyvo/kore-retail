@@ -1,5 +1,5 @@
 import { Badge } from '@kore/ui';
-import { useTools, useToolStats, useToggleToolAssignment } from '../hooks/useTools';
+import { useTools, useToolStats, useToggleToolAssignment, useUpdateTool } from '../hooks/useTools';
 import { TOOL_CATEGORIES, CATEGORY_ORDER } from '../lib/moduleCategories';
 import { Euro, Wrench, BarChart3 } from 'lucide-react';
 import { useStores, useStoreTools } from '../hooks/useStores';
@@ -27,6 +27,7 @@ export function ToolsOverviewPage() {
   const [selectedStore, setSelectedStore] = useState<string>('');
   const { data: storeToolsData } = useStoreTools(selectedStore || undefined);
   const toggleMutation = useToggleToolAssignment();
+  const updateToolMutation = useUpdateTool();
 
   const stores = storesData || [];
 
@@ -51,6 +52,10 @@ export function ToolsOverviewPage() {
       storeId: selectedStore,
       action: isActive ? 'unassign' : 'assign',
     });
+  };
+
+  const handleLearnerToggle = (toolId: string, current: boolean) => {
+    updateToolMutation.mutate({ toolId, learnerAccessible: !current });
   };
 
   return (
@@ -116,6 +121,28 @@ export function ToolsOverviewPage() {
                         <Badge variant="brass">
                           {tool._count.assignments} Stores
                         </Badge>
+                        {/* Learner-Sichtbarkeit Toggle */}
+                        <label
+                          className="flex items-center gap-xs cursor-pointer"
+                          title="Fuer Mitarbeiter sichtbar"
+                        >
+                          <button
+                            onClick={() => handleLearnerToggle(tool.id, tool.learnerAccessible)}
+                            disabled={updateToolMutation.isPending}
+                            className={`relative inline-flex h-[20px] w-[36px] items-center rounded-full transition-colors ${
+                              tool.learnerAccessible ? 'bg-kore-brass' : 'bg-kore-border'
+                            }`}
+                          >
+                            <span
+                              className={`inline-block h-[14px] w-[14px] rounded-full bg-kore-white transition-transform ${
+                                tool.learnerAccessible ? 'translate-x-[18px]' : 'translate-x-[3px]'
+                              }`}
+                            />
+                          </button>
+                          <span className="font-body text-[0.65rem] text-kore-mid whitespace-nowrap">
+                            Mitarbeiter
+                          </span>
+                        </label>
                         {selectedStore ? (
                           <button
                             onClick={() => handleToggle(tool.id, isActive)}

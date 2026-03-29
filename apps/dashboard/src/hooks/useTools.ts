@@ -11,6 +11,7 @@ interface ToolDefinitionWithCount {
   priceMonthly: number;
   isActive: boolean;
   sortOrder: number;
+  learnerAccessible: boolean;
   _count: { assignments: number };
 }
 
@@ -37,6 +38,20 @@ export function useToolStats() {
   return useQuery<ToolStats>({
     queryKey: ['tools', 'stats'],
     queryFn: () => api('/api/admin/tools/stats'),
+  });
+}
+
+export function useUpdateTool() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ toolId, learnerAccessible }: { toolId: string; learnerAccessible: boolean }) =>
+      api(`/api/admin/tools/${toolId}`, {
+        method: 'PUT',
+        body: JSON.stringify({ learnerAccessible }),
+      }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['tools'] });
+    },
   });
 }
 

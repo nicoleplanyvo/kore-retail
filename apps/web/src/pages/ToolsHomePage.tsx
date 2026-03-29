@@ -1,5 +1,5 @@
 import {
-  Wrench,
+  Wrench, PackageOpen,
   ClipboardCheck, Award, TrendingUp, Camera, BookOpen, BarChart3, Wallet,
   LineChart, Package, Monitor, Activity, Palette, GraduationCap,
   Clock, Trophy, UserPlus, MessageSquare, Compass, Star, CalendarDays,
@@ -84,10 +84,24 @@ export function ToolsHomePage() {
         </div>
       ) : !myTools || myTools.length === 0 ? (
         <div className="bg-kore-white border border-kore-border p-2xl text-center">
-          <Wrench size={32} className="text-kore-mid/30 mx-auto mb-md" />
-          <p className="font-body text-kore-mid">Keine Tools zugewiesen.</p>
+          <PackageOpen size={32} className="text-kore-mid/30 mx-auto mb-md" />
+          <p className="font-body text-kore-mid">
+            {user?.role === 'regional_manager'
+              ? 'Dir sind noch keine Regionen zugewiesen.'
+              : user?.role === 'store_manager' || user?.role === 'multisite_manager'
+                ? 'Dir sind noch keine Stores zugewiesen.'
+                : user?.role === 'learner'
+                  ? 'Dir wurden noch keine Tools freigeschaltet.'
+                  : 'Keine Tools gefunden.'}
+          </p>
           <p className="font-body text-small text-kore-mid/60 mt-xs">
-            Kontaktieren Sie Ihren Administrator, um Tools freizuschalten.
+            {user?.role === 'regional_manager'
+              ? 'Bitte wende dich an deinen Kunden-Admin.'
+              : user?.role === 'store_manager' || user?.role === 'multisite_manager'
+                ? 'Bitte wende dich an deinen Admin.'
+                : user?.role === 'learner'
+                  ? 'Bitte wende dich an deinen Store Manager.'
+                  : 'Bitte überprüfe die Tool-Zuweisungen im Dashboard.'}
           </p>
         </div>
       ) : (

@@ -20,6 +20,14 @@ const ROLE_OPTIONS: { value: UserRole; label: string }[] = [
   { value: 'learner', label: 'Mitarbeiter' },
 ];
 
+const ROLE_DESCRIPTIONS: Record<string, string> = {
+  tenant_admin: 'Kann Benutzer, Stores und Tools verwalten. Hat Zugriff auf Reporting und DSGVO.',
+  regional_manager: 'Ueberwacht die Performance einer Region. Kann Multi-Store-Vergleiche und RM-Dashboard nutzen.',
+  multisite_manager: 'Hat Einblick in mehrere zugewiesene Stores und deren KPIs.',
+  store_manager: 'Verwaltet ein Team, Schichtplaene und Store-KPIs. Kann Mitarbeiter anlegen.',
+  learner: 'Mitarbeiter mit Zugriff auf zugewiesene Tools und Trainings.',
+};
+
 export function UserCreatePage() {
   const navigate = useNavigate();
   const user = useAuthStore((s) => s.user);
@@ -121,6 +129,13 @@ export function UserCreatePage() {
               ))}
             </select>
             {errors.role && <p className="font-body text-caption text-kore-error mt-xs">{errors.role.message}</p>}
+            {selectedRole && ROLE_DESCRIPTIONS[selectedRole] && (
+              <div className="mt-sm px-md py-sm bg-kore-surface/50 border border-kore-border/50 rounded-sm">
+                <p className="font-body text-caption text-kore-mid leading-relaxed">
+                  {ROLE_DESCRIPTIONS[selectedRole]}
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Tenant-Auswahl nur für kore_admin */}

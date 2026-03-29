@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import {
-  Home, Wrench, LogOut, X,
+  Home, Wrench, LogOut, X, ExternalLink,
   ClipboardCheck, Award, TrendingUp, Camera, BookOpen, BarChart3, Wallet,
   LineChart, Package, Monitor, Activity, Palette, GraduationCap,
   Clock, Trophy, UserPlus, MessageSquare, Compass, Star, CalendarDays,
@@ -47,6 +47,21 @@ const categoryOrder = [
   'CUSTOMER_STOCK',
   'REGIONAL_INSIGHTS',
 ];
+
+// Rollen-Labels
+const roleLabels: Record<string, string> = {
+  kore_admin: 'Plattform-Admin',
+  tenant_admin: 'Administrator',
+  regional_manager: 'Regional Manager',
+  multisite_manager: 'Multisite Manager',
+  store_manager: 'Store Manager',
+  learner: 'Mitarbeiter',
+};
+
+// Rollen mit Dashboard-Zugang (store_manager und höher)
+const DASHBOARD_ROLES = ['kore_admin', 'tenant_admin', 'regional_manager', 'multisite_manager', 'store_manager'];
+
+const DASHBOARD_URL = 'https://dashboard.kore-retail.de';
 
 interface AppSidebarProps {
   open: boolean;
@@ -171,6 +186,20 @@ export function AppSidebar({ open, onClose }: AppSidebarProps) {
             <div className="px-md mb-md">
               <p className="font-body text-[0.7rem] text-kore-faint truncate">{user.name}</p>
               <p className="font-body text-[0.6rem] text-kore-faint/60 truncate">{user.email}</p>
+              <p className="font-body text-[0.55rem] text-kore-brass-lt/70 uppercase tracking-[0.12em] mt-xs">
+                {roleLabels[user.role] || user.role}
+              </p>
+              {DASHBOARD_ROLES.includes(user.role) && (
+                <a
+                  href={DASHBOARD_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-xs font-body text-[0.6rem] text-kore-faint/60 hover:text-kore-brass-lt transition-colors mt-xs"
+                >
+                  Dashboard öffnen
+                  <ExternalLink size={10} />
+                </a>
+              )}
             </div>
           )}
           <button
