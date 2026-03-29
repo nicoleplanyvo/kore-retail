@@ -106,7 +106,7 @@ app.use('/api/tools/checklisten', checklistenRouter);
 app.use('/api/tools/sop', sopRouter);
 // Tools — VM Foto-Compliance
 app.use('/api/tools/vm-compliance', vmComplianceRouter);
-// Tools — Store Standards
+// Tools — Personalkosten-Planer
 app.use('/api/tools/store-standards', storeStandardsRouter);
 // Tools — KPI Dashboard
 app.use('/api/tools/kpi', kpiDashboardRouter);

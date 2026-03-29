@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Camera, Plus, BarChart3, Eye } from 'lucide-react';
-import { useVmComplianceChecks, useVmComplianceStores } from '../../../hooks/useVmCompliance';
+import { Camera, Plus, BarChart3, Eye, ClipboardCheck } from 'lucide-react';
+import { useVmComplianceChecks, useVmComplianceStores, useVmCompliancePendingCount } from '../../../hooks/useVmCompliance';
 
 const STATUS_LABELS: Record<string, string> = { PENDING: 'Offen', APPROVED: 'Bewertet', REJECTED: 'Abgelehnt' };
 const STATUS_COLORS: Record<string, string> = { PENDING: 'text-amber-600 bg-amber-50', APPROVED: 'text-emerald-600 bg-emerald-50', REJECTED: 'text-red-600 bg-red-50' };
@@ -12,6 +12,7 @@ export function OverviewPage() {
   const [page, setPage] = useState(1);
   const { data: stores } = useVmComplianceStores();
   const { data: result, isLoading } = useVmComplianceChecks(page, storeId || undefined, status || undefined);
+  const { data: pendingCount } = useVmCompliancePendingCount();
   const checks = result?.data ?? [];
   const total = result?.total ?? 0;
 
@@ -23,6 +24,14 @@ export function OverviewPage() {
           <p className="text-body text-kore-mid mt-xs">Visual-Merchandising-Compliance-Checks verwalten und bewerten</p>
         </div>
         <div className="flex gap-md">
+          <Link to="review" className="relative flex items-center gap-sm border border-amber-300 text-amber-700 bg-amber-50 px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-amber-100 transition-colors">
+            <ClipboardCheck size={16} /> Pruefen
+            {typeof pendingCount === 'number' && pendingCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-amber-600 text-kore-white text-caption font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                {pendingCount > 99 ? '99+' : pendingCount}
+              </span>
+            )}
+          </Link>
           <Link to="dashboard" className="flex items-center gap-sm border border-kore-border text-kore-ink px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors">
             <BarChart3 size={16} /> Dashboard
           </Link>

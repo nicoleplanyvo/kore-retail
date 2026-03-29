@@ -314,7 +314,7 @@ export const vmReviewSchema = z.object({
 });
 
 // ============================================================
-// Store Standards — Validators
+// Personalkosten-Planer — Validators
 // ============================================================
 
 export const standardCategoryCreateSchema = z.object({

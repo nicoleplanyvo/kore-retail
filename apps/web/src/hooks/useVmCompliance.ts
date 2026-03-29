@@ -52,3 +52,28 @@ export function useVmComplianceDashboard() {
     queryFn: () => api<any>('/api/tools/vm-compliance/dashboard'),
   });
 }
+
+/** Fetches pending checks for the review queue with optional filters */
+export function useVmCompliancePendingChecks(page = 1, storeId?: string, from?: string, to?: string) {
+  return useQuery({
+    queryKey: ['vmc', 'checks', 'pending', page, storeId, from, to],
+    queryFn: () => {
+      const params = new URLSearchParams({ page: String(page), pageSize: '20', status: 'PENDING' });
+      if (storeId) params.set('storeId', storeId);
+      if (from) params.set('from', from);
+      if (to) params.set('to', to);
+      return api<{ data: any[]; total: number }>(`/api/tools/vm-compliance/checks?${params}`);
+    },
+  });
+}
+
+/** Lightweight count of pending checks (for badge on overview) */
+export function useVmCompliancePendingCount() {
+  return useQuery({
+    queryKey: ['vmc', 'checks', 'pending-count'],
+    queryFn: async () => {
+      const result = await api<{ data: any[]; total: number }>('/api/tools/vm-compliance/checks?status=PENDING&pageSize=1');
+      return result.total;
+    },
+  });
+}

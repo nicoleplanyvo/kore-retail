@@ -102,7 +102,7 @@ async function main() {
   const tools = [
     // STANDARDS & COMPLIANCE
     { key: 'standards.checklisten', name: 'Checklisten', category: 'STANDARDS_COMPLIANCE', description: 'Standardisierte Checklisten für Store-Visits und Audits', icon: 'ClipboardCheck', priceMonthly: 1500, sortOrder: 1, learnerAccessible: true },
-    { key: 'standards.store_standards', name: 'Store Standards', category: 'STANDARDS_COMPLIANCE', description: 'Store-Standards definieren, messen und benchmarken', icon: 'Award', priceMonthly: 1500, sortOrder: 2 },
+    { key: 'standards.store_standards', name: 'Personalkosten-Planer', category: 'STANDARDS_COMPLIANCE', description: 'Budget-Simulation und Personalkosten-Planung pro Store', icon: 'Award', priceMonthly: 1500, sortOrder: 2 },
     { key: 'standards.excellence_tracker', name: 'Excellence Tracker', category: 'STANDARDS_COMPLIANCE', description: 'Store Excellence Audit mit Foto-Proof und Scoring', icon: 'TrendingUp', priceMonthly: 1900, sortOrder: 3 },
     { key: 'standards.vm_foto_compliance', name: 'VM Foto-Compliance', category: 'STANDARDS_COMPLIANCE', description: 'Foto-basierte VM-Compliance-Checks mit KI-Unterstützung', icon: 'Camera', priceMonthly: 1900, sortOrder: 4 },
     { key: 'standards.sop_bibliothek', name: 'SOP Bibliothek', category: 'STANDARDS_COMPLIANCE', description: 'Zentrale Verwaltung aller Standard Operating Procedures', icon: 'BookOpen', priceMonthly: 1500, sortOrder: 5 },
@@ -672,7 +672,7 @@ Alle Mitarbeiter, Koordination durch Store Manager
   }
 
   // ============================================================
-  // Store Standards — KORE Default-Kategorie + Definitionen
+  // Personalkosten-Planer — KORE Default-Kategorie + Definitionen
   // ============================================================
 
   const existingStdCat = await prisma.standardCategory.findFirst({
@@ -707,9 +707,9 @@ Alle Mitarbeiter, Koordination durch Store Manager
       });
     }
 
-    console.log('✓ Store Standards: Kategorie "Basis Standards" + 5 Definitionen erstellt');
+    console.log('✓ Personalkosten-Planer: Kategorie "Basis Standards" + 5 Definitionen erstellt');
   } else {
-    console.log('✓ Store Standards Default-Daten bereits vorhanden');
+    console.log('✓ Personalkosten-Planer Default-Daten bereits vorhanden');
   }
 
   // === FR Conversion Seed (Fitting Room Management) ===

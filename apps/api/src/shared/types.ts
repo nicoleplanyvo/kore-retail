@@ -523,7 +523,7 @@ export interface VmSubmission {
 }
 
 // ============================================================
-// Store Standards Tool — Types
+// Personalkosten-Planer Tool — Types
 // ============================================================
 
 export type StandardOperator = 'GTE' | 'LTE' | 'EQ' | 'GT' | 'LT';

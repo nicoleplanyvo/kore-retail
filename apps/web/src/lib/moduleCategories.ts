@@ -2,7 +2,7 @@
 export const TOOL_CATEGORIES: Record<string, { label: string; description: string; icon: string }> = {
   STANDARDS_COMPLIANCE: {
     label: 'Standards & Compliance',
-    description: 'Checklisten, Store Standards, Foto-Compliance und SOPs',
+    description: 'Checklisten, Personalkosten-Planer, Foto-Compliance und SOPs',
     icon: 'ClipboardCheck',
   },
   PERFORMANCE: {
