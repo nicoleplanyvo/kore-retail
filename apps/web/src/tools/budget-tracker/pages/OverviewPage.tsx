@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Wallet, BarChart3, LayoutDashboard, TrendingUp, AlertTriangle, CheckCircle, Target } from 'lucide-react';
 import {
@@ -7,6 +7,7 @@ import {
   useCreateActual,
 } from '../../../hooks/useBudget';
 import { Breadcrumb } from '../../../components/Breadcrumb';
+import { KoreBarChart } from '../../../components/Charts';
 
 function currentMonth(): string {
   const d = new Date();
@@ -208,11 +209,24 @@ export function OverviewPage() {
             </div>
           </div>
 
-          {/* Weekly Overview */}
+          {/* Weekly Overview Chart */}
           {forecast.weeklyData && forecast.weeklyData.length > 0 && (
             <div className="bg-kore-white border border-kore-border p-xl mb-xl">
               <h2 className="font-display text-h3 text-kore-ink mb-lg">Wochen-Ueberblick</h2>
-              <div className="space-y-md">
+              <KoreBarChart
+                data={forecast.weeklyData.map((w: { week: number; soll: number; ist: number }) => ({
+                  week: `KW ${w.week}`,
+                  Soll: Math.round(w.soll),
+                  Ist: Math.round(w.ist),
+                }))}
+                xKey="week"
+                bars={[
+                  { key: 'Soll', label: 'Soll (EUR)', color: '#6b7280' },
+                  { key: 'Ist', label: 'Ist (EUR)', color: '#b08d57' },
+                ]}
+                height={280}
+              />
+              <div className="space-y-md mt-lg">
                 {forecast.weeklyData.map((w: { week: number; soll: number; ist: number }) => {
                   const pct = w.soll > 0 ? Math.min(100, (w.ist / w.soll) * 100) : 0;
                   return (

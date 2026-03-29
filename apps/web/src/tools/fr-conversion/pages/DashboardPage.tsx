@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, BarChart3, TrendingUp, TrendingDown, Download } from 'lucide-react';
 import { useFRStores, useFRDashboard } from '../../../hooks/useFrConversion';
+import { KoreLineChart, KoreBarChart } from '../../../components/Charts';
 
 const PERIODS = [
   { key: 'today', label: 'Heute' },
@@ -66,7 +67,7 @@ export function DashboardPage() {
     <div className="p-lg max-w-6xl">
       {/* Header */}
       <div className="flex items-center gap-md mb-lg">
-        <Link to="/app/tools/fr-conversion" className="text-kore-mid hover:text-kore-ink"><ArrowLeft size={20} /></Link>
+        <Link to="/tools/fr-conversion" className="text-kore-mid hover:text-kore-ink"><ArrowLeft size={20} /></Link>
         <div className="flex-1">
           <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm"><BarChart3 size={24} /> Reports</h1>
         </div>
@@ -119,53 +120,41 @@ export function DashboardPage() {
         </div>
       )}
 
-      {/* Conversion Trend */}
+      {/* Conversion Trend — recharts */}
       {trends.length > 0 && (
         <div className="bg-kore-white border border-kore-border p-lg mb-xl">
           <h2 className="font-display text-h3 text-kore-ink mb-md">Conversion Trend</h2>
-          <div className="flex items-end gap-1 h-40">
-            {trends.slice(-14).map((t: any, i: number) => {
-              const convH = Math.max((t.avgConversion / 100) * 100, 4);
-              const sessH = Math.max((t.sessions / maxTrendSessions) * 80, 4);
-              const isLast = i === Math.min(trends.length, 14) - 1;
-              return (
-                <div key={i} className="flex-1 flex flex-col items-center h-full justify-end" title={`${t.date}: ${t.avgConversion}% (${t.sessions} Sess.)`}>
-                  <span className="text-xs font-bold mb-1" style={{ color: isLast ? '#16a34a' : '#7c3aed' }}>
-                    {t.avgConversion > 0 ? t.avgConversion + '%' : ''}
-                  </span>
-                  <div className="w-full relative flex-1 flex flex-col justify-end">
-                    <div className="w-full rounded-t" style={{ height: `${convH}%`, background: isLast ? '#16a34a' : '#7c3aed' }} />
-                    <div className="w-full rounded-t opacity-20 absolute bottom-0" style={{ height: `${sessH}%`, background: '#3b82f6' }} />
-                  </div>
-                  <div className="text-xs text-kore-mid mt-1">{t.date.slice(5)}</div>
-                </div>
-              );
-            })}
-          </div>
-          <div className="flex justify-center gap-lg mt-md text-xs text-kore-mid">
-            <span className="flex items-center gap-1"><span className="w-3 h-3 rounded" style={{ background: '#7c3aed' }} /> Conversion %</span>
-            <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-blue-200" /> Sessions</span>
-          </div>
+          <KoreLineChart
+            data={trends.slice(-14).map((t: any) => ({
+              date: t.date?.slice(5) ?? '',
+              Conversion: t.avgConversion ?? 0,
+              Sessions: t.sessions ?? 0,
+            }))}
+            xKey="date"
+            lines={[
+              { key: 'Conversion', label: 'Conversion %', color: '#7c3aed' },
+              { key: 'Sessions', label: 'Sessions', color: '#3b82f6' },
+            ]}
+            height={280}
+          />
         </div>
       )}
 
-      {/* Peak Hours */}
+      {/* Peak Hours — recharts */}
       {peakHours.some((c: number) => c > 0) && (
         <div className="bg-kore-white border border-kore-border p-lg mb-xl">
           <h2 className="text-small font-bold text-kore-mid uppercase mb-md">Peak Times</h2>
-          <div className="flex items-end gap-1 h-28">
-            {peakHours.slice(9, 23).map((count: number, i: number) => {
-              const max = Math.max(...peakHours.slice(9, 23), 1);
-              const h = Math.max((count / max) * 100, 4);
-              const isPeak = count === max && count > 0;
-              return (
-                <div key={i} className="flex-1 flex flex-col items-center justify-end h-full">
-                  <div className={`w-full rounded-t ${isPeak ? 'bg-green-500' : count > max * 0.6 ? 'bg-blue-500' : 'bg-blue-200'}`} style={{ height: `${h}%` }} />
-                  <div className="text-xs text-kore-mid mt-1">{(i + 9).toString().padStart(2, '0')}</div>
-                </div>
-              );
-            })}
-          </div>
+          <KoreBarChart
+            data={peakHours.slice(9, 23).map((count: number, i: number) => ({
+              hour: `${(i + 9).toString().padStart(2, '0')}:00`,
+              Sessions: count,
+            }))}
+            xKey="hour"
+            bars={[
+              { key: 'Sessions', label: 'Sessions', color: '#2563eb' },
+            ]}
+            height={200}
+          />
         </div>
       )}
 

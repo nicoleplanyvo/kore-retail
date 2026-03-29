@@ -11,18 +11,19 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.0.0",
+    "@kore/types": "workspace:*",
+    "@kore/ui": "workspace:*",
+    "@kore/validators": "workspace:*",
+    "@tanstack/react-query": "^5.64.0",
+    "lucide-react": "^0.468.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^7.6.0",
-    "lucide-react": "^0.468.0",
     "react-hook-form": "^7.56.0",
-    "@hookform/resolvers": "^5.0.0",
+    "react-router-dom": "^7.6.0",
+    "recharts": "^3.8.1",
     "zod": "^3.24.0",
-    "@tanstack/react-query": "^5.64.0",
-    "zustand": "^5.0.0",
-    "@kore/ui": "workspace:*",
-    "@kore/types": "workspace:*",
-    "@kore/validators": "workspace:*"
+    "zustand": "^5.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

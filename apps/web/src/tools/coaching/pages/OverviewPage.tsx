@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { MessageSquare, Plus, Calendar, User, BarChart3, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useCoachingSessions, useCoachingStores, useCoachingDashboard } from '../../../hooks/useCoaching';
 import { Breadcrumb } from '../../../components/Breadcrumb';
 import { ListItemSkeleton } from '../../../components/Skeleton';
+import { KorePieChart } from '../../../components/Charts';
 
 const STATUS_LABELS: Record<string, string> = { SCHEDULED: 'Geplant', COMPLETED: 'Abgeschlossen', CANCELLED: 'Abgebrochen' };
 const STATUS_COLORS: Record<string, string> = { SCHEDULED: 'bg-blue-100 text-blue-700', COMPLETED: 'bg-emerald-100 text-emerald-700', CANCELLED: 'bg-red-100 text-red-700' };
@@ -84,6 +85,21 @@ export function OverviewPage() {
           </select>
         </div>
       </div>
+
+      {/* Session Status Distribution */}
+      {dashboard && (dashboard.scheduledSessions > 0 || dashboard.completedSessions > 0 || dashboard.cancelledSessions > 0) && (
+        <div className="bg-kore-white border border-kore-border p-xl mb-xl">
+          <h2 className="font-display text-h3 text-kore-ink mb-lg">Session-Verteilung</h2>
+          <KorePieChart
+            data={[
+              ...(dashboard.completedSessions > 0 ? [{ name: 'Abgeschlossen', value: dashboard.completedSessions }] : []),
+              ...(dashboard.scheduledSessions > 0 ? [{ name: 'Geplant', value: dashboard.scheduledSessions }] : []),
+              ...(dashboard.cancelledSessions > 0 ? [{ name: 'Abgebrochen', value: dashboard.cancelledSessions }] : []),
+            ]}
+            height={280}
+          />
+        </div>
+      )}
 
       {isLoading ? (
         <ListItemSkeleton count={4} />

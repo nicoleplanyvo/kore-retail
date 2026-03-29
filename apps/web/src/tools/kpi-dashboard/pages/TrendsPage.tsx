@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { useKpiTrends, useKpiStores } from '../../../hooks/useKpi';
 import { Breadcrumb } from '../../../components/Breadcrumb';
+import { KoreLineChart } from '../../../components/Charts';
 
 export function TrendsPage() {
   const [storeId, setStoreId] = useState('');
@@ -12,6 +13,15 @@ export function TrendsPage() {
 
   // Find max values for chart scaling
   const maxRevenue = Math.max(1, ...trendData.map((t) => Number(t.avgRevenue ?? 0)));
+
+  // Transform data for recharts
+  const chartData = useMemo(() => trendData.map((t) => ({
+    date: t.date,
+    Umsatz: Math.round(Number(t.avgRevenue ?? 0)),
+    Frequenz: Math.round(Number(t.avgFootfall ?? 0)),
+    Conversion: Number(Number(t.avgConversion ?? 0).toFixed(1)),
+    Bon: Math.round(Number(t.avgBasket ?? 0)),
+  })), [trendData]);
 
   return (
     <div className="p-xl max-w-5xl">
@@ -37,20 +47,32 @@ export function TrendsPage() {
         <div className="text-body text-kore-mid">Keine Trend-Daten vorhanden.</div>
       ) : (
         <div className="space-y-2xl">
-          {/* Umsatz-Trend als einfache Balken */}
+          {/* Umsatz & Frequenz Trend-Chart */}
           <div className="bg-kore-white border border-kore-border p-xl">
-            <h2 className="font-display text-h3 text-kore-ink mb-lg">Umsatz-Trend</h2>
-            <div className="space-y-sm">
-              {trendData.map((t) => (
-                <div key={t.date} className="flex items-center gap-md">
-                  <span className="text-small text-kore-mid w-20 flex-shrink-0">{t.date}</span>
-                  <div className="flex-1 bg-kore-bg h-6 relative">
-                    <div className="bg-kore-ink h-full transition-all" style={{ width: `${(Number(t.avgRevenue ?? 0) / maxRevenue) * 100}%` }} />
-                  </div>
-                  <span className="text-small text-kore-ink w-24 text-right">{Number(t.avgRevenue ?? 0).toLocaleString('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })}</span>
-                </div>
-              ))}
-            </div>
+            <h2 className="font-display text-h3 text-kore-ink mb-lg">Umsatz & Frequenz</h2>
+            <KoreLineChart
+              data={chartData}
+              xKey="date"
+              lines={[
+                { key: 'Umsatz', label: 'Ø Umsatz (EUR)', color: '#b08d57' },
+                { key: 'Frequenz', label: 'Ø Frequenz', color: '#2563eb' },
+              ]}
+              height={320}
+            />
+          </div>
+
+          {/* Conversion & Bon Trend-Chart */}
+          <div className="bg-kore-white border border-kore-border p-xl">
+            <h2 className="font-display text-h3 text-kore-ink mb-lg">Conversion & Bon</h2>
+            <KoreLineChart
+              data={chartData}
+              xKey="date"
+              lines={[
+                { key: 'Conversion', label: 'Ø Conversion (%)', color: '#059669' },
+                { key: 'Bon', label: 'Ø Bon (EUR)', color: '#7c3aed' },
+              ]}
+              height={280}
+            />
           </div>
 
           {/* Kennzahlen-Tabelle */}
