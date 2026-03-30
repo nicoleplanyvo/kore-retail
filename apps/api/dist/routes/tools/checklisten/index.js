@@ -4,7 +4,7 @@ import { authenticate } from '../../../middleware/auth.js';
 import { requireToolAccess } from '../../../middleware/requireToolAccess.js';
 import { z } from 'zod';
 export const checklistenRouter = Router();
-checklistenRouter.use(authenticate, requireToolAccess('operations.checklisten'));
+checklistenRouter.use(authenticate, requireToolAccess('standards.checklisten'));
 // ── Validators ────────────────────────────────────────────
 const templateCreateSchema = z.object({
     name: z.string().min(2).max(120),

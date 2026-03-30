@@ -186,9 +186,10 @@ handoverRouter.post('/', async (req, res) => {
 // GET /:id — Get single handover with user names
 handoverRouter.get('/:id', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
         const toolStoreIds = req.toolStoreIds;
-        const handover = await prisma.handover.findUnique({
-            where: { id: req.params['id'] },
+        const handover = await prisma.handover.findFirst({
+            where: { id: req.params['id'], store: { tenantId } },
             include: handoverInclude,
         });
         if (!handover)
@@ -206,8 +207,9 @@ handoverRouter.get('/:id', async (req, res) => {
 // PUT /:id — Update handover (only DRAFT, only creator)
 handoverRouter.put('/:id', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
         const userId = req.user.sub;
-        const existing = await prisma.handover.findUnique({ where: { id: req.params['id'] } });
+        const existing = await prisma.handover.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
         if (!existing)
             return res.status(404).json({ error: 'Handover nicht gefunden.' });
         if (existing.status !== 'DRAFT')
@@ -232,8 +234,9 @@ handoverRouter.put('/:id', async (req, res) => {
 // POST /:id/submit — Change status from DRAFT to SUBMITTED
 handoverRouter.post('/:id/submit', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
         const userId = req.user.sub;
-        const existing = await prisma.handover.findUnique({ where: { id: req.params['id'] } });
+        const existing = await prisma.handover.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
         if (!existing)
             return res.status(404).json({ error: 'Handover nicht gefunden.' });
         if (existing.status !== 'DRAFT')
@@ -255,8 +258,9 @@ handoverRouter.post('/:id/submit', async (req, res) => {
 // POST /:id/acknowledge — Acknowledge handover (set to ACKNOWLEDGED)
 handoverRouter.post('/:id/acknowledge', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
         const userId = req.user.sub;
-        const existing = await prisma.handover.findUnique({ where: { id: req.params['id'] } });
+        const existing = await prisma.handover.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
         if (!existing)
             return res.status(404).json({ error: 'Handover nicht gefunden.' });
         if (existing.status !== 'SUBMITTED')

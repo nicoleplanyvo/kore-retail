@@ -4,7 +4,7 @@ import { authenticate } from '../../../middleware/auth.js';
 import { requireToolAccess } from '../../../middleware/requireToolAccess.js';
 import { coachingSessionCreateSchema, coachingSessionUpdateSchema, coachingTemplateCreateSchema, } from '../../../shared/validators.js';
 export const coachingRouter = Router();
-coachingRouter.use(authenticate, requireToolAccess('coaching.coaching'));
+coachingRouter.use(authenticate, requireToolAccess('coaching.one_on_one'));
 // ── GET /stores ─────────────────────────────────────
 coachingRouter.get('/stores', async (req, res) => {
     try {

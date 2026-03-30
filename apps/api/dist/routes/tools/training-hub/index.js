@@ -49,8 +49,9 @@ trainingHubRouter.post('/courses', async (req, res) => {
 // GET /courses/:id
 trainingHubRouter.get('/courses/:id', async (req, res) => {
     try {
-        const course = await prisma.course.findUnique({
-            where: { id: req.params['id'] },
+        const tenantId = req.tenantId;
+        const course = await prisma.course.findFirst({
+            where: { id: req.params['id'], tenantId },
             include: { modules: { orderBy: { sortOrder: 'asc' } }, _count: { select: { enrollments: true } } },
         });
         if (!course)
@@ -65,9 +66,14 @@ trainingHubRouter.get('/courses/:id', async (req, res) => {
 // PUT /courses/:id
 trainingHubRouter.put('/courses/:id', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
         const parsed = courseUpdateSchema.safeParse(req.body);
         if (!parsed.success)
             return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
+        // Verify course belongs to tenant before updating
+        const existing = await prisma.course.findFirst({ where: { id: req.params['id'], tenantId } });
+        if (!existing)
+            return res.status(404).json({ error: 'Kurs nicht gefunden.' });
         const course = await prisma.course.update({ where: { id: req.params['id'] }, data: parsed.data });
         res.json(course);
     }
@@ -79,6 +85,11 @@ trainingHubRouter.put('/courses/:id', async (req, res) => {
 // POST /courses/:id/modules
 trainingHubRouter.post('/courses/:id/modules', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
+        // Verify course belongs to tenant before adding module
+        const course = await prisma.course.findFirst({ where: { id: req.params['id'], tenantId } });
+        if (!course)
+            return res.status(404).json({ error: 'Kurs nicht gefunden.' });
         const parsed = courseModuleCreateSchema.safeParse(req.body);
         if (!parsed.success)
             return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
@@ -93,6 +104,11 @@ trainingHubRouter.post('/courses/:id/modules', async (req, res) => {
 // POST /courses/:id/enroll
 trainingHubRouter.post('/courses/:id/enroll', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
+        // Verify course belongs to tenant before enrolling
+        const course = await prisma.course.findFirst({ where: { id: req.params['id'], tenantId } });
+        if (!course)
+            return res.status(404).json({ error: 'Kurs nicht gefunden.' });
         const parsed = enrollmentCreateSchema.safeParse({ ...req.body, courseId: req.params['id'] });
         if (!parsed.success)
             return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
@@ -136,6 +152,13 @@ trainingHubRouter.get('/enrollments', async (req, res) => {
 // PUT /enrollments/:id/progress
 trainingHubRouter.put('/enrollments/:id/progress', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
+        // Verify enrollment belongs to tenant via course relation
+        const existing = await prisma.courseEnrollment.findFirst({
+            where: { id: req.params['id'], course: { tenantId } },
+        });
+        if (!existing)
+            return res.status(404).json({ error: 'Enrollment nicht gefunden.' });
         const parsed = enrollmentProgressSchema.safeParse(req.body);
         if (!parsed.success)
             return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });

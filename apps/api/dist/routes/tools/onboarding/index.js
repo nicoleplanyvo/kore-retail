@@ -81,8 +81,9 @@ onboardingRouter.post('/templates', async (req, res) => {
 // GET /templates/:id
 onboardingRouter.get('/templates/:id', async (req, res) => {
     try {
-        const template = await prisma.onboardingTemplate.findUnique({
-            where: { id: req.params['id'] },
+        const tenantId = req.user.tenantId;
+        const template = await prisma.onboardingTemplate.findFirst({
+            where: { id: req.params['id'], tenantId },
             include: { steps: { orderBy: { sortOrder: 'asc' } }, _count: { select: { journeys: true } } },
         });
         if (!template)
@@ -97,6 +98,10 @@ onboardingRouter.get('/templates/:id', async (req, res) => {
 // PUT /templates/:id
 onboardingRouter.put('/templates/:id', async (req, res) => {
     try {
+        const tenantId = req.user.tenantId;
+        const existing = await prisma.onboardingTemplate.findFirst({ where: { id: req.params['id'], tenantId } });
+        if (!existing)
+            return res.status(404).json({ error: 'Template nicht gefunden.' });
         const parsed = onboardingTemplateCreateSchema.safeParse(req.body);
         if (!parsed.success)
             return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
@@ -118,6 +123,10 @@ onboardingRouter.put('/templates/:id', async (req, res) => {
 // DELETE /templates/:id (soft deactivate)
 onboardingRouter.delete('/templates/:id', async (req, res) => {
     try {
+        const tenantId = req.user.tenantId;
+        const existing = await prisma.onboardingTemplate.findFirst({ where: { id: req.params['id'], tenantId } });
+        if (!existing)
+            return res.status(404).json({ error: 'Template nicht gefunden.' });
         const template = await prisma.onboardingTemplate.update({
             where: { id: req.params['id'] },
             data: { isActive: false },
@@ -191,8 +200,8 @@ onboardingRouter.post('/journeys', async (req, res) => {
         const parsed = onboardingJourneyCreateSchema.safeParse(req.body);
         if (!parsed.success)
             return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
-        const template = await prisma.onboardingTemplate.findUnique({
-            where: { id: parsed.data.templateId },
+        const template = await prisma.onboardingTemplate.findFirst({
+            where: { id: parsed.data.templateId, tenantId },
             include: { steps: true },
         });
         if (!template)
@@ -223,8 +232,9 @@ onboardingRouter.post('/journeys', async (req, res) => {
 // GET /journeys/:id
 onboardingRouter.get('/journeys/:id', async (req, res) => {
     try {
-        const journey = await prisma.onboardingJourney.findUnique({
-            where: { id: req.params['id'] },
+        const tenantId = req.user.tenantId;
+        const journey = await prisma.onboardingJourney.findFirst({
+            where: { id: req.params['id'], tenantId },
             include: {
                 template: { select: { id: true, name: true, durationDays: true } },
                 user: { select: { id: true, name: true } },
@@ -245,6 +255,10 @@ onboardingRouter.get('/journeys/:id', async (req, res) => {
 // PUT /journeys/:id/status — Change journey status (COMPLETE / CANCEL)
 onboardingRouter.put('/journeys/:id/status', async (req, res) => {
     try {
+        const tenantId = req.user.tenantId;
+        const existing = await prisma.onboardingJourney.findFirst({ where: { id: req.params['id'], tenantId } });
+        if (!existing)
+            return res.status(404).json({ error: 'Journey nicht gefunden.' });
         const { status } = req.body;
         if (!['IN_PROGRESS', 'COMPLETED', 'CANCELLED'].includes(status)) {
             return res.status(400).json({ error: 'Ungueltiger Status.' });
@@ -273,6 +287,10 @@ onboardingRouter.put('/journeys/:id/status', async (req, res) => {
 // PUT /journeys/:id/mentor — Assign/change mentor
 onboardingRouter.put('/journeys/:id/mentor', async (req, res) => {
     try {
+        const tenantId = req.user.tenantId;
+        const existing = await prisma.onboardingJourney.findFirst({ where: { id: req.params['id'], tenantId } });
+        if (!existing)
+            return res.status(404).json({ error: 'Journey nicht gefunden.' });
         const { mentorId } = req.body;
         const journey = await prisma.onboardingJourney.update({
             where: { id: req.params['id'] },
@@ -292,6 +310,10 @@ onboardingRouter.put('/journeys/:id/mentor', async (req, res) => {
 // PUT /journeys/:id/steps/:sid — Update step progress
 onboardingRouter.put('/journeys/:id/steps/:sid', async (req, res) => {
     try {
+        const tenantId = req.user.tenantId;
+        const existingJourney = await prisma.onboardingJourney.findFirst({ where: { id: req.params['id'], tenantId } });
+        if (!existingJourney)
+            return res.status(404).json({ error: 'Journey nicht gefunden.' });
         const parsed = onboardingStepUpdateSchema.safeParse(req.body);
         if (!parsed.success)
             return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });

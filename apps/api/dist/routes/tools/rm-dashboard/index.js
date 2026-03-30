@@ -7,7 +7,10 @@ rmDashboardRouter.use(authenticate, requireToolAccess('regional.rm_dashboard'));
 // ── Helper: resolve accessible store IDs ─────────
 async function resolveStoreIds(req) {
     const toolStoreIds = req.toolStoreIds;
+    const tenantId = req.tenantId;
     const storeWhere = {};
+    if (tenantId)
+        storeWhere['tenantId'] = tenantId;
     if (toolStoreIds !== 'all')
         storeWhere['id'] = { in: toolStoreIds };
     const stores = await prisma.store.findMany({ where: storeWhere, select: { id: true } });
@@ -48,7 +51,10 @@ function getDateRange(from, to, period) {
 rmDashboardRouter.get('/stores', async (req, res) => {
     try {
         const toolStoreIds = req.toolStoreIds;
+        const tenantId = req.tenantId;
         const where = { isActive: true };
+        if (tenantId)
+            where['tenantId'] = tenantId;
         if (toolStoreIds !== 'all')
             where['id'] = { in: toolStoreIds };
         const stores = await prisma.store.findMany({
@@ -270,8 +276,9 @@ rmDashboardRouter.get('/store/:storeId', async (req, res) => {
         if (toolStoreIds !== 'all' && !toolStoreIds.includes(storeId)) {
             return res.status(403).json({ error: 'Kein Zugriff auf diesen Store.' });
         }
-        const store = await prisma.store.findUnique({
-            where: { id: storeId },
+        const tenantId = req.tenantId;
+        const store = await prisma.store.findFirst({
+            where: { id: storeId, tenantId },
             select: { id: true, name: true, city: true, address: true, region: { select: { id: true, name: true } } },
         });
         if (!store)

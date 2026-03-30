@@ -4,7 +4,7 @@ import { authenticate } from '../../../middleware/auth.js';
 import { requireToolAccess } from '../../../middleware/requireToolAccess.js';
 import { vmGuidelineDocCreateSchema, vmGuidelineDocUpdateSchema, } from '../../../shared/validators.js';
 export const vmGuidelinesRouter = Router();
-vmGuidelinesRouter.use(authenticate, requireToolAccess('vm.vm_guidelines'));
+vmGuidelinesRouter.use(authenticate, requireToolAccess('floor.vm_guidelines'));
 // GET /stores
 vmGuidelinesRouter.get('/stores', async (req, res) => {
     try {
@@ -75,11 +75,51 @@ vmGuidelinesRouter.post('/', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
+// GET /dashboard — Dashboard-Daten (MUST be before /:id to avoid catch-all)
+vmGuidelinesRouter.get('/dashboard', async (req, res) => {
+    try {
+        const tenantId = req.tenantId;
+        const [totalDocs, published, draft, archived] = await Promise.all([
+            prisma.vmGuidelineDoc.count({ where: { tenantId } }),
+            prisma.vmGuidelineDoc.count({ where: { tenantId, status: 'PUBLISHED' } }),
+            prisma.vmGuidelineDoc.count({ where: { tenantId, status: 'DRAFT' } }),
+            prisma.vmGuidelineDoc.count({ where: { tenantId, status: 'ARCHIVED' } }),
+        ]);
+        const recentUpdates = await prisma.vmGuidelineDoc.findMany({
+            where: { tenantId },
+            orderBy: { updatedAt: 'desc' },
+            take: 5,
+            select: { id: true, title: true, category: true, status: true, updatedAt: true, version: true },
+        });
+        const byCategory = {};
+        const allDocs = await prisma.vmGuidelineDoc.findMany({
+            where: { tenantId, status: 'PUBLISHED' },
+            select: { category: true },
+        });
+        for (const d of allDocs) {
+            const cat = d.category || 'Ohne Kategorie';
+            byCategory[cat] = (byCategory[cat] ?? 0) + 1;
+        }
+        res.json({
+            totalDocs,
+            published,
+            draft,
+            archived,
+            recentUpdates,
+            byCategory,
+        });
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Interner Serverfehler.' });
+    }
+});
 // GET /:id — Einzelne Guideline mit Bildern
 vmGuidelinesRouter.get('/:id', async (req, res) => {
     try {
-        const doc = await prisma.vmGuidelineDoc.findUnique({
-            where: { id: req.params['id'] },
+        const tenantId = req.tenantId;
+        const doc = await prisma.vmGuidelineDoc.findFirst({
+            where: { id: req.params['id'], tenantId },
             include: { images: { orderBy: { sortOrder: 'asc' } } },
         });
         if (!doc)
@@ -94,6 +134,10 @@ vmGuidelinesRouter.get('/:id', async (req, res) => {
 // PUT /:id — Guideline aktualisieren
 vmGuidelinesRouter.put('/:id', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
+        const existing = await prisma.vmGuidelineDoc.findFirst({ where: { id: req.params['id'], tenantId } });
+        if (!existing)
+            return res.status(404).json({ error: 'Guideline nicht gefunden.' });
         const parsed = vmGuidelineDocUpdateSchema.safeParse(req.body);
         if (!parsed.success)
             return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
@@ -111,6 +155,10 @@ vmGuidelinesRouter.put('/:id', async (req, res) => {
 // DELETE /:id — Guideline loeschen (archivieren)
 vmGuidelinesRouter.delete('/:id', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
+        const existing = await prisma.vmGuidelineDoc.findFirst({ where: { id: req.params['id'], tenantId } });
+        if (!existing)
+            return res.status(404).json({ error: 'Guideline nicht gefunden.' });
         await prisma.vmGuidelineDoc.update({
             where: { id: req.params['id'] },
             data: { status: 'ARCHIVED' },
@@ -150,6 +198,10 @@ vmGuidelinesRouter.get('/:id/readers', async (_req, res) => {
 // POST /:id/publish — Veroeffentlichen
 vmGuidelinesRouter.post('/:id/publish', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
+        const existing = await prisma.vmGuidelineDoc.findFirst({ where: { id: req.params['id'], tenantId } });
+        if (!existing)
+            return res.status(404).json({ error: 'Guideline nicht gefunden.' });
         const doc = await prisma.vmGuidelineDoc.update({
             where: { id: req.params['id'] },
             data: { status: 'PUBLISHED', publishedAt: new Date() },
@@ -164,6 +216,10 @@ vmGuidelinesRouter.post('/:id/publish', async (req, res) => {
 // POST /:id/archive — Archivieren
 vmGuidelinesRouter.post('/:id/archive', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
+        const existing = await prisma.vmGuidelineDoc.findFirst({ where: { id: req.params['id'], tenantId } });
+        if (!existing)
+            return res.status(404).json({ error: 'Guideline nicht gefunden.' });
         const doc = await prisma.vmGuidelineDoc.update({
             where: { id: req.params['id'] },
             data: { status: 'ARCHIVED' },
@@ -178,6 +234,10 @@ vmGuidelinesRouter.post('/:id/archive', async (req, res) => {
 // POST /:id/images — Bild zur Guideline hinzufuegen
 vmGuidelinesRouter.post('/:id/images', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
+        const docCheck = await prisma.vmGuidelineDoc.findFirst({ where: { id: req.params['id'], tenantId } });
+        if (!docCheck)
+            return res.status(404).json({ error: 'Guideline nicht gefunden.' });
         const { imagePath, caption, sortOrder } = req.body;
         if (!imagePath)
             return res.status(400).json({ error: 'imagePath erforderlich.' });
@@ -190,45 +250,6 @@ vmGuidelinesRouter.post('/:id/images', async (req, res) => {
             },
         });
         res.status(201).json(image);
-    }
-    catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Interner Serverfehler.' });
-    }
-});
-// GET /dashboard — Dashboard-Daten
-vmGuidelinesRouter.get('/dashboard', async (req, res) => {
-    try {
-        const tenantId = req.tenantId;
-        const [totalDocs, published, draft, archived] = await Promise.all([
-            prisma.vmGuidelineDoc.count({ where: { tenantId } }),
-            prisma.vmGuidelineDoc.count({ where: { tenantId, status: 'PUBLISHED' } }),
-            prisma.vmGuidelineDoc.count({ where: { tenantId, status: 'DRAFT' } }),
-            prisma.vmGuidelineDoc.count({ where: { tenantId, status: 'ARCHIVED' } }),
-        ]);
-        const recentUpdates = await prisma.vmGuidelineDoc.findMany({
-            where: { tenantId },
-            orderBy: { updatedAt: 'desc' },
-            take: 5,
-            select: { id: true, title: true, category: true, status: true, updatedAt: true, version: true },
-        });
-        const byCategory = {};
-        const allDocs = await prisma.vmGuidelineDoc.findMany({
-            where: { tenantId, status: 'PUBLISHED' },
-            select: { category: true },
-        });
-        for (const d of allDocs) {
-            const cat = d.category || 'Ohne Kategorie';
-            byCategory[cat] = (byCategory[cat] ?? 0) + 1;
-        }
-        res.json({
-            totalDocs,
-            published,
-            draft,
-            archived,
-            recentUpdates,
-            byCategory,
-        });
     }
     catch (err) {
         console.error(err);
