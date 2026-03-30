@@ -25,14 +25,14 @@ export function OverviewPage() {
         <Link to="/tools" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div>
           <h1 className="font-display text-h1 text-kore-ink">Training Hub</h1>
-          <p className="text-body text-kore-mid mt-xs">Kurse, Module & Enrollments verwalten</p>
+          <p className="text-body text-kore-mid mt-xs">Kurse, Module & Einschreibungen verwalten</p>
         </div>
       </div>
 
       {report && (
         <div className="grid grid-cols-3 gap-lg mb-xl">
           <div className="bg-kore-white border border-kore-border p-lg">
-            <div className="text-small text-kore-mid mb-xs">Gesamt Enrollments</div>
+            <div className="text-small text-kore-mid mb-xs">Gesamt Einschreibungen</div>
             <div className="text-h2 font-display text-kore-ink">{report.total}</div>
           </div>
           <div className="bg-kore-white border border-kore-border p-lg">
@@ -53,8 +53,8 @@ export function OverviewPage() {
           <option value="PUBLISHED">Veröffentlicht</option>
           <option value="ARCHIVED">Archiviert</option>
         </select>
-        <Link to="/tools/training-hub/enrollments" className="px-md py-sm border border-kore-border text-small hover:bg-kore-bg transition-colors flex items-center gap-xs">
-          <Users size={14} /> Enrollments
+        <Link to="/app/tools/training-hub/enrollments" className="px-md py-sm border border-kore-border text-small hover:bg-kore-bg transition-colors flex items-center gap-xs">
+          <Users size={14} /> Einschreibungen
         </Link>
         <button onClick={() => setShowCreate(true)} className="px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90 transition-opacity flex items-center gap-xs">
           <Plus size={14} /> Neuer Kurs
@@ -86,7 +86,7 @@ export function OverviewPage() {
         <>
           <div className="space-y-md">
             {data.data.map((course: any) => (
-              <Link key={course.id} to={`/tools/training-hub/courses/${course.id}`} className="block bg-kore-white border border-kore-border p-lg hover:border-kore-ink transition-colors">
+              <Link key={course.id} to={`/app/tools/training-hub/courses/${course.id}`} className="block bg-kore-white border border-kore-border p-lg hover:border-kore-ink transition-colors">
                 <div className="flex items-center justify-between mb-sm">
                   <h3 className="font-medium text-kore-ink flex items-center gap-xs">
                     <BookOpen size={16} /> {course.title}

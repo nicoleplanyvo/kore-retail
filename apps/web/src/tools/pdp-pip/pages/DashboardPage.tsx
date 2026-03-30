@@ -29,7 +29,7 @@ export function DashboardPage() {
     <div className="p-lg max-w-6xl">
       {/* Header */}
       <div className="flex items-center gap-md mb-lg">
-        <Link to="/tools/pdp-pip" className="text-kore-mid hover:text-kore-ink">
+        <Link to="/app/tools/pdp-pip" className="text-kore-mid hover:text-kore-ink">
           <ArrowLeft size={20} />
         </Link>
         <div className="flex-1">
@@ -125,7 +125,7 @@ export function DashboardPage() {
                 return (
                   <Link
                     key={d.id}
-                    to={`/tools/pdp-pip/plans/${d.id}`}
+                    to={`/app/tools/pdp-pip/plans/${d.id}`}
                     className="block p-sm border border-kore-border hover:border-kore-ink transition-colors"
                   >
                     <div className="flex items-center justify-between">
@@ -161,7 +161,7 @@ export function DashboardPage() {
               {needsReview.slice(0, 10).map((r: any) => (
                 <Link
                   key={r.id}
-                  to={`/tools/pdp-pip/plans/${r.id}`}
+                  to={`/app/tools/pdp-pip/plans/${r.id}`}
                   className="block p-sm border border-kore-border hover:border-kore-ink transition-colors"
                 >
                   <div className="flex items-center justify-between">

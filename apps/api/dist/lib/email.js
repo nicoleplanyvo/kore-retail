@@ -168,6 +168,65 @@ export function auditConfirmationEmail(data) {
     };
 }
 // ──────────────────────────────────────────────
+// Blog-Freigabe
+// ──────────────────────────────────────────────
+export function blogApprovalEmail(data) {
+    return {
+        from: `Lotta · KORE <${FROM}>`,
+        to: process.env['NOTIFICATION_EMAIL'] ?? 'nicole@kore-retail.de',
+        subject: `Blog-Vorschlag: ${data.title}`,
+        html: baseLayout(`
+      <h2>Neuer Blogbeitrag zur Freigabe</h2>
+      <div class="label">Titel</div>
+      <div class="field" style="font-family: 'Cormorant', Georgia, serif; font-size: 18px; font-weight: 600;">${escapeHtml(data.title)}</div>
+      ${data.excerpt ? `<div class="label">Zusammenfassung</div><div class="field">${escapeHtml(data.excerpt)}</div>` : ''}
+      <div class="label">Vorschau</div>
+      <div class="field" style="max-height: 300px; overflow: hidden;">${data.previewContent}</div>
+      <div class="brass-line"></div>
+      <table width="100%" cellpadding="0" cellspacing="0" style="margin-top: 24px;">
+        <tr>
+          <td align="center" style="padding: 8px;">
+            <a href="${data.approveUrl}" style="display: inline-block; padding: 14px 36px; background: #9E8460; color: #FFFFFF; font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; text-decoration: none;">
+              Freigeben
+            </a>
+          </td>
+          <td align="center" style="padding: 8px;">
+            <a href="${data.rejectUrl}" style="display: inline-block; padding: 14px 36px; border: 1px solid #9E8460; color: #9E8460; font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; text-decoration: none;">
+              Ablehnen
+            </a>
+          </td>
+        </tr>
+      </table>
+    `),
+    };
+}
+// ──────────────────────────────────────────────
+// Passwort-Reset-E-Mail
+// ──────────────────────────────────────────────
+export function passwordResetEmail(data) {
+    return {
+        from: `KORE <${FROM}>`,
+        to: data.email,
+        subject: 'Passwort zurücksetzen — KORE',
+        html: baseLayout(`
+      <h2>Passwort zurücksetzen</h2>
+      <p>Hallo ${escapeHtml(data.name)},</p>
+      <p>Sie haben eine Anfrage zum Zurücksetzen Ihres Passworts gestellt. Klicken Sie auf den Button, um ein neues Passwort festzulegen:</p>
+      <div class="brass-line"></div>
+      <table width="100%" cellpadding="0" cellspacing="0" style="margin: 24px 0;">
+        <tr>
+          <td align="center">
+            <a href="${data.resetUrl}" style="display: inline-block; padding: 14px 36px; background: #9E8460; color: #FFFFFF; font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; text-decoration: none;">
+              Neues Passwort festlegen
+            </a>
+          </td>
+        </tr>
+      </table>
+      <p style="font-size: 13px; color: #9E8460;">Dieser Link ist 1 Stunde gültig. Falls Sie diese Anfrage nicht gestellt haben, ignorieren Sie diese E-Mail.</p>
+    `),
+    };
+}
+// ──────────────────────────────────────────────
 // Helpers
 // ──────────────────────────────────────────────
 function escapeHtml(str) {

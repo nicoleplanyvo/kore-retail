@@ -13,8 +13,8 @@ export function OverviewPage() {
           <p className="text-body text-kore-mid mt-xs">Kennzahlen erfassen, vergleichen und Trends analysieren</p>
         </div>
         <div className="flex gap-md">
-          <Link to="/tools/kpi/trends" className="flex items-center gap-sm border border-kore-border text-kore-ink px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors"><TrendingUp size={16} /> Trends</Link>
-          <Link to="/tools/kpi/entries" className="flex items-center gap-sm bg-kore-ink text-kore-white px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"><List size={16} /> Alle Eintraege</Link>
+          <Link to="/app/tools/kpi/trends" className="flex items-center gap-sm border border-kore-border text-kore-ink px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors"><TrendingUp size={16} /> Trends</Link>
+          <Link to="/app/tools/kpi/entries" className="flex items-center gap-sm bg-kore-ink text-kore-white px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"><List size={16} /> Alle Eintraege</Link>
         </div>
       </div>
 
@@ -61,7 +61,7 @@ export function OverviewPage() {
           <BarChart3 size={48} className="text-kore-faint mb-lg" />
           <h2 className="font-display text-h2 text-kore-ink mb-md">Noch keine KPI-Daten</h2>
           <p className="text-body text-kore-mid max-w-md mb-xl">Erfassen Sie taegliche Kennzahlen, um Ihren Store-Performance-Ueberblick zu starten.</p>
-          <Link to="/tools/kpi/entries" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"><List size={16} /> KPIs erfassen</Link>
+          <Link to="/app/tools/kpi/entries" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"><List size={16} /> KPIs erfassen</Link>
         </div>
       )}
     </div>

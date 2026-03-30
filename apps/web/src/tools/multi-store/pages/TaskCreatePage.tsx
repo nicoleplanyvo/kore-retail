@@ -134,7 +134,7 @@ export function TaskCreatePage() {
       }
 
       await createTask.mutateAsync(payload as any);
-      navigate('/tools/multi-store/tasks');
+      navigate('/app/tools/multi-store/tasks');
     } catch (err: any) {
       setError(err.message || 'Fehler beim Erstellen.');
     }
@@ -144,7 +144,7 @@ export function TaskCreatePage() {
     <div className="p-xl max-w-4xl">
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/multi-store/tasks" className="text-kore-mid hover:text-kore-ink transition-colors">
+        <Link to="/app/tools/multi-store/tasks" className="text-kore-mid hover:text-kore-ink transition-colors">
           <ArrowLeft size={20} />
         </Link>
         <div>
@@ -413,7 +413,7 @@ export function TaskCreatePage() {
       {/* Actions */}
       <div className="flex items-center justify-between border-t border-kore-border pt-lg">
         <Link
-          to="/tools/multi-store/tasks"
+          to="/app/tools/multi-store/tasks"
           className="text-small text-kore-mid hover:text-kore-ink transition-colors"
         >
           Abbrechen

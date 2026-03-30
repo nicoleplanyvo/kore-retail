@@ -166,7 +166,7 @@ export function OverviewPage() {
       <div className="flex items-center justify-between mb-lg">
         <div>
           <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm">
-            <DoorOpen size={24} /> Fitting Room Management
+            <DoorOpen size={24} /> Umkleidekabinen-Management
           </h1>
           <p className="text-body text-kore-mid mt-xs">Umkleidekabinen live verwalten</p>
         </div>
@@ -179,10 +179,10 @@ export function OverviewPage() {
           <button onClick={() => refetchSessions()} className="p-sm border border-kore-border text-kore-mid hover:text-kore-ink">
             <RefreshCw size={16} />
           </button>
-          <Link to="/tools/fr-conversion/dashboard" className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink">
-            <BarChart3 size={14} /> Reports
+          <Link to="/app/tools/fr-conversion/dashboard" className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink">
+            <BarChart3 size={14} /> Berichte
           </Link>
-          <Link to="/tools/fr-conversion/settings" className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink">
+          <Link to="/app/tools/fr-conversion/settings" className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink">
             <Settings size={14} /> Einstellungen
           </Link>
         </div>
@@ -252,7 +252,7 @@ export function OverviewPage() {
       {!rooms?.length && (
         <div className="bg-kore-white border border-kore-border p-2xl text-center text-kore-mid mt-lg">
           Noch keine Kabinen angelegt.{' '}
-          <Link to="/tools/fr-conversion/settings" className="text-kore-brass underline">Einstellungen</Link>
+          <Link to="/app/tools/fr-conversion/settings" className="text-kore-brass underline">Einstellungen</Link>
         </div>
       )}
 

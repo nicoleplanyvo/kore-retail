@@ -74,7 +74,7 @@ export function SessionDetailPage() {
 
   const handleDelete = () => {
     if (!confirm('Session wirklich loeschen?')) return;
-    remove.mutate(session.id, { onSuccess: () => navigate('/tools/coaching') });
+    remove.mutate(session.id, { onSuccess: () => navigate('/app/tools/coaching') });
   };
 
   const handleSaveAsTemplate = () => {
@@ -102,7 +102,7 @@ export function SessionDetailPage() {
     <div className="p-xl max-w-4xl">
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/coaching" className="text-kore-mid hover:text-kore-ink transition-colors">
+        <Link to="/app/tools/coaching" className="text-kore-mid hover:text-kore-ink transition-colors">
           <ArrowLeft size={20} />
         </Link>
         <div className="flex-1">

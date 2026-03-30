@@ -115,7 +115,7 @@ export function OverviewPage() {
             </select>
           )}
           <Link
-            to="/tools/pdp-pip/dashboard"
+            to="/app/tools/pdp-pip/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink"
           >
             <BarChart3 size={14} /> Dashboard
@@ -307,7 +307,7 @@ export function OverviewPage() {
           {plans.map((p: any) => (
             <Link
               key={p.id}
-              to={`/tools/pdp-pip/plans/${p.id}`}
+              to={`/app/tools/pdp-pip/plans/${p.id}`}
               className="block bg-kore-white border border-kore-border p-md hover:border-kore-ink transition-colors"
             >
               <div className="flex items-center justify-between">

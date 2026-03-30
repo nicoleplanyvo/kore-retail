@@ -1,5 +1,6 @@
 import { User, Menu } from 'lucide-react';
 import { useAuthStore } from '../stores/authStore';
+import { NotificationBell } from './NotificationBell';
 
 const ROLE_LABELS: Record<string, string> = {
   kore_admin: 'Super Admin',
@@ -31,6 +32,7 @@ export function AppTopBar({ onMenuToggle }: AppTopBarProps) {
       <div className="hidden lg:block" />
 
       <div className="flex items-center gap-md-sm">
+        <NotificationBell />
         <span className="font-body text-caption text-kore-mid hidden sm:inline">
           {ROLE_LABELS[user?.role || ''] || ''}
         </span>

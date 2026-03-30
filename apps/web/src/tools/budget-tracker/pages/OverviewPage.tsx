@@ -66,13 +66,13 @@ export function OverviewPage() {
         </div>
         <div className="flex gap-sm">
           <Link
-            to="/tools/budget/detail"
+            to="/app/tools/budget/detail"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors"
           >
             <BarChart3 size={14} /> Detail
           </Link>
           <Link
-            to="/tools/budget/dashboard"
+            to="/app/tools/budget/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors"
           >
             <LayoutDashboard size={14} /> Dashboard
@@ -109,7 +109,7 @@ export function OverviewPage() {
             Erfassen Sie zuerst ein Soll-Ziel fuer diesen Monat in der Detailansicht.
           </p>
           <Link
-            to="/tools/budget/detail"
+            to="/app/tools/budget/detail"
             className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"
           >
             <BarChart3 size={16} /> Zur Detailansicht

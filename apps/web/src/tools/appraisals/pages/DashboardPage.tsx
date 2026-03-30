@@ -21,7 +21,7 @@ export function DashboardPage() {
     <div className="p-xl max-w-5xl">
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/appraisals" className="text-kore-mid hover:text-kore-ink transition-colors">
+        <Link to="/app/tools/appraisals" className="text-kore-mid hover:text-kore-ink transition-colors">
           <ArrowLeft size={20} />
         </Link>
         <div className="flex-1">
@@ -128,7 +128,7 @@ export function DashboardPage() {
                 {dashboard.dueSoon.map((item: any) => (
                   <Link
                     key={item.id}
-                    to={`/tools/appraisals/appraisals/${item.id}`}
+                    to={`/app/tools/appraisals/appraisals/${item.id}`}
                     className="flex items-center justify-between p-md border border-kore-border hover:border-kore-ink transition-colors"
                   >
                     <span className="text-body text-kore-ink">{item.employeeName}</span>

@@ -252,6 +252,38 @@ export function blogApprovalEmail(data: {
 }
 
 // ──────────────────────────────────────────────
+// Passwort-Reset-E-Mail
+// ──────────────────────────────────────────────
+
+export function passwordResetEmail(data: {
+  name: string;
+  email: string;
+  resetUrl: string;
+}): EmailPayload {
+  return {
+    from: `KORE <${FROM}>`,
+    to: data.email,
+    subject: 'Passwort zurücksetzen — KORE',
+    html: baseLayout(`
+      <h2>Passwort zurücksetzen</h2>
+      <p>Hallo ${escapeHtml(data.name)},</p>
+      <p>Sie haben eine Anfrage zum Zurücksetzen Ihres Passworts gestellt. Klicken Sie auf den Button, um ein neues Passwort festzulegen:</p>
+      <div class="brass-line"></div>
+      <table width="100%" cellpadding="0" cellspacing="0" style="margin: 24px 0;">
+        <tr>
+          <td align="center">
+            <a href="${data.resetUrl}" style="display: inline-block; padding: 14px 36px; background: #9E8460; color: #FFFFFF; font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; text-decoration: none;">
+              Neues Passwort festlegen
+            </a>
+          </td>
+        </tr>
+      </table>
+      <p style="font-size: 13px; color: #9E8460;">Dieser Link ist 1 Stunde gültig. Falls Sie diese Anfrage nicht gestellt haben, ignorieren Sie diese E-Mail.</p>
+    `),
+  };
+}
+
+// ──────────────────────────────────────────────
 // Helpers
 // ──────────────────────────────────────────────
 

@@ -60,7 +60,7 @@ export function AppointmentsPage() {
     <div className="p-xl max-w-5xl">
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/clienteling" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+        <Link to="/app/tools/clienteling" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div className="flex-1">
           <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm"><Calendar size={24} /> Termine</h1>
           <p className="text-body text-kore-mid mt-xs">Kundentermine planen und verwalten</p>
@@ -173,7 +173,7 @@ export function AppointmentsPage() {
                           {a.store && <span>{a.store.name}</span>}
                           {a.advisor && <span>Berater: {a.advisor.name}</span>}
                           {a.client && (
-                            <Link to={`/tools/clienteling/customers/${a.client.id}`} className="flex items-center gap-xs hover:text-kore-ink transition-colors">
+                            <Link to={`/app/tools/clienteling/customers/${a.client.id}`} className="flex items-center gap-xs hover:text-kore-ink transition-colors">
                               {a.client.firstName} {a.client.lastName}
                               {a.client.vipLevel && <Star size={10} className="text-amber-500" />}
                             </Link>

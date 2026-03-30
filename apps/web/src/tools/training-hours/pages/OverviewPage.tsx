@@ -27,7 +27,7 @@ export function OverviewPage() {
       <div className="flex items-center gap-md mb-2xl">
         <Link to="/tools" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div>
-          <h1 className="font-display text-h1 text-kore-ink">Training Hours</h1>
+          <h1 className="font-display text-h1 text-kore-ink">Trainingsstunden</h1>
           <p className="text-body text-kore-mid mt-xs">Schulungsstunden erfassen & auswerten</p>
         </div>
       </div>
@@ -37,10 +37,10 @@ export function OverviewPage() {
           <option value="">Alle Stores</option>
           {(stores ?? []).map((s: any) => <option key={s.id} value={s.id}>{s.name}</option>)}
         </select>
-        <Link to="/tools/training-hours/logs" className="px-md py-sm border border-kore-border text-small hover:bg-kore-bg transition-colors flex items-center gap-xs">
+        <Link to="/app/tools/training-hours/logs" className="px-md py-sm border border-kore-border text-small hover:bg-kore-bg transition-colors flex items-center gap-xs">
           <List size={14} /> Alle Einträge
         </Link>
-        <Link to="/tools/training-hours/summary" className="px-md py-sm border border-kore-border text-small hover:bg-kore-bg transition-colors flex items-center gap-xs">
+        <Link to="/app/tools/training-hours/summary" className="px-md py-sm border border-kore-border text-small hover:bg-kore-bg transition-colors flex items-center gap-xs">
           <BarChart3 size={14} /> Zusammenfassung
         </Link>
         <button onClick={() => setShowCreate(true)} className="px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90 transition-opacity flex items-center gap-xs">

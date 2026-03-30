@@ -31,7 +31,7 @@ export function DashboardPage() {
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
         <Link
-          to="/tools/inventory"
+          to="/app/tools/inventory"
           className="text-kore-mid hover:text-kore-ink transition-colors"
         >
           <ArrowLeft size={20} />

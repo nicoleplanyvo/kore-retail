@@ -37,5 +37,17 @@ export declare function auditConfirmationEmail(data: {
     email: string;
     company: string;
 }): EmailPayload;
+export declare function blogApprovalEmail(data: {
+    title: string;
+    excerpt: string;
+    previewContent: string;
+    approveUrl: string;
+    rejectUrl: string;
+}): EmailPayload;
+export declare function passwordResetEmail(data: {
+    name: string;
+    email: string;
+    resetUrl: string;
+}): EmailPayload;
 export {};
 //# sourceMappingURL=email.d.ts.map

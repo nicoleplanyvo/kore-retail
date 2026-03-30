@@ -76,7 +76,7 @@ export function JourneyListPage() {
     <div className="p-xl max-w-5xl">
       <div className="flex items-center gap-md mb-2xl">
         <Link
-          to="/tools/onboarding"
+          to="/app/tools/onboarding"
           className="text-kore-mid hover:text-kore-ink transition-colors"
         >
           <ArrowLeft size={20} />
@@ -256,7 +256,7 @@ export function JourneyListPage() {
             {data.data.map((j: any) => (
               <Link
                 key={j.id}
-                to={`/tools/onboarding/journeys/${j.id}`}
+                to={`/app/tools/onboarding/journeys/${j.id}`}
                 className="block bg-kore-white border border-kore-border p-lg hover:border-kore-ink transition-colors"
               >
                 <div className="flex items-center justify-between mb-xs">

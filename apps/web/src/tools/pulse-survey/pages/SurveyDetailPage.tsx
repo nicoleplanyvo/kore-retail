@@ -82,7 +82,7 @@ export function SurveyDetailPage() {
     <div className="p-xl max-w-4xl">
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/pulse-survey" className="text-kore-mid hover:text-kore-ink transition-colors">
+        <Link to="/app/tools/pulse-survey" className="text-kore-mid hover:text-kore-ink transition-colors">
           <ArrowLeft size={20} />
         </Link>
         <div className="flex-1">
@@ -114,7 +114,7 @@ export function SurveyDetailPage() {
           {survey.status === 'ACTIVE' && (
             <>
               <Link
-                to={`/tools/pulse-survey/surveys/${id}/respond`}
+                to={`/app/tools/pulse-survey/surveys/${id}/respond`}
                 className="flex items-center gap-xs px-md py-sm bg-kore-brass text-kore-white text-small hover:opacity-90"
               >
                 <MessageSquare size={14} /> Teilnehmen
@@ -129,7 +129,7 @@ export function SurveyDetailPage() {
           )}
           {(survey.status === 'ACTIVE' || survey.status === 'CLOSED') && (
             <Link
-              to={`/tools/pulse-survey/surveys/${id}/results`}
+              to={`/app/tools/pulse-survey/surveys/${id}/results`}
               className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink"
             >
               <BarChart3 size={14} /> Ergebnisse

@@ -35,7 +35,7 @@ export function SummaryPage() {
 
   return (
     <div className="p-xl max-w-5xl">
-      <Link to="/tools/store-standards" className="flex items-center gap-xs text-small text-kore-mid hover:text-kore-ink mb-lg print:hidden">
+      <Link to="/app/tools/store-standards" className="flex items-center gap-xs text-small text-kore-mid hover:text-kore-ink mb-lg print:hidden">
         <ArrowLeft size={14} /> Zurueck zur Uebersicht
       </Link>
 

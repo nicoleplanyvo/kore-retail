@@ -123,6 +123,8 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
   passwordHash: 'passwordHash',
   role: 'role',
+  avatarPath: 'avatarPath',
+  managerId: 'managerId',
   tenantId: 'tenantId',
   isActive: 'isActive',
   lastLoginAt: 'lastLoginAt',
@@ -1340,6 +1342,76 @@ exports.Prisma.FRSessionScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.BlogPostScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  excerpt: 'excerpt',
+  content: 'content',
+  coverImageUrl: 'coverImageUrl',
+  author: 'author',
+  status: 'status',
+  approvalToken: 'approvalToken',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.InvitationTokenScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  userId: 'userId',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.PasswordResetTokenScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  userId: 'userId',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ConversationScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  isGroup: 'isGroup',
+  groupName: 'groupName',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ConversationParticipantScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  userId: 'userId',
+  lastReadAt: 'lastReadAt',
+  joinedAt: 'joinedAt'
+};
+
+exports.Prisma.DirectMessageScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  senderId: 'senderId',
+  content: 'content',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  userId: 'userId',
+  type: 'type',
+  title: 'title',
+  body: 'body',
+  link: 'link',
+  isRead: 'isRead',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1447,7 +1519,14 @@ exports.Prisma.ModelName = {
   BudgetScenario: 'BudgetScenario',
   FRSettings: 'FRSettings',
   FRRoom: 'FRRoom',
-  FRSession: 'FRSession'
+  FRSession: 'FRSession',
+  BlogPost: 'BlogPost',
+  InvitationToken: 'InvitationToken',
+  PasswordResetToken: 'PasswordResetToken',
+  Conversation: 'Conversation',
+  ConversationParticipant: 'ConversationParticipant',
+  DirectMessage: 'DirectMessage',
+  Notification: 'Notification'
 };
 
 /**

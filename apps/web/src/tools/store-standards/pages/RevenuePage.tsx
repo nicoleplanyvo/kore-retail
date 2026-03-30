@@ -17,7 +17,7 @@ export function RevenuePage() {
 
   return (
     <div className="p-xl max-w-5xl">
-      <Link to="/tools/store-standards" className="flex items-center gap-xs text-small text-kore-mid hover:text-kore-ink mb-lg">
+      <Link to="/app/tools/store-standards" className="flex items-center gap-xs text-small text-kore-mid hover:text-kore-ink mb-lg">
         <ArrowLeft size={14} /> Zurueck zur Uebersicht
       </Link>
       <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm mb-xs">

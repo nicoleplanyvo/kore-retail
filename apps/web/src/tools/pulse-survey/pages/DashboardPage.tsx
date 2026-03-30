@@ -28,12 +28,12 @@ export function DashboardPage() {
     <div className="p-xl max-w-6xl">
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/pulse-survey" className="text-kore-mid hover:text-kore-ink">
+        <Link to="/app/tools/pulse-survey" className="text-kore-mid hover:text-kore-ink">
           <ArrowLeft size={20} />
         </Link>
         <div>
           <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm">
-            <BarChart3 size={24} /> Pulse Survey Dashboard
+            <BarChart3 size={24} /> Stimmungsbarometer Dashboard
           </h1>
           <p className="text-body text-kore-mid mt-xs">
             Gesamtuebersicht aller Mitarbeiterbefragungen.
@@ -94,7 +94,7 @@ export function DashboardPage() {
               {recentSurveys.map((sv: any) => (
                 <tr key={sv.id} className="border-b border-kore-border last:border-0 hover:bg-kore-bg/50 transition-colors">
                   <td className="px-md py-sm">
-                    <Link to={`/tools/pulse-survey/surveys/${sv.id}`} className="text-kore-ink font-medium hover:text-kore-brass">
+                    <Link to={`/app/tools/pulse-survey/surveys/${sv.id}`} className="text-kore-ink font-medium hover:text-kore-brass">
                       {sv.title}
                     </Link>
                   </td>
@@ -132,7 +132,7 @@ export function DashboardPage() {
             Erstellen Sie Ihre erste Mitarbeiterbefragung, um hier Ergebnisse zu sehen.
           </p>
           <Link
-            to="/tools/pulse-survey"
+            to="/app/tools/pulse-survey"
             className="flex items-center gap-xs px-lg py-sm bg-kore-ink text-kore-white text-small hover:opacity-90"
           >
             <TrendingUp size={16} /> Zur Uebersicht

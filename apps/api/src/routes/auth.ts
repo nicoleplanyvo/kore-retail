@@ -1,9 +1,12 @@
 import { Router, type Router as RouterType } from 'express';
+import crypto from 'crypto';
 import bcrypt from 'bcryptjs';
 import prisma from '../lib/prisma.js';
 import { signAccessToken, signRefreshToken, verifyRefreshToken } from '../lib/jwt.js';
 import { authenticate, requireRole } from '../middleware/auth.js';
 import { loginSchema } from '../shared/validators.js';
+import { sendEmail, passwordResetEmail } from '../lib/email.js';
+import { createNotification } from '../lib/notifications.js';
 
 export const authRouter: RouterType = Router();
 
@@ -52,6 +55,11 @@ authRouter.post('/login', async (req, res) => {
 
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user || !user.isActive) {
+      res.status(401).json({ error: 'Ungültige Anmeldedaten.' });
+      return;
+    }
+
+    if (!user.passwordHash) {
       res.status(401).json({ error: 'Ungültige Anmeldedaten.' });
       return;
     }
@@ -219,6 +227,230 @@ authRouter.post('/stop-impersonation', authenticate, async (req, res) => {
     res.json({ accessToken, user: authUser });
   } catch (err) {
     console.error('Stop impersonation error:', err);
+    res.status(500).json({ error: 'Interner Serverfehler.' });
+  }
+});
+
+// ──────────────────────────────────────────────
+// Passwort vergessen / zurücksetzen / Einladung
+// ──────────────────────────────────────────────
+
+const APP_URL = process.env['APP_URL'] || 'https://app.kore-retail.de';
+
+// POST /api/auth/forgot-password — Public
+authRouter.post('/forgot-password', async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email || typeof email !== 'string') {
+      res.status(400).json({ error: 'E-Mail-Adresse ist erforderlich.' });
+      return;
+    }
+
+    // Always return 200 to not reveal whether email exists
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (user && user.isActive) {
+      const token = crypto.randomUUID();
+      const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+
+      await prisma.passwordResetToken.create({
+        data: {
+          token,
+          userId: user.id,
+          expiresAt,
+        },
+      });
+
+      const resetUrl = `${APP_URL}/reset-password/${token}`;
+      await sendEmail(passwordResetEmail({
+        name: user.name,
+        email: user.email,
+        resetUrl,
+      }));
+    }
+
+    res.json({ success: true, message: 'Falls ein Konto mit dieser E-Mail existiert, wurde eine E-Mail gesendet.' });
+  } catch (err) {
+    console.error('Forgot password error:', err);
+    res.status(500).json({ error: 'Interner Serverfehler.' });
+  }
+});
+
+// POST /api/auth/reset-password — Public
+authRouter.post('/reset-password', async (req, res) => {
+  try {
+    const { token, password } = req.body;
+    if (!token || typeof token !== 'string') {
+      res.status(400).json({ error: 'Token ist erforderlich.' });
+      return;
+    }
+    if (!password || typeof password !== 'string' || password.length < 8) {
+      res.status(400).json({ error: 'Passwort muss mindestens 8 Zeichen haben.' });
+      return;
+    }
+
+    const resetToken = await prisma.passwordResetToken.findUnique({ where: { token } });
+    if (!resetToken) {
+      res.status(400).json({ error: 'Ungültiger oder abgelaufener Link.' });
+      return;
+    }
+    if (resetToken.usedAt) {
+      res.status(400).json({ error: 'Dieser Link wurde bereits verwendet.' });
+      return;
+    }
+    if (resetToken.expiresAt < new Date()) {
+      res.status(400).json({ error: 'Dieser Link ist abgelaufen.' });
+      return;
+    }
+
+    const passwordHash = await bcrypt.hash(password, 12);
+
+    await prisma.user.update({
+      where: { id: resetToken.userId },
+      data: { passwordHash },
+    });
+
+    await prisma.passwordResetToken.update({
+      where: { id: resetToken.id },
+      data: { usedAt: new Date() },
+    });
+
+    res.json({ success: true, message: 'Passwort erfolgreich zurückgesetzt.' });
+  } catch (err) {
+    console.error('Reset password error:', err);
+    res.status(500).json({ error: 'Interner Serverfehler.' });
+  }
+});
+
+// POST /api/auth/accept-invite — Public
+authRouter.post('/accept-invite', async (req, res) => {
+  try {
+    const { token, password } = req.body;
+    if (!token || typeof token !== 'string') {
+      res.status(400).json({ error: 'Token ist erforderlich.' });
+      return;
+    }
+    if (!password || typeof password !== 'string' || password.length < 8) {
+      res.status(400).json({ error: 'Passwort muss mindestens 8 Zeichen haben.' });
+      return;
+    }
+
+    const inviteToken = await prisma.invitationToken.findUnique({ where: { token } });
+    if (!inviteToken) {
+      res.status(400).json({ error: 'Ungültiger oder abgelaufener Einladungslink.' });
+      return;
+    }
+    if (inviteToken.usedAt) {
+      res.status(400).json({ error: 'Diese Einladung wurde bereits angenommen.' });
+      return;
+    }
+    if (inviteToken.expiresAt < new Date()) {
+      res.status(400).json({ error: 'Diese Einladung ist abgelaufen.' });
+      return;
+    }
+
+    const passwordHash = await bcrypt.hash(password, 12);
+
+    const user = await prisma.user.update({
+      where: { id: inviteToken.userId },
+      data: {
+        passwordHash,
+        isActive: true,
+      },
+    });
+
+    await prisma.invitationToken.update({
+      where: { id: inviteToken.id },
+      data: { usedAt: new Date() },
+    });
+
+    // Auto-login: generate tokens
+    const accessToken = signAccessToken({
+      sub: user.id,
+      tenantId: user.tenantId,
+      role: user.role,
+    });
+
+    const refreshToken = signRefreshToken(user.id);
+
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: process.env['NODE_ENV'] === 'production',
+      sameSite: 'lax',
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 Tage
+      path: '/api/auth',
+    });
+
+    const authUser = await buildAuthResponse(user.id);
+
+    res.json({ success: true, accessToken, user: authUser });
+
+    // ── Notification trigger: notify admins about accepted invite ──
+    try {
+      if (user.tenantId) {
+        const admins = await prisma.user.findMany({
+          where: {
+            tenantId: user.tenantId,
+            role: { in: ['tenant_admin', 'kore_admin'] },
+            isActive: true,
+            id: { not: user.id },
+          },
+          select: { id: true },
+        });
+
+        for (const admin of admins) {
+          await createNotification({
+            tenantId: user.tenantId,
+            userId: admin.id,
+            type: 'invite_accepted',
+            title: `${user.name} hat die Einladung angenommen`,
+            link: '/app/orgchart',
+          });
+        }
+      }
+    } catch (notifErr) {
+      console.error('Notification error (invite_accepted):', notifErr);
+    }
+  } catch (err) {
+    console.error('Accept invite error:', err);
+    res.status(500).json({ error: 'Interner Serverfehler.' });
+  }
+});
+
+// PUT /api/auth/change-password — Requires auth
+authRouter.put('/change-password', authenticate, async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    if (!currentPassword || typeof currentPassword !== 'string') {
+      res.status(400).json({ error: 'Aktuelles Passwort ist erforderlich.' });
+      return;
+    }
+    if (!newPassword || typeof newPassword !== 'string' || newPassword.length < 8) {
+      res.status(400).json({ error: 'Neues Passwort muss mindestens 8 Zeichen haben.' });
+      return;
+    }
+
+    const user = await prisma.user.findUnique({ where: { id: req.user!.sub } });
+    if (!user || !user.passwordHash) {
+      res.status(400).json({ error: 'Passwortänderung nicht möglich.' });
+      return;
+    }
+
+    const valid = await bcrypt.compare(currentPassword, user.passwordHash);
+    if (!valid) {
+      res.status(401).json({ error: 'Aktuelles Passwort ist falsch.' });
+      return;
+    }
+
+    const passwordHash = await bcrypt.hash(newPassword, 12);
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { passwordHash },
+    });
+
+    res.json({ success: true, message: 'Passwort erfolgreich geändert.' });
+  } catch (err) {
+    console.error('Change password error:', err);
     res.status(500).json({ error: 'Interner Serverfehler.' });
   }
 });

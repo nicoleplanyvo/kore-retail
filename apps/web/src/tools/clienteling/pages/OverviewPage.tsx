@@ -37,10 +37,10 @@ export function OverviewPage() {
           <p className="text-body text-kore-mid mt-xs">Kundenpflege, Kommunikation und Terminverwaltung</p>
         </div>
         <div className="flex items-center gap-sm">
-          <Link to="/tools/clienteling/appointments" className="flex items-center gap-xs px-lg py-md-sm bg-kore-white border border-kore-border text-kore-ink text-small font-medium uppercase tracking-widest hover:border-kore-ink transition-colors">
+          <Link to="/app/tools/clienteling/appointments" className="flex items-center gap-xs px-lg py-md-sm bg-kore-white border border-kore-border text-kore-ink text-small font-medium uppercase tracking-widest hover:border-kore-ink transition-colors">
             <Calendar size={16} /> Termine
           </Link>
-          <Link to="/tools/clienteling/customers/create" className="flex items-center gap-xs px-lg py-md-sm bg-kore-ink text-kore-white text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
+          <Link to="/app/tools/clienteling/customers/create" className="flex items-center gap-xs px-lg py-md-sm bg-kore-ink text-kore-white text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
             <Plus size={16} /> Neuer Kunde
           </Link>
         </div>
@@ -105,7 +105,7 @@ export function OverviewPage() {
           <Users size={48} className="text-kore-faint mb-lg" />
           <h2 className="font-display text-h2 text-kore-ink mb-md">Noch keine Kunden</h2>
           <p className="text-body text-kore-mid max-w-md mb-xl">Legen Sie Ihren ersten Kunden an, um mit dem Clienteling zu beginnen.</p>
-          <Link to="/tools/clienteling/customers/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
+          <Link to="/app/tools/clienteling/customers/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
             <Plus size={16} /> Kunden anlegen
           </Link>
         </div>
@@ -115,7 +115,7 @@ export function OverviewPage() {
             {customers.map((c: any) => (
               <Link
                 key={c.id}
-                to={`/tools/clienteling/customers/${c.id}`}
+                to={`/app/tools/clienteling/customers/${c.id}`}
                 className="block bg-kore-white border border-kore-border p-lg hover:border-kore-ink transition-colors"
               >
                 <div className="flex items-center justify-between">

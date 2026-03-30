@@ -117,14 +117,14 @@ export function EditorPage() {
   const handleArchive = () => {
     if (!confirm('Newsletter archivieren?')) return;
     archiveNl.mutate(newsletter.id, {
-      onSuccess: () => navigate('/tools/newsletter'),
+      onSuccess: () => navigate('/app/tools/newsletter'),
     });
   };
 
   const handleDuplicate = () => {
     duplicateNl.mutate(newsletter.id, {
       onSuccess: (data: any) => {
-        if (data?.id) navigate(`/tools/newsletter/${data.id}`);
+        if (data?.id) navigate(`/app/tools/newsletter/${data.id}`);
       },
     });
   };
@@ -133,7 +133,7 @@ export function EditorPage() {
     <div className="p-lg max-w-4xl">
       {/* Header */}
       <div className="flex items-center gap-md mb-lg">
-        <Link to="/tools/newsletter" className="text-kore-mid hover:text-kore-ink">
+        <Link to="/app/tools/newsletter" className="text-kore-mid hover:text-kore-ink">
           <ArrowLeft size={20} />
         </Link>
         <div className="flex-1 min-w-0">

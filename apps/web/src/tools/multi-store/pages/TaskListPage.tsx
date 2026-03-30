@@ -90,7 +90,7 @@ export function TaskListPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-lg">
         <div className="flex items-center gap-md">
-          <Link to="/tools/multi-store" className="text-kore-mid hover:text-kore-ink transition-colors">
+          <Link to="/app/tools/multi-store" className="text-kore-mid hover:text-kore-ink transition-colors">
             <ArrowLeft size={20} />
           </Link>
           <div>
@@ -103,7 +103,7 @@ export function TaskListPage() {
           </div>
         </div>
         <Link
-          to="/tools/multi-store/tasks/create"
+          to="/app/tools/multi-store/tasks/create"
           className="flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90"
         >
           <Plus size={16} /> Neue Aufgabe
@@ -182,7 +182,7 @@ export function TaskListPage() {
           <ClipboardList size={32} className="mx-auto text-kore-mid mb-md" />
           <p className="text-body text-kore-mid">Noch keine Aufgaben vorhanden.</p>
           <Link
-            to="/tools/multi-store/tasks/create"
+            to="/app/tools/multi-store/tasks/create"
             className="inline-flex items-center gap-xs mt-md px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90"
           >
             <Plus size={16} /> Erste Aufgabe erstellen
@@ -197,7 +197,7 @@ export function TaskListPage() {
             return (
               <Link
                 key={task.id}
-                to={`/tools/multi-store/tasks/${task.id}`}
+                to={`/app/tools/multi-store/tasks/${task.id}`}
                 className="block bg-kore-white border border-kore-border p-md hover:border-kore-brass transition-colors"
               >
                 <div className="flex items-start justify-between gap-md">

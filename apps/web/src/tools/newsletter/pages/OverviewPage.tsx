@@ -49,7 +49,7 @@ export function OverviewPage() {
       onSuccess: (data: any) => {
         setShowForm(false);
         setForm({ title: '', content: '' });
-        if (data?.id) navigate(`/tools/newsletter/${data.id}`);
+        if (data?.id) navigate(`/app/tools/newsletter/${data.id}`);
       },
     });
   };
@@ -74,10 +74,10 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-sm">
           <Link
-            to="/tools/newsletter/dashboard"
+            to="/app/tools/newsletter/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink"
           >
-            <BarChart3 size={14} /> Analytics
+            <BarChart3 size={14} /> Analyse
           </Link>
           <button
             onClick={() => setShowForm(!showForm)}
@@ -185,7 +185,7 @@ export function OverviewPage() {
               className="bg-kore-white border border-kore-border hover:border-kore-ink transition-colors"
             >
               <div className="flex items-start gap-md p-md">
-                <Link to={`/tools/newsletter/${n.id}`} className="flex-1 min-w-0">
+                <Link to={`/app/tools/newsletter/${n.id}`} className="flex-1 min-w-0">
                   <div className="flex items-center gap-sm mb-xs">
                     <span className="font-medium text-kore-ink truncate">{n.title}</span>
                     <span

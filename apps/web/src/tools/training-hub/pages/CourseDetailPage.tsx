@@ -37,7 +37,7 @@ export function CourseDetailPage() {
   return (
     <div className="p-xl max-w-4xl">
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/training-hub" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+        <Link to="/app/tools/training-hub" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div className="flex-1">
           <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm">
             <BookOpen size={24} /> {course.title}

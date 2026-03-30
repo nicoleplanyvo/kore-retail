@@ -59,12 +59,12 @@ export function DashboardPage() {
     <div className="p-lg max-w-6xl">
       {/* Header */}
       <div className="flex items-center gap-md mb-lg">
-        <Link to="/tools/newsletter" className="text-kore-mid hover:text-kore-ink">
+        <Link to="/app/tools/newsletter" className="text-kore-mid hover:text-kore-ink">
           <ArrowLeft size={20} />
         </Link>
         <div className="flex-1">
           <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm">
-            <BarChart3 size={24} /> Newsletter Analytics
+            <BarChart3 size={24} /> Newsletter-Analyse
           </h1>
           <p className="text-body text-kore-mid mt-xs">
             Engagement und Reichweite Ihrer Newsletter
@@ -204,7 +204,7 @@ export function DashboardPage() {
               {topByViews.map((n, i) => (
                 <Link
                   key={n.id}
-                  to={`/tools/newsletter/${n.id}`}
+                  to={`/app/tools/newsletter/${n.id}`}
                   className="flex items-center gap-md p-md bg-kore-bg border border-kore-border hover:border-kore-ink transition-colors"
                 >
                   <div

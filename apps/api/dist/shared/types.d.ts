@@ -1253,14 +1253,39 @@ export interface NewsletterView {
 export type ClientInteractionType = 'VISIT' | 'CALL' | 'EMAIL' | 'EVENT';
 export type ClientTaskStatus = 'OPEN' | 'DONE' | 'CANCELLED';
 export type StockCalloutUrgency = 'LOW' | 'NORMAL' | 'HIGH' | 'CRITICAL';
-export type StockCalloutStatus = 'OPEN' | 'ORDERED' | 'RECEIVED' | 'CANCELLED';
+export type StockCalloutStatus = 'OPEN' | 'OFFERED' | 'TRANSFER' | 'RESOLVED' | 'CANCELLED';
 export type OrderStatus = 'ORDERED' | 'SHIPPED' | 'IN_TRANSIT' | 'DELIVERED' | 'RETURNED';
-export interface ConversionGoal {
+export interface FRSettings {
     id: string;
     storeId: string;
-    period: string;
-    targetConversion: number | null;
-    targetAvgBasket: number | null;
+    maxItems: number;
+    warningMinutes: number;
+    alertMinutes: number;
+}
+export type FRRoomStatus = 'active' | 'deleted';
+export type FRSessionStatus = 'active' | 'completed' | 'canceled';
+export interface FRRoom {
+    id: string;
+    storeId: string;
+    number: number;
+    name: string | null;
+    status: FRRoomStatus;
+}
+export interface FRSession {
+    id: string;
+    storeId: string;
+    roomId: string;
+    staffId: string | null;
+    status: FRSessionStatus;
+    itemsIn: number;
+    itemsReturned: number | null;
+    itemsPurchased: number | null;
+    itemsShrinkage: number | null;
+    conversionRate: number | null;
+    notes: string | null;
+    checkInAt: string;
+    checkOutAt: string | null;
+    checkedInBy: string;
 }
 export interface ClientProfile {
     id: string;

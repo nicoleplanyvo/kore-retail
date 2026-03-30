@@ -733,3 +733,17 @@ export interface InventoryItem {
   notes: string | null;
   countedAt: string | null;
 }
+
+// ============================================================
+// Notifications — Types
+// ============================================================
+
+export interface AppNotification {
+  id: string;
+  type: string;
+  title: string;
+  body: string | null;
+  link: string | null;
+  isRead: boolean;
+  createdAt: string;
+}

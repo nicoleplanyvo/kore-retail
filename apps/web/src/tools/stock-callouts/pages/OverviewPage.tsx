@@ -134,7 +134,7 @@ export function OverviewPage() {
       <div className="flex items-center justify-between mb-lg">
         <div>
           <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm">
-            <Package size={24} /> Stock Callouts
+            <Package size={24} /> Bestandsmeldungen
           </h1>
           <p className="text-body text-kore-mid mt-xs">Inter-Store Stock-Abgleich und Nachbestellungen</p>
         </div>
@@ -144,7 +144,7 @@ export function OverviewPage() {
               {stores.map((s: any) => <option key={s.id} value={s.id}>{s.name}</option>)}
             </select>
           )}
-          <Link to="/tools/stock-callouts/dashboard" className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink">
+          <Link to="/app/tools/stock-callouts/dashboard" className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink">
             <BarChart3 size={14} /> Dashboard
           </Link>
           <button onClick={() => setShowForm(!showForm)} className="flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90">
@@ -181,7 +181,7 @@ export function OverviewPage() {
       {showForm && (
         <form onSubmit={handleSubmit} className="bg-kore-white border border-kore-border p-lg mb-lg">
           <div className="flex items-center justify-between mb-md">
-            <h2 className="font-display text-h3 text-kore-ink">Neues Stock Callout</h2>
+            <h2 className="font-display text-h3 text-kore-ink">Neue Bestandsmeldung</h2>
             <button type="button" onClick={() => setShowForm(false)} className="text-kore-mid hover:text-kore-ink"><X size={18} /></button>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-md">
@@ -251,7 +251,7 @@ export function OverviewPage() {
         <div className="text-body text-kore-mid">Lade Callouts...</div>
       ) : !callouts.length ? (
         <div className="bg-kore-white border border-kore-border p-2xl text-center text-body text-kore-mid">
-          Keine Stock Callouts vorhanden. Erstellen Sie ein neues Callout, um Artikel bei anderen Stores zu suchen.
+          Keine Bestandsmeldungen vorhanden. Erstellen Sie eine neue Meldung, um Artikel bei anderen Stores zu suchen.
         </div>
       ) : (
         <div className="space-y-sm">

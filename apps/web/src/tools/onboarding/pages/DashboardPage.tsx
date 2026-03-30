@@ -27,7 +27,7 @@ export function DashboardPage() {
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
         <Link
-          to="/tools/onboarding"
+          to="/app/tools/onboarding"
           className="text-kore-mid hover:text-kore-ink transition-colors"
         >
           <ArrowLeft size={20} />
@@ -231,7 +231,7 @@ export function DashboardPage() {
                 {dashboard.recentCompletions.map((c: any) => (
                   <Link
                     key={c.id}
-                    to={`/tools/onboarding/journeys/${c.id}`}
+                    to={`/app/tools/onboarding/journeys/${c.id}`}
                     className="flex items-center gap-md hover:bg-kore-bg p-sm -mx-sm transition-colors"
                   >
                     <CheckCircle size={14} className="text-blue-500 flex-shrink-0" />

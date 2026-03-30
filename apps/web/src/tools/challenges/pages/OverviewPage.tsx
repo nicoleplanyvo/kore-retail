@@ -31,10 +31,10 @@ export function OverviewPage() {
           <h1 className="font-display text-h1 text-kore-ink">Challenges</h1>
           <p className="text-body text-kore-mid mt-xs">Wettbewerbe und Gamification fuer Ihr Team</p>
         </div>
-        <Link to="/tools/challenges/dashboard" className="flex items-center gap-sm border border-kore-border px-lg py-md-sm text-small text-kore-ink hover:bg-kore-bg transition-colors">
+        <Link to="/app/tools/challenges/dashboard" className="flex items-center gap-sm border border-kore-border px-lg py-md-sm text-small text-kore-ink hover:bg-kore-bg transition-colors">
           <Medal size={16} /> Dashboard
         </Link>
-        <Link to="/tools/challenges/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
+        <Link to="/app/tools/challenges/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
           <Plus size={16} /> Neue Challenge
         </Link>
       </div>
@@ -65,7 +65,7 @@ export function OverviewPage() {
           <Trophy size={48} className="text-kore-faint mb-lg" />
           <h2 className="font-display text-h2 text-kore-ink mb-md">Noch keine Challenges</h2>
           <p className="text-body text-kore-mid max-w-md mb-xl">Erstellen Sie Ihre erste Challenge, um Motivation und Wettbewerb im Team zu foerdern.</p>
-          <Link to="/tools/challenges/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
+          <Link to="/app/tools/challenges/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
             <Plus size={16} /> Challenge erstellen
           </Link>
         </div>
@@ -80,7 +80,7 @@ export function OverviewPage() {
               return (
                 <Link
                   key={ch.id}
-                  to={`/tools/challenges/${ch.id}`}
+                  to={`/app/tools/challenges/${ch.id}`}
                   className="bg-kore-white border border-kore-border p-lg hover:border-kore-ink transition-colors flex flex-col"
                 >
                   {/* Status + Type badge row */}

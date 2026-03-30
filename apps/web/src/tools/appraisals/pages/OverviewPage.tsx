@@ -44,10 +44,10 @@ export function OverviewPage() {
           <p className="text-body text-kore-mid mt-xs">Beurteilungen verwalten, Selbsteinschaetzungen einholen und Gespraeche dokumentieren</p>
         </div>
         <div className="flex gap-sm">
-          <Link to="/tools/appraisals/dashboard" className="flex items-center gap-sm border border-kore-border px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors text-kore-ink">
+          <Link to="/app/tools/appraisals/dashboard" className="flex items-center gap-sm border border-kore-border px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors text-kore-ink">
             <BarChart3 size={16} /> Dashboard
           </Link>
-          <Link to="/tools/appraisals/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
+          <Link to="/app/tools/appraisals/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
             <Plus size={16} /> Neue Beurteilung
           </Link>
         </div>
@@ -99,7 +99,7 @@ export function OverviewPage() {
           <ClipboardCheck size={48} className="text-kore-faint mb-lg" />
           <h2 className="font-display text-h2 text-kore-ink mb-md">Keine Beurteilungen</h2>
           <p className="text-body text-kore-mid max-w-md mb-xl">Erstellen Sie eine neue Mitarbeiterbeurteilung, um den Bewertungsprozess zu starten.</p>
-          <Link to="/tools/appraisals/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
+          <Link to="/app/tools/appraisals/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
             <Plus size={16} /> Neue Beurteilung
           </Link>
         </div>
@@ -107,7 +107,7 @@ export function OverviewPage() {
         <>
           <div className="space-y-sm">
             {result.data.map((a: any) => (
-              <Link key={a.id} to={`/tools/appraisals/appraisals/${a.id}`} className="block bg-kore-white border border-kore-border p-md hover:border-kore-ink transition-colors">
+              <Link key={a.id} to={`/app/tools/appraisals/appraisals/${a.id}`} className="block bg-kore-white border border-kore-border p-md hover:border-kore-ink transition-colors">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-md">
                     <ClipboardCheck size={18} className="text-kore-mid" />

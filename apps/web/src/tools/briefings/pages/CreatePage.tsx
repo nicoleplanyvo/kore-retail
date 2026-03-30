@@ -75,14 +75,14 @@ export function CreatePage() {
     const content = sections.map((s) => `## ${s.title}\n${s.content}`).join('\n\n');
     create.mutate(
       { title, type, date, storeId: sid, sections, content, scheduledFor: scheduledFor || undefined },
-      { onSuccess: () => navigate('/tools/briefings') },
+      { onSuccess: () => navigate('/app/tools/briefings') },
     );
   };
 
   return (
     <div className="p-xl max-w-4xl">
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/briefings" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+        <Link to="/app/tools/briefings" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div className="flex-1">
           <h1 className="font-display text-h1 text-kore-ink">Neues Briefing erstellen</h1>
           <p className="text-body text-kore-mid mt-xs">Sektionen hinzufuegen, anordnen und planen.</p>
@@ -182,7 +182,7 @@ export function CreatePage() {
           <button type="submit" disabled={create.isPending} className="px-xl py-md-sm bg-kore-ink text-kore-white text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors disabled:opacity-50">
             {create.isPending ? 'Wird erstellt...' : scheduledFor ? 'Briefing planen' : 'Briefing veroeffentlichen'}
           </button>
-          <Link to="/tools/briefings" className="px-xl py-md-sm border border-kore-border text-small text-kore-ink hover:border-kore-ink transition-colors">Abbrechen</Link>
+          <Link to="/app/tools/briefings" className="px-xl py-md-sm border border-kore-border text-small text-kore-ink hover:border-kore-ink transition-colors">Abbrechen</Link>
         </div>
         {create.isError && <p className="text-small text-red-600">Fehler: {(create.error as Error).message}</p>}
       </form>

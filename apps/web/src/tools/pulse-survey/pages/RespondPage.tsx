@@ -24,7 +24,7 @@ export function RespondPage() {
     return (
       <div className="p-xl max-w-3xl">
         <div className="flex items-center gap-md mb-2xl">
-          <Link to={`/tools/pulse-survey/surveys/${id}`} className="text-kore-mid hover:text-kore-ink"><ArrowLeft size={20} /></Link>
+          <Link to={`/app/tools/pulse-survey/surveys/${id}`} className="text-kore-mid hover:text-kore-ink"><ArrowLeft size={20} /></Link>
           <h1 className="font-display text-h1 text-kore-ink">{survey.title}</h1>
         </div>
         <div className="bg-kore-white border border-kore-border p-2xl text-center">
@@ -71,7 +71,7 @@ export function RespondPage() {
             {survey.isAnonymous && ' Die Teilnahme war anonym.'}
           </p>
           <Link
-            to="/tools/pulse-survey"
+            to="/app/tools/pulse-survey"
             className="px-lg py-sm bg-kore-ink text-kore-white text-small hover:opacity-90"
           >
             Zurueck zur Uebersicht
@@ -85,7 +85,7 @@ export function RespondPage() {
     <div className="p-xl max-w-3xl">
       {/* Header */}
       <div className="flex items-center gap-md mb-lg">
-        <Link to={`/tools/pulse-survey/surveys/${id}`} className="text-kore-mid hover:text-kore-ink transition-colors">
+        <Link to={`/app/tools/pulse-survey/surveys/${id}`} className="text-kore-mid hover:text-kore-ink transition-colors">
           <ArrowLeft size={20} />
         </Link>
         <div className="flex-1">

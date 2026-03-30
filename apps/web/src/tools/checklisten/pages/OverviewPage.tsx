@@ -21,13 +21,13 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-md">
           <Link
-            to="/tools/checklisten/dashboard"
+            to="/app/tools/checklisten/dashboard"
             className="flex items-center gap-sm border border-kore-border text-kore-ink px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors"
           >
             Dashboard
           </Link>
           <Link
-            to="/tools/checklisten/templates"
+            to="/app/tools/checklisten/templates"
             className="flex items-center gap-sm border border-kore-border text-kore-ink px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors"
           >
             Vorlagen
@@ -150,7 +150,7 @@ function ChecklistCard({ checklist, onToggle }: { checklist: any; onToggle: (v: 
         <div className="border-t border-kore-border px-lg pb-lg">
           <div className="pt-md text-right mb-sm">
             <Link
-              to={`/tools/checklisten/checklists/${checklist.id}`}
+              to={`/app/tools/checklisten/checklists/${checklist.id}`}
               className="text-small text-kore-brass hover:text-kore-brass-dk transition-colors"
             >
               Vollansicht &rarr;
