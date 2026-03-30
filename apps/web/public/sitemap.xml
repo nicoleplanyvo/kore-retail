@@ -45,4 +45,34 @@
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://kore-retail.de/blog/retail-tech-trends-2026-8-technologien-fashion-stores</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kore-retail.de/blog/store-audit-einzelhandel-leitfaden</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kore-retail.de/blog/kpi-store-manager-einzelhandel</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kore-retail.de/blog/onboarding-einzelhandel-neue-mitarbeiter</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kore-retail.de/blog/conversion-rate-modehandel-steigern</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kore-retail.de/blog/schichtplanung-einzelhandel-optimieren</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
