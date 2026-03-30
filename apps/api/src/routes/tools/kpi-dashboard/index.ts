@@ -124,79 +124,96 @@ kpiDashboardRouter.get('/summary/yoy', async (req, res) => {
     const toolStoreIds = (req as any).toolStoreIds as string[] | 'all';
     const storeId = req.query.storeId as string | undefined;
 
-    if (!storeId) {
-      return res.status(400).json({ error: 'storeId ist erforderlich.' });
+    const dateFrom = req.query.dateFrom as string | undefined;
+    const dateTo = req.query.dateTo as string | undefined;
+
+    // Build current period date range
+    const from = dateFrom ?? `${new Date().getFullYear()}-01-01`;
+    const to = dateTo ?? new Date().toISOString().slice(0, 10);
+
+    // Calculate last year period (shift by 1 year)
+    const fromDate = new Date(from + 'T00:00:00');
+    const toDate = new Date(to + 'T00:00:00');
+    const lyFrom = `${fromDate.getFullYear() - 1}-${String(fromDate.getMonth() + 1).padStart(2, '0')}-${String(fromDate.getDate()).padStart(2, '0')}`;
+    const lyTo = `${toDate.getFullYear() - 1}-${String(toDate.getMonth() + 1).padStart(2, '0')}-${String(toDate.getDate()).padStart(2, '0')}`;
+
+    const baseWhere: Record<string, unknown> = { tenantId };
+    if (storeId) {
+      baseWhere['storeId'] = storeId;
+      if (toolStoreIds !== 'all' && !toolStoreIds.includes(storeId)) {
+        return res.status(403).json({ error: 'Kein Zugriff auf diesen Store.' });
+      }
+    } else if (toolStoreIds !== 'all') {
+      baseWhere['storeId'] = { in: toolStoreIds };
     }
 
-    const year = Number(req.query.year) || new Date().getFullYear();
-    const prevYear = year - 1;
+    const currentWhere = { ...baseWhere, date: { gte: from, lte: to } };
+    const lastYearWhere = { ...baseWhere, date: { gte: lyFrom, lte: lyTo } };
 
-    const baseWhere: Record<string, unknown> = { tenantId, storeId };
-    if (toolStoreIds !== 'all' && !toolStoreIds.includes(storeId)) {
-      return res.status(403).json({ error: 'Kein Zugriff auf diesen Store.' });
-    }
-
-    const currentYearWhere = {
-      ...baseWhere,
-      date: { gte: `${year}-01-01`, lte: `${year}-12-31` },
-    };
-    const prevYearWhere = {
-      ...baseWhere,
-      date: { gte: `${prevYear}-01-01`, lte: `${prevYear}-12-31` },
-    };
-
-    const [currentAgg, prevAgg] = await Promise.all([
+    const [currentAgg, prevAgg, currentStoreCount, lyStoreCount] = await Promise.all([
       prisma.kpiEntry.aggregate({
-        where: currentYearWhere,
+        where: currentWhere,
         _sum: { revenue: true, transactions: true, footfall: true, unitsSold: true },
         _count: true,
       }),
       prisma.kpiEntry.aggregate({
-        where: prevYearWhere,
+        where: lastYearWhere,
         _sum: { revenue: true, transactions: true, footfall: true, unitsSold: true },
         _count: true,
       }),
+      prisma.kpiEntry.groupBy({ by: ['storeId'], where: currentWhere }),
+      prisma.kpiEntry.groupBy({ by: ['storeId'], where: lastYearWhere }),
     ]);
 
-    const calc = (sum: { revenue: number | null; transactions: number | null; footfall: number | null; unitsSold: number | null }, count: number) => {
-      const revenue = sum.revenue ?? 0;
-      const transactions = sum.transactions ?? 0;
-      const footfall = sum.footfall ?? 0;
-      const unitsSold = sum.unitsSold ?? 0;
+    const buildPeriodData = (sum: { revenue: number | null; transactions: number | null; footfall: number | null; unitsSold: number | null }, count: number, stores: number) => {
+      const totalRevenue = sum.revenue ?? 0;
+      const totalTransactions = sum.transactions ?? 0;
+      const totalFootfall = sum.footfall ?? 0;
+      const totalUnits = sum.unitsSold ?? 0;
       return {
-        revenue,
-        transactions,
-        conversionRate: footfall > 0 ? Math.round((transactions / footfall) * 10000) / 100 : 0,
-        avgBasket: transactions > 0 ? Math.round((revenue / transactions) * 100) / 100 : 0,
-        unitsPerTransaction: transactions > 0 ? Math.round((unitsSold / transactions) * 100) / 100 : 0,
-        entryCount: count,
+        totalRevenue,
+        totalTransactions,
+        totalFootfall,
+        totalUnits,
+        avgRevenue: count > 0 ? Math.round((totalRevenue / count) * 100) / 100 : 0,
+        avgFootfall: count > 0 ? Math.round((totalFootfall / count) * 100) / 100 : 0,
+        avgBasket: totalTransactions > 0 ? Math.round((totalRevenue / totalTransactions) * 100) / 100 : 0,
+        avgConversion: totalFootfall > 0 ? Math.round((totalTransactions / totalFootfall) * 10000) / 100 : 0,
+        avgUpt: totalTransactions > 0 ? Math.round((totalUnits / totalTransactions) * 100) / 100 : 0,
+        storeCount: stores,
+        totalEntries: count,
       };
     };
 
-    const currentYear = calc(currentAgg._sum, currentAgg._count);
-    const previousYear = calc(prevAgg._sum, prevAgg._count);
+    const current = buildPeriodData(currentAgg._sum, currentAgg._count, currentStoreCount.length);
+    const lastYear = buildPeriodData(prevAgg._sum, prevAgg._count, lyStoreCount.length);
 
-    const pctChange = (current: number, previous: number): { value: number; improved: boolean } => {
-      if (previous === 0) {
-        return { value: current > 0 ? 100 : 0, improved: current > 0 };
-      }
-      const change = Math.round(((current - previous) / previous) * 10000) / 100;
-      return { value: change, improved: change >= 0 };
+    const pctChange = (cur: number, prev: number): number | null => {
+      if (prev === 0 && cur === 0) return null;
+      if (prev === 0) return 100;
+      return Math.round(((cur - prev) / prev) * 10000) / 100;
     };
 
     const changes = {
-      revenue: pctChange(currentYear.revenue, previousYear.revenue),
-      transactions: pctChange(currentYear.transactions, previousYear.transactions),
-      conversionRate: pctChange(currentYear.conversionRate, previousYear.conversionRate),
-      avgBasket: pctChange(currentYear.avgBasket, previousYear.avgBasket),
-      unitsPerTransaction: pctChange(currentYear.unitsPerTransaction, previousYear.unitsPerTransaction),
+      revenue: pctChange(current.totalRevenue, lastYear.totalRevenue),
+      avgRevenue: pctChange(current.avgRevenue, lastYear.avgRevenue),
+      footfall: pctChange(current.avgFootfall, lastYear.avgFootfall),
+      conversion: pctChange(current.avgConversion, lastYear.avgConversion),
+      avgBasket: pctChange(current.avgBasket, lastYear.avgBasket),
+      upt: pctChange(current.avgUpt, lastYear.avgUpt),
     };
 
-    res.json({ year, prevYear, currentYear, previousYear, changes });
+    res.json({
+      period: { from, to },
+      lastYearPeriod: { from: lyFrom, to: lyTo },
+      current,
+      lastYear,
+      changes,
+    });
   } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
 });
 
-// GET /trends — Tagesverlauf
+// GET /trends — Tagesverlauf (aggregated per date)
 kpiDashboardRouter.get('/trends', async (req, res) => {
   try {
     const tenantId = (req as any).tenantId as string;
@@ -215,8 +232,38 @@ kpiDashboardRouter.get('/trends', async (req, res) => {
       where,
       select: { date: true, revenue: true, transactions: true, footfall: true, unitsSold: true, storeId: true },
       orderBy: { date: 'asc' },
-      take: 90,
+      take: 500,
     });
-    res.json(entries);
+
+    // Aggregate per date (frontend expects avgRevenue, avgFootfall, avgConversion, avgBasket)
+    const byDate = new Map<string, { revenue: number; transactions: number; footfall: number; unitsSold: number; count: number }>();
+    for (const e of entries) {
+      const existing = byDate.get(e.date);
+      if (existing) {
+        existing.revenue += e.revenue;
+        existing.transactions += e.transactions;
+        existing.footfall += (e.footfall ?? 0);
+        existing.unitsSold += (e.unitsSold ?? 0);
+        existing.count++;
+      } else {
+        byDate.set(e.date, {
+          revenue: e.revenue,
+          transactions: e.transactions,
+          footfall: e.footfall ?? 0,
+          unitsSold: e.unitsSold ?? 0,
+          count: 1,
+        });
+      }
+    }
+
+    const trends = Array.from(byDate.entries()).map(([date, d]) => ({
+      date,
+      avgRevenue: Math.round((d.revenue / d.count) * 100) / 100,
+      avgFootfall: Math.round((d.footfall / d.count) * 100) / 100,
+      avgConversion: d.footfall > 0 ? Math.round((d.transactions / d.footfall) * 10000) / 100 : 0,
+      avgBasket: d.transactions > 0 ? Math.round((d.revenue / d.transactions) * 100) / 100 : 0,
+    }));
+
+    res.json(trends);
   } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
 });

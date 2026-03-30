@@ -38,7 +38,7 @@ const STEP_STATUS_LABELS: Record<string, string> = {
   PENDING: 'Ausstehend',
   IN_PROGRESS: 'In Bearbeitung',
   COMPLETED: 'Erledigt',
-  SKIPPED: 'Uebersprungen',
+  SKIPPED: 'Übersprungen',
 };
 
 export function JourneyDetailPage() {
@@ -395,7 +395,7 @@ export function JourneyDetailPage() {
                             onClick={() => handleSkipStep(p.step.id)}
                             disabled={updateStep.isPending}
                             className="px-sm py-xs bg-kore-mid text-kore-white text-small hover:opacity-90 disabled:opacity-50"
-                            title="Ueberspringen"
+                            title="Überspringen"
                           >
                             <SkipForward size={14} />
                           </button>

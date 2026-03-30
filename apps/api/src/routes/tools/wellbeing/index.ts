@@ -132,6 +132,11 @@ wellbeingRouter.post('/resources', async (req, res) => {
 // PUT /resources/:id
 wellbeingRouter.put('/resources/:id', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
+    // Verify resource belongs to tenant
+    const existing = await prisma.wellbeingResource.findFirst({ where: { id: req.params['id'], tenantId } });
+    if (!existing) return res.status(404).json({ error: 'Ressource nicht gefunden.' });
+
     const parsed = wellbeingResourceUpdateSchema.safeParse(req.body);
     if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
 
@@ -149,6 +154,11 @@ wellbeingRouter.put('/resources/:id', async (req, res) => {
 // DELETE /resources/:id — Soft-delete
 wellbeingRouter.delete('/resources/:id', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
+    // Verify resource belongs to tenant
+    const existing = await prisma.wellbeingResource.findFirst({ where: { id: req.params['id'], tenantId } });
+    if (!existing) return res.status(404).json({ error: 'Ressource nicht gefunden.' });
+
     const resource = await prisma.wellbeingResource.update({
       where: { id: req.params['id'] },
       data: { isActive: false },

@@ -47,8 +47,9 @@ pulseSurveyRouter.post('/surveys', async (req, res) => {
 // GET /surveys/:id — survey detail with questions
 pulseSurveyRouter.get('/surveys/:id', async (req, res) => {
   try {
-    const survey = await prisma.pulseSurvey.findUnique({
-      where: { id: req.params['id'] },
+    const tenantId = req.user!.tenantId!;
+    const survey = await prisma.pulseSurvey.findFirst({
+      where: { id: req.params['id'], tenantId },
       include: {
         questions: { orderBy: { sortOrder: 'asc' } },
         _count: { select: { responses: true } },
@@ -62,6 +63,11 @@ pulseSurveyRouter.get('/surveys/:id', async (req, res) => {
 // PUT /surveys/:id — update survey (status, title, dates)
 pulseSurveyRouter.put('/surveys/:id', async (req, res) => {
   try {
+    const tenantId = req.user!.tenantId!;
+    // Verify survey belongs to tenant
+    const existing = await prisma.pulseSurvey.findFirst({ where: { id: req.params['id'], tenantId } });
+    if (!existing) return res.status(404).json({ error: 'Umfrage nicht gefunden.' });
+
     const { title, status, startDate, endDate, isAnonymous } = req.body;
     const data: Record<string, unknown> = {};
     if (title !== undefined) data['title'] = title;
@@ -82,7 +88,12 @@ pulseSurveyRouter.put('/surveys/:id', async (req, res) => {
 // DELETE /surveys/:id
 pulseSurveyRouter.delete('/surveys/:id', async (req, res) => {
   try {
+    const tenantId = req.user!.tenantId!;
     const surveyId = req.params['id']!;
+    // Verify survey belongs to tenant
+    const existing = await prisma.pulseSurvey.findFirst({ where: { id: surveyId, tenantId } });
+    if (!existing) return res.status(404).json({ error: 'Umfrage nicht gefunden.' });
+
     // Delete answers, responses, questions, then survey
     const responses = await prisma.pulseResponse.findMany({ where: { surveyId }, select: { id: true } });
     const responseIds = responses.map(r => r.id);
@@ -101,6 +112,11 @@ pulseSurveyRouter.delete('/surveys/:id', async (req, res) => {
 // POST /surveys/:id/questions
 pulseSurveyRouter.post('/surveys/:id/questions', async (req, res) => {
   try {
+    const tenantId = req.user!.tenantId!;
+    // Verify survey belongs to tenant
+    const survey = await prisma.pulseSurvey.findFirst({ where: { id: req.params['id'], tenantId } });
+    if (!survey) return res.status(404).json({ error: 'Umfrage nicht gefunden.' });
+
     const parsed = pulseQuestionCreateSchema.safeParse(req.body);
     if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
     const question = await prisma.pulseQuestion.create({ data: { ...parsed.data, surveyId: req.params['id']! } });
@@ -111,6 +127,13 @@ pulseSurveyRouter.post('/surveys/:id/questions', async (req, res) => {
 // PUT /surveys/:surveyId/questions/:qid
 pulseSurveyRouter.put('/surveys/:surveyId/questions/:qid', async (req, res) => {
   try {
+    const tenantId = req.user!.tenantId!;
+    // Verify question belongs to tenant via survey relation
+    const existingQ = await prisma.pulseQuestion.findFirst({
+      where: { id: req.params['qid'], survey: { id: req.params['surveyId'], tenantId } },
+    });
+    if (!existingQ) return res.status(404).json({ error: 'Frage nicht gefunden.' });
+
     const { text, type, options, sortOrder } = req.body;
     const data: Record<string, unknown> = {};
     if (text !== undefined) data['text'] = text;
@@ -125,6 +148,13 @@ pulseSurveyRouter.put('/surveys/:surveyId/questions/:qid', async (req, res) => {
 // DELETE /surveys/:surveyId/questions/:qid
 pulseSurveyRouter.delete('/surveys/:surveyId/questions/:qid', async (req, res) => {
   try {
+    const tenantId = req.user!.tenantId!;
+    // Verify question belongs to tenant via survey relation
+    const existingQ = await prisma.pulseQuestion.findFirst({
+      where: { id: req.params['qid'], survey: { id: req.params['surveyId'], tenantId } },
+    });
+    if (!existingQ) return res.status(404).json({ error: 'Frage nicht gefunden.' });
+
     await prisma.pulseAnswer.deleteMany({ where: { questionId: req.params['qid'] } });
     await prisma.pulseQuestion.delete({ where: { id: req.params['qid'] } });
     res.json({ success: true });
@@ -141,8 +171,9 @@ pulseSurveyRouter.post('/surveys/:id/respond', async (req, res) => {
     const parsed = pulseRespondSchema.safeParse(req.body);
     if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
 
-    // Check survey is active
-    const survey = await prisma.pulseSurvey.findUnique({ where: { id: surveyId } });
+    // Check survey is active and belongs to tenant
+    const tenantId = req.user!.tenantId!;
+    const survey = await prisma.pulseSurvey.findFirst({ where: { id: surveyId, tenantId } });
     if (!survey) return res.status(404).json({ error: 'Umfrage nicht gefunden.' });
     if (survey.status !== 'ACTIVE') return res.status(400).json({ error: 'Umfrage ist nicht aktiv.' });
 
@@ -168,7 +199,12 @@ pulseSurveyRouter.post('/surveys/:id/respond', async (req, res) => {
 // GET /surveys/:id/results?storeId=
 pulseSurveyRouter.get('/surveys/:id/results', async (req, res) => {
   try {
+    const tenantId = req.user!.tenantId!;
     const storeId = req.query['storeId'] as string | undefined;
+
+    // Verify survey belongs to tenant
+    const surveyCheck = await prisma.pulseSurvey.findFirst({ where: { id: req.params['id'], tenantId } });
+    if (!surveyCheck) return res.status(404).json({ error: 'Umfrage nicht gefunden.' });
 
     const survey = await prisma.pulseSurvey.findUnique({
       where: { id: req.params['id'] },

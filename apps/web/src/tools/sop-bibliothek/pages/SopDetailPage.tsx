@@ -145,7 +145,7 @@ export function SopDetailPage() {
                 <span>{new Date(sop.createdAt).toLocaleDateString('de-DE')}</span>
               </div>
               <div className="flex justify-between">
-                <span>Letzte Aenderung</span>
+                <span>Letzte Änderung</span>
                 <span>{new Date(sop.updatedAt).toLocaleDateString('de-DE')}</span>
               </div>
               {sop.publishedAt && (

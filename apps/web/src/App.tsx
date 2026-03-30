@@ -78,7 +78,7 @@ export function App() {
     <>
       <ScrollToTop />
       <Routes>
-        {/* Marketing-Seiten (oeffentlich) */}
+        {/* Marketing-Seiten (öffentlich) */}
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/consulting" element={<ConsultingPage />} />
@@ -92,7 +92,7 @@ export function App() {
           <Route path="/blog/:slug" element={<BlogPostPage />} />
         </Route>
 
-        {/* Auth-Seiten (oeffentlich) */}
+        {/* Auth-Seiten (öffentlich) */}
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/invite/:token" element={<AcceptInvitePage />} />
@@ -100,7 +100,7 @@ export function App() {
           <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
         </Route>
 
-        {/* Geschuetzter App-Bereich */}
+        {/* Geschützter App-Bereich */}
         <Route element={<ProtectedRoute />}>
           <Route element={<AppLayout />}>
             {/* Home — Alle authentifizierten User */}

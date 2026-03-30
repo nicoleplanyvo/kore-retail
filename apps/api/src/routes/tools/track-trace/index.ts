@@ -106,8 +106,9 @@ trackTraceRouter.post('/orders', async (req, res) => {
 // ── ORDERS: DETAIL ──────────────────────────────────
 trackTraceRouter.get('/orders/:id', async (req, res) => {
   try {
-    const order = await prisma.customerOrder.findUnique({
-      where: { id: req.params['id'] },
+    const tenantId = (req as any).tenantId as string;
+    const order = await prisma.customerOrder.findFirst({
+      where: { id: req.params['id'], store: { tenantId } },
       include: {
         store: { select: { id: true, name: true, city: true } },
         creator: { select: { id: true, name: true } },
@@ -128,6 +129,10 @@ trackTraceRouter.get('/orders/:id', async (req, res) => {
 // ── ORDERS: UPDATE ──────────────────────────────────
 trackTraceRouter.put('/orders/:id', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
+    const existing = await prisma.customerOrder.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
+    if (!existing) return res.status(404).json({ error: 'Vorgang nicht gefunden.' });
+
     const parsed = customerOrderUpdateSchema.safeParse(req.body);
     if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
 
@@ -148,6 +153,10 @@ trackTraceRouter.put('/orders/:id', async (req, res) => {
 // ── ORDERS: ADD STATUS UPDATE ───────────────────────
 trackTraceRouter.post('/orders/:id/status', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
+    const existingOrder = await prisma.customerOrder.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
+    if (!existingOrder) return res.status(404).json({ error: 'Vorgang nicht gefunden.' });
+
     const userId = req.user!.sub;
     const parsed = orderStatusUpdateSchema.safeParse(req.body);
     if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });

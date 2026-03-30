@@ -773,7 +773,7 @@ export function OnboardingWizardPage() {
               onClick={nextStep}
               className="inline-flex items-center gap-sm font-body text-small text-kore-mid hover:text-kore-ink transition-colors"
             >
-              Ueberspringen
+              Überspringen
               <ChevronRight size={16} />
             </button>
           )}

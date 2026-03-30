@@ -59,6 +59,10 @@ trainingHoursRouter.post('/logs', async (req, res) => {
 // PUT /logs/:id
 trainingHoursRouter.put('/logs/:id', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
+    const existing = await prisma.trainingLog.findFirst({ where: { id: req.params['id'], tenantId } });
+    if (!existing) return res.status(404).json({ error: 'Log nicht gefunden.' });
+
     const parsed = trainingLogUpdateSchema.safeParse(req.body);
     if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
     const log = await prisma.trainingLog.update({ where: { id: req.params['id'] }, data: parsed.data });

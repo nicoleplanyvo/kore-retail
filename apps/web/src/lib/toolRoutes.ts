@@ -49,7 +49,7 @@ export const TOOL_ROUTES: Record<string, string> = {
 };
 
 /**
- * Gibt die App-Route fuer ein Tool zurueck, falls vorhanden.
+ * Gibt die App-Route für ein Tool zurück, falls vorhanden.
  */
 export function getToolRoute(toolKey: string): string | undefined {
   return TOOL_ROUTES[toolKey];

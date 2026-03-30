@@ -74,7 +74,7 @@ export function DashboardPage() {
                         <span className="text-small text-kore-mid">Geplant: {e.plannedHours}h</span>
                         <span className="text-small text-kore-mid">Gearbeitet: {e.workedHours}h</span>
                         {e.overtimeMin > 0 && (
-                          <span className="text-small text-amber-600 font-medium">+{(e.overtimeMin / 60).toFixed(1)}h Ueberstunden</span>
+                          <span className="text-small text-amber-600 font-medium">+{(e.overtimeMin / 60).toFixed(1)}h Überstunden</span>
                         )}
                       </div>
                     </div>
@@ -90,7 +90,7 @@ export function DashboardPage() {
               <div className="flex gap-lg mt-md pt-md border-t border-kore-border">
                 <div className="flex items-center gap-xs"><div className="w-4 h-3 bg-blue-200" /><span className="text-small text-kore-mid">Geplant</span></div>
                 <div className="flex items-center gap-xs"><div className="w-4 h-3 bg-emerald-400" /><span className="text-small text-kore-mid">Gearbeitet</span></div>
-                <div className="flex items-center gap-xs"><div className="w-4 h-3 bg-amber-400" /><span className="text-small text-kore-mid">Ueberstunden</span></div>
+                <div className="flex items-center gap-xs"><div className="w-4 h-3 bg-amber-400" /><span className="text-small text-kore-mid">Überstunden</span></div>
               </div>
             </div>
           )}

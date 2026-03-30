@@ -99,6 +99,10 @@ frConversionRouter.post('/rooms', async (req, res) => {
 // DELETE /rooms/:id — Soft-delete room
 frConversionRouter.delete('/rooms/:id', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
+    const existing = await prisma.fRRoom.findFirst({ where: { id: req.params.id, store: { tenantId } } });
+    if (!existing) return res.status(404).json({ error: 'Raum nicht gefunden.' });
+
     const room = await prisma.fRRoom.update({
       where: { id: req.params.id },
       data: { status: 'deleted' },
@@ -203,10 +207,11 @@ frConversionRouter.post('/sessions/check-in', async (req, res) => {
 // PUT /sessions/:id/check-out — Check-Out
 frConversionRouter.put('/sessions/:id/check-out', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
     const parsed = frCheckOutSchema.safeParse(req.body);
     if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
 
-    const session = await prisma.fRSession.findUnique({ where: { id: req.params.id } });
+    const session = await prisma.fRSession.findFirst({ where: { id: req.params.id, store: { tenantId } } });
     if (!session) return res.status(404).json({ error: 'Session nicht gefunden.' });
     if (session.status !== 'active') return res.status(400).json({ error: 'Session ist nicht aktiv.' });
 
@@ -238,10 +243,11 @@ frConversionRouter.put('/sessions/:id/check-out', async (req, res) => {
 // PUT /sessions/:id/add-items — Add items to active session
 frConversionRouter.put('/sessions/:id/add-items', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
     const parsed = frAddItemsSchema.safeParse(req.body);
     if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
 
-    const session = await prisma.fRSession.findUnique({ where: { id: req.params.id } });
+    const session = await prisma.fRSession.findFirst({ where: { id: req.params.id, store: { tenantId } } });
     if (!session) return res.status(404).json({ error: 'Session nicht gefunden.' });
     if (session.status !== 'active') return res.status(400).json({ error: 'Session ist nicht aktiv.' });
 
@@ -259,6 +265,10 @@ frConversionRouter.put('/sessions/:id/add-items', async (req, res) => {
 // PUT /sessions/:id/change-staff — Change staff assignment
 frConversionRouter.put('/sessions/:id/change-staff', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
+    const existing = await prisma.fRSession.findFirst({ where: { id: req.params.id, store: { tenantId } } });
+    if (!existing) return res.status(404).json({ error: 'Session nicht gefunden.' });
+
     const session = await prisma.fRSession.update({
       where: { id: req.params.id },
       data: { staffId: req.body.staffId || null },
@@ -273,6 +283,10 @@ frConversionRouter.put('/sessions/:id/change-staff', async (req, res) => {
 // PUT /sessions/:id/cancel — Cancel session
 frConversionRouter.put('/sessions/:id/cancel', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
+    const existing = await prisma.fRSession.findFirst({ where: { id: req.params.id, store: { tenantId } } });
+    if (!existing) return res.status(404).json({ error: 'Session nicht gefunden.' });
+
     const session = await prisma.fRSession.update({
       where: { id: req.params.id },
       data: { status: 'canceled' },

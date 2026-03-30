@@ -196,9 +196,10 @@ handoverRouter.post('/', async (req, res) => {
 // GET /:id — Get single handover with user names
 handoverRouter.get('/:id', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
     const toolStoreIds = (req as any).toolStoreIds as string[] | 'all';
-    const handover = await prisma.handover.findUnique({
-      where: { id: req.params['id'] },
+    const handover = await prisma.handover.findFirst({
+      where: { id: req.params['id'], store: { tenantId } },
       include: handoverInclude,
     });
     if (!handover) return res.status(404).json({ error: 'Handover nicht gefunden.' });
@@ -217,8 +218,9 @@ handoverRouter.get('/:id', async (req, res) => {
 // PUT /:id — Update handover (only DRAFT, only creator)
 handoverRouter.put('/:id', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
     const userId = req.user!.sub;
-    const existing = await prisma.handover.findUnique({ where: { id: req.params['id'] } });
+    const existing = await prisma.handover.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
     if (!existing) return res.status(404).json({ error: 'Handover nicht gefunden.' });
     if (existing.status !== 'DRAFT') return res.status(400).json({ error: 'Nur Entwuerfe koennen bearbeitet werden.' });
     if (existing.fromUserId !== userId) return res.status(403).json({ error: 'Nur der Ersteller kann bearbeiten.' });
@@ -241,8 +243,9 @@ handoverRouter.put('/:id', async (req, res) => {
 // POST /:id/submit — Change status from DRAFT to SUBMITTED
 handoverRouter.post('/:id/submit', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
     const userId = req.user!.sub;
-    const existing = await prisma.handover.findUnique({ where: { id: req.params['id'] } });
+    const existing = await prisma.handover.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
     if (!existing) return res.status(404).json({ error: 'Handover nicht gefunden.' });
     if (existing.status !== 'DRAFT') return res.status(400).json({ error: 'Nur Entwuerfe koennen eingereicht werden.' });
     if (existing.fromUserId !== userId) return res.status(403).json({ error: 'Nur der Ersteller kann einreichen.' });
@@ -262,8 +265,9 @@ handoverRouter.post('/:id/submit', async (req, res) => {
 // POST /:id/acknowledge — Acknowledge handover (set to ACKNOWLEDGED)
 handoverRouter.post('/:id/acknowledge', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
     const userId = req.user!.sub;
-    const existing = await prisma.handover.findUnique({ where: { id: req.params['id'] } });
+    const existing = await prisma.handover.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
     if (!existing) return res.status(404).json({ error: 'Handover nicht gefunden.' });
     if (existing.status !== 'SUBMITTED') return res.status(400).json({ error: 'Nur eingereichte Handovers koennen bestaetigt werden.' });
 

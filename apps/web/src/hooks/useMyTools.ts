@@ -5,7 +5,7 @@ import type { StoreToolAssignment } from '@kore/types';
 /**
  * Holt alle Tools, auf die der aktuelle User Zugriff hat.
  * Ruft GET /api/tools auf (user-scoped, nicht admin-katalog).
- * Gibt deduplizierte Tool-Assignments zurueck.
+ * Gibt deduplizierte Tool-Assignments zurück.
  */
 export function useMyTools() {
   return useQuery<StoreToolAssignment[]>({

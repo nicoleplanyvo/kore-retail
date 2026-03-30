@@ -5,7 +5,7 @@ import { requireToolAccess } from '../../../middleware/requireToolAccess.js';
 import { footfallUpsertSchema } from '../../../shared/validators.js';
 
 export const frTrackingRouter: RouterType = Router();
-frTrackingRouter.use(authenticate, requireToolAccess('customer.fr_tracking'));
+frTrackingRouter.use(authenticate, requireToolAccess('floor.fr_tracking'));
 
 // GET /stores
 frTrackingRouter.get('/stores', async (req, res) => {

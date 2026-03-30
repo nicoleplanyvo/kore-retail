@@ -177,8 +177,9 @@ multiStoreRouter.get('/tasks', async (req, res) => {
 // GET /tasks/:id — Single task with responses
 multiStoreRouter.get('/tasks/:id', async (req, res) => {
   try {
+    const tenantId = req.user!.tenantId!;
     const task = tasks.get(req.params.id);
-    if (!task) return res.status(404).json({ error: 'Aufgabe nicht gefunden.' });
+    if (!task || task.tenantId !== tenantId) return res.status(404).json({ error: 'Aufgabe nicht gefunden.' });
 
     const taskResponses = Array.from(responses.values()).filter((r) => r.taskId === task.id);
     const taskComments = Array.from(comments.values())
@@ -287,8 +288,9 @@ multiStoreRouter.post('/tasks', async (req, res) => {
 // PUT /tasks/:id — Update task
 multiStoreRouter.put('/tasks/:id', async (req, res) => {
   try {
+    const tenantId = req.user!.tenantId!;
     const task = tasks.get(req.params.id);
-    if (!task) return res.status(404).json({ error: 'Aufgabe nicht gefunden.' });
+    if (!task || task.tenantId !== tenantId) return res.status(404).json({ error: 'Aufgabe nicht gefunden.' });
 
     const body = req.body;
     const now = new Date().toISOString();
@@ -318,8 +320,9 @@ multiStoreRouter.put('/tasks/:id', async (req, res) => {
 // DELETE /tasks/:id — Delete task
 multiStoreRouter.delete('/tasks/:id', async (req, res) => {
   try {
+    const tenantId = req.user!.tenantId!;
     const task = tasks.get(req.params.id);
-    if (!task) return res.status(404).json({ error: 'Aufgabe nicht gefunden.' });
+    if (!task || task.tenantId !== tenantId) return res.status(404).json({ error: 'Aufgabe nicht gefunden.' });
 
     tasks.delete(task.id);
 

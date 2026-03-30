@@ -18,7 +18,7 @@ const STATUS_COLORS: Record<string, string> = {
 };
 
 const RATING_LABELS: Record<number, string> = {
-  5: 'Uebertrifft',
+  5: 'Übertrifft',
   4: 'Erreicht voll',
   3: 'Erreicht',
   2: 'Teilweise',

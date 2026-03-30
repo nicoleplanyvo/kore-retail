@@ -95,7 +95,7 @@ export function DashboardPage() {
           {/* Peak Hours */}
           {peakHours.length > 0 && (
             <div className="bg-kore-white border border-kore-border p-xl mb-xl">
-              <h2 className="font-display text-h3 text-kore-ink mb-lg">Stosstunden-Analyse</h2>
+              <h2 className="font-display text-h3 text-kore-ink mb-lg">Stoßstunden-Analyse</h2>
               <div className="space-y-sm">
                 {peakHours.slice(0, 12).map((p: any) => (
                   <div key={p.hour} className="flex items-center gap-md">
@@ -178,7 +178,7 @@ export function DashboardPage() {
               <BarChart3 size={48} className="text-kore-faint mb-lg" />
               <h2 className="font-display text-h2 text-kore-ink mb-md">Noch keine historischen Daten</h2>
               <p className="text-body text-kore-mid max-w-md">
-                Sobald Kundenfrequenzen erfasst werden, erscheinen hier Stosstunden-Analysen und Tagestrends.
+                Sobald Kundenfrequenzen erfasst werden, erscheinen hier Stoßstunden-Analysen und Tagestrends.
               </p>
             </div>
           )}

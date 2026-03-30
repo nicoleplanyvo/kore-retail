@@ -62,9 +62,9 @@ export function DashboardPage() {
 
         {/* Recent Updates */}
         <div className="bg-kore-white border border-kore-border p-xl">
-          <h2 className="font-display text-h3 text-kore-ink mb-lg">Letzte Aenderungen</h2>
+          <h2 className="font-display text-h3 text-kore-ink mb-lg">Letzte Änderungen</h2>
           {(dashboard.recentUpdates ?? []).length === 0 ? (
-            <p className="text-small text-kore-mid">Keine Aenderungen.</p>
+            <p className="text-small text-kore-mid">Keine Änderungen.</p>
           ) : (
             <div className="space-y-md">
               {(dashboard.recentUpdates as any[]).map((doc: any) => (

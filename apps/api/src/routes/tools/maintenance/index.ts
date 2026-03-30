@@ -89,8 +89,9 @@ maintenanceRouter.get('/requests', async (req, res) => {
 // GET /requests/:id — Single request detail
 maintenanceRouter.get('/requests/:id', async (req, res) => {
   try {
-    const request = await prisma.maintenanceRequest.findUnique({
-      where: { id: req.params['id'] },
+    const tenantId = (req as any).tenantId as string;
+    const request = await prisma.maintenanceRequest.findFirst({
+      where: { id: req.params['id'], tenantId },
       include: {
         store: { select: { id: true, name: true, city: true } },
         reporter: { select: { id: true, name: true } },
@@ -130,6 +131,10 @@ maintenanceRouter.post('/requests', async (req, res) => {
 // PUT /requests/:id — Update request
 maintenanceRouter.put('/requests/:id', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
+    const existing = await prisma.maintenanceRequest.findFirst({ where: { id: req.params['id'], tenantId } });
+    if (!existing) return res.status(404).json({ error: 'Request nicht gefunden.' });
+
     const parsed = maintenanceRequestUpdateSchema.safeParse(req.body);
     if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
 

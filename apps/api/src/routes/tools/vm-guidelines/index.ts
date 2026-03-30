@@ -8,7 +8,7 @@ import {
 } from '../../../shared/validators.js';
 
 export const vmGuidelinesRouter: RouterType = Router();
-vmGuidelinesRouter.use(authenticate, requireToolAccess('vm.vm_guidelines'));
+vmGuidelinesRouter.use(authenticate, requireToolAccess('floor.vm_guidelines'));
 
 // GET /stores
 vmGuidelinesRouter.get('/stores', async (req, res) => {
@@ -68,101 +68,7 @@ vmGuidelinesRouter.post('/', async (req, res) => {
   } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
 });
 
-// GET /:id — Einzelne Guideline mit Bildern
-vmGuidelinesRouter.get('/:id', async (req, res) => {
-  try {
-    const doc = await prisma.vmGuidelineDoc.findUnique({
-      where: { id: req.params['id'] },
-      include: { images: { orderBy: { sortOrder: 'asc' } } },
-    });
-    if (!doc) return res.status(404).json({ error: 'Guideline nicht gefunden.' });
-    res.json(doc);
-  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
-});
-
-// PUT /:id — Guideline aktualisieren
-vmGuidelinesRouter.put('/:id', async (req, res) => {
-  try {
-    const parsed = vmGuidelineDocUpdateSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
-    const doc = await prisma.vmGuidelineDoc.update({
-      where: { id: req.params['id'] },
-      data: { ...parsed.data, version: { increment: 1 } },
-    });
-    res.json(doc);
-  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
-});
-
-// DELETE /:id — Guideline loeschen (archivieren)
-vmGuidelinesRouter.delete('/:id', async (req, res) => {
-  try {
-    await prisma.vmGuidelineDoc.update({
-      where: { id: req.params['id'] },
-      data: { status: 'ARCHIVED' },
-    });
-    res.json({ success: true });
-  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
-});
-
-// POST /:id/read — Lesebestaetigung
-vmGuidelinesRouter.post('/:id/read', async (req, res) => {
-  try {
-    const userId = req.user!.sub;
-    // We store read confirmations as a simple log — using a lightweight approach
-    // Since there's no dedicated model, we just return success
-    // In production, you'd add a VmGuidelineRead model
-    res.json({ success: true, userId, guidelineId: req.params['id'], readAt: new Date().toISOString() });
-  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
-});
-
-// GET /:id/readers — Wer hat gelesen
-vmGuidelinesRouter.get('/:id/readers', async (_req, res) => {
-  try {
-    // Placeholder — would need a VmGuidelineRead model
-    res.json([]);
-  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
-});
-
-// POST /:id/publish — Veroeffentlichen
-vmGuidelinesRouter.post('/:id/publish', async (req, res) => {
-  try {
-    const doc = await prisma.vmGuidelineDoc.update({
-      where: { id: req.params['id'] },
-      data: { status: 'PUBLISHED', publishedAt: new Date() },
-    });
-    res.json(doc);
-  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
-});
-
-// POST /:id/archive — Archivieren
-vmGuidelinesRouter.post('/:id/archive', async (req, res) => {
-  try {
-    const doc = await prisma.vmGuidelineDoc.update({
-      where: { id: req.params['id'] },
-      data: { status: 'ARCHIVED' },
-    });
-    res.json(doc);
-  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
-});
-
-// POST /:id/images — Bild zur Guideline hinzufuegen
-vmGuidelinesRouter.post('/:id/images', async (req, res) => {
-  try {
-    const { imagePath, caption, sortOrder } = req.body;
-    if (!imagePath) return res.status(400).json({ error: 'imagePath erforderlich.' });
-    const image = await prisma.vmGuidelineImage.create({
-      data: {
-        guidelineDocId: req.params['id']!,
-        imagePath,
-        caption: caption ?? null,
-        sortOrder: sortOrder ?? 0,
-      },
-    });
-    res.status(201).json(image);
-  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
-});
-
-// GET /dashboard — Dashboard-Daten
+// GET /dashboard — Dashboard-Daten (MUST be before /:id to avoid catch-all)
 vmGuidelinesRouter.get('/dashboard', async (req, res) => {
   try {
     const tenantId = (req as any).tenantId as string;
@@ -201,3 +107,119 @@ vmGuidelinesRouter.get('/dashboard', async (req, res) => {
     });
   } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
 });
+
+// GET /:id — Einzelne Guideline mit Bildern
+vmGuidelinesRouter.get('/:id', async (req, res) => {
+  try {
+    const tenantId = (req as any).tenantId as string;
+    const doc = await prisma.vmGuidelineDoc.findFirst({
+      where: { id: req.params['id'], tenantId },
+      include: { images: { orderBy: { sortOrder: 'asc' } } },
+    });
+    if (!doc) return res.status(404).json({ error: 'Guideline nicht gefunden.' });
+    res.json(doc);
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
+});
+
+// PUT /:id — Guideline aktualisieren
+vmGuidelinesRouter.put('/:id', async (req, res) => {
+  try {
+    const tenantId = (req as any).tenantId as string;
+    const existing = await prisma.vmGuidelineDoc.findFirst({ where: { id: req.params['id'], tenantId } });
+    if (!existing) return res.status(404).json({ error: 'Guideline nicht gefunden.' });
+
+    const parsed = vmGuidelineDocUpdateSchema.safeParse(req.body);
+    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    const doc = await prisma.vmGuidelineDoc.update({
+      where: { id: req.params['id'] },
+      data: { ...parsed.data, version: { increment: 1 } },
+    });
+    res.json(doc);
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
+});
+
+// DELETE /:id — Guideline loeschen (archivieren)
+vmGuidelinesRouter.delete('/:id', async (req, res) => {
+  try {
+    const tenantId = (req as any).tenantId as string;
+    const existing = await prisma.vmGuidelineDoc.findFirst({ where: { id: req.params['id'], tenantId } });
+    if (!existing) return res.status(404).json({ error: 'Guideline nicht gefunden.' });
+
+    await prisma.vmGuidelineDoc.update({
+      where: { id: req.params['id'] },
+      data: { status: 'ARCHIVED' },
+    });
+    res.json({ success: true });
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
+});
+
+// POST /:id/read — Lesebestaetigung
+vmGuidelinesRouter.post('/:id/read', async (req, res) => {
+  try {
+    const userId = req.user!.sub;
+    // We store read confirmations as a simple log — using a lightweight approach
+    // Since there's no dedicated model, we just return success
+    // In production, you'd add a VmGuidelineRead model
+    res.json({ success: true, userId, guidelineId: req.params['id'], readAt: new Date().toISOString() });
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
+});
+
+// GET /:id/readers — Wer hat gelesen
+vmGuidelinesRouter.get('/:id/readers', async (_req, res) => {
+  try {
+    // Placeholder — would need a VmGuidelineRead model
+    res.json([]);
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
+});
+
+// POST /:id/publish — Veroeffentlichen
+vmGuidelinesRouter.post('/:id/publish', async (req, res) => {
+  try {
+    const tenantId = (req as any).tenantId as string;
+    const existing = await prisma.vmGuidelineDoc.findFirst({ where: { id: req.params['id'], tenantId } });
+    if (!existing) return res.status(404).json({ error: 'Guideline nicht gefunden.' });
+
+    const doc = await prisma.vmGuidelineDoc.update({
+      where: { id: req.params['id'] },
+      data: { status: 'PUBLISHED', publishedAt: new Date() },
+    });
+    res.json(doc);
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
+});
+
+// POST /:id/archive — Archivieren
+vmGuidelinesRouter.post('/:id/archive', async (req, res) => {
+  try {
+    const tenantId = (req as any).tenantId as string;
+    const existing = await prisma.vmGuidelineDoc.findFirst({ where: { id: req.params['id'], tenantId } });
+    if (!existing) return res.status(404).json({ error: 'Guideline nicht gefunden.' });
+
+    const doc = await prisma.vmGuidelineDoc.update({
+      where: { id: req.params['id'] },
+      data: { status: 'ARCHIVED' },
+    });
+    res.json(doc);
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
+});
+
+// POST /:id/images — Bild zur Guideline hinzufuegen
+vmGuidelinesRouter.post('/:id/images', async (req, res) => {
+  try {
+    const tenantId = (req as any).tenantId as string;
+    const docCheck = await prisma.vmGuidelineDoc.findFirst({ where: { id: req.params['id'], tenantId } });
+    if (!docCheck) return res.status(404).json({ error: 'Guideline nicht gefunden.' });
+
+    const { imagePath, caption, sortOrder } = req.body;
+    if (!imagePath) return res.status(400).json({ error: 'imagePath erforderlich.' });
+    const image = await prisma.vmGuidelineImage.create({
+      data: {
+        guidelineDocId: req.params['id']!,
+        imagePath,
+        caption: caption ?? null,
+        sortOrder: sortOrder ?? 0,
+      },
+    });
+    res.status(201).json(image);
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
+});
+

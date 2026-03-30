@@ -1,4 +1,4 @@
-// Tool-Kategorien gemaess KORE Akquisepapier
+// Tool-Kategorien gemäß KORE Akquisepapier
 export const TOOL_CATEGORIES: Record<string, { label: string; description: string; icon: string }> = {
   STANDARDS_COMPLIANCE: {
     label: 'Standards & Compliance',

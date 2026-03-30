@@ -81,6 +81,10 @@ liveFloorRouter.post('/zones', async (req, res) => {
 // ── PUT /zones/:id — Zone aktualisieren ──────────────
 liveFloorRouter.put('/zones/:id', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
+    const existing = await prisma.floorZone.findFirst({ where: { id: req.params['id'], tenantId } });
+    if (!existing) return res.status(404).json({ error: 'Zone nicht gefunden.' });
+
     const parsed = floorZoneUpdateSchema.safeParse(req.body);
     if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
     const zone = await prisma.floorZone.update({ where: { id: req.params['id'] }, data: parsed.data });
@@ -91,6 +95,10 @@ liveFloorRouter.put('/zones/:id', async (req, res) => {
 // ── DELETE /zones/:id — Zone loeschen ────────────────
 liveFloorRouter.delete('/zones/:id', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
+    const existing = await prisma.floorZone.findFirst({ where: { id: req.params['id'], tenantId } });
+    if (!existing) return res.status(404).json({ error: 'Zone nicht gefunden.' });
+
     // Soft delete — deactivate instead of hard delete
     const zone = await prisma.floorZone.update({
       where: { id: req.params['id'] },
@@ -166,6 +174,10 @@ liveFloorRouter.post('/zones/:id/frequency', async (req, res) => {
     const userId = (req as any).userId as string ?? req.user!.sub;
     const parsed = floorFrequencyUpdateSchema.safeParse(req.body);
     if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.' });
+
+    // Verify zone belongs to tenant
+    const existing = await prisma.floorZone.findFirst({ where: { id: req.params['id'], tenantId } });
+    if (!existing) return res.status(404).json({ error: 'Zone nicht gefunden.' });
 
     const zone = await prisma.floorZone.update({
       where: { id: req.params['id'] },
@@ -398,6 +410,10 @@ liveFloorRouter.post('/positions', async (req, res) => {
 // ── PUT /positions/:id ───────────────────────────────
 liveFloorRouter.put('/positions/:id', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
+    const existing = await prisma.floorStaffPosition.findFirst({ where: { id: req.params['id'], tenantId } });
+    if (!existing) return res.status(404).json({ error: 'Position nicht gefunden.' });
+
     const userId = (req as any).userId as string ?? req.user!.sub;
     const parsed = floorPositionUpdateSchema.safeParse(req.body);
     if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });

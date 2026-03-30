@@ -12,7 +12,7 @@ import {
 } from '../../../shared/validators.js';
 
 export const clientelingRouter: RouterType = Router();
-clientelingRouter.use(authenticate, requireToolAccess('customer.clienteling'));
+clientelingRouter.use(authenticate, requireToolAccess('customer.clienteling_crm'));
 
 // ── Helper ───────────────────────────────────────
 function storeWhere(req: any, filter?: string) {
@@ -110,8 +110,9 @@ clientelingRouter.post('/customers', async (req, res) => {
 // ── GET /customers/:id ───────────────────────────
 clientelingRouter.get('/customers/:id', async (req, res) => {
   try {
-    const client = await prisma.clientProfile.findUnique({
-      where: { id: req.params['id'] },
+    const tenantId = (req as any).tenantId as string;
+    const client = await prisma.clientProfile.findFirst({
+      where: { id: req.params['id'], store: { tenantId } },
       include: {
         store: { select: { id: true, name: true } },
         creator: { select: { id: true, name: true } },
@@ -137,6 +138,10 @@ clientelingRouter.get('/customers/:id', async (req, res) => {
 // ── PUT /customers/:id ───────────────────────────
 clientelingRouter.put('/customers/:id', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
+    const existing = await prisma.clientProfile.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
+    if (!existing) return res.status(404).json({ error: 'Kunde nicht gefunden.' });
+
     const parsed = clientProfileUpdateSchema.safeParse(req.body);
     if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
 
@@ -156,6 +161,10 @@ clientelingRouter.put('/customers/:id', async (req, res) => {
 // ── DELETE /customers/:id — DSGVO Loeschung ──────
 clientelingRouter.delete('/customers/:id', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
+    const existing = await prisma.clientProfile.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
+    if (!existing) return res.status(404).json({ error: 'Kunde nicht gefunden.' });
+
     // Cascade: interactions, tasks are cascade-deleted by schema
     // Appointments: clientId set to null
     await prisma.clientProfile.delete({ where: { id: req.params['id'] } });
@@ -169,6 +178,10 @@ clientelingRouter.delete('/customers/:id', async (req, res) => {
 // ── POST /customers/:id/interactions ─────────────
 clientelingRouter.post('/customers/:id/interactions', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
+    const clientCheck = await prisma.clientProfile.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
+    if (!clientCheck) return res.status(404).json({ error: 'Kunde nicht gefunden.' });
+
     const userId = req.user!.sub;
     const parsed = clientInteractionSchema.safeParse(req.body);
     if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
@@ -248,6 +261,10 @@ clientelingRouter.post('/appointments', async (req, res) => {
 // ── PUT /appointments/:id ────────────────────────
 clientelingRouter.put('/appointments/:id', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
+    const existing = await prisma.clientAppointment.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
+    if (!existing) return res.status(404).json({ error: 'Termin nicht gefunden.' });
+
     const parsed = clientAppointmentUpdateSchema.safeParse(req.body);
     if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
 
@@ -269,6 +286,10 @@ clientelingRouter.put('/appointments/:id', async (req, res) => {
 // ── DELETE /appointments/:id ─────────────────────
 clientelingRouter.delete('/appointments/:id', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
+    const existing = await prisma.clientAppointment.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
+    if (!existing) return res.status(404).json({ error: 'Termin nicht gefunden.' });
+
     await prisma.clientAppointment.delete({ where: { id: req.params['id'] } });
     res.json({ success: true });
   } catch (err: any) {

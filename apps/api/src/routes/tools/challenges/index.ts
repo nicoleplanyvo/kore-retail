@@ -5,7 +5,7 @@ import { requireToolAccess } from '../../../middleware/requireToolAccess.js';
 import { challengeCreateSchema, challengeUpdateSchema, challengeEntrySchema, challengeVoteSchema } from '../../../shared/validators.js';
 
 export const challengesRouter: RouterType = Router();
-challengesRouter.use(authenticate, requireToolAccess('coaching.challenges'));
+challengesRouter.use(authenticate, requireToolAccess('training.challenges'));
 
 // ── GET /stores ──────────────────────────────────────
 challengesRouter.get('/stores', async (req, res) => {
@@ -275,10 +275,15 @@ challengesRouter.delete('/:id', async (req, res) => {
 // ── POST /:id/entries — Ergebnis einreichen ──────────
 challengesRouter.post('/:id/entries', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
     const userId = req.user!.sub;
     const challengeId = req.params['id']!;
     const parsed = challengeEntrySchema.safeParse(req.body);
     if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+
+    // Verify challenge belongs to tenant
+    const challengeCheck = await prisma.challenge.findFirst({ where: { id: challengeId, tenantId } });
+    if (!challengeCheck) return res.status(404).json({ error: 'Challenge nicht gefunden.' });
 
     // Must be participant
     const participant = await prisma.challengeParticipant.findUnique({
@@ -303,12 +308,13 @@ challengesRouter.post('/:id/entries', async (req, res) => {
 // ── POST /:id/vote — Abstimmung (creative challenges)
 challengesRouter.post('/:id/vote', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
     const voterId = req.user!.sub;
     const challengeId = req.params['id']!;
     const parsed = challengeVoteSchema.safeParse(req.body);
     if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
 
-    const challenge = await prisma.challenge.findUnique({ where: { id: challengeId } });
+    const challenge = await prisma.challenge.findFirst({ where: { id: challengeId, tenantId } });
     if (!challenge || challenge.mode !== 'VOTING') {
       return res.status(400).json({ error: 'Diese Challenge unterstuetzt keine Abstimmung.' });
     }
@@ -379,10 +385,17 @@ challengesRouter.get('/:id/leaderboard', async (req, res) => {
 // ── POST /:id/join — Beitreten ───────────────────────
 challengesRouter.post('/:id/join', async (req, res) => {
   try {
+    const tenantId = (req as any).tenantId as string;
     const userId = req.user!.sub;
+    const challengeId = req.params['id']!;
+
+    // Verify challenge belongs to tenant
+    const challengeCheck = await prisma.challenge.findFirst({ where: { id: challengeId, tenantId } });
+    if (!challengeCheck) return res.status(404).json({ error: 'Challenge nicht gefunden.' });
+
     const storeId = req.body.storeId ?? null;
     const participant = await prisma.challengeParticipant.create({
-      data: { challengeId: req.params['id']!, userId, storeId },
+      data: { challengeId, userId, storeId },
     });
     res.status(201).json(participant);
   } catch (err: any) {
