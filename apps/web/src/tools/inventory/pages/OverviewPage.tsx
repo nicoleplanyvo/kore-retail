@@ -76,7 +76,7 @@ export function OverviewPage() {
         <div>
           <h1 className="font-display text-h1 text-kore-ink">Inventur</h1>
           <p className="text-body text-kore-mid mt-xs">
-            Bestandsaufnahmen durchfuehren und Abweichungen erkennen
+            Bestandsaufnahmen durchführen und Abweichungen erkennen
           </p>
         </div>
         <div className="flex items-center gap-md">
@@ -302,7 +302,7 @@ function CreateCountModal({
               onChange={(e) => setStoreId(e.target.value)}
               className="w-full border border-kore-border px-md py-sm text-small bg-kore-white"
             >
-              <option value="">Store waehlen...</option>
+              <option value="">Store wählen...</option>
               {stores.map((s) => (
                 <option key={s.id} value={s.id}>{s.name}{s.city ? ` (${s.city})` : ''}</option>
               ))}
@@ -431,7 +431,7 @@ function CsvImportModal({ onClose }: { onClose: () => void }) {
         }
 
         if (items.length === 0) {
-          setParseError('Keine gueltigen Zeilen in der CSV gefunden.');
+          setParseError('Keine gültigen Zeilen in der CSV gefunden.');
           return;
         }
 
@@ -455,7 +455,7 @@ function CsvImportModal({ onClose }: { onClose: () => void }) {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
       <div className="bg-kore-white border border-kore-border p-2xl w-full max-w-lg mx-xl">
         <div className="flex items-center justify-between mb-xl">
-          <h2 className="font-display text-h2 text-kore-ink">Soll-Bestaende importieren</h2>
+          <h2 className="font-display text-h2 text-kore-ink">Soll-Bestände importieren</h2>
           <button onClick={onClose} className="text-kore-mid hover:text-kore-ink">
             <X size={20} />
           </button>
@@ -464,14 +464,14 @@ function CsvImportModal({ onClose }: { onClose: () => void }) {
         <div className="space-y-lg">
           <div>
             <label className="block text-caption text-kore-mid uppercase tracking-widest mb-xs">
-              Inventur waehlen
+              Inventur wählen
             </label>
             <select
               value={countId}
               onChange={(e) => setCountId(e.target.value)}
               className="w-full border border-kore-border px-md py-sm text-small bg-kore-white"
             >
-              <option value="">Laufende Inventur waehlen...</option>
+              <option value="">Laufende Inventur wählen...</option>
               {inProgressCounts.map((c: any) => (
                 <option key={c.id} value={c.id}>
                   {c.store?.name} - {TYPE_LABELS[c.countType]} ({new Date(c.countDate).toLocaleDateString('de-DE')})

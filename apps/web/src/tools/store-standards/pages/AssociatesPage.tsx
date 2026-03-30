@@ -32,12 +32,12 @@ export function AssociatesPage() {
   return (
     <div className="p-xl max-w-5xl">
       <Link to="/app/tools/store-standards" className="flex items-center gap-xs text-small text-kore-mid hover:text-kore-ink mb-lg">
-        <ArrowLeft size={14} /> Zurueck zur Uebersicht
+        <ArrowLeft size={14} /> Zurück zur Übersicht
       </Link>
       <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm mb-xs">
         <UserCheck size={24} /> Mitarbeiter
       </h1>
-      <p className="text-body text-kore-mid mb-2xl">Headcount, Stundensaetze und Kostenverteilung.</p>
+      <p className="text-body text-kore-mid mb-2xl">Headcount, Stundensätze und Kostenverteilung.</p>
 
       {/* ---- Headcount Section ---- */}
       <h2 className="font-display text-h3 text-kore-ink mb-md">Headcount</h2>
@@ -58,7 +58,7 @@ export function AssociatesPage() {
             <input type="number" value={newContract.hoursPerWeek || ''} onChange={(e) => setNewContract({ ...newContract, hoursPerWeek: Number(e.target.value) })} className="w-full border border-kore-border px-md py-sm text-body text-right" />
           </div>
           <button onClick={handleAddContract} className="flex items-center justify-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90 h-[42px]">
-            <Plus size={14} /> Hinzufuegen
+            <Plus size={14} /> Hinzufügen
           </button>
         </div>
       </div>
@@ -118,8 +118,8 @@ export function AssociatesPage() {
         </div>
       </div>
 
-      {/* ---- Stundensaetze Section ---- */}
-      <h2 className="font-display text-h3 text-kore-ink mb-md flex items-center gap-sm"><DollarSign size={18} /> Stundensaetze</h2>
+      {/* ---- Stundensätze Section ---- */}
+      <h2 className="font-display text-h3 text-kore-ink mb-md flex items-center gap-sm"><DollarSign size={18} /> Stundensätze</h2>
       <div className="bg-kore-white border border-kore-border p-lg mb-md">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-md">
           {state.associateLevels.map((l, i) => (
@@ -147,7 +147,7 @@ export function AssociatesPage() {
           <p className="font-display text-h3 text-kore-ink">{fmt2(assocRate.blended)} {cur}/h</p>
         </div>
         <div className="bg-kore-white border border-kore-border p-md">
-          <div className="text-small text-kore-mid mb-xs">+ Zuschlaege</div>
+          <div className="text-small text-kore-mid mb-xs">+ Zuschläge</div>
           <p className="font-display text-h3 text-kore-ink">{fmt2(assocRate.withPremiums)} {cur}/h</p>
         </div>
         <div className="bg-kore-white border border-kore-border p-md">

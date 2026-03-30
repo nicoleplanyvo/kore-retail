@@ -50,7 +50,7 @@ export function OverviewPage() {
   };
 
   const handleDelete = (id: string) => {
-    if (!confirm('Szenario wirklich loeschen?')) return;
+    if (!confirm('Szenario wirklich löschen?')) return;
     deleteMut.mutate(id, {
       onSuccess: () => { if (scenarioId === id) resetState(); },
     });

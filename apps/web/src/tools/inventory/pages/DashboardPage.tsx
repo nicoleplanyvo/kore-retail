@@ -81,7 +81,7 @@ export function DashboardPage() {
       {isLoading ? (
         <div className="text-body text-kore-mid">Lade Daten...</div>
       ) : !dashboard ? (
-        <div className="text-body text-kore-mid">Keine Daten verfuegbar.</div>
+        <div className="text-body text-kore-mid">Keine Daten verfügbar.</div>
       ) : (
         <>
           {/* KPI Tiles */}
@@ -227,7 +227,7 @@ export function DashboardPage() {
                       </div>
                       <div className="flex gap-lg mt-xs">
                         <span className="text-small text-kore-mid">
-                          {staff.counted} Positionen gezaehlt
+                          {staff.counted} Positionen gezählt
                         </span>
                         <span className="text-small text-kore-mid">
                           {staff.discrepancies} Differenzen

@@ -149,7 +149,7 @@ export function StoreDetailPage() {
         <div className="text-body text-kore-mid">Lade Store-Daten...</div>
       ) : !detail ? (
         <div className="bg-kore-white border border-kore-border p-2xl text-center text-body text-kore-mid">
-          Store-Daten nicht verfuegbar.
+          Store-Daten nicht verfügbar.
         </div>
       ) : (
         <>
@@ -187,7 +187,7 @@ export function StoreDetailPage() {
               <div className="font-display text-h2 text-kore-ink">{detail.kpi.avgTicket.toLocaleString('de-DE')} EUR</div>
             </div>
             <div className="bg-kore-white border border-kore-border p-lg">
-              <span className="block text-small text-kore-mid uppercase tracking-widest mb-sm">Stueck verkauft</span>
+              <span className="block text-small text-kore-mid uppercase tracking-widest mb-sm">Stück verkauft</span>
               <div className="font-display text-h2 text-kore-ink">{detail.kpi.totalUnitsSold.toLocaleString('de-DE')}</div>
             </div>
           </div>
@@ -241,7 +241,7 @@ export function StoreDetailPage() {
                   to="/app/tools/loss-prevention"
                   className="bg-kore-white border border-kore-border p-md text-small text-kore-ink hover:bg-kore-bg transition-colors flex items-center gap-sm"
                 >
-                  <ShieldAlert size={14} /> Verlustpraevention
+                  <ShieldAlert size={14} /> Verlustprävention
                 </Link>
                 <Link
                   to="/app/tools/maintenance"
@@ -301,7 +301,7 @@ export function StoreDetailPage() {
               {detail.operational.lossIncidents.length > 0 && (
                 <div className="mb-md">
                   <h3 className="text-body font-medium text-kore-ink mb-sm flex items-center gap-xs">
-                    <ShieldAlert size={14} className="text-red-500" /> Verlust-Vorfaelle ({detail.operational.lossIncidents.length})
+                    <ShieldAlert size={14} className="text-red-500" /> Verlust-Vorfälle ({detail.operational.lossIncidents.length})
                   </h3>
                   <div className="space-y-xs">
                     {detail.operational.lossIncidents.map((l: any) => (

@@ -61,7 +61,7 @@ function getDateRange(preset: PeriodPreset): { from: string; to: string } {
 
 const CATEGORY_LABELS: Record<string, string> = {
   ELECTRICAL: 'Elektrik',
-  PLUMBING: 'Sanitaer',
+  PLUMBING: 'Sanitär',
   HVAC: 'Heizung/Klima',
   FIXTURE: 'Einrichtung',
   IT: 'IT',
@@ -78,7 +78,7 @@ const PRIORITY_LABELS: Record<string, string> = {
 const STATUS_LABELS: Record<string, string> = {
   OPEN: 'Offen',
   IN_PROGRESS: 'In Arbeit',
-  RESOLVED: 'Geloest',
+  RESOLVED: 'Gelöst',
   CLOSED: 'Geschlossen',
 };
 
@@ -159,7 +159,7 @@ function TrendChart({ data }: { data: { date: string; created: number; resolved:
         <rect x={50} y={chartHeight + 44} width={10} height={10} fill="#dc2626" rx={1} />
         <text x={64} y={chartHeight + 53} fontSize={10} className="fill-kore-ink">Erstellt</text>
         <rect x={120} y={chartHeight + 44} width={10} height={10} fill="#10b981" rx={1} />
-        <text x={134} y={chartHeight + 53} fontSize={10} className="fill-kore-ink">Geloest</text>
+        <text x={134} y={chartHeight + 53} fontSize={10} className="fill-kore-ink">Gelöst</text>
       </svg>
     </div>
   );
@@ -212,7 +212,7 @@ export function DashboardPage() {
       const data = await exportCsv(filters);
       if (!data?.length) return;
 
-      const headers = ['Titel', 'Beschreibung', 'Store', 'Kategorie', 'Prioritaet', 'Status', 'Gemeldet von', 'Zugewiesen an', 'Geschaetzte Kosten', 'Tatsaechliche Kosten', 'Erstellt am', 'Geloest am'];
+      const headers = ['Titel', 'Beschreibung', 'Store', 'Kategorie', 'Priorität', 'Status', 'Gemeldet von', 'Zugewiesen an', 'Geschätzte Kosten', 'Tatsächliche Kosten', 'Erstellt am', 'Gelöst am'];
       const rows = data.map((r: any) => [
         (r.title ?? '').replace(/"/g, '""'),
         (r.description ?? '').replace(/"/g, '""'),
@@ -261,7 +261,7 @@ export function DashboardPage() {
             <BarChart3 size={24} /> Maintenance Dashboard
           </h1>
           <p className="text-body text-kore-mid mt-xs">
-            KPIs, Kategorien, Kosten und Trends im Ueberblick.
+            KPIs, Kategorien, Kosten und Trends im Überblick.
           </p>
         </div>
         <button
@@ -354,7 +354,7 @@ export function DashboardPage() {
               </div>
               <div className="font-display text-h1 text-amber-600">{kpis?.open ?? 0}</div>
               {(kpis?.overdueCount ?? 0) > 0 && (
-                <span className="text-small text-red-600">{kpis?.overdueCount} ueberfaellig</span>
+                <span className="text-small text-red-600">{kpis?.overdueCount} überfällig</span>
               )}
             </div>
 
@@ -369,7 +369,7 @@ export function DashboardPage() {
             <div className="bg-kore-white border border-kore-border p-xl">
               <div className="flex items-center gap-sm mb-sm">
                 <Clock size={16} className="text-blue-600" />
-                <span className="text-caption text-kore-mid uppercase tracking-widest">Durchschn. Loesung</span>
+                <span className="text-caption text-kore-mid uppercase tracking-widest">Durchschn. Lösung</span>
               </div>
               <div className="font-display text-h1 text-kore-ink">
                 {(kpis?.avgResolutionHours ?? 0) < 24
@@ -385,7 +385,7 @@ export function DashboardPage() {
             <div className="bg-kore-white border border-kore-border p-xl">
               <div className="flex items-center gap-sm mb-sm">
                 <Euro size={16} className="text-kore-brass" />
-                <span className="text-caption text-kore-mid uppercase tracking-widest">Geschaetzte Kosten</span>
+                <span className="text-caption text-kore-mid uppercase tracking-widest">Geschätzte Kosten</span>
               </div>
               <div className="font-display text-h2 text-kore-ink">
                 {(kpis?.totalEstimatedCost ?? 0).toLocaleString('de-DE', { minimumFractionDigits: 2 })} EUR
@@ -394,7 +394,7 @@ export function DashboardPage() {
             <div className="bg-kore-white border border-kore-border p-xl">
               <div className="flex items-center gap-sm mb-sm">
                 <Euro size={16} className="text-emerald-600" />
-                <span className="text-caption text-kore-mid uppercase tracking-widest">Tatsaechliche Kosten</span>
+                <span className="text-caption text-kore-mid uppercase tracking-widest">Tatsächliche Kosten</span>
               </div>
               <div className="font-display text-h2 text-kore-ink">
                 {(kpis?.totalActualCost ?? 0).toLocaleString('de-DE', { minimumFractionDigits: 2 })} EUR
@@ -432,7 +432,7 @@ export function DashboardPage() {
             </div>
 
             <div className="bg-kore-white border border-kore-border p-xl">
-              <h2 className="font-display text-h3 text-kore-ink mb-lg">Nach Prioritaet</h2>
+              <h2 className="font-display text-h3 text-kore-ink mb-lg">Nach Priorität</h2>
               {dashboard?.byPriority && Object.keys(dashboard.byPriority).length > 0 ? (
                 <div className="space-y-sm">
                   {['URGENT', 'HIGH', 'MEDIUM', 'LOW']

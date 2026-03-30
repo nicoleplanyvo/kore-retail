@@ -397,7 +397,7 @@ export default function MessagingPage() {
             <button
               onClick={handleBack}
               className="md:hidden p-1 -ml-1 rounded-md hover:bg-kore-surface transition-colors text-kore-ink"
-              aria-label="Zurueck"
+              aria-label="Zurück"
             >
               <ArrowLeft size={20} />
             </button>

@@ -8,7 +8,7 @@ import { KorePieChart } from '../../../components/Charts';
 
 const STATUS_LABELS: Record<string, string> = { SCHEDULED: 'Geplant', COMPLETED: 'Abgeschlossen', CANCELLED: 'Abgebrochen' };
 const STATUS_COLORS: Record<string, string> = { SCHEDULED: 'bg-blue-100 text-blue-700', COMPLETED: 'bg-emerald-100 text-emerald-700', CANCELLED: 'bg-red-100 text-red-700' };
-const TYPE_LABELS: Record<string, string> = { REGULAR: 'Regulaer', AD_HOC: 'Ad-hoc', FOLLOW_UP: 'Follow-up' };
+const TYPE_LABELS: Record<string, string> = { REGULAR: 'Regulär', AD_HOC: 'Ad-hoc', FOLLOW_UP: 'Follow-up' };
 const FRAMEWORK_LABELS: Record<string, string> = { GROW: 'GROW', SMART: 'SMART', FREE: 'Frei' };
 
 export function OverviewPage() {
@@ -35,7 +35,7 @@ export function OverviewPage() {
             <MessageSquare size={24} /> Coaching
           </h1>
           <p className="text-body text-kore-mid mt-xs">
-            Coaching-Sessions planen, strukturiert durchfuehren und dokumentieren
+            Coaching-Sessions planen, strukturiert durchführen und dokumentieren
           </p>
         </div>
         <div className="flex items-center gap-sm">

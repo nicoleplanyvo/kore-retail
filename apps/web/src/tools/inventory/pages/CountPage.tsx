@@ -41,7 +41,7 @@ const SHRINKAGE_CATEGORIES = [
   { value: '', label: '-- Kategorie --' },
   { value: 'Diebstahl', label: 'Diebstahl' },
   { value: 'Fehlbuchung', label: 'Fehlbuchung' },
-  { value: 'Beschaedigung', label: 'Beschaedigung' },
+  { value: 'Beschädigung', label: 'Beschädigung' },
   { value: 'Unbekannt', label: 'Unbekannt' },
 ];
 
@@ -150,7 +150,7 @@ export function CountPage() {
 
         // Show success feedback
         if (result.needsRecount) {
-          setSuccessMsg(`${data.sku} erfasst - Nachzaehlung erforderlich (>5% Abweichung)`);
+          setSuccessMsg(`${data.sku} erfasst - Nachzählung erforderlich (>5% Abweichung)`);
         } else {
           setSuccessMsg(`${data.sku} erfasst`);
         }
@@ -232,7 +232,7 @@ export function CountPage() {
                 disabled={completeMut.isPending}
                 className="flex items-center gap-sm px-md py-sm text-small bg-kore-ink text-kore-white hover:bg-kore-brass transition-colors"
               >
-                <CheckCircle2 size={14} /> Abschliessen
+                <CheckCircle2 size={14} /> Abschließen
               </button>
             </>
           )}
@@ -269,7 +269,7 @@ export function CountPage() {
           <div className="font-display text-h2 text-kore-ink mt-sm">{progress.totalItems}</div>
         </div>
         <div className="bg-kore-white border border-kore-border p-lg">
-          <span className="text-caption text-kore-mid uppercase tracking-widest">Gezaehlt</span>
+          <span className="text-caption text-kore-mid uppercase tracking-widest">Gezählt</span>
           <div className="font-display text-h2 text-kore-ink mt-sm">{progress.countedItems}</div>
         </div>
         <div className="bg-kore-white border border-kore-border p-lg">
@@ -420,7 +420,7 @@ export function CountPage() {
           <div className="bg-kore-white border border-kore-border p-2xl flex flex-col items-center text-center">
             <Package size={36} className="text-kore-faint mb-md" />
             <p className="text-body text-kore-mid">
-              Noch keine Positionen erfasst. Beginnen Sie mit der Zaehlung oben.
+              Noch keine Positionen erfasst. Beginnen Sie mit der Zählung oben.
             </p>
           </div>
         ) : (
@@ -466,7 +466,7 @@ export function CountPage() {
                         ) : recount ? (
                           <span className="inline-flex items-center gap-xs text-red-600">
                             <RotateCcw size={14} />
-                            <span className="text-small">Nachzaehlung</span>
+                            <span className="text-small">Nachzählung</span>
                           </span>
                         ) : (
                           <AlertTriangle size={16} className="inline text-amber-500" />
@@ -497,7 +497,7 @@ export function CountPage() {
               </div>
             </div>
             <div>
-              <span className="text-caption text-kore-mid uppercase tracking-widest">Nachzaehlungen noetig</span>
+              <span className="text-caption text-kore-mid uppercase tracking-widest">Nachzählungen nötig</span>
               <div className="font-display text-h2 text-amber-600 mt-sm">{progress.recountCount}</div>
             </div>
           </div>

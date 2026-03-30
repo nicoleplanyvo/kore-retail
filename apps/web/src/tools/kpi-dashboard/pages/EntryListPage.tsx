@@ -18,12 +18,12 @@ export function EntryListPage() {
 
   return (
     <div className="p-xl max-w-5xl">
-      <Breadcrumb items={[{ label: 'KPI Dashboard', href: '/app/tools/kpi' }, { label: 'Eintraege' }]} />
+      <Breadcrumb items={[{ label: 'KPI Dashboard', href: '/app/tools/kpi' }, { label: 'Einträge' }]} />
       <div className="flex items-center gap-md mb-2xl">
         <Link to="/tools/kpi" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div>
-          <h1 className="font-display text-h1 text-kore-ink">KPI-Eintraege</h1>
-          <p className="text-body text-kore-mid mt-xs">Taegliche Kennzahlen aller Stores</p>
+          <h1 className="font-display text-h1 text-kore-ink">KPI-Einträge</h1>
+          <p className="text-body text-kore-mid mt-xs">Tägliche Kennzahlen aller Stores</p>
         </div>
       </div>
 
@@ -38,7 +38,7 @@ export function EntryListPage() {
       {isLoading ? (
         <div className="text-body text-kore-mid">Lade...</div>
       ) : entries.length === 0 ? (
-        <div className="text-body text-kore-mid">Keine Eintraege gefunden.</div>
+        <div className="text-body text-kore-mid">Keine Einträge gefunden.</div>
       ) : (
         <>
           <div className="border border-kore-border bg-kore-white">

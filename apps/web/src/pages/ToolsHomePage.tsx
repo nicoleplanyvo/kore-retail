@@ -128,7 +128,7 @@ export function ToolsHomePage() {
                           )}
                           {!route && (
                             <p className="font-body text-[0.6rem] text-kore-brass mt-xs">
-                              Bald verfuegbar
+                              Bald verfügbar
                             </p>
                           )}
                         </div>

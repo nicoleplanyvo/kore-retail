@@ -36,7 +36,7 @@ export function DashboardPage() {
           <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm">
             <BarChart3 size={24} /> PDP/PIP Dashboard
           </h1>
-          <p className="text-body text-kore-mid mt-xs">Uebersicht aller Entwicklungs- und Verbesserungsplaene</p>
+          <p className="text-body text-kore-mid mt-xs">Übersicht aller Entwicklungs- und Verbesserungspläne</p>
         </div>
         <div className="flex items-center gap-sm">
           {stores && stores.length > 1 && (
@@ -72,7 +72,7 @@ export function DashboardPage() {
             { label: 'Abgebrochen', value: kpis.cancelledPlans, color: 'text-red-500', icon: XCircle },
             { label: 'PDP', value: kpis.pdpCount, color: 'text-indigo-600', icon: Users },
             { label: 'PIP', value: kpis.pipCount, color: 'text-orange-600', icon: AlertTriangle },
-            { label: 'Ueberfaellig', value: kpis.overduePlans, color: kpis.overduePlans > 0 ? 'text-red-600' : 'text-kore-mid', icon: Clock },
+            { label: 'Überfällig', value: kpis.overduePlans, color: kpis.overduePlans > 0 ? 'text-red-600' : 'text-kore-mid', icon: Clock },
           ].map((k, i) => (
             <div key={i} className="bg-kore-white border border-kore-border p-md text-center">
               <k.icon size={18} className={`mx-auto mb-xs ${k.color}`} />
@@ -152,10 +152,10 @@ export function DashboardPage() {
         {/* Needs Review */}
         <div className="bg-kore-white border border-kore-border p-lg">
           <h2 className="font-display text-h3 text-kore-ink mb-md flex items-center gap-sm">
-            <AlertTriangle size={18} /> Review faellig
+            <AlertTriangle size={18} /> Review fällig
           </h2>
           {needsReview.length === 0 ? (
-            <p className="text-body text-kore-mid">Alle Plaene aktuell reviewed.</p>
+            <p className="text-body text-kore-mid">Alle Pläne aktuell reviewed.</p>
           ) : (
             <div className="space-y-sm">
               {needsReview.slice(0, 10).map((r: any) => (
@@ -227,7 +227,7 @@ export function DashboardPage() {
 
       {!kpis && (
         <div className="bg-kore-white border border-kore-border p-2xl text-center text-kore-mid">
-          Keine Daten verfuegbar.
+          Keine Daten verfügbar.
         </div>
       )}
     </div>

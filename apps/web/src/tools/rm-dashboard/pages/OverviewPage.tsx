@@ -78,7 +78,7 @@ export function OverviewPage() {
       const rows = await api<RmExportRow[]>(`/api/tools/rm-dashboard/export?${params}`);
       if (!rows?.length) return;
 
-      const headers = ['Store', 'Datum', 'Revenue', 'Transaktionen', 'Footfall', 'Stueck verkauft'];
+      const headers = ['Store', 'Datum', 'Revenue', 'Transaktionen', 'Footfall', 'Stück verkauft'];
       const csvRows = rows.map((r) => [
         `"${r.store}"`,
         r.date,
@@ -111,7 +111,7 @@ export function OverviewPage() {
             <LayoutDashboard size={24} /> RM Dashboard
           </h1>
           <p className="text-body text-kore-mid mt-xs">
-            Executive-Ueberblick ueber alle Stores der Region.
+            Executive-Überblick über alle Stores der Region.
           </p>
         </div>
         <div className="flex gap-sm">
@@ -195,7 +195,7 @@ export function OverviewPage() {
         <div className="text-body text-kore-mid">Lade Dashboard...</div>
       ) : !summary ? (
         <div className="bg-kore-white border border-kore-border p-2xl text-center text-body text-kore-mid">
-          Keine Daten verfuegbar.
+          Keine Daten verfügbar.
         </div>
       ) : (
         <>
@@ -248,7 +248,7 @@ export function OverviewPage() {
               <div className="font-display text-h2 text-kore-ink">{summary.kpi.avgTicket.toLocaleString('de-DE')} EUR</div>
             </div>
             <div className="bg-kore-white border border-kore-border p-lg">
-              <span className="block text-small text-kore-mid uppercase tracking-widest mb-sm">Stueck verkauft</span>
+              <span className="block text-small text-kore-mid uppercase tracking-widest mb-sm">Stück verkauft</span>
               <div className="font-display text-h2 text-kore-ink">{summary.kpi.totalUnitsSold.toLocaleString('de-DE')}</div>
             </div>
           </div>
@@ -299,7 +299,7 @@ export function OverviewPage() {
                 <option value="footfall">Frequenz</option>
                 <option value="conversionRate">Konversionsrate</option>
                 <option value="avgTicket">Durchschn. Bon</option>
-                <option value="unitsSold">Stueck verkauft</option>
+                <option value="unitsSold">Stück verkauft</option>
               </select>
               <Link
                 to="/tools/rm-dashboard/ranking"

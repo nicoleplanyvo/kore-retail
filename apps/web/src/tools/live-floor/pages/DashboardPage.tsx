@@ -14,7 +14,7 @@ export function DashboardPage() {
   const dailyTrend = dashboard?.dailyTrend ?? [];
   const zoneUtilization = dashboard?.zoneUtilization ?? [];
 
-  // Max-Werte fuer Balkenberechnung
+  // Max-Werte für Balkenberechnung
   const maxPeakCustomers = Math.max(1, ...peakHours.map((p: any) => p.avgCustomers));
   const maxDailyCustomers = Math.max(1, ...dailyTrend.map((d: any) => d.avgCustomers));
 
@@ -24,7 +24,7 @@ export function DashboardPage() {
         <Link to="/app/tools/live-floor" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div>
           <h1 className="font-display text-h1 text-kore-ink">Dashboard</h1>
-          <p className="text-body text-kore-mid mt-xs">Live-Statistik, Tagesrueckblick und Trend-Analyse</p>
+          <p className="text-body text-kore-mid mt-xs">Live-Statistik, Tagesrückblick und Trend-Analyse</p>
         </div>
       </div>
 
@@ -55,7 +55,7 @@ export function DashboardPage() {
       {isLoading ? (
         <div className="text-body text-kore-mid">Lade Dashboard...</div>
       ) : !dashboard ? (
-        <div className="text-body text-kore-mid">Keine Daten verfuegbar.</div>
+        <div className="text-body text-kore-mid">Keine Daten verfügbar.</div>
       ) : (
         <>
           {/* Live-KPIs */}

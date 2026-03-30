@@ -93,7 +93,7 @@ export function TrendsPage() {
           <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm">
             <TrendingUp size={24} /> Trends
           </h1>
-          <p className="text-body text-kore-mid mt-xs">Woechentliche Entwicklung ueber alle Stores.</p>
+          <p className="text-body text-kore-mid mt-xs">Wöchentliche Entwicklung über alle Stores.</p>
         </div>
         <div className="flex gap-sm">
           <select
@@ -127,7 +127,7 @@ export function TrendsPage() {
         <>
           {/* Chart */}
           <div className="bg-kore-white border border-kore-border p-xl mb-xl">
-            <h2 className="font-display text-h3 text-kore-ink mb-lg">{METRIC_LABELS[metric]} -- Woechentlich</h2>
+            <h2 className="font-display text-h3 text-kore-ink mb-lg">{METRIC_LABELS[metric]} -- Wöchentlich</h2>
             <TrendChart data={chartData} metric={metric} />
           </div>
 

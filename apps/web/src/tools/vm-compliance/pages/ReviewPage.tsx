@@ -59,12 +59,12 @@ export function ReviewPage() {
         to="/app/tools/vm-compliance"
         className="flex items-center gap-sm text-small text-kore-mid hover:text-kore-ink mb-xl"
       >
-        <ArrowLeft size={16} /> Zurueck zur Uebersicht
+        <ArrowLeft size={16} /> Zurück zur Übersicht
       </Link>
 
       <div className="flex items-center justify-between mb-2xl">
         <div>
-          <h1 className="font-display text-h1 text-kore-ink">VM Compliance Pruefen</h1>
+          <h1 className="font-display text-h1 text-kore-ink">VM Compliance Prüfen</h1>
           <p className="text-body text-kore-mid mt-xs">
             {total} ausstehende {total === 1 ? 'Einreichung' : 'Einreichungen'} zur Bewertung
           </p>
@@ -126,7 +126,7 @@ export function ReviewPage() {
             onClick={resetFilters}
             className="flex items-center gap-xs text-small text-kore-mid hover:text-kore-ink py-sm"
           >
-            <X size={14} /> Filter zuruecksetzen
+            <X size={14} /> Filter zurücksetzen
           </button>
         )}
       </div>
@@ -138,7 +138,7 @@ export function ReviewPage() {
         <div className="bg-kore-white border border-kore-border p-3xl flex flex-col items-center text-center">
           <CheckCircle size={48} className="text-emerald-400 mb-lg" />
           <h2 className="font-display text-h2 text-kore-ink mb-md">
-            Alles geprueft!
+            Alles geprüft!
           </h2>
           <p className="text-body text-kore-mid mb-xl max-w-md">
             {hasFilters
@@ -149,7 +149,7 @@ export function ReviewPage() {
             to="/app/tools/vm-compliance"
             className="flex items-center gap-sm border border-kore-border text-kore-ink px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors"
           >
-            Zurueck zur Uebersicht
+            Zurück zur Übersicht
           </Link>
         </div>
       ) : (
@@ -174,7 +174,7 @@ export function ReviewPage() {
                 disabled={page <= 1}
                 className="px-md py-sm border border-kore-border text-small disabled:opacity-40 hover:bg-kore-bg transition-colors"
               >
-                Zurueck
+                Zurück
               </button>
               <span className="text-small text-kore-mid self-center">
                 Seite {page} von {totalPages}

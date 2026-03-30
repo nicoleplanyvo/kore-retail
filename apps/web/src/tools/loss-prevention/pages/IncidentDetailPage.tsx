@@ -29,7 +29,7 @@ import { Breadcrumb } from '../../../components/Breadcrumb';
 const CATEGORY_LABELS: Record<string, string> = {
   THEFT: 'Diebstahl extern',
   ADMIN_ERROR: 'Kassenfehlbuchung',
-  DAMAGE: 'Beschaedigung',
+  DAMAGE: 'Beschädigung',
   SUPPLIER: 'WE-Differenz',
   OTHER: 'Sonstige',
 };
@@ -58,7 +58,7 @@ const STATUS_STYLES: Record<string, string> = {
 const STATUS_LABELS: Record<string, string> = {
   OPEN: 'Offen',
   INVESTIGATING: 'In Untersuchung',
-  RESOLVED: 'Geloest',
+  RESOLVED: 'Gelöst',
   CLOSED: 'Geschlossen',
 };
 
@@ -242,7 +242,7 @@ export function IncidentDetailPage() {
           <div className="bg-kore-white border border-kore-border p-lg">
             <div className="flex items-center gap-sm mb-sm">
               <CheckCircle2 size={14} className="text-emerald-600" />
-              <span className="text-caption text-kore-mid uppercase tracking-widest">Geloest am</span>
+              <span className="text-caption text-kore-mid uppercase tracking-widest">Gelöst am</span>
             </div>
             <div className="text-body text-kore-ink">
               {new Date(incident.resolvedAt).toLocaleDateString('de-DE')}
@@ -287,7 +287,7 @@ export function IncidentDetailPage() {
         <div className="bg-emerald-50 border border-emerald-200 p-xl mb-xl">
           <div className="flex items-center gap-sm mb-md">
             <CheckCircle2 size={16} className="text-emerald-700" />
-            <span className="text-caption text-emerald-700 uppercase tracking-widest font-medium">Loesung</span>
+            <span className="text-caption text-emerald-700 uppercase tracking-widest font-medium">Lösung</span>
           </div>
           <p className="text-body text-emerald-800 whitespace-pre-wrap">{incident.resolution}</p>
         </div>
@@ -343,7 +343,7 @@ export function IncidentDetailPage() {
                 className="flex items-center gap-sm bg-emerald-600 text-white px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-emerald-700 transition-colors"
               >
                 <CheckCircle2 size={16} />
-                Loesen
+                Lösen
               </button>
             )}
 
@@ -355,7 +355,7 @@ export function IncidentDetailPage() {
                 className="flex items-center gap-sm bg-kore-ink text-kore-white px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors disabled:opacity-40"
               >
                 <XCircle size={16} />
-                {updateMutation.isPending ? 'Wird geschlossen...' : 'Schliessen'}
+                {updateMutation.isPending ? 'Wird geschlossen...' : 'Schließen'}
               </button>
             )}
           </div>
@@ -372,7 +372,7 @@ export function IncidentDetailPage() {
                   onChange={(e) => setAssignUserId(e.target.value)}
                   className="flex-1 border border-kore-border px-md py-sm text-body bg-kore-white focus:outline-none focus:border-kore-brass"
                 >
-                  <option value="">Mitarbeiter waehlen...</option>
+                  <option value="">Mitarbeiter wählen...</option>
                   {(users ?? []).map((u: any) => (
                     <option key={u.id} value={u.id}>{u.name}</option>
                   ))}
@@ -392,20 +392,20 @@ export function IncidentDetailPage() {
           {showResolve && (
             <div className="mt-lg pt-lg border-t border-kore-border">
               <label className="block text-caption text-kore-mid uppercase tracking-widest mb-xs">
-                Loesung beschreiben
+                Lösung beschreiben
               </label>
               <textarea
                 value={resolution}
                 onChange={(e) => setResolution(e.target.value)}
                 className="w-full border border-kore-border px-md py-sm text-body bg-kore-white focus:outline-none focus:border-kore-brass min-h-[100px] resize-y mb-md"
-                placeholder="Beschreiben Sie die Massnahmen und das Ergebnis..."
+                placeholder="Beschreiben Sie die Maßnahmen und das Ergebnis..."
               />
               <button
                 onClick={handleResolve}
                 disabled={!resolution || resolveMutation.isPending}
                 className="bg-emerald-600 text-white px-lg py-sm text-small font-medium uppercase tracking-widest hover:bg-emerald-700 transition-colors disabled:opacity-40"
               >
-                {resolveMutation.isPending ? 'Wird gespeichert...' : 'Vorfall loesen'}
+                {resolveMutation.isPending ? 'Wird gespeichert...' : 'Vorfall lösen'}
               </button>
             </div>
           )}

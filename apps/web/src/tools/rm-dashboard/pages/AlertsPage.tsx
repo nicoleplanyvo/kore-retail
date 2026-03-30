@@ -43,7 +43,7 @@ export function AlertsPage() {
         <div className="text-body text-kore-mid">Lade Alerts...</div>
       ) : !alerts?.length ? (
         <div className="bg-emerald-50 border border-emerald-200 p-2xl text-center text-body text-emerald-700">
-          Keine kritischen Alerts vorhanden -- alles im gruenen Bereich.
+          Keine kritischen Alerts vorhanden -- alles im grünen Bereich.
         </div>
       ) : (
         <>

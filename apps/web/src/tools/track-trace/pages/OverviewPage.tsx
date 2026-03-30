@@ -232,7 +232,7 @@ export function OverviewPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-md">
             <div>
               <label className="block text-small text-kore-mid mb-xs">
-                {formType === 'transfer' ? 'Ziel-Store / Empfaenger' : 'Kundenname'}
+                {formType === 'transfer' ? 'Ziel-Store / Empfänger' : 'Kundenname'}
               </label>
               <input
                 value={form.customerName}
@@ -250,7 +250,7 @@ export function OverviewPage() {
                   value={form.customerEmail}
                   onChange={(e) => setForm({ ...form, customerEmail: e.target.value })}
                   className="w-full border border-kore-border px-md py-sm text-body"
-                  placeholder="fuer Benachrichtigung"
+                  placeholder="für Benachrichtigung"
                 />
               </div>
             )}
@@ -270,7 +270,7 @@ export function OverviewPage() {
                 onChange={(e) => setForm({ ...form, carrier: e.target.value })}
                 className="w-full border border-kore-border px-md py-sm text-body"
               >
-                <option value="">-- Waehlen --</option>
+                <option value="">-- Wählen --</option>
                 <option value="DHL">DHL</option>
                 <option value="UPS">UPS</option>
                 <option value="DPD">DPD</option>
@@ -356,11 +356,11 @@ export function OverviewPage() {
 
       {/* Order List */}
       {isLoading ? (
-        <div className="text-body text-kore-mid">Lade Vorgaenge...</div>
+        <div className="text-body text-kore-mid">Lade Vorgänge...</div>
       ) : !orders.length ? (
         <div className="bg-kore-white border border-kore-border p-2xl flex flex-col items-center text-center">
           <Truck size={48} className="text-kore-faint mb-lg" />
-          <h2 className="font-display text-h2 text-kore-ink mb-md">Keine Vorgaenge vorhanden</h2>
+          <h2 className="font-display text-h2 text-kore-ink mb-md">Keine Vorgänge vorhanden</h2>
           <p className="text-body text-kore-mid max-w-md mb-xl">
             Erstellen Sie einen neuen Transfer oder Click & Collect Vorgang.
           </p>
@@ -407,7 +407,7 @@ export function OverviewPage() {
           {totalPages > 1 && (
             <div className="flex items-center justify-between mt-lg">
               <span className="text-small text-kore-mid">
-                Seite {data.page} von {totalPages} ({data.total} Eintraege)
+                Seite {data.page} von {totalPages} ({data.total} Einträge)
               </span>
               <div className="flex items-center gap-xs">
                 <button

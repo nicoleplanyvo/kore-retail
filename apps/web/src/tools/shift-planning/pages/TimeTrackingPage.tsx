@@ -44,7 +44,7 @@ export function TimeTrackingPage() {
 
   return (
     <div className="p-xl max-w-5xl">
-      <Link to="/app/tools/shift-planning" className="flex items-center gap-xs text-kore-mid hover:text-kore-ink text-small mb-lg"><ArrowLeft size={16} /> Zurueck zum Wochenplan</Link>
+      <Link to="/app/tools/shift-planning" className="flex items-center gap-xs text-kore-mid hover:text-kore-ink text-small mb-lg"><ArrowLeft size={16} /> Zurück zum Wochenplan</Link>
 
       <h1 className="font-display text-h1 text-kore-ink mb-xs">Zeiterfassung</h1>
       <p className="text-body text-kore-mid mb-xl">Ein-/Ausstempeln, Pausen erfassen und Wochenstunden einsehen.</p>
@@ -52,7 +52,7 @@ export function TimeTrackingPage() {
       {/* Store Select */}
       <div className="mb-xl">
         <select value={selectedStore} onChange={e => setSelectedStore(e.target.value)} className="border border-kore-border px-md py-sm text-body">
-          <option value="">Store waehlen</option>
+          <option value="">Store wählen</option>
           {stores?.map((s: any) => <option key={s.id} value={s.id}>{s.name}</option>)}
         </select>
       </div>
@@ -107,11 +107,11 @@ export function TimeTrackingPage() {
       )}
 
       {/* Weekly Hours Summary */}
-      <h2 className="font-display text-h3 text-kore-ink mb-md">Wochenuebersicht ({from} bis {to})</h2>
+      <h2 className="font-display text-h3 text-kore-ink mb-md">Wochenübersicht ({from} bis {to})</h2>
       {isLoading ? (
-        <div className="text-body text-kore-mid">Lade Zeiteintraege...</div>
+        <div className="text-body text-kore-mid">Lade Zeiteinträge...</div>
       ) : !entries.length ? (
-        <div className="bg-kore-white border border-kore-border p-lg text-center text-body text-kore-mid">Keine Zeiteintraege in dieser Woche.</div>
+        <div className="bg-kore-white border border-kore-border p-lg text-center text-body text-kore-mid">Keine Zeiteinträge in dieser Woche.</div>
       ) : (
         <>
           <div className="bg-kore-white border border-kore-border mb-lg overflow-x-auto">
@@ -152,7 +152,7 @@ export function TimeTrackingPage() {
                   <div key={s.userId} className="flex items-center justify-between border-b border-kore-border pb-sm last:border-0">
                     <span className="text-body text-kore-ink font-medium">{s.userName}</span>
                     <div className="flex items-center gap-lg">
-                      <span className="text-small text-kore-mid">{s.entries} Eintraege</span>
+                      <span className="text-small text-kore-mid">{s.entries} Einträge</span>
                       <span className="font-display text-h3 text-kore-ink">{(s.totalMin / 60).toFixed(1)}h</span>
                     </div>
                   </div>

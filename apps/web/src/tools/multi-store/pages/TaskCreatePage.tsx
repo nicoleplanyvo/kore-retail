@@ -109,7 +109,7 @@ export function TaskCreatePage() {
       return;
     }
     if (selectedStoreIds.length === 0) {
-      setError('Bitte waehlen Sie mindestens einen Store aus.');
+      setError('Bitte wählen Sie mindestens einen Store aus.');
       return;
     }
 
@@ -179,7 +179,7 @@ export function TaskCreatePage() {
             </select>
           </div>
           <div>
-            <label className="block text-small text-kore-mid mb-xs">Prioritaet</label>
+            <label className="block text-small text-kore-mid mb-xs">Priorität</label>
             <select
               value={priority}
               onChange={(e) => setPriority(e.target.value)}
@@ -315,14 +315,14 @@ export function TaskCreatePage() {
               value={checklistInput}
               onChange={(e) => setChecklistInput(e.target.value)}
               onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addChecklistItem(); } }}
-              placeholder="Neuen Punkt hinzufuegen..."
+              placeholder="Neuen Punkt hinzufügen..."
               className="flex-1 border border-kore-border px-md py-sm text-body"
             />
             <button
               onClick={addChecklistItem}
               className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-ink hover:bg-kore-bg"
             >
-              <Plus size={14} /> Hinzufuegen
+              <Plus size={14} /> Hinzufügen
             </button>
           </div>
         </div>
@@ -349,7 +349,7 @@ export function TaskCreatePage() {
             value={tagInput}
             onChange={(e) => setTagInput(e.target.value)}
             onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addTag(); } }}
-            placeholder="Tag hinzufuegen..."
+            placeholder="Tag hinzufügen..."
             className="flex-1 border border-kore-border px-md py-sm text-body"
           />
           <button
@@ -372,7 +372,7 @@ export function TaskCreatePage() {
               onClick={selectAllStores}
               className="text-small text-kore-brass hover:underline"
             >
-              Alle auswaehlen
+              Alle auswählen
             </button>
             <button
               onClick={deselectAllStores}
@@ -383,7 +383,7 @@ export function TaskCreatePage() {
           </div>
         </div>
         <div className="text-small text-kore-mid mb-sm">
-          {selectedStoreIds.length} von {stores?.length ?? 0} Stores ausgewaehlt
+          {selectedStoreIds.length} von {stores?.length ?? 0} Stores ausgewählt
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-sm max-h-60 overflow-y-auto">
           {stores?.map((store) => (

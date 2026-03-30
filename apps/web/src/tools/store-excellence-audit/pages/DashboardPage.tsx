@@ -49,7 +49,7 @@ export function DashboardPage() {
             <div className="flex items-center gap-sm mt-sm">
               {trendIcon}
               <span className="text-body text-kore-ink">
-                {summary.recentTrend === 'up' ? 'Aufwaerts' : summary.recentTrend === 'down' ? 'Abwaerts' : 'Stabil'}
+                {summary.recentTrend === 'up' ? 'Aufwärts' : summary.recentTrend === 'down' ? 'Abwärts' : 'Stabil'}
               </span>
             </div>
           </div>

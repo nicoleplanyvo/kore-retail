@@ -80,7 +80,7 @@ export function ZoneManagementPage() {
           onChange={(e) => setStoreId(e.target.value)}
           className="border border-kore-border px-md py-sm text-small bg-kore-white min-w-[200px]"
         >
-          <option value="">Store waehlen...</option>
+          <option value="">Store wählen...</option>
           {(stores ?? []).map((s: any) => (
             <option key={s.id} value={s.id}>{s.name}</option>
           ))}
@@ -144,7 +144,7 @@ export function ZoneManagementPage() {
                   onChange={(e) => setAssignUserId(e.target.value)}
                   className="border border-kore-border px-md py-sm text-small w-full bg-kore-white"
                 >
-                  <option value="">MA waehlen...</option>
+                  <option value="">MA wählen...</option>
                   {(users ?? []).map((u: any) => (
                     <option key={u.id} value={u.id}>{u.name}</option>
                   ))}
@@ -265,7 +265,7 @@ export function ZoneManagementPage() {
                           <span key={a.id} className="text-small bg-kore-bg border border-kore-border px-md py-xs text-kore-ink">
                             {a.userName}
                             <span className="text-kore-faint ml-sm">
-                              {a.status === 'ON_FLOOR' ? 'Flaeche' : a.status === 'ON_BREAK' ? 'Pause' : a.status === 'CASHIER' ? 'Kasse' : 'Abwesend'}
+                              {a.status === 'ON_FLOOR' ? 'Fläche' : a.status === 'ON_BREAK' ? 'Pause' : a.status === 'CASHIER' ? 'Kasse' : 'Abwesend'}
                             </span>
                           </span>
                         ))}
@@ -280,7 +280,7 @@ export function ZoneManagementPage() {
       )}
 
       {!storeId && (
-        <div className="text-body text-kore-mid">Bitte waehlen Sie einen Store aus, um Zonen zu verwalten.</div>
+        <div className="text-body text-kore-mid">Bitte wählen Sie einen Store aus, um Zonen zu verwalten.</div>
       )}
     </div>
   );

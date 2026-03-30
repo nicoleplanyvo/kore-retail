@@ -118,7 +118,7 @@ export function DetailPage() {
         </Link>
         <div className="flex-1">
           <h1 className="font-display text-h1 text-kore-ink">Monatsdetail</h1>
-          <p className="text-body text-kore-mid mt-xs">Tageseintraege, kumulativer Verlauf und Ziele verwalten</p>
+          <p className="text-body text-kore-mid mt-xs">Tageseinträge, kumulativer Verlauf und Ziele verwalten</p>
         </div>
       </div>
 
@@ -156,7 +156,7 @@ export function DetailPage() {
       {/* Target Form */}
       {showTargetForm && (
         <div className="bg-kore-white border border-kore-border p-xl mb-xl">
-          <h3 className="font-display text-h3 text-kore-ink mb-md">Soll-Ziel fuer {month}</h3>
+          <h3 className="font-display text-h3 text-kore-ink mb-md">Soll-Ziel für {month}</h3>
           <form onSubmit={handleSetTarget} className="flex flex-wrap items-end gap-md">
             <div>
               <label className="block text-caption text-kore-mid uppercase tracking-widest mb-xs">Umsatzziel (EUR)</label>
@@ -224,7 +224,7 @@ export function DetailPage() {
       {isLoading ? (
         <div className="text-body text-kore-mid">Lade Daten...</div>
       ) : !forecast ? (
-        <div className="text-body text-kore-mid">Keine Daten fuer diesen Monat.</div>
+        <div className="text-body text-kore-mid">Keine Daten für diesen Monat.</div>
       ) : (
         <>
           {/* Cumulative Chart (Soll-Linie vs Ist-Balken) */}
@@ -274,7 +274,7 @@ export function DetailPage() {
           {/* Daily Entries Table */}
           <div className="bg-kore-white border border-kore-border mb-xl">
             <div className="flex items-center justify-between p-lg border-b border-kore-border">
-              <h2 className="font-display text-h3 text-kore-ink">Tageseintraege</h2>
+              <h2 className="font-display text-h3 text-kore-ink">Tageseinträge</h2>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-small">
@@ -343,7 +343,7 @@ export function DetailPage() {
 
           {/* Add Entry */}
           <div className="bg-kore-white border border-kore-border p-xl">
-            <h2 className="font-display text-h3 text-kore-ink mb-lg">Ist-Wert hinzufuegen</h2>
+            <h2 className="font-display text-h3 text-kore-ink mb-lg">Ist-Wert hinzufügen</h2>
             <form onSubmit={handleAddActual} className="flex flex-wrap items-end gap-md">
               <div>
                 <label className="block text-caption text-kore-mid uppercase tracking-widest mb-xs">Datum</label>

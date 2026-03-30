@@ -24,7 +24,7 @@ export function ResultsPage() {
   const { data: results, isLoading } = usePulseSurveyResults(id, storeId || undefined);
 
   if (isLoading) return <div className="p-xl text-body text-kore-mid">Lade Ergebnisse...</div>;
-  if (!results) return <div className="p-xl text-body text-kore-mid">Keine Ergebnisse verfuegbar.</div>;
+  if (!results) return <div className="p-xl text-body text-kore-mid">Keine Ergebnisse verfügbar.</div>;
 
   const totalResponses = results.totalResponses ?? 0;
   const questionResults = results.questionResults ?? [];

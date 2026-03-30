@@ -37,7 +37,7 @@ export function ReportsExportPage() {
   const reportOptions: { value: ReportType; label: string; description: string }[] = [
     { value: 'kpi', label: 'KPI Report', description: 'Umsatz, Transaktionen, Frequenz, Conversion' },
     { value: 'audit', label: 'Audit Report', description: 'Store Excellence Audit Ergebnisse und Scores' },
-    { value: 'store-overview', label: 'Store-Uebersicht', description: 'Kompletter Ueberblick eines einzelnen Stores' },
+    { value: 'store-overview', label: 'Store-Übersicht', description: 'Kompletter Überblick eines einzelnen Stores' },
   ];
 
   const needsStore = reportType === 'store-overview';
@@ -58,7 +58,7 @@ export function ReportsExportPage() {
     ? `kpi-report-${dateFrom}.pdf`
     : reportType === 'audit'
     ? `audit-report-${dateFrom}.pdf`
-    : `store-uebersicht-${selectedStore?.name?.replace(/\s/g, '-').toLowerCase() ?? 'store'}.pdf`;
+    : `store-übersicht-${selectedStore?.name?.replace(/\s/g, '-').toLowerCase() ?? 'store'}.pdf`;
 
   return (
     <div className="p-xl max-w-3xl">
@@ -67,7 +67,7 @@ export function ReportsExportPage() {
       <div className="mb-2xl">
         <h1 className="font-display text-h1 text-kore-ink">Berichte & PDF-Export</h1>
         <p className="text-body text-kore-mid mt-xs">
-          Erstellen Sie PDF-Reports fuer KPIs, Audits oder einzelne Stores.
+          Erstellen Sie PDF-Reports für KPIs, Audits oder einzelne Stores.
         </p>
       </div>
 
@@ -138,7 +138,7 @@ export function ReportsExportPage() {
               onChange={(e) => setStoreId(e.target.value)}
               className="w-full border border-kore-border px-md py-sm text-small bg-kore-white"
             >
-              <option value="">{needsStore ? '-- Store waehlen --' : 'Alle Stores'}</option>
+              <option value="">{needsStore ? '-- Store wählen --' : 'Alle Stores'}</option>
               {(stores ?? []).map((s) => (
                 <option key={s.id} value={s.id}>
                   {s.name}{s.city ? ` (${s.city})` : ''}
@@ -174,7 +174,7 @@ export function ReportsExportPage() {
             className="flex items-center gap-sm border border-kore-border px-lg py-md-sm text-small font-medium uppercase tracking-widest text-kore-faint cursor-not-allowed"
           >
             <Download size={14} />
-            Store waehlen
+            Store wählen
           </button>
         )}
       </div>

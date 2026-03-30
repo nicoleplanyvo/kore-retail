@@ -41,7 +41,7 @@ export function CreateCustomerPage() {
       <form onSubmit={handleSubmit} className="space-y-xl">
         {/* Personal Data */}
         <div className="bg-kore-white border border-kore-border p-xl">
-          <h2 className="font-display text-h3 text-kore-ink mb-lg">Persoenliche Daten</h2>
+          <h2 className="font-display text-h3 text-kore-ink mb-lg">Persönliche Daten</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-md">
             <div>
               <label className="block text-small text-kore-mid mb-xs">Vorname *</label>
@@ -79,14 +79,14 @@ export function CreateCustomerPage() {
 
         {/* Preferences */}
         <div className="bg-kore-white border border-kore-border p-xl">
-          <h2 className="font-display text-h3 text-kore-ink mb-lg">Vorlieben und Groessen</h2>
+          <h2 className="font-display text-h3 text-kore-ink mb-lg">Vorlieben und Größen</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-md">
             <div>
-              <label className="block text-small text-kore-mid mb-xs">Vorlieben / Praeferenzen</label>
+              <label className="block text-small text-kore-mid mb-xs">Vorlieben / Präferenzen</label>
               <textarea value={form.preferences} onChange={e => set('preferences', e.target.value)} rows={3} placeholder="z.B. Sneaker, Premium-Marken, Casual-Style" className="w-full border border-kore-border px-md py-sm text-body" />
             </div>
             <div>
-              <label className="block text-small text-kore-mid mb-xs">Groessen</label>
+              <label className="block text-small text-kore-mid mb-xs">Größen</label>
               <input value={form.sizes} onChange={e => set('sizes', e.target.value)} placeholder="z.B. Oberteil M, Hose 32, Schuh 42" className="w-full border border-kore-border px-md py-sm text-body" />
             </div>
           </div>

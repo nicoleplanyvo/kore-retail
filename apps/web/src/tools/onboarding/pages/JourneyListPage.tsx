@@ -150,7 +150,7 @@ export function JourneyListPage() {
                 onChange={(e) => setForm({ ...form, templateId: e.target.value })}
                 className="w-full border border-kore-border px-md py-sm text-small bg-kore-white"
               >
-                <option value="">Template waehlen</option>
+                <option value="">Template wählen</option>
                 {activeTemplates.map((t: any) => (
                   <option key={t.id} value={t.id}>
                     {t.name}
@@ -168,7 +168,7 @@ export function JourneyListPage() {
                 onChange={(e) => setForm({ ...form, userId: e.target.value })}
                 className="w-full border border-kore-border px-md py-sm text-small bg-kore-white"
               >
-                <option value="">Mitarbeiter waehlen</option>
+                <option value="">Mitarbeiter wählen</option>
                 {(users ?? []).map((u: any) => (
                   <option key={u.id} value={u.id}>
                     {u.name} ({u.role})
@@ -183,7 +183,7 @@ export function JourneyListPage() {
                 onChange={(e) => setForm({ ...form, storeId: e.target.value })}
                 className="w-full border border-kore-border px-md py-sm text-small bg-kore-white"
               >
-                <option value="">Store waehlen</option>
+                <option value="">Store wählen</option>
                 {(stores ?? []).map((s: any) => (
                   <option key={s.id} value={s.id}>
                     {s.name}
@@ -306,7 +306,7 @@ export function JourneyListPage() {
             <div className="flex items-center justify-between mt-lg">
               <span className="text-small text-kore-mid">
                 Seite {data.page} / {Math.ceil(data.total / data.pageSize)} ({data.total}{' '}
-                Eintraege)
+                Einträge)
               </span>
               <div className="flex gap-sm">
                 <button
@@ -314,7 +314,7 @@ export function JourneyListPage() {
                   onClick={() => setPage(page - 1)}
                   className="px-md py-sm border border-kore-border text-small disabled:opacity-40"
                 >
-                  Zurueck
+                  Zurück
                 </button>
                 <button
                   disabled={page * data.pageSize >= data.total}

@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Heart, Send } from 'lucide-react';
 import { useCreateWellbeingCheckIn, useWellbeingStores } from '../../../hooks/useWellbeing';
 
-const MOOD_LABELS = ['', 'Schlecht', 'Maessig', 'Ok', 'Gut', 'Sehr gut'];
+const MOOD_LABELS = ['', 'Schlecht', 'Mäßig', 'Ok', 'Gut', 'Sehr gut'];
 
 function RatingSelector({
   label,
@@ -159,7 +159,7 @@ export function CheckInPage() {
             onChange={(e) => setForm({ ...form, notes: e.target.value })}
             rows={3}
             className="w-full border border-kore-border px-md py-sm text-body"
-            placeholder="Gibt es etwas, das du mitteilen moechtest?"
+            placeholder="Gibt es etwas, das du mitteilen möchtest?"
           />
         </div>
 
@@ -174,7 +174,7 @@ export function CheckInPage() {
         </label>
         {form.isAnonymous && (
           <p className="text-small text-kore-mid ml-md">
-            Dein Name wird nicht gespeichert. Bei kritischen Werten wird das Management informiert, jedoch ohne persoenliche Zuordnung.
+            Dein Name wird nicht gespeichert. Bei kritischen Werten wird das Management informiert, jedoch ohne persönliche Zuordnung.
           </p>
         )}
 

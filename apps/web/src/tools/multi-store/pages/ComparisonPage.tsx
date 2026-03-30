@@ -55,7 +55,7 @@ export function ComparisonPage() {
                   <th className="text-right px-md py-sm text-small text-kore-mid font-medium">Umsatz</th>
                   <th className="text-right px-md py-sm text-small text-kore-mid font-medium">Transaktionen</th>
                   <th className="text-right px-md py-sm text-small text-kore-mid font-medium">Frequenz</th>
-                  <th className="text-right px-md py-sm text-small text-kore-mid font-medium">Stueck verkauft</th>
+                  <th className="text-right px-md py-sm text-small text-kore-mid font-medium">Stück verkauft</th>
                   <th className="text-right px-md py-sm text-small text-kore-mid font-medium">Ø Umsatz/Tag</th>
                 </tr>
               </thead>

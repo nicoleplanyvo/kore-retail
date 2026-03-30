@@ -89,7 +89,7 @@ export function DashboardPage() {
             <BarChart3 size={24} /> Bestandsmeldungen Dashboard
           </h1>
           <p className="text-body text-kore-mid mt-xs">
-            Aggregierte Uebersicht: fehlende Artikel, Store-Vergleich, Buying-Info
+            Aggregierte Übersicht: fehlende Artikel, Store-Vergleich, Buying-Info
           </p>
         </div>
       </div>
@@ -161,10 +161,10 @@ export function DashboardPage() {
             <div className="bg-kore-white border border-kore-border p-lg">
               <div className="flex items-center gap-sm mb-sm">
                 <TrendingUp size={16} className="text-emerald-600" />
-                <span className="text-xs text-kore-mid uppercase tracking-widest">Loesungsrate</span>
+                <span className="text-xs text-kore-mid uppercase tracking-widest">Lösungsrate</span>
               </div>
               <div className="font-display text-h1 text-emerald-600">{dashboard.kpis.resolutionRate}%</div>
-              <span className="text-small text-kore-mid">{dashboard.kpis.resolved} geloest</span>
+              <span className="text-small text-kore-mid">{dashboard.kpis.resolved} gelöst</span>
             </div>
             <div className="bg-kore-white border border-kore-border p-lg">
               <div className="flex items-center gap-sm mb-sm">
@@ -237,13 +237,13 @@ export function DashboardPage() {
             </div>
           </div>
 
-          {/* Buying-Info: Aggregierte Uebersicht fuer Buying/Allocation */}
+          {/* Buying-Info: Aggregierte Übersicht für Buying/Allocation */}
           <div className="bg-kore-white border border-kore-border p-lg mb-lg">
             <h2 className="font-display text-h3 text-kore-ink mb-md flex items-center gap-sm">
               <ShoppingCart size={18} /> Buying-Info: Offene Bedarfe
             </h2>
             <p className="text-small text-kore-mid mb-md">
-              Aggregierte Uebersicht welche Artikel in welchen Stores fehlen — fuer Buying und Allocation.
+              Aggregierte Übersicht welche Artikel in welchen Stores fehlen — für Buying und Allocation.
             </p>
             {dashboard.buyingInfo?.length ? (
               <div className="overflow-x-auto">
@@ -295,7 +295,7 @@ export function DashboardPage() {
         </>
       ) : (
         <div className="bg-kore-white border border-kore-border p-2xl text-center text-body text-kore-mid">
-          Keine Dashboard-Daten verfuegbar.
+          Keine Dashboard-Daten verfügbar.
         </div>
       )}
     </div>
@@ -342,7 +342,7 @@ function TrendChart({ data }: { data: { date: string; created: number; resolved:
         <rect x={50} y={chartHeight + 44} width={10} height={10} fill="#1a1a1a" rx={1} />
         <text x={64} y={chartHeight + 53} fontSize={10} className="fill-kore-ink">Erstellt</text>
         <rect x={130} y={chartHeight + 44} width={10} height={10} fill="#9E8460" rx={1} />
-        <text x={144} y={chartHeight + 53} fontSize={10} className="fill-kore-ink">Geloest</text>
+        <text x={144} y={chartHeight + 53} fontSize={10} className="fill-kore-ink">Gelöst</text>
       </svg>
     </div>
   );

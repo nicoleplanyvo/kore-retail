@@ -248,13 +248,13 @@ export function DashboardPage() {
       {isLoading ? (
         <div className="text-body text-kore-mid py-xl">Lade Dashboard...</div>
       ) : !dashboard ? (
-        <div className="text-body text-kore-mid py-xl">Keine Daten verfuegbar.</div>
+        <div className="text-body text-kore-mid py-xl">Keine Daten verfügbar.</div>
       ) : (
         <>
           {/* KPI Tiles */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-md mb-2xl">
             <div className="bg-kore-white border border-kore-border p-lg">
-              <span className="text-caption text-kore-mid uppercase tracking-widest">Vorfaelle gesamt</span>
+              <span className="text-caption text-kore-mid uppercase tracking-widest">Vorfälle gesamt</span>
               <div className="font-display text-h1 text-kore-ink mt-sm">{dashboard.totalIncidents}</div>
               <div className="mt-xs">
                 <ChangeIndicator value={dashboard.prevPeriod?.incidentChange ?? 0} />
@@ -285,7 +285,7 @@ export function DashboardPage() {
                     <Minus size={20} className="text-kore-mid" />
                   )}
                   <span className="text-body text-kore-ink">
-                    {dashboard.prevPeriod?.totalIncidents ?? 0} Vorfaelle
+                    {dashboard.prevPeriod?.totalIncidents ?? 0} Vorfälle
                   </span>
                 </div>
                 <span className="text-small text-kore-mid mt-xs block">

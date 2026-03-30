@@ -5,8 +5,8 @@ import { useAppraisal, useUpdateAppraisal, useSubmitSelfAssessment, useCompleteA
 
 const STATUS_LABELS: Record<string, string> = {
   PENDING: 'Entwurf',
-  SELF_REVIEW: 'Selbsteinschaetzung',
-  MANAGER_REVIEW: 'Durchgefuehrt',
+  SELF_REVIEW: 'Selbsteinschätzung',
+  MANAGER_REVIEW: 'Durchgeführt',
   COMPLETED: 'Abgeschlossen',
 };
 
@@ -88,7 +88,7 @@ export function AppraisalDetailPage() {
   };
 
   const handleComplete = () => {
-    if (confirm('Beurteilung abschliessen? Dies kann nicht rueckgaengig gemacht werden.')) {
+    if (confirm('Beurteilung abschließen? Dies kann nicht rückgängig gemacht werden.')) {
       complete.mutate(appraisal.id);
     }
   };
@@ -161,7 +161,7 @@ export function AppraisalDetailPage() {
           <div className="flex gap-sm">
             {appraisal.status === 'SELF_REVIEW' && !detail.selfAssessmentCompleted && (
               <button onClick={startSelfAssessment} className="px-md py-sm border border-amber-300 bg-amber-50 text-amber-700 text-small hover:bg-amber-100 transition-colors">
-                Selbsteinschaetzung
+                Selbsteinschätzung
               </button>
             )}
             <button onClick={startEdit} className="px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90 transition-colors">
@@ -169,7 +169,7 @@ export function AppraisalDetailPage() {
             </button>
             {appraisal.status === 'MANAGER_REVIEW' && (
               <button onClick={handleComplete} className="flex items-center gap-xs px-md py-sm bg-emerald-600 text-kore-white text-small hover:bg-emerald-700 transition-colors">
-                <CheckCircle2 size={14} /> Abschliessen
+                <CheckCircle2 size={14} /> Abschließen
               </button>
             )}
           </div>
@@ -201,7 +201,7 @@ export function AppraisalDetailPage() {
       {/* Self-Assessment Mode */}
       {selfMode && (
         <div className="mb-xl">
-          <h2 className="font-display text-h3 text-kore-ink mb-lg">Selbsteinschaetzung</h2>
+          <h2 className="font-display text-h3 text-kore-ink mb-lg">Selbsteinschätzung</h2>
           <p className="text-body text-kore-mid mb-lg">Bitte bewerten Sie sich selbst in jeder Kategorie (1-5).</p>
           <div className="space-y-md">
             {categories.map((cat, idx) => (
@@ -233,7 +233,7 @@ export function AppraisalDetailPage() {
               disabled={submitSelf.isPending}
               className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors disabled:opacity-50"
             >
-              <Save size={14} /> {submitSelf.isPending ? 'Sende...' : 'Selbsteinschaetzung absenden'}
+              <Save size={14} /> {submitSelf.isPending ? 'Sende...' : 'Selbsteinschätzung absenden'}
             </button>
             <button onClick={() => setSelfMode(false)} className="px-xl py-md-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors">
               Abbrechen
@@ -279,7 +279,7 @@ export function AppraisalDetailPage() {
                   {/* Self Rating (side-by-side comparison) */}
                   {detail.selfAssessmentCompleted && (
                     <div className="border-l border-kore-border pl-md">
-                      <label className="block text-small text-kore-mid mb-xs uppercase tracking-widest">Selbsteinschaetzung</label>
+                      <label className="block text-small text-kore-mid mb-xs uppercase tracking-widest">Selbsteinschätzung</label>
                       <div className="mt-xs">{renderRatingBadge(cat.selfRating)}</div>
                       {cat.selfComment && <p className="text-small text-kore-mid mt-sm">{cat.selfComment}</p>}
                     </div>
@@ -300,7 +300,7 @@ export function AppraisalDetailPage() {
             </h2>
             {editing && (
               <button onClick={addGoal} className="flex items-center gap-xs text-small text-kore-ink hover:text-kore-brass transition-colors">
-                <Plus size={14} /> Ziel hinzufuegen
+                <Plus size={14} /> Ziel hinzufügen
               </button>
             )}
           </div>
@@ -371,7 +371,7 @@ export function AppraisalDetailPage() {
       {!selfMode && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-md mb-xl">
           <div className="bg-kore-white border border-kore-border p-lg">
-            <h3 className="font-display text-h3 text-kore-ink mb-sm">Staerken</h3>
+            <h3 className="font-display text-h3 text-kore-ink mb-sm">Stärken</h3>
             {editing ? (
               <textarea value={strengths} onChange={e => setStrengths(e.target.value)} rows={4} className="w-full border border-kore-border px-md py-sm text-body" />
             ) : (

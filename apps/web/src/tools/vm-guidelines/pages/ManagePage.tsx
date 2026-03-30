@@ -52,11 +52,11 @@ export function ManagePage() {
   return (
     <div className="p-xl max-w-3xl">
       <Link to="/app/tools/vm-guidelines" className="flex items-center gap-sm text-small text-kore-mid hover:text-kore-ink mb-xl">
-        <ArrowLeft size={16} /> Zurueck
+        <ArrowLeft size={16} /> Zurück
       </Link>
 
       <h1 className="font-display text-h1 text-kore-ink mb-sm">{editId ? 'Guideline bearbeiten' : 'Neue Guideline'}</h1>
-      <p className="text-body text-kore-mid mb-2xl">{editId ? 'Aendern Sie die VM-Guideline.' : 'Erstellen Sie eine neue VM-Guideline mit Anweisungen und Bildern.'}</p>
+      <p className="text-body text-kore-mid mb-2xl">{editId ? 'Ändern Sie die VM-Guideline.' : 'Erstellen Sie eine neue VM-Guideline mit Anweisungen und Bildern.'}</p>
 
       <form onSubmit={handleSubmit} className="space-y-xl">
         <div className="bg-kore-white border border-kore-border p-xl">
@@ -64,7 +64,7 @@ export function ManagePage() {
           <div className="space-y-lg">
             <div>
               <label className="text-small text-kore-mid block mb-sm">Titel *</label>
-              <input value={title} onChange={(e) => setTitle(e.target.value)} className="w-full border border-kore-border px-md py-sm text-small" placeholder="z.B. Schaufenster Fruehjahr 2026" required />
+              <input value={title} onChange={(e) => setTitle(e.target.value)} className="w-full border border-kore-border px-md py-sm text-small" placeholder="z.B. Schaufenster Frühjahr 2026" required />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-lg">
               <div>
@@ -75,7 +75,7 @@ export function ManagePage() {
                 </select>
               </div>
               <div>
-                <label className="text-small text-kore-mid block mb-sm">Gueltig ab</label>
+                <label className="text-small text-kore-mid block mb-sm">Gültig ab</label>
                 <input type="date" value={effectiveFrom} onChange={(e) => setEffectiveFrom(e.target.value)} className="w-full border border-kore-border px-md py-sm text-small" />
               </div>
             </div>
@@ -89,7 +89,7 @@ export function ManagePage() {
             onChange={(e) => setContent(e.target.value)}
             className="w-full border border-kore-border px-md py-sm text-small resize-none font-mono"
             rows={12}
-            placeholder="Beschreiben Sie die VM-Richtlinien im Detail. Markdown wird unterstuetzt."
+            placeholder="Beschreiben Sie die VM-Richtlinien im Detail. Markdown wird unterstützt."
             required
           />
         </div>

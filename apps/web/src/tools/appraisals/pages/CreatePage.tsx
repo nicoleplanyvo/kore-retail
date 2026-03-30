@@ -33,7 +33,7 @@ export function CreatePage() {
         </Link>
         <div>
           <h1 className="font-display text-h1 text-kore-ink">Neue Beurteilung</h1>
-          <p className="text-body text-kore-mid mt-xs">Mitarbeiter auswaehlen, Vorlage festlegen und Faelligkeitsdatum setzen</p>
+          <p className="text-body text-kore-mid mt-xs">Mitarbeiter auswählen, Vorlage festlegen und Fälligkeitsdatum setzen</p>
         </div>
       </div>
 
@@ -46,7 +46,7 @@ export function CreatePage() {
             onChange={e => { setStoreId(e.target.value); setForm({ ...form, employeeId: '' }); }}
             className="w-full border border-kore-border px-md py-sm text-body"
           >
-            <option value="">-- Store waehlen (optional) --</option>
+            <option value="">-- Store wählen (optional) --</option>
             {stores?.map((s: any) => <option key={s.id} value={s.id}>{s.name}{s.city ? ` (${s.city})` : ''}</option>)}
           </select>
         </div>
@@ -60,7 +60,7 @@ export function CreatePage() {
             className="w-full border border-kore-border px-md py-sm text-body"
             required
           >
-            <option value="">-- Mitarbeiter waehlen --</option>
+            <option value="">-- Mitarbeiter wählen --</option>
             {users?.map((u: any) => <option key={u.id} value={u.id}>{u.name} ({u.email})</option>)}
           </select>
         </div>
@@ -75,14 +75,14 @@ export function CreatePage() {
           >
             <option value="Standard">Standard (alle Kategorien)</option>
             <option value="Verkauf">Verkauf</option>
-            <option value="Fuehrungskraft">Fuehrungskraft</option>
+            <option value="Führungskraft">Führungskraft</option>
             <option value="Lager">Lager / Logistik</option>
           </select>
         </div>
 
         {/* Due Date */}
         <div>
-          <label className="block text-small text-kore-mid mb-xs uppercase tracking-widest">Faelligkeitsdatum</label>
+          <label className="block text-small text-kore-mid mb-xs uppercase tracking-widest">Fälligkeitsdatum</label>
           <input
             type="date"
             value={form.dueDate}
@@ -101,7 +101,7 @@ export function CreatePage() {
             className="w-4 h-4"
           />
           <label htmlFor="selfAssessment" className="text-body text-kore-ink">
-            Selbsteinschaetzung anfordern (Mitarbeiter fuellt gleichen Bogen vorab aus)
+            Selbsteinschätzung anfordern (Mitarbeiter füllt gleichen Bogen vorab aus)
           </label>
         </div>
 

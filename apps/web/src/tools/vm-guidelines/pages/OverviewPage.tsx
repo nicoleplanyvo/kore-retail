@@ -5,7 +5,7 @@ import { useVmGuidelineDocs } from '../../../hooks/useVmGuidelines';
 import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const CATEGORIES = ['Schaufenster', 'Tisch', 'Wand', 'Eingang', 'Saison'];
-const STATUS_LABELS: Record<string, string> = { DRAFT: 'Entwurf', PUBLISHED: 'Veroeffentlicht', ARCHIVED: 'Archiviert' };
+const STATUS_LABELS: Record<string, string> = { DRAFT: 'Entwurf', PUBLISHED: 'Veröffentlicht', ARCHIVED: 'Archiviert' };
 const STATUS_COLORS: Record<string, string> = { DRAFT: 'text-amber-600 bg-amber-50', PUBLISHED: 'text-emerald-600 bg-emerald-50', ARCHIVED: 'text-kore-faint bg-kore-bg' };
 
 export function OverviewPage() {
@@ -29,7 +29,7 @@ export function OverviewPage() {
       <div className="flex items-center justify-between mb-2xl">
         <div>
           <h1 className="font-display text-h1 text-kore-ink">VM Guidelines</h1>
-          <p className="text-body text-kore-mid mt-xs">Zentrale Bibliothek fuer Visual-Merchandising-Richtlinien und Planogramme</p>
+          <p className="text-body text-kore-mid mt-xs">Zentrale Bibliothek für Visual-Merchandising-Richtlinien und Planogramme</p>
         </div>
         <div className="flex gap-md">
           <Link to="dashboard" className="flex items-center gap-sm border border-kore-border text-kore-ink px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors">
@@ -68,7 +68,7 @@ export function OverviewPage() {
         <div className="bg-kore-white border border-kore-border p-3xl flex flex-col items-center text-center">
           <BookOpen size={48} className="text-kore-faint mb-lg" />
           <h2 className="font-display text-h2 text-kore-ink mb-md">Noch keine Guidelines</h2>
-          <p className="text-body text-kore-mid mb-xl max-w-md">Erstellen Sie die erste VM-Guideline, um Standards fuer Ihr Visual Merchandising zu definieren.</p>
+          <p className="text-body text-kore-mid mb-xl max-w-md">Erstellen Sie die erste VM-Guideline, um Standards für Ihr Visual Merchandising zu definieren.</p>
           <Link to="manage" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
             <Plus size={16} /> Erste Guideline erstellen
           </Link>
@@ -105,7 +105,7 @@ export function OverviewPage() {
 
           {total > 20 && (
             <div className="flex justify-center gap-md mt-xl">
-              <button onClick={() => setPage(Math.max(1, page - 1))} disabled={page <= 1} className="px-md py-sm border border-kore-border text-small disabled:opacity-40 hover:bg-kore-bg transition-colors">Zurueck</button>
+              <button onClick={() => setPage(Math.max(1, page - 1))} disabled={page <= 1} className="px-md py-sm border border-kore-border text-small disabled:opacity-40 hover:bg-kore-bg transition-colors">Zurück</button>
               <span className="text-small text-kore-mid self-center">Seite {page} von {Math.ceil(total / 20)}</span>
               <button onClick={() => setPage(page + 1)} disabled={page * 20 >= total} className="px-md py-sm border border-kore-border text-small disabled:opacity-40 hover:bg-kore-bg transition-colors">Weiter</button>
             </div>

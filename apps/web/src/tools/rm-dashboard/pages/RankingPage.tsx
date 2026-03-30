@@ -18,7 +18,7 @@ const KPI_LABELS: Record<KpiKey, string> = {
   footfall: 'Frequenz',
   conversionRate: 'Konversionsrate',
   avgTicket: 'Durchschn. Bon',
-  unitsSold: 'Stueck verkauft',
+  unitsSold: 'Stück verkauft',
 };
 
 function statusDot(status: 'green' | 'yellow' | 'red') {
@@ -95,7 +95,7 @@ export function RankingPage() {
           <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm">
             <Trophy size={24} /> Store-Ranking
           </h1>
-          <p className="text-body text-kore-mid mt-xs">Vergleich aller Stores nach waehlbarem KPI mit Ampel-System.</p>
+          <p className="text-body text-kore-mid mt-xs">Vergleich aller Stores nach wählbarem KPI mit Ampel-System.</p>
         </div>
       </div>
 
@@ -167,7 +167,7 @@ export function RankingPage() {
                   <th className="text-right px-md py-sm text-kore-mid font-medium">Frequenz</th>
                   <th className="text-right px-md py-sm text-kore-mid font-medium">Konversion</th>
                   <th className="text-right px-md py-sm text-kore-mid font-medium">Bon</th>
-                  <th className="text-right px-md py-sm text-kore-mid font-medium">Stueck</th>
+                  <th className="text-right px-md py-sm text-kore-mid font-medium">Stück</th>
                 </tr>
               </thead>
               <tbody>

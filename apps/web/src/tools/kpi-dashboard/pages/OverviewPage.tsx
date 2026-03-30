@@ -25,9 +25,9 @@ function todayStr(): string {
   return new Date().toISOString().slice(0, 10);
 }
 
-/** Return month label like "Maerz 2026" */
+/** Return month label like "März 2026" */
 function monthLabel(dateStr: string): string {
-  const months = ['Januar', 'Februar', 'Maerz', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
+  const months = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
   const d = new Date(dateStr);
   return `${months[d.getMonth()]} ${d.getFullYear()}`;
 }
@@ -190,7 +190,7 @@ function YoYBarComparison({ current, lastYear, changes }: { current: YoYPeriodDa
 
   return (
     <div className="bg-kore-white border border-kore-border p-xl">
-      <h2 className="font-display text-h3 text-kore-ink mb-lg">Vorjahresvergleich -- Detailuebersicht</h2>
+      <h2 className="font-display text-h3 text-kore-ink mb-lg">Vorjahresvergleich -- Detailübersicht</h2>
       <div className="space-y-lg">
         {metrics.map((m) => {
           const maxVal = Math.max(m.current, m.ly, 1);
@@ -268,7 +268,7 @@ function PerformanceScorecard({ changes }: { changes: YoYChanges }) {
 
   const statusConfig = {
     positive: { bg: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-800', icon: TrendingUp, label: 'Positive Entwicklung' },
-    negative: { bg: 'bg-red-50', border: 'border-red-200', text: 'text-red-800', icon: TrendingDown, label: 'Ruecklaeufige Entwicklung' },
+    negative: { bg: 'bg-red-50', border: 'border-red-200', text: 'text-red-800', icon: TrendingDown, label: 'Rückläufige Entwicklung' },
     neutral: { bg: 'bg-kore-bg', border: 'border-kore-border', text: 'text-kore-ink', icon: Minus, label: 'Stabile Entwicklung' },
   };
 
@@ -281,7 +281,7 @@ function PerformanceScorecard({ changes }: { changes: YoYChanges }) {
       <div>
         <span className={`text-small font-medium ${cfg.text}`}>{cfg.label}</span>
         <span className="text-small text-kore-mid ml-md">
-          {positiveCount} von {totalValid} KPIs ueber Vorjahr
+          {positiveCount} von {totalValid} KPIs über Vorjahr
         </span>
       </div>
     </div>
@@ -328,7 +328,7 @@ export function OverviewPage() {
             filename={`kpi-report-${period.from}.pdf`}
           />
           <Link to="/tools/kpi/trends" className="flex items-center gap-sm border border-kore-border text-kore-ink px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors"><TrendingUp size={16} /> Trends</Link>
-          <Link to="/tools/kpi/entries" className="flex items-center gap-sm bg-kore-ink text-kore-white px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"><List size={16} /> Alle Eintraege</Link>
+          <Link to="/tools/kpi/entries" className="flex items-center gap-sm bg-kore-ink text-kore-white px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"><List size={16} /> Alle Einträge</Link>
         </div>
       </div>
 
@@ -386,7 +386,7 @@ export function OverviewPage() {
             {monthLabel(period.from)} -- Vergleich mit {monthLabel(yoy.lastYearPeriod.from)}
           </span>
           <span className="text-kore-faint mx-sm">|</span>
-          <span>{yoy.current.totalEntries} Eintraege aktuell, {yoy.lastYear.totalEntries} Eintraege Vorjahr</span>
+          <span>{yoy.current.totalEntries} Einträge aktuell, {yoy.lastYear.totalEntries} Einträge Vorjahr</span>
         </div>
       )}
 
@@ -439,7 +439,7 @@ export function OverviewPage() {
           {/* Summary stats row */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-md mb-2xl">
             <SummaryCard
-              label="Eintraege gesamt"
+              label="Einträge gesamt"
               value={String(yoy.current.totalEntries)}
               sub={`VJ: ${yoy.lastYear.totalEntries}`}
             />
@@ -470,10 +470,10 @@ export function OverviewPage() {
           <Calendar size={48} className="text-kore-faint mb-lg" />
           <h2 className="font-display text-h2 text-kore-ink mb-md">Keine aktuellen Daten</h2>
           <p className="text-body text-kore-mid max-w-md mb-md">
-            Fuer den gewaehlten Zeitraum liegen noch keine KPI-Eintraege vor.
+            Für den gewählten Zeitraum liegen noch keine KPI-Einträge vor.
           </p>
           <p className="text-small text-kore-faint mb-xl">
-            Vorjahreszeitraum: {yoy.lastYear.totalEntries} Eintraege verfuegbar
+            Vorjahreszeitraum: {yoy.lastYear.totalEntries} Einträge verfügbar
           </p>
           <Link to="/tools/kpi/entries" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"><List size={16} /> KPIs erfassen</Link>
         </div>
@@ -482,7 +482,7 @@ export function OverviewPage() {
         <div className="bg-kore-white border border-kore-border p-3xl flex flex-col items-center text-center">
           <BarChart3 size={48} className="text-kore-faint mb-lg" />
           <h2 className="font-display text-h2 text-kore-ink mb-md">Noch keine KPI-Daten</h2>
-          <p className="text-body text-kore-mid max-w-md mb-xl">Erfassen Sie taegliche Kennzahlen, um Ihren Store-Performance-Ueberblick mit Vorjahresvergleich zu starten.</p>
+          <p className="text-body text-kore-mid max-w-md mb-xl">Erfassen Sie tägliche Kennzahlen, um Ihren Store-Performance-Überblick mit Vorjahresvergleich zu starten.</p>
           <Link to="/tools/kpi/entries" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"><List size={16} /> KPIs erfassen</Link>
         </div>
       )}

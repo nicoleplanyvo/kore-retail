@@ -7,7 +7,7 @@ const METRIC_LABELS: Record<string, string> = {
   revenue: 'Umsatz',
   transactions: 'Transaktionen',
   footfall: 'Frequenz',
-  unitsSold: 'Stueck verkauft',
+  unitsSold: 'Stück verkauft',
 };
 
 export function RankingPage() {
@@ -26,7 +26,7 @@ export function RankingPage() {
           <option value="revenue">Umsatz</option>
           <option value="transactions">Transaktionen</option>
           <option value="footfall">Frequenz</option>
-          <option value="unitsSold">Stueck verkauft</option>
+          <option value="unitsSold">Stück verkauft</option>
         </select>
       </div>
 

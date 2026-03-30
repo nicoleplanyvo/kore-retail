@@ -11,7 +11,7 @@ const TYPE_OPTIONS = [
 
 const MODE_OPTIONS = [
   { value: 'KPI', label: 'KPI-basiert', desc: 'Fortschritt wird anhand messbarer Werte erfasst' },
-  { value: 'VOTING', label: 'Voting / Kreativ', desc: 'Teilnehmer stimmen ueber die besten Beitraege ab' },
+  { value: 'VOTING', label: 'Voting / Kreativ', desc: 'Teilnehmer stimmen über die besten Beiträge ab' },
 ];
 
 export function CreatePage() {
@@ -116,7 +116,7 @@ export function CreatePage() {
             <input
               value={form.title}
               onChange={(e) => update('title', e.target.value)}
-              placeholder="z.B. Umsatz-Sprint Maerz 2026"
+              placeholder="z.B. Umsatz-Sprint März 2026"
               className="w-full border border-kore-border px-md py-sm text-body"
               required
             />
@@ -143,7 +143,7 @@ export function CreatePage() {
                 <input
                   value={form.metric}
                   onChange={(e) => update('metric', e.target.value)}
-                  placeholder="z.B. Umsatz, Conversion, Stueckzahl"
+                  placeholder="z.B. Umsatz, Conversion, Stückzahl"
                   className="w-full border border-kore-border px-md py-sm text-small"
                 />
               </div>
@@ -177,7 +177,7 @@ export function CreatePage() {
               <label className="text-small text-kore-mid mb-xs block">Wiederholung</label>
               <select value={form.recurring} onChange={(e) => update('recurring', e.target.value)} className="w-full border border-kore-border px-md py-sm text-small bg-kore-white">
                 <option value="NONE">Keine</option>
-                <option value="WEEKLY">Woechentlich</option>
+                <option value="WEEKLY">Wöchentlich</option>
                 <option value="MONTHLY">Monatlich</option>
                 <option value="QUARTERLY">Quartalsweise</option>
               </select>

@@ -100,7 +100,7 @@ export function OverviewPage() {
             <Compass size={24} /> PDP / PIP
           </h1>
           <p className="text-body text-kore-mid mt-xs">
-            Entwicklungs- und Verbesserungsplaene verwalten
+            Entwicklungs- und Verbesserungspläne verwalten
           </p>
         </div>
         <div className="flex items-center gap-sm">
@@ -155,7 +155,7 @@ export function OverviewPage() {
                 className="w-full border border-kore-border px-md py-sm text-body"
                 required
               >
-                <option value="">-- Mitarbeiter waehlen --</option>
+                <option value="">-- Mitarbeiter wählen --</option>
                 {users?.map((u: any) => (
                   <option key={u.id} value={u.id}>{u.name} ({u.role})</option>
                 ))}
@@ -168,7 +168,7 @@ export function OverviewPage() {
               <input
                 value={form.title}
                 onChange={(e) => setForm({ ...form, title: e.target.value })}
-                placeholder={form.type === 'PDP' ? 'z.B. Fuehrungskompetenz Q2' : 'z.B. Verbesserung Kundenservice'}
+                placeholder={form.type === 'PDP' ? 'z.B. Führungskompetenz Q2' : 'z.B. Verbesserung Kundenservice'}
                 className="w-full border border-kore-border px-md py-sm text-body"
                 required
               />
@@ -262,7 +262,7 @@ export function OverviewPage() {
                 onClick={() => { setFilterType(''); setFilterStatus(''); setFilterUserId(''); setPage(1); }}
                 className="px-md py-sm text-small text-kore-brass hover:underline"
               >
-                Zuruecksetzen
+                Zurücksetzen
               </button>
             )}
           </div>
@@ -299,10 +299,10 @@ export function OverviewPage() {
 
       {/* Plans List */}
       {isLoading ? (
-        <div className="text-body text-kore-mid">Lade Plaene...</div>
+        <div className="text-body text-kore-mid">Lade Pläne...</div>
       ) : !plans.length ? (
         <div className="bg-kore-white border border-kore-border p-2xl text-center text-body text-kore-mid">
-          Noch keine Entwicklungsplaene vorhanden.
+          Noch keine Entwicklungspläne vorhanden.
         </div>
       ) : (
         <div className="space-y-sm">
@@ -321,7 +321,7 @@ export function OverviewPage() {
                     <div className="flex items-center gap-sm">
                       <span className="font-medium text-kore-ink">{p.title}</span>
                       {isOverdue(p) && (
-                        <span className="text-red-500" title="Ueberfaellig">
+                        <span className="text-red-500" title="Überfällig">
                           <AlertTriangle size={14} />
                         </span>
                       )}
@@ -378,7 +378,7 @@ export function OverviewPage() {
             disabled={page <= 1}
             className="px-md py-sm border border-kore-border text-small disabled:opacity-30"
           >
-            Zurueck
+            Zurück
           </button>
           <span className="text-small text-kore-mid">
             Seite {page} von {totalPages}

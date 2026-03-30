@@ -16,12 +16,12 @@ export function DashboardPage() {
 
   return (
     <div className="p-xl max-w-5xl">
-      <Link to="/app/tools/shift-planning" className="flex items-center gap-xs text-kore-mid hover:text-kore-ink text-small mb-lg"><ArrowLeft size={16} /> Zurueck zum Wochenplan</Link>
+      <Link to="/app/tools/shift-planning" className="flex items-center gap-xs text-kore-mid hover:text-kore-ink text-small mb-lg"><ArrowLeft size={16} /> Zurück zum Wochenplan</Link>
 
       <div className="flex items-center justify-between mb-xl">
         <div>
           <h1 className="font-display text-h1 text-kore-ink">Dashboard</h1>
-          <p className="text-body text-kore-mid mt-xs">Wochenueberblick, Stunden-Saldo und Besetzung</p>
+          <p className="text-body text-kore-mid mt-xs">Wochenüberblick, Stunden-Saldo und Besetzung</p>
         </div>
         <select value={selectedStore} onChange={e => setSelectedStore(e.target.value)} className="border border-kore-border px-md py-sm text-body">
           <option value="">Alle Stores</option>
@@ -32,7 +32,7 @@ export function DashboardPage() {
       {isLoading ? (
         <div className="text-body text-kore-mid py-xl text-center">Lade Dashboard...</div>
       ) : !dashboard ? (
-        <div className="bg-kore-white border border-kore-border p-2xl text-center text-body text-kore-mid">Keine Daten verfuegbar.</div>
+        <div className="bg-kore-white border border-kore-border p-2xl text-center text-body text-kore-mid">Keine Daten verfügbar.</div>
       ) : (
         <>
           {/* KPI Cards */}

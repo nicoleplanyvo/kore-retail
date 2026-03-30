@@ -114,7 +114,7 @@ export function OverviewPage() {
         <div>
           <h1 className="font-display text-h1 text-kore-ink">Loss Prevention</h1>
           <p className="text-body text-kore-mid mt-xs">
-            Schwund-Tracking, Vorfallmeldung und Praevention
+            Schwund-Tracking, Vorfallmeldung und Prävention
           </p>
         </div>
         <div className="flex items-center gap-md">
@@ -191,7 +191,7 @@ export function OverviewPage() {
             <option value="">Alle Kategorien</option>
             <option value="THEFT">Diebstahl extern</option>
             <option value="ADMIN_ERROR">Kassenfehlbuchung</option>
-            <option value="DAMAGE">Beschaedigung</option>
+            <option value="DAMAGE">Beschädigung</option>
             <option value="SUPPLIER">WE-Differenz</option>
             <option value="OTHER">Sonstige</option>
           </select>
@@ -204,7 +204,7 @@ export function OverviewPage() {
             <option value="">Alle Status</option>
             <option value="OPEN">Offen</option>
             <option value="INVESTIGATING">In Untersuchung</option>
-            <option value="RESOLVED">Geloest</option>
+            <option value="RESOLVED">Gelöst</option>
             <option value="CLOSED">Geschlossen</option>
           </select>
 
@@ -247,7 +247,7 @@ export function OverviewPage() {
               }}
               className="text-small text-kore-mid hover:text-kore-ink underline"
             >
-              Zuruecksetzen
+              Zurücksetzen
             </button>
           )}
         </div>
@@ -255,13 +255,13 @@ export function OverviewPage() {
 
       {/* Incident List */}
       {isLoading ? (
-        <div className="text-body text-kore-mid py-xl">Lade Vorfaelle...</div>
+        <div className="text-body text-kore-mid py-xl">Lade Vorfälle...</div>
       ) : incidents.length === 0 ? (
         <div className="bg-kore-white border border-kore-border p-3xl flex flex-col items-center text-center">
           <ShieldAlert size={48} className="text-kore-faint mb-lg" />
-          <h2 className="font-display text-h2 text-kore-ink mb-md">Keine Vorfaelle gefunden</h2>
+          <h2 className="font-display text-h2 text-kore-ink mb-md">Keine Vorfälle gefunden</h2>
           <p className="text-body text-kore-mid max-w-md mb-xl">
-            Erfassen Sie Diebstaehle, Schaeden und andere Verluste, um Muster zu erkennen und Praevention zu verbessern.
+            Erfassen Sie Diebstähle, Schäden und andere Verluste, um Muster zu erkennen und Prävention zu verbessern.
           </p>
           <Link
             to="/tools/loss-prevention/report"

@@ -8,7 +8,7 @@ import { useLossStores, useLossAreas, useCreateIncident } from '../../../hooks/u
 const CATEGORIES = [
   { value: 'THEFT', label: 'Diebstahl extern' },
   { value: 'ADMIN_ERROR', label: 'Kassenfehlbuchung' },
-  { value: 'DAMAGE', label: 'Beschaedigung' },
+  { value: 'DAMAGE', label: 'Beschädigung' },
   { value: 'SUPPLIER', label: 'WE-Differenz' },
   { value: 'OTHER', label: 'Sonstige' },
 ];
@@ -16,7 +16,7 @@ const CATEGORIES = [
 const SUBCATEGORIES: Record<string, string[]> = {
   THEFT: ['Ladendiebstahl', 'Bandendiebstahl', 'Taschendiebstahl'],
   ADMIN_ERROR: ['Kassenfehlbuchung', 'Retoure-Betrug', 'Preismanipulation'],
-  DAMAGE: ['Transportschaden', 'Kundenbeschaedigung', 'Lagerschaden'],
+  DAMAGE: ['Transportschaden', 'Kundenbeschädigung', 'Lagerschaden'],
   SUPPLIER: ['WE-Differenz', 'Falschlieferung', 'Mengenabweichung'],
   OTHER: ['Organisationsversagen', 'Schwund unbekannt', 'Sonstiges'],
 };
@@ -135,7 +135,7 @@ export function ReportPage() {
             className={inputClass}
             required
           >
-            <option value="">Store waehlen...</option>
+            <option value="">Store wählen...</option>
             {(stores ?? []).map((s: any) => (
               <option key={s.id} value={s.id}>
                 {s.name} {s.city ? `(${s.city})` : ''}
@@ -157,7 +157,7 @@ export function ReportPage() {
               className={inputClass}
               required
             >
-              <option value="">Kategorie waehlen...</option>
+              <option value="">Kategorie wählen...</option>
               {CATEGORIES.map((c) => (
                 <option key={c.value} value={c.value}>{c.label}</option>
               ))}
@@ -210,7 +210,7 @@ export function ReportPage() {
             onChange={(e) => setArea(e.target.value)}
             className={inputClass}
           >
-            <option value="">Bereich waehlen...</option>
+            <option value="">Bereich wählen...</option>
             {(areas ?? []).map((a: string) => (
               <option key={a} value={a}>{a}</option>
             ))}
@@ -235,7 +235,7 @@ export function ReportPage() {
             <div className="mt-xs flex items-center gap-sm">
               <AlertTriangle size={14} className={SEVERITY_COLORS[autoSeverity]} />
               <span className={`text-small ${SEVERITY_COLORS[autoSeverity]}`}>
-                Automatische Prioritaet: {SEVERITY_LABELS[autoSeverity]}
+                Automatische Priorität: {SEVERITY_LABELS[autoSeverity]}
                 {amountNum >= 2000 && ' (Sofort-Eskalation)'}
               </span>
             </div>
@@ -249,7 +249,7 @@ export function ReportPage() {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             className={`${inputClass} min-h-[120px] resize-y`}
-            placeholder="Was ist passiert? Bitte so detailliert wie moeglich beschreiben..."
+            placeholder="Was ist passiert? Bitte so detailliert wie möglich beschreiben..."
             required
             minLength={5}
           />

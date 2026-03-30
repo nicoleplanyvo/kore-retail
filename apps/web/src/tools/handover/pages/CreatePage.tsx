@@ -17,9 +17,9 @@ import {
 } from '../../../hooks/useHandover';
 
 const SHIFT_TYPES = [
-  { value: 'FRUEH_SPAET', label: 'Frueh \u2192 Spaet' },
-  { value: 'SPAET_NACHT', label: 'Spaet \u2192 Nacht' },
-  { value: 'NACHT_FRUEH', label: 'Nacht \u2192 Frueh' },
+  { value: 'FRUEH_SPAET', label: 'Früh \u2192 Spät' },
+  { value: 'SPAET_NACHT', label: 'Spät \u2192 Nacht' },
+  { value: 'NACHT_FRUEH', label: 'Nacht \u2192 Früh' },
 ];
 
 interface SectionField {
@@ -33,37 +33,37 @@ const SECTIONS: SectionField[] = [
   {
     key: 'salesUpdate',
     label: 'Umsatz-Update',
-    placeholder: 'Umsatzzahlen, Zielerreichung, besondere Verkaeufe...',
+    placeholder: 'Umsatzzahlen, Zielerreichung, besondere Verkäufe...',
     priorityKey: 'salesPriority',
   },
   {
     key: 'openTasks',
     label: 'Offene Aufgaben',
-    placeholder: 'Noch zu erledigende Aufgaben fuer die naechste Schicht...',
+    placeholder: 'Noch zu erledigende Aufgaben für die nächste Schicht...',
     priorityKey: 'tasksPriority',
   },
   {
     key: 'incidents',
-    label: 'Vorfaelle',
+    label: 'Vorfälle',
     placeholder: 'Besondere Vorkommnisse, Reklamationen, Probleme...',
     priorityKey: 'incidentsPriority',
   },
   {
     key: 'customerNotes',
     label: 'Kunden-Hinweise',
-    placeholder: 'Kundenanfragen, VIP-Besuche, Rueckgaben...',
+    placeholder: 'Kundenanfragen, VIP-Besuche, Rückgaben...',
     priorityKey: 'customerPriority',
   },
   {
     key: 'stockNotes',
     label: 'Warenbestand',
-    placeholder: 'Lieferungen, Fehlbestaende, Retouren...',
+    placeholder: 'Lieferungen, Fehlbestände, Retouren...',
     priorityKey: 'stockPriority',
   },
   {
     key: 'generalNotes',
     label: 'Allgemein',
-    placeholder: 'Sonstige Hinweise fuer die naechste Schicht...',
+    placeholder: 'Sonstige Hinweise für die nächste Schicht...',
     priorityKey: 'generalPriority',
   },
 ];
@@ -130,7 +130,7 @@ export function CreatePage() {
   const handleSaveDraft = async () => {
     setError('');
     if (!effectiveStoreId) {
-      setError('Bitte waehlen Sie einen Store aus.');
+      setError('Bitte wählen Sie einen Store aus.');
       return;
     }
     try {
@@ -144,7 +144,7 @@ export function CreatePage() {
   const handleSubmit = async () => {
     setError('');
     if (!effectiveStoreId) {
-      setError('Bitte waehlen Sie einen Store aus.');
+      setError('Bitte wählen Sie einen Store aus.');
       return;
     }
     try {
@@ -167,9 +167,9 @@ export function CreatePage() {
         </Link>
         <div>
           <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm">
-            <ArrowRightLeft size={24} /> Neue Uebergabe
+            <ArrowRightLeft size={24} /> Neue Übergabe
           </h1>
-          <p className="text-body text-kore-mid mt-xs">Schichtuebergabe erstellen und einreichen.</p>
+          <p className="text-body text-kore-mid mt-xs">Schichtübergabe erstellen und einreichen.</p>
         </div>
       </div>
 
@@ -197,7 +197,7 @@ export function CreatePage() {
                 className="w-full border border-kore-border px-md py-sm text-body bg-kore-white"
                 required
               >
-                <option value="">Store waehlen...</option>
+                <option value="">Store wählen...</option>
                 {stores.map((s) => (
                   <option key={s.id} value={s.id}>
                     {s.name}
@@ -247,14 +247,14 @@ export function CreatePage() {
 
           {/* Recipient */}
           <div>
-            <label className="block text-small text-kore-mid mb-xs">Empfaenger</label>
+            <label className="block text-small text-kore-mid mb-xs">Empfänger</label>
             <select
               value={toUserId}
               onChange={(e) => setToUserId(e.target.value)}
               className="w-full border border-kore-border px-md py-sm text-body bg-kore-white"
               disabled={!effectiveStoreId}
             >
-              <option value="">Empfaenger waehlen (optional)</option>
+              <option value="">Empfänger wählen (optional)</option>
               {users?.map((u) => (
                 <option key={u.id} value={u.id}>
                   {u.name}
@@ -291,7 +291,7 @@ export function CreatePage() {
                   size={14}
                   className={priorities[section.priorityKey] ? 'text-amber-500' : 'text-kore-mid'}
                 />
-                Prioritaet
+                Priorität
               </label>
             </div>
             <textarea

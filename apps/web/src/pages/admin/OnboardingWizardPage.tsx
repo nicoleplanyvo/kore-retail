@@ -144,7 +144,7 @@ export function OnboardingWizardPage() {
       if (!tenantData.slug.trim()) errs.tenantSlug = 'Slug ist erforderlich';
       else if (!/^[a-z0-9-]+$/.test(tenantData.slug)) errs.tenantSlug = 'Nur Kleinbuchstaben, Zahlen und Bindestriche';
       if (tenantData.contactEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(tenantData.contactEmail)) {
-        errs.tenantEmail = 'Ungueltige E-Mail-Adresse';
+        errs.tenantEmail = 'Ungültige E-Mail-Adresse';
       }
       if (tenantData.maxUsers < 1) errs.maxUsers = 'Mindestens 1 Benutzer';
     }
@@ -152,7 +152,7 @@ export function OnboardingWizardPage() {
     if (s === 1) {
       if (!adminData.name.trim()) errs.adminName = 'Name ist erforderlich';
       if (!adminData.email.trim()) errs.adminEmail = 'E-Mail ist erforderlich';
-      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(adminData.email)) errs.adminEmail = 'Ungueltige E-Mail-Adresse';
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(adminData.email)) errs.adminEmail = 'Ungültige E-Mail-Adresse';
       if (!adminData.password) errs.adminPassword = 'Passwort ist erforderlich';
       else if (adminData.password.length < 8) errs.adminPassword = 'Mindestens 8 Zeichen';
     }
@@ -417,7 +417,7 @@ export function OnboardingWizardPage() {
           <div className="space-y-lg">
             <h2 className="font-display text-h3 text-kore-ink mb-md">Admin-Benutzer</h2>
             <p className="font-body text-small text-kore-mid mb-md">
-              Dieser Benutzer wird als <span className="font-medium text-kore-ink">Tenant-Admin</span> angelegt und erhaelt vollen Zugriff.
+              Dieser Benutzer wird als <span className="font-medium text-kore-ink">Tenant-Admin</span> angelegt und erhält vollen Zugriff.
             </p>
 
             <FormField label="Name" required error={errors.adminName}>
@@ -481,7 +481,7 @@ export function OnboardingWizardPage() {
               <input
                 type="text"
                 className="input-default"
-                placeholder="z.B. Kurfuerstendamm 42"
+                placeholder="z.B. Kurfürstendamm 42"
                 value={storeData.address}
                 onChange={(e) => setStoreData((prev) => ({ ...prev, address: e.target.value }))}
               />
@@ -489,18 +489,18 @@ export function OnboardingWizardPage() {
           </div>
         )}
 
-        {/* Step 3: Tools auswaehlen */}
+        {/* Step 3: Tools auswählen */}
         {step === 3 && (
           <div className="space-y-lg">
             <div className="flex items-center justify-between mb-md">
-              <h2 className="font-display text-h3 text-kore-ink">Tools auswaehlen</h2>
+              <h2 className="font-display text-h3 text-kore-ink">Tools auswählen</h2>
               <div className="flex items-center gap-sm">
                 <button
                   type="button"
                   onClick={selectAllTools}
                   className="font-body text-xs text-kore-brass hover:text-kore-brass-dk transition-colors"
                 >
-                  Alle auswaehlen
+                  Alle auswählen
                 </button>
                 <span className="text-kore-border">|</span>
                 <button
@@ -514,7 +514,7 @@ export function OnboardingWizardPage() {
             </div>
 
             <p className="font-body text-small text-kore-mid">
-              {selectedTools.length} von {availableTools?.length || 0} Tools ausgewaehlt
+              {selectedTools.length} von {availableTools?.length || 0} Tools ausgewählt
             </p>
 
             {toolsLoading ? (
@@ -567,10 +567,10 @@ export function OnboardingWizardPage() {
           <div className="space-y-lg">
             <h2 className="font-display text-h3 text-kore-ink mb-md">Branding</h2>
             <p className="font-body text-small text-kore-mid mb-md">
-              Optional: Farben fuer die Plattform des Tenants festlegen. Kann spaeter geaendert werden.
+              Optional: Farben für die Plattform des Tenants festlegen. Kann später geändert werden.
             </p>
 
-            <FormField label="Primaerfarbe">
+            <FormField label="Primärfarbe">
               <div className="flex items-center gap-md">
                 <input
                   type="color"
@@ -614,7 +614,7 @@ export function OnboardingWizardPage() {
                   className="w-16 h-16 rounded-md border border-kore-border flex items-center justify-center"
                   style={{ backgroundColor: brandingData.primaryColor }}
                 >
-                  <span className="text-white text-xs font-medium">Primaer</span>
+                  <span className="text-white text-xs font-medium">Primär</span>
                 </div>
                 <div
                   className="w-16 h-16 rounded-md border border-kore-border flex items-center justify-center"
@@ -630,7 +630,7 @@ export function OnboardingWizardPage() {
               onClick={() => setBrandingData({ primaryColor: '#b08d57', accentColor: '#1a1a1a' })}
               className="font-body text-xs text-kore-mid hover:text-kore-ink transition-colors underline"
             >
-              Auf Standardwerte zuruecksetzen
+              Auf Standardwerte zurücksetzen
             </button>
           </div>
         )}
@@ -694,7 +694,7 @@ export function OnboardingWizardPage() {
                 </button>
               </div>
               <p className="font-body text-small text-kore-mid">
-                {selectedTools.length} Tool{selectedTools.length !== 1 ? 's' : ''} ausgewaehlt
+                {selectedTools.length} Tool{selectedTools.length !== 1 ? 's' : ''} ausgewählt
               </p>
               {selectedTools.length > 0 && availableTools && (
                 <div className="flex flex-wrap gap-xs mt-sm">
@@ -754,7 +754,7 @@ export function OnboardingWizardPage() {
               className="inline-flex items-center gap-sm font-body text-small text-kore-mid hover:text-kore-ink transition-colors disabled:opacity-50"
             >
               <ChevronLeft size={16} />
-              Zurueck
+              Zurück
             </button>
           )}
         </div>

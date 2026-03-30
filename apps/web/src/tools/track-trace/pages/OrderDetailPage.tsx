@@ -61,7 +61,7 @@ const CC_STATUSES = [
 ];
 
 const DIFFERENCE_REASONS = [
-  'beschaedigt',
+  'beschädigt',
   'fehlend',
   'falsche Ware',
   'Mengendifferenz',
@@ -152,7 +152,7 @@ export function OrderDetailPage() {
         <div className="flex items-center gap-sm">
           {isOverdue && (
             <span className="flex items-center gap-xs px-sm py-xs bg-red-50 text-red-700 text-small">
-              <AlertTriangle size={14} /> Ueberfaellig
+              <AlertTriangle size={14} /> Überfällig
             </span>
           )}
           <span className={`px-md py-sm text-small ${STATUS_COLORS[order.status] ?? 'bg-kore-bg text-kore-mid'}`}>
@@ -165,7 +165,7 @@ export function OrderDetailPage() {
       <div className="bg-kore-white border border-kore-border p-lg mb-xl">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-lg">
           <div>
-            <span className="text-small text-kore-mid">{transfer ? 'Empfaenger' : 'Kundenname'}</span>
+            <span className="text-small text-kore-mid">{transfer ? 'Empfänger' : 'Kundenname'}</span>
             <p className="text-body text-kore-ink">{order.customerName}</p>
           </div>
           {cc && (
@@ -281,7 +281,7 @@ export function OrderDetailPage() {
                   className="w-full border border-kore-border px-md py-sm text-body"
                   required
                 >
-                  <option value="">-- Status waehlen --</option>
+                  <option value="">-- Status wählen --</option>
                   {statusOptions.map((s) => (
                     <option key={s.value} value={s.value}>{s.label}</option>
                   ))}
@@ -296,7 +296,7 @@ export function OrderDetailPage() {
                     className="w-full border border-kore-border px-md py-sm text-body"
                     required
                   >
-                    <option value="">-- Grund waehlen --</option>
+                    <option value="">-- Grund wählen --</option>
                     {DIFFERENCE_REASONS.map((r) => (
                       <option key={r} value={r}>{r}</option>
                     ))}
@@ -309,7 +309,7 @@ export function OrderDetailPage() {
                   value={statusForm.notes}
                   onChange={(e) => setStatusForm({ ...statusForm, notes: e.target.value })}
                   className="w-full border border-kore-border px-md py-sm text-body"
-                  placeholder={statusForm.status === 'DIFFERENCE_REPORTED' ? 'z.B. 2 Artikel fehlend, 1 beschaedigt' : 'Optional'}
+                  placeholder={statusForm.status === 'DIFFERENCE_REPORTED' ? 'z.B. 2 Artikel fehlend, 1 beschädigt' : 'Optional'}
                 />
               </div>
             </div>

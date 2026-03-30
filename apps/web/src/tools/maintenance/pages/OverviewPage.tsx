@@ -21,7 +21,7 @@ import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const CATEGORY_OPTIONS = [
   { value: 'ELECTRICAL', label: 'Elektrik' },
-  { value: 'PLUMBING', label: 'Sanitaer' },
+  { value: 'PLUMBING', label: 'Sanitär' },
   { value: 'HVAC', label: 'Heizung/Klima' },
   { value: 'FIXTURE', label: 'Einrichtung' },
   { value: 'IT', label: 'IT' },
@@ -38,7 +38,7 @@ const PRIORITY_OPTIONS = [
 const STATUS_LABELS: Record<string, string> = {
   OPEN: 'Offen',
   IN_PROGRESS: 'In Arbeit',
-  RESOLVED: 'Geloest',
+  RESOLVED: 'Gelöst',
   CLOSED: 'Geschlossen',
 };
 
@@ -72,7 +72,7 @@ const PRIORITY_BADGE: Record<string, string> = {
 
 const CATEGORY_LABELS: Record<string, string> = {
   ELECTRICAL: 'Elektrik',
-  PLUMBING: 'Sanitaer',
+  PLUMBING: 'Sanitär',
   HVAC: 'Heizung/Klima',
   FIXTURE: 'Einrichtung',
   IT: 'IT',
@@ -149,7 +149,7 @@ export function OverviewPage() {
             <Wrench size={24} /> Maintenance
           </h1>
           <p className="text-body text-kore-mid mt-xs">
-            Stoerungsmeldungen erstellen, verwalten und Reparatur-Status verfolgen.
+            Störungsmeldungen erstellen, verwalten und Reparatur-Status verfolgen.
           </p>
         </div>
         <div className="flex items-center gap-md">
@@ -189,7 +189,7 @@ export function OverviewPage() {
       {/* Create form */}
       {showForm && (
         <form onSubmit={handleCreate} className="bg-kore-white border border-kore-border p-lg mb-xl">
-          <h2 className="font-display text-h3 text-kore-ink mb-md">Neue Stoerungsmeldung</h2>
+          <h2 className="font-display text-h3 text-kore-ink mb-md">Neue Störungsmeldung</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-md mb-md">
             <div className="md:col-span-2">
               <label className="block text-small text-kore-mid mb-xs">Titel</label>
@@ -198,7 +198,7 @@ export function OverviewPage() {
                 value={form.title}
                 onChange={(e) => setForm({ ...form, title: e.target.value })}
                 className="w-full border border-kore-border px-md py-sm text-body"
-                placeholder="Kurze Beschreibung der Stoerung"
+                placeholder="Kurze Beschreibung der Störung"
                 required
                 minLength={2}
                 maxLength={200}
@@ -217,7 +217,7 @@ export function OverviewPage() {
               </select>
             </div>
             <div>
-              <label className="block text-small text-kore-mid mb-xs">Prioritaet</label>
+              <label className="block text-small text-kore-mid mb-xs">Priorität</label>
               <select
                 value={form.priority}
                 onChange={(e) => setForm({ ...form, priority: e.target.value })}
@@ -234,7 +234,7 @@ export function OverviewPage() {
                 value={form.description}
                 onChange={(e) => setForm({ ...form, description: e.target.value })}
                 className="w-full border border-kore-border px-md py-sm text-body resize-y"
-                placeholder="Detaillierte Beschreibung der Stoerung, Standort im Store, etc."
+                placeholder="Detaillierte Beschreibung der Störung, Standort im Store, etc."
                 rows={3}
                 required
                 minLength={5}
@@ -276,7 +276,7 @@ export function OverviewPage() {
             <option value="">Alle Status</option>
             <option value="OPEN">Offen</option>
             <option value="IN_PROGRESS">In Arbeit</option>
-            <option value="RESOLVED">Geloest</option>
+            <option value="RESOLVED">Gelöst</option>
             <option value="CLOSED">Geschlossen</option>
           </select>
         </div>
@@ -294,13 +294,13 @@ export function OverviewPage() {
           </select>
         </div>
         <div>
-          <label className="block text-small text-kore-mid mb-xs">Prioritaet</label>
+          <label className="block text-small text-kore-mid mb-xs">Priorität</label>
           <select
             value={filterPriority}
             onChange={(e) => { setFilterPriority(e.target.value); setPage(1); }}
             className="border border-kore-border px-md py-sm text-small"
           >
-            <option value="">Alle Prioritaeten</option>
+            <option value="">Alle Prioritäten</option>
             {PRIORITY_OPTIONS.map((p) => (
               <option key={p.value} value={p.value}>{p.label}</option>
             ))}
@@ -311,7 +311,7 @@ export function OverviewPage() {
             onClick={() => { setFilterStatus(''); setFilterCategory(''); setFilterPriority(''); setPage(1); }}
             className="text-small text-kore-mid hover:text-kore-ink underline"
           >
-            Filter zuruecksetzen
+            Filter zurücksetzen
           </button>
         )}
       </div>
@@ -324,7 +324,7 @@ export function OverviewPage() {
           <Wrench size={48} className="text-kore-faint mb-lg" />
           <h2 className="font-display text-h2 text-kore-ink mb-md">Keine Meldungen vorhanden</h2>
           <p className="text-body text-kore-mid max-w-md mb-xl">
-            Erstellen Sie Ihre erste Stoerungsmeldung fuer diesen Store.
+            Erstellen Sie Ihre erste Störungsmeldung für diesen Store.
           </p>
           <button
             onClick={() => setShowForm(true)}
