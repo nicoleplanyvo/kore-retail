@@ -4,6 +4,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* CSS Custom Properties fuer @kore/ui Inline-Style-Komponenten */
+:root {
+  --kore-bg:       #F7F4EF;
+  --kore-surface:  #EDEAE4;
+  --kore-border:   #D8D4CC;
+  --kore-ink:      #1C1A17;
+  --kore-mid:      #524E46;
+  --kore-faint:    #C4BFB7;
+  --kore-white:    #FDFCFA;
+  --kore-brass:    #9E8460;
+  --kore-brass-lt: #C9B898;
+  --kore-brass-dk: #7A6347;
+  --kore-success:  #6B8C6B;
+  --kore-warning:  #B8935A;
+  --kore-error:    #9E5252;
+}
+
 @layer base {
   *, *::before, *::after {
     box-sizing: border-box;
