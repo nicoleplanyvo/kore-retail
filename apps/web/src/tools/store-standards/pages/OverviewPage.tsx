@@ -57,12 +57,12 @@ export function OverviewPage() {
   };
 
   const tabs = [
-    { to: '/tools/store-standards/revenue', label: 'Umsatz & Budget', icon: DollarSign },
-    { to: '/tools/store-standards/monthly', label: 'Monatsverteilung', icon: Clock },
-    { to: '/tools/store-standards/settings', label: 'Einstellungen', icon: Calculator },
-    { to: '/tools/store-standards/management', label: 'Management', icon: Store },
-    { to: '/tools/store-standards/associates', label: 'Mitarbeiter', icon: Calculator },
-    { to: '/tools/store-standards/summary', label: 'Zusammenfassung', icon: ChevronRight },
+    { to: '/app/tools/store-standards/revenue', label: 'Umsatz & Budget', icon: DollarSign },
+    { to: '/app/tools/store-standards/monthly', label: 'Monatsverteilung', icon: Clock },
+    { to: '/app/tools/store-standards/settings', label: 'Einstellungen', icon: Calculator },
+    { to: '/app/tools/store-standards/management', label: 'Management', icon: Store },
+    { to: '/app/tools/store-standards/associates', label: 'Mitarbeiter', icon: Calculator },
+    { to: '/app/tools/store-standards/summary', label: 'Zusammenfassung', icon: ChevronRight },
   ];
 
   return (
