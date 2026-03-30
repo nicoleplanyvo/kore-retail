@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ArrowLeft, BarChart3, Download, Users } from 'lucide-react';
 import { usePulseSurveyResults, usePulseStores } from '../../../hooks/usePulseSurvey';
 
@@ -22,10 +22,6 @@ export function ResultsPage() {
   const { data: stores } = usePulseStores();
   const [storeId, setStoreId] = useState('');
   const { data: results, isLoading } = usePulseSurveyResults(id, storeId || undefined);
-
-  useEffect(() => {
-    // Don't auto-select store — show all by default
-  }, []);
 
   if (isLoading) return <div className="p-xl text-body text-kore-mid">Lade Ergebnisse...</div>;
   if (!results) return <div className="p-xl text-body text-kore-mid">Keine Ergebnisse verfuegbar.</div>;

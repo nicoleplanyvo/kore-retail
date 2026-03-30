@@ -4,10 +4,10 @@ import { ArrowLeft, Trophy } from 'lucide-react';
 import { useMultiStoreRanking } from '../../../hooks/useMultiStore';
 
 const METRIC_LABELS: Record<string, string> = {
-  revenue: 'Revenue',
+  revenue: 'Umsatz',
   transactions: 'Transaktionen',
-  footfall: 'Footfall',
-  unitsSold: 'Units Sold',
+  footfall: 'Frequenz',
+  unitsSold: 'Stueck verkauft',
 };
 
 export function RankingPage() {
@@ -23,10 +23,10 @@ export function RankingPage() {
           <p className="text-body text-kore-mid mt-xs">Letzte 30 Tage — sortiert nach {METRIC_LABELS[metric] ?? metric}.</p>
         </div>
         <select value={metric} onChange={e => setMetric(e.target.value)} className="border border-kore-border px-md py-sm text-body">
-          <option value="revenue">Revenue</option>
+          <option value="revenue">Umsatz</option>
           <option value="transactions">Transaktionen</option>
-          <option value="footfall">Footfall</option>
-          <option value="unitsSold">Units Sold</option>
+          <option value="footfall">Frequenz</option>
+          <option value="unitsSold">Stueck verkauft</option>
         </select>
       </div>
 

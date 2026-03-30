@@ -8,7 +8,7 @@ import {
 } from '../../../hooks/useWellbeing';
 
 const CATEGORY_OPTIONS = [
-  'Mental Health',
+  'Psychische Gesundheit',
   'Fitness',
   'Ernaehrung',
   'Achtsamkeit',
@@ -177,7 +177,7 @@ export function ResourceListPage() {
                         </a>
                       )}
                       <button
-                        onClick={() => deleteResource.mutate(r.id)}
+                        onClick={() => { if (window.confirm('Ressource wirklich loeschen?')) deleteResource.mutate(r.id); }}
                         className="text-kore-mid hover:text-red-600"
                         title="Entfernen"
                       >

@@ -20,7 +20,7 @@ export function SummaryPage() {
         <Link to="/app/tools/training-hours" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div>
           <h1 className="font-display text-h1 text-kore-ink">Zusammenfassung</h1>
-          <p className="text-body text-kore-mid mt-xs">Training Hours Auswertung</p>
+          <p className="text-body text-kore-mid mt-xs">Trainingsstunden Auswertung</p>
         </div>
       </div>
 

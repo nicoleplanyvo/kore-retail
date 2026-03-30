@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
   ArrowLeft,
   ClipboardList,
@@ -72,6 +72,7 @@ const RESPONSE_STATUS_ICONS: Record<string, typeof CircleDot> = {
 
 export function TaskDetailPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const user = useAuthStore((s) => s.user);
   const { data: task, isLoading } = useMultiStoreTask(id);
   const updateResponse = useUpdateMultiStoreResponse();
@@ -131,7 +132,7 @@ export function TaskDetailPage() {
   const handleDelete = async () => {
     if (!confirm('Aufgabe wirklich loeschen?')) return;
     await deleteTask.mutateAsync(task.id);
-    window.location.href = '/tools/multi-store/tasks';
+    navigate('/tools/multi-store/tasks');
   };
 
   const toggleExpanded = (storeId: string) => {

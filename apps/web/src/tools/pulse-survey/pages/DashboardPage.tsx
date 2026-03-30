@@ -33,7 +33,7 @@ export function DashboardPage() {
         </Link>
         <div>
           <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm">
-            <BarChart3 size={24} /> Pulse Survey Dashboard
+            <BarChart3 size={24} /> Stimmungsbarometer Dashboard
           </h1>
           <p className="text-body text-kore-mid mt-xs">
             Gesamtuebersicht aller Mitarbeiterbefragungen.

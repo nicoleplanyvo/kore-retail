@@ -25,11 +25,11 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-5xl">
-      <Breadcrumb items={[{ label: 'Training Hours' }]} />
+      <Breadcrumb items={[{ label: 'Trainingsstunden' }]} />
       <div className="flex items-center gap-md mb-2xl">
         <Link to="/tools" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div>
-          <h1 className="font-display text-h1 text-kore-ink">Training Hours</h1>
+          <h1 className="font-display text-h1 text-kore-ink">Trainingsstunden</h1>
           <p className="text-body text-kore-mid mt-xs">Schulungsstunden erfassen & auswerten</p>
         </div>
       </div>

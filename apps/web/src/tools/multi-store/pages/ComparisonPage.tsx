@@ -31,16 +31,16 @@ export function ComparisonPage() {
         <>
           {/* Revenue Comparison Chart */}
           <div className="bg-kore-white border border-kore-border p-xl mb-xl">
-            <h2 className="font-display text-h3 text-kore-ink mb-lg">Revenue-Vergleich</h2>
+            <h2 className="font-display text-h3 text-kore-ink mb-lg">Umsatz-Vergleich</h2>
             <KoreBarChart
               data={comparison.map((row: any) => ({
                 store: row.storeName?.length > 12 ? row.storeName.slice(0, 12) + '...' : row.storeName,
-                Revenue: Math.round(row.totalRevenue ?? 0),
+                Umsatz: Math.round(row.totalRevenue ?? 0),
                 Transaktionen: row.totalTransactions ?? 0,
               }))}
               xKey="store"
               bars={[
-                { key: 'Revenue', label: 'Revenue (EUR)', color: '#b08d57' },
+                { key: 'Umsatz', label: 'Umsatz (EUR)', color: '#b08d57' },
                 { key: 'Transaktionen', label: 'Transaktionen', color: '#2563eb' },
               ]}
               height={320}
@@ -52,11 +52,11 @@ export function ComparisonPage() {
               <thead>
                 <tr className="border-b border-kore-border bg-kore-bg">
                   <th className="text-left px-md py-sm text-small text-kore-mid font-medium">Store</th>
-                  <th className="text-right px-md py-sm text-small text-kore-mid font-medium">Revenue</th>
+                  <th className="text-right px-md py-sm text-small text-kore-mid font-medium">Umsatz</th>
                   <th className="text-right px-md py-sm text-small text-kore-mid font-medium">Transaktionen</th>
-                  <th className="text-right px-md py-sm text-small text-kore-mid font-medium">Footfall</th>
-                  <th className="text-right px-md py-sm text-small text-kore-mid font-medium">Units Sold</th>
-                  <th className="text-right px-md py-sm text-small text-kore-mid font-medium">Ø Rev/Tag</th>
+                  <th className="text-right px-md py-sm text-small text-kore-mid font-medium">Frequenz</th>
+                  <th className="text-right px-md py-sm text-small text-kore-mid font-medium">Stueck verkauft</th>
+                  <th className="text-right px-md py-sm text-small text-kore-mid font-medium">Ø Umsatz/Tag</th>
                 </tr>
               </thead>
               <tbody>

@@ -113,7 +113,7 @@ export function OverviewPage() {
               {s.kpi ? (
                 <div className="grid grid-cols-2 gap-sm mb-md">
                   <div className="bg-kore-bg p-sm text-center">
-                    <span className="block text-small text-kore-mid">Revenue</span>
+                    <span className="block text-small text-kore-mid">Umsatz</span>
                     <span className="font-medium text-kore-ink">{s.kpi.revenue?.toLocaleString('de-DE')} EUR</span>
                   </div>
                   <div className="bg-kore-bg p-sm text-center">
@@ -140,7 +140,7 @@ export function OverviewPage() {
               {/* Footfall 7d */}
               <div className="flex items-center gap-sm mb-sm text-small">
                 <Footprints size={14} className="text-kore-mid" />
-                <span className="text-kore-mid">7-Tage Footfall:</span>
+                <span className="text-kore-mid">7-Tage Frequenz:</span>
                 <span className="text-kore-ink font-medium">{s.footfall7d?.totalFootfall?.toLocaleString('de-DE') ?? '---'}</span>
               </div>
 

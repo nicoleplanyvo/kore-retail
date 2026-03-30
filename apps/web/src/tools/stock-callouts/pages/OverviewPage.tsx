@@ -131,12 +131,12 @@ export function OverviewPage() {
 
   return (
     <div className="p-lg max-w-6xl">
-      <Breadcrumb items={[{ label: 'Stock Callouts' }]} />
+      <Breadcrumb items={[{ label: 'Bestandsmeldungen' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-lg">
         <div>
           <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm">
-            <Package size={24} /> Stock Callouts
+            <Package size={24} /> Bestandsmeldungen
           </h1>
           <p className="text-body text-kore-mid mt-xs">Inter-Store Stock-Abgleich und Nachbestellungen</p>
         </div>
@@ -183,7 +183,7 @@ export function OverviewPage() {
       {showForm && (
         <form onSubmit={handleSubmit} className="bg-kore-white border border-kore-border p-lg mb-lg">
           <div className="flex items-center justify-between mb-md">
-            <h2 className="font-display text-h3 text-kore-ink">Neues Stock Callout</h2>
+            <h2 className="font-display text-h3 text-kore-ink">Neue Bestandsmeldung</h2>
             <button type="button" onClick={() => setShowForm(false)} className="text-kore-mid hover:text-kore-ink"><X size={18} /></button>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-md">
@@ -253,7 +253,7 @@ export function OverviewPage() {
         <div className="text-body text-kore-mid">Lade Callouts...</div>
       ) : !callouts.length ? (
         <div className="bg-kore-white border border-kore-border p-2xl text-center text-body text-kore-mid">
-          Keine Stock Callouts vorhanden. Erstellen Sie ein neues Callout, um Artikel bei anderen Stores zu suchen.
+          Keine Bestandsmeldungen vorhanden. Erstellen Sie ein neues Callout, um Artikel bei anderen Stores zu suchen.
         </div>
       ) : (
         <div className="space-y-sm">

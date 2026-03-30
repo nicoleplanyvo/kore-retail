@@ -263,7 +263,7 @@ export function OverviewPage() {
             </div>
             <div className="bg-kore-white border border-kore-border p-lg text-center">
               <Package size={20} className="mx-auto text-blue-500 mb-sm" />
-              <span className="block text-small text-kore-mid mb-xs">Stock Callouts</span>
+              <span className="block text-small text-kore-mid mb-xs">Bestandsmeldungen</span>
               <span className="font-display text-h2 text-kore-ink">{summary.operational.openStockCallouts}</span>
             </div>
             <div className="bg-kore-white border border-kore-border p-lg text-center">

@@ -64,7 +64,7 @@ export function DashboardPage() {
         </Link>
         <div className="flex-1">
           <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm">
-            <BarChart3 size={24} /> Newsletter Analytics
+            <BarChart3 size={24} /> Newsletter-Analyse
           </h1>
           <p className="text-body text-kore-mid mt-xs">
             Engagement und Reichweite Ihrer Newsletter

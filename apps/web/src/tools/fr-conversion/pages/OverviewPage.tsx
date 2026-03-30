@@ -163,12 +163,12 @@ export function OverviewPage() {
 
   return (
     <div className="p-lg max-w-6xl">
-      <Breadcrumb items={[{ label: 'Fitting Room Management' }]} />
+      <Breadcrumb items={[{ label: 'Umkleidekabinen-Management' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-lg">
         <div>
           <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm">
-            <DoorOpen size={24} /> Fitting Room Management
+            <DoorOpen size={24} /> Umkleidekabinen-Management
           </h1>
           <p className="text-body text-kore-mid mt-xs">Umkleidekabinen live verwalten</p>
         </div>
@@ -182,7 +182,7 @@ export function OverviewPage() {
             <RefreshCw size={16} />
           </button>
           <Link to="/tools/fr-conversion/dashboard" className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink">
-            <BarChart3 size={14} /> Reports
+            <BarChart3 size={14} /> Berichte
           </Link>
           <Link to="/tools/fr-conversion/settings" className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink">
             <Settings size={14} /> Einstellungen

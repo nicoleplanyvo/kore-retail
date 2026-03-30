@@ -38,14 +38,14 @@ export function OverviewPage() {
         <Link to="/tools" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div>
           <h1 className="font-display text-h1 text-kore-ink">Training Hub</h1>
-          <p className="text-body text-kore-mid mt-xs">Kurse, Module & Enrollments verwalten</p>
+          <p className="text-body text-kore-mid mt-xs">Kurse, Module & Einschreibungen verwalten</p>
         </div>
       </div>
 
       {report && (
         <div className="grid grid-cols-3 gap-lg mb-xl">
           <div className="bg-kore-white border border-kore-border p-lg">
-            <div className="text-small text-kore-mid mb-xs">Gesamt Enrollments</div>
+            <div className="text-small text-kore-mid mb-xs">Gesamt Einschreibungen</div>
             <div className="text-h2 font-display text-kore-ink">{report.total}</div>
           </div>
           <div className="bg-kore-white border border-kore-border p-lg">
@@ -67,7 +67,7 @@ export function OverviewPage() {
           <option value="ARCHIVED">Archiviert</option>
         </select>
         <Link to="/tools/training-hub/enrollments" className="px-md py-sm border border-kore-border text-small hover:bg-kore-bg transition-colors flex items-center gap-xs">
-          <Users size={14} /> Enrollments
+          <Users size={14} /> Einschreibungen
         </Link>
         <button onClick={() => setShowCreate(true)} className="px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90 transition-opacity flex items-center gap-xs">
           <Plus size={14} /> Neuer Kurs

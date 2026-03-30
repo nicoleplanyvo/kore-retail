@@ -241,7 +241,7 @@ export function StoreDetailPage() {
                   to="/app/tools/loss-prevention"
                   className="bg-kore-white border border-kore-border p-md text-small text-kore-ink hover:bg-kore-bg transition-colors flex items-center gap-sm"
                 >
-                  <ShieldAlert size={14} /> Loss Prevention
+                  <ShieldAlert size={14} /> Verlustpraevention
                 </Link>
                 <Link
                   to="/app/tools/maintenance"
@@ -283,7 +283,7 @@ export function StoreDetailPage() {
               {detail.operational.openStock.length > 0 && (
                 <div className="mb-md">
                   <h3 className="text-body font-medium text-kore-ink mb-sm flex items-center gap-xs">
-                    <Package size={14} className="text-blue-500" /> Stock Callouts ({detail.operational.openStock.length})
+                    <Package size={14} className="text-blue-500" /> Bestandsmeldungen ({detail.operational.openStock.length})
                   </h3>
                   <div className="space-y-xs">
                     {detail.operational.openStock.map((s: any) => (
