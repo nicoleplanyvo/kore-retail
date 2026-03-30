@@ -4,6 +4,7 @@ import { requireMinRole } from '../../../middleware/auth.js';
 import { logAudit } from '../../../lib/audit.js';
 import { auditSessionCreateSchema } from '../../../shared/validators.js';
 import { calculateAuditScore } from '../../../shared/audit-scoring.js';
+import { createNotification } from '../../../lib/notifications.js';
 export const seaSessionsRouter = Router();
 // GET /sessions — Liste mit Pagination und Filter
 seaSessionsRouter.get('/', async (req, res) => {
@@ -284,6 +285,30 @@ seaSessionsRouter.post('/:id/complete', requireMinRole('store_manager'), async (
             ipAddress: req.ip ?? null,
         });
         res.json({ ...completed, scoreDetails: scoreResult });
+        // Fire-and-forget: notify store managers of the completed audit
+        (async () => {
+            try {
+                const storeManagers = await prisma.user.findMany({
+                    where: {
+                        tenantId,
+                        role: 'store_manager',
+                        isActive: true,
+                        storeAssignments: { some: { storeId: completed.storeId } },
+                    },
+                    select: { id: true },
+                });
+                await Promise.all(storeManagers.map((mgr) => createNotification({
+                    tenantId,
+                    userId: mgr.id,
+                    type: 'audit_completed',
+                    title: `Audit abgeschlossen: ${completed.store.name}`,
+                    link: `/app/tools/sea/sessions/${completed.id}`,
+                })));
+            }
+            catch (notifErr) {
+                console.error('Notification (audit_completed) error:', notifErr);
+            }
+        })();
     }
     catch (err) {
         console.error('SEA session complete error:', err);

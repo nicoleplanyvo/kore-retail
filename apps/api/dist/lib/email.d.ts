@@ -1,6 +1,6 @@
 /**
- * E-Mail-Versand über Lettermint API
- * https://api.lettermint.co/v1/send
+ * E-Mail-Versand über Brevo SMTP
+ * Ersetzt Lettermint — nutzt nodemailer mit smtp-relay.brevo.com
  */
 interface EmailPayload {
     from: string;
@@ -36,6 +36,25 @@ export declare function auditConfirmationEmail(data: {
     name: string;
     email: string;
     company: string;
+}): EmailPayload;
+export declare function blogApprovalEmail(data: {
+    title: string;
+    excerpt: string;
+    previewContent: string;
+    approveUrl: string;
+    rejectUrl: string;
+}): EmailPayload;
+export declare function invitationEmail(data: {
+    name: string;
+    email: string;
+    inviterName: string;
+    tenantName: string;
+    inviteUrl: string;
+}): EmailPayload;
+export declare function passwordResetEmail(data: {
+    name: string;
+    email: string;
+    resetUrl: string;
 }): EmailPayload;
 export {};
 //# sourceMappingURL=email.d.ts.map

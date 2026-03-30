@@ -5,7 +5,20 @@ import { requireToolAccess } from '../../../middleware/requireToolAccess.js';
 import { customerOrderCreateSchema, customerOrderUpdateSchema, orderStatusUpdateSchema, } from '../../../shared/validators.js';
 export const trackTraceRouter = Router();
 trackTraceRouter.use(authenticate, requireToolAccess('customer.track_trace'));
-// GET /orders — List with search, pagination
+// ── STORES ──────────────────────────────────────────
+trackTraceRouter.get('/stores', async (req, res) => {
+    try {
+        const toolStoreIds = req.toolStoreIds;
+        const where = toolStoreIds === 'all' ? {} : { id: { in: toolStoreIds } };
+        const stores = await prisma.store.findMany({ where, select: { id: true, name: true, city: true }, orderBy: { name: 'asc' } });
+        res.json(stores);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Interner Serverfehler.' });
+    }
+});
+// ── ORDERS: LIST ────────────────────────────────────
 trackTraceRouter.get('/orders', async (req, res) => {
     try {
         const toolStoreIds = req.toolStoreIds;
@@ -18,6 +31,11 @@ trackTraceRouter.get('/orders', async (req, res) => {
             where['storeId'] = { in: toolStoreIds };
         if (req.query.status)
             where['status'] = req.query.status;
+        // Filter by type (TRANSFER / CLICK_COLLECT / standard)
+        if (req.query.type) {
+            // type is stored as prefix in orderNumber (TRF- / CC- / ORD-)
+            where['orderNumber'] = { startsWith: req.query.type };
+        }
         if (req.query.search) {
             const search = req.query.search;
             where['OR'] = [
@@ -47,7 +65,7 @@ trackTraceRouter.get('/orders', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// POST /orders — Create
+// ── ORDERS: CREATE ──────────────────────────────────
 trackTraceRouter.post('/orders', async (req, res) => {
     try {
         const toolStoreIds = req.toolStoreIds;
@@ -77,31 +95,7 @@ trackTraceRouter.post('/orders', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// GET /summary — Order stats
-trackTraceRouter.get('/summary', async (req, res) => {
-    try {
-        const toolStoreIds = req.toolStoreIds;
-        const where = {};
-        if (req.query.storeId)
-            where['storeId'] = req.query.storeId;
-        else if (toolStoreIds !== 'all')
-            where['storeId'] = { in: toolStoreIds };
-        const orders = await prisma.customerOrder.findMany({ where });
-        const statusCounts = {};
-        for (const o of orders) {
-            statusCounts[o.status] = (statusCounts[o.status] || 0) + 1;
-        }
-        res.json({
-            total: orders.length,
-            byStatus: statusCounts,
-        });
-    }
-    catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Interner Serverfehler.' });
-    }
-});
-// GET /orders/:id — Get with statusUpdates
+// ── ORDERS: DETAIL ──────────────────────────────────
 trackTraceRouter.get('/orders/:id', async (req, res) => {
     try {
         const order = await prisma.customerOrder.findUnique({
@@ -116,7 +110,7 @@ trackTraceRouter.get('/orders/:id', async (req, res) => {
             },
         });
         if (!order)
-            return res.status(404).json({ error: 'Bestellung nicht gefunden.' });
+            return res.status(404).json({ error: 'Vorgang nicht gefunden.' });
         res.json(order);
     }
     catch (err) {
@@ -124,7 +118,7 @@ trackTraceRouter.get('/orders/:id', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// PUT /orders/:id — Update
+// ── ORDERS: UPDATE ──────────────────────────────────
 trackTraceRouter.put('/orders/:id', async (req, res) => {
     try {
         const parsed = customerOrderUpdateSchema.safeParse(req.body);
@@ -144,7 +138,7 @@ trackTraceRouter.put('/orders/:id', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// POST /orders/:id/status — Add status update
+// ── ORDERS: ADD STATUS UPDATE ───────────────────────
 trackTraceRouter.post('/orders/:id/status', async (req, res) => {
     try {
         const userId = req.user.sub;
@@ -165,6 +159,129 @@ trackTraceRouter.post('/orders/:id/status', async (req, res) => {
             data: { status: parsed.data.status },
         });
         res.status(201).json(statusUpdate);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Interner Serverfehler.' });
+    }
+});
+// ── DASHBOARD ───────────────────────────────────────
+trackTraceRouter.get('/dashboard', async (req, res) => {
+    try {
+        const toolStoreIds = req.toolStoreIds;
+        const where = {};
+        if (req.query.storeId)
+            where['storeId'] = req.query.storeId;
+        else if (toolStoreIds !== 'all')
+            where['storeId'] = { in: toolStoreIds };
+        if (req.query.from)
+            where['createdAt'] = { ...(where['createdAt'] || {}), gte: new Date(req.query.from) };
+        if (req.query.to)
+            where['createdAt'] = { ...(where['createdAt'] || {}), lte: new Date(req.query.to + 'T23:59:59') };
+        const orders = await prisma.customerOrder.findMany({
+            where,
+            include: {
+                store: { select: { id: true, name: true } },
+                statusUpdates: { orderBy: { createdAt: 'asc' } },
+            },
+            orderBy: { createdAt: 'desc' },
+        });
+        const total = orders.length;
+        const transfers = orders.filter(o => o.orderNumber.startsWith('TRF-'));
+        const clickCollect = orders.filter(o => o.orderNumber.startsWith('CC-'));
+        // Status counts
+        const statusCounts = {};
+        for (const o of orders) {
+            statusCounts[o.status] = (statusCounts[o.status] || 0) + 1;
+        }
+        // Transfer KPIs
+        const completedTransfers = transfers.filter(o => o.status === 'DELIVERED' || o.status === 'COMPLETED');
+        const transfersWithDiff = transfers.filter(o => o.statusUpdates.some(su => su.status === 'DIFFERENCE_REPORTED'));
+        const differenceRate = transfers.length > 0
+            ? Math.round((transfersWithDiff.length / transfers.length) * 100)
+            : 0;
+        // Avg transfer duration (from creation to DELIVERED/COMPLETED)
+        let avgTransferDays = 0;
+        if (completedTransfers.length > 0) {
+            const totalDays = completedTransfers.reduce((sum, o) => {
+                const delivered = o.statusUpdates.find(su => su.status === 'DELIVERED' || su.status === 'COMPLETED');
+                if (!delivered)
+                    return sum;
+                const days = (new Date(delivered.createdAt).getTime() - new Date(o.createdAt).getTime()) / (1000 * 60 * 60 * 24);
+                return sum + days;
+            }, 0);
+            avgTransferDays = Math.round((totalDays / completedTransfers.length) * 10) / 10;
+        }
+        // Click & Collect KPIs
+        const ccCompleted = clickCollect.filter(o => o.status === 'PICKED_UP');
+        const ccPending = clickCollect.filter(o => o.status !== 'PICKED_UP' && o.status !== 'RETURNED');
+        // Monthly trend
+        const monthMap = new Map();
+        orders.forEach(o => {
+            const month = new Date(o.createdAt).toISOString().slice(0, 7);
+            const existing = monthMap.get(month) || { transfers: 0, cc: 0, total: 0 };
+            existing.total++;
+            if (o.orderNumber.startsWith('TRF-'))
+                existing.transfers++;
+            if (o.orderNumber.startsWith('CC-'))
+                existing.cc++;
+            monthMap.set(month, existing);
+        });
+        const trends = Array.from(monthMap.entries())
+            .map(([month, d]) => ({ month, ...d }))
+            .sort((a, b) => a.month.localeCompare(b.month));
+        // Per-store stats
+        const storeMap = new Map();
+        orders.forEach(o => {
+            const key = o.storeId;
+            const existing = storeMap.get(key) || { id: o.storeId, name: o.store?.name || '—', total: 0, transfers: 0, cc: 0 };
+            existing.total++;
+            if (o.orderNumber.startsWith('TRF-'))
+                existing.transfers++;
+            if (o.orderNumber.startsWith('CC-'))
+                existing.cc++;
+            storeMap.set(key, existing);
+        });
+        const storeStats = Array.from(storeMap.values()).sort((a, b) => b.total - a.total);
+        res.json({
+            kpis: {
+                total,
+                transferCount: transfers.length,
+                clickCollectCount: clickCollect.length,
+                completedTransfers: completedTransfers.length,
+                avgTransferDays,
+                differenceRate,
+                ccCompleted: ccCompleted.length,
+                ccPending: ccPending.length,
+            },
+            byStatus: statusCounts,
+            trends,
+            storeStats,
+        });
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Interner Serverfehler.' });
+    }
+});
+// ── SUMMARY (legacy compat) ─────────────────────────
+trackTraceRouter.get('/summary', async (req, res) => {
+    try {
+        const toolStoreIds = req.toolStoreIds;
+        const where = {};
+        if (req.query.storeId)
+            where['storeId'] = req.query.storeId;
+        else if (toolStoreIds !== 'all')
+            where['storeId'] = { in: toolStoreIds };
+        const orders = await prisma.customerOrder.findMany({ where });
+        const statusCounts = {};
+        for (const o of orders) {
+            statusCounts[o.status] = (statusCounts[o.status] || 0) + 1;
+        }
+        res.json({
+            total: orders.length,
+            byStatus: statusCounts,
+        });
     }
     catch (err) {
         console.error(err);

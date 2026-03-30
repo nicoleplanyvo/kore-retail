@@ -24,6 +24,25 @@ adminToolsRouter.get('/', async (_req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
+// PUT /api/admin/tools/:toolId — Tool-Einstellungen aktualisieren (z.B. learnerAccessible)
+adminToolsRouter.put('/:toolId', async (req, res) => {
+    try {
+        const { toolId } = req.params;
+        const { learnerAccessible } = req.body;
+        if (typeof learnerAccessible !== 'boolean') {
+            return res.status(400).json({ error: 'learnerAccessible muss ein Boolean sein.' });
+        }
+        const tool = await prisma.toolDefinition.update({
+            where: { id: toolId },
+            data: { learnerAccessible },
+        });
+        res.json({ tool });
+    }
+    catch (err) {
+        console.error('Tool update error:', err);
+        res.status(500).json({ error: 'Interner Serverfehler.' });
+    }
+});
 // GET /api/admin/tools/stats — Statistiken: Kategorie-Stats + MRR
 adminToolsRouter.get('/stats', async (_req, res) => {
     try {

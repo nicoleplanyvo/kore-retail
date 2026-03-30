@@ -1073,28 +1073,49 @@ export type InventoryItemUpsertInput = z.infer<typeof inventoryItemUpsertSchema>
 export declare const floorZoneCreateSchema: z.ZodObject<{
     storeId: z.ZodString;
     name: z.ZodString;
+    description: z.ZodOptional<z.ZodString>;
     sortOrder: z.ZodDefault<z.ZodNumber>;
+    minStaff: z.ZodDefault<z.ZodNumber>;
+    maxStaff: z.ZodDefault<z.ZodNumber>;
 }, "strip", z.ZodTypeAny, {
     name: string;
     storeId: string;
     sortOrder: number;
+    minStaff: number;
+    maxStaff: number;
+    description?: string | undefined;
 }, {
     name: string;
     storeId: string;
+    description?: string | undefined;
     sortOrder?: number | undefined;
+    minStaff?: number | undefined;
+    maxStaff?: number | undefined;
 }>;
 export declare const floorZoneUpdateSchema: z.ZodObject<{
     name: z.ZodOptional<z.ZodString>;
+    description: z.ZodOptional<z.ZodString>;
     sortOrder: z.ZodOptional<z.ZodNumber>;
+    minStaff: z.ZodOptional<z.ZodNumber>;
+    maxStaff: z.ZodOptional<z.ZodNumber>;
+    customerCount: z.ZodOptional<z.ZodNumber>;
     isActive: z.ZodOptional<z.ZodBoolean>;
 }, "strip", z.ZodTypeAny, {
     name?: string | undefined;
+    description?: string | undefined;
     sortOrder?: number | undefined;
     isActive?: boolean | undefined;
+    minStaff?: number | undefined;
+    maxStaff?: number | undefined;
+    customerCount?: number | undefined;
 }, {
     name?: string | undefined;
+    description?: string | undefined;
     sortOrder?: number | undefined;
     isActive?: boolean | undefined;
+    minStaff?: number | undefined;
+    maxStaff?: number | undefined;
+    customerCount?: number | undefined;
 }>;
 export declare const floorPositionCreateSchema: z.ZodObject<{
     storeId: z.ZodString;
@@ -1133,6 +1154,48 @@ export declare const floorPositionUpdateSchema: z.ZodObject<{
     notes?: string | undefined;
     zoneId?: string | null | undefined;
     endedAt?: string | undefined;
+}>;
+export declare const floorFrequencyUpdateSchema: z.ZodObject<{
+    customerCount: z.ZodNumber;
+}, "strip", z.ZodTypeAny, {
+    customerCount: number;
+}, {
+    customerCount: number;
+}>;
+export declare const floorBulkAssignSchema: z.ZodObject<{
+    assignments: z.ZodArray<z.ZodObject<{
+        userId: z.ZodString;
+        userName: z.ZodString;
+        zoneId: z.ZodNullable<z.ZodString>;
+        status: z.ZodDefault<z.ZodEnum<["ON_FLOOR", "ON_BREAK", "OFF_FLOOR", "CASHIER"]>>;
+    }, "strip", z.ZodTypeAny, {
+        status: "ON_FLOOR" | "ON_BREAK" | "OFF_FLOOR" | "CASHIER";
+        zoneId: string | null;
+        userId: string;
+        userName: string;
+    }, {
+        zoneId: string | null;
+        userId: string;
+        userName: string;
+        status?: "ON_FLOOR" | "ON_BREAK" | "OFF_FLOOR" | "CASHIER" | undefined;
+    }>, "many">;
+    storeId: z.ZodString;
+}, "strip", z.ZodTypeAny, {
+    storeId: string;
+    assignments: {
+        status: "ON_FLOOR" | "ON_BREAK" | "OFF_FLOOR" | "CASHIER";
+        zoneId: string | null;
+        userId: string;
+        userName: string;
+    }[];
+}, {
+    storeId: string;
+    assignments: {
+        zoneId: string | null;
+        userId: string;
+        userName: string;
+        status?: "ON_FLOOR" | "ON_BREAK" | "OFF_FLOOR" | "CASHIER" | undefined;
+    }[];
 }>;
 export declare const footfallUpsertSchema: z.ZodObject<{
     storeId: z.ZodString;
@@ -1247,6 +1310,8 @@ export type VmGuidelineDocCreateInput = z.infer<typeof vmGuidelineDocCreateSchem
 export type VmGuidelineDocUpdateInput = z.infer<typeof vmGuidelineDocUpdateSchema>;
 export type MaintenanceRequestCreateInput = z.infer<typeof maintenanceRequestCreateSchema>;
 export type MaintenanceRequestUpdateInput = z.infer<typeof maintenanceRequestUpdateSchema>;
+export type FloorFrequencyUpdateInput = z.infer<typeof floorFrequencyUpdateSchema>;
+export type FloorBulkAssignInput = z.infer<typeof floorBulkAssignSchema>;
 export declare const courseCreateSchema: z.ZodObject<{
     title: z.ZodString;
     description: z.ZodOptional<z.ZodString>;
@@ -1374,30 +1439,45 @@ export declare const trainingLogUpdateSchema: z.ZodObject<{
 export declare const challengeCreateSchema: z.ZodObject<{
     title: z.ZodString;
     description: z.ZodOptional<z.ZodString>;
+    mode: z.ZodDefault<z.ZodEnum<["KPI", "VOTING"]>>;
     type: z.ZodDefault<z.ZodEnum<["INDIVIDUAL", "TEAM", "STORE"]>>;
     metric: z.ZodOptional<z.ZodString>;
     targetValue: z.ZodOptional<z.ZodNumber>;
     startDate: z.ZodString;
     endDate: z.ZodString;
+    recurring: z.ZodOptional<z.ZodEnum<["NONE", "WEEKLY", "MONTHLY", "QUARTERLY"]>>;
     reward: z.ZodOptional<z.ZodString>;
+    rewardType: z.ZodOptional<z.ZodEnum<["HONOUR", "PRIZE", "POINTS", "BADGE"]>>;
+    anonymized: z.ZodOptional<z.ZodBoolean>;
+    storeIds: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
 }, "strip", z.ZodTypeAny, {
     type: "INDIVIDUAL" | "TEAM" | "STORE";
     title: string;
+    mode: "KPI" | "VOTING";
     startDate: string;
     endDate: string;
     description?: string | undefined;
+    storeIds?: string[] | undefined;
     targetValue?: number | undefined;
     metric?: string | undefined;
+    recurring?: "MONTHLY" | "QUARTERLY" | "NONE" | "WEEKLY" | undefined;
     reward?: string | undefined;
+    rewardType?: "HONOUR" | "PRIZE" | "POINTS" | "BADGE" | undefined;
+    anonymized?: boolean | undefined;
 }, {
     title: string;
     startDate: string;
     endDate: string;
     type?: "INDIVIDUAL" | "TEAM" | "STORE" | undefined;
     description?: string | undefined;
+    storeIds?: string[] | undefined;
     targetValue?: number | undefined;
+    mode?: "KPI" | "VOTING" | undefined;
     metric?: string | undefined;
+    recurring?: "MONTHLY" | "QUARTERLY" | "NONE" | "WEEKLY" | undefined;
     reward?: string | undefined;
+    rewardType?: "HONOUR" | "PRIZE" | "POINTS" | "BADGE" | undefined;
+    anonymized?: boolean | undefined;
 }>;
 export declare const challengeUpdateSchema: z.ZodObject<{
     title: z.ZodOptional<z.ZodString>;
@@ -1405,18 +1485,41 @@ export declare const challengeUpdateSchema: z.ZodObject<{
     status: z.ZodOptional<z.ZodEnum<["DRAFT", "ACTIVE", "COMPLETED", "CANCELLED"]>>;
     targetValue: z.ZodOptional<z.ZodNumber>;
     reward: z.ZodOptional<z.ZodString>;
+    rewardType: z.ZodOptional<z.ZodEnum<["HONOUR", "PRIZE", "POINTS", "BADGE"]>>;
+    anonymized: z.ZodOptional<z.ZodBoolean>;
 }, "strip", z.ZodTypeAny, {
     status?: "DRAFT" | "COMPLETED" | "ACTIVE" | "CANCELLED" | undefined;
     title?: string | undefined;
     description?: string | undefined;
     targetValue?: number | undefined;
     reward?: string | undefined;
+    rewardType?: "HONOUR" | "PRIZE" | "POINTS" | "BADGE" | undefined;
+    anonymized?: boolean | undefined;
 }, {
     status?: "DRAFT" | "COMPLETED" | "ACTIVE" | "CANCELLED" | undefined;
     title?: string | undefined;
     description?: string | undefined;
     targetValue?: number | undefined;
     reward?: string | undefined;
+    rewardType?: "HONOUR" | "PRIZE" | "POINTS" | "BADGE" | undefined;
+    anonymized?: boolean | undefined;
+}>;
+export declare const challengeEntrySchema: z.ZodObject<{
+    value: z.ZodNumber;
+    note: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    value: number;
+    note?: string | undefined;
+}, {
+    value: number;
+    note?: string | undefined;
+}>;
+export declare const challengeVoteSchema: z.ZodObject<{
+    targetUserId: z.ZodString;
+}, "strip", z.ZodTypeAny, {
+    targetUserId: string;
+}, {
+    targetUserId: string;
 }>;
 export declare const challengeProgressSchema: z.ZodObject<{
     currentValue: z.ZodNumber;
@@ -1521,6 +1624,8 @@ export type TrainingLogUpdateInput = z.infer<typeof trainingLogUpdateSchema>;
 export type ChallengeCreateInput = z.infer<typeof challengeCreateSchema>;
 export type ChallengeUpdateInput = z.infer<typeof challengeUpdateSchema>;
 export type ChallengeProgressInput = z.infer<typeof challengeProgressSchema>;
+export type ChallengeEntryInput = z.infer<typeof challengeEntrySchema>;
+export type ChallengeVoteInput = z.infer<typeof challengeVoteSchema>;
 export type OnboardingTemplateCreateInput = z.infer<typeof onboardingTemplateCreateSchema>;
 export type OnboardingJourneyCreateInput = z.infer<typeof onboardingJourneyCreateSchema>;
 export type OnboardingStepUpdateInput = z.infer<typeof onboardingStepUpdateSchema>;
@@ -1530,17 +1635,35 @@ export declare const coachingSessionCreateSchema: z.ZodObject<{
     scheduledAt: z.ZodString;
     duration: z.ZodDefault<z.ZodNumber>;
     type: z.ZodDefault<z.ZodEnum<["REGULAR", "AD_HOC", "FOLLOW_UP"]>>;
+    framework: z.ZodDefault<z.ZodEnum<["GROW", "SMART", "FREE"]>>;
+    topic: z.ZodOptional<z.ZodString>;
+    category: z.ZodOptional<z.ZodString>;
+    goalText: z.ZodOptional<z.ZodString>;
+    realityText: z.ZodOptional<z.ZodString>;
+    optionsText: z.ZodOptional<z.ZodString>;
+    wayForwardText: z.ZodOptional<z.ZodString>;
+    timelineText: z.ZodOptional<z.ZodString>;
     notes: z.ZodOptional<z.ZodString>;
     actionItems: z.ZodOptional<z.ZodString>;
     mood: z.ZodOptional<z.ZodNumber>;
     followUpDate: z.ZodOptional<z.ZodString>;
+    templateId: z.ZodOptional<z.ZodString>;
 }, "strip", z.ZodTypeAny, {
     type: "REGULAR" | "AD_HOC" | "FOLLOW_UP";
     storeId: string;
     coacheeId: string;
     scheduledAt: string;
     duration: number;
+    framework: "GROW" | "SMART" | "FREE";
+    templateId?: string | undefined;
     notes?: string | undefined;
+    category?: string | undefined;
+    topic?: string | undefined;
+    goalText?: string | undefined;
+    realityText?: string | undefined;
+    optionsText?: string | undefined;
+    wayForwardText?: string | undefined;
+    timelineText?: string | undefined;
     actionItems?: string | undefined;
     mood?: number | undefined;
     followUpDate?: string | undefined;
@@ -1549,8 +1672,17 @@ export declare const coachingSessionCreateSchema: z.ZodObject<{
     coacheeId: string;
     scheduledAt: string;
     type?: "REGULAR" | "AD_HOC" | "FOLLOW_UP" | undefined;
+    templateId?: string | undefined;
     notes?: string | undefined;
+    category?: string | undefined;
+    topic?: string | undefined;
     duration?: number | undefined;
+    framework?: "GROW" | "SMART" | "FREE" | undefined;
+    goalText?: string | undefined;
+    realityText?: string | undefined;
+    optionsText?: string | undefined;
+    wayForwardText?: string | undefined;
+    timelineText?: string | undefined;
     actionItems?: string | undefined;
     mood?: number | undefined;
     followUpDate?: string | undefined;
@@ -1560,6 +1692,14 @@ export declare const coachingSessionUpdateSchema: z.ZodObject<{
     duration: z.ZodOptional<z.ZodNumber>;
     type: z.ZodOptional<z.ZodEnum<["REGULAR", "AD_HOC", "FOLLOW_UP"]>>;
     status: z.ZodOptional<z.ZodEnum<["SCHEDULED", "COMPLETED", "CANCELLED"]>>;
+    framework: z.ZodOptional<z.ZodEnum<["GROW", "SMART", "FREE"]>>;
+    topic: z.ZodOptional<z.ZodString>;
+    category: z.ZodOptional<z.ZodString>;
+    goalText: z.ZodOptional<z.ZodString>;
+    realityText: z.ZodOptional<z.ZodString>;
+    optionsText: z.ZodOptional<z.ZodString>;
+    wayForwardText: z.ZodOptional<z.ZodString>;
+    timelineText: z.ZodOptional<z.ZodString>;
     notes: z.ZodOptional<z.ZodString>;
     actionItems: z.ZodOptional<z.ZodString>;
     mood: z.ZodOptional<z.ZodNumber>;
@@ -1568,8 +1708,16 @@ export declare const coachingSessionUpdateSchema: z.ZodObject<{
     type?: "REGULAR" | "AD_HOC" | "FOLLOW_UP" | undefined;
     status?: "COMPLETED" | "CANCELLED" | "SCHEDULED" | undefined;
     notes?: string | undefined;
+    category?: string | undefined;
+    topic?: string | undefined;
     scheduledAt?: string | undefined;
     duration?: number | undefined;
+    framework?: "GROW" | "SMART" | "FREE" | undefined;
+    goalText?: string | undefined;
+    realityText?: string | undefined;
+    optionsText?: string | undefined;
+    wayForwardText?: string | undefined;
+    timelineText?: string | undefined;
     actionItems?: string | undefined;
     mood?: number | undefined;
     followUpDate?: string | undefined;
@@ -1577,11 +1725,53 @@ export declare const coachingSessionUpdateSchema: z.ZodObject<{
     type?: "REGULAR" | "AD_HOC" | "FOLLOW_UP" | undefined;
     status?: "COMPLETED" | "CANCELLED" | "SCHEDULED" | undefined;
     notes?: string | undefined;
+    category?: string | undefined;
+    topic?: string | undefined;
     scheduledAt?: string | undefined;
     duration?: number | undefined;
+    framework?: "GROW" | "SMART" | "FREE" | undefined;
+    goalText?: string | undefined;
+    realityText?: string | undefined;
+    optionsText?: string | undefined;
+    wayForwardText?: string | undefined;
+    timelineText?: string | undefined;
     actionItems?: string | undefined;
     mood?: number | undefined;
     followUpDate?: string | undefined;
+}>;
+export declare const coachingTemplateCreateSchema: z.ZodObject<{
+    name: z.ZodString;
+    framework: z.ZodDefault<z.ZodEnum<["GROW", "SMART", "FREE"]>>;
+    topic: z.ZodOptional<z.ZodString>;
+    category: z.ZodOptional<z.ZodString>;
+    goalText: z.ZodOptional<z.ZodString>;
+    realityText: z.ZodOptional<z.ZodString>;
+    optionsText: z.ZodOptional<z.ZodString>;
+    wayForwardText: z.ZodOptional<z.ZodString>;
+    timelineText: z.ZodOptional<z.ZodString>;
+    notes: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    name: string;
+    framework: "GROW" | "SMART" | "FREE";
+    notes?: string | undefined;
+    category?: string | undefined;
+    topic?: string | undefined;
+    goalText?: string | undefined;
+    realityText?: string | undefined;
+    optionsText?: string | undefined;
+    wayForwardText?: string | undefined;
+    timelineText?: string | undefined;
+}, {
+    name: string;
+    notes?: string | undefined;
+    category?: string | undefined;
+    topic?: string | undefined;
+    framework?: "GROW" | "SMART" | "FREE" | undefined;
+    goalText?: string | undefined;
+    realityText?: string | undefined;
+    optionsText?: string | undefined;
+    wayForwardText?: string | undefined;
+    timelineText?: string | undefined;
 }>;
 export declare const developmentPlanCreateSchema: z.ZodObject<{
     storeId: z.ZodOptional<z.ZodString>;
@@ -1715,10 +1905,10 @@ export declare const shiftTemplateCreateSchema: z.ZodObject<{
 }, "strip", z.ZodTypeAny, {
     name: string;
     storeId: string;
+    minStaff: number;
     dayOfWeek: number;
     startTime: string;
     endTime: string;
-    minStaff: number;
     role?: string | undefined;
 }, {
     name: string;
@@ -1736,6 +1926,7 @@ export declare const shiftEntryCreateSchema: z.ZodObject<{
     startTime: z.ZodString;
     endTime: z.ZodString;
     role: z.ZodOptional<z.ZodString>;
+    note: z.ZodOptional<z.ZodString>;
 }, "strip", z.ZodTypeAny, {
     date: string;
     storeId: string;
@@ -1743,6 +1934,7 @@ export declare const shiftEntryCreateSchema: z.ZodObject<{
     startTime: string;
     endTime: string;
     role?: string | undefined;
+    note?: string | undefined;
 }, {
     date: string;
     storeId: string;
@@ -1750,29 +1942,77 @@ export declare const shiftEntryCreateSchema: z.ZodObject<{
     startTime: string;
     endTime: string;
     role?: string | undefined;
+    note?: string | undefined;
 }>;
 export declare const shiftEntryUpdateSchema: z.ZodObject<{
     startTime: z.ZodOptional<z.ZodString>;
     endTime: z.ZodOptional<z.ZodString>;
+    userId: z.ZodOptional<z.ZodString>;
     role: z.ZodOptional<z.ZodString>;
+    note: z.ZodOptional<z.ZodString>;
     status: z.ZodOptional<z.ZodEnum<["PLANNED", "CONFIRMED", "SWAPPED", "CANCELLED"]>>;
 }, "strip", z.ZodTypeAny, {
     status?: "CANCELLED" | "PLANNED" | "CONFIRMED" | "SWAPPED" | undefined;
     role?: string | undefined;
+    userId?: string | undefined;
+    note?: string | undefined;
     startTime?: string | undefined;
     endTime?: string | undefined;
 }, {
     status?: "CANCELLED" | "PLANNED" | "CONFIRMED" | "SWAPPED" | undefined;
     role?: string | undefined;
+    userId?: string | undefined;
+    note?: string | undefined;
     startTime?: string | undefined;
     endTime?: string | undefined;
 }>;
 export declare const shiftSwapRequestSchema: z.ZodObject<{
     swapWithUserId: z.ZodOptional<z.ZodString>;
+    reason: z.ZodOptional<z.ZodString>;
 }, "strip", z.ZodTypeAny, {
     swapWithUserId?: string | undefined;
+    reason?: string | undefined;
 }, {
     swapWithUserId?: string | undefined;
+    reason?: string | undefined;
+}>;
+export declare const shiftAvailabilitySchema: z.ZodObject<{
+    storeId: z.ZodString;
+    userId: z.ZodString;
+    date: z.ZodString;
+    type: z.ZodEnum<["AVAILABLE", "UNAVAILABLE", "WISH", "VACATION", "SICK"]>;
+    wishStart: z.ZodOptional<z.ZodString>;
+    wishEnd: z.ZodOptional<z.ZodString>;
+    note: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    type: "AVAILABLE" | "UNAVAILABLE" | "WISH" | "VACATION" | "SICK";
+    date: string;
+    storeId: string;
+    userId: string;
+    note?: string | undefined;
+    wishStart?: string | undefined;
+    wishEnd?: string | undefined;
+}, {
+    type: "AVAILABLE" | "UNAVAILABLE" | "WISH" | "VACATION" | "SICK";
+    date: string;
+    storeId: string;
+    userId: string;
+    note?: string | undefined;
+    wishStart?: string | undefined;
+    wishEnd?: string | undefined;
+}>;
+export declare const shiftClockSchema: z.ZodObject<{
+    storeId: z.ZodString;
+    action: z.ZodEnum<["CLOCK_IN", "CLOCK_OUT", "PAUSE_START", "PAUSE_END"]>;
+    note: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    storeId: string;
+    action: "CLOCK_IN" | "CLOCK_OUT" | "PAUSE_START" | "PAUSE_END";
+    note?: string | undefined;
+}, {
+    storeId: string;
+    action: "CLOCK_IN" | "CLOCK_OUT" | "PAUSE_START" | "PAUSE_END";
+    note?: string | undefined;
 }>;
 export declare const pulseSurveyCreateSchema: z.ZodObject<{
     title: z.ZodString;
@@ -1901,35 +2141,103 @@ export declare const wellbeingResourceUpdateSchema: z.ZodObject<{
     category?: string | undefined;
     url?: string | undefined;
 }>;
-export declare const briefingCreateSchema: z.ZodObject<{
+export declare const briefingSectionSchema: z.ZodObject<{
     title: z.ZodString;
     content: z.ZodString;
+    sortOrder: z.ZodNumber;
+}, "strip", z.ZodTypeAny, {
+    title: string;
+    content: string;
+    sortOrder: number;
+}, {
+    title: string;
+    content: string;
+    sortOrder: number;
+}>;
+export declare const briefingCreateSchema: z.ZodObject<{
+    title: z.ZodString;
+    content: z.ZodDefault<z.ZodOptional<z.ZodString>>;
+    sections: z.ZodDefault<z.ZodOptional<z.ZodArray<z.ZodObject<{
+        title: z.ZodString;
+        content: z.ZodString;
+        sortOrder: z.ZodNumber;
+    }, "strip", z.ZodTypeAny, {
+        title: string;
+        content: string;
+        sortOrder: number;
+    }, {
+        title: string;
+        content: string;
+        sortOrder: number;
+    }>, "many">>>;
     date: z.ZodString;
     type: z.ZodOptional<z.ZodEnum<["MORNING", "EVENING", "SPECIAL"]>>;
+    scheduledFor: z.ZodOptional<z.ZodString>;
+    storeId: z.ZodString;
 }, "strip", z.ZodTypeAny, {
     title: string;
     date: string;
     content: string;
+    storeId: string;
+    sections: {
+        title: string;
+        content: string;
+        sortOrder: number;
+    }[];
     type?: "MORNING" | "EVENING" | "SPECIAL" | undefined;
+    scheduledFor?: string | undefined;
 }, {
     title: string;
     date: string;
-    content: string;
+    storeId: string;
     type?: "MORNING" | "EVENING" | "SPECIAL" | undefined;
+    content?: string | undefined;
+    sections?: {
+        title: string;
+        content: string;
+        sortOrder: number;
+    }[] | undefined;
+    scheduledFor?: string | undefined;
 }>;
 export type BriefingCreateInput = z.infer<typeof briefingCreateSchema>;
 export declare const briefingUpdateSchema: z.ZodObject<{
     title: z.ZodOptional<z.ZodString>;
     content: z.ZodOptional<z.ZodString>;
+    sections: z.ZodOptional<z.ZodArray<z.ZodObject<{
+        title: z.ZodString;
+        content: z.ZodString;
+        sortOrder: z.ZodNumber;
+    }, "strip", z.ZodTypeAny, {
+        title: string;
+        content: string;
+        sortOrder: number;
+    }, {
+        title: string;
+        content: string;
+        sortOrder: number;
+    }>, "many">>;
     type: z.ZodOptional<z.ZodEnum<["MORNING", "EVENING", "SPECIAL"]>>;
+    scheduledFor: z.ZodOptional<z.ZodNullable<z.ZodString>>;
 }, "strip", z.ZodTypeAny, {
     type?: "MORNING" | "EVENING" | "SPECIAL" | undefined;
     title?: string | undefined;
     content?: string | undefined;
+    sections?: {
+        title: string;
+        content: string;
+        sortOrder: number;
+    }[] | undefined;
+    scheduledFor?: string | null | undefined;
 }, {
     type?: "MORNING" | "EVENING" | "SPECIAL" | undefined;
     title?: string | undefined;
     content?: string | undefined;
+    sections?: {
+        title: string;
+        content: string;
+        sortOrder: number;
+    }[] | undefined;
+    scheduledFor?: string | null | undefined;
 }>;
 export declare const handoverCreateSchema: z.ZodObject<{
     toUserId: z.ZodOptional<z.ZodString>;
@@ -2064,64 +2372,124 @@ export declare const conversionGoalSchema: z.ZodObject<{
 export declare const clientProfileCreateSchema: z.ZodObject<{
     firstName: z.ZodString;
     lastName: z.ZodString;
-    email: z.ZodOptional<z.ZodString>;
+    email: z.ZodUnion<[z.ZodOptional<z.ZodString>, z.ZodLiteral<"">]>;
     phone: z.ZodOptional<z.ZodString>;
+    whatsapp: z.ZodOptional<z.ZodString>;
     preferences: z.ZodOptional<z.ZodString>;
+    sizes: z.ZodOptional<z.ZodString>;
+    birthday: z.ZodOptional<z.ZodString>;
     vipLevel: z.ZodOptional<z.ZodString>;
+    notes: z.ZodOptional<z.ZodString>;
+    consentEmail: z.ZodOptional<z.ZodBoolean>;
+    consentSms: z.ZodOptional<z.ZodBoolean>;
+    consentWhatsapp: z.ZodOptional<z.ZodBoolean>;
+    consentGeneral: z.ZodOptional<z.ZodBoolean>;
 }, "strip", z.ZodTypeAny, {
     firstName: string;
     lastName: string;
     email?: string | undefined;
+    notes?: string | undefined;
     phone?: string | undefined;
+    whatsapp?: string | undefined;
     preferences?: string | undefined;
+    sizes?: string | undefined;
+    birthday?: string | undefined;
     vipLevel?: string | undefined;
+    consentEmail?: boolean | undefined;
+    consentSms?: boolean | undefined;
+    consentWhatsapp?: boolean | undefined;
+    consentGeneral?: boolean | undefined;
 }, {
     firstName: string;
     lastName: string;
     email?: string | undefined;
+    notes?: string | undefined;
     phone?: string | undefined;
+    whatsapp?: string | undefined;
     preferences?: string | undefined;
+    sizes?: string | undefined;
+    birthday?: string | undefined;
     vipLevel?: string | undefined;
+    consentEmail?: boolean | undefined;
+    consentSms?: boolean | undefined;
+    consentWhatsapp?: boolean | undefined;
+    consentGeneral?: boolean | undefined;
 }>;
 export declare const clientProfileUpdateSchema: z.ZodObject<{
     firstName: z.ZodOptional<z.ZodString>;
     lastName: z.ZodOptional<z.ZodString>;
-    email: z.ZodOptional<z.ZodString>;
+    email: z.ZodUnion<[z.ZodOptional<z.ZodString>, z.ZodLiteral<"">]>;
     phone: z.ZodOptional<z.ZodString>;
+    whatsapp: z.ZodOptional<z.ZodString>;
     preferences: z.ZodOptional<z.ZodString>;
+    sizes: z.ZodOptional<z.ZodString>;
+    birthday: z.ZodOptional<z.ZodString>;
     vipLevel: z.ZodOptional<z.ZodString>;
+    loyaltyPoints: z.ZodOptional<z.ZodNumber>;
     totalPurchases: z.ZodOptional<z.ZodNumber>;
+    totalSpent: z.ZodOptional<z.ZodNumber>;
+    notes: z.ZodOptional<z.ZodString>;
+    consentEmail: z.ZodOptional<z.ZodBoolean>;
+    consentSms: z.ZodOptional<z.ZodBoolean>;
+    consentWhatsapp: z.ZodOptional<z.ZodBoolean>;
+    consentGeneral: z.ZodOptional<z.ZodBoolean>;
     lastVisit: z.ZodOptional<z.ZodString>;
 }, "strip", z.ZodTypeAny, {
     email?: string | undefined;
+    notes?: string | undefined;
     firstName?: string | undefined;
     lastName?: string | undefined;
     phone?: string | undefined;
+    whatsapp?: string | undefined;
     preferences?: string | undefined;
+    sizes?: string | undefined;
+    birthday?: string | undefined;
     vipLevel?: string | undefined;
+    consentEmail?: boolean | undefined;
+    consentSms?: boolean | undefined;
+    consentWhatsapp?: boolean | undefined;
+    consentGeneral?: boolean | undefined;
+    loyaltyPoints?: number | undefined;
     totalPurchases?: number | undefined;
+    totalSpent?: number | undefined;
     lastVisit?: string | undefined;
 }, {
     email?: string | undefined;
+    notes?: string | undefined;
     firstName?: string | undefined;
     lastName?: string | undefined;
     phone?: string | undefined;
+    whatsapp?: string | undefined;
     preferences?: string | undefined;
+    sizes?: string | undefined;
+    birthday?: string | undefined;
     vipLevel?: string | undefined;
+    consentEmail?: boolean | undefined;
+    consentSms?: boolean | undefined;
+    consentWhatsapp?: boolean | undefined;
+    consentGeneral?: boolean | undefined;
+    loyaltyPoints?: number | undefined;
     totalPurchases?: number | undefined;
+    totalSpent?: number | undefined;
     lastVisit?: string | undefined;
 }>;
 export declare const clientInteractionSchema: z.ZodObject<{
-    type: z.ZodOptional<z.ZodEnum<["VISIT", "CALL", "EMAIL", "EVENT"]>>;
+    type: z.ZodOptional<z.ZodEnum<["VISIT", "CALL", "EMAIL", "SMS", "WHATSAPP", "EVENT"]>>;
+    channel: z.ZodOptional<z.ZodString>;
     notes: z.ZodOptional<z.ZodString>;
     purchaseAmount: z.ZodOptional<z.ZodNumber>;
+    date: z.ZodOptional<z.ZodString>;
 }, "strip", z.ZodTypeAny, {
-    type?: "VISIT" | "CALL" | "EMAIL" | "EVENT" | undefined;
+    type?: "VISIT" | "CALL" | "EMAIL" | "SMS" | "WHATSAPP" | "EVENT" | undefined;
+    date?: string | undefined;
     notes?: string | undefined;
+    channel?: string | undefined;
     purchaseAmount?: number | undefined;
 }, {
-    type?: "VISIT" | "CALL" | "EMAIL" | "EVENT" | undefined;
+    type?: "VISIT" | "CALL" | "EMAIL" | "SMS" | "WHATSAPP" | "EVENT" | undefined;
+    date?: string | undefined;
     notes?: string | undefined;
+    channel?: string | undefined;
     purchaseAmount?: number | undefined;
 }>;
 export declare const clientTaskSchema: z.ZodObject<{
@@ -2136,6 +2504,56 @@ export declare const clientTaskSchema: z.ZodObject<{
     title: string;
     status?: "OPEN" | "CANCELLED" | "DONE" | undefined;
     dueDate?: string | undefined;
+}>;
+export declare const clientAppointmentCreateSchema: z.ZodObject<{
+    clientId: z.ZodOptional<z.ZodString>;
+    storeId: z.ZodString;
+    type: z.ZodOptional<z.ZodEnum<["BERATUNG", "STYLE_BERATUNG", "VIP_EVENT", "PERSONAL_SHOPPING", "ANPROBE", "SONSTIGES"]>>;
+    title: z.ZodString;
+    notes: z.ZodOptional<z.ZodString>;
+    startsAt: z.ZodString;
+    endsAt: z.ZodString;
+}, "strip", z.ZodTypeAny, {
+    title: string;
+    storeId: string;
+    startsAt: string;
+    endsAt: string;
+    type?: "BERATUNG" | "STYLE_BERATUNG" | "VIP_EVENT" | "PERSONAL_SHOPPING" | "ANPROBE" | "SONSTIGES" | undefined;
+    notes?: string | undefined;
+    clientId?: string | undefined;
+}, {
+    title: string;
+    storeId: string;
+    startsAt: string;
+    endsAt: string;
+    type?: "BERATUNG" | "STYLE_BERATUNG" | "VIP_EVENT" | "PERSONAL_SHOPPING" | "ANPROBE" | "SONSTIGES" | undefined;
+    notes?: string | undefined;
+    clientId?: string | undefined;
+}>;
+export declare const clientAppointmentUpdateSchema: z.ZodObject<{
+    clientId: z.ZodOptional<z.ZodString>;
+    type: z.ZodOptional<z.ZodString>;
+    title: z.ZodOptional<z.ZodString>;
+    notes: z.ZodOptional<z.ZodString>;
+    startsAt: z.ZodOptional<z.ZodString>;
+    endsAt: z.ZodOptional<z.ZodString>;
+    status: z.ZodOptional<z.ZodEnum<["GEPLANT", "BESTAETIGT", "ABGESCHLOSSEN", "ABGESAGT"]>>;
+}, "strip", z.ZodTypeAny, {
+    type?: string | undefined;
+    status?: "GEPLANT" | "BESTAETIGT" | "ABGESCHLOSSEN" | "ABGESAGT" | undefined;
+    title?: string | undefined;
+    notes?: string | undefined;
+    clientId?: string | undefined;
+    startsAt?: string | undefined;
+    endsAt?: string | undefined;
+}, {
+    type?: string | undefined;
+    status?: "GEPLANT" | "BESTAETIGT" | "ABGESCHLOSSEN" | "ABGESAGT" | undefined;
+    title?: string | undefined;
+    notes?: string | undefined;
+    clientId?: string | undefined;
+    startsAt?: string | undefined;
+    endsAt?: string | undefined;
 }>;
 export declare const stockCalloutCreateSchema: z.ZodObject<{
     sku: z.ZodString;
@@ -2160,20 +2578,46 @@ export declare const stockCalloutCreateSchema: z.ZodObject<{
     urgency?: "LOW" | "HIGH" | "CRITICAL" | "NORMAL" | undefined;
 }>;
 export declare const stockCalloutUpdateSchema: z.ZodObject<{
-    status: z.ZodOptional<z.ZodEnum<["OPEN", "ORDERED", "RECEIVED", "CANCELLED"]>>;
+    status: z.ZodOptional<z.ZodEnum<["OPEN", "ORDERED", "RECEIVED", "CANCELLED", "OFFERED", "TRANSFER", "RESOLVED"]>>;
     currentStock: z.ZodOptional<z.ZodNumber>;
     requestedQty: z.ZodOptional<z.ZodNumber>;
     urgency: z.ZodOptional<z.ZodEnum<["LOW", "NORMAL", "HIGH", "CRITICAL"]>>;
 }, "strip", z.ZodTypeAny, {
-    status?: "OPEN" | "CANCELLED" | "ORDERED" | "RECEIVED" | undefined;
+    status?: "OPEN" | "RESOLVED" | "CANCELLED" | "ORDERED" | "RECEIVED" | "OFFERED" | "TRANSFER" | undefined;
     currentStock?: number | undefined;
     requestedQty?: number | undefined;
     urgency?: "LOW" | "HIGH" | "CRITICAL" | "NORMAL" | undefined;
 }, {
-    status?: "OPEN" | "CANCELLED" | "ORDERED" | "RECEIVED" | undefined;
+    status?: "OPEN" | "RESOLVED" | "CANCELLED" | "ORDERED" | "RECEIVED" | "OFFERED" | "TRANSFER" | undefined;
     currentStock?: number | undefined;
     requestedQty?: number | undefined;
     urgency?: "LOW" | "HIGH" | "CRITICAL" | "NORMAL" | undefined;
+}>;
+export declare const stockCalloutOfferSchema: z.ZodObject<{
+    availableQty: z.ZodNumber;
+    notes: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    availableQty: number;
+    notes?: string | undefined;
+}, {
+    availableQty: number;
+    notes?: string | undefined;
+}>;
+export declare const stockBoardItemCreateSchema: z.ZodObject<{
+    sku: z.ZodString;
+    productName: z.ZodString;
+    availableQty: z.ZodNumber;
+    notes: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    sku: string;
+    productName: string;
+    availableQty: number;
+    notes?: string | undefined;
+}, {
+    sku: string;
+    productName: string;
+    availableQty: number;
+    notes?: string | undefined;
 }>;
 export declare const customerOrderCreateSchema: z.ZodObject<{
     orderNumber: z.ZodString;
@@ -2222,5 +2666,61 @@ export declare const orderStatusUpdateSchema: z.ZodObject<{
 }, {
     status: string;
     notes?: string | undefined;
+}>;
+export declare const frSettingsSchema: z.ZodObject<{
+    maxItems: z.ZodOptional<z.ZodNumber>;
+    warningMinutes: z.ZodOptional<z.ZodNumber>;
+    alertMinutes: z.ZodOptional<z.ZodNumber>;
+}, "strip", z.ZodTypeAny, {
+    maxItems?: number | undefined;
+    warningMinutes?: number | undefined;
+    alertMinutes?: number | undefined;
+}, {
+    maxItems?: number | undefined;
+    warningMinutes?: number | undefined;
+    alertMinutes?: number | undefined;
+}>;
+export declare const frRoomCreateSchema: z.ZodObject<{
+    number: z.ZodNumber;
+    name: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    number: number;
+    name?: string | undefined;
+}, {
+    number: number;
+    name?: string | undefined;
+}>;
+export declare const frCheckInSchema: z.ZodObject<{
+    roomId: z.ZodString;
+    staffId: z.ZodOptional<z.ZodString>;
+    itemsIn: z.ZodNumber;
+    notes: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    roomId: string;
+    itemsIn: number;
+    notes?: string | undefined;
+    staffId?: string | undefined;
+}, {
+    roomId: string;
+    itemsIn: number;
+    notes?: string | undefined;
+    staffId?: string | undefined;
+}>;
+export declare const frCheckOutSchema: z.ZodObject<{
+    itemsReturned: z.ZodNumber;
+    itemsPurchased: z.ZodNumber;
+}, "strip", z.ZodTypeAny, {
+    itemsReturned: number;
+    itemsPurchased: number;
+}, {
+    itemsReturned: number;
+    itemsPurchased: number;
+}>;
+export declare const frAddItemsSchema: z.ZodObject<{
+    additionalItems: z.ZodNumber;
+}, "strip", z.ZodTypeAny, {
+    additionalItems: number;
+}, {
+    additionalItems: number;
 }>;
 //# sourceMappingURL=validators.d.ts.map
