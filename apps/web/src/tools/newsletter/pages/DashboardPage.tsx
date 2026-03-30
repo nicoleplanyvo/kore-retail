@@ -204,7 +204,7 @@ export function DashboardPage() {
               {topByViews.map((n, i) => (
                 <Link
                   key={n.id}
-                  to={`/tools/newsletter/${n.id}`}
+                  to={`/app/tools/newsletter/${n.id}`}
                   className="flex items-center gap-md p-md bg-kore-bg border border-kore-border hover:border-kore-ink transition-colors"
                 >
                   <div

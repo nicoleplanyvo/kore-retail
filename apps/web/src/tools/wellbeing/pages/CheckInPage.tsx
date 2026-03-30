@@ -82,7 +82,7 @@ export function CheckInPage() {
         notes: form.notes || undefined,
         isAnonymous: form.isAnonymous,
       },
-      { onSuccess: () => navigate('/tools/wellbeing') },
+      { onSuccess: () => navigate('/app/tools/wellbeing') },
     );
   };
 

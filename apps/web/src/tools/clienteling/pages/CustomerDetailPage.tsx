@@ -58,7 +58,7 @@ export function CustomerDetailPage() {
   };
 
   const handleDelete = () => {
-    deleteCustomer.mutate(customer.id, { onSuccess: () => navigate('/tools/clienteling') });
+    deleteCustomer.mutate(customer.id, { onSuccess: () => navigate('/app/tools/clienteling') });
   };
 
   const handleInteraction = (e: React.FormEvent) => {

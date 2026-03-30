@@ -46,7 +46,7 @@ export function ResultsPage() {
     <div className="p-xl max-w-5xl">
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
-        <Link to={`/tools/pulse-survey/surveys/${id}`} className="text-kore-mid hover:text-kore-ink">
+        <Link to={`/app/tools/pulse-survey/surveys/${id}`} className="text-kore-mid hover:text-kore-ink">
           <ArrowLeft size={20} />
         </Link>
         <div className="flex-1">

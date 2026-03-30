@@ -132,7 +132,7 @@ export function TaskDetailPage() {
   const handleDelete = async () => {
     if (!confirm('Aufgabe wirklich löschen?')) return;
     await deleteTask.mutateAsync(task.id);
-    navigate('/tools/multi-store/tasks');
+    navigate('/app/tools/multi-store/tasks');
   };
 
   const toggleExpanded = (storeId: string) => {

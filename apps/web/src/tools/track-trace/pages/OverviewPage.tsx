@@ -153,7 +153,7 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-md">
           <Link
-            to="/tools/track-trace/dashboard"
+            to="/app/tools/track-trace/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-kore-ink text-small hover:bg-kore-bg transition-colors"
           >
             <BarChart3 size={16} /> Dashboard
@@ -377,7 +377,7 @@ export function OverviewPage() {
             {orders.map((o: any) => (
               <Link
                 key={o.id}
-                to={`/tools/track-trace/detail/${o.id}`}
+                to={`/app/tools/track-trace/detail/${o.id}`}
                 className="block bg-kore-white border border-kore-border p-md hover:border-kore-ink transition-colors"
               >
                 <div className="flex items-center justify-between">

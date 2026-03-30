@@ -119,14 +119,14 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-md">
           <Link
-            to="/tools/loss-prevention/dashboard"
+            to="/app/tools/loss-prevention/dashboard"
             className="flex items-center gap-sm border border-kore-border px-lg py-md-sm text-small font-medium uppercase tracking-widest text-kore-ink hover:bg-kore-bg transition-colors"
           >
             <BarChart3 size={16} />
             Dashboard
           </Link>
           <Link
-            to="/tools/loss-prevention/report"
+            to="/app/tools/loss-prevention/report"
             className="flex items-center gap-sm bg-kore-ink text-kore-white px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"
           >
             <Plus size={16} />
@@ -264,7 +264,7 @@ export function OverviewPage() {
             Erfassen Sie Diebstähle, Schäden und andere Verluste, um Muster zu erkennen und Prävention zu verbessern.
           </p>
           <Link
-            to="/tools/loss-prevention/report"
+            to="/app/tools/loss-prevention/report"
             className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"
           >
             <Plus size={16} />
@@ -291,7 +291,7 @@ export function OverviewPage() {
                   <tr
                     key={inc.id}
                     className="border-b border-kore-border last:border-0 hover:bg-kore-bg cursor-pointer transition-colors"
-                    onClick={() => navigate(`/tools/loss-prevention/incident/${inc.id}`)}
+                    onClick={() => navigate(`/app/tools/loss-prevention/incident/${inc.id}`)}
                   >
                     <td className="px-lg py-md text-small text-kore-ink whitespace-nowrap">
                       {new Date(inc.incidentDate).toLocaleDateString('de-DE')}
@@ -329,7 +329,7 @@ export function OverviewPage() {
               <div
                 key={inc.id}
                 className="bg-kore-white border border-kore-border p-lg cursor-pointer hover:border-kore-brass transition-colors"
-                onClick={() => navigate(`/tools/loss-prevention/incident/${inc.id}`)}
+                onClick={() => navigate(`/app/tools/loss-prevention/incident/${inc.id}`)}
               >
                 <div className="flex items-center justify-between mb-sm">
                   <span className={`text-small font-medium px-sm py-px border ${CATEGORY_STYLES[inc.category] ?? CATEGORY_STYLES.OTHER}`}>

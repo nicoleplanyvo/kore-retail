@@ -100,7 +100,7 @@ export function DashboardPage() {
               <h2 className="font-display text-h3 text-kore-ink mb-lg flex items-center gap-sm"><BarChart3 size={18} /> Letzte Briefings</h2>
               <div className="divide-y divide-kore-border">
                 {(dash.recentBriefings as Array<any>).map((b: any) => (
-                  <Link key={b.id} to={`/tools/briefings/${b.id}`} className="flex items-center gap-lg py-md hover:bg-kore-bg transition-colors px-sm -mx-sm">
+                  <Link key={b.id} to={`/app/tools/briefings/${b.id}`} className="flex items-center gap-lg py-md hover:bg-kore-bg transition-colors px-sm -mx-sm">
                     <FileText size={16} className="text-kore-mid flex-shrink-0" />
                     <div className="flex-1 min-w-0">
                       <span className="text-body text-kore-ink truncate block">{b.title}</span>

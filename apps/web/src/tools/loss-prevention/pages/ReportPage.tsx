@@ -100,7 +100,7 @@ export function ReportPage() {
         anonymous,
         photoPath: photoPath || undefined,
       });
-      navigate('/tools/loss-prevention');
+      navigate('/app/tools/loss-prevention');
     } catch {
       // Error handled by mutation state
     }

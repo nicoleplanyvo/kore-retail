@@ -135,7 +135,7 @@ export function CreatePage() {
     }
     try {
       const result = await createHandover.mutateAsync(buildPayload());
-      navigate(`/tools/handover/${result.id}`);
+      navigate(`/app/tools/handover/${result.id}`);
     } catch (err: any) {
       setError(err.message || 'Fehler beim Speichern.');
     }
@@ -150,7 +150,7 @@ export function CreatePage() {
     try {
       const result = await createHandover.mutateAsync(buildPayload());
       await submitHandover.mutateAsync(result.id);
-      navigate(`/tools/handover/${result.id}`);
+      navigate(`/app/tools/handover/${result.id}`);
     } catch (err: any) {
       setError(err.message || 'Fehler beim Einreichen.');
     }

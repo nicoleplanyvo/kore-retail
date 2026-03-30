@@ -69,7 +69,7 @@ export function AlertsPage() {
                     <div className="flex gap-md text-small text-kore-mid flex-wrap">
                       <span>{TYPE_LABELS[a.type] ?? a.type}</span>
                       <Link
-                        to={`/tools/rm-dashboard/store/${a.storeId}`}
+                        to={`/app/tools/rm-dashboard/store/${a.storeId}`}
                         className="hover:text-kore-ink transition-colors"
                       >
                         {a.store}

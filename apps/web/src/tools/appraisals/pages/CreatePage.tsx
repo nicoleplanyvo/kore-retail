@@ -21,7 +21,7 @@ export function CreatePage() {
     e.preventDefault();
     create.mutate(
       { ...form, storeId: storeId || undefined },
-      { onSuccess: () => navigate('/tools/appraisals') },
+      { onSuccess: () => navigate('/app/tools/appraisals') },
     );
   };
 

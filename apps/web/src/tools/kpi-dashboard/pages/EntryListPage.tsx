@@ -20,7 +20,7 @@ export function EntryListPage() {
     <div className="p-xl max-w-5xl">
       <Breadcrumb items={[{ label: 'KPI Dashboard', href: '/app/tools/kpi' }, { label: 'Einträge' }]} />
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/kpi" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+        <Link to="/app/tools/kpi" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div>
           <h1 className="font-display text-h1 text-kore-ink">KPI-Einträge</h1>
           <p className="text-body text-kore-mid mt-xs">Tägliche Kennzahlen aller Stores</p>

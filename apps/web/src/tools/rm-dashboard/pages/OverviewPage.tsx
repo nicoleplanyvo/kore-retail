@@ -122,13 +122,13 @@ export function OverviewPage() {
             <Download size={14} /> CSV Export
           </button>
           <Link
-            to="/tools/rm-dashboard/ranking"
+            to="/app/tools/rm-dashboard/ranking"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors"
           >
             <Trophy size={14} /> Ranking
           </Link>
           <Link
-            to="/tools/rm-dashboard/alerts"
+            to="/app/tools/rm-dashboard/alerts"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors relative"
           >
             <AlertTriangle size={14} /> Alerts
@@ -139,7 +139,7 @@ export function OverviewPage() {
             )}
           </Link>
           <Link
-            to="/tools/rm-dashboard/trends"
+            to="/app/tools/rm-dashboard/trends"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors"
           >
             <TrendingUp size={14} /> Trends
@@ -302,7 +302,7 @@ export function OverviewPage() {
                 <option value="unitsSold">Stück verkauft</option>
               </select>
               <Link
-                to="/tools/rm-dashboard/ranking"
+                to="/app/tools/rm-dashboard/ranking"
                 className="text-small text-kore-brass hover:text-kore-ink transition-colors"
               >
                 Alle anzeigen
@@ -338,7 +338,7 @@ export function OverviewPage() {
                       <td className="text-center px-sm py-sm">{statusDot(r.status)}</td>
                       <td className="px-md py-sm">
                         <Link
-                          to={`/tools/rm-dashboard/store/${r.storeId}`}
+                          to={`/app/tools/rm-dashboard/store/${r.storeId}`}
                           className="text-kore-ink hover:text-kore-brass transition-colors font-medium"
                         >
                           {r.storeName}

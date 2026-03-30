@@ -141,7 +141,7 @@ export function IncidentDetailPage() {
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
         <Link
-          to="/tools/loss-prevention"
+          to="/app/tools/loss-prevention"
           className="text-kore-mid hover:text-kore-ink transition-colors"
         >
           <ArrowLeft size={20} />

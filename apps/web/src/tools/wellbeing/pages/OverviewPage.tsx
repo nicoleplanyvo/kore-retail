@@ -52,25 +52,25 @@ export function OverviewPage() {
         </div>
         <div className="flex gap-sm">
           <Link
-            to="/tools/wellbeing/resources"
+            to="/app/tools/wellbeing/resources"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors"
           >
             <BookOpen size={16} /> Ressourcen
           </Link>
           <Link
-            to="/tools/wellbeing/trends"
+            to="/app/tools/wellbeing/trends"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors"
           >
             <TrendingUp size={16} /> Trends
           </Link>
           <Link
-            to="/tools/wellbeing/dashboard"
+            to="/app/tools/wellbeing/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors"
           >
             <BarChart3 size={16} /> Dashboard
           </Link>
           <Link
-            to="/tools/wellbeing/checkin"
+            to="/app/tools/wellbeing/checkin"
             className="flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90"
           >
             <Plus size={16} /> Check-In
@@ -107,7 +107,7 @@ export function OverviewPage() {
             Starten Sie den ersten Stimmungs-Check-In für Ihr Team.
           </p>
           <Link
-            to="/tools/wellbeing/checkin"
+            to="/app/tools/wellbeing/checkin"
             className="flex items-center gap-xs px-lg py-sm bg-kore-ink text-kore-white text-small hover:opacity-90"
           >
             <Plus size={16} /> Ersten Check-In starten

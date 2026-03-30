@@ -68,7 +68,7 @@ export function DashboardPage() {
           {data.completedChallenges.map((ch: any) => (
             <Link
               key={ch.id}
-              to={`/tools/challenges/${ch.id}`}
+              to={`/app/tools/challenges/${ch.id}`}
               className="block bg-kore-white border border-kore-border p-lg hover:border-kore-ink transition-colors"
             >
               <div className="flex items-center justify-between mb-md">

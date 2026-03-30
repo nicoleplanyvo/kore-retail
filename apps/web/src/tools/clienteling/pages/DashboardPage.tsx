@@ -73,7 +73,7 @@ export function DashboardPage() {
           ) : (
             <div className="space-y-sm">
               {dashboard.topCustomers.map((c: any, i: number) => (
-                <Link key={c.id} to={`/tools/clienteling/customers/${c.id}`} className="flex items-center gap-md p-sm hover:bg-kore-bg transition-colors">
+                <Link key={c.id} to={`/app/tools/clienteling/customers/${c.id}`} className="flex items-center gap-md p-sm hover:bg-kore-bg transition-colors">
                   <span className="w-6 text-small text-kore-mid text-right">{i + 1}.</span>
                   <div className="flex-1">
                     <span className="font-medium text-kore-ink">{c.name}</span>

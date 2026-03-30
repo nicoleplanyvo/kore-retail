@@ -492,7 +492,7 @@ export function DashboardPage() {
                 {dashboard.urgentOpen.map((r) => (
                   <Link
                     key={r.id}
-                    to={`/tools/maintenance/requests/${r.id}`}
+                    to={`/app/tools/maintenance/requests/${r.id}`}
                     className="flex items-center justify-between p-md border border-kore-border hover:border-red-300 transition-colors"
                   >
                     <div>

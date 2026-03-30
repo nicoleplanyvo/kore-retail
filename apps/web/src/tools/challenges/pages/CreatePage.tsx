@@ -53,7 +53,7 @@ export function CreatePage() {
     if (form.rewardType) data.rewardType = form.rewardType;
 
     createChallenge.mutate(data, {
-      onSuccess: (result: any) => navigate(`/tools/challenges/${result.id}`),
+      onSuccess: (result: any) => navigate(`/app/tools/challenges/${result.id}`),
     });
   };
 

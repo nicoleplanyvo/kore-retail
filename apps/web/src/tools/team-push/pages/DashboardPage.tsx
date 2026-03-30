@@ -311,7 +311,7 @@ export function DashboardPage() {
           {dashboard?.bestRead && (
             <div className="bg-kore-white border border-kore-border p-lg">
               <h2 className="font-display text-h3 text-kore-ink mb-md">Meistgelesene Nachricht</h2>
-              <Link to={`/tools/team-push/messages/${dashboard.bestRead.id}`} className="block hover:opacity-80 transition-opacity">
+              <Link to={`/app/tools/team-push/messages/${dashboard.bestRead.id}`} className="block hover:opacity-80 transition-opacity">
                 <div className="text-body text-kore-ink font-medium">{dashboard.bestRead.title}</div>
                 <div className="flex gap-md text-small text-kore-mid mt-sm">
                   <span className="text-emerald-600 font-medium">{dashboard.bestRead.readRate}% Leserate</span>

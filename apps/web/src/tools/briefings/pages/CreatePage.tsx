@@ -75,7 +75,7 @@ export function CreatePage() {
     const content = sections.map((s) => `## ${s.title}\n${s.content}`).join('\n\n');
     create.mutate(
       { title, type, date, storeId: sid, sections, content, scheduledFor: scheduledFor || undefined },
-      { onSuccess: () => navigate('/tools/briefings') },
+      { onSuccess: () => navigate('/app/tools/briefings') },
     );
   };
 

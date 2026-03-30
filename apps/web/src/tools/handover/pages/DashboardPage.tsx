@@ -208,7 +208,7 @@ export function DashboardPage() {
                 {dashboard.unacknowledged.map((h: any) => (
                   <Link
                     key={h.id}
-                    to={`/tools/handover/${h.id}`}
+                    to={`/app/tools/handover/${h.id}`}
                     className="flex items-center justify-between p-md border border-kore-border hover:border-kore-brass transition-colors"
                   >
                     <div className="flex-1 min-w-0">

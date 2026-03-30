@@ -31,7 +31,7 @@ export function MessageDetailPage() {
   const handleDelete = () => {
     if (!id) return;
     if (!confirm('Nachricht wirklich löschen?')) return;
-    deleteMessage.mutate(id, { onSuccess: () => navigate('/tools/team-push') });
+    deleteMessage.mutate(id, { onSuccess: () => navigate('/app/tools/team-push') });
   };
 
   const formatDate = (iso: string) => {

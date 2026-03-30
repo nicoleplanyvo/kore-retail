@@ -50,10 +50,10 @@ export function OverviewPage() {
           <p className="text-body text-kore-mid mt-xs">Zonen-Zuweisung, Live-Status und Kundenfrequenz-Abgleich</p>
         </div>
         <div className="flex gap-sm">
-          <Link to="/tools/live-floor/zones" className="flex items-center gap-sm px-lg py-md-sm border border-kore-border text-small hover:bg-kore-bg transition-colors">
+          <Link to="/app/tools/live-floor/zones" className="flex items-center gap-sm px-lg py-md-sm border border-kore-border text-small hover:bg-kore-bg transition-colors">
             <LayoutGrid size={16} /> Zonen verwalten
           </Link>
-          <Link to="/tools/live-floor/dashboard" className="flex items-center gap-sm bg-kore-ink text-kore-white px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
+          <Link to="/app/tools/live-floor/dashboard" className="flex items-center gap-sm bg-kore-ink text-kore-white px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
             <BarChart3 size={16} /> Dashboard
           </Link>
         </div>
@@ -106,7 +106,7 @@ export function OverviewPage() {
                   {r.staffCount}/{r.idealStaff} MA | {r.customerCount} Kunden | Deficit: +{r.deficit} MA
                 </span>
               </div>
-              <Link to="/tools/live-floor/zones" className="text-small text-kore-brass hover:underline flex items-center gap-xs">
+              <Link to="/app/tools/live-floor/zones" className="text-small text-kore-brass hover:underline flex items-center gap-xs">
                 Zuweisen <ChevronRight size={14} />
               </Link>
             </div>
@@ -122,7 +122,7 @@ export function OverviewPage() {
           <MapPin size={48} className="text-kore-faint mb-lg" />
           <h2 className="font-display text-h2 text-kore-ink mb-md">Keine Zonen definiert</h2>
           <p className="text-body text-kore-mid max-w-md mb-xl">Erstellen Sie Verkaufsflächen-Zonen, um Personal zuzuweisen und die Kundenfrequenz zu überwachen.</p>
-          <Link to="/tools/live-floor/zones" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
+          <Link to="/app/tools/live-floor/zones" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
             <LayoutGrid size={16} /> Zonen erstellen
           </Link>
         </div>

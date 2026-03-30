@@ -83,7 +83,7 @@ export function DashboardPage() {
                 {dashboard.overdue.map((item: any) => (
                   <Link
                     key={item.id}
-                    to={`/tools/checklisten/checklists/${item.id}`}
+                    to={`/app/tools/checklisten/checklists/${item.id}`}
                     className="flex items-center justify-between p-md hover:bg-red-50 transition-colors"
                   >
                     <div>
@@ -109,7 +109,7 @@ export function DashboardPage() {
                 {dashboard.recentHistory.map((item: any) => (
                   <Link
                     key={item.id}
-                    to={`/tools/checklisten/checklists/${item.id}`}
+                    to={`/app/tools/checklisten/checklists/${item.id}`}
                     className="flex items-center justify-between p-md hover:bg-kore-bg transition-colors"
                   >
                     <div className="flex items-center gap-md">

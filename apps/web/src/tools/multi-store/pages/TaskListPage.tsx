@@ -197,7 +197,7 @@ export function TaskListPage() {
             return (
               <Link
                 key={task.id}
-                to={`/tools/multi-store/tasks/${task.id}`}
+                to={`/app/tools/multi-store/tasks/${task.id}`}
                 className="block bg-kore-white border border-kore-border p-md hover:border-kore-brass transition-colors"
               >
                 <div className="flex items-start justify-between gap-md">

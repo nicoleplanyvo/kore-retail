@@ -134,7 +134,7 @@ export function TaskCreatePage() {
       }
 
       await createTask.mutateAsync(payload as any);
-      navigate('/tools/multi-store/tasks');
+      navigate('/app/tools/multi-store/tasks');
     } catch (err: any) {
       setError(err.message || 'Fehler beim Erstellen.');
     }

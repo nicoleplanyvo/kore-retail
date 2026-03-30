@@ -94,7 +94,7 @@ export function DashboardPage() {
               {recentSurveys.map((sv: any) => (
                 <tr key={sv.id} className="border-b border-kore-border last:border-0 hover:bg-kore-bg/50 transition-colors">
                   <td className="px-md py-sm">
-                    <Link to={`/tools/pulse-survey/surveys/${sv.id}`} className="text-kore-ink font-medium hover:text-kore-brass">
+                    <Link to={`/app/tools/pulse-survey/surveys/${sv.id}`} className="text-kore-ink font-medium hover:text-kore-brass">
                       {sv.title}
                     </Link>
                   </td>

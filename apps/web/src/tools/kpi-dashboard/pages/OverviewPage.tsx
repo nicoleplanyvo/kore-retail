@@ -327,8 +327,8 @@ export function OverviewPage() {
             params={{ dateFrom: period.from, dateTo: period.to, ...(storeId ? { storeId } : {}) }}
             filename={`kpi-report-${period.from}.pdf`}
           />
-          <Link to="/tools/kpi/trends" className="flex items-center gap-sm border border-kore-border text-kore-ink px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors"><TrendingUp size={16} /> Trends</Link>
-          <Link to="/tools/kpi/entries" className="flex items-center gap-sm bg-kore-ink text-kore-white px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"><List size={16} /> Alle Einträge</Link>
+          <Link to="/app/tools/kpi/trends" className="flex items-center gap-sm border border-kore-border text-kore-ink px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors"><TrendingUp size={16} /> Trends</Link>
+          <Link to="/app/tools/kpi/entries" className="flex items-center gap-sm bg-kore-ink text-kore-white px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"><List size={16} /> Alle Einträge</Link>
         </div>
       </div>
 
@@ -475,7 +475,7 @@ export function OverviewPage() {
           <p className="text-small text-kore-faint mb-xl">
             Vorjahreszeitraum: {yoy.lastYear.totalEntries} Einträge verfügbar
           </p>
-          <Link to="/tools/kpi/entries" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"><List size={16} /> KPIs erfassen</Link>
+          <Link to="/app/tools/kpi/entries" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"><List size={16} /> KPIs erfassen</Link>
         </div>
       ) : (
         /* No data at all */
@@ -483,7 +483,7 @@ export function OverviewPage() {
           <BarChart3 size={48} className="text-kore-faint mb-lg" />
           <h2 className="font-display text-h2 text-kore-ink mb-md">Noch keine KPI-Daten</h2>
           <p className="text-body text-kore-mid max-w-md mb-xl">Erfassen Sie tägliche Kennzahlen, um Ihren Store-Performance-Überblick mit Vorjahresvergleich zu starten.</p>
-          <Link to="/tools/kpi/entries" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"><List size={16} /> KPIs erfassen</Link>
+          <Link to="/app/tools/kpi/entries" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"><List size={16} /> KPIs erfassen</Link>
         </div>
       )}
     </div>

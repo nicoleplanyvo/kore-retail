@@ -117,14 +117,14 @@ export function EditorPage() {
   const handleArchive = () => {
     if (!confirm('Newsletter archivieren?')) return;
     archiveNl.mutate(newsletter.id, {
-      onSuccess: () => navigate('/tools/newsletter'),
+      onSuccess: () => navigate('/app/tools/newsletter'),
     });
   };
 
   const handleDuplicate = () => {
     duplicateNl.mutate(newsletter.id, {
       onSuccess: (data: any) => {
-        if (data?.id) navigate(`/tools/newsletter/${data.id}`);
+        if (data?.id) navigate(`/app/tools/newsletter/${data.id}`);
       },
     });
   };

@@ -33,10 +33,10 @@ export function OverviewPage() {
           <p className="text-body text-kore-mid mt-xs">Strukturierte Tagesinformationen für das Team erstellen und lesen.</p>
         </div>
         <div className="flex items-center gap-md">
-          <Link to="/tools/briefings/dashboard" className="flex items-center gap-xs px-md py-sm border border-kore-border text-kore-ink text-small hover:border-kore-ink transition-colors">
+          <Link to="/app/tools/briefings/dashboard" className="flex items-center gap-xs px-md py-sm border border-kore-border text-kore-ink text-small hover:border-kore-ink transition-colors">
             <BarChart3 size={16} /> Dashboard
           </Link>
-          <Link to="/tools/briefings/create" className="flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90">
+          <Link to="/app/tools/briefings/create" className="flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90">
             <Plus size={16} /> Neues Briefing
           </Link>
         </div>
@@ -68,7 +68,7 @@ export function OverviewPage() {
             </div>
             <span className="text-small text-kore-brass font-medium uppercase tracking-widest">{TYPE_LABELS[todayBriefing.type] ?? todayBriefing.type}</span>
           </div>
-          <Link to={`/tools/briefings/${todayBriefing.id}`} className="block">
+          <Link to={`/app/tools/briefings/${todayBriefing.id}`} className="block">
             <h2 className="font-display text-h2 text-kore-ink mb-sm hover:text-kore-brass transition-colors">{todayBriefing.title}</h2>
           </Link>
           <div className="flex items-center gap-lg text-small text-kore-mid mb-lg">
@@ -84,7 +84,7 @@ export function OverviewPage() {
             >
               <CheckCircle size={16} /> Gelesen bestätigen
             </button>
-            <Link to={`/tools/briefings/${todayBriefing.id}`} className="px-md py-sm border border-kore-border text-kore-ink text-small hover:border-kore-ink transition-colors">
+            <Link to={`/app/tools/briefings/${todayBriefing.id}`} className="px-md py-sm border border-kore-border text-kore-ink text-small hover:border-kore-ink transition-colors">
               Details ansehen
             </Link>
           </div>
@@ -117,7 +117,7 @@ export function OverviewPage() {
           <FileText size={48} className="text-kore-faint mb-lg" />
           <h2 className="font-display text-h2 text-kore-ink mb-md">Noch keine Briefings</h2>
           <p className="text-body text-kore-mid max-w-md mb-xl">Erstellen Sie das erste Tages-Briefing für Ihr Team.</p>
-          <Link to="/tools/briefings/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
+          <Link to="/app/tools/briefings/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
             <Plus size={16} /> Briefing erstellen
           </Link>
         </div>
@@ -126,7 +126,7 @@ export function OverviewPage() {
           <h2 className="font-display text-h3 text-kore-ink mb-md">Alle Briefings</h2>
           <div className="space-y-sm">
             {briefings.map((b: any) => (
-              <Link key={b.id} to={`/tools/briefings/${b.id}`} className="block bg-kore-white border border-kore-border p-md hover:border-kore-ink transition-colors">
+              <Link key={b.id} to={`/app/tools/briefings/${b.id}`} className="block bg-kore-white border border-kore-border p-md hover:border-kore-ink transition-colors">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-sm">
                     {TYPE_ICONS[b.type] ?? <FileText size={16} className="text-kore-mid" />}

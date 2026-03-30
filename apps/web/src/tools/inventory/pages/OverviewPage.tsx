@@ -81,7 +81,7 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-md">
           <Link
-            to="/tools/inventory/dashboard"
+            to="/app/tools/inventory/dashboard"
             className="flex items-center gap-sm border border-kore-border px-lg py-md-sm text-small font-medium uppercase tracking-widest text-kore-ink hover:bg-kore-bg transition-colors"
           >
             <BarChart3 size={16} /> Dashboard
@@ -155,7 +155,7 @@ export function OverviewPage() {
               return (
                 <button
                   key={c.id}
-                  onClick={() => navigate(`/tools/inventory/count/${c.id}`)}
+                  onClick={() => navigate(`/app/tools/inventory/count/${c.id}`)}
                   className="w-full text-left block bg-kore-white border border-kore-border p-lg hover:border-kore-brass transition-colors"
                 >
                   <div className="flex items-center justify-between">
@@ -244,7 +244,7 @@ export function OverviewPage() {
           onClose={() => setShowCreateModal(false)}
           onCreated={(id) => {
             setShowCreateModal(false);
-            navigate(`/tools/inventory/count/${id}`);
+            navigate(`/app/tools/inventory/count/${id}`);
           }}
         />
       )}

@@ -154,7 +154,7 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-md">
           <Link
-            to="/tools/maintenance/dashboard"
+            to="/app/tools/maintenance/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-kore-ink text-small hover:bg-kore-bg transition-colors"
           >
             <BarChart3 size={16} /> Dashboard
@@ -341,7 +341,7 @@ export function OverviewPage() {
               return (
                 <Link
                   key={r.id}
-                  to={`/tools/maintenance/requests/${r.id}`}
+                  to={`/app/tools/maintenance/requests/${r.id}`}
                   className="block bg-kore-white border border-kore-border p-lg hover:border-kore-brass transition-colors"
                 >
                   <div className="flex items-start justify-between gap-md">

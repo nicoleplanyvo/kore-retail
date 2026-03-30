@@ -128,7 +128,7 @@ export function DashboardPage() {
                 {dashboard.dueSoon.map((item: any) => (
                   <Link
                     key={item.id}
-                    to={`/tools/appraisals/appraisals/${item.id}`}
+                    to={`/app/tools/appraisals/appraisals/${item.id}`}
                     className="flex items-center justify-between p-md border border-kore-border hover:border-kore-ink transition-colors"
                   >
                     <span className="text-body text-kore-ink">{item.employeeName}</span>

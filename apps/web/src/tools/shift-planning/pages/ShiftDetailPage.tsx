@@ -37,7 +37,7 @@ export function ShiftDetailPage() {
 
   const handleDelete = () => {
     if (!confirm('Schicht wirklich löschen?')) return;
-    deleteShift.mutate(id!, { onSuccess: () => navigate('/tools/shift-planning') });
+    deleteShift.mutate(id!, { onSuccess: () => navigate('/app/tools/shift-planning') });
   };
 
   const handleSwapRequest = () => {

@@ -173,7 +173,7 @@ export function AppointmentsPage() {
                           {a.store && <span>{a.store.name}</span>}
                           {a.advisor && <span>Berater: {a.advisor.name}</span>}
                           {a.client && (
-                            <Link to={`/tools/clienteling/customers/${a.client.id}`} className="flex items-center gap-xs hover:text-kore-ink transition-colors">
+                            <Link to={`/app/tools/clienteling/customers/${a.client.id}`} className="flex items-center gap-xs hover:text-kore-ink transition-colors">
                               {a.client.firstName} {a.client.lastName}
                               {a.client.vipLevel && <Star size={10} className="text-amber-500" />}
                             </Link>

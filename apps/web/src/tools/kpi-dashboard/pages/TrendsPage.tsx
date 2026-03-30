@@ -29,7 +29,7 @@ export function TrendsPage() {
       <Breadcrumb items={[{ label: 'KPI Dashboard', href: '/app/tools/kpi' }, { label: 'Trends' }]} />
       <div className="flex items-center justify-between mb-2xl">
         <div className="flex items-center gap-md">
-          <Link to="/tools/kpi" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+          <Link to="/app/tools/kpi" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
           <div>
             <h1 className="font-display text-h1 text-kore-ink">KPI-Trends</h1>
             <p className="text-body text-kore-mid mt-xs">Entwicklung der Kennzahlen über Zeit</p>

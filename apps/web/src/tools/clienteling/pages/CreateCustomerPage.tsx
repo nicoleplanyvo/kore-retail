@@ -24,7 +24,7 @@ export function CreateCustomerPage() {
     if (!data['vipLevel']) delete data['vipLevel'];
     if (!data['birthday']) delete data['birthday'];
     create.mutate(data, {
-      onSuccess: () => navigate('/tools/clienteling'),
+      onSuccess: () => navigate('/app/tools/clienteling'),
     });
   };
 

@@ -231,7 +231,7 @@ export function DashboardPage() {
                 {dashboard.recentCompletions.map((c: any) => (
                   <Link
                     key={c.id}
-                    to={`/tools/onboarding/journeys/${c.id}`}
+                    to={`/app/tools/onboarding/journeys/${c.id}`}
                     className="flex items-center gap-md hover:bg-kore-bg p-sm -mx-sm transition-colors"
                   >
                     <CheckCircle size={14} className="text-blue-500 flex-shrink-0" />

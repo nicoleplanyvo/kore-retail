@@ -60,13 +60,13 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-md">
           <Link
-            to="/tools/onboarding/dashboard"
+            to="/app/tools/onboarding/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-kore-ink text-small hover:bg-kore-bg transition-colors"
           >
             <BarChart3 size={16} /> Dashboard
           </Link>
           <Link
-            to="/tools/onboarding/journeys"
+            to="/app/tools/onboarding/journeys"
             className="flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90"
           >
             <Plus size={16} /> Alle Journeys
@@ -151,7 +151,7 @@ export function OverviewPage() {
       {/* Navigation cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-lg mb-2xl">
         <Link
-          to="/tools/onboarding/templates"
+          to="/app/tools/onboarding/templates"
           className="bg-kore-white border border-kore-border p-lg hover:border-kore-ink transition-colors"
         >
           <FileText size={20} className="text-kore-brass mb-sm" />
@@ -161,7 +161,7 @@ export function OverviewPage() {
           </p>
         </Link>
         <Link
-          to="/tools/onboarding/journeys"
+          to="/app/tools/onboarding/journeys"
           className="bg-kore-white border border-kore-border p-lg hover:border-kore-ink transition-colors"
         >
           <UserPlus size={20} className="text-kore-brass mb-sm" />
@@ -171,7 +171,7 @@ export function OverviewPage() {
           </p>
         </Link>
         <Link
-          to="/tools/onboarding/dashboard"
+          to="/app/tools/onboarding/dashboard"
           className="bg-kore-white border border-kore-border p-lg hover:border-kore-ink transition-colors"
         >
           <BarChart3 size={20} className="text-kore-brass mb-sm" />
@@ -191,7 +191,7 @@ export function OverviewPage() {
           <UserPlus size={36} className="text-kore-faint mx-auto mb-md" />
           <p className="text-body text-kore-mid">Keine aktiven Journeys vorhanden.</p>
           <Link
-            to="/tools/onboarding/journeys"
+            to="/app/tools/onboarding/journeys"
             className="inline-flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90 mt-md"
           >
             <Plus size={14} /> Neue Journey starten
@@ -202,7 +202,7 @@ export function OverviewPage() {
           {journeys.data.map((j: any) => (
             <Link
               key={j.id}
-              to={`/tools/onboarding/journeys/${j.id}`}
+              to={`/app/tools/onboarding/journeys/${j.id}`}
               className="block bg-kore-white border border-kore-border p-md hover:border-kore-ink transition-colors"
             >
               <div className="flex items-center justify-between mb-sm">

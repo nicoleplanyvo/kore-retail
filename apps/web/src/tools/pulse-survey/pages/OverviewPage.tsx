@@ -68,7 +68,7 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-md">
           <Link
-            to="/tools/pulse-survey/dashboard"
+            to="/app/tools/pulse-survey/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink"
           >
             <BarChart3 size={14} /> Dashboard
@@ -194,7 +194,7 @@ export function OverviewPage() {
           {filtered.map((s: any) => (
             <Link
               key={s.id}
-              to={`/tools/pulse-survey/surveys/${s.id}`}
+              to={`/app/tools/pulse-survey/surveys/${s.id}`}
               className="block bg-kore-white border border-kore-border p-md hover:border-kore-ink transition-colors"
             >
               <div className="flex items-center justify-between">

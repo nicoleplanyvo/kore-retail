@@ -94,7 +94,7 @@ export function CreateSessionPage() {
     if (!validateForm()) return;
     create.mutate(
       { ...form, duration: Number(form.duration) },
-      { onSuccess: () => navigate('/tools/coaching') },
+      { onSuccess: () => navigate('/app/tools/coaching') },
     );
   };
 
@@ -104,7 +104,7 @@ export function CreateSessionPage() {
     <div className="p-xl max-w-4xl">
       <Breadcrumb items={[{ label: 'Coaching', href: '/app/tools/coaching' }, { label: 'Neue Session' }]} />
       <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/coaching" className="text-kore-mid hover:text-kore-ink transition-colors">
+        <Link to="/app/tools/coaching" className="text-kore-mid hover:text-kore-ink transition-colors">
           <ArrowLeft size={20} />
         </Link>
         <div>
@@ -215,7 +215,7 @@ export function CreateSessionPage() {
           >
             <Save size={16} /> Session erstellen
           </LoadingButton>
-          <Link to="/tools/coaching" className="px-lg py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink inline-flex items-center">
+          <Link to="/app/tools/coaching" className="px-lg py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink inline-flex items-center">
             Abbrechen
           </Link>
         </div>

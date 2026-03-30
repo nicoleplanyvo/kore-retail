@@ -80,13 +80,13 @@ export function OverviewPage() {
         </div>
         <div className="flex items-center gap-sm">
           <Link
-            to="/tools/handover/dashboard"
+            to="/app/tools/handover/dashboard"
             className="flex items-center gap-xs px-md py-sm border border-kore-border text-kore-ink text-small hover:bg-kore-bg transition-colors"
           >
             <BarChart3 size={16} /> Dashboard
           </Link>
           <Link
-            to="/tools/handover/create"
+            to="/app/tools/handover/create"
             className="flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90"
           >
             <Plus size={16} /> Neue Übergabe
@@ -142,7 +142,7 @@ export function OverviewPage() {
           <ArrowRightLeft size={32} className="mx-auto text-kore-mid mb-md" />
           <p className="text-body text-kore-mid">Noch keine Übergaben vorhanden.</p>
           <Link
-            to="/tools/handover/create"
+            to="/app/tools/handover/create"
             className="inline-flex items-center gap-xs mt-md px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90"
           >
             <Plus size={16} /> Erste Übergabe erstellen
@@ -158,7 +158,7 @@ export function OverviewPage() {
             return (
               <Link
                 key={h.id}
-                to={`/tools/handover/${h.id}`}
+                to={`/app/tools/handover/${h.id}`}
                 className="block bg-kore-white border border-kore-border p-md hover:border-kore-brass transition-colors"
               >
                 <div className="flex items-start justify-between gap-md">
