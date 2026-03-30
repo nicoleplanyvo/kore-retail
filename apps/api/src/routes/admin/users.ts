@@ -1,10 +1,12 @@
 import { Router, type Router as RouterType } from 'express';
+import crypto from 'crypto';
 import bcrypt from 'bcryptjs';
 import prisma from '../../lib/prisma.js';
 import { logAudit } from '../../lib/audit.js';
 import { authenticate, requireMinRole } from '../../middleware/auth.js';
 import { userCreateSchema, userUpdateSchema, userStoreAssignSchema, userRegionAssignSchema } from '../../shared/validators.js';
 import { ROLE_HIERARCHY, hasMinRole, canCreateRole, type UserRole } from '../../shared/types.js';
+import { sendEmail, invitationEmail } from '../../lib/email.js';
 
 export const adminUsersRouter: RouterType = Router();
 
@@ -187,10 +189,17 @@ adminUsersRouter.get('/:id', async (req, res) => {
   }
 });
 
-// POST /api/admin/users — User erstellen
+// POST /api/admin/users — User erstellen (mit Passwort oder per Einladung)
+const APP_URL = process.env['APP_URL'] || 'https://app.kore-retail.de';
+
+// Modified schema: password is optional (invitation flow when omitted)
+const userCreateSchemaOptionalPassword = userCreateSchema.extend({
+  password: userCreateSchema.shape.password.optional(),
+});
+
 adminUsersRouter.post('/', async (req, res) => {
   try {
-    const result = userCreateSchema.safeParse(req.body);
+    const result = userCreateSchemaOptionalPassword.safeParse(req.body);
     if (!result.success) {
       res.status(400).json({
         error: 'Validierungsfehler',
@@ -229,7 +238,10 @@ adminUsersRouter.post('/', async (req, res) => {
       return;
     }
 
-    const passwordHash = await bcrypt.hash(password, 12);
+    // If password provided: create active user directly
+    // If no password: create inactive user + send invitation
+    const hasPassword = !!password;
+    const passwordHash = hasPassword ? await bcrypt.hash(password, 12) : null;
 
     const user = await prisma.user.create({
       data: {
@@ -238,6 +250,7 @@ adminUsersRouter.post('/', async (req, res) => {
         passwordHash,
         role,
         tenantId: effectiveTenantId,
+        isActive: hasPassword, // inactive if invited
       },
     });
 
@@ -261,13 +274,51 @@ adminUsersRouter.post('/', async (req, res) => {
       });
     }
 
+    // Invitation flow: create token + send email
+    if (!hasPassword) {
+      const token = crypto.randomUUID();
+      const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
+
+      await prisma.invitationToken.create({
+        data: {
+          token,
+          userId: user.id,
+          expiresAt,
+        },
+      });
+
+      // Fetch inviter name and tenant name for the email
+      const [inviter, tenant] = await Promise.all([
+        prisma.user.findUnique({
+          where: { id: req.user!.sub },
+          select: { name: true },
+        }),
+        effectiveTenantId
+          ? prisma.tenant.findUnique({
+              where: { id: effectiveTenantId },
+              select: { name: true },
+            })
+          : null,
+      ]);
+
+      const inviteUrl = `${APP_URL}/invite/${token}`;
+
+      await sendEmail(invitationEmail({
+        name,
+        email,
+        inviterName: inviter?.name ?? 'KORE Admin',
+        tenantName: tenant?.name ?? 'KORE',
+        inviteUrl,
+      }));
+    }
+
     await logAudit({
       tenantId: effectiveTenantId,
       userId: req.user!.sub,
       action: 'CREATE',
       entity: 'user',
       entityId: user.id,
-      details: JSON.stringify({ userName: name, role }),
+      details: JSON.stringify({ userName: name, role, invited: !hasPassword }),
       ipAddress: req.ip || null,
     });
 

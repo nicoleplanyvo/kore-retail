@@ -5,8 +5,9 @@ import {
   LineChart, Package, Monitor, Activity, Palette, GraduationCap,
   Clock, Trophy, UserPlus, MessageSquare, Compass, Star, CalendarDays,
   Heart, Smile, FileText, ArrowLeftRight, Bell, Mail, Navigation,
-  Map, LayoutDashboard, PackageSearch, Shield, type LucideIcon,
+  Map, LayoutDashboard, PackageSearch, Shield, Users, User, Paintbrush, type LucideIcon,
 } from 'lucide-react';
+import { useUnreadCount } from '../hooks/useMessaging';
 import { useAuthStore } from '../stores/authStore';
 import { useMyTools } from '../hooks/useMyTools';
 import { TOOL_ROUTES } from '../lib/toolRoutes';
@@ -56,6 +57,11 @@ interface AppSidebarProps {
 export function AppSidebar({ open, onClose }: AppSidebarProps) {
   const { user, clearAuth } = useAuthStore();
   const { data: myTools } = useMyTools();
+  const { data: unreadCount } = useUnreadCount();
+
+  const branding = user?.tenantBranding;
+  const hasTenantLogo = !!branding?.logoUrl;
+  const tenantPrimary = branding?.primaryColor;
 
   // Tool-Items nach Kategorie gruppieren
   const toolsByCategory: Record<string, Array<{
@@ -90,9 +96,11 @@ export function AppSidebar({ open, onClose }: AppSidebarProps) {
   const linkClasses = ({ isActive }: { isActive: boolean }) =>
     `flex items-center gap-md-sm px-md py-md-sm rounded-sm mb-xs transition-colors duration-200 ${
       isActive
-        ? 'bg-white/10 text-kore-brass-lt'
+        ? `bg-white/10 ${tenantPrimary ? '' : 'text-kore-brass-lt'}`
         : 'text-kore-faint hover:text-kore-white hover:bg-white/5'
     }`;
+
+  const activeLinkStyle = tenantPrimary ? { color: tenantPrimary } : undefined;
 
   return (
     <>
@@ -115,11 +123,21 @@ export function AppSidebar({ open, onClose }: AppSidebarProps) {
       >
         {/* Logo + Close on mobile */}
         <div className="px-lg py-xl border-b border-white/10 flex items-center justify-between">
-          <div>
-            <h1 className="font-display text-h3 text-kore-white tracking-wider">KORE</h1>
-            <p className="font-body text-[0.65rem] text-kore-faint uppercase tracking-[0.16em] mt-xs">
-              Retail Platform
-            </p>
+          <div className="flex items-center gap-md min-w-0">
+            {hasTenantLogo ? (
+              <img
+                src={`/api/uploads/${branding!.logoUrl}`}
+                alt={branding?.tenantName || 'Logo'}
+                className="h-8 w-auto max-w-[120px] object-contain"
+              />
+            ) : (
+              <div>
+                <h1 className="font-display text-h3 text-kore-white tracking-wider">KORE</h1>
+                <p className="font-body text-[0.65rem] text-kore-faint uppercase tracking-[0.16em] mt-xs">
+                  {branding?.tenantName || 'Retail Platform'}
+                </p>
+              </div>
+            )}
           </div>
           <button
             onClick={onClose}
@@ -138,10 +156,46 @@ export function AppSidebar({ open, onClose }: AppSidebarProps) {
             end
             onClick={onClose}
             className={linkClasses}
+            style={({ isActive }) => isActive ? activeLinkStyle : undefined}
           >
             <Home size={18} />
             <span className="font-body text-small font-normal">Home</span>
           </NavLink>
+
+          {/* Platform Features */}
+          <p className="font-body text-[0.6rem] text-kore-faint/50 uppercase tracking-[0.16em] px-md mt-lg mb-xs">
+            Platform
+          </p>
+          <NavLink to="/app/messaging" onClick={onClose} className={linkClasses} style={({ isActive }) => isActive ? activeLinkStyle : undefined}>
+            <MessageSquare size={18} />
+            <span className="font-body text-small font-normal flex-1">Nachrichten</span>
+            {(unreadCount ?? 0) > 0 && (
+              <span className="text-white text-[10px] font-bold min-w-[18px] h-[18px] rounded-full flex items-center justify-center px-1"
+                style={{ backgroundColor: tenantPrimary || 'rgb(59 130 246)' }}>
+                {unreadCount! > 99 ? '99+' : unreadCount}
+              </span>
+            )}
+          </NavLink>
+          <NavLink to="/app/orgchart" onClick={onClose} className={linkClasses} style={({ isActive }) => isActive ? activeLinkStyle : undefined}>
+            <Users size={18} />
+            <span className="font-body text-small font-normal">Organigramm</span>
+          </NavLink>
+          <NavLink to="/app/profile" onClick={onClose} className={linkClasses} style={({ isActive }) => isActive ? activeLinkStyle : undefined}>
+            <User size={18} />
+            <span className="font-body text-small font-normal">Mein Profil</span>
+          </NavLink>
+          {(user?.role === 'tenant_admin' || user?.role === 'kore_admin') && (
+            <NavLink to="/app/branding" onClick={onClose} className={linkClasses} style={({ isActive }) => isActive ? activeLinkStyle : undefined}>
+              <Paintbrush size={18} />
+              <span className="font-body text-small font-normal">Branding</span>
+            </NavLink>
+          )}
+          {user?.role === 'kore_admin' && (
+            <NavLink to="/app/admin/onboarding" onClick={onClose} className={linkClasses} style={({ isActive }) => isActive ? activeLinkStyle : undefined}>
+              <UserPlus size={18} />
+              <span className="font-body text-small font-normal">Tenant einrichten</span>
+            </NavLink>
+          )}
 
           {/* Tools nach Kategorie */}
           {categoryOrder
@@ -157,6 +211,7 @@ export function AppSidebar({ open, onClose }: AppSidebarProps) {
                     to={item.to}
                     onClick={onClose}
                     className={linkClasses}
+                    style={({ isActive }) => isActive ? activeLinkStyle : undefined}
                   >
                     <item.icon size={18} />
                     <span className="font-body text-small font-normal">{item.label}</span>

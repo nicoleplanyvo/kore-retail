@@ -1,7 +1,15 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { api } from '../lib/api';
+import { api, apiUpload } from '../lib/api';
 import type { Tenant, DashboardStats, PaginatedResponse, TenantListParams } from '@kore/types';
 import type { TenantCreateInput, TenantUpdateInput } from '@kore/validators';
+
+interface TenantBranding {
+  id: string;
+  name: string;
+  logoUrl: string | null;
+  primaryColor: string | null;
+  accentColor: string | null;
+}
 
 export function useTenants(params: TenantListParams = {}) {
   const query = new URLSearchParams();
@@ -68,6 +76,36 @@ export function useDeleteTenant() {
       api(`/api/admin/tenants/${id}`, { method: 'DELETE' }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tenants'] });
+    },
+  });
+}
+
+/** Update tenant branding colors (primaryColor, accentColor) */
+export function useUpdateBranding(tenantId: string) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: { primaryColor?: string; accentColor?: string }) =>
+      api<TenantBranding>(`/api/admin/tenants/${tenantId}/branding`, {
+        method: 'PUT',
+        body: JSON.stringify(data),
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tenants', tenantId] });
+    },
+  });
+}
+
+/** Upload tenant logo */
+export function useUploadLogo(tenantId: string) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (file: File) => {
+      const formData = new FormData();
+      formData.append('logo', file);
+      return apiUpload<TenantBranding>(`/api/admin/tenants/${tenantId}/logo`, formData);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tenants', tenantId] });
     },
   });
 }

@@ -4,6 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 import { useKpiTrends, useKpiStores } from '../../../hooks/useKpi';
 import { Breadcrumb } from '../../../components/Breadcrumb';
 import { KoreLineChart } from '../../../components/Charts';
+import { ExportButton } from '../../../components/ExportButton';
 
 export function TrendsPage() {
   const [storeId, setStoreId] = useState('');
@@ -26,12 +27,19 @@ export function TrendsPage() {
   return (
     <div className="p-xl max-w-5xl">
       <Breadcrumb items={[{ label: 'KPI Dashboard', href: '/app/tools/kpi' }, { label: 'Trends' }]} />
-      <div className="flex items-center gap-md mb-2xl">
-        <Link to="/tools/kpi" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
-        <div>
-          <h1 className="font-display text-h1 text-kore-ink">KPI-Trends</h1>
-          <p className="text-body text-kore-mid mt-xs">Entwicklung der Kennzahlen ueber Zeit</p>
+      <div className="flex items-center justify-between mb-2xl">
+        <div className="flex items-center gap-md">
+          <Link to="/tools/kpi" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+          <div>
+            <h1 className="font-display text-h1 text-kore-ink">KPI-Trends</h1>
+            <p className="text-body text-kore-mid mt-xs">Entwicklung der Kennzahlen ueber Zeit</p>
+          </div>
         </div>
+        <ExportButton
+          endpoint="/api/admin/reporting/export/kpi"
+          params={storeId ? { storeId } : {}}
+          filename="kpi-trends-report.pdf"
+        />
       </div>
 
       <div className="flex gap-md mb-xl">

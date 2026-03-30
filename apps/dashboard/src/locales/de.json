@@ -53,7 +53,17 @@
     "contactEmail": "Kontakt E-Mail",
     "contactName": "Kontaktperson",
     "contactPhone": "Telefon",
-    "maxUsers": "Max. Benutzer"
+    "maxUsers": "Max. Benutzer",
+    "branding": "Branding",
+    "brandingDesc": "Logo und Farben für die Plattform-Oberfläche des Kunden.",
+    "primaryColor": "Primärfarbe",
+    "accentColor": "Akzentfarbe",
+    "logo": "Logo",
+    "uploadLogo": "Logo hochladen",
+    "removeLogo": "Logo entfernen",
+    "saveBranding": "Branding speichern",
+    "brandingSaved": "Branding gespeichert.",
+    "colorHint": "Hex-Farbwert, z.B. #3B82F6"
   },
   "tools": {
     "title": "Tools",

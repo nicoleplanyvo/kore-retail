@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, ArrowRight, BarChart3, Shield, Users, ClipboardCheck, BookOpen, MessageSquare, Briefcase, Eye, Package } from 'lucide-react';
+import { Search, ArrowRight, BarChart3, Shield, Users, ClipboardCheck, BookOpen, MessageSquare, Briefcase, Eye, Package, User, Paintbrush } from 'lucide-react';
 
 // All navigable items
 const TOOL_ITEMS = [
@@ -42,6 +42,10 @@ const TOOL_ITEMS = [
 
 const PAGE_ITEMS: Array<{ label: string; path: string; category: string; icon: typeof ArrowRight; external?: boolean }> = [
   { label: 'Startseite', path: '/app', category: 'Navigation', icon: ArrowRight },
+  { label: 'Nachrichten', path: '/app/messaging', category: 'Platform', icon: MessageSquare },
+  { label: 'Organigramm', path: '/app/orgchart', category: 'Platform', icon: Users },
+  { label: 'Mein Profil', path: '/app/profile', category: 'Platform', icon: User },
+  { label: 'Branding', path: '/app/branding', category: 'Platform', icon: Paintbrush },
   { label: 'Dashboard', path: 'https://dashboard.kore-retail.de', category: 'Navigation', icon: ArrowRight, external: true },
 ];
 

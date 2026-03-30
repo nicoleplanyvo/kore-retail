@@ -1,9 +1,10 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { BarChart3, TrendingUp, TrendingDown, Minus, List, Calendar, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { BarChart3, TrendingUp, TrendingDown, Minus, List, Calendar, ArrowUpRight, ArrowDownRight, Download } from 'lucide-react';
 import { useKpiSummaryYoY, useKpiStores, type YoYPeriodData, type YoYChanges } from '../../../hooks/useKpi';
 import { StatCardsSkeleton } from '../../../components/Skeleton';
 import { Breadcrumb } from '../../../components/Breadcrumb';
+import { ExportButton } from '../../../components/ExportButton';
 
 /* ---------- helpers ---------- */
 
@@ -321,6 +322,11 @@ export function OverviewPage() {
           <p className="text-body text-kore-mid mt-xs">Kennzahlen mit Vorjahresvergleich und Zielerreichung</p>
         </div>
         <div className="flex gap-md">
+          <ExportButton
+            endpoint="/api/admin/reporting/export/kpi"
+            params={{ dateFrom: period.from, dateTo: period.to, ...(storeId ? { storeId } : {}) }}
+            filename={`kpi-report-${period.from}.pdf`}
+          />
           <Link to="/tools/kpi/trends" className="flex items-center gap-sm border border-kore-border text-kore-ink px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors"><TrendingUp size={16} /> Trends</Link>
           <Link to="/tools/kpi/entries" className="flex items-center gap-sm bg-kore-ink text-kore-white px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors"><List size={16} /> Alle Eintraege</Link>
         </div>

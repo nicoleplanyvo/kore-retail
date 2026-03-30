@@ -6,6 +6,7 @@ import { queryClient } from './lib/queryClient';
 import { useAuthStore } from './stores/authStore';
 import { setAccessToken } from './lib/api';
 import { App } from './App';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { ToastProvider } from './components/Toast';
 import './index.css';
 
@@ -38,14 +39,16 @@ function AuthInitializer({ children }: { children: React.ReactNode }) {
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <ToastProvider>
-          <AuthInitializer>
-            <App />
-          </AuthInitializer>
-        </ToastProvider>
-      </BrowserRouter>
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <ToastProvider>
+            <AuthInitializer>
+              <App />
+            </AuthInitializer>
+          </ToastProvider>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </ErrorBoundary>
   </StrictMode>
 );

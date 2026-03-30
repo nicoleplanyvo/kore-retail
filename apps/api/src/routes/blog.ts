@@ -1,9 +1,7 @@
 import { Router, type Router as RouterType } from 'express';
 import crypto from 'crypto';
-import { PrismaClient } from '../../prisma/generated/client/index.js';
+import prisma from '../lib/prisma.js';
 import { sendEmail, blogApprovalEmail } from '../lib/email.js';
-
-const prisma = new PrismaClient();
 export const blogRouter: RouterType = Router();
 
 const BLOG_API_KEY = process.env['BLOG_API_KEY'] ?? '';

@@ -1,5 +1,8 @@
-import { User, Menu } from 'lucide-react';
+import { User, Menu, MessageSquare } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../stores/authStore';
+import { useUnreadCount } from '../hooks/useMessaging';
+import { NotificationBell } from './NotificationBell';
 
 const ROLE_CONFIG: Record<string, { label: string; dot: string; bg: string; text: string }> = {
   kore_admin:        { label: 'Admin',         dot: 'bg-kore-brass',    bg: 'bg-kore-brass/10',    text: 'text-kore-brass-dk' },
@@ -15,7 +18,9 @@ interface AppTopBarProps {
 }
 
 export function AppTopBar({ onMenuToggle }: AppTopBarProps) {
+  const navigate = useNavigate();
   const { user } = useAuthStore();
+  const { data: unreadCount } = useUnreadCount();
   const roleCfg = ROLE_CONFIG[user?.role || ''];
 
   return (
@@ -32,6 +37,24 @@ export function AppTopBar({ onMenuToggle }: AppTopBarProps) {
       <div className="hidden lg:block" />
 
       <div className="flex items-center gap-md-sm">
+        {/* Notifications */}
+        <NotificationBell />
+        {/* Messages shortcut */}
+        <button
+          onClick={() => navigate('/app/messaging')}
+          className="relative w-[36px] h-[36px] flex items-center justify-center rounded-sm hover:bg-kore-surface transition-colors"
+          aria-label="Nachrichten"
+        >
+          <MessageSquare size={18} className="text-kore-mid" />
+          {(unreadCount ?? 0) > 0 && (
+            <span
+              className="absolute -top-0.5 -right-0.5 text-white text-[9px] font-bold min-w-[16px] h-[16px] rounded-full flex items-center justify-center px-1"
+              style={{ backgroundColor: user?.tenantBranding?.primaryColor || 'rgb(59 130 246)' }}
+            >
+              {unreadCount! > 99 ? '99+' : unreadCount}
+            </span>
+          )}
+        </button>
         {/* Role Badge */}
         {roleCfg && (
           <span className={`hidden sm:inline-flex items-center gap-[5px] rounded-full px-2 py-0.5 font-body text-xs font-medium ${roleCfg.bg} ${roleCfg.text}`}>
@@ -39,9 +62,13 @@ export function AppTopBar({ onMenuToggle }: AppTopBarProps) {
             {roleCfg.label}
           </span>
         )}
-        <div className="w-[32px] h-[32px] rounded-full bg-kore-surface flex items-center justify-center">
-          <User size={16} className="text-kore-mid" />
-        </div>
+        <button onClick={() => navigate('/app/profile')} className="w-[32px] h-[32px] rounded-full bg-kore-surface flex items-center justify-center overflow-hidden hover:ring-2 hover:ring-kore-brass/30 transition-all">
+          {user?.avatarUrl ? (
+            <img src={user.avatarUrl} alt={user.name} className="w-full h-full object-cover" />
+          ) : (
+            <User size={16} className="text-kore-mid" />
+          )}
+        </button>
         <span className="font-body text-small text-kore-ink hidden sm:inline">{user?.name}</span>
       </div>
     </header>

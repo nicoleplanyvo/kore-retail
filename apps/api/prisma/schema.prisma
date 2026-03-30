@@ -13,12 +13,16 @@ model User {
   id           String    @id @default(cuid())
   email        String    @unique
   name         String
-  passwordHash String
+  passwordHash String?
   role         String    @default("learner")
   tenantId     String?
   tenant       Tenant?   @relation(fields: [tenantId], references: [id])
   isActive     Boolean   @default(true)
   lastLoginAt  DateTime?
+  avatarPath   String?
+  managerId    String?
+  manager      User?     @relation("UserManager", fields: [managerId], references: [id], onDelete: SetNull)
+  directReports User[]   @relation("UserManager")
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 
@@ -81,8 +85,14 @@ model User {
   stockCallouts        StockCallout[]        @relation("StockCalloutReporter")
   ordersCreated        CustomerOrder[]       @relation("OrderCreator")
   orderStatusUpdates   OrderStatusUpdate[]   @relation("OrderStatusUpdater")
+  conversationParticipations ConversationParticipant[]
+  directMessagesSent         DirectMessage[]           @relation("DirectMessageSender")
+  invitationTokens           InvitationToken[]
+  passwordResetTokens        PasswordResetToken[]
+  notifications              Notification[]
 
   @@index([tenantId])
+  @@index([managerId])
 }
 
 model Tenant {
@@ -95,6 +105,8 @@ model Tenant {
   contactPhone String?
   maxUsers     Int       @default(15)
   logoUrl      String?
+  primaryColor String?
+  accentColor  String?
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 
@@ -137,6 +149,8 @@ model Tenant {
   teamMessages    TeamMessage[]
   newsletters     Newsletter[]
   floorFrequencyLogs FloorFrequencyLog[]
+  conversations   Conversation[]
+  notifications   Notification[]
 }
 
 model Region {
@@ -1945,6 +1959,36 @@ model FRSession {
   @@index([roomId])
 }
 
+// ============================================================
+// Invitation & Password Reset Tokens
+// ============================================================
+
+model InvitationToken {
+  id        String    @id @default(cuid())
+  token     String    @unique
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([token])
+  @@index([userId])
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  token     String    @unique
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([token])
+  @@index([userId])
+}
+
 // === Blog ===
 
 model BlogPost {
@@ -1960,4 +2004,70 @@ model BlogPost {
   publishedAt   DateTime?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+}
+
+// ============================================================
+// Direct Messaging (Tenant-scoped)
+// ============================================================
+
+model Conversation {
+  id         String   @id @default(cuid())
+  tenantId   String
+  tenant     Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  isGroup    Boolean  @default(false)
+  groupName  String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  participants ConversationParticipant[]
+  messages     DirectMessage[]
+
+  @@index([tenantId])
+}
+
+model ConversationParticipant {
+  id             String   @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lastReadAt     DateTime @default(now())
+  joinedAt       DateTime @default(now())
+
+  @@unique([conversationId, userId])
+  @@index([userId])
+}
+
+model DirectMessage {
+  id             String   @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId       String
+  sender         User     @relation("DirectMessageSender", fields: [senderId], references: [id])
+  content        String
+  createdAt      DateTime @default(now())
+
+  @@index([conversationId, createdAt])
+  @@index([senderId])
+}
+
+// ============================================================
+// Notifications — In-App Benachrichtigungen
+// ============================================================
+
+model Notification {
+  id        String   @id @default(cuid())
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      String
+  title     String
+  body      String?
+  link      String?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId, isRead, createdAt])
+  @@index([tenantId])
 }

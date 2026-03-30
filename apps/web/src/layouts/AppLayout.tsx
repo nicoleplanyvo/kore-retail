@@ -1,14 +1,31 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { Eye, X as XIcon } from 'lucide-react';
 import { AppSidebar } from '../components/AppSidebar';
 import { AppTopBar } from '../components/AppTopBar';
 import { KeyboardShortcutsDialog } from '../components/KeyboardShortcutsDialog';
 import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
+import { useAuthStore } from '../stores/authStore';
+import { api } from '../lib/api';
 
 export function AppLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [shortcutsOpen, setShortcutsOpen] = useState(false);
   const navigate = useNavigate();
+  const { user } = useAuthStore();
+
+  // Tenant Branding — CSS Custom Properties für Sidebar & Akzente
+  const brandingStyle = useMemo(() => {
+    const style: Record<string, string> = {};
+    const branding = user?.tenantBranding;
+    if (branding?.primaryColor) {
+      style['--tenant-primary'] = branding.primaryColor;
+    }
+    if (branding?.accentColor) {
+      style['--tenant-accent'] = branding.accentColor;
+    }
+    return style;
+  }, [user?.tenantBranding]);
 
   const shortcuts = useCallback(() => [
     {
@@ -26,8 +43,24 @@ export function AppLayout() {
 
   useKeyboardShortcuts(shortcuts());
 
+  const isImpersonating = !!user?.impersonatedBy;
+
+  async function handleStopImpersonation() {
+    try {
+      const data = await api<{ accessToken: string; user: typeof user }>('/api/auth/stop-impersonation', {
+        method: 'POST',
+      });
+      const { setAuth } = useAuthStore.getState();
+      setAuth(data.user!, data.accessToken);
+      navigate('/app');
+    } catch {
+      // Fallback: Seite neu laden
+      window.location.href = '/app';
+    }
+  }
+
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen overflow-hidden" style={brandingStyle}>
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-gray-900 focus:rounded focus:shadow-lg focus:text-sm"
@@ -36,6 +69,20 @@ export function AppLayout() {
       </a>
       <AppSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div className="flex-1 flex flex-col overflow-hidden min-w-0">
+        {/* Impersonation Banner */}
+        {isImpersonating && (
+          <div className="bg-amber-500 text-white px-md py-xs flex items-center justify-center gap-md text-sm font-body flex-shrink-0">
+            <Eye size={14} />
+            <span>Du bist als <strong>{user?.name}</strong> angemeldet (Impersonation)</span>
+            <button
+              onClick={handleStopImpersonation}
+              className="ml-2 inline-flex items-center gap-1 px-2 py-0.5 rounded bg-white/20 hover:bg-white/30 transition-colors text-xs font-medium"
+            >
+              <XIcon size={12} />
+              Zurück zum Admin
+            </button>
+          </div>
+        )}
         <AppTopBar onMenuToggle={() => setSidebarOpen(true)} />
         <main id="main-content" role="main" className="flex-1 overflow-y-auto p-md sm:p-lg lg:p-xl bg-kore-bg">
           <Outlet />

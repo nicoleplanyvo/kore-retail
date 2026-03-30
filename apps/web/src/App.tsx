@@ -15,7 +15,18 @@ import { LegalPage } from './pages/LegalPage';
 import { BlogListPage } from './pages/BlogListPage';
 import { BlogPostPage } from './pages/BlogPostPage';
 import { LoginPage } from './pages/LoginPage';
+import { AcceptInvitePage } from './pages/AcceptInvitePage';
+import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
+import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { ToolsHomePage } from './pages/ToolsHomePage';
+import { ProfilePage } from './pages/ProfilePage';
+import { OrgchartPage } from './pages/OrgchartPage';
+import MessagingPage from './pages/MessagingPage';
+import { BrandingPage } from './pages/BrandingPage';
+import { NotificationsPage } from './pages/NotificationsPage';
+import { NotFoundPage } from './pages/NotFoundPage';
+import { OnboardingWizardPage } from './pages/admin/OnboardingWizardPage';
+import { ReportsExportPage } from './pages/admin/ReportsExportPage';
 import { useAnalytics } from './hooks/useAnalytics';
 import { ScrollToTop } from './components/ScrollToTop';
 import { ListPageSkeleton } from './components/Skeleton';
@@ -81,9 +92,12 @@ export function App() {
           <Route path="/blog/:slug" element={<BlogPostPage />} />
         </Route>
 
-        {/* Login */}
+        {/* Auth-Seiten (oeffentlich) */}
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/invite/:token" element={<AcceptInvitePage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
         </Route>
 
         {/* Geschuetzter App-Bereich */}
@@ -91,6 +105,10 @@ export function App() {
           <Route element={<AppLayout />}>
             {/* Home — Alle authentifizierten User */}
             <Route path="/app" element={<ToolsHomePage />} />
+            <Route path="/app/profile" element={<ProfilePage />} />
+            <Route path="/app/orgchart" element={<OrgchartPage />} />
+            <Route path="/app/messaging" element={<MessagingPage />} />
+            <Route path="/app/notifications" element={<NotificationsPage />} />
 
             {/* Standards & Compliance */}
             <Route path="/app/tools/sea/*" element={<ToolSuspense><StoreExcellenceAuditRoutes /></ToolSuspense>} />
@@ -143,6 +161,30 @@ export function App() {
             <Route path="/app/tools/rm-dashboard/*" element={<ToolSuspense><RmDashboardRoutes /></ToolSuspense>} />
           </Route>
         </Route>
+
+        {/* Berichte & Export — store_manager+ */}
+        <Route element={<ProtectedRoute minRole="store_manager" />}>
+          <Route element={<AppLayout />}>
+            <Route path="/app/admin/reports" element={<ReportsExportPage />} />
+          </Route>
+        </Route>
+
+        {/* Branding — nur tenant_admin + kore_admin */}
+        <Route element={<ProtectedRoute minRole="tenant_admin" />}>
+          <Route element={<AppLayout />}>
+            <Route path="/app/branding" element={<BrandingPage />} />
+          </Route>
+        </Route>
+
+        {/* Admin — nur kore_admin */}
+        <Route element={<ProtectedRoute allowedRoles={['kore_admin']} />}>
+          <Route element={<AppLayout />}>
+            <Route path="/app/admin/onboarding" element={<OnboardingWizardPage />} />
+          </Route>
+        </Route>
+
+        {/* 404 Fallback */}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
   );

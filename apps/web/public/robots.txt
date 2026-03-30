@@ -2,8 +2,27 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://kore-retail.de/sitemap.xml
+# Sitemap (dynamisch generiert, inkl. Blog-Posts)
+Sitemap: https://kore-retail.de/api/sitemap.xml
 
-# Disallow API and internal paths
-Disallow: /api/
+# Erlaubt: Sitemap + oeffentliche Blog-API
+Allow: /api/sitemap.xml
+Allow: /api/blog/
+
+# Disallow internal paths
+Disallow: /api/auth/
+Disallow: /api/admin/
+Disallow: /api/tools/
+Disallow: /api/uploads/
+Disallow: /api/contact
+Disallow: /api/audit
+Disallow: /api/profile
+Disallow: /api/orgchart
+Disallow: /api/messaging
+Disallow: /api/notifications
+Disallow: /app/
+Disallow: /dashboard/
+Disallow: /login
+Disallow: /invite/
+Disallow: /forgot-password
+Disallow: /reset-password/

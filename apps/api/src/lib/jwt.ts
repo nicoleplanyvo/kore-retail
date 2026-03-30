@@ -12,6 +12,11 @@ export interface JWTPayload {
 const JWT_SECRET = process.env['JWT_SECRET'] ?? 'dev-secret-key-min-32-characters-long';
 const JWT_REFRESH_SECRET = process.env['JWT_REFRESH_SECRET'] ?? 'dev-refresh-secret-min-32-chars-long';
 
+// Warnung in Development wenn Default-Secrets verwendet werden
+if (!process.env['JWT_SECRET'] && process.env['NODE_ENV'] !== 'test') {
+  console.warn('⚠ JWT_SECRET nicht gesetzt — Dev-Default wird verwendet. Nicht in Production verwenden!');
+}
+
 export function signAccessToken(payload: {
   sub: string;
   tenantId: string | null;

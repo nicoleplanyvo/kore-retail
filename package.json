@@ -8,7 +8,9 @@
     "build": "turbo build",
     "lint": "turbo lint",
     "clean": "turbo clean",
-    "typecheck": "turbo typecheck"
+    "typecheck": "turbo typecheck",
+    "test": "turbo test",
+    "test:watch": "turbo test:watch"
   },
   "packageManager": "pnpm@10.30.3",
   "engines": {
