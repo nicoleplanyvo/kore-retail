@@ -4,7 +4,7 @@ import { authenticate } from '../../../middleware/auth.js';
 import { requireToolAccess } from '../../../middleware/requireToolAccess.js';
 import { shiftEntryCreateSchema, shiftEntryUpdateSchema, shiftAvailabilitySchema, shiftClockSchema, } from '../../../shared/validators.js';
 export const shiftPlanningRouter = Router();
-shiftPlanningRouter.use(authenticate, requireToolAccess('operations.shift_planning'));
+shiftPlanningRouter.use(authenticate, requireToolAccess('coaching.shift_planning'));
 // ── GET /stores ──────────────────────────────────────
 shiftPlanningRouter.get('/stores', async (req, res) => {
     try {
@@ -95,6 +95,10 @@ shiftPlanningRouter.post('/shifts', async (req, res) => {
 // ── PUT /shifts/:id ──────────────────────────────────
 shiftPlanningRouter.put('/shifts/:id', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
+        const existing = await prisma.shiftEntry.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
+        if (!existing)
+            return res.status(404).json({ error: 'Schicht nicht gefunden.' });
         const parsed = shiftEntryUpdateSchema.safeParse(req.body);
         if (!parsed.success)
             return res.status(400).json({ error: 'Ungueltige Daten.' });
@@ -113,6 +117,10 @@ shiftPlanningRouter.put('/shifts/:id', async (req, res) => {
 // ── DELETE /shifts/:id ───────────────────────────────
 shiftPlanningRouter.delete('/shifts/:id', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
+        const existing = await prisma.shiftEntry.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
+        if (!existing)
+            return res.status(404).json({ error: 'Schicht nicht gefunden.' });
         await prisma.shiftSwapRequest.deleteMany({ where: { shiftEntryId: req.params['id'] } });
         await prisma.shiftEntry.delete({ where: { id: req.params['id'] } });
         res.json({ success: true });
@@ -212,6 +220,12 @@ shiftPlanningRouter.post('/swap-requests', async (req, res) => {
 // ── PUT /swap-requests/:id ───────────────────────────
 shiftPlanningRouter.put('/swap-requests/:id', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
+        const existingSwap = await prisma.shiftSwapRequest.findFirst({
+            where: { id: req.params['id'], shiftEntry: { store: { tenantId } } },
+        });
+        if (!existingSwap)
+            return res.status(404).json({ error: 'Tauschanfrage nicht gefunden.' });
         const approvedBy = req.user.sub;
         const status = req.body.status;
         if (!['APPROVED', 'REJECTED'].includes(status))

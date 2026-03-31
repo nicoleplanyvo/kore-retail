@@ -15803,6 +15803,8 @@ export namespace Prisma {
     contactPhone: string | null
     maxUsers: number | null
     logoUrl: string | null
+    primaryColor: string | null
+    accentColor: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -15817,6 +15819,8 @@ export namespace Prisma {
     contactPhone: string | null
     maxUsers: number | null
     logoUrl: string | null
+    primaryColor: string | null
+    accentColor: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -15831,6 +15835,8 @@ export namespace Prisma {
     contactPhone: number
     maxUsers: number
     logoUrl: number
+    primaryColor: number
+    accentColor: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -15855,6 +15861,8 @@ export namespace Prisma {
     contactPhone?: true
     maxUsers?: true
     logoUrl?: true
+    primaryColor?: true
+    accentColor?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -15869,6 +15877,8 @@ export namespace Prisma {
     contactPhone?: true
     maxUsers?: true
     logoUrl?: true
+    primaryColor?: true
+    accentColor?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -15883,6 +15893,8 @@ export namespace Prisma {
     contactPhone?: true
     maxUsers?: true
     logoUrl?: true
+    primaryColor?: true
+    accentColor?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -15984,6 +15996,8 @@ export namespace Prisma {
     contactPhone: string | null
     maxUsers: number
     logoUrl: string | null
+    primaryColor: string | null
+    accentColor: string | null
     createdAt: Date
     updatedAt: Date
     _count: TenantCountAggregateOutputType | null
@@ -16017,6 +16031,8 @@ export namespace Prisma {
     contactPhone?: boolean
     maxUsers?: boolean
     logoUrl?: boolean
+    primaryColor?: boolean
+    accentColor?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     users?: boolean | Tenant$usersArgs<ExtArgs>
@@ -16073,6 +16089,8 @@ export namespace Prisma {
     contactPhone?: boolean
     maxUsers?: boolean
     logoUrl?: boolean
+    primaryColor?: boolean
+    accentColor?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["tenant"]>
@@ -16087,6 +16105,8 @@ export namespace Prisma {
     contactPhone?: boolean
     maxUsers?: boolean
     logoUrl?: boolean
+    primaryColor?: boolean
+    accentColor?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["tenant"]>
@@ -16101,11 +16121,13 @@ export namespace Prisma {
     contactPhone?: boolean
     maxUsers?: boolean
     logoUrl?: boolean
+    primaryColor?: boolean
+    accentColor?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type TenantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "status" | "contactEmail" | "contactName" | "contactPhone" | "maxUsers" | "logoUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["tenant"]>
+  export type TenantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "status" | "contactEmail" | "contactName" | "contactPhone" | "maxUsers" | "logoUrl" | "primaryColor" | "accentColor" | "createdAt" | "updatedAt", ExtArgs["result"]["tenant"]>
   export type TenantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | Tenant$usersArgs<ExtArgs>
     stores?: boolean | Tenant$storesArgs<ExtArgs>
@@ -16208,6 +16230,8 @@ export namespace Prisma {
       contactPhone: string | null
       maxUsers: number
       logoUrl: string | null
+      primaryColor: string | null
+      accentColor: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["tenant"]>
@@ -16683,6 +16707,8 @@ export namespace Prisma {
     readonly contactPhone: FieldRef<"Tenant", 'String'>
     readonly maxUsers: FieldRef<"Tenant", 'Int'>
     readonly logoUrl: FieldRef<"Tenant", 'String'>
+    readonly primaryColor: FieldRef<"Tenant", 'String'>
+    readonly accentColor: FieldRef<"Tenant", 'String'>
     readonly createdAt: FieldRef<"Tenant", 'DateTime'>
     readonly updatedAt: FieldRef<"Tenant", 'DateTime'>
   }
@@ -136631,6 +136657,8 @@ export namespace Prisma {
     contactPhone: 'contactPhone',
     maxUsers: 'maxUsers',
     logoUrl: 'logoUrl',
+    primaryColor: 'primaryColor',
+    accentColor: 'accentColor',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -138561,6 +138589,8 @@ export namespace Prisma {
     contactPhone?: StringNullableFilter<"Tenant"> | string | null
     maxUsers?: IntFilter<"Tenant"> | number
     logoUrl?: StringNullableFilter<"Tenant"> | string | null
+    primaryColor?: StringNullableFilter<"Tenant"> | string | null
+    accentColor?: StringNullableFilter<"Tenant"> | string | null
     createdAt?: DateTimeFilter<"Tenant"> | Date | string
     updatedAt?: DateTimeFilter<"Tenant"> | Date | string
     users?: UserListRelationFilter
@@ -138616,6 +138646,8 @@ export namespace Prisma {
     contactPhone?: SortOrderInput | SortOrder
     maxUsers?: SortOrder
     logoUrl?: SortOrderInput | SortOrder
+    primaryColor?: SortOrderInput | SortOrder
+    accentColor?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     users?: UserOrderByRelationAggregateInput
@@ -138674,6 +138706,8 @@ export namespace Prisma {
     contactPhone?: StringNullableFilter<"Tenant"> | string | null
     maxUsers?: IntFilter<"Tenant"> | number
     logoUrl?: StringNullableFilter<"Tenant"> | string | null
+    primaryColor?: StringNullableFilter<"Tenant"> | string | null
+    accentColor?: StringNullableFilter<"Tenant"> | string | null
     createdAt?: DateTimeFilter<"Tenant"> | Date | string
     updatedAt?: DateTimeFilter<"Tenant"> | Date | string
     users?: UserListRelationFilter
@@ -138729,6 +138763,8 @@ export namespace Prisma {
     contactPhone?: SortOrderInput | SortOrder
     maxUsers?: SortOrder
     logoUrl?: SortOrderInput | SortOrder
+    primaryColor?: SortOrderInput | SortOrder
+    accentColor?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: TenantCountOrderByAggregateInput
@@ -138751,6 +138787,8 @@ export namespace Prisma {
     contactPhone?: StringNullableWithAggregatesFilter<"Tenant"> | string | null
     maxUsers?: IntWithAggregatesFilter<"Tenant"> | number
     logoUrl?: StringNullableWithAggregatesFilter<"Tenant"> | string | null
+    primaryColor?: StringNullableWithAggregatesFilter<"Tenant"> | string | null
+    accentColor?: StringNullableWithAggregatesFilter<"Tenant"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Tenant"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Tenant"> | Date | string
   }
@@ -147685,6 +147723,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -147740,6 +147780,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -147795,6 +147837,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -147850,6 +147894,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -147905,6 +147951,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -147919,6 +147967,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -147933,6 +147983,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -157903,6 +157955,8 @@ export namespace Prisma {
     contactPhone?: SortOrder
     maxUsers?: SortOrder
     logoUrl?: SortOrder
+    primaryColor?: SortOrder
+    accentColor?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -157921,6 +157975,8 @@ export namespace Prisma {
     contactPhone?: SortOrder
     maxUsers?: SortOrder
     logoUrl?: SortOrder
+    primaryColor?: SortOrder
+    accentColor?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -157935,6 +157991,8 @@ export namespace Prisma {
     contactPhone?: SortOrder
     maxUsers?: SortOrder
     logoUrl?: SortOrder
+    primaryColor?: SortOrder
+    accentColor?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -174511,6 +174569,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     stores?: StoreCreateNestedManyWithoutTenantInput
@@ -174565,6 +174625,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     stores?: StoreUncheckedCreateNestedManyWithoutTenantInput
@@ -176929,6 +176991,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stores?: StoreUpdateManyWithoutTenantNestedInput
@@ -176983,6 +177047,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stores?: StoreUncheckedUpdateManyWithoutTenantNestedInput
@@ -181637,6 +181703,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -181691,6 +181759,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -181895,6 +181965,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -181949,6 +182021,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -182035,6 +182109,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -182089,6 +182165,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -183715,6 +183793,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -183769,6 +183849,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -185518,6 +185600,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -185572,6 +185656,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -185642,6 +185728,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -185696,6 +185784,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -185750,6 +185840,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -185804,6 +185896,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -185874,6 +185968,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -185928,6 +186024,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -187209,6 +187307,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -187263,6 +187363,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -187391,6 +187493,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -187445,6 +187549,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -187774,6 +187880,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -187828,6 +187936,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -188232,6 +188342,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -188286,6 +188398,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -188797,6 +188911,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -188851,6 +188967,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -188960,6 +189078,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -189014,6 +189134,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -189084,6 +189206,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -189138,6 +189262,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -189411,6 +189537,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -189465,6 +189593,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -190133,6 +190263,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -190187,6 +190319,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -190292,6 +190426,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -190346,6 +190482,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -190416,6 +190554,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -190470,6 +190610,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -191004,6 +191146,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -191058,6 +191202,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -191600,6 +191746,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -191654,6 +191802,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -191761,6 +191911,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -191815,6 +191967,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -191908,6 +192062,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -191962,6 +192118,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -192088,6 +192246,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -192142,6 +192302,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -192225,6 +192387,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -192279,6 +192443,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -192646,6 +192812,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -192700,6 +192868,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -193192,6 +193362,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -193246,6 +193418,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -193586,6 +193760,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -193640,6 +193816,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -193976,6 +194154,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -194030,6 +194210,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -194399,6 +194581,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -194453,6 +194637,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -194907,6 +195093,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -194961,6 +195149,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -195301,6 +195491,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -195355,6 +195547,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -195691,6 +195885,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -195745,6 +195941,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -196246,6 +196444,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -196300,6 +196500,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -196803,6 +197005,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -196857,6 +197061,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -197234,6 +197440,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -197288,6 +197496,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -197746,6 +197956,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -197800,6 +198012,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -198053,6 +198267,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -198107,6 +198323,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -198308,6 +198526,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -198362,6 +198582,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -198578,6 +198800,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -198632,6 +198856,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -198844,6 +199070,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -198898,6 +199126,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -199436,6 +199666,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -199490,6 +199722,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -200036,6 +200270,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -200090,6 +200326,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -200269,6 +200507,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -200323,6 +200563,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -200492,6 +200734,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -200546,6 +200790,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -200641,6 +200887,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -200695,6 +200943,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -200857,6 +201107,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -200911,6 +201163,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -201412,6 +201666,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -201466,6 +201722,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -201969,6 +202227,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -202023,6 +202283,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -202318,6 +202580,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -202372,6 +202636,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -203787,6 +204053,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -203841,6 +204109,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -204181,6 +204451,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -204235,6 +204507,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -204571,6 +204845,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -204625,6 +204901,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -204935,6 +205213,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -204989,6 +205269,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -207118,6 +207400,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -207172,6 +207456,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -207312,6 +207598,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -207366,6 +207654,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -207628,6 +207918,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -207682,6 +207974,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -208251,6 +208545,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -208305,6 +208601,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -208960,6 +209258,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -209014,6 +209314,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -209515,6 +209817,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -209569,6 +209873,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -210072,6 +210378,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -210126,6 +210434,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -210357,6 +210667,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -210411,6 +210723,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -210632,6 +210946,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -210686,6 +211002,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -211245,6 +211563,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -211299,6 +211619,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -212337,6 +212659,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -212391,6 +212715,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -212506,6 +212832,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -212560,6 +212888,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -216123,6 +216453,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -216177,6 +216509,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -216299,6 +216633,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -216353,6 +216689,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -217013,6 +217351,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -217067,6 +217407,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -217407,6 +217749,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -217461,6 +217805,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -217797,6 +218143,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -217851,6 +218199,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -217921,6 +218271,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -217975,6 +218327,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -219902,6 +220256,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -219956,6 +220312,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -220208,6 +220566,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -220262,6 +220622,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -220891,6 +221253,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -220945,6 +221309,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -221220,6 +221586,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -221274,6 +221642,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -228397,6 +228767,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -228451,6 +228823,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -228567,6 +228941,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -228621,6 +228997,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -229475,6 +229853,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -229529,6 +229909,8 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
+    primaryColor?: string | null
+    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -229760,6 +230142,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -229814,6 +230198,8 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput

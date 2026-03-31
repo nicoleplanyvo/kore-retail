@@ -9,10 +9,6 @@ import { tenantCreateSchema, tenantUpdateSchema } from '../../shared/validators.
 export const adminTenantsRouter: RouterType = Router();
 adminTenantsRouter.use(authenticate, requireMinRole('kore_admin'));
 
-// Branding router — tenant_admin can manage own branding, kore_admin can manage any
-export const tenantBrandingRouter: RouterType = Router();
-tenantBrandingRouter.use(authenticate, requireMinRole('tenant_admin'));
-
 // GET /api/admin/tenants/stats — Dashboard-Statistiken
 adminTenantsRouter.get('/stats', async (_req, res) => {
   try {

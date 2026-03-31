@@ -119,8 +119,9 @@ pdpPipRouter.post('/plans', async (req, res) => {
 // ── PLANS — DETAIL ──────────────────────────────────
 pdpPipRouter.get('/plans/:id', async (req, res) => {
     try {
-        const plan = await prisma.developmentPlan.findUnique({
-            where: { id: req.params.id },
+        const tenantId = req.user.tenantId;
+        const plan = await prisma.developmentPlan.findFirst({
+            where: { id: req.params.id, tenantId },
             include: {
                 user: { select: { id: true, name: true } },
                 manager: { select: { id: true, name: true } },
@@ -144,6 +145,11 @@ pdpPipRouter.get('/plans/:id', async (req, res) => {
 // ── PLANS — UPDATE STATUS ───────────────────────────
 pdpPipRouter.put('/plans/:id', async (req, res) => {
     try {
+        const tenantId = req.user.tenantId;
+        // Verify plan belongs to tenant
+        const existing = await prisma.developmentPlan.findFirst({ where: { id: req.params.id, tenantId } });
+        if (!existing)
+            return res.status(404).json({ error: 'Plan nicht gefunden.' });
         const { status, title, targetDate } = req.body;
         const data = {};
         if (status)
@@ -171,6 +177,11 @@ pdpPipRouter.put('/plans/:id', async (req, res) => {
 // ── GOALS — CREATE ──────────────────────────────────
 pdpPipRouter.post('/plans/:id/goals', async (req, res) => {
     try {
+        const tenantId = req.user.tenantId;
+        // Verify plan belongs to tenant
+        const plan = await prisma.developmentPlan.findFirst({ where: { id: req.params.id, tenantId } });
+        if (!plan)
+            return res.status(404).json({ error: 'Plan nicht gefunden.' });
         const parsed = developmentGoalCreateSchema.safeParse(req.body);
         if (!parsed.success)
             return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
@@ -192,6 +203,13 @@ pdpPipRouter.post('/plans/:id/goals', async (req, res) => {
 // ── GOALS — UPDATE ──────────────────────────────────
 pdpPipRouter.put('/plans/:pid/goals/:gid', async (req, res) => {
     try {
+        const tenantId = req.user.tenantId;
+        // Verify goal belongs to tenant via plan relation
+        const existingGoal = await prisma.developmentGoal.findFirst({
+            where: { id: req.params.gid, plan: { id: req.params.pid, tenantId } },
+        });
+        if (!existingGoal)
+            return res.status(404).json({ error: 'Ziel nicht gefunden.' });
         const parsed = developmentGoalUpdateSchema.safeParse(req.body);
         if (!parsed.success)
             return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
@@ -220,6 +238,13 @@ pdpPipRouter.put('/plans/:pid/goals/:gid', async (req, res) => {
 // ── GOALS — DELETE ──────────────────────────────────
 pdpPipRouter.delete('/plans/:pid/goals/:gid', async (req, res) => {
     try {
+        const tenantId = req.user.tenantId;
+        // Verify goal belongs to tenant via plan relation
+        const existingGoal = await prisma.developmentGoal.findFirst({
+            where: { id: req.params.gid, plan: { id: req.params.pid, tenantId } },
+        });
+        if (!existingGoal)
+            return res.status(404).json({ error: 'Ziel nicht gefunden.' });
         await prisma.developmentGoal.delete({ where: { id: req.params.gid } });
         res.json({ success: true });
     }
@@ -231,6 +256,11 @@ pdpPipRouter.delete('/plans/:pid/goals/:gid', async (req, res) => {
 // ── REVIEWS — CREATE ────────────────────────────────
 pdpPipRouter.post('/plans/:id/reviews', async (req, res) => {
     try {
+        const tenantId = req.user.tenantId;
+        // Verify plan belongs to tenant
+        const plan = await prisma.developmentPlan.findFirst({ where: { id: req.params.id, tenantId } });
+        if (!plan)
+            return res.status(404).json({ error: 'Plan nicht gefunden.' });
         const reviewedBy = req.user.sub;
         const parsed = developmentReviewCreateSchema.safeParse(req.body);
         if (!parsed.success)

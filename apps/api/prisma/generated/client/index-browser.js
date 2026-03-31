@@ -142,6 +142,8 @@ exports.Prisma.TenantScalarFieldEnum = {
   contactPhone: 'contactPhone',
   maxUsers: 'maxUsers',
   logoUrl: 'logoUrl',
+  primaryColor: 'primaryColor',
+  accentColor: 'accentColor',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

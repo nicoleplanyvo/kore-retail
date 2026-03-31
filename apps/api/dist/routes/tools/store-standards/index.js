@@ -75,8 +75,9 @@ storeStandardsRouter.post('/scenarios', async (req, res) => {
 // GET /scenarios/:id — Load scenario
 storeStandardsRouter.get('/scenarios/:id', async (req, res) => {
     try {
-        const scenario = await prisma.budgetScenario.findUnique({
-            where: { id: req.params.id },
+        const tenantId = req.tenantId;
+        const scenario = await prisma.budgetScenario.findFirst({
+            where: { id: req.params.id, store: { tenantId } },
         });
         if (!scenario)
             return res.status(404).json({ error: 'Szenario nicht gefunden.' });
@@ -90,6 +91,10 @@ storeStandardsRouter.get('/scenarios/:id', async (req, res) => {
 // PUT /scenarios/:id — Update scenario
 storeStandardsRouter.put('/scenarios/:id', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
+        const existing = await prisma.budgetScenario.findFirst({ where: { id: req.params.id, store: { tenantId } } });
+        if (!existing)
+            return res.status(404).json({ error: 'Szenario nicht gefunden.' });
         const { name, data } = req.body;
         const updateData = {};
         if (name)
@@ -110,6 +115,10 @@ storeStandardsRouter.put('/scenarios/:id', async (req, res) => {
 // DELETE /scenarios/:id — Delete scenario
 storeStandardsRouter.delete('/scenarios/:id', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
+        const existing = await prisma.budgetScenario.findFirst({ where: { id: req.params.id, store: { tenantId } } });
+        if (!existing)
+            return res.status(404).json({ error: 'Szenario nicht gefunden.' });
         await prisma.budgetScenario.delete({ where: { id: req.params.id } });
         res.json({ ok: true });
     }
@@ -121,11 +130,12 @@ storeStandardsRouter.delete('/scenarios/:id', async (req, res) => {
 // GET /scenarios/compare — Compare multiple scenarios
 storeStandardsRouter.get('/scenarios/compare', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
         const ids = req.query.ids?.split(',').filter(Boolean) ?? [];
         if (ids.length < 2)
             return res.status(400).json({ error: 'Mindestens 2 IDs erforderlich.' });
         const scenarios = await prisma.budgetScenario.findMany({
-            where: { id: { in: ids } },
+            where: { id: { in: ids }, store: { tenantId } },
         });
         const parsed = scenarios.map((s) => ({ ...s, data: JSON.parse(s.data) }));
         res.json(parsed);

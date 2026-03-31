@@ -43,8 +43,9 @@ briefingsRouter.get('/users', async (req, res) => {
 briefingsRouter.get('/copy-last', async (req, res) => {
     try {
         const toolStoreIds = req.toolStoreIds;
+        const tenantId = req.tenantId;
         const storeId = req.query.storeId;
-        const where = {};
+        const where = { store: { tenantId } };
         if (storeId)
             where['storeId'] = storeId;
         else if (toolStoreIds !== 'all')
@@ -68,7 +69,7 @@ briefingsRouter.get('/dashboard', async (req, res) => {
     try {
         const toolStoreIds = req.toolStoreIds;
         const tenantId = req.tenantId;
-        const where = {};
+        const where = { store: { tenantId } };
         if (req.query.storeId)
             where['storeId'] = req.query.storeId;
         else if (toolStoreIds !== 'all')
@@ -168,9 +169,10 @@ briefingsRouter.get('/dashboard', async (req, res) => {
 briefingsRouter.get('/', async (req, res) => {
     try {
         const toolStoreIds = req.toolStoreIds;
+        const tenantId = req.tenantId;
         const page = Math.max(1, Number(req.query.page) || 1);
         const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 20));
-        const where = {};
+        const where = { store: { tenantId } };
         if (req.query.storeId)
             where['storeId'] = req.query.storeId;
         else if (toolStoreIds !== 'all')
@@ -235,8 +237,9 @@ briefingsRouter.post('/', async (req, res) => {
 // ── GET /:id — Briefing detail with read status ──────
 briefingsRouter.get('/:id', async (req, res) => {
     try {
-        const briefing = await prisma.briefing.findUnique({
-            where: { id: req.params['id'] },
+        const tenantId = req.tenantId;
+        const briefing = await prisma.briefing.findFirst({
+            where: { id: req.params['id'], store: { tenantId } },
             include: {
                 creator: { select: { id: true, name: true } },
                 store: { select: { id: true, name: true } },
@@ -264,6 +267,11 @@ briefingsRouter.get('/:id', async (req, res) => {
 // ── PUT /:id — Update briefing ───────────────────────
 briefingsRouter.put('/:id', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
+        // Verify briefing belongs to tenant via store
+        const existing = await prisma.briefing.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
+        if (!existing)
+            return res.status(404).json({ error: 'Briefing nicht gefunden.' });
         const parsed = briefingUpdateSchema.safeParse(req.body);
         if (!parsed.success)
             return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
@@ -285,6 +293,10 @@ briefingsRouter.put('/:id', async (req, res) => {
 // ── POST /:id/read — Mark briefing as read ───────────
 briefingsRouter.post('/:id/read', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
+        const briefingCheck = await prisma.briefing.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
+        if (!briefingCheck)
+            return res.status(404).json({ error: 'Briefing nicht gefunden.' });
         const userId = req.user.sub;
         const ack = await prisma.briefingAcknowledgment.upsert({
             where: { briefingId_userId: { briefingId: req.params['id'], userId } },
@@ -301,6 +313,10 @@ briefingsRouter.post('/:id/read', async (req, res) => {
 // ── GET /:id/readers — Who read the briefing ─────────
 briefingsRouter.get('/:id/readers', async (req, res) => {
     try {
+        const tenantId = req.tenantId;
+        const briefingCheck = await prisma.briefing.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
+        if (!briefingCheck)
+            return res.status(404).json({ error: 'Briefing nicht gefunden.' });
         const acks = await prisma.briefingAcknowledgment.findMany({
             where: { briefingId: req.params['id'] },
             include: { user: { select: { id: true, name: true } } },

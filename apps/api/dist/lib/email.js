@@ -201,6 +201,40 @@ export function blogApprovalEmail(data) {
     };
 }
 // ──────────────────────────────────────────────
+// Einladungs-E-Mail
+// ──────────────────────────────────────────────
+export function invitationEmail(data) {
+    const url = data.inviteUrl ?? data.loginUrl ?? 'https://app.kore-retail.de/login';
+    return {
+        from: `KORE <${FROM}>`,
+        to: data.email,
+        subject: `Einladung zu ${data.tenantName} — KORE`,
+        html: baseLayout(`
+      <h2>Willkommen bei KORE</h2>
+      <p>Hallo ${escapeHtml(data.name)},</p>
+      <p>${data.inviterName ? `${escapeHtml(data.inviterName)} hat Sie` : 'Sie wurden'} zu <strong>${escapeHtml(data.tenantName)}</strong> eingeladen.</p>
+      <div class="brass-line"></div>
+      ${data.tempPassword ? `
+        <div class="label">Ihre Zugangsdaten</div>
+        <div class="field">
+          <strong>E-Mail:</strong> ${escapeHtml(data.email)}<br/>
+          <strong>Passwort:</strong> ${escapeHtml(data.tempPassword)}
+        </div>
+        <p style="font-size: 13px; color: #9E8460;">Bitte aendern Sie Ihr Passwort nach dem ersten Login.</p>
+      ` : ''}
+      <table width="100%" cellpadding="0" cellspacing="0" style="margin: 24px 0;">
+        <tr>
+          <td align="center">
+            <a href="${url}" style="display: inline-block; padding: 14px 36px; background: #9E8460; color: #FFFFFF; font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; text-decoration: none;">
+              Jetzt anmelden
+            </a>
+          </td>
+        </tr>
+      </table>
+    `),
+    };
+}
+// ──────────────────────────────────────────────
 // Passwort-Reset-E-Mail
 // ──────────────────────────────────────────────
 export function passwordResetEmail(data) {

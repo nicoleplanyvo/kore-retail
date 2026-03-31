@@ -44,6 +44,16 @@ export declare function blogApprovalEmail(data: {
     approveUrl: string;
     rejectUrl: string;
 }): EmailPayload;
+export declare function invitationEmail(data: {
+    name: string;
+    email: string;
+    tenantName: string;
+    inviterName?: string;
+    inviteUrl?: string;
+    role?: string;
+    loginUrl?: string;
+    tempPassword?: string;
+}): EmailPayload;
 export declare function passwordResetEmail(data: {
     name: string;
     email: string;
