@@ -1,18 +1,49 @@
 /**
- * E-Mail-Versand über Lettermint API
- * https://api.lettermint.co/v1/send
+ * E-Mail-Versand über SMTP (Brevo) oder Lettermint API
+ *
+ * Priorität:
+ * 1. SMTP (SMTP_HOST gesetzt) — Brevo SMTP Relay
+ * 2. Lettermint API (LETTERMINT_API_TOKEN gesetzt)
+ * 3. Dev-Modus: Nur Logging
  */
+import nodemailer from 'nodemailer';
 
 const LETTERMINT_TOKEN = process.env['LETTERMINT_API_TOKEN'];
-if (!LETTERMINT_TOKEN) {
-  console.warn('⚠ LETTERMINT_API_TOKEN nicht gesetzt — E-Mails werden nur geloggt.');
+const SMTP_HOST = process.env['SMTP_HOST'];
+const SMTP_PORT = parseInt(process.env['SMTP_PORT'] ?? '587', 10);
+const SMTP_USER = process.env['SMTP_USER'];
+const SMTP_PASS = process.env['SMTP_PASS'];
+
+const hasSmtp = !!(SMTP_HOST && SMTP_USER && SMTP_PASS);
+const hasLettermint = !!LETTERMINT_TOKEN;
+
+if (hasSmtp) {
+  console.log('✓ E-Mail via SMTP (Brevo) konfiguriert.');
+} else if (hasLettermint) {
+  console.log('✓ E-Mail via Lettermint API konfiguriert.');
+} else {
+  console.warn('⚠ Kein E-Mail-Provider konfiguriert — E-Mails werden nur geloggt.');
+}
+
+// SMTP Transporter (lazy init)
+let smtpTransporter: nodemailer.Transporter | null = null;
+function getSmtpTransporter(): nodemailer.Transporter {
+  if (!smtpTransporter) {
+    smtpTransporter = nodemailer.createTransport({
+      host: SMTP_HOST,
+      port: SMTP_PORT,
+      secure: SMTP_PORT === 465,
+      auth: { user: SMTP_USER, pass: SMTP_PASS },
+    });
+  }
+  return smtpTransporter;
 }
 
 const FROM = process.env['FROM_EMAIL'] ?? 'noreply@kore-retail.de';
 const NOTIFY = process.env['NOTIFICATION_EMAIL'] ?? 'info@kore-retail.de';
 
 // ──────────────────────────────────────────────
-// Lettermint Send
+// E-Mail Versand (SMTP → Lettermint → Dev-Log)
 // ──────────────────────────────────────────────
 
 interface EmailPayload {
@@ -30,21 +61,51 @@ interface SendResult {
 }
 
 export async function sendEmail(payload: EmailPayload): Promise<SendResult> {
-  if (!LETTERMINT_TOKEN) {
-    console.log('[DEV] E-Mail (nur geloggt):', {
-      from: payload.from,
-      to: payload.to,
-      subject: payload.subject,
-    });
-    return { success: true, messageId: 'dev-mode' };
+  // 1. SMTP (Brevo)
+  if (hasSmtp) {
+    return sendViaSmtp(payload);
   }
 
+  // 2. Lettermint API
+  if (hasLettermint) {
+    return sendViaLettermint(payload);
+  }
+
+  // 3. Dev-Mode: nur loggen
+  console.log('[DEV] E-Mail (nur geloggt):', {
+    from: payload.from,
+    to: payload.to,
+    subject: payload.subject,
+  });
+  return { success: true, messageId: 'dev-mode' };
+}
+
+async function sendViaSmtp(payload: EmailPayload): Promise<SendResult> {
+  try {
+    const transporter = getSmtpTransporter();
+    const to = Array.isArray(payload.to) ? payload.to.join(', ') : payload.to;
+    const info = await transporter.sendMail({
+      from: payload.from,
+      to,
+      subject: payload.subject,
+      html: payload.html,
+      ...(payload.reply_to ? { replyTo: payload.reply_to } : {}),
+    });
+    console.log(`[SMTP] E-Mail gesendet: ${payload.subject} → ${to} (${info.messageId})`);
+    return { success: true, messageId: info.messageId };
+  } catch (err) {
+    console.error('[SMTP] Fehler:', err);
+    return { success: false, error: String(err) };
+  }
+}
+
+async function sendViaLettermint(payload: EmailPayload): Promise<SendResult> {
   try {
     const res = await fetch('https://api.lettermint.co/v1/send', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-lettermint-token': LETTERMINT_TOKEN,
+        'x-lettermint-token': LETTERMINT_TOKEN!,
       },
       body: JSON.stringify({
         from: payload.from,
