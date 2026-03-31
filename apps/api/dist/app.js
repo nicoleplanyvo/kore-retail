@@ -13,7 +13,6 @@ import { adminStoresRouter } from './routes/admin/stores.js';
 import { adminGdprRouter } from './routes/admin/gdpr.js';
 import { adminUsersRouter } from './routes/admin/users.js';
 import { adminReportingRouter } from './routes/admin/reporting.js';
-import { reportingExportRouter } from './routes/admin/reporting-export.js';
 import { adminRegionsRouter } from './routes/admin/regions.js';
 import { storeExcellenceAuditRouter } from './routes/tools/store-excellence-audit/index.js';
 import { checklistenRouter } from './routes/tools/checklisten/index.js';
@@ -51,7 +50,6 @@ import { multiStoreRouter } from './routes/tools/multi-store/index.js';
 import { rmDashboardRouter } from './routes/tools/rm-dashboard/index.js';
 import { toolsRouter } from './routes/tools/index.js';
 import { blogRouter } from './routes/blog.js';
-import { sitemapRouter } from './routes/sitemap.js';
 import { profileRouter } from './routes/profile.js';
 import { orgchartRouter } from './routes/orgchart.js';
 import { messagingRouter } from './routes/messaging.js';
@@ -84,8 +82,6 @@ export function createApp() {
     app.use('/api/audit', auditRouter);
     // Blog (öffentlich + Lotta API)
     app.use('/api/blog', blogRouter);
-    // Dynamic Sitemap (no-cache, includes blog posts)
-    app.use('/api/sitemap.xml', sitemapRouter);
     // Auth (mit Rate-Limiting auf Login, Passwort-Reset, Einladungen)
     app.post('/api/auth/login', authRateLimit);
     app.post('/api/auth/forgot-password', passwordRateLimit);
@@ -103,7 +99,6 @@ export function createApp() {
     app.use('/api/admin/gdpr', adminGdprRouter);
     app.use('/api/admin/users', adminUsersRouter);
     app.use('/api/admin/reporting', adminReportingRouter);
-    app.use('/api/admin/reporting/export', reportingExportRouter);
     app.use('/api/admin/regions', adminRegionsRouter);
     // Tools (App: zugewiesene Tools des Users)
     app.use('/api/tools', toolsRouter);

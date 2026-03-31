@@ -2,17 +2,16 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { ArrowLeft, MessageSquare, Save, Trash2, FileText } from 'lucide-react';
 import { useCoachingSession, useUpdateCoachingSession, useDeleteCoachingSession, useCreateCoachingTemplate } from '../../../hooks/useCoaching';
-import { Breadcrumb } from '../../../components/Breadcrumb';
 
-const TYPE_LABELS: Record<string, string> = { REGULAR: 'Regulär', AD_HOC: 'Ad-hoc', FOLLOW_UP: 'Follow-up' };
+const TYPE_LABELS: Record<string, string> = { REGULAR: 'Regulaer', AD_HOC: 'Ad-hoc', FOLLOW_UP: 'Follow-up' };
 const STATUS_LABELS: Record<string, string> = { SCHEDULED: 'Geplant', COMPLETED: 'Abgeschlossen', CANCELLED: 'Abgebrochen' };
 const FRAMEWORK_LABELS: Record<string, string> = { GROW: 'GROW', SMART: 'SMART', FREE: 'Frei' };
-const TOPICS = ['Verkauf', 'Kundenservice', 'Führung', 'Produktwissen', 'Soft Skills'];
+const TOPICS = ['Verkauf', 'Kundenservice', 'Fuehrung', 'Produktwissen', 'Soft Skills'];
 
 const GROW_SECTIONS = [
-  { key: 'goalText', label: 'Goal (Ziel)', description: 'Was möchten Sie in dieser Session erreichen?' },
-  { key: 'realityText', label: 'Reality (Realität)', description: 'Wie ist die aktuelle Situation?' },
-  { key: 'optionsText', label: 'Options (Optionen)', description: 'Welche Möglichkeiten gibt es?' },
+  { key: 'goalText', label: 'Goal (Ziel)', description: 'Was moechten Sie in dieser Session erreichen?' },
+  { key: 'realityText', label: 'Reality (Realitaet)', description: 'Wie ist die aktuelle Situation?' },
+  { key: 'optionsText', label: 'Options (Optionen)', description: 'Welche Moeglichkeiten gibt es?' },
   { key: 'wayForwardText', label: 'Way Forward (Weg)', description: 'Welche konkreten Schritte werden unternommen?' },
 ];
 
@@ -74,7 +73,7 @@ export function SessionDetailPage() {
   };
 
   const handleDelete = () => {
-    if (!confirm('Session wirklich löschen?')) return;
+    if (!confirm('Session wirklich loeschen?')) return;
     remove.mutate(session.id, { onSuccess: () => navigate('/app/tools/coaching') });
   };
 
@@ -101,7 +100,6 @@ export function SessionDetailPage() {
 
   return (
     <div className="p-xl max-w-4xl">
-      <Breadcrumb items={[{ label: 'Coaching', href: '/app/tools/coaching' }, { label: 'Session' }]} />
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
         <Link to="/app/tools/coaching" className="text-kore-mid hover:text-kore-ink transition-colors">
@@ -250,7 +248,7 @@ export function SessionDetailPage() {
             />
           ) : (
             <p className="text-body text-kore-mid whitespace-pre-wrap">
-              {(session as any)[section.key] || 'Noch nicht ausgefüllt.'}
+              {(session as any)[section.key] || 'Noch nicht ausgefuellt.'}
             </p>
           )}
         </div>

@@ -494,6 +494,11 @@ export type FRRoom = $Result.DefaultSelection<Prisma.$FRRoomPayload>
  */
 export type FRSession = $Result.DefaultSelection<Prisma.$FRSessionPayload>
 /**
+ * Model BlogPost
+ * 
+ */
+export type BlogPost = $Result.DefaultSelection<Prisma.$BlogPostPayload>
+/**
  * Model InvitationToken
  * 
  */
@@ -503,11 +508,6 @@ export type InvitationToken = $Result.DefaultSelection<Prisma.$InvitationTokenPa
  * 
  */
 export type PasswordResetToken = $Result.DefaultSelection<Prisma.$PasswordResetTokenPayload>
-/**
- * Model BlogPost
- * 
- */
-export type BlogPost = $Result.DefaultSelection<Prisma.$BlogPostPayload>
 /**
  * Model Conversation
  * 
@@ -1611,6 +1611,16 @@ export class PrismaClient<
   get fRSession(): Prisma.FRSessionDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.blogPost`: Exposes CRUD operations for the **BlogPost** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BlogPosts
+    * const blogPosts = await prisma.blogPost.findMany()
+    * ```
+    */
+  get blogPost(): Prisma.BlogPostDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.invitationToken`: Exposes CRUD operations for the **InvitationToken** model.
     * Example usage:
     * ```ts
@@ -1629,16 +1639,6 @@ export class PrismaClient<
     * ```
     */
   get passwordResetToken(): Prisma.PasswordResetTokenDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.blogPost`: Exposes CRUD operations for the **BlogPost** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more BlogPosts
-    * const blogPosts = await prisma.blogPost.findMany()
-    * ```
-    */
-  get blogPost(): Prisma.BlogPostDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.conversation`: Exposes CRUD operations for the **Conversation** model.
@@ -2209,9 +2209,9 @@ export namespace Prisma {
     FRSettings: 'FRSettings',
     FRRoom: 'FRRoom',
     FRSession: 'FRSession',
+    BlogPost: 'BlogPost',
     InvitationToken: 'InvitationToken',
     PasswordResetToken: 'PasswordResetToken',
-    BlogPost: 'BlogPost',
     Conversation: 'Conversation',
     ConversationParticipant: 'ConversationParticipant',
     DirectMessage: 'DirectMessage',
@@ -2231,7 +2231,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "tenant" | "region" | "store" | "toolDefinition" | "storeToolAssignment" | "userStoreAssignment" | "subscription" | "auditLog" | "dataProcessingConsent" | "userRegionAssignment" | "auditTemplate" | "auditCategory" | "auditCriterion" | "auditSession" | "auditResponse" | "checklistTemplate" | "checklistSection" | "checklistItem" | "checklistSession" | "checklistEntry" | "sopCategory" | "sop" | "sopAcknowledgment" | "vmGuideline" | "vmSubmission" | "standardCategory" | "standardDefinition" | "standardEvaluation" | "standardScore" | "kpiEntry" | "budgetPeriod" | "budgetActual" | "forecast" | "lossIncident" | "inventoryCount" | "inventoryItem" | "floorZone" | "floorFrequencyLog" | "floorStaffPosition" | "footfallEntry" | "vmGuidelineDoc" | "vmGuidelineImage" | "maintenanceRequest" | "course" | "courseModule" | "courseEnrollment" | "certificate" | "trainingLog" | "challenge" | "challengeParticipant" | "challengeEntry" | "challengeVote" | "onboardingTemplate" | "onboardingStep" | "onboardingJourney" | "onboardingProgress" | "coachingSession" | "coachingTemplate" | "developmentPlan" | "developmentGoal" | "developmentReview" | "appraisalCycle" | "appraisal" | "shiftTemplate" | "shiftEntry" | "shiftSwapRequest" | "shiftAvailability" | "shiftTimeEntry" | "shiftWeekStatus" | "pulseSurvey" | "pulseQuestion" | "pulseResponse" | "pulseAnswer" | "wellbeingCheckIn" | "wellbeingResource" | "briefing" | "briefingAcknowledgment" | "handover" | "teamMessage" | "teamMessageRead" | "newsletter" | "newsletterSection" | "newsletterView" | "conversionGoal" | "clientProfile" | "clientInteraction" | "clientTask" | "stockCallout" | "customerOrder" | "orderStatusUpdate" | "clientAppointment" | "budgetScenario" | "fRSettings" | "fRRoom" | "fRSession" | "invitationToken" | "passwordResetToken" | "blogPost" | "conversation" | "conversationParticipant" | "directMessage" | "notification"
+      modelProps: "user" | "tenant" | "region" | "store" | "toolDefinition" | "storeToolAssignment" | "userStoreAssignment" | "subscription" | "auditLog" | "dataProcessingConsent" | "userRegionAssignment" | "auditTemplate" | "auditCategory" | "auditCriterion" | "auditSession" | "auditResponse" | "checklistTemplate" | "checklistSection" | "checklistItem" | "checklistSession" | "checklistEntry" | "sopCategory" | "sop" | "sopAcknowledgment" | "vmGuideline" | "vmSubmission" | "standardCategory" | "standardDefinition" | "standardEvaluation" | "standardScore" | "kpiEntry" | "budgetPeriod" | "budgetActual" | "forecast" | "lossIncident" | "inventoryCount" | "inventoryItem" | "floorZone" | "floorFrequencyLog" | "floorStaffPosition" | "footfallEntry" | "vmGuidelineDoc" | "vmGuidelineImage" | "maintenanceRequest" | "course" | "courseModule" | "courseEnrollment" | "certificate" | "trainingLog" | "challenge" | "challengeParticipant" | "challengeEntry" | "challengeVote" | "onboardingTemplate" | "onboardingStep" | "onboardingJourney" | "onboardingProgress" | "coachingSession" | "coachingTemplate" | "developmentPlan" | "developmentGoal" | "developmentReview" | "appraisalCycle" | "appraisal" | "shiftTemplate" | "shiftEntry" | "shiftSwapRequest" | "shiftAvailability" | "shiftTimeEntry" | "shiftWeekStatus" | "pulseSurvey" | "pulseQuestion" | "pulseResponse" | "pulseAnswer" | "wellbeingCheckIn" | "wellbeingResource" | "briefing" | "briefingAcknowledgment" | "handover" | "teamMessage" | "teamMessageRead" | "newsletter" | "newsletterSection" | "newsletterView" | "conversionGoal" | "clientProfile" | "clientInteraction" | "clientTask" | "stockCallout" | "customerOrder" | "orderStatusUpdate" | "clientAppointment" | "budgetScenario" | "fRSettings" | "fRRoom" | "fRSession" | "blogPost" | "invitationToken" | "passwordResetToken" | "conversation" | "conversationParticipant" | "directMessage" | "notification"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -9339,6 +9339,80 @@ export namespace Prisma {
           }
         }
       }
+      BlogPost: {
+        payload: Prisma.$BlogPostPayload<ExtArgs>
+        fields: Prisma.BlogPostFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BlogPostFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BlogPostFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>
+          }
+          findFirst: {
+            args: Prisma.BlogPostFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BlogPostFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>
+          }
+          findMany: {
+            args: Prisma.BlogPostFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>[]
+          }
+          create: {
+            args: Prisma.BlogPostCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>
+          }
+          createMany: {
+            args: Prisma.BlogPostCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BlogPostCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>[]
+          }
+          delete: {
+            args: Prisma.BlogPostDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>
+          }
+          update: {
+            args: Prisma.BlogPostUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>
+          }
+          deleteMany: {
+            args: Prisma.BlogPostDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BlogPostUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BlogPostUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>[]
+          }
+          upsert: {
+            args: Prisma.BlogPostUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>
+          }
+          aggregate: {
+            args: Prisma.BlogPostAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBlogPost>
+          }
+          groupBy: {
+            args: Prisma.BlogPostGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BlogPostGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BlogPostCountArgs<ExtArgs>
+            result: $Utils.Optional<BlogPostCountAggregateOutputType> | number
+          }
+        }
+      }
       InvitationToken: {
         payload: Prisma.$InvitationTokenPayload<ExtArgs>
         fields: Prisma.InvitationTokenFieldRefs
@@ -9484,80 +9558,6 @@ export namespace Prisma {
           count: {
             args: Prisma.PasswordResetTokenCountArgs<ExtArgs>
             result: $Utils.Optional<PasswordResetTokenCountAggregateOutputType> | number
-          }
-        }
-      }
-      BlogPost: {
-        payload: Prisma.$BlogPostPayload<ExtArgs>
-        fields: Prisma.BlogPostFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.BlogPostFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.BlogPostFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>
-          }
-          findFirst: {
-            args: Prisma.BlogPostFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.BlogPostFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>
-          }
-          findMany: {
-            args: Prisma.BlogPostFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>[]
-          }
-          create: {
-            args: Prisma.BlogPostCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>
-          }
-          createMany: {
-            args: Prisma.BlogPostCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.BlogPostCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>[]
-          }
-          delete: {
-            args: Prisma.BlogPostDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>
-          }
-          update: {
-            args: Prisma.BlogPostUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>
-          }
-          deleteMany: {
-            args: Prisma.BlogPostDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.BlogPostUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.BlogPostUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>[]
-          }
-          upsert: {
-            args: Prisma.BlogPostUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>
-          }
-          aggregate: {
-            args: Prisma.BlogPostAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateBlogPost>
-          }
-          groupBy: {
-            args: Prisma.BlogPostGroupByArgs<ExtArgs>
-            result: $Utils.Optional<BlogPostGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.BlogPostCountArgs<ExtArgs>
-            result: $Utils.Optional<BlogPostCountAggregateOutputType> | number
           }
         }
       }
@@ -10061,9 +10061,9 @@ export namespace Prisma {
     fRSettings?: FRSettingsOmit
     fRRoom?: FRRoomOmit
     fRSession?: FRSessionOmit
+    blogPost?: BlogPostOmit
     invitationToken?: InvitationTokenOmit
     passwordResetToken?: PasswordResetTokenOmit
-    blogPost?: BlogPostOmit
     conversation?: ConversationOmit
     conversationParticipant?: ConversationParticipantOmit
     directMessage?: DirectMessageOmit
@@ -10148,7 +10148,6 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    directReports: number
     storeAssignments: number
     regionAssignments: number
     checklistSessions: number
@@ -10216,7 +10215,6 @@ export namespace Prisma {
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    directReports?: boolean | UserCountOutputTypeCountDirectReportsArgs
     storeAssignments?: boolean | UserCountOutputTypeCountStoreAssignmentsArgs
     regionAssignments?: boolean | UserCountOutputTypeCountRegionAssignmentsArgs
     checklistSessions?: boolean | UserCountOutputTypeCountChecklistSessionsArgs
@@ -10292,13 +10290,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the UserCountOutputType
      */
     select?: UserCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountDirectReportsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserWhereInput
   }
 
   /**
@@ -12838,11 +12829,11 @@ export namespace Prisma {
     name: string | null
     passwordHash: string | null
     role: string | null
+    avatarPath: string | null
+    managerId: string | null
     tenantId: string | null
     isActive: boolean | null
     lastLoginAt: Date | null
-    avatarPath: string | null
-    managerId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -12853,11 +12844,11 @@ export namespace Prisma {
     name: string | null
     passwordHash: string | null
     role: string | null
+    avatarPath: string | null
+    managerId: string | null
     tenantId: string | null
     isActive: boolean | null
     lastLoginAt: Date | null
-    avatarPath: string | null
-    managerId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -12868,11 +12859,11 @@ export namespace Prisma {
     name: number
     passwordHash: number
     role: number
+    avatarPath: number
+    managerId: number
     tenantId: number
     isActive: number
     lastLoginAt: number
-    avatarPath: number
-    managerId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -12885,11 +12876,11 @@ export namespace Prisma {
     name?: true
     passwordHash?: true
     role?: true
+    avatarPath?: true
+    managerId?: true
     tenantId?: true
     isActive?: true
     lastLoginAt?: true
-    avatarPath?: true
-    managerId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -12900,11 +12891,11 @@ export namespace Prisma {
     name?: true
     passwordHash?: true
     role?: true
+    avatarPath?: true
+    managerId?: true
     tenantId?: true
     isActive?: true
     lastLoginAt?: true
-    avatarPath?: true
-    managerId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -12915,11 +12906,11 @@ export namespace Prisma {
     name?: true
     passwordHash?: true
     role?: true
+    avatarPath?: true
+    managerId?: true
     tenantId?: true
     isActive?: true
     lastLoginAt?: true
-    avatarPath?: true
-    managerId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -13003,11 +12994,11 @@ export namespace Prisma {
     name: string
     passwordHash: string | null
     role: string
+    avatarPath: string | null
+    managerId: string | null
     tenantId: string | null
     isActive: boolean
     lastLoginAt: Date | null
-    avatarPath: string | null
-    managerId: string | null
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -13035,16 +13026,14 @@ export namespace Prisma {
     name?: boolean
     passwordHash?: boolean
     role?: boolean
+    avatarPath?: boolean
+    managerId?: boolean
     tenantId?: boolean
     isActive?: boolean
     lastLoginAt?: boolean
-    avatarPath?: boolean
-    managerId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     tenant?: boolean | User$tenantArgs<ExtArgs>
-    manager?: boolean | User$managerArgs<ExtArgs>
-    directReports?: boolean | User$directReportsArgs<ExtArgs>
     storeAssignments?: boolean | User$storeAssignmentsArgs<ExtArgs>
     regionAssignments?: boolean | User$regionAssignmentsArgs<ExtArgs>
     checklistSessions?: boolean | User$checklistSessionsArgs<ExtArgs>
@@ -13118,15 +13107,14 @@ export namespace Prisma {
     name?: boolean
     passwordHash?: boolean
     role?: boolean
+    avatarPath?: boolean
+    managerId?: boolean
     tenantId?: boolean
     isActive?: boolean
     lastLoginAt?: boolean
-    avatarPath?: boolean
-    managerId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     tenant?: boolean | User$tenantArgs<ExtArgs>
-    manager?: boolean | User$managerArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -13135,15 +13123,14 @@ export namespace Prisma {
     name?: boolean
     passwordHash?: boolean
     role?: boolean
+    avatarPath?: boolean
+    managerId?: boolean
     tenantId?: boolean
     isActive?: boolean
     lastLoginAt?: boolean
-    avatarPath?: boolean
-    managerId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     tenant?: boolean | User$tenantArgs<ExtArgs>
-    manager?: boolean | User$managerArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -13152,20 +13139,18 @@ export namespace Prisma {
     name?: boolean
     passwordHash?: boolean
     role?: boolean
+    avatarPath?: boolean
+    managerId?: boolean
     tenantId?: boolean
     isActive?: boolean
     lastLoginAt?: boolean
-    avatarPath?: boolean
-    managerId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "passwordHash" | "role" | "tenantId" | "isActive" | "lastLoginAt" | "avatarPath" | "managerId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "passwordHash" | "role" | "avatarPath" | "managerId" | "tenantId" | "isActive" | "lastLoginAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | User$tenantArgs<ExtArgs>
-    manager?: boolean | User$managerArgs<ExtArgs>
-    directReports?: boolean | User$directReportsArgs<ExtArgs>
     storeAssignments?: boolean | User$storeAssignmentsArgs<ExtArgs>
     regionAssignments?: boolean | User$regionAssignmentsArgs<ExtArgs>
     checklistSessions?: boolean | User$checklistSessionsArgs<ExtArgs>
@@ -13234,19 +13219,15 @@ export namespace Prisma {
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | User$tenantArgs<ExtArgs>
-    manager?: boolean | User$managerArgs<ExtArgs>
   }
   export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | User$tenantArgs<ExtArgs>
-    manager?: boolean | User$managerArgs<ExtArgs>
   }
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
       tenant: Prisma.$TenantPayload<ExtArgs> | null
-      manager: Prisma.$UserPayload<ExtArgs> | null
-      directReports: Prisma.$UserPayload<ExtArgs>[]
       storeAssignments: Prisma.$UserStoreAssignmentPayload<ExtArgs>[]
       regionAssignments: Prisma.$UserRegionAssignmentPayload<ExtArgs>[]
       checklistSessions: Prisma.$ChecklistSessionPayload<ExtArgs>[]
@@ -13318,11 +13299,11 @@ export namespace Prisma {
       name: string
       passwordHash: string | null
       role: string
+      avatarPath: string | null
+      managerId: string | null
       tenantId: string | null
       isActive: boolean
       lastLoginAt: Date | null
-      avatarPath: string | null
-      managerId: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -13720,8 +13701,6 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     tenant<T extends User$tenantArgs<ExtArgs> = {}>(args?: Subset<T, User$tenantArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    manager<T extends User$managerArgs<ExtArgs> = {}>(args?: Subset<T, User$managerArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    directReports<T extends User$directReportsArgs<ExtArgs> = {}>(args?: Subset<T, User$directReportsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     storeAssignments<T extends User$storeAssignmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$storeAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserStoreAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     regionAssignments<T extends User$regionAssignmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$regionAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRegionAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     checklistSessions<T extends User$checklistSessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$checklistSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChecklistSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -13820,11 +13799,11 @@ export namespace Prisma {
     readonly name: FieldRef<"User", 'String'>
     readonly passwordHash: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'String'>
+    readonly avatarPath: FieldRef<"User", 'String'>
+    readonly managerId: FieldRef<"User", 'String'>
     readonly tenantId: FieldRef<"User", 'String'>
     readonly isActive: FieldRef<"User", 'Boolean'>
     readonly lastLoginAt: FieldRef<"User", 'DateTime'>
-    readonly avatarPath: FieldRef<"User", 'String'>
-    readonly managerId: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -14237,49 +14216,6 @@ export namespace Prisma {
      */
     include?: TenantInclude<ExtArgs> | null
     where?: TenantWhereInput
-  }
-
-  /**
-   * User.manager
-   */
-  export type User$managerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-  }
-
-  /**
-   * User.directReports
-   */
-  export type User$directReportsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
-    cursor?: UserWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
   /**
@@ -15867,8 +15803,6 @@ export namespace Prisma {
     contactPhone: string | null
     maxUsers: number | null
     logoUrl: string | null
-    primaryColor: string | null
-    accentColor: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -15883,8 +15817,6 @@ export namespace Prisma {
     contactPhone: string | null
     maxUsers: number | null
     logoUrl: string | null
-    primaryColor: string | null
-    accentColor: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -15899,8 +15831,6 @@ export namespace Prisma {
     contactPhone: number
     maxUsers: number
     logoUrl: number
-    primaryColor: number
-    accentColor: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -15925,8 +15855,6 @@ export namespace Prisma {
     contactPhone?: true
     maxUsers?: true
     logoUrl?: true
-    primaryColor?: true
-    accentColor?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -15941,8 +15869,6 @@ export namespace Prisma {
     contactPhone?: true
     maxUsers?: true
     logoUrl?: true
-    primaryColor?: true
-    accentColor?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -15957,8 +15883,6 @@ export namespace Prisma {
     contactPhone?: true
     maxUsers?: true
     logoUrl?: true
-    primaryColor?: true
-    accentColor?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -16060,8 +15984,6 @@ export namespace Prisma {
     contactPhone: string | null
     maxUsers: number
     logoUrl: string | null
-    primaryColor: string | null
-    accentColor: string | null
     createdAt: Date
     updatedAt: Date
     _count: TenantCountAggregateOutputType | null
@@ -16095,8 +16017,6 @@ export namespace Prisma {
     contactPhone?: boolean
     maxUsers?: boolean
     logoUrl?: boolean
-    primaryColor?: boolean
-    accentColor?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     users?: boolean | Tenant$usersArgs<ExtArgs>
@@ -16153,8 +16073,6 @@ export namespace Prisma {
     contactPhone?: boolean
     maxUsers?: boolean
     logoUrl?: boolean
-    primaryColor?: boolean
-    accentColor?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["tenant"]>
@@ -16169,8 +16087,6 @@ export namespace Prisma {
     contactPhone?: boolean
     maxUsers?: boolean
     logoUrl?: boolean
-    primaryColor?: boolean
-    accentColor?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["tenant"]>
@@ -16185,13 +16101,11 @@ export namespace Prisma {
     contactPhone?: boolean
     maxUsers?: boolean
     logoUrl?: boolean
-    primaryColor?: boolean
-    accentColor?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type TenantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "status" | "contactEmail" | "contactName" | "contactPhone" | "maxUsers" | "logoUrl" | "primaryColor" | "accentColor" | "createdAt" | "updatedAt", ExtArgs["result"]["tenant"]>
+  export type TenantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "status" | "contactEmail" | "contactName" | "contactPhone" | "maxUsers" | "logoUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["tenant"]>
   export type TenantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | Tenant$usersArgs<ExtArgs>
     stores?: boolean | Tenant$storesArgs<ExtArgs>
@@ -16294,8 +16208,6 @@ export namespace Prisma {
       contactPhone: string | null
       maxUsers: number
       logoUrl: string | null
-      primaryColor: string | null
-      accentColor: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["tenant"]>
@@ -16771,8 +16683,6 @@ export namespace Prisma {
     readonly contactPhone: FieldRef<"Tenant", 'String'>
     readonly maxUsers: FieldRef<"Tenant", 'Int'>
     readonly logoUrl: FieldRef<"Tenant", 'String'>
-    readonly primaryColor: FieldRef<"Tenant", 'String'>
-    readonly accentColor: FieldRef<"Tenant", 'String'>
     readonly createdAt: FieldRef<"Tenant", 'DateTime'>
     readonly updatedAt: FieldRef<"Tenant", 'DateTime'>
   }
@@ -129090,6 +129000,1090 @@ export namespace Prisma {
 
 
   /**
+   * Model BlogPost
+   */
+
+  export type AggregateBlogPost = {
+    _count: BlogPostCountAggregateOutputType | null
+    _min: BlogPostMinAggregateOutputType | null
+    _max: BlogPostMaxAggregateOutputType | null
+  }
+
+  export type BlogPostMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    slug: string | null
+    excerpt: string | null
+    content: string | null
+    coverImageUrl: string | null
+    author: string | null
+    status: string | null
+    approvalToken: string | null
+    publishedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BlogPostMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    slug: string | null
+    excerpt: string | null
+    content: string | null
+    coverImageUrl: string | null
+    author: string | null
+    status: string | null
+    approvalToken: string | null
+    publishedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BlogPostCountAggregateOutputType = {
+    id: number
+    title: number
+    slug: number
+    excerpt: number
+    content: number
+    coverImageUrl: number
+    author: number
+    status: number
+    approvalToken: number
+    publishedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BlogPostMinAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    excerpt?: true
+    content?: true
+    coverImageUrl?: true
+    author?: true
+    status?: true
+    approvalToken?: true
+    publishedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BlogPostMaxAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    excerpt?: true
+    content?: true
+    coverImageUrl?: true
+    author?: true
+    status?: true
+    approvalToken?: true
+    publishedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BlogPostCountAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    excerpt?: true
+    content?: true
+    coverImageUrl?: true
+    author?: true
+    status?: true
+    approvalToken?: true
+    publishedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BlogPostAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BlogPost to aggregate.
+     */
+    where?: BlogPostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlogPosts to fetch.
+     */
+    orderBy?: BlogPostOrderByWithRelationInput | BlogPostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BlogPostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlogPosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlogPosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BlogPosts
+    **/
+    _count?: true | BlogPostCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BlogPostMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BlogPostMaxAggregateInputType
+  }
+
+  export type GetBlogPostAggregateType<T extends BlogPostAggregateArgs> = {
+        [P in keyof T & keyof AggregateBlogPost]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBlogPost[P]>
+      : GetScalarType<T[P], AggregateBlogPost[P]>
+  }
+
+
+
+
+  export type BlogPostGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BlogPostWhereInput
+    orderBy?: BlogPostOrderByWithAggregationInput | BlogPostOrderByWithAggregationInput[]
+    by: BlogPostScalarFieldEnum[] | BlogPostScalarFieldEnum
+    having?: BlogPostScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BlogPostCountAggregateInputType | true
+    _min?: BlogPostMinAggregateInputType
+    _max?: BlogPostMaxAggregateInputType
+  }
+
+  export type BlogPostGroupByOutputType = {
+    id: string
+    title: string
+    slug: string
+    excerpt: string | null
+    content: string
+    coverImageUrl: string | null
+    author: string
+    status: string
+    approvalToken: string
+    publishedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: BlogPostCountAggregateOutputType | null
+    _min: BlogPostMinAggregateOutputType | null
+    _max: BlogPostMaxAggregateOutputType | null
+  }
+
+  type GetBlogPostGroupByPayload<T extends BlogPostGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BlogPostGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BlogPostGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BlogPostGroupByOutputType[P]>
+            : GetScalarType<T[P], BlogPostGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BlogPostSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    excerpt?: boolean
+    content?: boolean
+    coverImageUrl?: boolean
+    author?: boolean
+    status?: boolean
+    approvalToken?: boolean
+    publishedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["blogPost"]>
+
+  export type BlogPostSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    excerpt?: boolean
+    content?: boolean
+    coverImageUrl?: boolean
+    author?: boolean
+    status?: boolean
+    approvalToken?: boolean
+    publishedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["blogPost"]>
+
+  export type BlogPostSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    excerpt?: boolean
+    content?: boolean
+    coverImageUrl?: boolean
+    author?: boolean
+    status?: boolean
+    approvalToken?: boolean
+    publishedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["blogPost"]>
+
+  export type BlogPostSelectScalar = {
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    excerpt?: boolean
+    content?: boolean
+    coverImageUrl?: boolean
+    author?: boolean
+    status?: boolean
+    approvalToken?: boolean
+    publishedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BlogPostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "excerpt" | "content" | "coverImageUrl" | "author" | "status" | "approvalToken" | "publishedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["blogPost"]>
+
+  export type $BlogPostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BlogPost"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      slug: string
+      excerpt: string | null
+      content: string
+      coverImageUrl: string | null
+      author: string
+      status: string
+      approvalToken: string
+      publishedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["blogPost"]>
+    composites: {}
+  }
+
+  type BlogPostGetPayload<S extends boolean | null | undefined | BlogPostDefaultArgs> = $Result.GetResult<Prisma.$BlogPostPayload, S>
+
+  type BlogPostCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BlogPostFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BlogPostCountAggregateInputType | true
+    }
+
+  export interface BlogPostDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BlogPost'], meta: { name: 'BlogPost' } }
+    /**
+     * Find zero or one BlogPost that matches the filter.
+     * @param {BlogPostFindUniqueArgs} args - Arguments to find a BlogPost
+     * @example
+     * // Get one BlogPost
+     * const blogPost = await prisma.blogPost.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BlogPostFindUniqueArgs>(args: SelectSubset<T, BlogPostFindUniqueArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BlogPost that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BlogPostFindUniqueOrThrowArgs} args - Arguments to find a BlogPost
+     * @example
+     * // Get one BlogPost
+     * const blogPost = await prisma.blogPost.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BlogPostFindUniqueOrThrowArgs>(args: SelectSubset<T, BlogPostFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BlogPost that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogPostFindFirstArgs} args - Arguments to find a BlogPost
+     * @example
+     * // Get one BlogPost
+     * const blogPost = await prisma.blogPost.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BlogPostFindFirstArgs>(args?: SelectSubset<T, BlogPostFindFirstArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BlogPost that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogPostFindFirstOrThrowArgs} args - Arguments to find a BlogPost
+     * @example
+     * // Get one BlogPost
+     * const blogPost = await prisma.blogPost.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BlogPostFindFirstOrThrowArgs>(args?: SelectSubset<T, BlogPostFindFirstOrThrowArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BlogPosts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogPostFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BlogPosts
+     * const blogPosts = await prisma.blogPost.findMany()
+     * 
+     * // Get first 10 BlogPosts
+     * const blogPosts = await prisma.blogPost.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const blogPostWithIdOnly = await prisma.blogPost.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BlogPostFindManyArgs>(args?: SelectSubset<T, BlogPostFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BlogPost.
+     * @param {BlogPostCreateArgs} args - Arguments to create a BlogPost.
+     * @example
+     * // Create one BlogPost
+     * const BlogPost = await prisma.blogPost.create({
+     *   data: {
+     *     // ... data to create a BlogPost
+     *   }
+     * })
+     * 
+     */
+    create<T extends BlogPostCreateArgs>(args: SelectSubset<T, BlogPostCreateArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BlogPosts.
+     * @param {BlogPostCreateManyArgs} args - Arguments to create many BlogPosts.
+     * @example
+     * // Create many BlogPosts
+     * const blogPost = await prisma.blogPost.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BlogPostCreateManyArgs>(args?: SelectSubset<T, BlogPostCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BlogPosts and returns the data saved in the database.
+     * @param {BlogPostCreateManyAndReturnArgs} args - Arguments to create many BlogPosts.
+     * @example
+     * // Create many BlogPosts
+     * const blogPost = await prisma.blogPost.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BlogPosts and only return the `id`
+     * const blogPostWithIdOnly = await prisma.blogPost.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BlogPostCreateManyAndReturnArgs>(args?: SelectSubset<T, BlogPostCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BlogPost.
+     * @param {BlogPostDeleteArgs} args - Arguments to delete one BlogPost.
+     * @example
+     * // Delete one BlogPost
+     * const BlogPost = await prisma.blogPost.delete({
+     *   where: {
+     *     // ... filter to delete one BlogPost
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BlogPostDeleteArgs>(args: SelectSubset<T, BlogPostDeleteArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BlogPost.
+     * @param {BlogPostUpdateArgs} args - Arguments to update one BlogPost.
+     * @example
+     * // Update one BlogPost
+     * const blogPost = await prisma.blogPost.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BlogPostUpdateArgs>(args: SelectSubset<T, BlogPostUpdateArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BlogPosts.
+     * @param {BlogPostDeleteManyArgs} args - Arguments to filter BlogPosts to delete.
+     * @example
+     * // Delete a few BlogPosts
+     * const { count } = await prisma.blogPost.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BlogPostDeleteManyArgs>(args?: SelectSubset<T, BlogPostDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BlogPosts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogPostUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BlogPosts
+     * const blogPost = await prisma.blogPost.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BlogPostUpdateManyArgs>(args: SelectSubset<T, BlogPostUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BlogPosts and returns the data updated in the database.
+     * @param {BlogPostUpdateManyAndReturnArgs} args - Arguments to update many BlogPosts.
+     * @example
+     * // Update many BlogPosts
+     * const blogPost = await prisma.blogPost.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BlogPosts and only return the `id`
+     * const blogPostWithIdOnly = await prisma.blogPost.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BlogPostUpdateManyAndReturnArgs>(args: SelectSubset<T, BlogPostUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BlogPost.
+     * @param {BlogPostUpsertArgs} args - Arguments to update or create a BlogPost.
+     * @example
+     * // Update or create a BlogPost
+     * const blogPost = await prisma.blogPost.upsert({
+     *   create: {
+     *     // ... data to create a BlogPost
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BlogPost we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BlogPostUpsertArgs>(args: SelectSubset<T, BlogPostUpsertArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BlogPosts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogPostCountArgs} args - Arguments to filter BlogPosts to count.
+     * @example
+     * // Count the number of BlogPosts
+     * const count = await prisma.blogPost.count({
+     *   where: {
+     *     // ... the filter for the BlogPosts we want to count
+     *   }
+     * })
+    **/
+    count<T extends BlogPostCountArgs>(
+      args?: Subset<T, BlogPostCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BlogPostCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BlogPost.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogPostAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BlogPostAggregateArgs>(args: Subset<T, BlogPostAggregateArgs>): Prisma.PrismaPromise<GetBlogPostAggregateType<T>>
+
+    /**
+     * Group by BlogPost.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogPostGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BlogPostGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BlogPostGroupByArgs['orderBy'] }
+        : { orderBy?: BlogPostGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BlogPostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBlogPostGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BlogPost model
+   */
+  readonly fields: BlogPostFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BlogPost.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BlogPostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BlogPost model
+   */
+  interface BlogPostFieldRefs {
+    readonly id: FieldRef<"BlogPost", 'String'>
+    readonly title: FieldRef<"BlogPost", 'String'>
+    readonly slug: FieldRef<"BlogPost", 'String'>
+    readonly excerpt: FieldRef<"BlogPost", 'String'>
+    readonly content: FieldRef<"BlogPost", 'String'>
+    readonly coverImageUrl: FieldRef<"BlogPost", 'String'>
+    readonly author: FieldRef<"BlogPost", 'String'>
+    readonly status: FieldRef<"BlogPost", 'String'>
+    readonly approvalToken: FieldRef<"BlogPost", 'String'>
+    readonly publishedAt: FieldRef<"BlogPost", 'DateTime'>
+    readonly createdAt: FieldRef<"BlogPost", 'DateTime'>
+    readonly updatedAt: FieldRef<"BlogPost", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BlogPost findUnique
+   */
+  export type BlogPostFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Filter, which BlogPost to fetch.
+     */
+    where: BlogPostWhereUniqueInput
+  }
+
+  /**
+   * BlogPost findUniqueOrThrow
+   */
+  export type BlogPostFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Filter, which BlogPost to fetch.
+     */
+    where: BlogPostWhereUniqueInput
+  }
+
+  /**
+   * BlogPost findFirst
+   */
+  export type BlogPostFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Filter, which BlogPost to fetch.
+     */
+    where?: BlogPostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlogPosts to fetch.
+     */
+    orderBy?: BlogPostOrderByWithRelationInput | BlogPostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BlogPosts.
+     */
+    cursor?: BlogPostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlogPosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlogPosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BlogPosts.
+     */
+    distinct?: BlogPostScalarFieldEnum | BlogPostScalarFieldEnum[]
+  }
+
+  /**
+   * BlogPost findFirstOrThrow
+   */
+  export type BlogPostFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Filter, which BlogPost to fetch.
+     */
+    where?: BlogPostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlogPosts to fetch.
+     */
+    orderBy?: BlogPostOrderByWithRelationInput | BlogPostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BlogPosts.
+     */
+    cursor?: BlogPostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlogPosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlogPosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BlogPosts.
+     */
+    distinct?: BlogPostScalarFieldEnum | BlogPostScalarFieldEnum[]
+  }
+
+  /**
+   * BlogPost findMany
+   */
+  export type BlogPostFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Filter, which BlogPosts to fetch.
+     */
+    where?: BlogPostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlogPosts to fetch.
+     */
+    orderBy?: BlogPostOrderByWithRelationInput | BlogPostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BlogPosts.
+     */
+    cursor?: BlogPostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlogPosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlogPosts.
+     */
+    skip?: number
+    distinct?: BlogPostScalarFieldEnum | BlogPostScalarFieldEnum[]
+  }
+
+  /**
+   * BlogPost create
+   */
+  export type BlogPostCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * The data needed to create a BlogPost.
+     */
+    data: XOR<BlogPostCreateInput, BlogPostUncheckedCreateInput>
+  }
+
+  /**
+   * BlogPost createMany
+   */
+  export type BlogPostCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BlogPosts.
+     */
+    data: BlogPostCreateManyInput | BlogPostCreateManyInput[]
+  }
+
+  /**
+   * BlogPost createManyAndReturn
+   */
+  export type BlogPostCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * The data used to create many BlogPosts.
+     */
+    data: BlogPostCreateManyInput | BlogPostCreateManyInput[]
+  }
+
+  /**
+   * BlogPost update
+   */
+  export type BlogPostUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * The data needed to update a BlogPost.
+     */
+    data: XOR<BlogPostUpdateInput, BlogPostUncheckedUpdateInput>
+    /**
+     * Choose, which BlogPost to update.
+     */
+    where: BlogPostWhereUniqueInput
+  }
+
+  /**
+   * BlogPost updateMany
+   */
+  export type BlogPostUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BlogPosts.
+     */
+    data: XOR<BlogPostUpdateManyMutationInput, BlogPostUncheckedUpdateManyInput>
+    /**
+     * Filter which BlogPosts to update
+     */
+    where?: BlogPostWhereInput
+    /**
+     * Limit how many BlogPosts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BlogPost updateManyAndReturn
+   */
+  export type BlogPostUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * The data used to update BlogPosts.
+     */
+    data: XOR<BlogPostUpdateManyMutationInput, BlogPostUncheckedUpdateManyInput>
+    /**
+     * Filter which BlogPosts to update
+     */
+    where?: BlogPostWhereInput
+    /**
+     * Limit how many BlogPosts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BlogPost upsert
+   */
+  export type BlogPostUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * The filter to search for the BlogPost to update in case it exists.
+     */
+    where: BlogPostWhereUniqueInput
+    /**
+     * In case the BlogPost found by the `where` argument doesn't exist, create a new BlogPost with this data.
+     */
+    create: XOR<BlogPostCreateInput, BlogPostUncheckedCreateInput>
+    /**
+     * In case the BlogPost was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BlogPostUpdateInput, BlogPostUncheckedUpdateInput>
+  }
+
+  /**
+   * BlogPost delete
+   */
+  export type BlogPostDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Filter which BlogPost to delete.
+     */
+    where: BlogPostWhereUniqueInput
+  }
+
+  /**
+   * BlogPost deleteMany
+   */
+  export type BlogPostDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BlogPosts to delete
+     */
+    where?: BlogPostWhereInput
+    /**
+     * Limit how many BlogPosts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BlogPost without action
+   */
+  export type BlogPostDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Model InvitationToken
    */
 
@@ -131224,1090 +132218,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: PasswordResetTokenInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model BlogPost
-   */
-
-  export type AggregateBlogPost = {
-    _count: BlogPostCountAggregateOutputType | null
-    _min: BlogPostMinAggregateOutputType | null
-    _max: BlogPostMaxAggregateOutputType | null
-  }
-
-  export type BlogPostMinAggregateOutputType = {
-    id: string | null
-    title: string | null
-    slug: string | null
-    excerpt: string | null
-    content: string | null
-    coverImageUrl: string | null
-    author: string | null
-    status: string | null
-    approvalToken: string | null
-    publishedAt: Date | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type BlogPostMaxAggregateOutputType = {
-    id: string | null
-    title: string | null
-    slug: string | null
-    excerpt: string | null
-    content: string | null
-    coverImageUrl: string | null
-    author: string | null
-    status: string | null
-    approvalToken: string | null
-    publishedAt: Date | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type BlogPostCountAggregateOutputType = {
-    id: number
-    title: number
-    slug: number
-    excerpt: number
-    content: number
-    coverImageUrl: number
-    author: number
-    status: number
-    approvalToken: number
-    publishedAt: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type BlogPostMinAggregateInputType = {
-    id?: true
-    title?: true
-    slug?: true
-    excerpt?: true
-    content?: true
-    coverImageUrl?: true
-    author?: true
-    status?: true
-    approvalToken?: true
-    publishedAt?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type BlogPostMaxAggregateInputType = {
-    id?: true
-    title?: true
-    slug?: true
-    excerpt?: true
-    content?: true
-    coverImageUrl?: true
-    author?: true
-    status?: true
-    approvalToken?: true
-    publishedAt?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type BlogPostCountAggregateInputType = {
-    id?: true
-    title?: true
-    slug?: true
-    excerpt?: true
-    content?: true
-    coverImageUrl?: true
-    author?: true
-    status?: true
-    approvalToken?: true
-    publishedAt?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type BlogPostAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which BlogPost to aggregate.
-     */
-    where?: BlogPostWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BlogPosts to fetch.
-     */
-    orderBy?: BlogPostOrderByWithRelationInput | BlogPostOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: BlogPostWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BlogPosts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BlogPosts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned BlogPosts
-    **/
-    _count?: true | BlogPostCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: BlogPostMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: BlogPostMaxAggregateInputType
-  }
-
-  export type GetBlogPostAggregateType<T extends BlogPostAggregateArgs> = {
-        [P in keyof T & keyof AggregateBlogPost]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateBlogPost[P]>
-      : GetScalarType<T[P], AggregateBlogPost[P]>
-  }
-
-
-
-
-  export type BlogPostGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BlogPostWhereInput
-    orderBy?: BlogPostOrderByWithAggregationInput | BlogPostOrderByWithAggregationInput[]
-    by: BlogPostScalarFieldEnum[] | BlogPostScalarFieldEnum
-    having?: BlogPostScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: BlogPostCountAggregateInputType | true
-    _min?: BlogPostMinAggregateInputType
-    _max?: BlogPostMaxAggregateInputType
-  }
-
-  export type BlogPostGroupByOutputType = {
-    id: string
-    title: string
-    slug: string
-    excerpt: string | null
-    content: string
-    coverImageUrl: string | null
-    author: string
-    status: string
-    approvalToken: string
-    publishedAt: Date | null
-    createdAt: Date
-    updatedAt: Date
-    _count: BlogPostCountAggregateOutputType | null
-    _min: BlogPostMinAggregateOutputType | null
-    _max: BlogPostMaxAggregateOutputType | null
-  }
-
-  type GetBlogPostGroupByPayload<T extends BlogPostGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<BlogPostGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof BlogPostGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], BlogPostGroupByOutputType[P]>
-            : GetScalarType<T[P], BlogPostGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type BlogPostSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    title?: boolean
-    slug?: boolean
-    excerpt?: boolean
-    content?: boolean
-    coverImageUrl?: boolean
-    author?: boolean
-    status?: boolean
-    approvalToken?: boolean
-    publishedAt?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }, ExtArgs["result"]["blogPost"]>
-
-  export type BlogPostSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    title?: boolean
-    slug?: boolean
-    excerpt?: boolean
-    content?: boolean
-    coverImageUrl?: boolean
-    author?: boolean
-    status?: boolean
-    approvalToken?: boolean
-    publishedAt?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }, ExtArgs["result"]["blogPost"]>
-
-  export type BlogPostSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    title?: boolean
-    slug?: boolean
-    excerpt?: boolean
-    content?: boolean
-    coverImageUrl?: boolean
-    author?: boolean
-    status?: boolean
-    approvalToken?: boolean
-    publishedAt?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }, ExtArgs["result"]["blogPost"]>
-
-  export type BlogPostSelectScalar = {
-    id?: boolean
-    title?: boolean
-    slug?: boolean
-    excerpt?: boolean
-    content?: boolean
-    coverImageUrl?: boolean
-    author?: boolean
-    status?: boolean
-    approvalToken?: boolean
-    publishedAt?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type BlogPostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "excerpt" | "content" | "coverImageUrl" | "author" | "status" | "approvalToken" | "publishedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["blogPost"]>
-
-  export type $BlogPostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "BlogPost"
-    objects: {}
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      title: string
-      slug: string
-      excerpt: string | null
-      content: string
-      coverImageUrl: string | null
-      author: string
-      status: string
-      approvalToken: string
-      publishedAt: Date | null
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["blogPost"]>
-    composites: {}
-  }
-
-  type BlogPostGetPayload<S extends boolean | null | undefined | BlogPostDefaultArgs> = $Result.GetResult<Prisma.$BlogPostPayload, S>
-
-  type BlogPostCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<BlogPostFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: BlogPostCountAggregateInputType | true
-    }
-
-  export interface BlogPostDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BlogPost'], meta: { name: 'BlogPost' } }
-    /**
-     * Find zero or one BlogPost that matches the filter.
-     * @param {BlogPostFindUniqueArgs} args - Arguments to find a BlogPost
-     * @example
-     * // Get one BlogPost
-     * const blogPost = await prisma.blogPost.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends BlogPostFindUniqueArgs>(args: SelectSubset<T, BlogPostFindUniqueArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one BlogPost that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {BlogPostFindUniqueOrThrowArgs} args - Arguments to find a BlogPost
-     * @example
-     * // Get one BlogPost
-     * const blogPost = await prisma.blogPost.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends BlogPostFindUniqueOrThrowArgs>(args: SelectSubset<T, BlogPostFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first BlogPost that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BlogPostFindFirstArgs} args - Arguments to find a BlogPost
-     * @example
-     * // Get one BlogPost
-     * const blogPost = await prisma.blogPost.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends BlogPostFindFirstArgs>(args?: SelectSubset<T, BlogPostFindFirstArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first BlogPost that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BlogPostFindFirstOrThrowArgs} args - Arguments to find a BlogPost
-     * @example
-     * // Get one BlogPost
-     * const blogPost = await prisma.blogPost.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends BlogPostFindFirstOrThrowArgs>(args?: SelectSubset<T, BlogPostFindFirstOrThrowArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more BlogPosts that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BlogPostFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all BlogPosts
-     * const blogPosts = await prisma.blogPost.findMany()
-     * 
-     * // Get first 10 BlogPosts
-     * const blogPosts = await prisma.blogPost.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const blogPostWithIdOnly = await prisma.blogPost.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends BlogPostFindManyArgs>(args?: SelectSubset<T, BlogPostFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a BlogPost.
-     * @param {BlogPostCreateArgs} args - Arguments to create a BlogPost.
-     * @example
-     * // Create one BlogPost
-     * const BlogPost = await prisma.blogPost.create({
-     *   data: {
-     *     // ... data to create a BlogPost
-     *   }
-     * })
-     * 
-     */
-    create<T extends BlogPostCreateArgs>(args: SelectSubset<T, BlogPostCreateArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many BlogPosts.
-     * @param {BlogPostCreateManyArgs} args - Arguments to create many BlogPosts.
-     * @example
-     * // Create many BlogPosts
-     * const blogPost = await prisma.blogPost.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends BlogPostCreateManyArgs>(args?: SelectSubset<T, BlogPostCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many BlogPosts and returns the data saved in the database.
-     * @param {BlogPostCreateManyAndReturnArgs} args - Arguments to create many BlogPosts.
-     * @example
-     * // Create many BlogPosts
-     * const blogPost = await prisma.blogPost.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many BlogPosts and only return the `id`
-     * const blogPostWithIdOnly = await prisma.blogPost.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends BlogPostCreateManyAndReturnArgs>(args?: SelectSubset<T, BlogPostCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a BlogPost.
-     * @param {BlogPostDeleteArgs} args - Arguments to delete one BlogPost.
-     * @example
-     * // Delete one BlogPost
-     * const BlogPost = await prisma.blogPost.delete({
-     *   where: {
-     *     // ... filter to delete one BlogPost
-     *   }
-     * })
-     * 
-     */
-    delete<T extends BlogPostDeleteArgs>(args: SelectSubset<T, BlogPostDeleteArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one BlogPost.
-     * @param {BlogPostUpdateArgs} args - Arguments to update one BlogPost.
-     * @example
-     * // Update one BlogPost
-     * const blogPost = await prisma.blogPost.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends BlogPostUpdateArgs>(args: SelectSubset<T, BlogPostUpdateArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more BlogPosts.
-     * @param {BlogPostDeleteManyArgs} args - Arguments to filter BlogPosts to delete.
-     * @example
-     * // Delete a few BlogPosts
-     * const { count } = await prisma.blogPost.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends BlogPostDeleteManyArgs>(args?: SelectSubset<T, BlogPostDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more BlogPosts.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BlogPostUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many BlogPosts
-     * const blogPost = await prisma.blogPost.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends BlogPostUpdateManyArgs>(args: SelectSubset<T, BlogPostUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more BlogPosts and returns the data updated in the database.
-     * @param {BlogPostUpdateManyAndReturnArgs} args - Arguments to update many BlogPosts.
-     * @example
-     * // Update many BlogPosts
-     * const blogPost = await prisma.blogPost.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more BlogPosts and only return the `id`
-     * const blogPostWithIdOnly = await prisma.blogPost.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends BlogPostUpdateManyAndReturnArgs>(args: SelectSubset<T, BlogPostUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one BlogPost.
-     * @param {BlogPostUpsertArgs} args - Arguments to update or create a BlogPost.
-     * @example
-     * // Update or create a BlogPost
-     * const blogPost = await prisma.blogPost.upsert({
-     *   create: {
-     *     // ... data to create a BlogPost
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the BlogPost we want to update
-     *   }
-     * })
-     */
-    upsert<T extends BlogPostUpsertArgs>(args: SelectSubset<T, BlogPostUpsertArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of BlogPosts.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BlogPostCountArgs} args - Arguments to filter BlogPosts to count.
-     * @example
-     * // Count the number of BlogPosts
-     * const count = await prisma.blogPost.count({
-     *   where: {
-     *     // ... the filter for the BlogPosts we want to count
-     *   }
-     * })
-    **/
-    count<T extends BlogPostCountArgs>(
-      args?: Subset<T, BlogPostCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], BlogPostCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a BlogPost.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BlogPostAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends BlogPostAggregateArgs>(args: Subset<T, BlogPostAggregateArgs>): Prisma.PrismaPromise<GetBlogPostAggregateType<T>>
-
-    /**
-     * Group by BlogPost.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BlogPostGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends BlogPostGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: BlogPostGroupByArgs['orderBy'] }
-        : { orderBy?: BlogPostGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, BlogPostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBlogPostGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the BlogPost model
-   */
-  readonly fields: BlogPostFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for BlogPost.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__BlogPostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the BlogPost model
-   */
-  interface BlogPostFieldRefs {
-    readonly id: FieldRef<"BlogPost", 'String'>
-    readonly title: FieldRef<"BlogPost", 'String'>
-    readonly slug: FieldRef<"BlogPost", 'String'>
-    readonly excerpt: FieldRef<"BlogPost", 'String'>
-    readonly content: FieldRef<"BlogPost", 'String'>
-    readonly coverImageUrl: FieldRef<"BlogPost", 'String'>
-    readonly author: FieldRef<"BlogPost", 'String'>
-    readonly status: FieldRef<"BlogPost", 'String'>
-    readonly approvalToken: FieldRef<"BlogPost", 'String'>
-    readonly publishedAt: FieldRef<"BlogPost", 'DateTime'>
-    readonly createdAt: FieldRef<"BlogPost", 'DateTime'>
-    readonly updatedAt: FieldRef<"BlogPost", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * BlogPost findUnique
-   */
-  export type BlogPostFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BlogPost
-     */
-    select?: BlogPostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BlogPost
-     */
-    omit?: BlogPostOmit<ExtArgs> | null
-    /**
-     * Filter, which BlogPost to fetch.
-     */
-    where: BlogPostWhereUniqueInput
-  }
-
-  /**
-   * BlogPost findUniqueOrThrow
-   */
-  export type BlogPostFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BlogPost
-     */
-    select?: BlogPostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BlogPost
-     */
-    omit?: BlogPostOmit<ExtArgs> | null
-    /**
-     * Filter, which BlogPost to fetch.
-     */
-    where: BlogPostWhereUniqueInput
-  }
-
-  /**
-   * BlogPost findFirst
-   */
-  export type BlogPostFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BlogPost
-     */
-    select?: BlogPostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BlogPost
-     */
-    omit?: BlogPostOmit<ExtArgs> | null
-    /**
-     * Filter, which BlogPost to fetch.
-     */
-    where?: BlogPostWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BlogPosts to fetch.
-     */
-    orderBy?: BlogPostOrderByWithRelationInput | BlogPostOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for BlogPosts.
-     */
-    cursor?: BlogPostWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BlogPosts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BlogPosts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of BlogPosts.
-     */
-    distinct?: BlogPostScalarFieldEnum | BlogPostScalarFieldEnum[]
-  }
-
-  /**
-   * BlogPost findFirstOrThrow
-   */
-  export type BlogPostFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BlogPost
-     */
-    select?: BlogPostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BlogPost
-     */
-    omit?: BlogPostOmit<ExtArgs> | null
-    /**
-     * Filter, which BlogPost to fetch.
-     */
-    where?: BlogPostWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BlogPosts to fetch.
-     */
-    orderBy?: BlogPostOrderByWithRelationInput | BlogPostOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for BlogPosts.
-     */
-    cursor?: BlogPostWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BlogPosts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BlogPosts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of BlogPosts.
-     */
-    distinct?: BlogPostScalarFieldEnum | BlogPostScalarFieldEnum[]
-  }
-
-  /**
-   * BlogPost findMany
-   */
-  export type BlogPostFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BlogPost
-     */
-    select?: BlogPostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BlogPost
-     */
-    omit?: BlogPostOmit<ExtArgs> | null
-    /**
-     * Filter, which BlogPosts to fetch.
-     */
-    where?: BlogPostWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BlogPosts to fetch.
-     */
-    orderBy?: BlogPostOrderByWithRelationInput | BlogPostOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing BlogPosts.
-     */
-    cursor?: BlogPostWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BlogPosts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BlogPosts.
-     */
-    skip?: number
-    distinct?: BlogPostScalarFieldEnum | BlogPostScalarFieldEnum[]
-  }
-
-  /**
-   * BlogPost create
-   */
-  export type BlogPostCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BlogPost
-     */
-    select?: BlogPostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BlogPost
-     */
-    omit?: BlogPostOmit<ExtArgs> | null
-    /**
-     * The data needed to create a BlogPost.
-     */
-    data: XOR<BlogPostCreateInput, BlogPostUncheckedCreateInput>
-  }
-
-  /**
-   * BlogPost createMany
-   */
-  export type BlogPostCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many BlogPosts.
-     */
-    data: BlogPostCreateManyInput | BlogPostCreateManyInput[]
-  }
-
-  /**
-   * BlogPost createManyAndReturn
-   */
-  export type BlogPostCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BlogPost
-     */
-    select?: BlogPostSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the BlogPost
-     */
-    omit?: BlogPostOmit<ExtArgs> | null
-    /**
-     * The data used to create many BlogPosts.
-     */
-    data: BlogPostCreateManyInput | BlogPostCreateManyInput[]
-  }
-
-  /**
-   * BlogPost update
-   */
-  export type BlogPostUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BlogPost
-     */
-    select?: BlogPostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BlogPost
-     */
-    omit?: BlogPostOmit<ExtArgs> | null
-    /**
-     * The data needed to update a BlogPost.
-     */
-    data: XOR<BlogPostUpdateInput, BlogPostUncheckedUpdateInput>
-    /**
-     * Choose, which BlogPost to update.
-     */
-    where: BlogPostWhereUniqueInput
-  }
-
-  /**
-   * BlogPost updateMany
-   */
-  export type BlogPostUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update BlogPosts.
-     */
-    data: XOR<BlogPostUpdateManyMutationInput, BlogPostUncheckedUpdateManyInput>
-    /**
-     * Filter which BlogPosts to update
-     */
-    where?: BlogPostWhereInput
-    /**
-     * Limit how many BlogPosts to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * BlogPost updateManyAndReturn
-   */
-  export type BlogPostUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BlogPost
-     */
-    select?: BlogPostSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the BlogPost
-     */
-    omit?: BlogPostOmit<ExtArgs> | null
-    /**
-     * The data used to update BlogPosts.
-     */
-    data: XOR<BlogPostUpdateManyMutationInput, BlogPostUncheckedUpdateManyInput>
-    /**
-     * Filter which BlogPosts to update
-     */
-    where?: BlogPostWhereInput
-    /**
-     * Limit how many BlogPosts to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * BlogPost upsert
-   */
-  export type BlogPostUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BlogPost
-     */
-    select?: BlogPostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BlogPost
-     */
-    omit?: BlogPostOmit<ExtArgs> | null
-    /**
-     * The filter to search for the BlogPost to update in case it exists.
-     */
-    where: BlogPostWhereUniqueInput
-    /**
-     * In case the BlogPost found by the `where` argument doesn't exist, create a new BlogPost with this data.
-     */
-    create: XOR<BlogPostCreateInput, BlogPostUncheckedCreateInput>
-    /**
-     * In case the BlogPost was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<BlogPostUpdateInput, BlogPostUncheckedUpdateInput>
-  }
-
-  /**
-   * BlogPost delete
-   */
-  export type BlogPostDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BlogPost
-     */
-    select?: BlogPostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BlogPost
-     */
-    omit?: BlogPostOmit<ExtArgs> | null
-    /**
-     * Filter which BlogPost to delete.
-     */
-    where: BlogPostWhereUniqueInput
-  }
-
-  /**
-   * BlogPost deleteMany
-   */
-  export type BlogPostDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which BlogPosts to delete
-     */
-    where?: BlogPostWhereInput
-    /**
-     * Limit how many BlogPosts to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * BlogPost without action
-   */
-  export type BlogPostDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BlogPost
-     */
-    select?: BlogPostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BlogPost
-     */
-    omit?: BlogPostOmit<ExtArgs> | null
   }
 
 
@@ -136699,11 +136609,11 @@ export namespace Prisma {
     name: 'name',
     passwordHash: 'passwordHash',
     role: 'role',
+    avatarPath: 'avatarPath',
+    managerId: 'managerId',
     tenantId: 'tenantId',
     isActive: 'isActive',
     lastLoginAt: 'lastLoginAt',
-    avatarPath: 'avatarPath',
-    managerId: 'managerId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -136721,8 +136631,6 @@ export namespace Prisma {
     contactPhone: 'contactPhone',
     maxUsers: 'maxUsers',
     logoUrl: 'logoUrl',
-    primaryColor: 'primaryColor',
-    accentColor: 'accentColor',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -138208,6 +138116,24 @@ export namespace Prisma {
   export type FRSessionScalarFieldEnum = (typeof FRSessionScalarFieldEnum)[keyof typeof FRSessionScalarFieldEnum]
 
 
+  export const BlogPostScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    slug: 'slug',
+    excerpt: 'excerpt',
+    content: 'content',
+    coverImageUrl: 'coverImageUrl',
+    author: 'author',
+    status: 'status',
+    approvalToken: 'approvalToken',
+    publishedAt: 'publishedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BlogPostScalarFieldEnum = (typeof BlogPostScalarFieldEnum)[keyof typeof BlogPostScalarFieldEnum]
+
+
   export const InvitationTokenScalarFieldEnum: {
     id: 'id',
     token: 'token',
@@ -138230,24 +138156,6 @@ export namespace Prisma {
   };
 
   export type PasswordResetTokenScalarFieldEnum = (typeof PasswordResetTokenScalarFieldEnum)[keyof typeof PasswordResetTokenScalarFieldEnum]
-
-
-  export const BlogPostScalarFieldEnum: {
-    id: 'id',
-    title: 'title',
-    slug: 'slug',
-    excerpt: 'excerpt',
-    content: 'content',
-    coverImageUrl: 'coverImageUrl',
-    author: 'author',
-    status: 'status',
-    approvalToken: 'approvalToken',
-    publishedAt: 'publishedAt',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type BlogPostScalarFieldEnum = (typeof BlogPostScalarFieldEnum)[keyof typeof BlogPostScalarFieldEnum]
 
 
   export const ConversationScalarFieldEnum: {
@@ -138367,16 +138275,14 @@ export namespace Prisma {
     name?: StringFilter<"User"> | string
     passwordHash?: StringNullableFilter<"User"> | string | null
     role?: StringFilter<"User"> | string
+    avatarPath?: StringNullableFilter<"User"> | string | null
+    managerId?: StringNullableFilter<"User"> | string | null
     tenantId?: StringNullableFilter<"User"> | string | null
     isActive?: BoolFilter<"User"> | boolean
     lastLoginAt?: DateTimeNullableFilter<"User"> | Date | string | null
-    avatarPath?: StringNullableFilter<"User"> | string | null
-    managerId?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     tenant?: XOR<TenantNullableScalarRelationFilter, TenantWhereInput> | null
-    manager?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    directReports?: UserListRelationFilter
     storeAssignments?: UserStoreAssignmentListRelationFilter
     regionAssignments?: UserRegionAssignmentListRelationFilter
     checklistSessions?: ChecklistSessionListRelationFilter
@@ -138449,16 +138355,14 @@ export namespace Prisma {
     name?: SortOrder
     passwordHash?: SortOrderInput | SortOrder
     role?: SortOrder
+    avatarPath?: SortOrderInput | SortOrder
+    managerId?: SortOrderInput | SortOrder
     tenantId?: SortOrderInput | SortOrder
     isActive?: SortOrder
     lastLoginAt?: SortOrderInput | SortOrder
-    avatarPath?: SortOrderInput | SortOrder
-    managerId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     tenant?: TenantOrderByWithRelationInput
-    manager?: UserOrderByWithRelationInput
-    directReports?: UserOrderByRelationAggregateInput
     storeAssignments?: UserStoreAssignmentOrderByRelationAggregateInput
     regionAssignments?: UserRegionAssignmentOrderByRelationAggregateInput
     checklistSessions?: ChecklistSessionOrderByRelationAggregateInput
@@ -138534,16 +138438,14 @@ export namespace Prisma {
     name?: StringFilter<"User"> | string
     passwordHash?: StringNullableFilter<"User"> | string | null
     role?: StringFilter<"User"> | string
+    avatarPath?: StringNullableFilter<"User"> | string | null
+    managerId?: StringNullableFilter<"User"> | string | null
     tenantId?: StringNullableFilter<"User"> | string | null
     isActive?: BoolFilter<"User"> | boolean
     lastLoginAt?: DateTimeNullableFilter<"User"> | Date | string | null
-    avatarPath?: StringNullableFilter<"User"> | string | null
-    managerId?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     tenant?: XOR<TenantNullableScalarRelationFilter, TenantWhereInput> | null
-    manager?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    directReports?: UserListRelationFilter
     storeAssignments?: UserStoreAssignmentListRelationFilter
     regionAssignments?: UserRegionAssignmentListRelationFilter
     checklistSessions?: ChecklistSessionListRelationFilter
@@ -138616,11 +138518,11 @@ export namespace Prisma {
     name?: SortOrder
     passwordHash?: SortOrderInput | SortOrder
     role?: SortOrder
+    avatarPath?: SortOrderInput | SortOrder
+    managerId?: SortOrderInput | SortOrder
     tenantId?: SortOrderInput | SortOrder
     isActive?: SortOrder
     lastLoginAt?: SortOrderInput | SortOrder
-    avatarPath?: SortOrderInput | SortOrder
-    managerId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -138637,11 +138539,11 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"User"> | string
     passwordHash?: StringNullableWithAggregatesFilter<"User"> | string | null
     role?: StringWithAggregatesFilter<"User"> | string
+    avatarPath?: StringNullableWithAggregatesFilter<"User"> | string | null
+    managerId?: StringNullableWithAggregatesFilter<"User"> | string | null
     tenantId?: StringNullableWithAggregatesFilter<"User"> | string | null
     isActive?: BoolWithAggregatesFilter<"User"> | boolean
     lastLoginAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
-    avatarPath?: StringNullableWithAggregatesFilter<"User"> | string | null
-    managerId?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -138659,8 +138561,6 @@ export namespace Prisma {
     contactPhone?: StringNullableFilter<"Tenant"> | string | null
     maxUsers?: IntFilter<"Tenant"> | number
     logoUrl?: StringNullableFilter<"Tenant"> | string | null
-    primaryColor?: StringNullableFilter<"Tenant"> | string | null
-    accentColor?: StringNullableFilter<"Tenant"> | string | null
     createdAt?: DateTimeFilter<"Tenant"> | Date | string
     updatedAt?: DateTimeFilter<"Tenant"> | Date | string
     users?: UserListRelationFilter
@@ -138716,8 +138616,6 @@ export namespace Prisma {
     contactPhone?: SortOrderInput | SortOrder
     maxUsers?: SortOrder
     logoUrl?: SortOrderInput | SortOrder
-    primaryColor?: SortOrderInput | SortOrder
-    accentColor?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     users?: UserOrderByRelationAggregateInput
@@ -138776,8 +138674,6 @@ export namespace Prisma {
     contactPhone?: StringNullableFilter<"Tenant"> | string | null
     maxUsers?: IntFilter<"Tenant"> | number
     logoUrl?: StringNullableFilter<"Tenant"> | string | null
-    primaryColor?: StringNullableFilter<"Tenant"> | string | null
-    accentColor?: StringNullableFilter<"Tenant"> | string | null
     createdAt?: DateTimeFilter<"Tenant"> | Date | string
     updatedAt?: DateTimeFilter<"Tenant"> | Date | string
     users?: UserListRelationFilter
@@ -138833,8 +138729,6 @@ export namespace Prisma {
     contactPhone?: SortOrderInput | SortOrder
     maxUsers?: SortOrder
     logoUrl?: SortOrderInput | SortOrder
-    primaryColor?: SortOrderInput | SortOrder
-    accentColor?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: TenantCountOrderByAggregateInput
@@ -138857,8 +138751,6 @@ export namespace Prisma {
     contactPhone?: StringNullableWithAggregatesFilter<"Tenant"> | string | null
     maxUsers?: IntWithAggregatesFilter<"Tenant"> | number
     logoUrl?: StringNullableWithAggregatesFilter<"Tenant"> | string | null
-    primaryColor?: StringNullableWithAggregatesFilter<"Tenant"> | string | null
-    accentColor?: StringNullableWithAggregatesFilter<"Tenant"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Tenant"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Tenant"> | Date | string
   }
@@ -146955,6 +146847,93 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"FRSession"> | Date | string
   }
 
+  export type BlogPostWhereInput = {
+    AND?: BlogPostWhereInput | BlogPostWhereInput[]
+    OR?: BlogPostWhereInput[]
+    NOT?: BlogPostWhereInput | BlogPostWhereInput[]
+    id?: StringFilter<"BlogPost"> | string
+    title?: StringFilter<"BlogPost"> | string
+    slug?: StringFilter<"BlogPost"> | string
+    excerpt?: StringNullableFilter<"BlogPost"> | string | null
+    content?: StringFilter<"BlogPost"> | string
+    coverImageUrl?: StringNullableFilter<"BlogPost"> | string | null
+    author?: StringFilter<"BlogPost"> | string
+    status?: StringFilter<"BlogPost"> | string
+    approvalToken?: StringFilter<"BlogPost"> | string
+    publishedAt?: DateTimeNullableFilter<"BlogPost"> | Date | string | null
+    createdAt?: DateTimeFilter<"BlogPost"> | Date | string
+    updatedAt?: DateTimeFilter<"BlogPost"> | Date | string
+  }
+
+  export type BlogPostOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    excerpt?: SortOrderInput | SortOrder
+    content?: SortOrder
+    coverImageUrl?: SortOrderInput | SortOrder
+    author?: SortOrder
+    status?: SortOrder
+    approvalToken?: SortOrder
+    publishedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BlogPostWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slug?: string
+    approvalToken?: string
+    AND?: BlogPostWhereInput | BlogPostWhereInput[]
+    OR?: BlogPostWhereInput[]
+    NOT?: BlogPostWhereInput | BlogPostWhereInput[]
+    title?: StringFilter<"BlogPost"> | string
+    excerpt?: StringNullableFilter<"BlogPost"> | string | null
+    content?: StringFilter<"BlogPost"> | string
+    coverImageUrl?: StringNullableFilter<"BlogPost"> | string | null
+    author?: StringFilter<"BlogPost"> | string
+    status?: StringFilter<"BlogPost"> | string
+    publishedAt?: DateTimeNullableFilter<"BlogPost"> | Date | string | null
+    createdAt?: DateTimeFilter<"BlogPost"> | Date | string
+    updatedAt?: DateTimeFilter<"BlogPost"> | Date | string
+  }, "id" | "slug" | "approvalToken">
+
+  export type BlogPostOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    excerpt?: SortOrderInput | SortOrder
+    content?: SortOrder
+    coverImageUrl?: SortOrderInput | SortOrder
+    author?: SortOrder
+    status?: SortOrder
+    approvalToken?: SortOrder
+    publishedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BlogPostCountOrderByAggregateInput
+    _max?: BlogPostMaxOrderByAggregateInput
+    _min?: BlogPostMinOrderByAggregateInput
+  }
+
+  export type BlogPostScalarWhereWithAggregatesInput = {
+    AND?: BlogPostScalarWhereWithAggregatesInput | BlogPostScalarWhereWithAggregatesInput[]
+    OR?: BlogPostScalarWhereWithAggregatesInput[]
+    NOT?: BlogPostScalarWhereWithAggregatesInput | BlogPostScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BlogPost"> | string
+    title?: StringWithAggregatesFilter<"BlogPost"> | string
+    slug?: StringWithAggregatesFilter<"BlogPost"> | string
+    excerpt?: StringNullableWithAggregatesFilter<"BlogPost"> | string | null
+    content?: StringWithAggregatesFilter<"BlogPost"> | string
+    coverImageUrl?: StringNullableWithAggregatesFilter<"BlogPost"> | string | null
+    author?: StringWithAggregatesFilter<"BlogPost"> | string
+    status?: StringWithAggregatesFilter<"BlogPost"> | string
+    approvalToken?: StringWithAggregatesFilter<"BlogPost"> | string
+    publishedAt?: DateTimeNullableWithAggregatesFilter<"BlogPost"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"BlogPost"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BlogPost"> | Date | string
+  }
+
   export type InvitationTokenWhereInput = {
     AND?: InvitationTokenWhereInput | InvitationTokenWhereInput[]
     OR?: InvitationTokenWhereInput[]
@@ -147073,93 +147052,6 @@ export namespace Prisma {
     expiresAt?: DateTimeWithAggregatesFilter<"PasswordResetToken"> | Date | string
     usedAt?: DateTimeNullableWithAggregatesFilter<"PasswordResetToken"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"PasswordResetToken"> | Date | string
-  }
-
-  export type BlogPostWhereInput = {
-    AND?: BlogPostWhereInput | BlogPostWhereInput[]
-    OR?: BlogPostWhereInput[]
-    NOT?: BlogPostWhereInput | BlogPostWhereInput[]
-    id?: StringFilter<"BlogPost"> | string
-    title?: StringFilter<"BlogPost"> | string
-    slug?: StringFilter<"BlogPost"> | string
-    excerpt?: StringNullableFilter<"BlogPost"> | string | null
-    content?: StringFilter<"BlogPost"> | string
-    coverImageUrl?: StringNullableFilter<"BlogPost"> | string | null
-    author?: StringFilter<"BlogPost"> | string
-    status?: StringFilter<"BlogPost"> | string
-    approvalToken?: StringFilter<"BlogPost"> | string
-    publishedAt?: DateTimeNullableFilter<"BlogPost"> | Date | string | null
-    createdAt?: DateTimeFilter<"BlogPost"> | Date | string
-    updatedAt?: DateTimeFilter<"BlogPost"> | Date | string
-  }
-
-  export type BlogPostOrderByWithRelationInput = {
-    id?: SortOrder
-    title?: SortOrder
-    slug?: SortOrder
-    excerpt?: SortOrderInput | SortOrder
-    content?: SortOrder
-    coverImageUrl?: SortOrderInput | SortOrder
-    author?: SortOrder
-    status?: SortOrder
-    approvalToken?: SortOrder
-    publishedAt?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type BlogPostWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    slug?: string
-    approvalToken?: string
-    AND?: BlogPostWhereInput | BlogPostWhereInput[]
-    OR?: BlogPostWhereInput[]
-    NOT?: BlogPostWhereInput | BlogPostWhereInput[]
-    title?: StringFilter<"BlogPost"> | string
-    excerpt?: StringNullableFilter<"BlogPost"> | string | null
-    content?: StringFilter<"BlogPost"> | string
-    coverImageUrl?: StringNullableFilter<"BlogPost"> | string | null
-    author?: StringFilter<"BlogPost"> | string
-    status?: StringFilter<"BlogPost"> | string
-    publishedAt?: DateTimeNullableFilter<"BlogPost"> | Date | string | null
-    createdAt?: DateTimeFilter<"BlogPost"> | Date | string
-    updatedAt?: DateTimeFilter<"BlogPost"> | Date | string
-  }, "id" | "slug" | "approvalToken">
-
-  export type BlogPostOrderByWithAggregationInput = {
-    id?: SortOrder
-    title?: SortOrder
-    slug?: SortOrder
-    excerpt?: SortOrderInput | SortOrder
-    content?: SortOrder
-    coverImageUrl?: SortOrderInput | SortOrder
-    author?: SortOrder
-    status?: SortOrder
-    approvalToken?: SortOrder
-    publishedAt?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: BlogPostCountOrderByAggregateInput
-    _max?: BlogPostMaxOrderByAggregateInput
-    _min?: BlogPostMinOrderByAggregateInput
-  }
-
-  export type BlogPostScalarWhereWithAggregatesInput = {
-    AND?: BlogPostScalarWhereWithAggregatesInput | BlogPostScalarWhereWithAggregatesInput[]
-    OR?: BlogPostScalarWhereWithAggregatesInput[]
-    NOT?: BlogPostScalarWhereWithAggregatesInput | BlogPostScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"BlogPost"> | string
-    title?: StringWithAggregatesFilter<"BlogPost"> | string
-    slug?: StringWithAggregatesFilter<"BlogPost"> | string
-    excerpt?: StringNullableWithAggregatesFilter<"BlogPost"> | string | null
-    content?: StringWithAggregatesFilter<"BlogPost"> | string
-    coverImageUrl?: StringNullableWithAggregatesFilter<"BlogPost"> | string | null
-    author?: StringWithAggregatesFilter<"BlogPost"> | string
-    status?: StringWithAggregatesFilter<"BlogPost"> | string
-    approvalToken?: StringWithAggregatesFilter<"BlogPost"> | string
-    publishedAt?: DateTimeNullableWithAggregatesFilter<"BlogPost"> | Date | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"BlogPost"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"BlogPost"> | Date | string
   }
 
   export type ConversationWhereInput = {
@@ -147429,14 +147321,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -147509,14 +147400,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -147589,14 +147479,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -147669,14 +147558,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -147749,11 +147637,11 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -147764,9 +147652,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -147777,11 +147666,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -147796,8 +147685,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -147853,8 +147740,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -147910,8 +147795,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -147967,8 +147850,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -148024,8 +147905,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -148040,8 +147919,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -148056,8 +147933,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -156613,6 +156488,111 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BlogPostCreateInput = {
+    id?: string
+    title: string
+    slug: string
+    excerpt?: string | null
+    content: string
+    coverImageUrl?: string | null
+    author?: string
+    status?: string
+    approvalToken: string
+    publishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BlogPostUncheckedCreateInput = {
+    id?: string
+    title: string
+    slug: string
+    excerpt?: string | null
+    content: string
+    coverImageUrl?: string | null
+    author?: string
+    status?: string
+    approvalToken: string
+    publishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BlogPostUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    coverImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    author?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    approvalToken?: StringFieldUpdateOperationsInput | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlogPostUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    coverImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    author?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    approvalToken?: StringFieldUpdateOperationsInput | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlogPostCreateManyInput = {
+    id?: string
+    title: string
+    slug: string
+    excerpt?: string | null
+    content: string
+    coverImageUrl?: string | null
+    author?: string
+    status?: string
+    approvalToken: string
+    publishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BlogPostUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    coverImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    author?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    approvalToken?: StringFieldUpdateOperationsInput | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlogPostUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    coverImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    author?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    approvalToken?: StringFieldUpdateOperationsInput | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type InvitationTokenCreateInput = {
     id?: string
     token: string
@@ -156735,111 +156715,6 @@ export namespace Prisma {
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BlogPostCreateInput = {
-    id?: string
-    title: string
-    slug: string
-    excerpt?: string | null
-    content: string
-    coverImageUrl?: string | null
-    author?: string
-    status?: string
-    approvalToken: string
-    publishedAt?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type BlogPostUncheckedCreateInput = {
-    id?: string
-    title: string
-    slug: string
-    excerpt?: string | null
-    content: string
-    coverImageUrl?: string | null
-    author?: string
-    status?: string
-    approvalToken: string
-    publishedAt?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type BlogPostUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
-    content?: StringFieldUpdateOperationsInput | string
-    coverImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    author?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    approvalToken?: StringFieldUpdateOperationsInput | string
-    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BlogPostUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
-    content?: StringFieldUpdateOperationsInput | string
-    coverImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    author?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    approvalToken?: StringFieldUpdateOperationsInput | string
-    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BlogPostCreateManyInput = {
-    id?: string
-    title: string
-    slug: string
-    excerpt?: string | null
-    content: string
-    coverImageUrl?: string | null
-    author?: string
-    status?: string
-    approvalToken: string
-    publishedAt?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type BlogPostUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
-    content?: StringFieldUpdateOperationsInput | string
-    coverImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    author?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    approvalToken?: StringFieldUpdateOperationsInput | string
-    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BlogPostUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
-    content?: StringFieldUpdateOperationsInput | string
-    coverImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    author?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    approvalToken?: StringFieldUpdateOperationsInput | string
-    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ConversationCreateInput = {
@@ -157160,17 +157035,6 @@ export namespace Prisma {
   export type TenantNullableScalarRelationFilter = {
     is?: TenantWhereInput | null
     isNot?: TenantWhereInput | null
-  }
-
-  export type UserNullableScalarRelationFilter = {
-    is?: UserWhereInput | null
-    isNot?: UserWhereInput | null
-  }
-
-  export type UserListRelationFilter = {
-    every?: UserWhereInput
-    some?: UserWhereInput
-    none?: UserWhereInput
   }
 
   export type UserStoreAssignmentListRelationFilter = {
@@ -157502,10 +157366,6 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
-  export type UserOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type UserStoreAssignmentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -157728,11 +157588,11 @@ export namespace Prisma {
     name?: SortOrder
     passwordHash?: SortOrder
     role?: SortOrder
+    avatarPath?: SortOrder
+    managerId?: SortOrder
     tenantId?: SortOrder
     isActive?: SortOrder
     lastLoginAt?: SortOrder
-    avatarPath?: SortOrder
-    managerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -157743,11 +157603,11 @@ export namespace Prisma {
     name?: SortOrder
     passwordHash?: SortOrder
     role?: SortOrder
+    avatarPath?: SortOrder
+    managerId?: SortOrder
     tenantId?: SortOrder
     isActive?: SortOrder
     lastLoginAt?: SortOrder
-    avatarPath?: SortOrder
-    managerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -157758,11 +157618,11 @@ export namespace Prisma {
     name?: SortOrder
     passwordHash?: SortOrder
     role?: SortOrder
+    avatarPath?: SortOrder
+    managerId?: SortOrder
     tenantId?: SortOrder
     isActive?: SortOrder
     lastLoginAt?: SortOrder
-    avatarPath?: SortOrder
-    managerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -157846,6 +157706,12 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type UserListRelationFilter = {
+    every?: UserWhereInput
+    some?: UserWhereInput
+    none?: UserWhereInput
   }
 
   export type StoreListRelationFilter = {
@@ -157955,6 +157821,10 @@ export namespace Prisma {
     none?: ConversationWhereInput
   }
 
+  export type UserOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type StoreOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -158033,8 +157903,6 @@ export namespace Prisma {
     contactPhone?: SortOrder
     maxUsers?: SortOrder
     logoUrl?: SortOrder
-    primaryColor?: SortOrder
-    accentColor?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -158053,8 +157921,6 @@ export namespace Prisma {
     contactPhone?: SortOrder
     maxUsers?: SortOrder
     logoUrl?: SortOrder
-    primaryColor?: SortOrder
-    accentColor?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -158069,8 +157935,6 @@ export namespace Prisma {
     contactPhone?: SortOrder
     maxUsers?: SortOrder
     logoUrl?: SortOrder
-    primaryColor?: SortOrder
-    accentColor?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -159325,6 +159189,11 @@ export namespace Prisma {
   export type VmGuidelineScalarRelationFilter = {
     is?: VmGuidelineWhereInput
     isNot?: VmGuidelineWhereInput
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
   }
 
   export type VmSubmissionCountOrderByAggregateInput = {
@@ -162954,6 +162823,51 @@ export namespace Prisma {
     conversionRate?: SortOrder
   }
 
+  export type BlogPostCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    excerpt?: SortOrder
+    content?: SortOrder
+    coverImageUrl?: SortOrder
+    author?: SortOrder
+    status?: SortOrder
+    approvalToken?: SortOrder
+    publishedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BlogPostMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    excerpt?: SortOrder
+    content?: SortOrder
+    coverImageUrl?: SortOrder
+    author?: SortOrder
+    status?: SortOrder
+    approvalToken?: SortOrder
+    publishedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BlogPostMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    excerpt?: SortOrder
+    content?: SortOrder
+    coverImageUrl?: SortOrder
+    author?: SortOrder
+    status?: SortOrder
+    approvalToken?: SortOrder
+    publishedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type InvitationTokenCountOrderByAggregateInput = {
     id?: SortOrder
     token?: SortOrder
@@ -163006,51 +162920,6 @@ export namespace Prisma {
     expiresAt?: SortOrder
     usedAt?: SortOrder
     createdAt?: SortOrder
-  }
-
-  export type BlogPostCountOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    slug?: SortOrder
-    excerpt?: SortOrder
-    content?: SortOrder
-    coverImageUrl?: SortOrder
-    author?: SortOrder
-    status?: SortOrder
-    approvalToken?: SortOrder
-    publishedAt?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type BlogPostMaxOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    slug?: SortOrder
-    excerpt?: SortOrder
-    content?: SortOrder
-    coverImageUrl?: SortOrder
-    author?: SortOrder
-    status?: SortOrder
-    approvalToken?: SortOrder
-    publishedAt?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type BlogPostMinOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    slug?: SortOrder
-    excerpt?: SortOrder
-    content?: SortOrder
-    coverImageUrl?: SortOrder
-    author?: SortOrder
-    status?: SortOrder
-    approvalToken?: SortOrder
-    publishedAt?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
   }
 
   export type ConversationCountOrderByAggregateInput = {
@@ -163178,19 +163047,6 @@ export namespace Prisma {
     create?: XOR<TenantCreateWithoutUsersInput, TenantUncheckedCreateWithoutUsersInput>
     connectOrCreate?: TenantCreateOrConnectWithoutUsersInput
     connect?: TenantWhereUniqueInput
-  }
-
-  export type UserCreateNestedOneWithoutDirectReportsInput = {
-    create?: XOR<UserCreateWithoutDirectReportsInput, UserUncheckedCreateWithoutDirectReportsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutDirectReportsInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type UserCreateNestedManyWithoutManagerInput = {
-    create?: XOR<UserCreateWithoutManagerInput, UserUncheckedCreateWithoutManagerInput> | UserCreateWithoutManagerInput[] | UserUncheckedCreateWithoutManagerInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutManagerInput | UserCreateOrConnectWithoutManagerInput[]
-    createMany?: UserCreateManyManagerInputEnvelope
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
   export type UserStoreAssignmentCreateNestedManyWithoutUserInput = {
@@ -163639,13 +163495,6 @@ export namespace Prisma {
     connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
     createMany?: NotificationCreateManyUserInputEnvelope
     connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-  }
-
-  export type UserUncheckedCreateNestedManyWithoutManagerInput = {
-    create?: XOR<UserCreateWithoutManagerInput, UserUncheckedCreateWithoutManagerInput> | UserCreateWithoutManagerInput[] | UserUncheckedCreateWithoutManagerInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutManagerInput | UserCreateOrConnectWithoutManagerInput[]
-    createMany?: UserCreateManyManagerInputEnvelope
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
   export type UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput = {
@@ -164124,30 +163973,6 @@ export namespace Prisma {
     delete?: TenantWhereInput | boolean
     connect?: TenantWhereUniqueInput
     update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutUsersInput, TenantUpdateWithoutUsersInput>, TenantUncheckedUpdateWithoutUsersInput>
-  }
-
-  export type UserUpdateOneWithoutDirectReportsNestedInput = {
-    create?: XOR<UserCreateWithoutDirectReportsInput, UserUncheckedCreateWithoutDirectReportsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutDirectReportsInput
-    upsert?: UserUpsertWithoutDirectReportsInput
-    disconnect?: UserWhereInput | boolean
-    delete?: UserWhereInput | boolean
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDirectReportsInput, UserUpdateWithoutDirectReportsInput>, UserUncheckedUpdateWithoutDirectReportsInput>
-  }
-
-  export type UserUpdateManyWithoutManagerNestedInput = {
-    create?: XOR<UserCreateWithoutManagerInput, UserUncheckedCreateWithoutManagerInput> | UserCreateWithoutManagerInput[] | UserUncheckedCreateWithoutManagerInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutManagerInput | UserCreateOrConnectWithoutManagerInput[]
-    upsert?: UserUpsertWithWhereUniqueWithoutManagerInput | UserUpsertWithWhereUniqueWithoutManagerInput[]
-    createMany?: UserCreateManyManagerInputEnvelope
-    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    update?: UserUpdateWithWhereUniqueWithoutManagerInput | UserUpdateWithWhereUniqueWithoutManagerInput[]
-    updateMany?: UserUpdateManyWithWhereWithoutManagerInput | UserUpdateManyWithWhereWithoutManagerInput[]
-    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
   export type UserStoreAssignmentUpdateManyWithoutUserNestedInput = {
@@ -165044,20 +164869,6 @@ export namespace Prisma {
     update?: NotificationUpdateWithWhereUniqueWithoutUserInput | NotificationUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: NotificationUpdateManyWithWhereWithoutUserInput | NotificationUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
-  }
-
-  export type UserUncheckedUpdateManyWithoutManagerNestedInput = {
-    create?: XOR<UserCreateWithoutManagerInput, UserUncheckedCreateWithoutManagerInput> | UserCreateWithoutManagerInput[] | UserUncheckedCreateWithoutManagerInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutManagerInput | UserCreateOrConnectWithoutManagerInput[]
-    upsert?: UserUpsertWithWhereUniqueWithoutManagerInput | UserUpsertWithWhereUniqueWithoutManagerInput[]
-    createMany?: UserCreateManyManagerInputEnvelope
-    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    update?: UserUpdateWithWhereUniqueWithoutManagerInput | UserUpdateWithWhereUniqueWithoutManagerInput[]
-    updateMany?: UserUpdateManyWithWhereWithoutManagerInput | UserUpdateManyWithWhereWithoutManagerInput[]
-    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
   export type UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput = {
@@ -174700,8 +174511,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     stores?: StoreCreateNestedManyWithoutTenantInput
@@ -174756,8 +174565,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     stores?: StoreUncheckedCreateNestedManyWithoutTenantInput
@@ -174805,336 +174612,6 @@ export namespace Prisma {
   export type TenantCreateOrConnectWithoutUsersInput = {
     where: TenantWhereUniqueInput
     create: XOR<TenantCreateWithoutUsersInput, TenantUncheckedCreateWithoutUsersInput>
-  }
-
-  export type UserCreateWithoutDirectReportsInput = {
-    id?: string
-    email: string
-    name: string
-    passwordHash?: string | null
-    role?: string
-    isActive?: boolean
-    lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
-    regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
-    checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
-    createdSops?: SopCreateNestedManyWithoutCreatorInput
-    sopAcknowledgments?: SopAcknowledgmentCreateNestedManyWithoutUserInput
-    vmSubmissions?: VmSubmissionCreateNestedManyWithoutSubmitterInput
-    vmReviews?: VmSubmissionCreateNestedManyWithoutReviewerInput
-    standardEvaluations?: StandardEvaluationCreateNestedManyWithoutEvaluatorInput
-    kpiEntries?: KpiEntryCreateNestedManyWithoutUserInput
-    budgetPeriods?: BudgetPeriodCreateNestedManyWithoutUserInput
-    forecasts?: ForecastCreateNestedManyWithoutUserInput
-    lossReports?: LossIncidentCreateNestedManyWithoutReporterInput
-    lossAssignments?: LossIncidentCreateNestedManyWithoutAssigneeInput
-    inventoryCounts?: InventoryCountCreateNestedManyWithoutConductorInput
-    floorPositions?: FloorStaffPositionCreateNestedManyWithoutUserInput
-    floorUpdates?: FloorStaffPositionCreateNestedManyWithoutUpdaterInput
-    maintenanceReports?: MaintenanceRequestCreateNestedManyWithoutReporterInput
-    maintenanceAssignments?: MaintenanceRequestCreateNestedManyWithoutAssigneeInput
-    courseCreations?: CourseCreateNestedManyWithoutCreatorInput
-    courseEnrollments?: CourseEnrollmentCreateNestedManyWithoutUserInput
-    certificates?: CertificateCreateNestedManyWithoutUserInput
-    trainingLogs?: TrainingLogCreateNestedManyWithoutUserInput
-    challengeCreations?: ChallengeCreateNestedManyWithoutCreatorInput
-    challengeParticipations?: ChallengeParticipantCreateNestedManyWithoutUserInput
-    onboardingJourneys?: OnboardingJourneyCreateNestedManyWithoutUserInput
-    onboardingMentoring?: OnboardingJourneyCreateNestedManyWithoutMentorInput
-    coachSessions?: CoachingSessionCreateNestedManyWithoutCoachInput
-    coacheeSessions?: CoachingSessionCreateNestedManyWithoutCoacheeInput
-    devPlansAsUser?: DevelopmentPlanCreateNestedManyWithoutUserInput
-    devPlansAsManager?: DevelopmentPlanCreateNestedManyWithoutManagerInput
-    devReviews?: DevelopmentReviewCreateNestedManyWithoutReviewerInput
-    appraisalsAsEmployee?: AppraisalCreateNestedManyWithoutEmployeeInput
-    appraisalsAsManager?: AppraisalCreateNestedManyWithoutManagerInput
-    shiftEntries?: ShiftEntryCreateNestedManyWithoutUserInput
-    swapRequests?: ShiftSwapRequestCreateNestedManyWithoutRequesterInput
-    shiftAvailabilities?: ShiftAvailabilityCreateNestedManyWithoutUserInput
-    shiftTimeEntries?: ShiftTimeEntryCreateNestedManyWithoutUserInput
-    wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutUserInput
-    challengeEntries?: ChallengeEntryCreateNestedManyWithoutUserInput
-    challengeVotesCast?: ChallengeVoteCreateNestedManyWithoutVoterInput
-    challengeVotesReceived?: ChallengeVoteCreateNestedManyWithoutTargetUserInput
-    coachingTemplates?: CoachingTemplateCreateNestedManyWithoutCreatorInput
-    clientAppointments?: ClientAppointmentCreateNestedManyWithoutAdvisorInput
-    budgetScenarios?: BudgetScenarioCreateNestedManyWithoutCreatorInput
-    frSessions?: FRSessionCreateNestedManyWithoutStaffInput
-    briefingsCreated?: BriefingCreateNestedManyWithoutCreatorInput
-    briefingAcks?: BriefingAcknowledgmentCreateNestedManyWithoutUserInput
-    handoversFrom?: HandoverCreateNestedManyWithoutFromUserInput
-    handoversTo?: HandoverCreateNestedManyWithoutToUserInput
-    teamMessagesSent?: TeamMessageCreateNestedManyWithoutSenderInput
-    teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
-    newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
-    newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
-    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
-    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
-    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
-    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
-    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
-    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
-    conversationParticipations?: ConversationParticipantCreateNestedManyWithoutUserInput
-    directMessagesSent?: DirectMessageCreateNestedManyWithoutSenderInput
-    invitationTokens?: InvitationTokenCreateNestedManyWithoutUserInput
-    passwordResetTokens?: PasswordResetTokenCreateNestedManyWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutDirectReportsInput = {
-    id?: string
-    email: string
-    name: string
-    passwordHash?: string | null
-    role?: string
-    tenantId?: string | null
-    isActive?: boolean
-    lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
-    regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
-    checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
-    createdSops?: SopUncheckedCreateNestedManyWithoutCreatorInput
-    sopAcknowledgments?: SopAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
-    vmSubmissions?: VmSubmissionUncheckedCreateNestedManyWithoutSubmitterInput
-    vmReviews?: VmSubmissionUncheckedCreateNestedManyWithoutReviewerInput
-    standardEvaluations?: StandardEvaluationUncheckedCreateNestedManyWithoutEvaluatorInput
-    kpiEntries?: KpiEntryUncheckedCreateNestedManyWithoutUserInput
-    budgetPeriods?: BudgetPeriodUncheckedCreateNestedManyWithoutUserInput
-    forecasts?: ForecastUncheckedCreateNestedManyWithoutUserInput
-    lossReports?: LossIncidentUncheckedCreateNestedManyWithoutReporterInput
-    lossAssignments?: LossIncidentUncheckedCreateNestedManyWithoutAssigneeInput
-    inventoryCounts?: InventoryCountUncheckedCreateNestedManyWithoutConductorInput
-    floorPositions?: FloorStaffPositionUncheckedCreateNestedManyWithoutUserInput
-    floorUpdates?: FloorStaffPositionUncheckedCreateNestedManyWithoutUpdaterInput
-    maintenanceReports?: MaintenanceRequestUncheckedCreateNestedManyWithoutReporterInput
-    maintenanceAssignments?: MaintenanceRequestUncheckedCreateNestedManyWithoutAssigneeInput
-    courseCreations?: CourseUncheckedCreateNestedManyWithoutCreatorInput
-    courseEnrollments?: CourseEnrollmentUncheckedCreateNestedManyWithoutUserInput
-    certificates?: CertificateUncheckedCreateNestedManyWithoutUserInput
-    trainingLogs?: TrainingLogUncheckedCreateNestedManyWithoutUserInput
-    challengeCreations?: ChallengeUncheckedCreateNestedManyWithoutCreatorInput
-    challengeParticipations?: ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
-    onboardingJourneys?: OnboardingJourneyUncheckedCreateNestedManyWithoutUserInput
-    onboardingMentoring?: OnboardingJourneyUncheckedCreateNestedManyWithoutMentorInput
-    coachSessions?: CoachingSessionUncheckedCreateNestedManyWithoutCoachInput
-    coacheeSessions?: CoachingSessionUncheckedCreateNestedManyWithoutCoacheeInput
-    devPlansAsUser?: DevelopmentPlanUncheckedCreateNestedManyWithoutUserInput
-    devPlansAsManager?: DevelopmentPlanUncheckedCreateNestedManyWithoutManagerInput
-    devReviews?: DevelopmentReviewUncheckedCreateNestedManyWithoutReviewerInput
-    appraisalsAsEmployee?: AppraisalUncheckedCreateNestedManyWithoutEmployeeInput
-    appraisalsAsManager?: AppraisalUncheckedCreateNestedManyWithoutManagerInput
-    shiftEntries?: ShiftEntryUncheckedCreateNestedManyWithoutUserInput
-    swapRequests?: ShiftSwapRequestUncheckedCreateNestedManyWithoutRequesterInput
-    shiftAvailabilities?: ShiftAvailabilityUncheckedCreateNestedManyWithoutUserInput
-    shiftTimeEntries?: ShiftTimeEntryUncheckedCreateNestedManyWithoutUserInput
-    wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutUserInput
-    challengeEntries?: ChallengeEntryUncheckedCreateNestedManyWithoutUserInput
-    challengeVotesCast?: ChallengeVoteUncheckedCreateNestedManyWithoutVoterInput
-    challengeVotesReceived?: ChallengeVoteUncheckedCreateNestedManyWithoutTargetUserInput
-    coachingTemplates?: CoachingTemplateUncheckedCreateNestedManyWithoutCreatorInput
-    clientAppointments?: ClientAppointmentUncheckedCreateNestedManyWithoutAdvisorInput
-    budgetScenarios?: BudgetScenarioUncheckedCreateNestedManyWithoutCreatorInput
-    frSessions?: FRSessionUncheckedCreateNestedManyWithoutStaffInput
-    briefingsCreated?: BriefingUncheckedCreateNestedManyWithoutCreatorInput
-    briefingAcks?: BriefingAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
-    handoversFrom?: HandoverUncheckedCreateNestedManyWithoutFromUserInput
-    handoversTo?: HandoverUncheckedCreateNestedManyWithoutToUserInput
-    teamMessagesSent?: TeamMessageUncheckedCreateNestedManyWithoutSenderInput
-    teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
-    newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
-    newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
-    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
-    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
-    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
-    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
-    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
-    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
-    conversationParticipations?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-    directMessagesSent?: DirectMessageUncheckedCreateNestedManyWithoutSenderInput
-    invitationTokens?: InvitationTokenUncheckedCreateNestedManyWithoutUserInput
-    passwordResetTokens?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutDirectReportsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutDirectReportsInput, UserUncheckedCreateWithoutDirectReportsInput>
-  }
-
-  export type UserCreateWithoutManagerInput = {
-    id?: string
-    email: string
-    name: string
-    passwordHash?: string | null
-    role?: string
-    isActive?: boolean
-    lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    tenant?: TenantCreateNestedOneWithoutUsersInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
-    storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
-    regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
-    checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
-    createdSops?: SopCreateNestedManyWithoutCreatorInput
-    sopAcknowledgments?: SopAcknowledgmentCreateNestedManyWithoutUserInput
-    vmSubmissions?: VmSubmissionCreateNestedManyWithoutSubmitterInput
-    vmReviews?: VmSubmissionCreateNestedManyWithoutReviewerInput
-    standardEvaluations?: StandardEvaluationCreateNestedManyWithoutEvaluatorInput
-    kpiEntries?: KpiEntryCreateNestedManyWithoutUserInput
-    budgetPeriods?: BudgetPeriodCreateNestedManyWithoutUserInput
-    forecasts?: ForecastCreateNestedManyWithoutUserInput
-    lossReports?: LossIncidentCreateNestedManyWithoutReporterInput
-    lossAssignments?: LossIncidentCreateNestedManyWithoutAssigneeInput
-    inventoryCounts?: InventoryCountCreateNestedManyWithoutConductorInput
-    floorPositions?: FloorStaffPositionCreateNestedManyWithoutUserInput
-    floorUpdates?: FloorStaffPositionCreateNestedManyWithoutUpdaterInput
-    maintenanceReports?: MaintenanceRequestCreateNestedManyWithoutReporterInput
-    maintenanceAssignments?: MaintenanceRequestCreateNestedManyWithoutAssigneeInput
-    courseCreations?: CourseCreateNestedManyWithoutCreatorInput
-    courseEnrollments?: CourseEnrollmentCreateNestedManyWithoutUserInput
-    certificates?: CertificateCreateNestedManyWithoutUserInput
-    trainingLogs?: TrainingLogCreateNestedManyWithoutUserInput
-    challengeCreations?: ChallengeCreateNestedManyWithoutCreatorInput
-    challengeParticipations?: ChallengeParticipantCreateNestedManyWithoutUserInput
-    onboardingJourneys?: OnboardingJourneyCreateNestedManyWithoutUserInput
-    onboardingMentoring?: OnboardingJourneyCreateNestedManyWithoutMentorInput
-    coachSessions?: CoachingSessionCreateNestedManyWithoutCoachInput
-    coacheeSessions?: CoachingSessionCreateNestedManyWithoutCoacheeInput
-    devPlansAsUser?: DevelopmentPlanCreateNestedManyWithoutUserInput
-    devPlansAsManager?: DevelopmentPlanCreateNestedManyWithoutManagerInput
-    devReviews?: DevelopmentReviewCreateNestedManyWithoutReviewerInput
-    appraisalsAsEmployee?: AppraisalCreateNestedManyWithoutEmployeeInput
-    appraisalsAsManager?: AppraisalCreateNestedManyWithoutManagerInput
-    shiftEntries?: ShiftEntryCreateNestedManyWithoutUserInput
-    swapRequests?: ShiftSwapRequestCreateNestedManyWithoutRequesterInput
-    shiftAvailabilities?: ShiftAvailabilityCreateNestedManyWithoutUserInput
-    shiftTimeEntries?: ShiftTimeEntryCreateNestedManyWithoutUserInput
-    wellbeingCheckIns?: WellbeingCheckInCreateNestedManyWithoutUserInput
-    challengeEntries?: ChallengeEntryCreateNestedManyWithoutUserInput
-    challengeVotesCast?: ChallengeVoteCreateNestedManyWithoutVoterInput
-    challengeVotesReceived?: ChallengeVoteCreateNestedManyWithoutTargetUserInput
-    coachingTemplates?: CoachingTemplateCreateNestedManyWithoutCreatorInput
-    clientAppointments?: ClientAppointmentCreateNestedManyWithoutAdvisorInput
-    budgetScenarios?: BudgetScenarioCreateNestedManyWithoutCreatorInput
-    frSessions?: FRSessionCreateNestedManyWithoutStaffInput
-    briefingsCreated?: BriefingCreateNestedManyWithoutCreatorInput
-    briefingAcks?: BriefingAcknowledgmentCreateNestedManyWithoutUserInput
-    handoversFrom?: HandoverCreateNestedManyWithoutFromUserInput
-    handoversTo?: HandoverCreateNestedManyWithoutToUserInput
-    teamMessagesSent?: TeamMessageCreateNestedManyWithoutSenderInput
-    teamMessageReads?: TeamMessageReadCreateNestedManyWithoutUserInput
-    newslettersCreated?: NewsletterCreateNestedManyWithoutCreatorInput
-    newsletterViews?: NewsletterViewCreateNestedManyWithoutUserInput
-    clientsCreated?: ClientProfileCreateNestedManyWithoutCreatorInput
-    clientInteractions?: ClientInteractionCreateNestedManyWithoutUserInput
-    clientTasks?: ClientTaskCreateNestedManyWithoutUserInput
-    stockCallouts?: StockCalloutCreateNestedManyWithoutReporterInput
-    ordersCreated?: CustomerOrderCreateNestedManyWithoutCreatorInput
-    orderStatusUpdates?: OrderStatusUpdateCreateNestedManyWithoutUpdaterInput
-    conversationParticipations?: ConversationParticipantCreateNestedManyWithoutUserInput
-    directMessagesSent?: DirectMessageCreateNestedManyWithoutSenderInput
-    invitationTokens?: InvitationTokenCreateNestedManyWithoutUserInput
-    passwordResetTokens?: PasswordResetTokenCreateNestedManyWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutManagerInput = {
-    id?: string
-    email: string
-    name: string
-    passwordHash?: string | null
-    role?: string
-    tenantId?: string | null
-    isActive?: boolean
-    lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
-    storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
-    regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
-    checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
-    createdSops?: SopUncheckedCreateNestedManyWithoutCreatorInput
-    sopAcknowledgments?: SopAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
-    vmSubmissions?: VmSubmissionUncheckedCreateNestedManyWithoutSubmitterInput
-    vmReviews?: VmSubmissionUncheckedCreateNestedManyWithoutReviewerInput
-    standardEvaluations?: StandardEvaluationUncheckedCreateNestedManyWithoutEvaluatorInput
-    kpiEntries?: KpiEntryUncheckedCreateNestedManyWithoutUserInput
-    budgetPeriods?: BudgetPeriodUncheckedCreateNestedManyWithoutUserInput
-    forecasts?: ForecastUncheckedCreateNestedManyWithoutUserInput
-    lossReports?: LossIncidentUncheckedCreateNestedManyWithoutReporterInput
-    lossAssignments?: LossIncidentUncheckedCreateNestedManyWithoutAssigneeInput
-    inventoryCounts?: InventoryCountUncheckedCreateNestedManyWithoutConductorInput
-    floorPositions?: FloorStaffPositionUncheckedCreateNestedManyWithoutUserInput
-    floorUpdates?: FloorStaffPositionUncheckedCreateNestedManyWithoutUpdaterInput
-    maintenanceReports?: MaintenanceRequestUncheckedCreateNestedManyWithoutReporterInput
-    maintenanceAssignments?: MaintenanceRequestUncheckedCreateNestedManyWithoutAssigneeInput
-    courseCreations?: CourseUncheckedCreateNestedManyWithoutCreatorInput
-    courseEnrollments?: CourseEnrollmentUncheckedCreateNestedManyWithoutUserInput
-    certificates?: CertificateUncheckedCreateNestedManyWithoutUserInput
-    trainingLogs?: TrainingLogUncheckedCreateNestedManyWithoutUserInput
-    challengeCreations?: ChallengeUncheckedCreateNestedManyWithoutCreatorInput
-    challengeParticipations?: ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
-    onboardingJourneys?: OnboardingJourneyUncheckedCreateNestedManyWithoutUserInput
-    onboardingMentoring?: OnboardingJourneyUncheckedCreateNestedManyWithoutMentorInput
-    coachSessions?: CoachingSessionUncheckedCreateNestedManyWithoutCoachInput
-    coacheeSessions?: CoachingSessionUncheckedCreateNestedManyWithoutCoacheeInput
-    devPlansAsUser?: DevelopmentPlanUncheckedCreateNestedManyWithoutUserInput
-    devPlansAsManager?: DevelopmentPlanUncheckedCreateNestedManyWithoutManagerInput
-    devReviews?: DevelopmentReviewUncheckedCreateNestedManyWithoutReviewerInput
-    appraisalsAsEmployee?: AppraisalUncheckedCreateNestedManyWithoutEmployeeInput
-    appraisalsAsManager?: AppraisalUncheckedCreateNestedManyWithoutManagerInput
-    shiftEntries?: ShiftEntryUncheckedCreateNestedManyWithoutUserInput
-    swapRequests?: ShiftSwapRequestUncheckedCreateNestedManyWithoutRequesterInput
-    shiftAvailabilities?: ShiftAvailabilityUncheckedCreateNestedManyWithoutUserInput
-    shiftTimeEntries?: ShiftTimeEntryUncheckedCreateNestedManyWithoutUserInput
-    wellbeingCheckIns?: WellbeingCheckInUncheckedCreateNestedManyWithoutUserInput
-    challengeEntries?: ChallengeEntryUncheckedCreateNestedManyWithoutUserInput
-    challengeVotesCast?: ChallengeVoteUncheckedCreateNestedManyWithoutVoterInput
-    challengeVotesReceived?: ChallengeVoteUncheckedCreateNestedManyWithoutTargetUserInput
-    coachingTemplates?: CoachingTemplateUncheckedCreateNestedManyWithoutCreatorInput
-    clientAppointments?: ClientAppointmentUncheckedCreateNestedManyWithoutAdvisorInput
-    budgetScenarios?: BudgetScenarioUncheckedCreateNestedManyWithoutCreatorInput
-    frSessions?: FRSessionUncheckedCreateNestedManyWithoutStaffInput
-    briefingsCreated?: BriefingUncheckedCreateNestedManyWithoutCreatorInput
-    briefingAcks?: BriefingAcknowledgmentUncheckedCreateNestedManyWithoutUserInput
-    handoversFrom?: HandoverUncheckedCreateNestedManyWithoutFromUserInput
-    handoversTo?: HandoverUncheckedCreateNestedManyWithoutToUserInput
-    teamMessagesSent?: TeamMessageUncheckedCreateNestedManyWithoutSenderInput
-    teamMessageReads?: TeamMessageReadUncheckedCreateNestedManyWithoutUserInput
-    newslettersCreated?: NewsletterUncheckedCreateNestedManyWithoutCreatorInput
-    newsletterViews?: NewsletterViewUncheckedCreateNestedManyWithoutUserInput
-    clientsCreated?: ClientProfileUncheckedCreateNestedManyWithoutCreatorInput
-    clientInteractions?: ClientInteractionUncheckedCreateNestedManyWithoutUserInput
-    clientTasks?: ClientTaskUncheckedCreateNestedManyWithoutUserInput
-    stockCallouts?: StockCalloutUncheckedCreateNestedManyWithoutReporterInput
-    ordersCreated?: CustomerOrderUncheckedCreateNestedManyWithoutCreatorInput
-    orderStatusUpdates?: OrderStatusUpdateUncheckedCreateNestedManyWithoutUpdaterInput
-    conversationParticipations?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
-    directMessagesSent?: DirectMessageUncheckedCreateNestedManyWithoutSenderInput
-    invitationTokens?: InvitationTokenUncheckedCreateNestedManyWithoutUserInput
-    passwordResetTokens?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutManagerInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutManagerInput, UserUncheckedCreateWithoutManagerInput>
-  }
-
-  export type UserCreateManyManagerInputEnvelope = {
-    data: UserCreateManyManagerInput | UserCreateManyManagerInput[]
   }
 
   export type UserStoreAssignmentCreateWithoutUserInput = {
@@ -177452,8 +176929,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stores?: StoreUpdateManyWithoutTenantNestedInput
@@ -177508,8 +176983,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stores?: StoreUncheckedUpdateManyWithoutTenantNestedInput
@@ -177552,209 +177025,6 @@ export namespace Prisma {
     floorFrequencyLogs?: FloorFrequencyLogUncheckedUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  }
-
-  export type UserUpsertWithoutDirectReportsInput = {
-    update: XOR<UserUpdateWithoutDirectReportsInput, UserUncheckedUpdateWithoutDirectReportsInput>
-    create: XOR<UserCreateWithoutDirectReportsInput, UserUncheckedCreateWithoutDirectReportsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutDirectReportsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutDirectReportsInput, UserUncheckedUpdateWithoutDirectReportsInput>
-  }
-
-  export type UserUpdateWithoutDirectReportsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
-    regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
-    checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
-    createdSops?: SopUpdateManyWithoutCreatorNestedInput
-    sopAcknowledgments?: SopAcknowledgmentUpdateManyWithoutUserNestedInput
-    vmSubmissions?: VmSubmissionUpdateManyWithoutSubmitterNestedInput
-    vmReviews?: VmSubmissionUpdateManyWithoutReviewerNestedInput
-    standardEvaluations?: StandardEvaluationUpdateManyWithoutEvaluatorNestedInput
-    kpiEntries?: KpiEntryUpdateManyWithoutUserNestedInput
-    budgetPeriods?: BudgetPeriodUpdateManyWithoutUserNestedInput
-    forecasts?: ForecastUpdateManyWithoutUserNestedInput
-    lossReports?: LossIncidentUpdateManyWithoutReporterNestedInput
-    lossAssignments?: LossIncidentUpdateManyWithoutAssigneeNestedInput
-    inventoryCounts?: InventoryCountUpdateManyWithoutConductorNestedInput
-    floorPositions?: FloorStaffPositionUpdateManyWithoutUserNestedInput
-    floorUpdates?: FloorStaffPositionUpdateManyWithoutUpdaterNestedInput
-    maintenanceReports?: MaintenanceRequestUpdateManyWithoutReporterNestedInput
-    maintenanceAssignments?: MaintenanceRequestUpdateManyWithoutAssigneeNestedInput
-    courseCreations?: CourseUpdateManyWithoutCreatorNestedInput
-    courseEnrollments?: CourseEnrollmentUpdateManyWithoutUserNestedInput
-    certificates?: CertificateUpdateManyWithoutUserNestedInput
-    trainingLogs?: TrainingLogUpdateManyWithoutUserNestedInput
-    challengeCreations?: ChallengeUpdateManyWithoutCreatorNestedInput
-    challengeParticipations?: ChallengeParticipantUpdateManyWithoutUserNestedInput
-    onboardingJourneys?: OnboardingJourneyUpdateManyWithoutUserNestedInput
-    onboardingMentoring?: OnboardingJourneyUpdateManyWithoutMentorNestedInput
-    coachSessions?: CoachingSessionUpdateManyWithoutCoachNestedInput
-    coacheeSessions?: CoachingSessionUpdateManyWithoutCoacheeNestedInput
-    devPlansAsUser?: DevelopmentPlanUpdateManyWithoutUserNestedInput
-    devPlansAsManager?: DevelopmentPlanUpdateManyWithoutManagerNestedInput
-    devReviews?: DevelopmentReviewUpdateManyWithoutReviewerNestedInput
-    appraisalsAsEmployee?: AppraisalUpdateManyWithoutEmployeeNestedInput
-    appraisalsAsManager?: AppraisalUpdateManyWithoutManagerNestedInput
-    shiftEntries?: ShiftEntryUpdateManyWithoutUserNestedInput
-    swapRequests?: ShiftSwapRequestUpdateManyWithoutRequesterNestedInput
-    shiftAvailabilities?: ShiftAvailabilityUpdateManyWithoutUserNestedInput
-    shiftTimeEntries?: ShiftTimeEntryUpdateManyWithoutUserNestedInput
-    wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutUserNestedInput
-    challengeEntries?: ChallengeEntryUpdateManyWithoutUserNestedInput
-    challengeVotesCast?: ChallengeVoteUpdateManyWithoutVoterNestedInput
-    challengeVotesReceived?: ChallengeVoteUpdateManyWithoutTargetUserNestedInput
-    coachingTemplates?: CoachingTemplateUpdateManyWithoutCreatorNestedInput
-    clientAppointments?: ClientAppointmentUpdateManyWithoutAdvisorNestedInput
-    budgetScenarios?: BudgetScenarioUpdateManyWithoutCreatorNestedInput
-    frSessions?: FRSessionUpdateManyWithoutStaffNestedInput
-    briefingsCreated?: BriefingUpdateManyWithoutCreatorNestedInput
-    briefingAcks?: BriefingAcknowledgmentUpdateManyWithoutUserNestedInput
-    handoversFrom?: HandoverUpdateManyWithoutFromUserNestedInput
-    handoversTo?: HandoverUpdateManyWithoutToUserNestedInput
-    teamMessagesSent?: TeamMessageUpdateManyWithoutSenderNestedInput
-    teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
-    newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
-    newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
-    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
-    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
-    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
-    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
-    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
-    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
-    conversationParticipations?: ConversationParticipantUpdateManyWithoutUserNestedInput
-    directMessagesSent?: DirectMessageUpdateManyWithoutSenderNestedInput
-    invitationTokens?: InvitationTokenUpdateManyWithoutUserNestedInput
-    passwordResetTokens?: PasswordResetTokenUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutDirectReportsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: StringFieldUpdateOperationsInput | string
-    tenantId?: NullableStringFieldUpdateOperationsInput | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
-    regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
-    checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
-    createdSops?: SopUncheckedUpdateManyWithoutCreatorNestedInput
-    sopAcknowledgments?: SopAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
-    vmSubmissions?: VmSubmissionUncheckedUpdateManyWithoutSubmitterNestedInput
-    vmReviews?: VmSubmissionUncheckedUpdateManyWithoutReviewerNestedInput
-    standardEvaluations?: StandardEvaluationUncheckedUpdateManyWithoutEvaluatorNestedInput
-    kpiEntries?: KpiEntryUncheckedUpdateManyWithoutUserNestedInput
-    budgetPeriods?: BudgetPeriodUncheckedUpdateManyWithoutUserNestedInput
-    forecasts?: ForecastUncheckedUpdateManyWithoutUserNestedInput
-    lossReports?: LossIncidentUncheckedUpdateManyWithoutReporterNestedInput
-    lossAssignments?: LossIncidentUncheckedUpdateManyWithoutAssigneeNestedInput
-    inventoryCounts?: InventoryCountUncheckedUpdateManyWithoutConductorNestedInput
-    floorPositions?: FloorStaffPositionUncheckedUpdateManyWithoutUserNestedInput
-    floorUpdates?: FloorStaffPositionUncheckedUpdateManyWithoutUpdaterNestedInput
-    maintenanceReports?: MaintenanceRequestUncheckedUpdateManyWithoutReporterNestedInput
-    maintenanceAssignments?: MaintenanceRequestUncheckedUpdateManyWithoutAssigneeNestedInput
-    courseCreations?: CourseUncheckedUpdateManyWithoutCreatorNestedInput
-    courseEnrollments?: CourseEnrollmentUncheckedUpdateManyWithoutUserNestedInput
-    certificates?: CertificateUncheckedUpdateManyWithoutUserNestedInput
-    trainingLogs?: TrainingLogUncheckedUpdateManyWithoutUserNestedInput
-    challengeCreations?: ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
-    challengeParticipations?: ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
-    onboardingJourneys?: OnboardingJourneyUncheckedUpdateManyWithoutUserNestedInput
-    onboardingMentoring?: OnboardingJourneyUncheckedUpdateManyWithoutMentorNestedInput
-    coachSessions?: CoachingSessionUncheckedUpdateManyWithoutCoachNestedInput
-    coacheeSessions?: CoachingSessionUncheckedUpdateManyWithoutCoacheeNestedInput
-    devPlansAsUser?: DevelopmentPlanUncheckedUpdateManyWithoutUserNestedInput
-    devPlansAsManager?: DevelopmentPlanUncheckedUpdateManyWithoutManagerNestedInput
-    devReviews?: DevelopmentReviewUncheckedUpdateManyWithoutReviewerNestedInput
-    appraisalsAsEmployee?: AppraisalUncheckedUpdateManyWithoutEmployeeNestedInput
-    appraisalsAsManager?: AppraisalUncheckedUpdateManyWithoutManagerNestedInput
-    shiftEntries?: ShiftEntryUncheckedUpdateManyWithoutUserNestedInput
-    swapRequests?: ShiftSwapRequestUncheckedUpdateManyWithoutRequesterNestedInput
-    shiftAvailabilities?: ShiftAvailabilityUncheckedUpdateManyWithoutUserNestedInput
-    shiftTimeEntries?: ShiftTimeEntryUncheckedUpdateManyWithoutUserNestedInput
-    wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutUserNestedInput
-    challengeEntries?: ChallengeEntryUncheckedUpdateManyWithoutUserNestedInput
-    challengeVotesCast?: ChallengeVoteUncheckedUpdateManyWithoutVoterNestedInput
-    challengeVotesReceived?: ChallengeVoteUncheckedUpdateManyWithoutTargetUserNestedInput
-    coachingTemplates?: CoachingTemplateUncheckedUpdateManyWithoutCreatorNestedInput
-    clientAppointments?: ClientAppointmentUncheckedUpdateManyWithoutAdvisorNestedInput
-    budgetScenarios?: BudgetScenarioUncheckedUpdateManyWithoutCreatorNestedInput
-    frSessions?: FRSessionUncheckedUpdateManyWithoutStaffNestedInput
-    briefingsCreated?: BriefingUncheckedUpdateManyWithoutCreatorNestedInput
-    briefingAcks?: BriefingAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
-    handoversFrom?: HandoverUncheckedUpdateManyWithoutFromUserNestedInput
-    handoversTo?: HandoverUncheckedUpdateManyWithoutToUserNestedInput
-    teamMessagesSent?: TeamMessageUncheckedUpdateManyWithoutSenderNestedInput
-    teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
-    newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
-    newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
-    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
-    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
-    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
-    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
-    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
-    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
-    conversationParticipations?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-    directMessagesSent?: DirectMessageUncheckedUpdateManyWithoutSenderNestedInput
-    invitationTokens?: InvitationTokenUncheckedUpdateManyWithoutUserNestedInput
-    passwordResetTokens?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUpsertWithWhereUniqueWithoutManagerInput = {
-    where: UserWhereUniqueInput
-    update: XOR<UserUpdateWithoutManagerInput, UserUncheckedUpdateWithoutManagerInput>
-    create: XOR<UserCreateWithoutManagerInput, UserUncheckedCreateWithoutManagerInput>
-  }
-
-  export type UserUpdateWithWhereUniqueWithoutManagerInput = {
-    where: UserWhereUniqueInput
-    data: XOR<UserUpdateWithoutManagerInput, UserUncheckedUpdateWithoutManagerInput>
-  }
-
-  export type UserUpdateManyWithWhereWithoutManagerInput = {
-    where: UserScalarWhereInput
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutManagerInput>
-  }
-
-  export type UserScalarWhereInput = {
-    AND?: UserScalarWhereInput | UserScalarWhereInput[]
-    OR?: UserScalarWhereInput[]
-    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
-    id?: StringFilter<"User"> | string
-    email?: StringFilter<"User"> | string
-    name?: StringFilter<"User"> | string
-    passwordHash?: StringNullableFilter<"User"> | string | null
-    role?: StringFilter<"User"> | string
-    tenantId?: StringNullableFilter<"User"> | string | null
-    isActive?: BoolFilter<"User"> | boolean
-    lastLoginAt?: DateTimeNullableFilter<"User"> | Date | string | null
-    avatarPath?: StringNullableFilter<"User"> | string | null
-    managerId?: StringNullableFilter<"User"> | string | null
-    createdAt?: DateTimeFilter<"User"> | Date | string
-    updatedAt?: DateTimeFilter<"User"> | Date | string
   }
 
   export type UserStoreAssignmentUpsertWithWhereUniqueWithoutUserInput = {
@@ -179676,13 +178946,12 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -179755,13 +179024,12 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
-    isActive?: boolean
-    lastLoginAt?: Date | string | null
     avatarPath?: string | null
     managerId?: string | null
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -181427,6 +180695,24 @@ export namespace Prisma {
     data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutTenantInput>
   }
 
+  export type UserScalarWhereInput = {
+    AND?: UserScalarWhereInput | UserScalarWhereInput[]
+    OR?: UserScalarWhereInput[]
+    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
+    id?: StringFilter<"User"> | string
+    email?: StringFilter<"User"> | string
+    name?: StringFilter<"User"> | string
+    passwordHash?: StringNullableFilter<"User"> | string | null
+    role?: StringFilter<"User"> | string
+    avatarPath?: StringNullableFilter<"User"> | string | null
+    managerId?: StringNullableFilter<"User"> | string | null
+    tenantId?: StringNullableFilter<"User"> | string | null
+    isActive?: BoolFilter<"User"> | boolean
+    lastLoginAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
+  }
+
   export type StoreUpsertWithWhereUniqueWithoutTenantInput = {
     where: StoreWhereUniqueInput
     update: XOR<StoreUpdateWithoutTenantInput, StoreUncheckedUpdateWithoutTenantInput>
@@ -182351,8 +181637,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -182407,8 +181691,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -182613,8 +181895,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -182669,8 +181949,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -182757,8 +182035,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -182813,8 +182089,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -184441,8 +183715,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -184497,8 +183769,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -185692,14 +184962,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
     createdSops?: SopCreateNestedManyWithoutCreatorInput
@@ -185771,14 +185040,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
     createdSops?: SopUncheckedCreateNestedManyWithoutCreatorInput
@@ -185975,14 +185243,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
     createdSops?: SopUpdateManyWithoutCreatorNestedInput
@@ -186054,14 +185321,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
     createdSops?: SopUncheckedUpdateManyWithoutCreatorNestedInput
@@ -186252,8 +185518,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -186308,8 +185572,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -186380,8 +185642,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -186436,8 +185696,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -186492,8 +185750,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -186548,8 +185804,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -186620,8 +185874,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -186676,8 +185928,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -186728,14 +185978,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
     createdSops?: SopCreateNestedManyWithoutCreatorInput
@@ -186807,14 +186056,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
     createdSops?: SopUncheckedCreateNestedManyWithoutCreatorInput
@@ -186931,14 +186179,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
     createdSops?: SopUpdateManyWithoutCreatorNestedInput
@@ -187010,14 +186257,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
     createdSops?: SopUncheckedUpdateManyWithoutCreatorNestedInput
@@ -187963,8 +187209,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -188019,8 +187263,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -188149,8 +187391,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -188205,8 +187445,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -188536,8 +187774,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -188592,8 +187828,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -188791,14 +188025,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     createdSops?: SopCreateNestedManyWithoutCreatorInput
@@ -188870,14 +188103,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     createdSops?: SopUncheckedCreateNestedManyWithoutCreatorInput
@@ -189000,8 +188232,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -189056,8 +188286,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -189273,14 +188501,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     createdSops?: SopUpdateManyWithoutCreatorNestedInput
@@ -189352,14 +188579,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     createdSops?: SopUncheckedUpdateManyWithoutCreatorNestedInput
@@ -189571,8 +188797,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -189627,8 +188851,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -189738,8 +188960,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -189794,8 +189014,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -189866,8 +189084,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -189922,8 +189138,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -190000,14 +189214,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -190079,14 +189292,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -190199,8 +189411,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -190255,8 +189465,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -190345,14 +189553,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -190424,14 +189631,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -190554,14 +189760,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -190633,14 +189838,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -190769,14 +189973,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -190848,14 +190051,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -190931,8 +190133,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -190987,8 +190187,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -191094,8 +190292,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -191150,8 +190346,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -191222,8 +190416,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -191278,8 +190470,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -191477,14 +190667,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -191556,14 +190745,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -191640,14 +190828,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -191719,14 +190906,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -191818,8 +191004,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -191874,8 +191058,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -192091,14 +191273,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -192170,14 +191351,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -192260,14 +191440,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -192339,14 +191518,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -192422,8 +191600,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -192478,8 +191654,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -192587,8 +191761,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -192643,8 +191815,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -192738,8 +191908,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -192794,8 +191962,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -192922,8 +192088,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -192978,8 +192142,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -193063,8 +192225,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -193119,8 +192279,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -193285,14 +192443,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -193364,14 +192521,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -193490,8 +192646,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -193546,8 +192700,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -193724,14 +192876,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -193803,14 +192954,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -194042,8 +193192,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -194098,8 +193246,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -194264,14 +193410,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -194343,14 +193488,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -194442,8 +193586,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -194498,8 +193640,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -194676,14 +193816,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -194755,14 +193894,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -194838,8 +193976,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -194894,8 +194030,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -195060,14 +194194,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -195139,14 +194272,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -195267,8 +194399,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -195323,8 +194453,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -195501,14 +194629,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -195580,14 +194707,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -195781,8 +194907,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -195837,8 +194961,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -196003,14 +195125,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -196082,14 +195203,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -196181,8 +195301,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -196237,8 +195355,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -196415,14 +195531,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -196494,14 +195609,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -196577,8 +195691,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -196633,8 +195745,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -196799,14 +195909,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -196878,14 +195987,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -196962,14 +196070,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -197041,14 +196148,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -197140,8 +196246,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -197196,8 +196300,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -197374,14 +196476,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -197453,14 +196554,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -197543,14 +196643,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -197622,14 +196721,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -197705,8 +196803,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -197761,8 +196857,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -197927,14 +197021,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -198006,14 +197099,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -198142,8 +197234,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -198198,8 +197288,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -198376,14 +197464,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -198455,14 +197542,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -198660,8 +197746,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -198716,8 +197800,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -198971,8 +198053,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -199027,8 +198107,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -199230,8 +198308,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -199286,8 +198362,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -199504,8 +198578,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -199560,8 +198632,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -199774,8 +198844,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -199830,8 +198898,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -200033,14 +199099,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -200112,14 +199177,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -200196,14 +199260,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -200275,14 +199338,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -200374,8 +199436,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -200430,8 +199490,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -200651,14 +199709,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -200730,14 +199787,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -200820,14 +199876,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -200899,14 +199954,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -200982,8 +200036,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -201038,8 +200090,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -201219,8 +200269,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -201275,8 +200323,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -201446,8 +200492,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -201502,8 +200546,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -201599,8 +200641,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -201655,8 +200695,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -201819,8 +200857,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -201875,8 +200911,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -202041,14 +201075,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -202120,14 +201153,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -202204,14 +201236,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -202283,14 +201314,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -202382,8 +201412,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -202438,8 +201466,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -202616,14 +201642,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -202695,14 +201720,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -202785,14 +201809,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -202864,14 +201887,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -202947,8 +201969,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -203003,8 +202023,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -203060,14 +202078,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -203139,14 +202156,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -203302,8 +202318,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -203358,8 +202372,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -203421,14 +202433,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -203500,14 +202511,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -203736,14 +202746,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -203815,14 +202824,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -204081,14 +203089,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -204160,14 +203167,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -204412,14 +203418,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -204491,14 +203496,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -204623,14 +203627,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -204702,14 +203705,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -204785,8 +203787,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -204841,8 +203841,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -205007,14 +204005,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -205086,14 +204083,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -205185,8 +204181,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -205241,8 +204235,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -205419,14 +204411,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -205498,14 +204489,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -205581,8 +204571,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -205637,8 +204625,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -205694,14 +204680,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -205773,14 +204758,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -205951,8 +204935,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -206007,8 +204989,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -206070,14 +205050,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -206149,14 +205128,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -206327,14 +205305,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -206406,14 +205383,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -206667,14 +205643,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -206746,14 +205721,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -206991,14 +205965,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -207070,14 +206043,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -207222,14 +206194,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -207301,14 +206272,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -207431,14 +206401,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -207510,14 +206479,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -207594,14 +206562,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -207673,14 +206640,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -207825,14 +206791,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -207904,14 +206869,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -207994,14 +206958,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -208073,14 +207036,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -208156,8 +207118,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -208212,8 +207172,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -208354,8 +207312,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -208410,8 +207366,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -208674,8 +207628,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -208730,8 +207682,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -208896,14 +207846,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -208975,14 +207924,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -209059,14 +208007,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -209138,14 +208085,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -209305,8 +208251,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -209361,8 +208305,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -209539,14 +208481,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -209618,14 +208559,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -209708,14 +208648,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -209787,14 +208726,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -210022,8 +208960,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -210078,8 +209014,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -210244,14 +209178,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -210323,14 +209256,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -210407,14 +209339,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -210486,14 +209417,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -210585,8 +209515,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -210641,8 +209569,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -210819,14 +209745,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -210898,14 +209823,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -210988,14 +209912,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -211067,14 +209990,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -211150,8 +210072,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -211206,8 +210126,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -211263,14 +210181,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -211342,14 +210259,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -211441,8 +210357,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -211497,8 +210411,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -211560,14 +210472,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -211639,14 +210550,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -211722,8 +210632,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -211778,8 +210686,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -211944,14 +210850,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -212023,14 +210928,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -212107,14 +211011,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -212186,14 +211089,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -212343,8 +211245,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -212399,8 +211299,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -212577,14 +211475,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -212656,14 +211553,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -212746,14 +211642,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -212825,14 +211720,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -213068,14 +211962,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -213147,14 +212040,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -213285,14 +212177,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -213364,14 +212255,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -213447,8 +212337,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -213503,8 +212391,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -213620,8 +212506,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -213676,8 +212560,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -213882,14 +212764,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -213961,14 +212842,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -214045,14 +212925,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -214124,14 +213003,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -214369,14 +213247,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -214448,14 +213325,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -214538,14 +213414,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -214617,14 +213492,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -215029,14 +213903,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -215108,14 +213981,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -215347,14 +214219,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -215426,14 +214297,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -215554,14 +214424,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -215633,14 +214502,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -215767,14 +214635,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -215846,14 +214713,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -216034,14 +214900,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -216113,14 +214978,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -216323,14 +215187,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -216402,14 +215265,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -216590,14 +215452,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -216669,14 +215530,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -216879,14 +215739,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -216958,14 +215817,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -217265,8 +216123,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -217321,8 +216177,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -217445,8 +216299,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -217501,8 +216353,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -218163,8 +217013,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -218219,8 +217067,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -218385,14 +217231,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -218464,14 +217309,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -218563,8 +217407,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -218619,8 +217461,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -218797,14 +217637,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -218876,14 +217715,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -218959,8 +217797,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -219015,8 +217851,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -219087,8 +217921,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -219143,8 +217975,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -219304,14 +218134,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -219383,14 +218212,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -219614,14 +218442,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -219693,14 +218520,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -219823,14 +218649,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -219902,14 +218727,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -220038,14 +218862,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -220117,14 +218940,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -220305,14 +219127,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -220384,14 +219205,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -220468,14 +219288,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -220547,14 +219366,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -220757,14 +219575,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -220836,14 +219653,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -220926,14 +219742,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -221005,14 +219820,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -221088,8 +219902,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -221144,8 +219956,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -221201,14 +220011,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -221280,14 +220089,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -221400,8 +220208,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -221456,8 +220262,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -221519,14 +220323,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -221598,14 +220401,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -221722,14 +220524,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -221801,14 +220602,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -221931,14 +220731,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -222010,14 +220809,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -222093,8 +220891,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -222149,8 +220945,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -222206,14 +221000,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -222285,14 +221078,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -222428,8 +221220,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -222484,8 +221274,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -222547,14 +221335,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -222626,14 +221413,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -222853,14 +221639,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -222932,14 +221717,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -223066,14 +221850,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -223145,14 +221928,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -223557,14 +222339,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -223636,14 +222417,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -223943,14 +222723,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -224022,14 +222801,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -224210,14 +222988,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -224289,14 +223066,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -224451,14 +223227,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -224530,14 +223305,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -224670,14 +223444,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -224749,14 +223522,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -224911,14 +223683,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -224990,14 +223761,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -225178,14 +223948,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -225257,14 +224026,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -225467,14 +224235,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -225546,14 +224313,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -225734,14 +224500,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -225813,14 +224578,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -226048,14 +224812,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -226127,14 +224890,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -226257,14 +225019,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -226336,14 +225097,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -226472,14 +225232,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -226551,14 +225310,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -226800,14 +225558,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -226879,14 +225636,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -227156,14 +225912,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -227235,14 +225990,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -227423,14 +226177,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -227502,14 +226255,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -227712,14 +226464,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -227791,14 +226542,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -228513,14 +227263,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -228592,14 +227341,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -228833,14 +227581,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -228912,14 +227659,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -228991,14 +227737,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -229070,14 +227815,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -229165,14 +227909,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -229244,14 +227987,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -229323,14 +228065,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -229402,14 +228143,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -229497,14 +228237,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -229576,14 +228315,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -229659,8 +228397,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -229715,8 +228451,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -229833,8 +228567,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -229889,8 +228621,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -229998,14 +228728,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -230077,14 +228806,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -230203,14 +228931,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -230282,14 +229009,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -230386,14 +229112,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -230465,14 +229190,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -230591,14 +229315,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -230670,14 +229393,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -230753,8 +229475,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutTenantInput
@@ -230809,8 +229529,6 @@ export namespace Prisma {
     contactPhone?: string | null
     maxUsers?: number
     logoUrl?: string | null
-    primaryColor?: string | null
-    accentColor?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutTenantInput
@@ -230866,14 +229584,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant?: TenantCreateNestedOneWithoutUsersInput
-    manager?: UserCreateNestedOneWithoutDirectReportsInput
-    directReports?: UserCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionCreateNestedManyWithoutConductorInput
@@ -230945,14 +229662,13 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
+    avatarPath?: string | null
+    managerId?: string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    managerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    directReports?: UserUncheckedCreateNestedManyWithoutManagerInput
     storeAssignments?: UserStoreAssignmentUncheckedCreateNestedManyWithoutUserInput
     regionAssignments?: UserRegionAssignmentUncheckedCreateNestedManyWithoutUserInput
     checklistSessions?: ChecklistSessionUncheckedCreateNestedManyWithoutConductorInput
@@ -231044,8 +229760,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutTenantNestedInput
@@ -231100,8 +229814,6 @@ export namespace Prisma {
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     maxUsers?: IntFieldUpdateOperationsInput | number
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
-    accentColor?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutTenantNestedInput
@@ -231163,14 +229875,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneWithoutUsersNestedInput
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -231242,14 +229953,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -231313,20 +230023,6 @@ export namespace Prisma {
     directMessagesSent?: DirectMessageUncheckedUpdateManyWithoutSenderNestedInput
     invitationTokens?: InvitationTokenUncheckedUpdateManyWithoutUserNestedInput
     passwordResetTokens?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserCreateManyManagerInput = {
-    id?: string
-    email: string
-    name: string
-    passwordHash?: string | null
-    role?: string
-    tenantId?: string | null
-    isActive?: boolean
-    lastLoginAt?: Date | string | null
-    avatarPath?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type UserStoreAssignmentCreateManyUserInput = {
@@ -232160,178 +230856,6 @@ export namespace Prisma {
     link?: string | null
     isRead?: boolean
     createdAt?: Date | string
-  }
-
-  export type UserUpdateWithoutManagerInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tenant?: TenantUpdateOneWithoutUsersNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
-    storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
-    regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
-    checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
-    createdSops?: SopUpdateManyWithoutCreatorNestedInput
-    sopAcknowledgments?: SopAcknowledgmentUpdateManyWithoutUserNestedInput
-    vmSubmissions?: VmSubmissionUpdateManyWithoutSubmitterNestedInput
-    vmReviews?: VmSubmissionUpdateManyWithoutReviewerNestedInput
-    standardEvaluations?: StandardEvaluationUpdateManyWithoutEvaluatorNestedInput
-    kpiEntries?: KpiEntryUpdateManyWithoutUserNestedInput
-    budgetPeriods?: BudgetPeriodUpdateManyWithoutUserNestedInput
-    forecasts?: ForecastUpdateManyWithoutUserNestedInput
-    lossReports?: LossIncidentUpdateManyWithoutReporterNestedInput
-    lossAssignments?: LossIncidentUpdateManyWithoutAssigneeNestedInput
-    inventoryCounts?: InventoryCountUpdateManyWithoutConductorNestedInput
-    floorPositions?: FloorStaffPositionUpdateManyWithoutUserNestedInput
-    floorUpdates?: FloorStaffPositionUpdateManyWithoutUpdaterNestedInput
-    maintenanceReports?: MaintenanceRequestUpdateManyWithoutReporterNestedInput
-    maintenanceAssignments?: MaintenanceRequestUpdateManyWithoutAssigneeNestedInput
-    courseCreations?: CourseUpdateManyWithoutCreatorNestedInput
-    courseEnrollments?: CourseEnrollmentUpdateManyWithoutUserNestedInput
-    certificates?: CertificateUpdateManyWithoutUserNestedInput
-    trainingLogs?: TrainingLogUpdateManyWithoutUserNestedInput
-    challengeCreations?: ChallengeUpdateManyWithoutCreatorNestedInput
-    challengeParticipations?: ChallengeParticipantUpdateManyWithoutUserNestedInput
-    onboardingJourneys?: OnboardingJourneyUpdateManyWithoutUserNestedInput
-    onboardingMentoring?: OnboardingJourneyUpdateManyWithoutMentorNestedInput
-    coachSessions?: CoachingSessionUpdateManyWithoutCoachNestedInput
-    coacheeSessions?: CoachingSessionUpdateManyWithoutCoacheeNestedInput
-    devPlansAsUser?: DevelopmentPlanUpdateManyWithoutUserNestedInput
-    devPlansAsManager?: DevelopmentPlanUpdateManyWithoutManagerNestedInput
-    devReviews?: DevelopmentReviewUpdateManyWithoutReviewerNestedInput
-    appraisalsAsEmployee?: AppraisalUpdateManyWithoutEmployeeNestedInput
-    appraisalsAsManager?: AppraisalUpdateManyWithoutManagerNestedInput
-    shiftEntries?: ShiftEntryUpdateManyWithoutUserNestedInput
-    swapRequests?: ShiftSwapRequestUpdateManyWithoutRequesterNestedInput
-    shiftAvailabilities?: ShiftAvailabilityUpdateManyWithoutUserNestedInput
-    shiftTimeEntries?: ShiftTimeEntryUpdateManyWithoutUserNestedInput
-    wellbeingCheckIns?: WellbeingCheckInUpdateManyWithoutUserNestedInput
-    challengeEntries?: ChallengeEntryUpdateManyWithoutUserNestedInput
-    challengeVotesCast?: ChallengeVoteUpdateManyWithoutVoterNestedInput
-    challengeVotesReceived?: ChallengeVoteUpdateManyWithoutTargetUserNestedInput
-    coachingTemplates?: CoachingTemplateUpdateManyWithoutCreatorNestedInput
-    clientAppointments?: ClientAppointmentUpdateManyWithoutAdvisorNestedInput
-    budgetScenarios?: BudgetScenarioUpdateManyWithoutCreatorNestedInput
-    frSessions?: FRSessionUpdateManyWithoutStaffNestedInput
-    briefingsCreated?: BriefingUpdateManyWithoutCreatorNestedInput
-    briefingAcks?: BriefingAcknowledgmentUpdateManyWithoutUserNestedInput
-    handoversFrom?: HandoverUpdateManyWithoutFromUserNestedInput
-    handoversTo?: HandoverUpdateManyWithoutToUserNestedInput
-    teamMessagesSent?: TeamMessageUpdateManyWithoutSenderNestedInput
-    teamMessageReads?: TeamMessageReadUpdateManyWithoutUserNestedInput
-    newslettersCreated?: NewsletterUpdateManyWithoutCreatorNestedInput
-    newsletterViews?: NewsletterViewUpdateManyWithoutUserNestedInput
-    clientsCreated?: ClientProfileUpdateManyWithoutCreatorNestedInput
-    clientInteractions?: ClientInteractionUpdateManyWithoutUserNestedInput
-    clientTasks?: ClientTaskUpdateManyWithoutUserNestedInput
-    stockCallouts?: StockCalloutUpdateManyWithoutReporterNestedInput
-    ordersCreated?: CustomerOrderUpdateManyWithoutCreatorNestedInput
-    orderStatusUpdates?: OrderStatusUpdateUpdateManyWithoutUpdaterNestedInput
-    conversationParticipations?: ConversationParticipantUpdateManyWithoutUserNestedInput
-    directMessagesSent?: DirectMessageUpdateManyWithoutSenderNestedInput
-    invitationTokens?: InvitationTokenUpdateManyWithoutUserNestedInput
-    passwordResetTokens?: PasswordResetTokenUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutManagerInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: StringFieldUpdateOperationsInput | string
-    tenantId?: NullableStringFieldUpdateOperationsInput | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
-    storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
-    regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
-    checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
-    createdSops?: SopUncheckedUpdateManyWithoutCreatorNestedInput
-    sopAcknowledgments?: SopAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
-    vmSubmissions?: VmSubmissionUncheckedUpdateManyWithoutSubmitterNestedInput
-    vmReviews?: VmSubmissionUncheckedUpdateManyWithoutReviewerNestedInput
-    standardEvaluations?: StandardEvaluationUncheckedUpdateManyWithoutEvaluatorNestedInput
-    kpiEntries?: KpiEntryUncheckedUpdateManyWithoutUserNestedInput
-    budgetPeriods?: BudgetPeriodUncheckedUpdateManyWithoutUserNestedInput
-    forecasts?: ForecastUncheckedUpdateManyWithoutUserNestedInput
-    lossReports?: LossIncidentUncheckedUpdateManyWithoutReporterNestedInput
-    lossAssignments?: LossIncidentUncheckedUpdateManyWithoutAssigneeNestedInput
-    inventoryCounts?: InventoryCountUncheckedUpdateManyWithoutConductorNestedInput
-    floorPositions?: FloorStaffPositionUncheckedUpdateManyWithoutUserNestedInput
-    floorUpdates?: FloorStaffPositionUncheckedUpdateManyWithoutUpdaterNestedInput
-    maintenanceReports?: MaintenanceRequestUncheckedUpdateManyWithoutReporterNestedInput
-    maintenanceAssignments?: MaintenanceRequestUncheckedUpdateManyWithoutAssigneeNestedInput
-    courseCreations?: CourseUncheckedUpdateManyWithoutCreatorNestedInput
-    courseEnrollments?: CourseEnrollmentUncheckedUpdateManyWithoutUserNestedInput
-    certificates?: CertificateUncheckedUpdateManyWithoutUserNestedInput
-    trainingLogs?: TrainingLogUncheckedUpdateManyWithoutUserNestedInput
-    challengeCreations?: ChallengeUncheckedUpdateManyWithoutCreatorNestedInput
-    challengeParticipations?: ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
-    onboardingJourneys?: OnboardingJourneyUncheckedUpdateManyWithoutUserNestedInput
-    onboardingMentoring?: OnboardingJourneyUncheckedUpdateManyWithoutMentorNestedInput
-    coachSessions?: CoachingSessionUncheckedUpdateManyWithoutCoachNestedInput
-    coacheeSessions?: CoachingSessionUncheckedUpdateManyWithoutCoacheeNestedInput
-    devPlansAsUser?: DevelopmentPlanUncheckedUpdateManyWithoutUserNestedInput
-    devPlansAsManager?: DevelopmentPlanUncheckedUpdateManyWithoutManagerNestedInput
-    devReviews?: DevelopmentReviewUncheckedUpdateManyWithoutReviewerNestedInput
-    appraisalsAsEmployee?: AppraisalUncheckedUpdateManyWithoutEmployeeNestedInput
-    appraisalsAsManager?: AppraisalUncheckedUpdateManyWithoutManagerNestedInput
-    shiftEntries?: ShiftEntryUncheckedUpdateManyWithoutUserNestedInput
-    swapRequests?: ShiftSwapRequestUncheckedUpdateManyWithoutRequesterNestedInput
-    shiftAvailabilities?: ShiftAvailabilityUncheckedUpdateManyWithoutUserNestedInput
-    shiftTimeEntries?: ShiftTimeEntryUncheckedUpdateManyWithoutUserNestedInput
-    wellbeingCheckIns?: WellbeingCheckInUncheckedUpdateManyWithoutUserNestedInput
-    challengeEntries?: ChallengeEntryUncheckedUpdateManyWithoutUserNestedInput
-    challengeVotesCast?: ChallengeVoteUncheckedUpdateManyWithoutVoterNestedInput
-    challengeVotesReceived?: ChallengeVoteUncheckedUpdateManyWithoutTargetUserNestedInput
-    coachingTemplates?: CoachingTemplateUncheckedUpdateManyWithoutCreatorNestedInput
-    clientAppointments?: ClientAppointmentUncheckedUpdateManyWithoutAdvisorNestedInput
-    budgetScenarios?: BudgetScenarioUncheckedUpdateManyWithoutCreatorNestedInput
-    frSessions?: FRSessionUncheckedUpdateManyWithoutStaffNestedInput
-    briefingsCreated?: BriefingUncheckedUpdateManyWithoutCreatorNestedInput
-    briefingAcks?: BriefingAcknowledgmentUncheckedUpdateManyWithoutUserNestedInput
-    handoversFrom?: HandoverUncheckedUpdateManyWithoutFromUserNestedInput
-    handoversTo?: HandoverUncheckedUpdateManyWithoutToUserNestedInput
-    teamMessagesSent?: TeamMessageUncheckedUpdateManyWithoutSenderNestedInput
-    teamMessageReads?: TeamMessageReadUncheckedUpdateManyWithoutUserNestedInput
-    newslettersCreated?: NewsletterUncheckedUpdateManyWithoutCreatorNestedInput
-    newsletterViews?: NewsletterViewUncheckedUpdateManyWithoutUserNestedInput
-    clientsCreated?: ClientProfileUncheckedUpdateManyWithoutCreatorNestedInput
-    clientInteractions?: ClientInteractionUncheckedUpdateManyWithoutUserNestedInput
-    clientTasks?: ClientTaskUncheckedUpdateManyWithoutUserNestedInput
-    stockCallouts?: StockCalloutUncheckedUpdateManyWithoutReporterNestedInput
-    ordersCreated?: CustomerOrderUncheckedUpdateManyWithoutCreatorNestedInput
-    orderStatusUpdates?: OrderStatusUpdateUncheckedUpdateManyWithoutUpdaterNestedInput
-    conversationParticipations?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
-    directMessagesSent?: DirectMessageUncheckedUpdateManyWithoutSenderNestedInput
-    invitationTokens?: InvitationTokenUncheckedUpdateManyWithoutUserNestedInput
-    passwordResetTokens?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateManyWithoutManagerInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: StringFieldUpdateOperationsInput | string
-    tenantId?: NullableStringFieldUpdateOperationsInput | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserStoreAssignmentUpdateWithoutUserInput = {
@@ -234891,10 +233415,10 @@ export namespace Prisma {
     name: string
     passwordHash?: string | null
     role?: string
-    isActive?: boolean
-    lastLoginAt?: Date | string | null
     avatarPath?: string | null
     managerId?: string | null
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -235430,13 +233954,12 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    manager?: UserUpdateOneWithoutDirectReportsNestedInput
-    directReports?: UserUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUpdateManyWithoutConductorNestedInput
@@ -235509,13 +234032,12 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    directReports?: UserUncheckedUpdateManyWithoutManagerNestedInput
     storeAssignments?: UserStoreAssignmentUncheckedUpdateManyWithoutUserNestedInput
     regionAssignments?: UserRegionAssignmentUncheckedUpdateManyWithoutUserNestedInput
     checklistSessions?: ChecklistSessionUncheckedUpdateManyWithoutConductorNestedInput
@@ -235588,10 +234110,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

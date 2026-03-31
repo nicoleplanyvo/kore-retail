@@ -102,9 +102,8 @@ stockCalloutsRouter.post('/callouts', async (req, res) => {
 // GET /callouts/:id — Get single callout
 stockCalloutsRouter.get('/callouts/:id', async (req, res) => {
     try {
-        const tenantId = req.tenantId;
-        const callout = await prisma.stockCallout.findFirst({
-            where: { id: req.params['id'], store: { tenantId } },
+        const callout = await prisma.stockCallout.findUnique({
+            where: { id: req.params['id'] },
             include: {
                 store: { select: { id: true, name: true, city: true } },
                 reporter: { select: { id: true, name: true } },
@@ -122,10 +121,6 @@ stockCalloutsRouter.get('/callouts/:id', async (req, res) => {
 // PUT /callouts/:id — Update callout (status, urgency, etc.)
 stockCalloutsRouter.put('/callouts/:id', async (req, res) => {
     try {
-        const tenantId = req.tenantId;
-        const existing = await prisma.stockCallout.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
-        if (!existing)
-            return res.status(404).json({ error: 'Stock Callout nicht gefunden.' });
         const parsed = stockCalloutUpdateSchema.safeParse(req.body);
         if (!parsed.success)
             return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
@@ -152,8 +147,7 @@ stockCalloutsRouter.put('/callouts/:id/offer', async (req, res) => {
             return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
         const toolStoreIds = req.toolStoreIds;
         const offeringStoreId = req.body.storeId || (toolStoreIds !== 'all' ? toolStoreIds[0] : undefined);
-        const tenantId = req.tenantId;
-        const callout = await prisma.stockCallout.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
+        const callout = await prisma.stockCallout.findUnique({ where: { id: req.params['id'] } });
         if (!callout)
             return res.status(404).json({ error: 'Callout nicht gefunden.' });
         if (callout.status !== 'OPEN')
@@ -181,8 +175,7 @@ stockCalloutsRouter.put('/callouts/:id/offer', async (req, res) => {
 // PUT /callouts/:id/transfer — Confirm transfer (Angeboten -> Transfer)
 stockCalloutsRouter.put('/callouts/:id/transfer', async (req, res) => {
     try {
-        const tenantId = req.tenantId;
-        const callout = await prisma.stockCallout.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
+        const callout = await prisma.stockCallout.findUnique({ where: { id: req.params['id'] } });
         if (!callout)
             return res.status(404).json({ error: 'Callout nicht gefunden.' });
         if (callout.status !== 'OFFERED')
@@ -205,8 +198,7 @@ stockCalloutsRouter.put('/callouts/:id/transfer', async (req, res) => {
 // PUT /callouts/:id/resolve — Mark as resolved (Transfer -> Geloest)
 stockCalloutsRouter.put('/callouts/:id/resolve', async (req, res) => {
     try {
-        const tenantId = req.tenantId;
-        const callout = await prisma.stockCallout.findFirst({ where: { id: req.params['id'], store: { tenantId } } });
+        const callout = await prisma.stockCallout.findUnique({ where: { id: req.params['id'] } });
         if (!callout)
             return res.status(404).json({ error: 'Callout nicht gefunden.' });
         const updated = await prisma.stockCallout.update({

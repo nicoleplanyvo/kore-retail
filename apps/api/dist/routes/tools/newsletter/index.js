@@ -204,9 +204,8 @@ newsletterRouter.get('/reports/engagement', async (req, res) => {
 // GET /:id — Get newsletter with sections & views count
 newsletterRouter.get('/:id', async (req, res) => {
     try {
-        const tenantId = req.tenantId;
-        const newsletter = await prisma.newsletter.findFirst({
-            where: { id: req.params['id'], tenantId },
+        const newsletter = await prisma.newsletter.findUnique({
+            where: { id: req.params['id'] },
             include: {
                 creator: { select: { id: true, name: true } },
                 sections: { orderBy: { sortOrder: 'asc' } },
@@ -226,11 +225,6 @@ newsletterRouter.get('/:id', async (req, res) => {
 // PUT /:id — Update newsletter
 newsletterRouter.put('/:id', async (req, res) => {
     try {
-        const tenantId = req.tenantId;
-        // Verify newsletter belongs to tenant
-        const existing = await prisma.newsletter.findFirst({ where: { id: req.params['id'], tenantId } });
-        if (!existing)
-            return res.status(404).json({ error: 'Newsletter nicht gefunden.' });
         const parsed = newsletterUpdateSchema.safeParse(req.body);
         if (!parsed.success)
             return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
@@ -254,10 +248,6 @@ newsletterRouter.put('/:id', async (req, res) => {
 // POST /:id/publish — Publish newsletter
 newsletterRouter.post('/:id/publish', async (req, res) => {
     try {
-        const tenantId = req.tenantId;
-        const existing = await prisma.newsletter.findFirst({ where: { id: req.params['id'], tenantId } });
-        if (!existing)
-            return res.status(404).json({ error: 'Newsletter nicht gefunden.' });
         const newsletter = await prisma.newsletter.update({
             where: { id: req.params['id'] },
             data: { status: 'PUBLISHED', publishedAt: new Date() },
@@ -276,10 +266,6 @@ newsletterRouter.post('/:id/publish', async (req, res) => {
 // POST /:id/archive — Archive newsletter
 newsletterRouter.post('/:id/archive', async (req, res) => {
     try {
-        const tenantId = req.tenantId;
-        const existing = await prisma.newsletter.findFirst({ where: { id: req.params['id'], tenantId } });
-        if (!existing)
-            return res.status(404).json({ error: 'Newsletter nicht gefunden.' });
         const newsletter = await prisma.newsletter.update({
             where: { id: req.params['id'] },
             data: { status: 'ARCHIVED' },
@@ -300,8 +286,8 @@ newsletterRouter.post('/:id/duplicate', async (req, res) => {
     try {
         const tenantId = req.tenantId;
         const userId = req.user.sub;
-        const original = await prisma.newsletter.findFirst({
-            where: { id: req.params['id'], tenantId },
+        const original = await prisma.newsletter.findUnique({
+            where: { id: req.params['id'] },
             include: { sections: { orderBy: { sortOrder: 'asc' } } },
         });
         if (!original)
@@ -338,11 +324,6 @@ newsletterRouter.post('/:id/duplicate', async (req, res) => {
 // POST /:id/sections — Add section to newsletter
 newsletterRouter.post('/:id/sections', async (req, res) => {
     try {
-        const tenantId = req.tenantId;
-        // Verify newsletter belongs to tenant
-        const nl = await prisma.newsletter.findFirst({ where: { id: req.params['id'], tenantId } });
-        if (!nl)
-            return res.status(404).json({ error: 'Newsletter nicht gefunden.' });
         const parsed = newsletterSectionSchema.safeParse(req.body);
         if (!parsed.success)
             return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
@@ -371,13 +352,6 @@ newsletterRouter.post('/:id/sections', async (req, res) => {
 // PUT /sections/:sectionId — Update a section
 newsletterRouter.put('/sections/:sectionId', async (req, res) => {
     try {
-        const tenantId = req.tenantId;
-        // Verify section belongs to tenant via newsletter relation
-        const existingSection = await prisma.newsletterSection.findFirst({
-            where: { id: req.params['sectionId'], newsletter: { tenantId } },
-        });
-        if (!existingSection)
-            return res.status(404).json({ error: 'Abschnitt nicht gefunden.' });
         const parsed = newsletterSectionSchema.safeParse(req.body);
         if (!parsed.success)
             return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
@@ -399,13 +373,6 @@ newsletterRouter.put('/sections/:sectionId', async (req, res) => {
 // DELETE /sections/:sectionId — Delete a section
 newsletterRouter.delete('/sections/:sectionId', async (req, res) => {
     try {
-        const tenantId = req.tenantId;
-        // Verify section belongs to tenant via newsletter relation
-        const existingSection = await prisma.newsletterSection.findFirst({
-            where: { id: req.params['sectionId'], newsletter: { tenantId } },
-        });
-        if (!existingSection)
-            return res.status(404).json({ error: 'Abschnitt nicht gefunden.' });
         await prisma.newsletterSection.delete({ where: { id: req.params['sectionId'] } });
         res.json({ success: true });
     }
@@ -417,11 +384,6 @@ newsletterRouter.delete('/sections/:sectionId', async (req, res) => {
 // PUT /:id/sections/reorder — Reorder sections
 newsletterRouter.put('/:id/sections/reorder', async (req, res) => {
     try {
-        const tenantId = req.tenantId;
-        // Verify newsletter belongs to tenant
-        const nl = await prisma.newsletter.findFirst({ where: { id: req.params['id'], tenantId } });
-        if (!nl)
-            return res.status(404).json({ error: 'Newsletter nicht gefunden.' });
         const { order } = req.body;
         if (!Array.isArray(order))
             return res.status(400).json({ error: 'order muss ein Array sein.' });
@@ -444,10 +406,6 @@ newsletterRouter.put('/:id/sections/reorder', async (req, res) => {
 // POST /:id/view — Record view
 newsletterRouter.post('/:id/view', async (req, res) => {
     try {
-        const tenantId = req.tenantId;
-        const nlCheck = await prisma.newsletter.findFirst({ where: { id: req.params['id'], tenantId } });
-        if (!nlCheck)
-            return res.status(404).json({ error: 'Newsletter nicht gefunden.' });
         const userId = req.user.sub;
         const view = await prisma.newsletterView.upsert({
             where: {
@@ -466,10 +424,6 @@ newsletterRouter.post('/:id/view', async (req, res) => {
 // DELETE /:id — Delete newsletter (soft: archive)
 newsletterRouter.delete('/:id', async (req, res) => {
     try {
-        const tenantId = req.tenantId;
-        const existing = await prisma.newsletter.findFirst({ where: { id: req.params['id'], tenantId } });
-        if (!existing)
-            return res.status(404).json({ error: 'Newsletter nicht gefunden.' });
         const newsletter = await prisma.newsletter.update({
             where: { id: req.params['id'] },
             data: { status: 'ARCHIVED' },

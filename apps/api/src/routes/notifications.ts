@@ -5,16 +5,20 @@ import { authenticate } from '../middleware/auth.js';
 export const notificationsRouter: RouterType = Router();
 notificationsRouter.use(authenticate);
 
-// GET /api/notifications — paginated list
+// ── GET / ────────────────────────────────────────
+// Paginated list of user's own notifications
 notificationsRouter.get('/', async (req, res) => {
   try {
     const userId = req.user!.sub;
-    const page = Math.max(1, parseInt(req.query['page'] as string) || 1);
-    const pageSize = Math.min(100, Math.max(1, parseInt(req.query['pageSize'] as string) || 20));
+    const tenantId = req.user!.tenantId ?? undefined;
+    const page = Math.max(1, Number(req.query['page']) || 1);
+    const pageSize = Math.min(100, Math.max(1, Number(req.query['pageSize']) || 20));
     const unreadOnly = req.query['unreadOnly'] === 'true';
 
-    const where: Record<string, unknown> = { userId };
-    if (unreadOnly) where['isRead'] = false;
+    const where: Record<string, unknown> = { userId, tenantId };
+    if (unreadOnly) {
+      where['isRead'] = false;
+    }
 
     const [data, total] = await Promise.all([
       prisma.notification.findMany({
@@ -22,10 +26,6 @@ notificationsRouter.get('/', async (req, res) => {
         orderBy: { createdAt: 'desc' },
         skip: (page - 1) * pageSize,
         take: pageSize,
-        select: {
-          id: true, type: true, title: true, body: true,
-          link: true, isRead: true, createdAt: true,
-        },
       }),
       prisma.notification.count({ where }),
     ]);
@@ -37,53 +37,68 @@ notificationsRouter.get('/', async (req, res) => {
   }
 });
 
-// GET /api/notifications/unread-count
+// ── GET /unread-count ────────────────────────────
+// Returns count of unread notifications
 notificationsRouter.get('/unread-count', async (req, res) => {
   try {
+    const userId = req.user!.sub;
+    const tenantId = req.user!.tenantId ?? undefined;
+
     const count = await prisma.notification.count({
-      where: { userId: req.user!.sub, isRead: false },
+      where: { userId, tenantId, isRead: false },
     });
+
     res.json({ count });
   } catch (err) {
-    console.error('Unread count error:', err);
+    console.error('Notification unread-count error:', err);
     res.status(500).json({ error: 'Interner Serverfehler.' });
   }
 });
 
-// PUT /api/notifications/read-all — MUST be before /:id/read
+// ── PUT /read-all ────────────────────────────────
+// Mark all user's unread notifications as read
+// IMPORTANT: This route must be registered BEFORE /:id/read
 notificationsRouter.put('/read-all', async (req, res) => {
   try {
+    const userId = req.user!.sub;
+    const tenantId = req.user!.tenantId ?? undefined;
+
     const result = await prisma.notification.updateMany({
-      where: { userId: req.user!.sub, isRead: false },
+      where: { userId, tenantId, isRead: false },
       data: { isRead: true },
     });
+
     res.json({ success: true, updated: result.count });
   } catch (err) {
-    console.error('Mark all read error:', err);
+    console.error('Notification read-all error:', err);
     res.status(500).json({ error: 'Interner Serverfehler.' });
   }
 });
 
-// PUT /api/notifications/:id/read
+// ── PUT /:id/read ────────────────────────────────
+// Mark single notification as read
 notificationsRouter.put('/:id/read', async (req, res) => {
   try {
+    const userId = req.user!.sub;
+    const notificationId = req.params['id']!;
+
     const notification = await prisma.notification.findUnique({
-      where: { id: req.params['id'] },
+      where: { id: notificationId },
     });
 
-    if (!notification || notification.userId !== req.user!.sub) {
+    if (!notification || notification.userId !== userId) {
       res.status(404).json({ error: 'Benachrichtigung nicht gefunden.' });
       return;
     }
 
     await prisma.notification.update({
-      where: { id: notification.id },
+      where: { id: notificationId },
       data: { isRead: true },
     });
 
     res.json({ success: true });
   } catch (err) {
-    console.error('Mark read error:', err);
+    console.error('Notification mark-read error:', err);
     res.status(500).json({ error: 'Interner Serverfehler.' });
   }
 });

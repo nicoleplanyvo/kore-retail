@@ -7,16 +7,13 @@ import {
   useCoachingTemplates,
   useCreateCoachingSession,
 } from '../../../hooks/useCoaching';
-import { Breadcrumb } from '../../../components/Breadcrumb';
-import { FormField } from '../../../components/FormField';
-import { LoadingButton } from '../../../components/LoadingButton';
 
-const TOPICS = ['Verkauf', 'Kundenservice', 'Führung', 'Produktwissen', 'Soft Skills'];
+const TOPICS = ['Verkauf', 'Kundenservice', 'Fuehrung', 'Produktwissen', 'Soft Skills'];
 
 const GROW_SECTIONS = [
-  { key: 'goalText', label: 'Goal (Ziel)', placeholder: 'Was möchten Sie in dieser Session erreichen?' },
-  { key: 'realityText', label: 'Reality (Realität)', placeholder: 'Wie ist die aktuelle Situation?' },
-  { key: 'optionsText', label: 'Options (Optionen)', placeholder: 'Welche Möglichkeiten gibt es?' },
+  { key: 'goalText', label: 'Goal (Ziel)', placeholder: 'Was moechten Sie in dieser Session erreichen?' },
+  { key: 'realityText', label: 'Reality (Realitaet)', placeholder: 'Wie ist die aktuelle Situation?' },
+  { key: 'optionsText', label: 'Options (Optionen)', placeholder: 'Welche Moeglichkeiten gibt es?' },
   { key: 'wayForwardText', label: 'Way Forward (Weg)', placeholder: 'Welche konkreten Schritte werden unternommen?' },
 ];
 
@@ -53,12 +50,7 @@ export function CreateSessionPage() {
     templateId: '',
   });
 
-  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
-
-  const set = (key: string, val: any) => {
-    setForm((f) => ({ ...f, [key]: val }));
-    if (formErrors[key]) setFormErrors((e) => ({ ...e, [key]: '' }));
-  };
+  const set = (key: string, val: any) => setForm((f) => ({ ...f, [key]: val }));
 
   const applyTemplate = (templateId: string) => {
     set('templateId', templateId);
@@ -80,18 +72,8 @@ export function CreateSessionPage() {
     }));
   };
 
-  const validateForm = () => {
-    const errors: Record<string, string> = {};
-    if (!form.storeId) errors.storeId = 'Pflichtfeld';
-    if (!form.coacheeId) errors.coacheeId = 'Pflichtfeld';
-    if (!form.scheduledAt) errors.scheduledAt = 'Pflichtfeld';
-    setFormErrors(errors);
-    return Object.keys(errors).length === 0;
-  };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateForm()) return;
     create.mutate(
       { ...form, duration: Number(form.duration) },
       { onSuccess: () => navigate('/app/tools/coaching') },
@@ -102,7 +84,6 @@ export function CreateSessionPage() {
 
   return (
     <div className="p-xl max-w-4xl">
-      <Breadcrumb items={[{ label: 'Coaching', href: '/app/tools/coaching' }, { label: 'Neue Session' }]} />
       <div className="flex items-center gap-md mb-2xl">
         <Link to="/app/tools/coaching" className="text-kore-mid hover:text-kore-ink transition-colors">
           <ArrowLeft size={20} />
@@ -111,7 +92,7 @@ export function CreateSessionPage() {
           <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm">
             <MessageSquare size={24} /> Neue Coaching-Session
           </h1>
-          <p className="text-body text-kore-mid mt-xs">Session planen und Framework wählen</p>
+          <p className="text-body text-kore-mid mt-xs">Session planen und Framework waehlen</p>
         </div>
       </div>
 
@@ -120,51 +101,59 @@ export function CreateSessionPage() {
         <div className="bg-kore-white border border-kore-border p-lg mb-xl">
           <h2 className="font-display text-h3 text-kore-ink mb-lg">Grunddaten</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-lg">
-            <FormField label="Store" required error={formErrors.storeId}>
-              <select value={form.storeId} onChange={(e) => set('storeId', e.target.value)} className={`w-full border px-md py-sm text-body ${formErrors.storeId ? 'border-red-500' : 'border-kore-border'}`}>
-                <option value="">Store wählen...</option>
+            <div>
+              <label className="block text-small text-kore-mid mb-xs">Store *</label>
+              <select value={form.storeId} onChange={(e) => set('storeId', e.target.value)} className="w-full border border-kore-border px-md py-sm text-body" required>
+                <option value="">Store waehlen...</option>
                 {(stores ?? []).map((s: any) => (
                   <option key={s.id} value={s.id}>{s.name}{s.city ? ` (${s.city})` : ''}</option>
                 ))}
               </select>
-            </FormField>
-            <FormField label="Coachee" required error={formErrors.coacheeId}>
-              <select value={form.coacheeId} onChange={(e) => set('coacheeId', e.target.value)} className={`w-full border px-md py-sm text-body ${formErrors.coacheeId ? 'border-red-500' : 'border-kore-border'}`}>
-                <option value="">Mitarbeiter wählen...</option>
+            </div>
+            <div>
+              <label className="block text-small text-kore-mid mb-xs">Coachee *</label>
+              <select value={form.coacheeId} onChange={(e) => set('coacheeId', e.target.value)} className="w-full border border-kore-border px-md py-sm text-body" required>
+                <option value="">Mitarbeiter waehlen...</option>
                 {(users ?? []).map((u: any) => (
                   <option key={u.id} value={u.id}>{u.name}</option>
                 ))}
               </select>
-            </FormField>
-            <FormField label="Termin" required error={formErrors.scheduledAt}>
-              <input type="datetime-local" value={form.scheduledAt} onChange={(e) => set('scheduledAt', e.target.value)} className={`w-full border px-md py-sm text-body ${formErrors.scheduledAt ? 'border-red-500' : 'border-kore-border'}`} />
-            </FormField>
-            <FormField label="Dauer (Minuten)" hint="Zwischen 5 und 480 Minuten">
+            </div>
+            <div>
+              <label className="block text-small text-kore-mid mb-xs">Termin *</label>
+              <input type="datetime-local" value={form.scheduledAt} onChange={(e) => set('scheduledAt', e.target.value)} className="w-full border border-kore-border px-md py-sm text-body" required />
+            </div>
+            <div>
+              <label className="block text-small text-kore-mid mb-xs">Dauer (Minuten)</label>
               <input type="number" value={form.duration} onChange={(e) => set('duration', e.target.value)} min={5} max={480} className="w-full border border-kore-border px-md py-sm text-body" />
-            </FormField>
-            <FormField label="Typ">
+            </div>
+            <div>
+              <label className="block text-small text-kore-mid mb-xs">Typ</label>
               <select value={form.type} onChange={(e) => set('type', e.target.value)} className="w-full border border-kore-border px-md py-sm text-body">
-                <option value="REGULAR">Regulär</option>
+                <option value="REGULAR">Regulaer</option>
                 <option value="AD_HOC">Ad-hoc</option>
                 <option value="FOLLOW_UP">Follow-up</option>
               </select>
-            </FormField>
-            <FormField label="Framework" required>
+            </div>
+            <div>
+              <label className="block text-small text-kore-mid mb-xs">Framework *</label>
               <select value={form.framework} onChange={(e) => set('framework', e.target.value)} className="w-full border border-kore-border px-md py-sm text-body">
                 <option value="GROW">GROW (Goal, Reality, Options, Way forward)</option>
                 <option value="SMART">SMART (Specific, Measurable, Achievable, Relevant, Time-bound)</option>
                 <option value="FREE">Frei (ohne Framework)</option>
               </select>
-            </FormField>
-            <FormField label="Thema">
+            </div>
+            <div>
+              <label className="block text-small text-kore-mid mb-xs">Thema</label>
               <select value={form.topic} onChange={(e) => set('topic', e.target.value)} className="w-full border border-kore-border px-md py-sm text-body">
                 <option value="">Kein Thema</option>
                 {TOPICS.map((t) => <option key={t} value={t}>{t}</option>)}
               </select>
-            </FormField>
-            <FormField label="Kategorie">
+            </div>
+            <div>
+              <label className="block text-small text-kore-mid mb-xs">Kategorie</label>
               <input value={form.category} onChange={(e) => set('category', e.target.value)} placeholder="Optional" className="w-full border border-kore-border px-md py-sm text-body" />
-            </FormField>
+            </div>
           </div>
         </div>
 
@@ -207,15 +196,14 @@ export function CreateSessionPage() {
 
         {/* Submit */}
         <div className="flex gap-sm">
-          <LoadingButton
+          <button
             type="submit"
-            isLoading={create.isPending}
-            loadingText="Erstellen..."
-            className="flex items-center gap-xs px-lg py-sm text-small font-medium uppercase tracking-widest"
+            disabled={create.isPending}
+            className="flex items-center gap-xs px-lg py-sm bg-kore-ink text-kore-white text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors disabled:opacity-50"
           >
-            <Save size={16} /> Session erstellen
-          </LoadingButton>
-          <Link to="/app/tools/coaching" className="px-lg py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink inline-flex items-center">
+            <Save size={16} /> {create.isPending ? 'Erstellen...' : 'Session erstellen'}
+          </button>
+          <Link to="/app/tools/coaching" className="px-lg py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink">
             Abbrechen
           </Link>
         </div>

@@ -17,7 +17,7 @@ const upload = multer({
     limits: { fileSize: 10 * 1024 * 1024 },
 });
 export const vmComplianceRouter = Router();
-vmComplianceRouter.use(authenticate, requireToolAccess('standards.vm_foto_compliance'));
+vmComplianceRouter.use(authenticate, requireToolAccess('vm.vm_compliance'));
 // GET /stores
 vmComplianceRouter.get('/stores', async (req, res) => {
     try {

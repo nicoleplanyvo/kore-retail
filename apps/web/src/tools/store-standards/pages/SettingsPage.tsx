@@ -25,19 +25,19 @@ export function SettingsPage() {
   return (
     <div className="p-xl max-w-5xl">
       <Link to="/app/tools/store-standards" className="flex items-center gap-xs text-small text-kore-mid hover:text-kore-ink mb-lg">
-        <ArrowLeft size={14} /> Zurück zur Übersicht
+        <ArrowLeft size={14} /> Zurueck zur Uebersicht
       </Link>
       <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm mb-xs">
         <Settings size={24} /> Einstellungen
       </h1>
-      <p className="text-body text-kore-mid mb-2xl">Grundparameter für die Budget-Berechnung.</p>
+      <p className="text-body text-kore-mid mb-2xl">Grundparameter fuer die Budget-Berechnung.</p>
 
-      {/* Währung & Kosten */}
-      <h2 className="font-display text-h3 text-kore-ink mb-md flex items-center gap-sm"><Coins size={18} /> Währung & Kosten</h2>
+      {/* Waehrung & Kosten */}
+      <h2 className="font-display text-h3 text-kore-ink mb-md flex items-center gap-sm"><Coins size={18} /> Waehrung & Kosten</h2>
       <div className="bg-kore-white border border-kore-border p-lg mb-xl">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-md">
           <div>
-            <label className="block text-small text-kore-mid mb-xs">Währungssymbol</label>
+            <label className="block text-small text-kore-mid mb-xs">Waehrungssymbol</label>
             <input
               type="text"
               value={s.currency}
@@ -62,8 +62,8 @@ export function SettingsPage() {
         </div>
       </div>
 
-      {/* Zuschläge */}
-      <h2 className="font-display text-h3 text-kore-ink mb-md flex items-center gap-sm"><Award size={18} /> Zuschläge</h2>
+      {/* Zuschlaege */}
+      <h2 className="font-display text-h3 text-kore-ink mb-md flex items-center gap-sm"><Award size={18} /> Zuschlaege</h2>
       <div className="bg-kore-white border border-kore-border p-lg">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-md">
           {field('Sonntagszuschlag', 'sundayPremiumPct', '1', '%')}

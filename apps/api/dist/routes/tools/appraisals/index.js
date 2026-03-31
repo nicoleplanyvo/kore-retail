@@ -173,9 +173,8 @@ appraisalsRouter.post('/appraisals', async (req, res) => {
 // ── GET /appraisals/:id ──────────────────
 appraisalsRouter.get('/appraisals/:id', async (req, res) => {
     try {
-        const tenantId = req.tenantId;
-        const appraisal = await prisma.appraisal.findFirst({
-            where: { id: req.params['id'], cycle: { tenantId } },
+        const appraisal = await prisma.appraisal.findUnique({
+            where: { id: req.params['id'] },
             include: {
                 cycle: { select: { id: true, name: true, period: true } },
                 store: { select: { id: true, name: true } },
@@ -211,8 +210,7 @@ appraisalsRouter.get('/appraisals/:id', async (req, res) => {
 // ── PUT /appraisals/:id ──────────────────
 appraisalsRouter.put('/appraisals/:id', async (req, res) => {
     try {
-        const tenantId = req.tenantId;
-        const existing = await prisma.appraisal.findFirst({ where: { id: req.params['id'], cycle: { tenantId } } });
+        const existing = await prisma.appraisal.findUnique({ where: { id: req.params['id'] } });
         if (!existing)
             return res.status(404).json({ error: 'Beurteilung nicht gefunden.' });
         const { categories, smartGoals, strengths, improvements, goals, overallRating, managerRating, status } = req.body;
@@ -260,8 +258,7 @@ appraisalsRouter.put('/appraisals/:id', async (req, res) => {
 // ── POST /appraisals/:id/self-assessment ─
 appraisalsRouter.post('/appraisals/:id/self-assessment', async (req, res) => {
     try {
-        const tenantId = req.tenantId;
-        const existing = await prisma.appraisal.findFirst({ where: { id: req.params['id'], cycle: { tenantId } } });
+        const existing = await prisma.appraisal.findUnique({ where: { id: req.params['id'] } });
         if (!existing)
             return res.status(404).json({ error: 'Beurteilung nicht gefunden.' });
         const { categories } = req.body;
@@ -305,8 +302,7 @@ appraisalsRouter.post('/appraisals/:id/self-assessment', async (req, res) => {
 // ── POST /appraisals/:id/complete ────────
 appraisalsRouter.post('/appraisals/:id/complete', async (req, res) => {
     try {
-        const tenantId = req.tenantId;
-        const existing = await prisma.appraisal.findFirst({ where: { id: req.params['id'], cycle: { tenantId } } });
+        const existing = await prisma.appraisal.findUnique({ where: { id: req.params['id'] } });
         if (!existing)
             return res.status(404).json({ error: 'Beurteilung nicht gefunden.' });
         const appraisal = await prisma.appraisal.update({

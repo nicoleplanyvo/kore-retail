@@ -1,1 +1,0 @@
-import{am as l,a as y,b as E}from"./index-97RvdVp7.js";function g(o){const e=l(),a=y(),{successMessage:r,errorMessage:n,invalidateKeys:t,onSuccess:u,onError:i,...c}=o;return E({...c,onSuccess:(...s)=>{r&&e.success(r),t&&t.forEach(f=>a.invalidateQueries({queryKey:f})),u?.(...s)},onError:(...s)=>{e.error(n||"Ein Fehler ist aufgetreten."),i?.(...s)}})}export{g as u};

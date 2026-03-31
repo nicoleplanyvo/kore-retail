@@ -18,29 +18,12 @@ async function buildAuthResponse(userId, impersonatedBy) {
             email: true,
             role: true,
             tenantId: true,
-            avatarPath: true,
-            managerId: true,
             storeAssignments: { select: { storeId: true } },
             regionAssignments: { select: { regionId: true } },
         },
     });
     if (!user)
         return null;
-    let tenantBranding = null;
-    if (user.tenantId) {
-        const tenant = await prisma.tenant.findUnique({
-            where: { id: user.tenantId },
-            select: { name: true, logoUrl: true, primaryColor: true, accentColor: true },
-        });
-        if (tenant) {
-            tenantBranding = {
-                tenantName: tenant.name,
-                logoUrl: tenant.logoUrl,
-                primaryColor: tenant.primaryColor,
-                accentColor: tenant.accentColor,
-            };
-        }
-    }
     return {
         id: user.id,
         name: user.name,
@@ -48,11 +31,8 @@ async function buildAuthResponse(userId, impersonatedBy) {
         role: user.role,
         tenantId: user.tenantId,
         impersonatedBy: impersonatedBy || undefined,
-        avatarUrl: user.avatarPath ? `/api/uploads/${user.avatarPath}` : null,
-        managerId: user.managerId,
         storeAssignments: user.storeAssignments.map((a) => a.storeId),
         regionAssignments: user.regionAssignments.map((a) => a.regionId),
-        tenantBranding,
     };
 }
 // POST /api/auth/login
@@ -348,32 +328,32 @@ authRouter.post('/accept-invite', async (req, res) => {
         });
         const authUser = await buildAuthResponse(user.id);
         res.json({ success: true, accessToken, user: authUser });
-        // Fire-and-forget: notify tenant admins that the invitation was accepted
-        (async () => {
-            try {
-                if (!user.tenantId)
-                    return;
+        // ── Notification trigger: notify admins about accepted invite ──
+        try {
+            if (user.tenantId) {
                 const admins = await prisma.user.findMany({
                     where: {
                         tenantId: user.tenantId,
-                        role: { in: ['kore_admin', 'tenant_admin'] },
+                        role: { in: ['tenant_admin', 'kore_admin'] },
                         isActive: true,
                         id: { not: user.id },
                     },
                     select: { id: true },
                 });
-                await Promise.all(admins.map((admin) => createNotification({
-                    tenantId: user.tenantId,
-                    userId: admin.id,
-                    type: 'invite_accepted',
-                    title: `${user.name} hat die Einladung angenommen`,
-                    link: '/app/orgchart',
-                })));
+                for (const admin of admins) {
+                    await createNotification({
+                        tenantId: user.tenantId,
+                        userId: admin.id,
+                        type: 'invite_accepted',
+                        title: `${user.name} hat die Einladung angenommen`,
+                        link: '/app/orgchart',
+                    });
+                }
             }
-            catch (notifErr) {
-                console.error('Notification (invite_accepted) error:', notifErr);
-            }
-        })();
+        }
+        catch (notifErr) {
+            console.error('Notification error (invite_accepted):', notifErr);
+        }
     }
     catch (err) {
         console.error('Accept invite error:', err);

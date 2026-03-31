@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Trophy, Plus, Users, Target, Clock, Medal, User, Store, Filter } from 'lucide-react';
 import { useChallenges } from '../../../hooks/useChallenges';
-import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const STATUS_DOT: Record<string, string> = { DRAFT: 'bg-kore-mid', ACTIVE: 'bg-emerald-500', COMPLETED: 'bg-blue-500', CANCELLED: 'bg-red-500' };
 const STATUS_LABELS: Record<string, string> = { DRAFT: 'Entwurf', ACTIVE: 'Aktiv', COMPLETED: 'Beendet', CANCELLED: 'Abgebrochen' };
@@ -25,13 +24,12 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-6xl">
-      <Breadcrumb items={[{ label: 'Challenges' }]} />
       {/* Header */}
       <div className="flex items-center gap-md mb-2xl">
         <Link to="/tools" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div className="flex-1">
           <h1 className="font-display text-h1 text-kore-ink">Challenges</h1>
-          <p className="text-body text-kore-mid mt-xs">Wettbewerbe und Gamification für Ihr Team</p>
+          <p className="text-body text-kore-mid mt-xs">Wettbewerbe und Gamification fuer Ihr Team</p>
         </div>
         <Link to="/app/tools/challenges/dashboard" className="flex items-center gap-sm border border-kore-border px-lg py-md-sm text-small text-kore-ink hover:bg-kore-bg transition-colors">
           <Medal size={16} /> Dashboard
@@ -66,7 +64,7 @@ export function OverviewPage() {
         <div className="bg-kore-white border border-kore-border p-3xl flex flex-col items-center text-center">
           <Trophy size={48} className="text-kore-faint mb-lg" />
           <h2 className="font-display text-h2 text-kore-ink mb-md">Noch keine Challenges</h2>
-          <p className="text-body text-kore-mid max-w-md mb-xl">Erstellen Sie Ihre erste Challenge, um Motivation und Wettbewerb im Team zu fördern.</p>
+          <p className="text-body text-kore-mid max-w-md mb-xl">Erstellen Sie Ihre erste Challenge, um Motivation und Wettbewerb im Team zu foerdern.</p>
           <Link to="/app/tools/challenges/create" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
             <Plus size={16} /> Challenge erstellen
           </Link>
@@ -137,7 +135,7 @@ export function OverviewPage() {
           {/* Pagination */}
           {data.total > data.pageSize && (
             <div className="flex gap-sm mt-xl items-center justify-center">
-              <button disabled={page <= 1} onClick={() => setPage(page - 1)} className="px-md py-sm border border-kore-border text-small disabled:opacity-40">Zurück</button>
+              <button disabled={page <= 1} onClick={() => setPage(page - 1)} className="px-md py-sm border border-kore-border text-small disabled:opacity-40">Zurueck</button>
               <span className="px-md py-sm text-small text-kore-mid">Seite {data.page} / {Math.ceil(data.total / data.pageSize)}</span>
               <button disabled={page * data.pageSize >= data.total} onClick={() => setPage(page + 1)} className="px-md py-sm border border-kore-border text-small disabled:opacity-40">Weiter</button>
             </div>

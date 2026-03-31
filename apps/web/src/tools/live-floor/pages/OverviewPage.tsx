@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Users, MapPin, LayoutGrid, BarChart3, AlertTriangle, ChevronRight } from 'lucide-react';
 import { useFloorStores, useFloorZones, useFloorAssignments, useFloorRecommendations } from '../../../hooks/useFloor';
-import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const STATUS_COLORS: Record<string, string> = {
   OK: 'border-emerald-400 bg-emerald-50',
@@ -43,7 +42,6 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-6xl">
-      <Breadcrumb items={[{ label: 'Live Floor' }]} />
       <div className="flex items-center justify-between mb-2xl">
         <div>
           <h1 className="font-display text-h1 text-kore-ink">Live Floor</h1>
@@ -121,7 +119,7 @@ export function OverviewPage() {
         <div className="bg-kore-white border border-kore-border p-3xl flex flex-col items-center text-center">
           <MapPin size={48} className="text-kore-faint mb-lg" />
           <h2 className="font-display text-h2 text-kore-ink mb-md">Keine Zonen definiert</h2>
-          <p className="text-body text-kore-mid max-w-md mb-xl">Erstellen Sie Verkaufsflächen-Zonen, um Personal zuzuweisen und die Kundenfrequenz zu überwachen.</p>
+          <p className="text-body text-kore-mid max-w-md mb-xl">Erstellen Sie Verkaufsflaechen-Zonen, um Personal zuzuweisen und die Kundenfrequenz zu ueberwachen.</p>
           <Link to="/app/tools/live-floor/zones" className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors">
             <LayoutGrid size={16} /> Zonen erstellen
           </Link>

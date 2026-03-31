@@ -239,9 +239,29 @@ profileRouter.put('/manager', requireMinRole('tenant_admin'), async (req, res) =
 profileRouter.get('/colleagues', async (req, res) => {
     try {
         const tenantId = req.user.tenantId;
-        const where = tenantId ? { tenantId, isActive: true } : { isActive: true };
+        if (!tenantId) {
+            // kore_admin without tenant — return all active users
+            const users = await prisma.user.findMany({
+                where: { isActive: true },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    role: true,
+                    avatarPath: true,
+                    managerId: true,
+                    isActive: true,
+                },
+                orderBy: { name: 'asc' },
+            });
+            res.json(users);
+            return;
+        }
         const users = await prisma.user.findMany({
-            where,
+            where: {
+                tenantId,
+                isActive: true,
+            },
             select: {
                 id: true,
                 name: true,
@@ -253,15 +273,7 @@ profileRouter.get('/colleagues', async (req, res) => {
             },
             orderBy: { name: 'asc' },
         });
-        res.json(users.map((u) => ({
-            id: u.id,
-            name: u.name,
-            email: u.email,
-            role: u.role,
-            avatarUrl: u.avatarPath ? `/api/uploads/${u.avatarPath}` : null,
-            managerId: u.managerId,
-            isActive: u.isActive,
-        })));
+        res.json(users);
     }
     catch (err) {
         console.error('Colleagues GET error:', err);

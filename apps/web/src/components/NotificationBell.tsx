@@ -117,7 +117,7 @@ export function NotificationBell() {
                     }`}
                   >
                     {/* Unread dot */}
-                    <span className="mt-[6px] flex-shrink-0 w-[7px] h-[7px] rounded-full bg-kore-brass"
+                    <span className="mt-[6px] flex-shrink-0 w-[7px] h-[7px] rounded-full bg-kore-brass opacity-0 aria-hidden"
                       style={{ opacity: n.isRead ? 0 : 1 }}
                     />
                     <div className="flex-1 min-w-0">

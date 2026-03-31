@@ -81,9 +81,8 @@ teamPushRouter.get('/messages', async (req, res) => {
 // GET /messages/:id — Single message with read details
 teamPushRouter.get('/messages/:id', async (req, res) => {
     try {
-        const tenantId = req.user.tenantId;
-        const message = await prisma.teamMessage.findFirst({
-            where: { id: req.params['id'], tenantId },
+        const message = await prisma.teamMessage.findUnique({
+            where: { id: req.params['id'] },
             include: {
                 sender: { select: { id: true, name: true } },
                 reads: {
@@ -130,8 +129,7 @@ teamPushRouter.post('/messages', async (req, res) => {
 // DELETE /messages/:id — Delete message (only sender can delete)
 teamPushRouter.delete('/messages/:id', async (req, res) => {
     try {
-        const tenantId = req.user.tenantId;
-        const message = await prisma.teamMessage.findFirst({ where: { id: req.params['id'], tenantId } });
+        const message = await prisma.teamMessage.findUnique({ where: { id: req.params['id'] } });
         if (!message)
             return res.status(404).json({ error: 'Nachricht nicht gefunden.' });
         if (message.sentBy !== req.user.sub)
@@ -166,9 +164,8 @@ teamPushRouter.post('/messages/:id/read', async (req, res) => {
 // GET /messages/:id/unread — List users who have NOT read a message
 teamPushRouter.get('/messages/:id/unread', async (req, res) => {
     try {
-        const tenantId = req.user.tenantId;
-        const message = await prisma.teamMessage.findFirst({
-            where: { id: req.params['id'], tenantId },
+        const message = await prisma.teamMessage.findUnique({
+            where: { id: req.params['id'] },
             include: { reads: { select: { userId: true } } },
         });
         if (!message)

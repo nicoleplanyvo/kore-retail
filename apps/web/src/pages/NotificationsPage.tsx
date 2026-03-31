@@ -30,15 +30,13 @@ function formatRelativeTime(dateStr: string): string {
 function TypeIcon({ type }: { type: string }) {
   const cls = 'flex-shrink-0';
   switch (type) {
-    case 'audit_completed':
-      return <CheckCircle size={18} className={`${cls} text-emerald-500`} />;
-    case 'message_received':
-      return <MessageSquare size={18} className={`${cls} text-kore-brass`} />;
-    case 'invite_accepted':
-      return <CheckCircle size={18} className={`${cls} text-kore-brass`} />;
     case 'alert':
     case 'warning':
       return <AlertTriangle size={18} className={`${cls} text-amber-500`} />;
+    case 'success':
+      return <CheckCircle size={18} className={`${cls} text-emerald-500`} />;
+    case 'message':
+      return <MessageSquare size={18} className={`${cls} text-kore-brass`} />;
     default:
       return <Info size={18} className={`${cls} text-kore-mid`} />;
   }

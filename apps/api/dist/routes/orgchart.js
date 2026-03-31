@@ -43,7 +43,7 @@ orgchartRouter.get('/', async (req, res) => {
             name: u.name,
             email: u.email,
             role: u.role,
-            avatarUrl: u.avatarPath ? `/api/uploads/${u.avatarPath}` : null,
+            avatarUrl: u.avatarPath ?? null,
             managerId: u.managerId ?? null,
             storeNames: u.storeAssignments.map((a) => a.store.name),
         }));
@@ -105,20 +105,22 @@ orgchartRouter.put('/manager', requireMinRole('tenant_admin'), async (req, res) 
             // proposed managerId to ensure it never reaches the userId being updated.
             // Max 10 levels to prevent infinite loops.
             let currentId = managerId;
-            for (let depth = 0; depth < 10 && currentId; depth++) {
-                const found = await prisma.user.findUnique({
+            let depth = 0;
+            while (currentId && depth < 10) {
+                const current = await prisma.user.findUnique({
                     where: { id: currentId },
                     select: { managerId: true },
                 });
-                if (!found)
+                if (!current)
                     break;
-                if (found.managerId === userId) {
+                if (current.managerId === userId) {
                     res.status(400).json({
                         error: 'Zirkulaere Referenz: Der Vorgesetzte befindet sich bereits in der Berichtskette dieses Benutzers.',
                     });
                     return;
                 }
-                currentId = found.managerId;
+                currentId = current.managerId;
+                depth++;
             }
         }
         // Perform the update

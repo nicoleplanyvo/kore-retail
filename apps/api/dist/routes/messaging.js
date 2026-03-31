@@ -61,7 +61,7 @@ messagingRouter.get('/conversations', async (req, res) => {
                     .map((p) => ({
                     id: p.user.id,
                     name: p.user.name,
-                    avatarUrl: p.user.avatarPath ? `/api/uploads/${p.user.avatarPath}` : null,
+                    avatarUrl: p.user.avatarPath,
                 })),
                 lastMessage: lastMsg
                     ? {
@@ -214,7 +214,7 @@ messagingRouter.get('/conversations/:id/messages', async (req, res) => {
                 sender: {
                     id: m.sender.id,
                     name: m.sender.name,
-                    avatarUrl: m.sender.avatarPath ? `/api/uploads/${m.sender.avatarPath}` : null,
+                    avatarUrl: m.sender.avatarPath,
                 },
             })),
         });
@@ -270,31 +270,29 @@ messagingRouter.post('/conversations/:id/messages', async (req, res) => {
                 avatarUrl: message.sender.avatarPath,
             },
         });
-        // Fire-and-forget: notify other participants
-        (async () => {
-            try {
+        // ── Notification trigger: notify other participants ──
+        try {
+            const tenantId = req.user.tenantId;
+            if (tenantId) {
                 const participants = await prisma.conversationParticipant.findMany({
                     where: { conversationId, userId: { not: userId } },
                     select: { userId: true },
                 });
-                const sender = await prisma.user.findUnique({
-                    where: { id: userId },
-                    select: { name: true, tenantId: true },
-                });
-                if (!sender || !sender.tenantId)
-                    return;
-                await Promise.all(participants.map((p) => createNotification({
-                    tenantId: sender.tenantId,
-                    userId: p.userId,
-                    type: 'message_received',
-                    title: `${sender.name} hat eine Nachricht gesendet`,
-                    link: '/app/messaging',
-                })));
+                const senderName = message.sender.name;
+                for (const p of participants) {
+                    await createNotification({
+                        tenantId,
+                        userId: p.userId,
+                        type: 'message_received',
+                        title: `${senderName} hat eine Nachricht gesendet`,
+                        link: '/app/messaging',
+                    });
+                }
             }
-            catch (notifErr) {
-                console.error('Notification (message_received) error:', notifErr);
-            }
-        })();
+        }
+        catch (notifErr) {
+            console.error('Notification error (message_received):', notifErr);
+        }
     }
     catch (err) {
         console.error('Send message error:', err);

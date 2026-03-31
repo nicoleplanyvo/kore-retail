@@ -14,13 +14,12 @@ import {
   useConfirmTransfer,
   useResolveCallout,
 } from '../../../hooks/useStockCallouts';
-import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const STATUS_LABELS: Record<string, string> = {
   OPEN: 'Offen',
   OFFERED: 'Angeboten',
   TRANSFER: 'Transfer',
-  RESOLVED: 'Gelöst',
+  RESOLVED: 'Geloest',
   CANCELLED: 'Storniert',
 };
 const STATUS_COLORS: Record<string, string> = {
@@ -131,7 +130,6 @@ export function OverviewPage() {
 
   return (
     <div className="p-lg max-w-6xl">
-      <Breadcrumb items={[{ label: 'Bestandsmeldungen' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-lg">
         <div>
@@ -171,7 +169,7 @@ export function OverviewPage() {
         </div>
         <div className="bg-kore-white border border-kore-border p-md text-center">
           <div className="text-2xl font-bold text-emerald-600">{resolvedCount}</div>
-          <div className="text-xs text-kore-mid uppercase mt-1">Gelöst</div>
+          <div className="text-xs text-kore-mid uppercase mt-1">Geloest</div>
         </div>
         <div className="bg-kore-white border border-kore-border p-md text-center">
           <div className="text-2xl font-bold text-kore-brass">{summary?.total ?? 0}</div>
@@ -236,7 +234,7 @@ export function OverviewPage() {
           <option value="OPEN">Offen</option>
           <option value="OFFERED">Angeboten</option>
           <option value="TRANSFER">Transfer</option>
-          <option value="RESOLVED">Gelöst</option>
+          <option value="RESOLVED">Geloest</option>
           <option value="CANCELLED">Storniert</option>
         </select>
         <select value={urgencyFilter} onChange={e => setUrgencyFilter(e.target.value)} className="border border-kore-border px-md py-sm text-small">
@@ -253,7 +251,7 @@ export function OverviewPage() {
         <div className="text-body text-kore-mid">Lade Callouts...</div>
       ) : !callouts.length ? (
         <div className="bg-kore-white border border-kore-border p-2xl text-center text-body text-kore-mid">
-          Keine Bestandsmeldungen vorhanden. Erstellen Sie ein neues Callout, um Artikel bei anderen Stores zu suchen.
+          Keine Bestandsmeldungen vorhanden. Erstellen Sie eine neue Meldung, um Artikel bei anderen Stores zu suchen.
         </div>
       ) : (
         <div className="space-y-sm">
@@ -307,7 +305,7 @@ export function OverviewPage() {
                     onClick={() => handleTransfer(c.id)}
                     className="flex items-center gap-xs px-sm py-xs text-xs border border-purple-300 text-purple-700 hover:bg-purple-50"
                   >
-                    <Truck size={12} /> Transfer bestätigen
+                    <Truck size={12} /> Transfer bestaetigen
                   </button>
                 )}
                 {c.status === 'TRANSFER' && (
@@ -315,7 +313,7 @@ export function OverviewPage() {
                     onClick={() => handleResolve(c.id)}
                     className="flex items-center gap-xs px-sm py-xs text-xs border border-emerald-300 text-emerald-700 hover:bg-emerald-50"
                   >
-                    <CheckCircle size={12} /> Erhalten / Gelöst
+                    <CheckCircle size={12} /> Erhalten / Geloest
                   </button>
                 )}
                 {(c.status === 'OPEN' || c.status === 'OFFERED') && (
@@ -353,7 +351,7 @@ export function OverviewPage() {
               <div className="flex justify-between"><span className="text-kore-mid">Angefordert</span><span className="font-medium">{offerModal.requestedQty} Stk.</span></div>
               <div className="flex justify-between"><span className="text-kore-mid">Von Store</span><span className="font-medium">{offerModal.store?.name ?? ''}</span></div>
             </div>
-            <label className="block text-small text-kore-mid mb-xs">Verfügbare Menge</label>
+            <label className="block text-small text-kore-mid mb-xs">Verfuegbare Menge</label>
             <input type="number" min={1} value={offerQty} onChange={e => setOfferQty(Math.max(1, parseInt(e.target.value) || 1))} className="w-full border border-kore-border px-md py-sm text-body mb-md" />
             <label className="block text-small text-kore-mid mb-xs">Notiz (optional)</label>
             <input value={offerNotes} onChange={e => setOfferNotes(e.target.value)} placeholder="z.B. Kann morgen versendet werden..." className="w-full border border-kore-border px-md py-sm text-body mb-lg" />
@@ -400,7 +398,7 @@ export function OverviewPage() {
                     onClick={() => { handleTransfer(detailModal.id); setDetailModal(null); }}
                     className="flex items-center gap-xs px-md py-sm border border-purple-300 text-purple-700 hover:bg-purple-50 text-small"
                   >
-                    <Truck size={14} /> Transfer bestätigen
+                    <Truck size={14} /> Transfer bestaetigen
                   </button>
                 )}
                 {detailModal.status === 'TRANSFER' && (
@@ -408,7 +406,7 @@ export function OverviewPage() {
                     onClick={() => { handleResolve(detailModal.id); setDetailModal(null); }}
                     className="flex items-center gap-xs px-md py-sm border border-emerald-300 text-emerald-700 hover:bg-emerald-50 text-small"
                   >
-                    <CheckCircle size={14} /> Erhalten / Gelöst
+                    <CheckCircle size={14} /> Erhalten / Geloest
                   </button>
                 )}
                 {(detailModal.status === 'OPEN' || detailModal.status === 'OFFERED') && (

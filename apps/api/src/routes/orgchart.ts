@@ -51,7 +51,7 @@ orgchartRouter.get('/', async (req, res) => {
       name: u.name,
       email: u.email,
       role: u.role,
-      avatarUrl: u.avatarPath ? `/api/uploads/${u.avatarPath}` : null,
+      avatarUrl: u.avatarPath ?? null,
       managerId: u.managerId ?? null,
       storeNames: u.storeAssignments.map(
         (a: { store: { name: string } }) => a.store.name,
@@ -131,19 +131,21 @@ orgchartRouter.put(
         // proposed managerId to ensure it never reaches the userId being updated.
         // Max 10 levels to prevent infinite loops.
         let currentId: string | null = managerId;
-        for (let depth = 0; depth < 10 && currentId; depth++) {
-          const found: { managerId: string | null } | null = await prisma.user.findUnique({
+        let depth = 0;
+        while (currentId && depth < 10) {
+          const current: { managerId: string | null } | null = await prisma.user.findUnique({
             where: { id: currentId },
             select: { managerId: true },
           });
-          if (!found) break;
-          if (found.managerId === userId) {
+          if (!current) break;
+          if (current.managerId === userId) {
             res.status(400).json({
               error: 'Zirkulaere Referenz: Der Vorgesetzte befindet sich bereits in der Berichtskette dieses Benutzers.',
             });
             return;
           }
-          currentId = found.managerId;
+          currentId = current.managerId;
+          depth++;
         }
       }
 

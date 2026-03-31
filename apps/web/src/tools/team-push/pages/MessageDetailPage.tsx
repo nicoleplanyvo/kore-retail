@@ -30,7 +30,7 @@ export function MessageDetailPage() {
 
   const handleDelete = () => {
     if (!id) return;
-    if (!confirm('Nachricht wirklich löschen?')) return;
+    if (!confirm('Nachricht wirklich loeschen?')) return;
     deleteMessage.mutate(id, { onSuccess: () => navigate('/app/tools/team-push') });
   };
 
@@ -85,7 +85,7 @@ export function MessageDetailPage() {
           disabled={deleteMessage.isPending}
           className="flex items-center gap-xs px-md py-sm border border-red-200 text-red-600 text-small hover:bg-red-50 disabled:opacity-50"
         >
-          <Trash2 size={16} /> Löschen
+          <Trash2 size={16} /> Loeschen
         </button>
       </div>
 
@@ -94,7 +94,7 @@ export function MessageDetailPage() {
         <div className="bg-red-50 border border-red-200 p-md mb-xl flex items-center gap-sm">
           <AlertCircle size={18} className="text-red-500" />
           <span className="text-small text-red-700 font-medium">
-            Diese Nachricht ist als DRINGEND markiert. Lesebestätigung erforderlich.
+            Diese Nachricht ist als DRINGEND markiert. Lesebestaetigung erforderlich.
           </span>
         </div>
       )}
@@ -105,7 +105,7 @@ export function MessageDetailPage() {
       </div>
 
       {/* Read Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-md mb-xl">
+      <div className="grid grid-cols-3 gap-md mb-xl">
         <div className="bg-kore-white border border-kore-border p-md text-center">
           <div className="text-2xl font-bold text-emerald-600">{readCount}</div>
           <div className="text-xs text-kore-mid uppercase mt-1">Gelesen</div>

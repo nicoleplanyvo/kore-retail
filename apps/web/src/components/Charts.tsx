@@ -99,8 +99,8 @@ export function KorePieChart({ data, height = 250 }: KorePieChartProps) {
           innerRadius={40}
           paddingAngle={2}
           dataKey="value"
-          label={false}
-          labelLine={false}
+          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+          labelLine={{ stroke: '#9ca3af', strokeWidth: 1 }}
         >
           {data.map((_, i) => (
             <Cell key={i} fill={COLORS[i % COLORS.length]} />

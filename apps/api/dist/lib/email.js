@@ -1,28 +1,15 @@
 /**
- * E-Mail-Versand über Brevo SMTP
- * Ersetzt Lettermint — nutzt nodemailer mit smtp-relay.brevo.com
+ * E-Mail-Versand über Lettermint API
+ * https://api.lettermint.co/v1/send
  */
-import nodemailer from 'nodemailer';
-const SMTP_HOST = process.env['SMTP_HOST'] ?? 'smtp-relay.brevo.com';
-const SMTP_PORT = Number(process.env['SMTP_PORT'] ?? '587');
-const SMTP_USER = process.env['SMTP_USER'] ?? '';
-const SMTP_PASS = process.env['SMTP_PASS'] ?? '';
-const FROM = process.env['FROM_EMAIL'] ?? 'noreply@kore-retail.de';
-const NOTIFY = process.env['NOTIFICATION_EMAIL'] ?? 'info@munozbonilla.de';
-const hasSmtp = !!(SMTP_USER && SMTP_PASS);
-if (!hasSmtp) {
-    console.warn('⚠ SMTP_USER/SMTP_PASS nicht gesetzt — E-Mails werden nur geloggt.');
+const LETTERMINT_TOKEN = process.env['LETTERMINT_API_TOKEN'];
+if (!LETTERMINT_TOKEN) {
+    console.warn('⚠ LETTERMINT_API_TOKEN nicht gesetzt — E-Mails werden nur geloggt.');
 }
-const transporter = hasSmtp
-    ? nodemailer.createTransport({
-        host: SMTP_HOST,
-        port: SMTP_PORT,
-        secure: false,
-        auth: { user: SMTP_USER, pass: SMTP_PASS },
-    })
-    : null;
+const FROM = process.env['FROM_EMAIL'] ?? 'noreply@kore-retail.de';
+const NOTIFY = process.env['NOTIFICATION_EMAIL'] ?? 'info@kore-retail.de';
 export async function sendEmail(payload) {
-    if (!transporter) {
+    if (!LETTERMINT_TOKEN) {
         console.log('[DEV] E-Mail (nur geloggt):', {
             from: payload.from,
             to: payload.to,
@@ -31,18 +18,30 @@ export async function sendEmail(payload) {
         return { success: true, messageId: 'dev-mode' };
     }
     try {
-        const info = await transporter.sendMail({
-            from: payload.from,
-            to: Array.isArray(payload.to) ? payload.to.join(', ') : payload.to,
-            subject: payload.subject,
-            html: payload.html,
-            ...(payload.reply_to ? { replyTo: payload.reply_to } : {}),
+        const res = await fetch('https://api.lettermint.co/v1/send', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-lettermint-token': LETTERMINT_TOKEN,
+            },
+            body: JSON.stringify({
+                from: payload.from,
+                to: Array.isArray(payload.to) ? payload.to : [payload.to],
+                subject: payload.subject,
+                html: payload.html,
+                ...(payload.reply_to ? { reply_to: Array.isArray(payload.reply_to) ? payload.reply_to : [payload.reply_to] } : {}),
+            }),
         });
-        console.log('[EMAIL] Gesendet:', info.messageId, '→', payload.to);
-        return { success: true, messageId: info.messageId };
+        if (!res.ok) {
+            const body = await res.text();
+            console.error('Lettermint error:', res.status, body);
+            return { success: false, error: `Lettermint ${res.status}: ${body}` };
+        }
+        const data = (await res.json());
+        return { success: true, messageId: data.message_id };
     }
     catch (err) {
-        console.error('[EMAIL] Fehler:', err);
+        console.error('Lettermint fetch error:', err);
         return { success: false, error: String(err) };
     }
 }
@@ -79,8 +78,8 @@ function baseLayout(content) {
     </div>
     <div class="footer">
       KORE — Retail Intelligence<br/>
-      Eine Marke der Muñoz Bonilla GmbH<br/>
-      Benediktusstraße 46, 40549 Düsseldorf
+      Eine Marke der planyvo GmbH<br/>
+      Rudolf-Diesel-Str. 5, 40670 Meerbusch
     </div>
   </div>
 </body>
@@ -174,7 +173,7 @@ export function auditConfirmationEmail(data) {
 export function blogApprovalEmail(data) {
     return {
         from: `Lotta · KORE <${FROM}>`,
-        to: process.env['NOTIFICATION_EMAIL'] ?? 'info@munozbonilla.de',
+        to: process.env['NOTIFICATION_EMAIL'] ?? 'nicole@kore-retail.de',
         subject: `Blog-Vorschlag: ${data.title}`,
         html: baseLayout(`
       <h2>Neuer Blogbeitrag zur Freigabe</h2>
@@ -198,32 +197,6 @@ export function blogApprovalEmail(data) {
           </td>
         </tr>
       </table>
-    `),
-    };
-}
-// ──────────────────────────────────────────────
-// Einladungs-E-Mail
-// ──────────────────────────────────────────────
-export function invitationEmail(data) {
-    return {
-        from: `KORE <${FROM}>`,
-        to: data.email,
-        subject: `${data.inviterName} hat Sie zu KORE eingeladen`,
-        html: baseLayout(`
-      <h2>Willkommen bei KORE, ${escapeHtml(data.name)}.</h2>
-      <p>${escapeHtml(data.inviterName)} hat Sie zum Team von <strong>${escapeHtml(data.tenantName)}</strong> auf der KORE Retail Platform eingeladen.</p>
-      <div class="brass-line"></div>
-      <p>Klicken Sie auf den Button, um Ihr Passwort festzulegen und loszulegen:</p>
-      <table width="100%" cellpadding="0" cellspacing="0" style="margin: 24px 0;">
-        <tr>
-          <td align="center">
-            <a href="${data.inviteUrl}" style="display: inline-block; padding: 14px 36px; background: #9E8460; color: #FFFFFF; font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; text-decoration: none;">
-              Einladung annehmen
-            </a>
-          </td>
-        </tr>
-      </table>
-      <p style="font-size: 13px; color: #9E8460;">Dieser Link ist 7 Tage gültig.</p>
     `),
     };
 }

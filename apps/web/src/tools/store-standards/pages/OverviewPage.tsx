@@ -72,9 +72,9 @@ export function OverviewPage() {
       <div className="flex items-center justify-between mb-2xl">
         <div>
           <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm">
-            <Calculator size={24} /> Personalkosten-Planer
+            <Calculator size={24} /> Store Standards
           </h1>
-          <p className="text-body text-kore-mid mt-xs">Budget-Simulation und Personalkosten-Planung.</p>
+          <p className="text-body text-kore-mid mt-xs">Budget-Simulation und Personalkosten-Planung für Ihren Store.</p>
         </div>
         <div className="flex gap-sm">
           <button onClick={() => setSaveDialogOpen(true)} className="flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90">

@@ -2,8 +2,6 @@ import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, ChevronLeft, ChevronRight, Plus, Send, Trash2, Edit3 } from 'lucide-react';
 import { useShifts, useShiftStores, useShiftUsers, useCreateShift, useDeleteShift, usePublishWeek, useUpdateShift } from '../../../hooks/useShiftPlanning';
-import { ShiftGridSkeleton } from '../../../components/Skeleton';
-import { Breadcrumb } from '../../../components/Breadcrumb';
 
 const DAYS = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
 const STATUS_COLORS: Record<string, string> = {
@@ -87,15 +85,14 @@ export function OverviewPage() {
 
   return (
     <div className="p-xl max-w-7xl">
-      <Breadcrumb items={[{ label: 'Schichtplanung' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-xl">
         <div>
           <h1 className="font-display text-h1 text-kore-ink">Schichtplanung</h1>
-          <p className="text-body text-kore-mid mt-xs">Wochenplan: Schichten zuweisen, veröffentlichen und verwalten</p>
+          <p className="text-body text-kore-mid mt-xs">Wochenplan: Schichten zuweisen, veroeffentlichen und verwalten</p>
         </div>
         <div className="flex gap-sm">
-          <Link to="/app/tools/shift-planning/availability" className="px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors">Verfügbarkeiten</Link>
+          <Link to="/app/tools/shift-planning/availability" className="px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors">Verfuegbarkeiten</Link>
           <Link to="/app/tools/shift-planning/time-tracking" className="px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors">Zeiterfassung</Link>
           <Link to="/app/tools/shift-planning/dashboard" className="px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink transition-colors">Dashboard</Link>
         </div>
@@ -110,10 +107,10 @@ export function OverviewPage() {
           </select>
         </div>
         <div className="flex items-center gap-sm">
-          <button onClick={() => setWeekOffset(w => w - 1)} className="p-sm border border-kore-border hover:bg-kore-bg transition-colors" aria-label="Vorherige Woche"><ChevronLeft size={16} /></button>
+          <button onClick={() => setWeekOffset(w => w - 1)} className="p-sm border border-kore-border hover:bg-kore-bg transition-colors"><ChevronLeft size={16} /></button>
           <button onClick={() => setWeekOffset(0)} className="px-md py-sm border border-kore-border text-small hover:bg-kore-bg transition-colors">Heute</button>
           <span className="text-body text-kore-ink font-medium min-w-[180px] text-center">{weekLabel}</span>
-          <button onClick={() => setWeekOffset(w => w + 1)} className="p-sm border border-kore-border hover:bg-kore-bg transition-colors" aria-label="Nächste Woche"><ChevronRight size={16} /></button>
+          <button onClick={() => setWeekOffset(w => w + 1)} className="p-sm border border-kore-border hover:bg-kore-bg transition-colors"><ChevronRight size={16} /></button>
         </div>
         <div className="flex items-center gap-sm">
           <button onClick={() => { setEditId(null); resetForm(); setShowForm(!showForm); }} className="flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90 transition-opacity">
@@ -121,7 +118,7 @@ export function OverviewPage() {
           </button>
           {selectedStore && (
             <button onClick={handlePublish} disabled={publishWeek.isPending} className="flex items-center gap-xs px-md py-sm bg-[#9E8460] text-white text-small hover:opacity-90 transition-opacity disabled:opacity-50">
-              <Send size={16} /> Veröffentlichen
+              <Send size={16} /> Veroeffentlichen
             </button>
           )}
         </div>
@@ -135,7 +132,7 @@ export function OverviewPage() {
             <div>
               <label className="block text-small text-kore-mid mb-xs">Mitarbeiter</label>
               <select value={form.userId} onChange={e => setForm({ ...form, userId: e.target.value })} className="w-full border border-kore-border px-md py-sm text-body" required>
-                <option value="">-- Wählen --</option>
+                <option value="">-- Waehlen --</option>
                 {users?.map((u: any) => <option key={u.id} value={u.id}>{u.name}</option>)}
               </select>
             </div>
@@ -167,7 +164,7 @@ export function OverviewPage() {
 
       {/* Week Grid */}
       {isLoading ? (
-        <ShiftGridSkeleton />
+        <div className="text-body text-kore-mid py-xl text-center">Lade Schichtplan...</div>
       ) : (
         <div className="bg-kore-white border border-kore-border overflow-x-auto">
           <table className="w-full border-collapse min-w-[800px]">
@@ -191,7 +188,7 @@ export function OverviewPage() {
                 <tr>
                   <td colSpan={8} className="p-2xl text-center text-body text-kore-mid">
                     <Calendar size={32} className="mx-auto mb-md text-kore-faint" />
-                    Keine Schichten für diese Woche geplant.
+                    Keine Schichten fuer diese Woche geplant.
                   </td>
                 </tr>
               ) : (

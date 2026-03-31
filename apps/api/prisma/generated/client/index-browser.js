@@ -123,11 +123,11 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
   passwordHash: 'passwordHash',
   role: 'role',
+  avatarPath: 'avatarPath',
+  managerId: 'managerId',
   tenantId: 'tenantId',
   isActive: 'isActive',
   lastLoginAt: 'lastLoginAt',
-  avatarPath: 'avatarPath',
-  managerId: 'managerId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -142,8 +142,6 @@ exports.Prisma.TenantScalarFieldEnum = {
   contactPhone: 'contactPhone',
   maxUsers: 'maxUsers',
   logoUrl: 'logoUrl',
-  primaryColor: 'primaryColor',
-  accentColor: 'accentColor',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -1344,6 +1342,21 @@ exports.Prisma.FRSessionScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.BlogPostScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  excerpt: 'excerpt',
+  content: 'content',
+  coverImageUrl: 'coverImageUrl',
+  author: 'author',
+  status: 'status',
+  approvalToken: 'approvalToken',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.InvitationTokenScalarFieldEnum = {
   id: 'id',
   token: 'token',
@@ -1360,21 +1373,6 @@ exports.Prisma.PasswordResetTokenScalarFieldEnum = {
   expiresAt: 'expiresAt',
   usedAt: 'usedAt',
   createdAt: 'createdAt'
-};
-
-exports.Prisma.BlogPostScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  slug: 'slug',
-  excerpt: 'excerpt',
-  content: 'content',
-  coverImageUrl: 'coverImageUrl',
-  author: 'author',
-  status: 'status',
-  approvalToken: 'approvalToken',
-  publishedAt: 'publishedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.ConversationScalarFieldEnum = {
@@ -1522,9 +1520,9 @@ exports.Prisma.ModelName = {
   FRSettings: 'FRSettings',
   FRRoom: 'FRRoom',
   FRSession: 'FRSession',
+  BlogPost: 'BlogPost',
   InvitationToken: 'InvitationToken',
   PasswordResetToken: 'PasswordResetToken',
-  BlogPost: 'BlogPost',
   Conversation: 'Conversation',
   ConversationParticipant: 'ConversationParticipant',
   DirectMessage: 'DirectMessage',

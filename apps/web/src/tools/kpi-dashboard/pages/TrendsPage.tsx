@@ -1,10 +1,7 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { useKpiTrends, useKpiStores } from '../../../hooks/useKpi';
-import { Breadcrumb } from '../../../components/Breadcrumb';
-import { KoreLineChart } from '../../../components/Charts';
-import { ExportButton } from '../../../components/ExportButton';
 
 export function TrendsPage() {
   const [storeId, setStoreId] = useState('');
@@ -15,31 +12,14 @@ export function TrendsPage() {
   // Find max values for chart scaling
   const maxRevenue = Math.max(1, ...trendData.map((t) => Number(t.avgRevenue ?? 0)));
 
-  // Transform data for recharts
-  const chartData = useMemo(() => trendData.map((t) => ({
-    date: t.date,
-    Umsatz: Math.round(Number(t.avgRevenue ?? 0)),
-    Frequenz: Math.round(Number(t.avgFootfall ?? 0)),
-    Conversion: Number(Number(t.avgConversion ?? 0).toFixed(1)),
-    Bon: Math.round(Number(t.avgBasket ?? 0)),
-  })), [trendData]);
-
   return (
     <div className="p-xl max-w-5xl">
-      <Breadcrumb items={[{ label: 'KPI Dashboard', href: '/app/tools/kpi' }, { label: 'Trends' }]} />
-      <div className="flex items-center justify-between mb-2xl">
-        <div className="flex items-center gap-md">
-          <Link to="/app/tools/kpi" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
-          <div>
-            <h1 className="font-display text-h1 text-kore-ink">KPI-Trends</h1>
-            <p className="text-body text-kore-mid mt-xs">Entwicklung der Kennzahlen über Zeit</p>
-          </div>
+      <div className="flex items-center gap-md mb-2xl">
+        <Link to="/app/tools/kpi" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
+        <div>
+          <h1 className="font-display text-h1 text-kore-ink">KPI-Trends</h1>
+          <p className="text-body text-kore-mid mt-xs">Entwicklung der Kennzahlen ueber Zeit</p>
         </div>
-        <ExportButton
-          endpoint="/api/admin/reporting/export/kpi"
-          params={storeId ? { storeId } : {}}
-          filename="kpi-trends-report.pdf"
-        />
       </div>
 
       <div className="flex gap-md mb-xl">
@@ -55,32 +35,20 @@ export function TrendsPage() {
         <div className="text-body text-kore-mid">Keine Trend-Daten vorhanden.</div>
       ) : (
         <div className="space-y-2xl">
-          {/* Umsatz & Frequenz Trend-Chart */}
+          {/* Umsatz-Trend als einfache Balken */}
           <div className="bg-kore-white border border-kore-border p-xl">
-            <h2 className="font-display text-h3 text-kore-ink mb-lg">Umsatz & Frequenz</h2>
-            <KoreLineChart
-              data={chartData}
-              xKey="date"
-              lines={[
-                { key: 'Umsatz', label: 'Ø Umsatz (EUR)', color: '#b08d57' },
-                { key: 'Frequenz', label: 'Ø Frequenz', color: '#2563eb' },
-              ]}
-              height={320}
-            />
-          </div>
-
-          {/* Conversion & Bon Trend-Chart */}
-          <div className="bg-kore-white border border-kore-border p-xl">
-            <h2 className="font-display text-h3 text-kore-ink mb-lg">Conversion & Bon</h2>
-            <KoreLineChart
-              data={chartData}
-              xKey="date"
-              lines={[
-                { key: 'Conversion', label: 'Ø Conversion (%)', color: '#059669' },
-                { key: 'Bon', label: 'Ø Bon (EUR)', color: '#7c3aed' },
-              ]}
-              height={280}
-            />
+            <h2 className="font-display text-h3 text-kore-ink mb-lg">Umsatz-Trend</h2>
+            <div className="space-y-sm">
+              {trendData.map((t) => (
+                <div key={t.date} className="flex items-center gap-md">
+                  <span className="text-small text-kore-mid w-20 flex-shrink-0">{t.date}</span>
+                  <div className="flex-1 bg-kore-bg h-6 relative">
+                    <div className="bg-kore-ink h-full transition-all" style={{ width: `${(Number(t.avgRevenue ?? 0) / maxRevenue) * 100}%` }} />
+                  </div>
+                  <span className="text-small text-kore-ink w-24 text-right">{Number(t.avgRevenue ?? 0).toLocaleString('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Kennzahlen-Tabelle */}
@@ -93,7 +61,7 @@ export function TrendsPage() {
                   <th className="text-right px-lg py-md text-caption text-kore-mid uppercase tracking-widest">Ø Frequenz</th>
                   <th className="text-right px-lg py-md text-caption text-kore-mid uppercase tracking-widest">Ø Conversion</th>
                   <th className="text-right px-lg py-md text-caption text-kore-mid uppercase tracking-widest">Ø Bon</th>
-                  <th className="text-right px-lg py-md text-caption text-kore-mid uppercase tracking-widest">Einträge</th>
+                  <th className="text-right px-lg py-md text-caption text-kore-mid uppercase tracking-widest">Eintraege</th>
                 </tr>
               </thead>
               <tbody>

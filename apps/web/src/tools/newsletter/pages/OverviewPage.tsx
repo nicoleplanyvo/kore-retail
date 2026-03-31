@@ -8,15 +8,12 @@ import {
   useNewsletters, useCreateNewsletter, usePublishNewsletter,
   useArchiveNewsletter, useDuplicateNewsletter,
 } from '../../../hooks/useNewsletter';
-import { Breadcrumb } from '../../../components/Breadcrumb';
-import { FormField } from '../../../components/FormField';
-import { LoadingButton } from '../../../components/LoadingButton';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 const STATUS_LABELS: Record<string, string> = {
   DRAFT: 'Entwurf',
-  PUBLISHED: 'Veröffentlicht',
+  PUBLISHED: 'Veroeffentlicht',
   ARCHIVED: 'Archiviert',
 };
 const STATUS_COLORS: Record<string, string> = {
@@ -45,23 +42,13 @@ export function OverviewPage() {
 
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ title: '', content: '' });
-  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
-
-  const validateForm = () => {
-    const errors: Record<string, string> = {};
-    if (!form.title.trim()) errors.title = 'Pflichtfeld';
-    setFormErrors(errors);
-    return Object.keys(errors).length === 0;
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateForm()) return;
     create.mutate(form, {
       onSuccess: (data: any) => {
         setShowForm(false);
         setForm({ title: '', content: '' });
-        setFormErrors({});
         if (data?.id) navigate(`/app/tools/newsletter/${data.id}`);
       },
     });
@@ -75,7 +62,6 @@ export function OverviewPage() {
 
   return (
     <div className="p-lg max-w-6xl">
-      <Breadcrumb items={[{ label: 'Team Newsletter' }]} />
       {/* Header */}
       <div className="flex items-center justify-between mb-lg">
         <div>
@@ -83,7 +69,7 @@ export function OverviewPage() {
             <Newspaper size={24} /> Team Newsletter
           </h1>
           <p className="text-body text-kore-mid mt-xs">
-            Interne Newsletter erstellen, verwalten und veröffentlichen
+            Interne Newsletter erstellen, verwalten und veroeffentlichen
           </p>
         </div>
         <div className="flex items-center gap-sm">
@@ -105,15 +91,18 @@ export function OverviewPage() {
       {/* Create Form */}
       {showForm && (
         <form onSubmit={handleSubmit} className="bg-kore-white border border-kore-border p-lg mb-lg space-y-md">
-          <FormField label="Titel" required error={formErrors.title}>
+          <div>
+            <label className="block text-small text-kore-mid mb-xs">Titel</label>
             <input
               value={form.title}
-              onChange={(e) => { setForm({ ...form, title: e.target.value }); if (formErrors.title) setFormErrors((f) => ({ ...f, title: '' })); }}
+              onChange={(e) => setForm({ ...form, title: e.target.value })}
               placeholder="Newsletter-Titel eingeben..."
-              className={`w-full border px-md py-sm text-body ${formErrors.title ? 'border-red-500' : 'border-kore-border'}`}
+              className="w-full border border-kore-border px-md py-sm text-body"
+              required
             />
-          </FormField>
-          <FormField label="Einleitung" hint="Optional - kurze Einleitung oder Zusammenfassung">
+          </div>
+          <div>
+            <label className="block text-small text-kore-mid mb-xs">Einleitung (optional)</label>
             <textarea
               value={form.content}
               onChange={(e) => setForm({ ...form, content: e.target.value })}
@@ -121,22 +110,22 @@ export function OverviewPage() {
               placeholder="Kurze Einleitung oder Zusammenfassung..."
               className="w-full border border-kore-border px-md py-sm text-body"
             />
-          </FormField>
+          </div>
           <div className="flex items-center gap-sm">
-            <LoadingButton
+            <button
               type="submit"
-              isLoading={create.isPending}
-              loadingText="Wird angelegt..."
+              disabled={create.isPending}
+              className="px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90 disabled:opacity-50"
             >
-              Newsletter anlegen
-            </LoadingButton>
-            <LoadingButton
+              {create.isPending ? 'Wird angelegt...' : 'Newsletter anlegen'}
+            </button>
+            <button
               type="button"
-              variant="secondary"
-              onClick={() => { setShowForm(false); setFormErrors({}); }}
+              onClick={() => setShowForm(false)}
+              className="px-md py-sm border border-kore-border text-small text-kore-mid hover:text-kore-ink"
             >
               Abbrechen
-            </LoadingButton>
+            </button>
           </div>
         </form>
       )}
@@ -158,8 +147,8 @@ export function OverviewPage() {
         <div className="flex gap-xs">
           {[
             { key: '', label: 'Alle' },
-            { key: 'DRAFT', label: 'Entwürfe' },
-            { key: 'PUBLISHED', label: 'Veröffentlicht' },
+            { key: 'DRAFT', label: 'Entwuerfe' },
+            { key: 'PUBLISHED', label: 'Veroeffentlicht' },
             { key: 'ARCHIVED', label: 'Archiviert' },
           ].map((f) => (
             <button
@@ -185,7 +174,7 @@ export function OverviewPage() {
       ) : !newsletters.length ? (
         <div className="bg-kore-white border border-kore-border p-2xl text-center text-body text-kore-mid">
           {search || statusFilter
-            ? 'Keine Newsletter für diese Filter gefunden.'
+            ? 'Keine Newsletter fuer diese Filter gefunden.'
             : 'Noch keine Newsletter vorhanden. Erstellen Sie den ersten Newsletter.'}
         </div>
       ) : (
@@ -226,7 +215,7 @@ export function OverviewPage() {
                     </span>
                     {n.publishedAt && (
                       <span className="text-emerald-600">
-                        Veröffentlicht: {new Date(n.publishedAt).toLocaleDateString('de-DE')}
+                        Veroeffentlicht: {new Date(n.publishedAt).toLocaleDateString('de-DE')}
                       </span>
                     )}
                   </div>
@@ -237,7 +226,7 @@ export function OverviewPage() {
                   {n.status === 'DRAFT' && (
                     <button
                       onClick={() => publish.mutate(n.id)}
-                      title="Veröffentlichen"
+                      title="Veroeffentlichen"
                       className="p-sm text-emerald-600 hover:bg-emerald-50 border border-transparent hover:border-emerald-200"
                     >
                       <Send size={14} />

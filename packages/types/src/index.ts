@@ -58,16 +58,8 @@ export interface AuthUser {
   role: UserRole;
   tenantId?: string;
   impersonatedBy?: string;
-  avatarUrl?: string | null;
-  managerId?: string | null;
   storeAssignments?: string[]; // Store-IDs
   regionAssignments?: string[]; // Region-IDs (für regional_manager)
-  tenantBranding?: {
-    tenantName: string;
-    logoUrl: string | null;
-    primaryColor: string | null;
-    accentColor: string | null;
-  } | null;
 }
 
 // === User Store Assignment ===
@@ -196,8 +188,6 @@ export interface Tenant {
   contactPhone: string | null;
   maxUsers: number;
   logoUrl: string | null;
-  primaryColor: string | null;
-  accentColor: string | null;
   createdAt: string;
   updatedAt: string;
   stores?: Store[];
@@ -744,7 +734,9 @@ export interface InventoryItem {
   countedAt: string | null;
 }
 
-// === Notifications ===
+// ============================================================
+// Notifications — Types
+// ============================================================
 
 export interface AppNotification {
   id: string;
