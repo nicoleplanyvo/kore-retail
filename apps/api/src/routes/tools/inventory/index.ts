@@ -98,7 +98,7 @@ inventoryRouter.post('/counts', async (req, res) => {
     const tenantId = (req as any).tenantId as string;
     const userId = req.user!.sub;
     const parsed = inventoryCountCreateSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
 
     const count = await prisma.inventoryCount.create({
       data: {
@@ -187,7 +187,7 @@ inventoryRouter.put('/counts/:id/items', async (req, res) => {
   try {
     const tenantId = (req as any).tenantId as string;
     const parsed = inventoryItemUpsertSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
 
     const count = await prisma.inventoryCount.findFirst({
       where: { id: req.params.id, tenantId, status: 'IN_PROGRESS' },
@@ -268,7 +268,7 @@ inventoryRouter.post('/counts/:id/items/batch', async (req, res) => {
     }>;
 
     if (!Array.isArray(items) || items.length === 0) {
-      return res.status(400).json({ error: 'Keine Positionen uebergeben.' });
+      return res.status(400).json({ error: 'Keine Positionen übergeben.' });
     }
 
     const results: Array<{ sku: string; success: boolean; error?: string; needsRecount?: boolean }> = [];
@@ -276,7 +276,7 @@ inventoryRouter.post('/counts/:id/items/batch', async (req, res) => {
     for (const raw of items) {
       const parsed = inventoryItemUpsertSchema.safeParse(raw);
       if (!parsed.success) {
-        results.push({ sku: raw.sku || '?', success: false, error: 'Ungueltige Daten' });
+        results.push({ sku: raw.sku || '?', success: false, error: 'Ungültige Daten' });
         continue;
       }
 

@@ -23,7 +23,7 @@ export function AppTopBar({ onMenuToggle }: AppTopBarProps) {
       <button
         onClick={onMenuToggle}
         className="lg:hidden w-[36px] h-[36px] flex items-center justify-center rounded-sm hover:bg-kore-surface transition-colors"
-        aria-label="Menue oeffnen"
+        aria-label="Menü öffnen"
       >
         <Menu size={20} className="text-kore-ink" />
       </button>

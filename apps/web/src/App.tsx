@@ -62,7 +62,7 @@ export function App() {
     <>
       <ScrollToTop />
       <Routes>
-        {/* Marketing-Seiten (oeffentlich) */}
+        {/* Marketing-Seiten (öffentlich) */}
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/consulting" element={<ConsultingPage />} />

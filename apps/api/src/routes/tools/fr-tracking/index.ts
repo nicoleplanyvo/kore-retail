@@ -305,7 +305,7 @@ frTrackingRouter.put('/entries', async (req, res) => {
     const tenantId = (req as any).tenantId as string;
     const userId = req.user!.sub;
     const parsed = footfallUpsertSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
 
     const conversionRate = parsed.data.transactions && parsed.data.footfall
       ? Math.round((parsed.data.transactions / parsed.data.footfall) * 10000) / 100

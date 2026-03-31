@@ -13,7 +13,7 @@ const TOPICS = ['Verkauf', 'Kundenservice', 'Fuehrung', 'Produktwissen', 'Soft S
 const GROW_SECTIONS = [
   { key: 'goalText', label: 'Goal (Ziel)', placeholder: 'Was moechten Sie in dieser Session erreichen?' },
   { key: 'realityText', label: 'Reality (Realitaet)', placeholder: 'Wie ist die aktuelle Situation?' },
-  { key: 'optionsText', label: 'Options (Optionen)', placeholder: 'Welche Moeglichkeiten gibt es?' },
+  { key: 'optionsText', label: 'Options (Optionen)', placeholder: 'Welche Möglichkeiten gibt es?' },
   { key: 'wayForwardText', label: 'Way Forward (Weg)', placeholder: 'Welche konkreten Schritte werden unternommen?' },
 ];
 
@@ -92,7 +92,7 @@ export function CreateSessionPage() {
           <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm">
             <MessageSquare size={24} /> Neue Coaching-Session
           </h1>
-          <p className="text-body text-kore-mid mt-xs">Session planen und Framework waehlen</p>
+          <p className="text-body text-kore-mid mt-xs">Session planen und Framework wählen</p>
         </div>
       </div>
 
@@ -104,7 +104,7 @@ export function CreateSessionPage() {
             <div>
               <label className="block text-small text-kore-mid mb-xs">Store *</label>
               <select value={form.storeId} onChange={(e) => set('storeId', e.target.value)} className="w-full border border-kore-border px-md py-sm text-body" required>
-                <option value="">Store waehlen...</option>
+                <option value="">Store wählen...</option>
                 {(stores ?? []).map((s: any) => (
                   <option key={s.id} value={s.id}>{s.name}{s.city ? ` (${s.city})` : ''}</option>
                 ))}
@@ -113,7 +113,7 @@ export function CreateSessionPage() {
             <div>
               <label className="block text-small text-kore-mid mb-xs">Coachee *</label>
               <select value={form.coacheeId} onChange={(e) => set('coacheeId', e.target.value)} className="w-full border border-kore-border px-md py-sm text-body" required>
-                <option value="">Mitarbeiter waehlen...</option>
+                <option value="">Mitarbeiter wählen...</option>
                 {(users ?? []).map((u: any) => (
                   <option key={u.id} value={u.id}>{u.name}</option>
                 ))}

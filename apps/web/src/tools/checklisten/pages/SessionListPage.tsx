@@ -27,7 +27,7 @@ export function SessionListPage() {
         className="flex items-center gap-xs text-small text-kore-mid hover:text-kore-ink mb-xl transition-colors"
       >
         <ArrowLeft size={16} />
-        Zurueck zur Uebersicht
+        Zurück zur Übersicht
       </Link>
 
       <div className="flex items-center justify-between mb-2xl">

@@ -79,7 +79,7 @@ trackTraceRouter.post('/orders', async (req, res) => {
     const toolStoreIds = (req as any).toolStoreIds as string[] | 'all';
     const userId = req.user!.sub;
     const parsed = customerOrderCreateSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
 
     const storeId = (req.body.storeId as string) || (toolStoreIds !== 'all' ? toolStoreIds[0] : undefined);
     if (!storeId) return res.status(400).json({ error: 'storeId ist erforderlich.' });
@@ -134,7 +134,7 @@ trackTraceRouter.put('/orders/:id', async (req, res) => {
     if (!existing) return res.status(404).json({ error: 'Vorgang nicht gefunden.' });
 
     const parsed = customerOrderUpdateSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
 
     const data: Record<string, unknown> = { ...parsed.data };
     if (parsed.data.estimatedDelivery) data['estimatedDelivery'] = new Date(parsed.data.estimatedDelivery);
@@ -159,7 +159,7 @@ trackTraceRouter.post('/orders/:id/status', async (req, res) => {
 
     const userId = req.user!.sub;
     const parsed = orderStatusUpdateSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
 
     const statusUpdate = await prisma.orderStatusUpdate.create({
       data: {

@@ -115,7 +115,7 @@
     "email": "E-Mail",
     "password": "Passwort",
     "submit": "Anmelden",
-    "error": "Ungueltige Anmeldedaten."
+    "error": "Ungültige Anmeldedaten."
   },
   "roles": {
     "kore_admin": "Super Admin",
@@ -128,6 +128,6 @@
   "common": {
     "loading": "Laden...",
     "error": "Ein Fehler ist aufgetreten.",
-    "back": "Zurueck"
+    "back": "Zurück"
   }
 }

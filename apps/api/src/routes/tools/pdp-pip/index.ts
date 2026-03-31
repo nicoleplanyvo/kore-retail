@@ -100,7 +100,7 @@ pdpPipRouter.post('/plans', async (req, res) => {
     const tenantId = req.user!.tenantId!;
     const managerId = req.user!.sub;
     const parsed = developmentPlanCreateSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
 
     const plan = await prisma.developmentPlan.create({
       data: {
@@ -186,7 +186,7 @@ pdpPipRouter.post('/plans/:id/goals', async (req, res) => {
     if (!plan) return res.status(404).json({ error: 'Plan nicht gefunden.' });
 
     const parsed = developmentGoalCreateSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
 
     const goal = await prisma.developmentGoal.create({
       data: {
@@ -214,7 +214,7 @@ pdpPipRouter.put('/plans/:pid/goals/:gid', async (req, res) => {
     if (!existingGoal) return res.status(404).json({ error: 'Ziel nicht gefunden.' });
 
     const parsed = developmentGoalUpdateSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
 
     const updateData: Record<string, unknown> = {};
     if (parsed.data.title !== undefined) updateData['title'] = parsed.data.title;
@@ -262,7 +262,7 @@ pdpPipRouter.post('/plans/:id/reviews', async (req, res) => {
 
     const reviewedBy = req.user!.sub;
     const parsed = developmentReviewCreateSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
 
     const review = await prisma.developmentReview.create({
       data: {

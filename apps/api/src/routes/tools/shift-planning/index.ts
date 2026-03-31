@@ -72,7 +72,7 @@ shiftPlanningRouter.post('/shifts', async (req, res) => {
   try {
     const userId = req.user!.sub;
     const parsed = shiftEntryCreateSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
     const shift = await prisma.shiftEntry.create({
       data: { ...parsed.data, date: new Date(parsed.data.date), createdBy: userId },
       include: { user: { select: { id: true, name: true } }, store: { select: { id: true, name: true } } },
@@ -89,7 +89,7 @@ shiftPlanningRouter.put('/shifts/:id', async (req, res) => {
     if (!existing) return res.status(404).json({ error: 'Schicht nicht gefunden.' });
 
     const parsed = shiftEntryUpdateSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.' });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.' });
     const shift = await prisma.shiftEntry.update({
       where: { id: req.params['id'] },
       data: parsed.data,
@@ -157,7 +157,7 @@ shiftPlanningRouter.get('/availability', async (req, res) => {
 shiftPlanningRouter.put('/availability', async (req, res) => {
   try {
     const parsed = shiftAvailabilitySchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
     const d = new Date(parsed.data.date);
     const result = await prisma.shiftAvailability.upsert({
       where: { storeId_userId_date: { storeId: parsed.data.storeId, userId: parsed.data.userId, date: d } },
@@ -213,7 +213,7 @@ shiftPlanningRouter.post('/clock', async (req, res) => {
   try {
     const userId = req.user!.sub;
     const parsed = shiftClockSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
     const { storeId, action, note } = parsed.data;
     const today = new Date();
     today.setHours(0, 0, 0, 0);

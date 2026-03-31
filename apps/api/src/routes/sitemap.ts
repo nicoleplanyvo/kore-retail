@@ -6,7 +6,7 @@ export const sitemapRouter: RouterType = Router();
 const PUBLIC_URL = process.env['PUBLIC_URL'] ?? 'https://kore-retail.de';
 
 /**
- * Statische Seiten der KORE Website mit Prioritaeten und Aenderungshaeufigkeit.
+ * Statische Seiten der KORE Website mit Prioritäten und Änderungshäufigkeit.
  */
 const STATIC_PAGES: Array<{ path: string; changefreq: string; priority: string }> = [
   { path: '/', changefreq: 'weekly', priority: '1.0' },
@@ -23,7 +23,7 @@ const STATIC_PAGES: Array<{ path: string; changefreq: string; priority: string }
 // ── GET /sitemap.xml — Dynamic Sitemap ──
 sitemapRouter.get('/', async (_req, res) => {
   try {
-    // Alle veroeffentlichten Blog-Posts aus der Datenbank holen
+    // Alle veröffentlichten Blog-Posts aus der Datenbank holen
     const blogPosts = await prisma.blogPost.findMany({
       where: { status: 'PUBLISHED' },
       orderBy: { publishedAt: 'desc' },

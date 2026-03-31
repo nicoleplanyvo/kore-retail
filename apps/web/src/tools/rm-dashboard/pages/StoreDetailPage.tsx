@@ -149,7 +149,7 @@ export function StoreDetailPage() {
         <div className="text-body text-kore-mid">Lade Store-Daten...</div>
       ) : !detail ? (
         <div className="bg-kore-white border border-kore-border p-2xl text-center text-body text-kore-mid">
-          Store-Daten nicht verfuegbar.
+          Store-Daten nicht verfügbar.
         </div>
       ) : (
         <>
@@ -187,7 +187,7 @@ export function StoreDetailPage() {
               <div className="font-display text-h2 text-kore-ink">{detail.kpi.avgTicket.toLocaleString('de-DE')} EUR</div>
             </div>
             <div className="bg-kore-white border border-kore-border p-lg">
-              <span className="block text-small text-kore-mid uppercase tracking-widest mb-sm">Stueck verkauft</span>
+              <span className="block text-small text-kore-mid uppercase tracking-widest mb-sm">Stück verkauft</span>
               <div className="font-display text-h2 text-kore-ink">{detail.kpi.totalUnitsSold.toLocaleString('de-DE')}</div>
             </div>
           </div>

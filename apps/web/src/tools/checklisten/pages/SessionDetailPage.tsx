@@ -35,7 +35,7 @@ export function SessionDetailPage() {
         className="flex items-center gap-xs text-small text-kore-mid hover:text-kore-ink mb-xl transition-colors"
       >
         <ArrowLeft size={16} />
-        Zurueck zum Verlauf
+        Zurück zum Verlauf
       </Link>
 
       {/* Header */}

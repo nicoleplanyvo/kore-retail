@@ -20,7 +20,7 @@ export function PeriodListPage() {
         <Link to="/app/tools/budget" className="text-kore-mid hover:text-kore-ink transition-colors"><ArrowLeft size={20} /></Link>
         <div>
           <h1 className="font-display text-h1 text-kore-ink">Budget-Perioden</h1>
-          <p className="text-body text-kore-mid mt-xs">Alle Budget-Zeitraeume im Ueberblick</p>
+          <p className="text-body text-kore-mid mt-xs">Alle Budget-Zeiträume im Überblick</p>
         </div>
       </div>
 

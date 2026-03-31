@@ -88,7 +88,7 @@ vmComplianceRouter.post('/checks', upload.single('photo'), async (req, res) => {
     const tenantId = (req as any).tenantId as string;
     const userId = req.user!.sub;
     const parsed = vmSubmissionCreateSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
     if (!req.file) return res.status(400).json({ error: 'Foto ist erforderlich.' });
 
     const guideline = await prisma.vmGuideline.findFirst({
@@ -137,7 +137,7 @@ vmComplianceRouter.put('/checks/:id', async (req, res) => {
     const tenantId = (req as any).tenantId as string;
     const userId = req.user!.sub;
     const parsed = vmReviewSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
 
     const submission = await prisma.vmSubmission.findFirst({
       where: { id: req.params['id'], tenantId },
@@ -332,7 +332,7 @@ vmComplianceRouter.post('/submissions', upload.single('photo'), async (req, res)
     const tenantId = (req as any).tenantId as string;
     const userId = req.user!.sub;
     const parsed = vmSubmissionCreateSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
     if (!req.file) return res.status(400).json({ error: 'Foto ist erforderlich.' });
 
     const guideline = await prisma.vmGuideline.findFirst({
@@ -363,7 +363,7 @@ vmComplianceRouter.put('/reviews/submissions/:id/review', async (req, res) => {
     const tenantId = (req as any).tenantId as string;
     const userId = req.user!.sub;
     const parsed = vmReviewSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
 
     const submission = await prisma.vmSubmission.findFirst({
       where: { id: req.params['id'], tenantId },

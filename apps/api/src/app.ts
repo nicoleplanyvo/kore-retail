@@ -62,7 +62,7 @@ export function createApp(): Express {
   app.set('trust proxy', 1);
 
   // ── CORS ──────────────────────────────────────────
-  // Alle Frontends muessen sich mit der API verbinden koennen
+  // Alle Frontends müssen sich mit der API verbinden können
   const CORS_ORIGIN =
     process.env['CORS_ORIGIN'] ??
     'http://localhost:5173,http://localhost:5174,http://localhost:5175,http://localhost:5176,https://kore-retail.de,https://www.kore-retail.de,https://dashboard.kore-retail.de,https://app.kore-retail.de';

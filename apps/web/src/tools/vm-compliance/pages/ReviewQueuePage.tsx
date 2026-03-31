@@ -13,7 +13,7 @@ export function ReviewQueuePage() {
 
   return (
     <div className="p-xl max-w-5xl">
-      <Breadcrumb items={[{ label: 'VM Compliance', href: '/app/tools/vm-compliance' }, { label: 'Pruefung' }]} />
+      <Breadcrumb items={[{ label: 'VM Compliance', href: '/app/tools/vm-compliance' }, { label: 'Prüfung' }]} />
       <Link to="/app/tools/vm-compliance" className="flex items-center gap-sm text-small text-kore-mid hover:text-kore-ink mb-xl"><ArrowLeft size={16} /> Zurück</Link>
       <h1 className="font-display text-h1 text-kore-ink mb-2xl">Review Queue</h1>
 

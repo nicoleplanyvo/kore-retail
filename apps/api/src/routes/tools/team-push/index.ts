@@ -113,7 +113,7 @@ teamPushRouter.post('/messages', async (req, res) => {
     const tenantId = req.user!.tenantId!;
     const userId = req.user!.sub;
     const parsed = teamMessageCreateSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
 
     const message = await prisma.teamMessage.create({
       data: { ...parsed.data, tenantId, sentBy: userId },
@@ -135,7 +135,7 @@ teamPushRouter.delete('/messages/:id', async (req, res) => {
     const tenantId = req.user!.tenantId!;
     const message = await prisma.teamMessage.findFirst({ where: { id: req.params['id'], tenantId } });
     if (!message) return res.status(404).json({ error: 'Nachricht nicht gefunden.' });
-    if (message.sentBy !== req.user!.sub) return res.status(403).json({ error: 'Nur der Absender kann die Nachricht loeschen.' });
+    if (message.sentBy !== req.user!.sub) return res.status(403).json({ error: 'Nur der Absender kann die Nachricht löschen.' });
 
     // Delete reads first, then message
     await prisma.teamMessageRead.deleteMany({ where: { messageId: message.id } });

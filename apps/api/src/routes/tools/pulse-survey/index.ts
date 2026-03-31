@@ -38,7 +38,7 @@ pulseSurveyRouter.post('/surveys', async (req, res) => {
     const tenantId = req.user!.tenantId!;
     const createdBy = req.user!.sub;
     const parsed = pulseSurveyCreateSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
     const survey = await prisma.pulseSurvey.create({ data: { ...parsed.data, tenantId, createdBy } });
     res.status(201).json(survey);
   } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
@@ -118,7 +118,7 @@ pulseSurveyRouter.post('/surveys/:id/questions', async (req, res) => {
     if (!survey) return res.status(404).json({ error: 'Umfrage nicht gefunden.' });
 
     const parsed = pulseQuestionCreateSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
     const question = await prisma.pulseQuestion.create({ data: { ...parsed.data, surveyId: req.params['id']! } });
     res.status(201).json(question);
   } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
@@ -169,7 +169,7 @@ pulseSurveyRouter.post('/surveys/:id/respond', async (req, res) => {
     const respondentId = req.user!.sub;
     const surveyId = req.params['id']!;
     const parsed = pulseRespondSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
 
     // Check survey is active and belongs to tenant
     const tenantId = req.user!.tenantId!;

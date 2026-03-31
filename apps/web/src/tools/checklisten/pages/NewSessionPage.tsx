@@ -57,7 +57,7 @@ export function NewSessionPage() {
         className="flex items-center gap-xs text-small text-kore-mid hover:text-kore-ink mb-xl transition-colors"
       >
         <ArrowLeft size={16} />
-        Zurueck zur Uebersicht
+        Zurück zur Übersicht
       </Link>
 
       <h1 className="font-display text-h1 text-kore-ink mb-2xl">Neue Checkliste starten</h1>

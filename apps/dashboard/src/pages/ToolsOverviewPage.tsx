@@ -72,14 +72,14 @@ export function ToolsOverviewPage() {
       {/* Store-Auswahl */}
       <div className="bg-kore-white border border-kore-border p-xl mb-xl">
         <label className="font-body text-caption text-kore-mid uppercase tracking-[0.14em] block mb-md">
-          Store auswaehlen
+          Store auswählen
         </label>
         <select
           value={selectedStore}
           onChange={(e) => setSelectedStore(e.target.value)}
           className="w-full max-w-[400px] px-md py-md-sm border border-kore-border bg-kore-white font-body text-body text-kore-ink"
         >
-          <option value="">— Bitte Store waehlen —</option>
+          <option value="">— Bitte Store wählen —</option>
           {stores.map((store) => (
             <option key={store.id} value={store.id}>
               {store.name} ({store.city || 'Unbekannt'})
@@ -124,7 +124,7 @@ export function ToolsOverviewPage() {
                         {/* Learner-Sichtbarkeit Toggle */}
                         <label
                           className="flex items-center gap-xs cursor-pointer"
-                          title="Fuer Mitarbeiter sichtbar"
+                          title="Für Mitarbeiter sichtbar"
                         >
                           <button
                             onClick={() => handleLearnerToggle(tool.id, tool.learnerAccessible)}
@@ -159,7 +159,7 @@ export function ToolsOverviewPage() {
                           </button>
                         ) : (
                           <span className="font-body text-[0.65rem] text-kore-mid">
-                            Store waehlen
+                            Store wählen
                           </span>
                         )}
                       </div>

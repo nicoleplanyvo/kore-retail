@@ -11,7 +11,7 @@ const TOPICS = ['Verkauf', 'Kundenservice', 'Fuehrung', 'Produktwissen', 'Soft S
 const GROW_SECTIONS = [
   { key: 'goalText', label: 'Goal (Ziel)', description: 'Was moechten Sie in dieser Session erreichen?' },
   { key: 'realityText', label: 'Reality (Realitaet)', description: 'Wie ist die aktuelle Situation?' },
-  { key: 'optionsText', label: 'Options (Optionen)', description: 'Welche Moeglichkeiten gibt es?' },
+  { key: 'optionsText', label: 'Options (Optionen)', description: 'Welche Möglichkeiten gibt es?' },
   { key: 'wayForwardText', label: 'Way Forward (Weg)', description: 'Welche konkreten Schritte werden unternommen?' },
 ];
 
@@ -73,7 +73,7 @@ export function SessionDetailPage() {
   };
 
   const handleDelete = () => {
-    if (!confirm('Session wirklich loeschen?')) return;
+    if (!confirm('Session wirklich löschen?')) return;
     remove.mutate(session.id, { onSuccess: () => navigate('/app/tools/coaching') });
   };
 

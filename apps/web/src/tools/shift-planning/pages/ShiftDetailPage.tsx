@@ -36,7 +36,7 @@ export function ShiftDetailPage() {
   };
 
   const handleDelete = () => {
-    if (!confirm('Schicht wirklich loeschen?')) return;
+    if (!confirm('Schicht wirklich löschen?')) return;
     deleteShift.mutate(id!, { onSuccess: () => navigate('/app/tools/shift-planning') });
   };
 
@@ -47,7 +47,7 @@ export function ShiftDetailPage() {
   if (isLoading) return <div className="p-xl text-body text-kore-mid">Lade...</div>;
   if (!shift) return (
     <div className="p-xl max-w-3xl">
-      <Link to="/app/tools/shift-planning" className="flex items-center gap-xs text-kore-mid hover:text-kore-ink text-small mb-lg"><ArrowLeft size={16} /> Zurueck</Link>
+      <Link to="/app/tools/shift-planning" className="flex items-center gap-xs text-kore-mid hover:text-kore-ink text-small mb-lg"><ArrowLeft size={16} /> Zurück</Link>
       <div className="bg-kore-white border border-kore-border p-2xl text-center text-body text-kore-mid">Schicht nicht gefunden.</div>
     </div>
   );
@@ -56,7 +56,7 @@ export function ShiftDetailPage() {
 
   return (
     <div className="p-xl max-w-3xl">
-      <Link to="/app/tools/shift-planning" className="flex items-center gap-xs text-kore-mid hover:text-kore-ink text-small mb-lg"><ArrowLeft size={16} /> Zurueck zum Wochenplan</Link>
+      <Link to="/app/tools/shift-planning" className="flex items-center gap-xs text-kore-mid hover:text-kore-ink text-small mb-lg"><ArrowLeft size={16} /> Zurück zum Wochenplan</Link>
 
       <div className="bg-kore-white border border-kore-border p-xl mb-lg">
         <div className="flex items-start justify-between mb-lg">
@@ -121,7 +121,7 @@ export function ShiftDetailPage() {
             <div className="flex gap-sm pt-md border-t border-kore-border">
               <button onClick={startEditing} className="flex items-center gap-xs px-md py-sm bg-kore-ink text-kore-white text-small hover:opacity-90"><Save size={14} /> Bearbeiten</button>
               <button onClick={() => setShowSwapForm(!showSwapForm)} className="flex items-center gap-xs px-md py-sm border border-[#9E8460] text-[#9E8460] text-small hover:bg-[#9E8460] hover:text-white transition-colors"><ArrowRightLeft size={14} /> Tausch anfragen</button>
-              <button onClick={handleDelete} className="flex items-center gap-xs px-md py-sm border border-red-300 text-red-600 text-small hover:bg-red-50"><Trash2 size={14} /> Loeschen</button>
+              <button onClick={handleDelete} className="flex items-center gap-xs px-md py-sm border border-red-300 text-red-600 text-small hover:bg-red-50"><Trash2 size={14} /> Löschen</button>
             </div>
           </div>
         )}
@@ -134,7 +134,7 @@ export function ShiftDetailPage() {
           <div className="mb-md">
             <label className="block text-small text-kore-mid mb-xs">Tauschen mit (optional)</label>
             <select value={swapUserId} onChange={e => setSwapUserId(e.target.value)} className="w-full border border-kore-border px-md py-sm text-body">
-              <option value="">-- Offen fuer alle --</option>
+              <option value="">-- Offen für alle --</option>
               {users?.filter((u: any) => u.id !== shift.userId).map((u: any) => <option key={u.id} value={u.id}>{u.name}</option>)}
             </select>
           </div>

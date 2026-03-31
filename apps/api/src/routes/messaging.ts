@@ -133,7 +133,7 @@ messagingRouter.post('/conversations', async (req, res) => {
     });
 
     if (participants.length !== otherIds.length) {
-      res.status(400).json({ error: 'Alle Teilnehmer muessen zum selben Mandanten gehoeren.' });
+      res.status(400).json({ error: 'Alle Teilnehmer müssen zum selben Mandanten gehören.' });
       return;
     }
 

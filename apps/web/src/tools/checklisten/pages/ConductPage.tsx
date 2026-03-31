@@ -136,7 +136,7 @@ export function ConductPage() {
       });
       navigate(`/app/tools/checklisten/sessions/${id}`);
     } catch (error) {
-      console.error('Checkliste abschliessen fehlgeschlagen:', error);
+      console.error('Checkliste abschließen fehlgeschlagen:', error);
       setCompleting(false);
     }
   };
@@ -319,7 +319,7 @@ export function ConductPage() {
           className="flex items-center gap-xs text-small text-kore-mid hover:text-kore-ink disabled:opacity-30 transition-colors"
         >
           <ChevronLeft size={16} />
-          Zurueck
+          Zurück
         </button>
 
         {isLastSection ? (
@@ -329,7 +329,7 @@ export function ConductPage() {
             className="flex items-center gap-sm bg-kore-success text-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:opacity-90 transition-opacity disabled:opacity-50"
           >
             <CheckCircle size={16} />
-            {completing ? 'Wird abgeschlossen...' : 'Abschliessen'}
+            {completing ? 'Wird abgeschlossen...' : 'Abschließen'}
           </button>
         ) : (
           <button

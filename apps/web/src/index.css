@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* CSS Custom Properties fuer @kore/ui Inline-Style-Komponenten */
+/* CSS Custom Properties für @kore/ui Inline-Style-Komponenten */
 :root {
   --kore-bg:       #F7F4EF;
   --kore-surface:  #EDEAE4;

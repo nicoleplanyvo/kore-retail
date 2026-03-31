@@ -342,7 +342,7 @@ export function invitationEmail(data: {
           <strong>E-Mail:</strong> ${escapeHtml(data.email)}<br/>
           <strong>Passwort:</strong> ${escapeHtml(data.tempPassword)}
         </div>
-        <p style="font-size: 13px; color: #9E8460;">Bitte aendern Sie Ihr Passwort nach dem ersten Login.</p>
+        <p style="font-size: 13px; color: #9E8460;">Bitte ändern Sie Ihr Passwort nach dem ersten Login.</p>
       ` : ''}
       <table width="100%" cellpadding="0" cellspacing="0" style="margin: 24px 0;">
         <tr>

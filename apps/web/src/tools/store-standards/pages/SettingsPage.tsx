@@ -25,12 +25,12 @@ export function SettingsPage() {
   return (
     <div className="p-xl max-w-5xl">
       <Link to="/app/tools/store-standards" className="flex items-center gap-xs text-small text-kore-mid hover:text-kore-ink mb-lg">
-        <ArrowLeft size={14} /> Zurueck zur Uebersicht
+        <ArrowLeft size={14} /> Zurück zur Übersicht
       </Link>
       <h1 className="font-display text-h1 text-kore-ink flex items-center gap-sm mb-xs">
         <Settings size={24} /> Einstellungen
       </h1>
-      <p className="text-body text-kore-mid mb-2xl">Grundparameter fuer die Budget-Berechnung.</p>
+      <p className="text-body text-kore-mid mb-2xl">Grundparameter für die Budget-Berechnung.</p>
 
       {/* Waehrung & Kosten */}
       <h2 className="font-display text-h3 text-kore-ink mb-md flex items-center gap-sm"><Coins size={18} /> Waehrung & Kosten</h2>

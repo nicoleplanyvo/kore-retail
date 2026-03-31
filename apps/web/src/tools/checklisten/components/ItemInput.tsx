@@ -107,7 +107,7 @@ export function ItemInput({
           }`}
         >
           <Camera size={18} />
-          Foto hinzufuegen
+          Foto hinzufügen
         </button>
       );
 

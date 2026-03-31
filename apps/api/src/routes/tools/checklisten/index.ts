@@ -115,7 +115,7 @@ checklistenRouter.get('/templates', async (req, res) => {
 checklistenRouter.post('/templates', async (req, res) => {
   try {
     const parsed = templateCreateSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
 
     const data = parsed.data;
     const tenantId = (req as any).tenantId as string;
@@ -157,7 +157,7 @@ checklistenRouter.post('/templates', async (req, res) => {
 checklistenRouter.put('/templates/:id', async (req, res) => {
   try {
     const parsed = templateUpdateSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.' });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.' });
 
     const tenantId = (req as any).tenantId as string;
     const existing = await prisma.checklistTemplate.findUnique({ where: { id: req.params['id'] } });
@@ -299,7 +299,7 @@ checklistenRouter.get('/checklists/:id', async (req, res) => {
 checklistenRouter.post('/checklists', async (req, res) => {
   try {
     const parsed = checklistCreateSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
 
     const data = parsed.data;
     const tenantId = (req as any).tenantId as string;

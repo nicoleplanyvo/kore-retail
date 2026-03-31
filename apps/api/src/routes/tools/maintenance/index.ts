@@ -112,7 +112,7 @@ maintenanceRouter.post('/requests', async (req, res) => {
     const tenantId = (req as any).tenantId as string;
     const userId = req.user!.sub;
     const parsed = maintenanceRequestCreateSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
 
     const request = await prisma.maintenanceRequest.create({
       data: { ...parsed.data, tenantId, reportedBy: userId },
@@ -136,7 +136,7 @@ maintenanceRouter.put('/requests/:id', async (req, res) => {
     if (!existing) return res.status(404).json({ error: 'Request nicht gefunden.' });
 
     const parsed = maintenanceRequestUpdateSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+    if (!parsed.success) return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
 
     const data: Record<string, unknown> = { ...parsed.data };
     if (parsed.data.status === 'RESOLVED' || parsed.data.status === 'CLOSED') {

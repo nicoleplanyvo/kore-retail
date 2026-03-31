@@ -37,11 +37,11 @@ const ROLE_DESCRIPTIONS: Record<UserRole, string> = {
   kore_admin:
     'Du hast vollen Zugriff auf die gesamte KORE-Plattform. Du verwaltest Mandanten, Stores und kannst dich als jeder Benutzer anmelden, um Support zu leisten.',
   tenant_admin:
-    'Du verwaltest Benutzer, Stores und Tool-Buchungen fuer dein Unternehmen. Ausserdem hast du Zugriff auf DSGVO-Einstellungen und uebergreifende Reports.',
+    'Du verwaltest Benutzer, Stores und Tool-Buchungen für dein Unternehmen. Außerdem hast du Zugriff auf DSGVO-Einstellungen und übergreifende Reports.',
   regional_manager:
-    'Du hast Einblick in alle Stores deiner Region. Vergleiche Performance-Daten, manage dein Team und steuere Tool-Buchungen ueberregional.',
+    'Du hast Einblick in alle Stores deiner Region. Vergleiche Performance-Daten, manage dein Team und steuere Tool-Buchungen überregional.',
   multisite_manager:
-    'Du betreust mehrere Stores gleichzeitig. Behalte den Ueberblick ueber alle Standorte, vergleiche Kennzahlen und koordiniere dein Team.',
+    'Du betreust mehrere Stores gleichzeitig. Behalte den Überblick über alle Standorte, vergleiche Kennzahlen und koordiniere dein Team.',
   store_manager:
     'Du leitest deinen Store. Verwalte dein Team, nutze die zugewiesenen Tools und behalte Reports und Store-Einstellungen im Blick.',
   learner:
@@ -64,24 +64,24 @@ const ROLE_FEATURES: Record<UserRole, FeatureCard[]> = {
     {
       icon: UserPlus,
       title: 'Onboarding',
-      description: 'Schritt fuer Schritt durch deinen Einstieg begleitet.',
+      description: 'Schritt für Schritt durch deinen Einstieg begleitet.',
     },
     {
       icon: GraduationCap,
       title: 'Training',
-      description: 'Lerne neue Faehigkeiten mit interaktiven Kursen.',
+      description: 'Lerne neue Fähigkeiten mit interaktiven Kursen.',
     },
   ],
   store_manager: [
     {
       icon: Users,
       title: 'Team verwalten',
-      description: 'Ueberblick ueber dein Team und Rollenzuweisungen.',
+      description: 'Überblick über dein Team und Rollenzuweisungen.',
     },
     {
       icon: Wrench,
       title: 'Tools nutzen',
-      description: 'Alle gebuchten Tools fuer deinen Store.',
+      description: 'Alle gebuchten Tools für deinen Store.',
     },
     {
       icon: BarChart3,
@@ -91,7 +91,7 @@ const ROLE_FEATURES: Record<UserRole, FeatureCard[]> = {
     {
       icon: Settings,
       title: 'Store-Einstellungen',
-      description: 'Konfiguriere deinen Store nach deinen Beduerfnissen.',
+      description: 'Konfiguriere deinen Store nach deinen Bedürfnissen.',
     },
   ],
   multisite_manager: [
@@ -102,29 +102,29 @@ const ROLE_FEATURES: Record<UserRole, FeatureCard[]> = {
     },
     {
       icon: Users,
-      title: 'Team-Uebersicht',
+      title: 'Team-Übersicht',
       description: 'Alle Teams deiner Stores auf einen Blick.',
     },
     {
       icon: BarChart3,
       title: 'Reports',
-      description: 'Uebergreifende Auswertungen und Trends.',
+      description: 'Übergreifende Auswertungen und Trends.',
     },
     {
       icon: ShoppingBag,
       title: 'Store-Koordination',
-      description: 'Koordiniere Aktionen und Prozesse standortuebergreifend.',
+      description: 'Koordiniere Aktionen und Prozesse standortübergreifend.',
     },
   ],
   regional_manager: [
     {
       icon: Map,
       title: 'Multi-Store Vergleich',
-      description: 'Vergleiche Performance-Daten ueber deine gesamte Region.',
+      description: 'Vergleiche Performance-Daten über deine gesamte Region.',
     },
     {
       icon: Users,
-      title: 'Team-Uebersicht',
+      title: 'Team-Übersicht',
       description: 'Alle Mitarbeiter deiner Region auf einen Blick.',
     },
     {
@@ -135,7 +135,7 @@ const ROLE_FEATURES: Record<UserRole, FeatureCard[]> = {
     {
       icon: CalendarDays,
       title: 'Tool-Buchung',
-      description: 'Buche und verwalte Tools fuer deine Stores.',
+      description: 'Buche und verwalte Tools für deine Stores.',
     },
   ],
   tenant_admin: [
@@ -157,7 +157,7 @@ const ROLE_FEATURES: Record<UserRole, FeatureCard[]> = {
     {
       icon: FileText,
       title: 'DSGVO & Reporting',
-      description: 'Datenschutz-Einstellungen und uebergreifende Reports.',
+      description: 'Datenschutz-Einstellungen und übergreifende Reports.',
     },
   ],
   kore_admin: [
@@ -169,7 +169,7 @@ const ROLE_FEATURES: Record<UserRole, FeatureCard[]> = {
     {
       icon: Store,
       title: 'Alle Stores',
-      description: 'Zugriff auf jeden Store ueber alle Mandanten.',
+      description: 'Zugriff auf jeden Store über alle Mandanten.',
     },
     {
       icon: Settings,
