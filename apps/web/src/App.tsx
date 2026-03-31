@@ -20,7 +20,7 @@ import { useAnalytics } from './hooks/useAnalytics';
 import { ScrollToTop } from './components/ScrollToTop';
 
 // Tool-Routes importieren
-import { StoreExcellenceAuditRoutes } from './tools/store-excellence-audit/index';
+import StoreExcellenceAuditRoutes from './tools/store-excellence-audit/index';
 import ChecklistenRoutes from './tools/checklisten/index';
 import SopBibliothekRoutes from './tools/sop-bibliothek/index';
 import VmComplianceRoutes from './tools/vm-compliance/index';
