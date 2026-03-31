@@ -1,0 +1,1167 @@
+{
+  "timestamp": "2026-03-31T08:23:50.922Z",
+  "baseUrl": "https://app.kore-retail.de",
+  "totalEndpoints": 95,
+  "passed": 95,
+  "warned": 0,
+  "failed": 0,
+  "passRate": "100.0%",
+  "tools": [
+    {
+      "tool": "Store Excellence Audit",
+      "slug": "sea",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/sea/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 94,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/templates",
+          "url": "https://app.kore-retail.de/api/tools/sea/templates",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 32,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/sessions",
+          "url": "https://app.kore-retail.de/api/tools/sea/sessions",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 66,
+          "dataCount": 1,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Checklisten",
+      "slug": "checklisten",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/checklisten/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 32,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/templates",
+          "url": "https://app.kore-retail.de/api/tools/checklisten/templates",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 46,
+          "dataCount": 1,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "SOP Bibliothek",
+      "slug": "sop",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/sop/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 29,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/categories",
+          "url": "https://app.kore-retail.de/api/tools/sop/categories",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 26,
+          "dataCount": 3,
+          "error": null
+        },
+        {
+          "endpoint": "/documents",
+          "url": "https://app.kore-retail.de/api/tools/sop/documents",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 35,
+          "dataCount": 3,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "VM Foto-Compliance",
+      "slug": "vm-compliance",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/vm-compliance/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 27,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/checks",
+          "url": "https://app.kore-retail.de/api/tools/vm-compliance/checks",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 33,
+          "dataCount": 0,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/vm-compliance/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 32,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Store Standards",
+      "slug": "store-standards",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/store-standards/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 37,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/scenarios",
+          "url": "https://app.kore-retail.de/api/tools/store-standards/scenarios",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 29,
+          "dataCount": 0,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "KPI Dashboard",
+      "slug": "kpi",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/kpi/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 30,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/entries",
+          "url": "https://app.kore-retail.de/api/tools/kpi/entries",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 57,
+          "dataCount": 0,
+          "error": null
+        },
+        {
+          "endpoint": "/summary",
+          "url": "https://app.kore-retail.de/api/tools/kpi/summary",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 41,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Budget Tracker",
+      "slug": "budget",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/budget/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 28,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/targets",
+          "url": "https://app.kore-retail.de/api/tools/budget/targets",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 27,
+          "dataCount": 0,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/budget/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 40,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Forecast",
+      "slug": "forecast",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/forecast/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 28,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/",
+          "url": "https://app.kore-retail.de/api/tools/forecast",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 49,
+          "dataCount": 0,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/forecast/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 28,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Loss Prevention",
+      "slug": "loss-prevention",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/loss-prevention/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 45,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/incidents",
+          "url": "https://app.kore-retail.de/api/tools/loss-prevention/incidents",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 27,
+          "dataCount": 0,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/loss-prevention/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 35,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Inventory",
+      "slug": "inventory",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/inventory/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 32,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/counts",
+          "url": "https://app.kore-retail.de/api/tools/inventory/counts",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 38,
+          "dataCount": 1,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Live Floor",
+      "slug": "live-floor",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/live-floor/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 49,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/zones",
+          "url": "https://app.kore-retail.de/api/tools/live-floor/zones",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 36,
+          "dataCount": 16,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/live-floor/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 35,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "FR Tracking",
+      "slug": "fr-tracking",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/fr-tracking/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 31,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/fr-tracking/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 36,
+          "dataCount": null,
+          "error": null
+        },
+        {
+          "endpoint": "/entries",
+          "url": "https://app.kore-retail.de/api/tools/fr-tracking/entries",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 35,
+          "dataCount": 0,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "VM Guidelines",
+      "slug": "vm-guidelines",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/vm-guidelines/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 29,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/",
+          "url": "https://app.kore-retail.de/api/tools/vm-guidelines",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 33,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/vm-guidelines/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 35,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Maintenance",
+      "slug": "maintenance",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/maintenance/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 28,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/requests",
+          "url": "https://app.kore-retail.de/api/tools/maintenance/requests",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 32,
+          "dataCount": 0,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/maintenance/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 33,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Training Hub",
+      "slug": "training-hub",
+      "endpoints": [
+        {
+          "endpoint": "/courses",
+          "url": "https://app.kore-retail.de/api/tools/training-hub/courses",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 32,
+          "dataCount": 4,
+          "error": null
+        },
+        {
+          "endpoint": "/enrollments",
+          "url": "https://app.kore-retail.de/api/tools/training-hub/enrollments",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 33,
+          "dataCount": 0,
+          "error": null
+        },
+        {
+          "endpoint": "/reports/completion",
+          "url": "https://app.kore-retail.de/api/tools/training-hub/reports/completion",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 32,
+          "dataCount": 0,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Training Hours",
+      "slug": "training-hours",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/training-hours/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 30,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/logs",
+          "url": "https://app.kore-retail.de/api/tools/training-hours/logs",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 34,
+          "dataCount": 0,
+          "error": null
+        },
+        {
+          "endpoint": "/summary",
+          "url": "https://app.kore-retail.de/api/tools/training-hours/summary",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 30,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Challenges",
+      "slug": "challenges",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/challenges/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 30,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/",
+          "url": "https://app.kore-retail.de/api/tools/challenges",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 32,
+          "dataCount": 0,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/challenges/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 42,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Onboarding",
+      "slug": "onboarding",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/onboarding/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 35,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/templates",
+          "url": "https://app.kore-retail.de/api/tools/onboarding/templates",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 28,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/journeys",
+          "url": "https://app.kore-retail.de/api/tools/onboarding/journeys",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 30,
+          "dataCount": 0,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Coaching",
+      "slug": "coaching",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/coaching/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 32,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/sessions",
+          "url": "https://app.kore-retail.de/api/tools/coaching/sessions",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 32,
+          "dataCount": 0,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/coaching/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 33,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "PDP/PIP",
+      "slug": "pdp-pip",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/pdp-pip/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 32,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/plans",
+          "url": "https://app.kore-retail.de/api/tools/pdp-pip/plans",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 33,
+          "dataCount": 0,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/pdp-pip/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 34,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Appraisals",
+      "slug": "appraisals",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/appraisals/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 30,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/appraisals",
+          "url": "https://app.kore-retail.de/api/tools/appraisals/appraisals",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 39,
+          "dataCount": 0,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/appraisals/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 29,
+          "dataCount": 0,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Shift Planning",
+      "slug": "shift-planning",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/shift-planning/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 30,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/users",
+          "url": "https://app.kore-retail.de/api/tools/shift-planning/users",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 29,
+          "dataCount": 5,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/shift-planning/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 34,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Pulse Survey",
+      "slug": "pulse-survey",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/pulse-survey/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 27,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/surveys",
+          "url": "https://app.kore-retail.de/api/tools/pulse-survey/surveys",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 28,
+          "dataCount": 1,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/pulse-survey/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 33,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Wellbeing",
+      "slug": "wellbeing",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/wellbeing/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 32,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/checkins",
+          "url": "https://app.kore-retail.de/api/tools/wellbeing/checkins",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 32,
+          "dataCount": 0,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/wellbeing/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 31,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Briefings",
+      "slug": "briefings",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/briefings/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 31,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/",
+          "url": "https://app.kore-retail.de/api/tools/briefings",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 32,
+          "dataCount": 0,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/briefings/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 29,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Handover",
+      "slug": "handover",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/handover/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 30,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/",
+          "url": "https://app.kore-retail.de/api/tools/handover",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 37,
+          "dataCount": 0,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/handover/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 32,
+          "dataCount": 0,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Team Push",
+      "slug": "team-push",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/team-push/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 30,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/messages",
+          "url": "https://app.kore-retail.de/api/tools/team-push/messages",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 32,
+          "dataCount": 0,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Newsletter",
+      "slug": "newsletter",
+      "endpoints": [
+        {
+          "endpoint": "/",
+          "url": "https://app.kore-retail.de/api/tools/newsletter",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 31,
+          "dataCount": 0,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/newsletter/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 29,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "FR Conversion",
+      "slug": "fr-conversion",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/fr-conversion/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 25,
+          "dataCount": 3,
+          "error": null
+        },
+        {
+          "endpoint": "/rooms",
+          "url": "https://app.kore-retail.de/api/tools/fr-conversion/rooms",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 28,
+          "dataCount": 4,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/fr-conversion/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 27,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Clienteling",
+      "slug": "clienteling",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/clienteling/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 27,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/customers",
+          "url": "https://app.kore-retail.de/api/tools/clienteling/customers",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 32,
+          "dataCount": 0,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/clienteling/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 32,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Stock Callouts",
+      "slug": "stock-callouts",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/stock-callouts/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 28,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/callouts",
+          "url": "https://app.kore-retail.de/api/tools/stock-callouts/callouts",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 30,
+          "dataCount": 0,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/stock-callouts/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 30,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Track & Trace",
+      "slug": "track-trace",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/track-trace/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 30,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/orders",
+          "url": "https://app.kore-retail.de/api/tools/track-trace/orders",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 30,
+          "dataCount": 0,
+          "error": null
+        },
+        {
+          "endpoint": "/dashboard",
+          "url": "https://app.kore-retail.de/api/tools/track-trace/dashboard",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 35,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "Multi-Store",
+      "slug": "multi-store",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/multi-store/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 27,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/comparison",
+          "url": "https://app.kore-retail.de/api/tools/multi-store/comparison",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 27,
+          "dataCount": 0,
+          "error": null
+        }
+      ]
+    },
+    {
+      "tool": "RM Dashboard",
+      "slug": "rm-dashboard",
+      "endpoints": [
+        {
+          "endpoint": "/stores",
+          "url": "https://app.kore-retail.de/api/tools/rm-dashboard/stores",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 34,
+          "dataCount": 2,
+          "error": null
+        },
+        {
+          "endpoint": "/summary",
+          "url": "https://app.kore-retail.de/api/tools/rm-dashboard/summary",
+          "status": 200,
+          "ok": true,
+          "warning": false,
+          "ms": 42,
+          "dataCount": null,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "warnings": []
+}
