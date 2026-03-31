@@ -100,6 +100,19 @@ export function useDeleteAppointment() {
   });
 }
 
+// ── Aliases ───────────────────────────────────────────────
+export const useClient = useCustomer;
+export const useUpdateClient = useUpdateCustomer;
+
+export function useAddClientTask() {
+  return useMutationWithToast({
+    mutationFn: ({ customerId, ...data }: any) => api<any>(`${BASE}/customers/${customerId}/tasks`, { method: 'POST', body: JSON.stringify(data) }),
+    invalidateKeys: [['clienteling']],
+    successMessage: 'Aufgabe hinzugefügt.',
+    errorMessage: 'Aufgabe konnte nicht gespeichert werden.',
+  });
+}
+
 export function useClientelingDashboard(storeId?: string) {
   const sp = new URLSearchParams();
   if (storeId) sp.set('storeId', storeId);

@@ -95,6 +95,67 @@ export function useToggleCheckItem() {
   });
 }
 
+// ── Session list item shape ────────────────────────────────
+export interface ChecklistSessionListItem {
+  id: string;
+  status: string;
+  completionRate: number | null;
+  startedAt: string;
+  completedAt: string | null;
+  store: { id: string; name: string; city?: string | null } | null;
+  template: { id: string; name: string } | null;
+}
+
+// ── Session detail shape (minimal, for type safety in pages) ─────
+interface ChecklistSessionData {
+  id: string;
+  status: string;
+  completionRate: number | null;
+  notes: string | null;
+  startedAt: string | null;
+  completedAt: string | null;
+  store: { id: string; name: string; city?: string | null } | null;
+  template: {
+    name: string;
+    sections: {
+      id: string;
+      name: string;
+      items: { id: string; text: string; type: string }[];
+    }[];
+  } | null;
+  entries: {
+    id: string;
+    itemId: string;
+    valueBool: boolean | null;
+    valueText: string | null;
+    valueNumber: number | null;
+    photoPath: string | null;
+    comment: string | null;
+  }[];
+}
+
+// ── Aliases for session-named imports ─────────────────────
+export function useChecklistSession(id?: string) {
+  return useQuery<ChecklistSessionData>({
+    queryKey: ['checklisten', 'detail', id],
+    queryFn: () => api(`/api/tools/checklisten/checklists/${id}`),
+    enabled: !!id,
+  });
+}
+
+export function useChecklistSessions(page = 1, storeId?: string, status?: string, date?: string) {
+  return useQuery<{ data: ChecklistSessionListItem[]; total: number; page: number; pageSize: number }>({
+    queryKey: ['checklisten', 'list', page, storeId, status, date],
+    queryFn: () => {
+      const params = new URLSearchParams({ page: String(page), pageSize: '20' });
+      if (storeId) params.set('storeId', storeId);
+      if (status) params.set('status', status);
+      if (date) params.set('date', date);
+      return api(`/api/tools/checklisten/checklists?${params}`);
+    },
+  });
+}
+
 // ── Dashboard ─────────────────────────────────────────────
 export function useChecklistDashboard(storeId?: string) {
   return useQuery<any>({

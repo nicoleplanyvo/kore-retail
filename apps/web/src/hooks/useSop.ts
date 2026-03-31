@@ -28,12 +28,20 @@ interface SopDocumentDetail {
   category?: { id: string; name: string };
   creator?: { id: string; name: string };
   _count?: { acknowledgments: number };
+  /** Whether the current user has already acknowledged this document */
+  userAcknowledged?: boolean;
 }
 
 interface AcknowledgmentStatusItem {
   sopId: string; title: string; category?: { id: string; name: string };
   publishedAt: string | null; acknowledgedCount: number; totalUsers: number;
   acknowledgedPercent: number;
+  /** SOP publish status (e.g. PUBLISHED, DRAFT) */
+  status: string;
+  /** Number of users who acknowledged */
+  acknowledged: number;
+  /** Total number of users expected to acknowledge */
+  total: number;
 }
 
 interface PaginatedResponse<T> { data: T[]; total: number; page: number; pageSize: number; }

@@ -27,6 +27,7 @@ interface NewsletterListItem {
 
 interface NewsletterDetail extends NewsletterListItem {
   sections: NewsletterSection[];
+  views?: { id: string }[];
 }
 
 interface NewsletterListResponse {

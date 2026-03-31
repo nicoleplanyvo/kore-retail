@@ -23,15 +23,20 @@ export function useAuditStores() {
   });
 }
 
-export function useAuditSessions(params: { page?: number; pageSize?: number; storeId?: string; status?: string } = {}) {
+/** Alias for useAuditStores — used by NewSessionPage */
+export const useStoreOptions = useAuditStores;
+
+export function useAuditSessions(params: { page?: number; pageSize?: number; storeId?: string; status?: string } | number = {}) {
+  const normalised: { page?: number; pageSize?: number; storeId?: string; status?: string } =
+    typeof params === 'number' ? { page: params } : params;
   const qs = new URLSearchParams();
-  if (params.page) qs.set('page', String(params.page));
-  if (params.pageSize) qs.set('pageSize', String(params.pageSize));
-  if (params.storeId) qs.set('storeId', params.storeId);
-  if (params.status) qs.set('status', params.status);
+  if (normalised.page) qs.set('page', String(normalised.page));
+  if (normalised.pageSize) qs.set('pageSize', String(normalised.pageSize));
+  if (normalised.storeId) qs.set('storeId', normalised.storeId);
+  if (normalised.status) qs.set('status', normalised.status);
   const query = qs.toString();
   return useQuery<PaginatedSessions>({
-    queryKey: ['audit', 'sessions', params],
+    queryKey: ['audit', 'sessions', normalised],
     queryFn: () => api(`/api/tools/sea/sessions${query ? '?' + query : ''}`),
   });
 }

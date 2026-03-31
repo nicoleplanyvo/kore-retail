@@ -53,6 +53,24 @@ export function useVmComplianceDashboard() {
   });
 }
 
+/** Alias for useVmComplianceGuidelines — used by GuidelinesPage */
+export const useVmGuidelines = useVmComplianceGuidelines;
+
+/** Paginated submissions with optional filters — used by ReviewQueuePage and SubmissionDetailPage */
+export function useVmSubmissions(params: { page?: number; storeId?: string; status?: string; from?: string; to?: string } = {}) {
+  return useQuery({
+    queryKey: ['vmc', 'submissions', params],
+    queryFn: () => {
+      const p = new URLSearchParams({ page: String(params.page ?? 1), pageSize: '20' });
+      if (params.storeId) p.set('storeId', params.storeId);
+      if (params.status) p.set('status', params.status);
+      if (params.from) p.set('from', params.from);
+      if (params.to) p.set('to', params.to);
+      return api<{ data: any[]; total: number }>(`/api/tools/vm-compliance/checks?${p}`);
+    },
+  });
+}
+
 /** Fetches pending checks for the review queue with optional filters */
 export function useVmCompliancePendingChecks(page = 1, storeId?: string, from?: string, to?: string) {
   return useQuery({

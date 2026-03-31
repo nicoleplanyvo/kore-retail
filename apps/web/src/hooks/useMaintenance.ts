@@ -110,7 +110,10 @@ export function useMaintenanceUsers() {
 
 // ── Requests ────────────────────────────────────────
 
-export function useMaintenanceRequests(filters: RequestFilters = {}) {
+export function useMaintenanceRequests(filtersOrPage: RequestFilters | number = {}, storeIdArg?: string, statusArg?: string) {
+  const filters: RequestFilters = typeof filtersOrPage === 'number'
+    ? { page: filtersOrPage, storeId: storeIdArg, status: statusArg }
+    : filtersOrPage;
   const { storeId, status, category, priority, from, to, page = 1, pageSize = 20 } = filters;
   return useQuery<MaintenanceListResponse>({
     queryKey: ['maint', 'requests', storeId, status, category, priority, from, to, page, pageSize],

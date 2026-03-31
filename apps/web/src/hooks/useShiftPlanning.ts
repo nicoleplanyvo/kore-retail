@@ -137,3 +137,35 @@ export function useShiftDashboard(storeId?: string) {
     queryFn: () => api<any>(`${BASE}/dashboard?${sp}`),
   });
 }
+
+// ── Templates ─────────────────────────────────────────
+export function useShiftTemplates() {
+  return useQuery({
+    queryKey: ['shift', 'templates'],
+    queryFn: () => api<any[]>(`${BASE}/templates`),
+  });
+}
+
+export function useCreateShiftTemplate() {
+  return useMutationWithToast({
+    mutationFn: (data: any) => api<any>(`${BASE}/templates`, { method: 'POST', body: JSON.stringify(data) }),
+    invalidateKeys: [['shift', 'templates']],
+    successMessage: 'Vorlage erstellt.',
+    errorMessage: 'Vorlage konnte nicht erstellt werden.',
+  });
+}
+
+// ── Shift Entries (alias with from/to params) ─────────
+export function useShiftEntries(params?: { storeId?: string; from?: string; to?: string; userId?: string }) {
+  const sp = new URLSearchParams();
+  if (params?.storeId) sp.set('storeId', params.storeId);
+  if (params?.from) sp.set('weekStart', params.from);
+  if (params?.to) sp.set('weekEnd', params.to);
+  if (params?.userId) sp.set('userId', params.userId);
+  return useQuery({
+    queryKey: ['shift', 'entries', params],
+    queryFn: () => api<any[]>(`${BASE}/shifts?${sp}`),
+  });
+}
+
+export const useCreateShiftEntry = useCreateShift;

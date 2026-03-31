@@ -106,3 +106,22 @@ export function useBudgetDashboard(month?: string) {
     },
   });
 }
+
+export function useBudgetPeriods(page = 1, storeId?: string) {
+  return useQuery({
+    queryKey: ['budget', 'periods', page, storeId],
+    queryFn: () => {
+      const params = new URLSearchParams({ page: String(page), pageSize: '20' });
+      if (storeId) params.set('storeId', storeId);
+      return api<any>(`/api/tools/budget/periods?${params}`);
+    },
+  });
+}
+
+export function useBudgetPeriod(id: string) {
+  return useQuery({
+    queryKey: ['budget', 'period', id],
+    queryFn: () => api<any>(`/api/tools/budget/periods/${id}`),
+    enabled: !!id,
+  });
+}
