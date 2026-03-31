@@ -130,44 +130,44 @@ console.log(`  ✓ ${muellerStores.length + schmidtStores.length + luxusStores.l
 // 4. Tool-Definitionen (34 Tools)
 const tools = [
   // STANDARDS & COMPLIANCE
-  ['standards.checklisten', 'Checklisten', 'STANDARDS_COMPLIANCE', 'Standardisierte Checklisten fuer Store-Visits und Audits', 'ClipboardCheck', 1500, 1],
+  ['standards.checklisten', 'Checklisten', 'STANDARDS_COMPLIANCE', 'Standardisierte Checklisten für Store-Visits und Audits', 'ClipboardCheck', 1500, 1],
   ['standards.store_standards', 'Store Standards', 'STANDARDS_COMPLIANCE', 'Store-Standards definieren, messen und benchmarken', 'Award', 1500, 2],
   ['standards.excellence_tracker', 'Excellence Tracker', 'STANDARDS_COMPLIANCE', 'Store Excellence Audit mit Foto-Proof und Scoring', 'TrendingUp', 1900, 3],
-  ['standards.vm_foto_compliance', 'VM Foto-Compliance', 'STANDARDS_COMPLIANCE', 'Foto-basierte VM-Compliance-Checks mit KI-Unterstuetzung', 'Camera', 1900, 4],
+  ['standards.vm_foto_compliance', 'VM Foto-Compliance', 'STANDARDS_COMPLIANCE', 'Foto-basierte VM-Compliance-Checks mit KI-Unterstützung', 'Camera', 1900, 4],
   ['standards.sop_bibliothek', 'SOP Bibliothek', 'STANDARDS_COMPLIANCE', 'Zentrale Verwaltung aller Standard Operating Procedures', 'BookOpen', 1500, 5],
   // PERFORMANCE & SICHTBARKEIT
   ['performance.kpi_dashboard', 'KPI Dashboard', 'PERFORMANCE', 'Echtzeit-KPI-Dashboard mit allen relevanten Kennzahlen', 'BarChart3', 1900, 1],
   ['performance.budget_tracker', 'Budget Tracker', 'PERFORMANCE', 'Budget-Planung und Kostenverfolgung pro Store', 'Wallet', 1500, 2],
   ['performance.forecast', 'Forecast', 'PERFORMANCE', 'Umsatz- und Performance-Prognosen mit KI', 'LineChart', 2500, 3],
-  ['performance.loss_prevention', 'Loss Prevention', 'PERFORMANCE', 'Schwund-Erkennung und Verlustpraevention', 'Shield', 1500, 4],
+  ['performance.loss_prevention', 'Loss Prevention', 'PERFORMANCE', 'Schwund-Erkennung und Verlustprävention', 'Shield', 1500, 4],
   ['performance.inventory', 'Inventory', 'PERFORMANCE', 'Bestandsmanagement und Inventur-Automatisierung', 'Package', 1900, 5],
   // FLOOR IN ECHTZEIT
-  ['floor.live_floor', 'Live Floor', 'FLOOR', 'Echtzeit-Ueberblick ueber Verkaufsflaeche und Personal', 'Monitor', 1900, 1],
+  ['floor.live_floor', 'Live Floor', 'FLOOR', 'Echtzeit-Überblick über Verkaufsfläche und Personal', 'Monitor', 1900, 1],
   ['floor.fr_tracking', 'FR Tracking', 'FLOOR', 'Footfall & Revenue Tracking in Echtzeit', 'Activity', 1900, 2],
   ['floor.vm_guidelines', 'VM Guidelines', 'FLOOR', 'Visual-Merchandising-Richtlinien digital verwalten', 'Palette', 1500, 3],
   ['floor.maintenance', 'Maintenance', 'FLOOR', 'Store-Wartung und Reparatur-Management', 'Wrench', 1000, 4],
   // TRAINING & ENTWICKLUNG
   ['training.training_hub_lms', 'Training Hub / LMS', 'TRAINING', 'Learning-Management-System mit Kursen und Zertifikaten', 'GraduationCap', 2500, 1],
   ['training.training_hours', 'Training Hours', 'TRAINING', 'Trainingszeiten erfassen und analysieren', 'Clock', 1000, 2],
-  ['training.challenges', 'Challenges', 'TRAINING', 'Team-Challenges und Gamification fuer Mitarbeiter', 'Trophy', 1900, 3],
+  ['training.challenges', 'Challenges', 'TRAINING', 'Team-Challenges und Gamification für Mitarbeiter', 'Trophy', 1900, 3],
   ['training.onboarding', 'Onboarding', 'TRAINING', 'Strukturiertes Onboarding neuer Mitarbeiter', 'UserPlus', 1900, 4],
   // COACHING & PEOPLE
   ['coaching.one_on_one', '1:1 Coaching', 'COACHING_PEOPLE', 'Strukturierte 1:1-Coaching-Sessions dokumentieren', 'MessageSquare', 1900, 1],
   ['coaching.pdp_pip', 'PDP / PIP', 'COACHING_PEOPLE', 'Personal Development & Performance Improvement Plans', 'Compass', 1500, 2],
-  ['coaching.appraisals', 'Appraisals', 'COACHING_PEOPLE', 'Mitarbeitergespraeche und Leistungsbeurteilungen', 'Star', 1500, 3],
+  ['coaching.appraisals', 'Appraisals', 'COACHING_PEOPLE', 'Mitarbeitergespräche und Leistungsbeurteilungen', 'Star', 1500, 3],
   ['coaching.shift_planning', 'Shift Planning', 'COACHING_PEOPLE', 'Intelligente Schichtplanung und Personalabdeckung', 'CalendarDays', 2500, 4],
-  ['coaching.pulse_survey', 'Pulse Survey', 'COACHING_PEOPLE', 'Regelmaessige Mitarbeiter-Pulsbefragungen', 'Heart', 1500, 5],
+  ['coaching.pulse_survey', 'Pulse Survey', 'COACHING_PEOPLE', 'Regelmäßige Mitarbeiter-Pulsbefragungen', 'Heart', 1500, 5],
   ['coaching.wellbeing', 'Wellbeing', 'COACHING_PEOPLE', 'Mitarbeiter-Wellbeing-Tracking und Ressourcen', 'Smile', 1500, 6],
   // KOMMUNIKATION & SIGNAL
-  ['komm.briefings', 'Briefings', 'KOMMUNIKATION', 'Taegliche Store-Briefings digital verteilen', 'FileText', 1000, 1],
-  ['komm.handover', 'Handover', 'KOMMUNIKATION', 'Schichtuebergabe-Protokolle digital abbilden', 'ArrowLeftRight', 1000, 2],
+  ['komm.briefings', 'Briefings', 'KOMMUNIKATION', 'Tägliche Store-Briefings digital verteilen', 'FileText', 1000, 1],
+  ['komm.handover', 'Handover', 'KOMMUNIKATION', 'Schichtübergabe-Protokolle digital abbilden', 'ArrowLeftRight', 1000, 2],
   ['komm.team_push', 'Team Push', 'KOMMUNIKATION', 'Push-Nachrichten an Store-Teams senden', 'Bell', 1000, 3],
-  ['komm.team_newsletter', 'Team Newsletter', 'KOMMUNIKATION', 'Interne Newsletter fuer Teams erstellen', 'Mail', 1500, 4],
+  ['komm.team_newsletter', 'Team Newsletter', 'KOMMUNIKATION', 'Interne Newsletter für Teams erstellen', 'Mail', 1500, 4],
   // CUSTOMER, CLIENTELING & STOCK
   ['customer.fr_conversion', 'FR Conversion', 'CUSTOMER_STOCK', 'Footfall-to-Revenue Conversion optimieren', 'TrendingUp', 1900, 1],
   ['customer.clienteling_crm', 'Clienteling / CRM', 'CUSTOMER_STOCK', 'Kundenbeziehungsmanagement und VIP-Betreuung', 'Users', 2500, 2],
   ['customer.stock_callouts', 'Stock Callouts', 'CUSTOMER_STOCK', 'Bestandsmeldungen und Nachbestellungen', 'PackageSearch', 1500, 3],
-  ['customer.track_trace', 'Track & Trace', 'CUSTOMER_STOCK', 'Warenverfolgung und Lieferstatus fuer Kunden', 'Navigation', 1900, 4],
+  ['customer.track_trace', 'Track & Trace', 'CUSTOMER_STOCK', 'Warenverfolgung und Lieferstatus für Kunden', 'Navigation', 1900, 4],
   // REGIONAL INSIGHTS
   ['regional.multi_store_view', 'Multi-Store View', 'REGIONAL_INSIGHTS', 'Vergleichende Ansicht aller Stores einer Region', 'Map', 3500, 1],
   ['regional.rm_dashboard', 'RM Dashboard', 'REGIONAL_INSIGHTS', 'Regional-Manager-Dashboard mit aggregierten KPIs', 'LayoutDashboard', 2500, 2],
@@ -247,7 +247,7 @@ if (!existingTemplate) {
   db.prepare(
     'INSERT INTO AuditTemplate (id, tenantId, name, description, version, isDefault, isActive, createdBy, createdAt, updatedAt) VALUES (?,?,?,?,1,1,1,?,?,?)'
   ).run(templateId, null, 'KORE Store Excellence Standard',
-    'KORE Standard-Template fuer Store Excellence Audits. Deckt alle wesentlichen Bereiche eines Premium-Retail-Stores ab.',
+    'KORE Standard-Template für Store Excellence Audits. Deckt alle wesentlichen Bereiche eines Premium-Retail-Stores ab.',
     adminId, now(), now());
 
   const categories = [
