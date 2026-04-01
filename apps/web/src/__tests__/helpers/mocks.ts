@@ -7,8 +7,6 @@ export function mockAuthUser(overrides?: Partial<AuthUser>): AuthUser {
     email: 'test@example.com',
     role: 'store_manager',
     tenantId: 'test-tenant-1',
-    avatarUrl: null,
-    managerId: null,
     storeAssignments: ['store-1'],
     regionAssignments: [],
     tenantBranding: {

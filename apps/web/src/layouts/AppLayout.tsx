@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { Eye, X as XIcon } from 'lucide-react';
 import { AppSidebar } from '../components/AppSidebar';
@@ -8,11 +8,34 @@ import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
 import { useAuthStore } from '../stores/authStore';
 import { api } from '../lib/api';
 
+const SIDEBAR_COLLAPSED_KEY = 'kore-sidebar-collapsed';
+
+function readCollapsedPreference(): boolean {
+  try {
+    return localStorage.getItem(SIDEBAR_COLLAPSED_KEY) === 'true';
+  } catch {
+    return false;
+  }
+}
+
 export function AppLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(readCollapsedPreference);
   const [shortcutsOpen, setShortcutsOpen] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuthStore();
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(SIDEBAR_COLLAPSED_KEY, String(sidebarCollapsed));
+    } catch {
+      // localStorage unavailable
+    }
+  }, [sidebarCollapsed]);
+
+  const toggleSidebarCollapse = useCallback(() => {
+    setSidebarCollapsed((prev) => !prev);
+  }, []);
 
   // Tenant Branding — CSS Custom Properties für Sidebar & Akzente
   const brandingStyle = useMemo(() => {
@@ -67,7 +90,12 @@ export function AppLayout() {
       >
         Zum Hauptinhalt springen
       </a>
-      <AppSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <AppSidebar
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        collapsed={sidebarCollapsed}
+        onToggleCollapse={toggleSidebarCollapse}
+      />
       <div className="flex-1 flex flex-col overflow-hidden min-w-0">
         {/* Impersonation Banner */}
         {isImpersonating && (

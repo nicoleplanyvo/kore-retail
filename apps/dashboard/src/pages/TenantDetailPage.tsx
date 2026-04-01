@@ -69,8 +69,8 @@ export function TenantDetailPage() {
 
   // Initialize branding fields when tenant data loads
   if (tenant && !brandingInitialized) {
-    setPrimaryColor(tenant.primaryColor ?? '');
-    setAccentColor(tenant.accentColor ?? '');
+    setPrimaryColor(((tenant as unknown) as { primaryColor?: string }).primaryColor ?? '');
+    setAccentColor(((tenant as unknown) as { accentColor?: string }).accentColor ?? '');
     setBrandingInitialized(true);
   }
 

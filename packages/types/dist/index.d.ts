@@ -25,8 +25,6 @@ export interface AuthUser {
     role: UserRole;
     tenantId?: string;
     impersonatedBy?: string;
-    avatarUrl?: string | null;
-    managerId?: string | null;
     storeAssignments?: string[];
     regionAssignments?: string[];
     tenantBranding?: {
@@ -34,7 +32,7 @@ export interface AuthUser {
         logoUrl: string | null;
         primaryColor: string | null;
         accentColor: string | null;
-    } | null;
+    };
 }
 export interface UserStoreAssignment {
     id: string;
@@ -132,8 +130,6 @@ export interface Tenant {
     contactPhone: string | null;
     maxUsers: number;
     logoUrl: string | null;
-    primaryColor: string | null;
-    accentColor: string | null;
     createdAt: string;
     updatedAt: string;
     stores?: Store[];

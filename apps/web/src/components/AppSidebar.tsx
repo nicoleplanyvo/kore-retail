@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import {
-  Home, Wrench, LogOut, X,
+  Home, Wrench, LogOut, X, PanelLeftClose, PanelLeftOpen,
   ClipboardCheck, Award, TrendingUp, Camera, BookOpen, BarChart3, Wallet,
   LineChart, Package, Monitor, Activity, Palette, GraduationCap,
   Clock, Trophy, UserPlus, MessageSquare, Compass, Star, CalendarDays,
@@ -52,9 +52,11 @@ const categoryOrder = [
 interface AppSidebarProps {
   open: boolean;
   onClose: () => void;
+  collapsed: boolean;
+  onToggleCollapse: () => void;
 }
 
-export function AppSidebar({ open, onClose }: AppSidebarProps) {
+export function AppSidebar({ open, onClose, collapsed, onToggleCollapse }: AppSidebarProps) {
   const { user, clearAuth } = useAuthStore();
   const { data: myTools } = useMyTools();
   const { data: unreadCount } = useUnreadCount();
@@ -94,7 +96,9 @@ export function AppSidebar({ open, onClose }: AppSidebarProps) {
   };
 
   const linkClasses = ({ isActive }: { isActive: boolean }) =>
-    `flex items-center gap-md-sm px-md py-md-sm rounded-sm mb-xs transition-colors duration-200 ${
+    `flex items-center gap-md-sm py-md-sm rounded-sm mb-xs transition-colors duration-200 ${
+      collapsed ? 'px-0 justify-center' : 'px-md'
+    } ${
       isActive
         ? `bg-white/10 ${tenantPrimary ? '' : 'text-kore-brass-lt'}`
         : 'text-kore-faint hover:text-kore-white hover:bg-white/5'
@@ -115,25 +119,29 @@ export function AppSidebar({ open, onClose }: AppSidebarProps) {
       {/* Sidebar */}
       <aside
         className={`
-          fixed inset-y-0 left-0 z-50 w-[240px] bg-kore-ink flex flex-col flex-shrink-0
-          transform transition-transform duration-200 ease-in-out
+          fixed inset-y-0 left-0 z-50 bg-kore-ink flex flex-col flex-shrink-0
+          transition-all duration-200 ease-in-out
           lg:relative lg:translate-x-0
           ${open ? 'translate-x-0' : '-translate-x-full'}
+          ${collapsed ? 'lg:w-16' : 'lg:w-[240px]'}
+          w-[240px]
         `}
       >
         {/* Logo + Close on mobile */}
-        <div className="px-lg py-xl border-b border-white/10 flex items-center justify-between">
+        <div className={`py-xl border-b border-white/10 flex items-center justify-between ${collapsed ? 'px-md' : 'px-lg'}`}>
           <div className="flex items-center gap-md min-w-0">
             {hasTenantLogo ? (
               <img
                 src={`/api/uploads/${branding!.logoUrl}`}
                 alt={branding?.tenantName || 'Logo'}
-                className="h-8 w-auto max-w-[120px] object-contain"
+                className={`h-8 w-auto object-contain ${collapsed ? 'max-w-[32px]' : 'max-w-[120px]'}`}
               />
             ) : (
-              <div>
-                <h1 className="font-display text-h3 text-kore-white tracking-wider">KORE</h1>
-                <p className="font-body text-[0.65rem] text-kore-faint uppercase tracking-[0.16em] mt-xs">
+              <div className="overflow-hidden">
+                <h1 className={`font-display text-kore-white tracking-wider transition-all duration-200 ${collapsed ? 'text-small text-center' : 'text-h3'}`}>
+                  {collapsed ? 'K' : 'KORE'}
+                </h1>
+                <p className={`font-body text-[0.65rem] text-kore-faint uppercase tracking-[0.16em] mt-xs transition-opacity duration-200 ${collapsed ? 'opacity-0 h-0 mt-0' : 'opacity-100'}`}>
                   {branding?.tenantName || 'Retail Platform'}
                 </p>
               </div>
@@ -149,7 +157,7 @@ export function AppSidebar({ open, onClose }: AppSidebarProps) {
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 py-lg px-md-sm overflow-y-auto" role="navigation" aria-label="Hauptnavigation">
+        <nav className={`flex-1 py-lg overflow-y-auto ${collapsed ? 'px-xs' : 'px-md-sm'}`} role="navigation" aria-label="Hauptnavigation">
           {/* Home */}
           <NavLink
             to="/app"
@@ -157,43 +165,49 @@ export function AppSidebar({ open, onClose }: AppSidebarProps) {
             onClick={onClose}
             className={linkClasses}
             style={({ isActive }) => isActive ? activeLinkStyle : undefined}
+            title={collapsed ? 'Home' : undefined}
           >
-            <Home size={18} />
-            <span className="font-body text-small font-normal">Home</span>
+            <Home size={18} className="flex-shrink-0" />
+            <span className={`font-body text-small font-normal whitespace-nowrap transition-opacity duration-200 ${collapsed ? 'lg:opacity-0 lg:w-0 lg:overflow-hidden' : 'opacity-100'}`}>Home</span>
           </NavLink>
 
           {/* Platform Features */}
-          <p className="font-body text-[0.6rem] text-kore-faint/50 uppercase tracking-[0.16em] px-md mt-lg mb-xs">
+          <p className={`font-body text-[0.6rem] text-kore-faint/50 uppercase tracking-[0.16em] px-md mt-lg mb-xs transition-opacity duration-200 ${collapsed ? 'lg:opacity-0 lg:h-0 lg:mt-0 lg:mb-0 lg:overflow-hidden' : 'opacity-100'}`}>
             Platform
           </p>
-          <NavLink to="/app/messaging" onClick={onClose} className={linkClasses} style={({ isActive }) => isActive ? activeLinkStyle : undefined}>
-            <MessageSquare size={18} />
-            <span className="font-body text-small font-normal flex-1">Nachrichten</span>
-            {(unreadCount ?? 0) > 0 && (
+          <NavLink to="/app/messaging" onClick={onClose} className={linkClasses} style={({ isActive }) => isActive ? activeLinkStyle : undefined} title={collapsed ? 'Nachrichten' : undefined}>
+            <span className="relative flex-shrink-0">
+              <MessageSquare size={18} />
+              {collapsed && (unreadCount ?? 0) > 0 && (
+                <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full" style={{ backgroundColor: tenantPrimary || 'rgb(59 130 246)' }} />
+              )}
+            </span>
+            <span className={`font-body text-small font-normal flex-1 whitespace-nowrap transition-opacity duration-200 ${collapsed ? 'lg:opacity-0 lg:w-0 lg:overflow-hidden' : 'opacity-100'}`}>Nachrichten</span>
+            {!collapsed && (unreadCount ?? 0) > 0 && (
               <span className="text-white text-[10px] font-bold min-w-[18px] h-[18px] rounded-full flex items-center justify-center px-1"
                 style={{ backgroundColor: tenantPrimary || 'rgb(59 130 246)' }}>
                 {unreadCount! > 99 ? '99+' : unreadCount}
               </span>
             )}
           </NavLink>
-          <NavLink to="/app/orgchart" onClick={onClose} className={linkClasses} style={({ isActive }) => isActive ? activeLinkStyle : undefined}>
-            <Users size={18} />
-            <span className="font-body text-small font-normal">Organigramm</span>
+          <NavLink to="/app/orgchart" onClick={onClose} className={linkClasses} style={({ isActive }) => isActive ? activeLinkStyle : undefined} title={collapsed ? 'Organigramm' : undefined}>
+            <Users size={18} className="flex-shrink-0" />
+            <span className={`font-body text-small font-normal whitespace-nowrap transition-opacity duration-200 ${collapsed ? 'lg:opacity-0 lg:w-0 lg:overflow-hidden' : 'opacity-100'}`}>Organigramm</span>
           </NavLink>
-          <NavLink to="/app/profile" onClick={onClose} className={linkClasses} style={({ isActive }) => isActive ? activeLinkStyle : undefined}>
-            <User size={18} />
-            <span className="font-body text-small font-normal">Mein Profil</span>
+          <NavLink to="/app/profile" onClick={onClose} className={linkClasses} style={({ isActive }) => isActive ? activeLinkStyle : undefined} title={collapsed ? 'Mein Profil' : undefined}>
+            <User size={18} className="flex-shrink-0" />
+            <span className={`font-body text-small font-normal whitespace-nowrap transition-opacity duration-200 ${collapsed ? 'lg:opacity-0 lg:w-0 lg:overflow-hidden' : 'opacity-100'}`}>Mein Profil</span>
           </NavLink>
           {(user?.role === 'tenant_admin' || user?.role === 'kore_admin') && (
-            <NavLink to="/app/branding" onClick={onClose} className={linkClasses} style={({ isActive }) => isActive ? activeLinkStyle : undefined}>
-              <Paintbrush size={18} />
-              <span className="font-body text-small font-normal">Branding</span>
+            <NavLink to="/app/branding" onClick={onClose} className={linkClasses} style={({ isActive }) => isActive ? activeLinkStyle : undefined} title={collapsed ? 'Branding' : undefined}>
+              <Paintbrush size={18} className="flex-shrink-0" />
+              <span className={`font-body text-small font-normal whitespace-nowrap transition-opacity duration-200 ${collapsed ? 'lg:opacity-0 lg:w-0 lg:overflow-hidden' : 'opacity-100'}`}>Branding</span>
             </NavLink>
           )}
           {user?.role === 'kore_admin' && (
-            <NavLink to="/app/admin/onboarding" onClick={onClose} className={linkClasses} style={({ isActive }) => isActive ? activeLinkStyle : undefined}>
-              <UserPlus size={18} />
-              <span className="font-body text-small font-normal">Tenant einrichten</span>
+            <NavLink to="/app/admin/onboarding" onClick={onClose} className={linkClasses} style={({ isActive }) => isActive ? activeLinkStyle : undefined} title={collapsed ? 'Tenant einrichten' : undefined}>
+              <UserPlus size={18} className="flex-shrink-0" />
+              <span className={`font-body text-small font-normal whitespace-nowrap transition-opacity duration-200 ${collapsed ? 'lg:opacity-0 lg:w-0 lg:overflow-hidden' : 'opacity-100'}`}>Tenant einrichten</span>
             </NavLink>
           )}
 
@@ -202,7 +216,7 @@ export function AppSidebar({ open, onClose }: AppSidebarProps) {
             .filter((cat) => toolsByCategory[cat]?.length)
             .map((cat) => (
               <div key={cat}>
-                <p className="font-body text-[0.6rem] text-kore-faint/50 uppercase tracking-[0.16em] px-md mt-lg mb-xs">
+                <p className={`font-body text-[0.6rem] text-kore-faint/50 uppercase tracking-[0.16em] px-md mt-lg mb-xs transition-opacity duration-200 ${collapsed ? 'lg:opacity-0 lg:h-0 lg:mt-0 lg:mb-0 lg:overflow-hidden' : 'opacity-100'}`}>
                   {categoryLabels[cat] || cat}
                 </p>
                 {toolsByCategory[cat]!.map((item) => (
@@ -212,9 +226,10 @@ export function AppSidebar({ open, onClose }: AppSidebarProps) {
                     onClick={onClose}
                     className={linkClasses}
                     style={({ isActive }) => isActive ? activeLinkStyle : undefined}
+                    title={collapsed ? item.label : undefined}
                   >
-                    <item.icon size={18} />
-                    <span className="font-body text-small font-normal">{item.label}</span>
+                    <item.icon size={18} className="flex-shrink-0" />
+                    <span className={`font-body text-small font-normal whitespace-nowrap transition-opacity duration-200 ${collapsed ? 'lg:opacity-0 lg:w-0 lg:overflow-hidden' : 'opacity-100'}`}>{item.label}</span>
                   </NavLink>
                 ))}
               </div>
@@ -222,8 +237,8 @@ export function AppSidebar({ open, onClose }: AppSidebarProps) {
         </nav>
 
         {/* User Info + Logout */}
-        <div className="px-md-sm py-lg border-t border-white/10">
-          {user && (
+        <div className={`py-lg border-t border-white/10 ${collapsed ? 'px-xs' : 'px-md-sm'}`}>
+          {user && !collapsed && (
             <div className="px-md mb-md">
               <p className="font-body text-[0.7rem] text-kore-faint truncate">{user.name}</p>
               <p className="font-body text-[0.6rem] text-kore-faint/60 truncate">{user.email}</p>
@@ -231,10 +246,21 @@ export function AppSidebar({ open, onClose }: AppSidebarProps) {
           )}
           <button
             onClick={handleLogout}
-            className="flex items-center gap-md-sm px-md py-md-sm text-kore-faint hover:text-kore-error transition-colors duration-200 w-full font-body text-small"
+            className={`flex items-center gap-md-sm py-md-sm text-kore-faint hover:text-kore-error transition-colors duration-200 w-full font-body text-small ${collapsed ? 'justify-center px-0' : 'px-md'}`}
+            title={collapsed ? 'Abmelden' : undefined}
           >
-            <LogOut size={18} />
-            <span>Abmelden</span>
+            <LogOut size={18} className="flex-shrink-0" />
+            <span className={`whitespace-nowrap transition-opacity duration-200 ${collapsed ? 'lg:opacity-0 lg:w-0 lg:overflow-hidden' : 'opacity-100'}`}>Abmelden</span>
+          </button>
+
+          {/* Desktop collapse toggle */}
+          <button
+            onClick={onToggleCollapse}
+            className="hidden lg:flex items-center justify-center w-full py-md-sm mt-xs text-kore-faint hover:text-kore-white transition-colors duration-200 rounded-sm hover:bg-white/5"
+            aria-label={collapsed ? 'Seitenleiste erweitern' : 'Seitenleiste einklappen'}
+            title={collapsed ? 'Seitenleiste erweitern' : 'Seitenleiste einklappen'}
+          >
+            {collapsed ? <PanelLeftOpen size={18} /> : <PanelLeftClose size={18} />}
           </button>
         </div>
       </aside>

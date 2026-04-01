@@ -23,7 +23,7 @@ beforeEach(() => {
 });
 
 describe('AppSidebar', () => {
-  const defaultProps = { open: true, onClose: vi.fn() };
+  const defaultProps = { open: true, onClose: vi.fn(), collapsed: false, onToggleCollapse: vi.fn() };
 
   it('renders "Home" link for any user', () => {
     const user = mockAuthUser();
