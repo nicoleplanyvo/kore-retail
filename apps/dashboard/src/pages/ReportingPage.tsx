@@ -7,7 +7,7 @@ import { useAuthStore } from '../stores/authStore';
 import type { UserRole, ReportingManager, ReportingStore } from '@kore/types';
 
 const ROLE_LABELS: Record<string, string> = {
-  tenant_admin: 'Kunden-Admin',
+  tenant_admin: 'Admin',
   regional_manager: 'Regional Manager',
   multisite_manager: 'Multisite Manager',
   store_manager: 'Store Manager',

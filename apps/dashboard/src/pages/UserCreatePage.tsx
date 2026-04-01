@@ -15,7 +15,7 @@ import { FormField } from '../components/FormField';
 import { LoadingButton } from '../components/LoadingButton';
 
 const ROLE_OPTIONS: { value: UserRole; label: string }[] = [
-  { value: 'tenant_admin', label: 'Kunden-Admin' },
+  { value: 'tenant_admin', label: 'Admin' },
   { value: 'regional_manager', label: 'Regional Manager' },
   { value: 'multisite_manager', label: 'Multisite Manager' },
   { value: 'store_manager', label: 'Store Manager' },

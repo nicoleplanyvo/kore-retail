@@ -26,7 +26,7 @@ import {
 
 const ROLE_LABELS: Record<UserRole, string> = {
   kore_admin: 'Plattform-Administrator',
-  tenant_admin: 'Kunden-Administrator',
+  tenant_admin: 'Admin',
   regional_manager: 'Regional Manager',
   multisite_manager: 'Multisite Manager',
   store_manager: 'Store Manager',

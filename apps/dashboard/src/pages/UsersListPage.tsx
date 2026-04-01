@@ -8,7 +8,7 @@ import { TableSkeleton } from '../components/Skeleton';
 
 const ROLE_LABELS: Record<string, string> = {
   kore_admin: 'Super Admin',
-  tenant_admin: 'Kunden-Admin',
+  tenant_admin: 'Admin',
   regional_manager: 'Regional Manager',
   multisite_manager: 'Multisite Manager',
   store_manager: 'Store Manager',
@@ -26,7 +26,7 @@ const ROLE_VARIANTS: Record<string, 'brass' | 'success' | 'error'> = {
 
 const ROLE_OPTIONS = [
   { value: '', label: 'Alle Rollen' },
-  { value: 'tenant_admin', label: 'Kunden-Admin' },
+  { value: 'tenant_admin', label: 'Admin' },
   { value: 'regional_manager', label: 'Regional Manager' },
   { value: 'multisite_manager', label: 'Multisite Manager' },
   { value: 'store_manager', label: 'Store Manager' },

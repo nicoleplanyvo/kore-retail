@@ -10,7 +10,7 @@ import { canCreateRole, hasMinRole, type UserRole } from '@kore/types';
 
 const ROLE_LABELS: Record<string, string> = {
   kore_admin: 'Super Admin',
-  tenant_admin: 'Kunden-Admin',
+  tenant_admin: 'Admin',
   regional_manager: 'Regional Manager',
   multisite_manager: 'Multisite Manager',
   store_manager: 'Store Manager',
@@ -18,7 +18,7 @@ const ROLE_LABELS: Record<string, string> = {
 };
 
 const ROLE_OPTIONS: { value: UserRole; label: string }[] = [
-  { value: 'tenant_admin', label: 'Kunden-Admin' },
+  { value: 'tenant_admin', label: 'Admin' },
   { value: 'regional_manager', label: 'Regional Manager' },
   { value: 'multisite_manager', label: 'Multisite Manager' },
   { value: 'store_manager', label: 'Store Manager' },

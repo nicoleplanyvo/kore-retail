@@ -11,7 +11,7 @@ export const ROLE_STYLES: Record<string, RoleStyle> = {
 
 export const ROLE_LABELS: Record<string, string> = {
   kore_admin:        'Admin',
-  tenant_admin:      'Kunden-Admin',
+  tenant_admin:      'Admin',
   regional_manager:  'Regionalleiter',
   multisite_manager: 'Multisite-Leiter',
   store_manager:     'Filialleiter',
