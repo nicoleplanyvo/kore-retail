@@ -100,13 +100,17 @@ export function AppSidebar({ open, onClose, collapsed, onToggleCollapse }: AppSi
   };
 
   const linkClasses = ({ isActive }: { isActive: boolean }) =>
-    `flex items-center gap-md-sm py-md-sm rounded-sm mb-xs transition-colors duration-200 ${
-      collapsed ? 'px-0 justify-center' : 'px-md'
-    } ${
-      isActive
-        ? `bg-white/10 ${tenantPrimary ? '' : 'text-kore-brass-lt'}`
-        : 'text-kore-faint hover:text-kore-white hover:bg-white/5'
-    }`;
+    collapsed
+      ? `flex items-center justify-center w-[40px] h-[40px] mx-auto rounded-sm mb-xs transition-colors duration-200 ${
+          isActive
+            ? `bg-white/10 ${tenantPrimary ? '' : 'text-kore-brass-lt'}`
+            : 'text-kore-faint hover:text-kore-white hover:bg-white/5'
+        }`
+      : `flex items-center gap-md-sm px-md py-md-sm rounded-sm mb-xs transition-colors duration-200 ${
+          isActive
+            ? `bg-white/10 ${tenantPrimary ? '' : 'text-kore-brass-lt'}`
+            : 'text-kore-faint hover:text-kore-white hover:bg-white/5'
+        }`;
 
   const activeLinkStyle = tenantPrimary ? { color: tenantPrimary } : undefined;
 
