@@ -102,8 +102,8 @@ async function main() {
   const tools = [
     // STANDARDS & COMPLIANCE
     { key: 'standards.checklisten', name: 'Checklisten & Audits', category: 'STANDARDS_COMPLIANCE', description: 'Gewichtete Checklisten, Audits und Excellence-Tracking', icon: 'ClipboardCheck', priceMonthly: 1500, sortOrder: 1, learnerAccessible: true },
-    { key: 'standards.store_standards', name: 'Raise the Bar', category: 'STANDARDS_COMPLIANCE', description: 'Store-Ranking ueber gewichtete KPIs mit Excel-Import', icon: 'Award', priceMonthly: 1500, sortOrder: 2 },
-    { key: 'standards.excellence_tracker', name: 'Excellence Tracker (Legacy)', category: 'STANDARDS_COMPLIANCE', description: 'Zusammengefuehrt mit Checklisten & Audits', icon: 'TrendingUp', priceMonthly: 0, sortOrder: 99 },
+    { key: 'standards.store_standards', name: 'Raise the Bar', category: 'STANDARDS_COMPLIANCE', description: 'Store-Ranking über gewichtete KPIs mit Excel-Import', icon: 'Award', priceMonthly: 1500, sortOrder: 2 },
+    { key: 'standards.excellence_tracker', name: 'Excellence Tracker (Legacy)', category: 'STANDARDS_COMPLIANCE', description: 'Zusammengeführt mit Checklisten & Audits', icon: 'TrendingUp', priceMonthly: 0, sortOrder: 99 },
     { key: 'standards.vm_foto_compliance', name: 'VM Foto-Compliance', category: 'STANDARDS_COMPLIANCE', description: 'Foto-basierte VM-Compliance-Checks mit KI-Unterstützung', icon: 'Camera', priceMonthly: 1900, sortOrder: 4 },
     { key: 'standards.sop_bibliothek', name: 'SOP Bibliothek', category: 'STANDARDS_COMPLIANCE', description: 'Zentrale Verwaltung aller Standard Operating Procedures', icon: 'BookOpen', priceMonthly: 1500, sortOrder: 5 },
 
@@ -458,7 +458,143 @@ async function main() {
   }
 
   // ============================================================
-  // Checklisten — KORE Default-Template "Store Visit Checklist"
+  // Checklisten & Audits — KORE Default CHECKLIST-Templates
+  // ============================================================
+
+  const existingDailyChecklist = await prisma.auditTemplate.findFirst({
+    where: { isDefault: true, templateType: 'CHECKLIST', name: 'Tägliche Store-Checkliste' },
+  });
+
+  if (!existingDailyChecklist) {
+    await prisma.auditTemplate.create({
+      data: {
+        name: 'Tägliche Store-Checkliste',
+        description: 'KORE Standard-Checkliste für tägliche Store-Routinen.',
+        templateType: 'CHECKLIST',
+        recurrence: 'daily',
+        tenantId: null,
+        isDefault: true,
+        createdBy: admin.id,
+        categories: {
+          create: [
+            {
+              name: 'Ladenfläche',
+              description: 'Sauberkeit und Ordnung auf der Fläche',
+              sortOrder: 0,
+              weight: 33.3,
+              criteria: {
+                create: [
+                  { name: 'Eingangsbereich sauber und einladend', type: 'BOOLEAN', sortOrder: 0, isRequired: true, photoRequired: false },
+                  { name: 'Böden gereinigt', type: 'BOOLEAN', sortOrder: 1, isRequired: true, photoRequired: false },
+                  { name: 'Spiegel und Glasflächen sauber', type: 'BOOLEAN', sortOrder: 2, isRequired: true, photoRequired: false },
+                  { name: 'Beleuchtung funktioniert vollständig', type: 'BOOLEAN', sortOrder: 3, isRequired: true, photoRequired: false },
+                  { name: 'Musik und Duft angemessen', type: 'BOOLEAN', sortOrder: 4, isRequired: false, photoRequired: false },
+                ],
+              },
+            },
+            {
+              name: 'Warenpräsentation',
+              description: 'Visual Merchandising und Produktpflege',
+              sortOrder: 1,
+              weight: 33.3,
+              criteria: {
+                create: [
+                  { name: 'Schaufenster aktuell und ansprechend', type: 'BOOLEAN', sortOrder: 0, isRequired: true, photoRequired: false },
+                  { name: 'Ware nach Größen sortiert', type: 'BOOLEAN', sortOrder: 1, isRequired: true, photoRequired: false },
+                  { name: 'Preisschilder vollständig und korrekt', type: 'BOOLEAN', sortOrder: 2, isRequired: true, photoRequired: false },
+                  { name: 'Fokus-Artikel prominent platziert', type: 'BOOLEAN', sortOrder: 3, isRequired: true, photoRequired: false },
+                  { name: 'Leere Bügel entfernt', type: 'BOOLEAN', sortOrder: 4, isRequired: true, photoRequired: false },
+                ],
+              },
+            },
+            {
+              name: 'Kasse & Team',
+              description: 'Kassenbereich und Team-Check',
+              sortOrder: 2,
+              weight: 33.4,
+              criteria: {
+                create: [
+                  { name: 'Kassenbereich aufgeräumt', type: 'BOOLEAN', sortOrder: 0, isRequired: true, photoRequired: false },
+                  { name: 'Verpackungsmaterial aufgefüllt', type: 'BOOLEAN', sortOrder: 1, isRequired: true, photoRequired: false },
+                  { name: 'Alle Mitarbeiter anwesend laut Plan', type: 'BOOLEAN', sortOrder: 2, isRequired: true, photoRequired: false },
+                  { name: 'Dresscode eingehalten', type: 'BOOLEAN', sortOrder: 3, isRequired: true, photoRequired: false },
+                  { name: 'Tagesbriefing durchgeführt', type: 'BOOLEAN', sortOrder: 4, isRequired: true, photoRequired: false },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    });
+    console.log('✓ KORE Tägliche Store-Checkliste Default-Template erstellt');
+  }
+
+  const existingWeeklyChecklist = await prisma.auditTemplate.findFirst({
+    where: { isDefault: true, templateType: 'CHECKLIST', name: 'Wöchentliche Inventur-Checkliste' },
+  });
+
+  if (!existingWeeklyChecklist) {
+    await prisma.auditTemplate.create({
+      data: {
+        name: 'Wöchentliche Inventur-Checkliste',
+        description: 'KORE Standard-Checkliste für wöchentliche Bestandskontrolle und Flächen-Rotation.',
+        templateType: 'CHECKLIST',
+        recurrence: 'weekly',
+        tenantId: null,
+        isDefault: true,
+        createdBy: admin.id,
+        categories: {
+          create: [
+            {
+              name: 'Lagerbestand',
+              description: 'Bestandskontrolle im Lager',
+              sortOrder: 0,
+              weight: 33.3,
+              criteria: {
+                create: [
+                  { name: 'Lager aufgeräumt und organisiert', type: 'BOOLEAN', sortOrder: 0, isRequired: true, photoRequired: false },
+                  { name: 'Nachbestellungen eingegeben', type: 'BOOLEAN', sortOrder: 1, isRequired: true, photoRequired: false },
+                  { name: 'Retouren-Ware verarbeitet', type: 'BOOLEAN', sortOrder: 2, isRequired: true, photoRequired: false },
+                  { name: 'Inventurdifferenzen geprüft', type: 'BOOLEAN', sortOrder: 3, isRequired: true, photoRequired: false },
+                ],
+              },
+            },
+            {
+              name: 'Flächen-Rotation',
+              description: 'Regelmäßiger Warenwechsel',
+              sortOrder: 1,
+              weight: 33.3,
+              criteria: {
+                create: [
+                  { name: 'Highlights der Woche aktualisiert', type: 'BOOLEAN', sortOrder: 0, isRequired: true, photoRequired: true },
+                  { name: 'Schaufenster umgestellt', type: 'BOOLEAN', sortOrder: 1, isRequired: false, photoRequired: true },
+                  { name: 'Sale-Ware korrekt ausgezeichnet', type: 'BOOLEAN', sortOrder: 2, isRequired: true, photoRequired: false },
+                  { name: 'Mannequins aktualisiert', type: 'BOOLEAN', sortOrder: 3, isRequired: false, photoRequired: true },
+                ],
+              },
+            },
+            {
+              name: 'Admin & Reporting',
+              description: 'Administrative Aufgaben',
+              sortOrder: 2,
+              weight: 33.4,
+              criteria: {
+                create: [
+                  { name: 'Wochenumsatz-Report geprüft', type: 'BOOLEAN', sortOrder: 0, isRequired: true, photoRequired: false },
+                  { name: 'Dienstplan nächste Woche finalisiert', type: 'BOOLEAN', sortOrder: 1, isRequired: true, photoRequired: false },
+                  { name: 'Team-Meeting abgehalten', type: 'BOOLEAN', sortOrder: 2, isRequired: true, photoRequired: false },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    });
+    console.log('✓ KORE Wöchentliche Inventur-Checkliste Default-Template erstellt');
+  }
+
+  // ============================================================
+  // Checklisten (Legacy) — KORE Default-Template "Store Visit Checklist"
   // ============================================================
 
   const existingChecklist = await prisma.checklistTemplate.findFirst({

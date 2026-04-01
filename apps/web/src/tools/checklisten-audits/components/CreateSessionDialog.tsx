@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { X, Plus } from 'lucide-react';
 
 interface Store { id: string; name: string; city: string | null; }
 
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export function CreateSessionDialog({ type, stores, templates, onSubmit, onClose, isSubmitting }: Props) {
+  const navigate = useNavigate();
   const [storeId, setStoreId] = useState('');
   const [templateId, setTemplateId] = useState('');
   const [notes, setNotes] = useState('');
@@ -75,9 +77,18 @@ export function CreateSessionDialog({ type, stores, templates, onSubmit, onClose
               ))}
             </select>
             {filteredTemplates.length === 0 && (
-              <p className="text-caption text-kore-mid mt-xs">
-                Keine Templates vorhanden. Erstellen Sie zuerst ein Template.
-              </p>
+              <div className="mt-sm p-md bg-kore-bg border border-kore-border">
+                <p className="text-small text-kore-mid mb-sm">
+                  Keine {type === 'CHECKLIST' ? 'Checklisten' : 'Audit'}-Templates vorhanden.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => { onClose(); navigate('/app/tools/checklisten-audits/templates/new'); }}
+                  className="flex items-center gap-xs text-small font-medium text-kore-brass hover:text-kore-brass-dk transition-colors"
+                >
+                  <Plus size={14} /> Jetzt Template erstellen
+                </button>
+              </div>
             )}
           </div>
 
