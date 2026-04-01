@@ -9,40 +9,10 @@ import { caReportsRouter } from './reports.js';
 export const checklistenAuditsRouter: RouterType = Router();
 
 /**
- * Middleware: Authentifizierung + Zugriff auf mindestens eines der beiden Tools.
- * Akzeptiert sowohl 'standards.checklisten' als auch 'standards.excellence_tracker'.
+ * Middleware: Authentifizierung + Zugriff auf 'standards.checklisten'.
+ * (Ehemals auch 'standards.excellence_tracker' — jetzt zusammengefuehrt.)
  */
-checklistenAuditsRouter.use(authenticate, async (req, res, next) => {
-  // Versuche erst excellence_tracker, dann checklisten
-  const tryTool = (toolKey: string) =>
-    new Promise<boolean>((resolve) => {
-      requireToolAccess(toolKey)(req, res, (err?: unknown) => {
-        if (err) { resolve(false); return; }
-        // Prüfe ob die Response schon geschrieben wurde (403/404)
-        if (res.headersSent) { resolve(false); return; }
-        resolve(true);
-      });
-    });
-
-  const hasExcellence = await tryTool('standards.excellence_tracker');
-  if (hasExcellence && !res.headersSent) {
-    next();
-    return;
-  }
-
-  // Reset res wenn Header noch nicht gesendet
-  if (!res.headersSent) {
-    const hasChecklisten = await tryTool('standards.checklisten');
-    if (hasChecklisten && !res.headersSent) {
-      next();
-      return;
-    }
-  }
-
-  if (!res.headersSent) {
-    res.status(403).json({ error: 'Kein Zugriff auf Checklisten & Audits.' });
-  }
-});
+checklistenAuditsRouter.use(authenticate, requireToolAccess('standards.checklisten'));
 
 // GET /stores — Zugängliche Stores
 checklistenAuditsRouter.get('/stores', async (req, res) => {
