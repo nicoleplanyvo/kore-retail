@@ -1,16 +1,24 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Upload, Camera } from 'lucide-react';
-import { useVmComplianceStores, useVmComplianceGuidelines, useSubmitVmCheck } from '../../../hooks/useVmCompliance';
+import {
+  useVmComplianceStores,
+  useVmComplianceGuidelines,
+  useVmAreas,
+  useSubmitVmCheck,
+} from '../../../hooks/useVmCompliance';
 
 export function SubmitPage() {
   const navigate = useNavigate();
   const { data: stores } = useVmComplianceStores();
   const { data: guidelines } = useVmComplianceGuidelines();
+  const { data: areas } = useVmAreas();
   const submitMutation = useSubmitVmCheck();
 
   const [storeId, setStoreId] = useState('');
   const [guidelineId, setGuidelineId] = useState('');
+  const [areaId, setAreaId] = useState('');
+  const [deadline, setDeadline] = useState('');
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [notes, setNotes] = useState('');
@@ -31,6 +39,8 @@ export function SubmitPage() {
     fd.append('storeId', storeId);
     fd.append('guidelineId', guidelineId);
     fd.append('photo', file);
+    if (areaId) fd.append('areaId', areaId);
+    if (deadline) fd.append('deadline', new Date(deadline).toISOString());
     if (notes) fd.append('notes', notes);
 
     submitMutation.mutate(fd, {
@@ -40,51 +50,121 @@ export function SubmitPage() {
 
   return (
     <div className="p-xl max-w-3xl">
-      <Link to="/app/tools/vm-compliance" className="flex items-center gap-sm text-small text-kore-mid hover:text-kore-ink mb-xl">
+      <Link
+        to="/app/tools/vm-compliance"
+        className="flex items-center gap-sm text-small text-kore-mid hover:text-kore-ink mb-xl"
+      >
         <ArrowLeft size={16} /> Zurück
       </Link>
 
       <h1 className="font-display text-h1 text-kore-ink mb-sm">Neuen Check einreichen</h1>
-      <p className="text-body text-kore-mid mb-2xl">Laden Sie ein Foto hoch und wählen Sie den Bereich für den VM-Compliance-Check.</p>
+      <p className="text-body text-kore-mid mb-2xl">
+        Laden Sie ein Foto hoch und wählen Sie den Bereich für den VM-Compliance-Check.
+      </p>
 
       <form onSubmit={handleSubmit} className="space-y-xl">
+        {/* Store & Guideline */}
         <div className="bg-kore-white border border-kore-border p-xl">
           <h2 className="font-display text-h3 text-kore-ink mb-lg">Zuordnung</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-lg">
             <div>
               <label className="text-small text-kore-mid block mb-sm">Store *</label>
-              <select value={storeId} onChange={(e) => setStoreId(e.target.value)} className="w-full border border-kore-border px-md py-sm text-small bg-kore-white" required>
+              <select
+                value={storeId}
+                onChange={(e) => setStoreId(e.target.value)}
+                className="w-full border border-kore-border px-md py-sm text-small bg-kore-white"
+                required
+              >
                 <option value="">Store wählen...</option>
-                {(stores ?? []).map((s: any) => <option key={s.id} value={s.id}>{s.name} {s.city ? `(${s.city})` : ''}</option>)}
+                {(stores ?? []).map((s: any) => (
+                  <option key={s.id} value={s.id}>
+                    {s.name} {s.city ? `(${s.city})` : ''}
+                  </option>
+                ))}
               </select>
             </div>
             <div>
-              <label className="text-small text-kore-mid block mb-sm">Bereich / Guideline *</label>
-              <select value={guidelineId} onChange={(e) => setGuidelineId(e.target.value)} className="w-full border border-kore-border px-md py-sm text-small bg-kore-white" required>
-                <option value="">Bereich wählen...</option>
-                {(guidelines ?? []).map((g: any) => <option key={g.id} value={g.id}>{g.name} {g.category ? `(${g.category})` : ''}</option>)}
+              <label className="text-small text-kore-mid block mb-sm">Guideline *</label>
+              <select
+                value={guidelineId}
+                onChange={(e) => setGuidelineId(e.target.value)}
+                className="w-full border border-kore-border px-md py-sm text-small bg-kore-white"
+                required
+              >
+                <option value="">Guideline wählen...</option>
+                {(guidelines ?? []).map((g: any) => (
+                  <option key={g.id} value={g.id}>
+                    {g.name} {g.category ? `(${g.category})` : ''}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
         </div>
 
+        {/* Area & Deadline */}
+        <div className="bg-kore-white border border-kore-border p-xl">
+          <h2 className="font-display text-h3 text-kore-ink mb-lg">Bereich & Frist</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-lg">
+            <div>
+              <label className="text-small text-kore-mid block mb-sm">Bereich (optional)</label>
+              <select
+                value={areaId}
+                onChange={(e) => setAreaId(e.target.value)}
+                className="w-full border border-kore-border px-md py-sm text-small bg-kore-white"
+              >
+                <option value="">Kein Bereich</option>
+                {(areas ?? []).map((a: any) => (
+                  <option key={a.id} value={a.id}>{a.name}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="text-small text-kore-mid block mb-sm">Frist (optional)</label>
+              <input
+                type="datetime-local"
+                value={deadline}
+                onChange={(e) => setDeadline(e.target.value)}
+                className="w-full border border-kore-border px-md py-sm text-small bg-kore-white"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Photo */}
         <div className="bg-kore-white border border-kore-border p-xl">
           <h2 className="font-display text-h3 text-kore-ink mb-lg">Foto</h2>
           {preview ? (
             <div className="relative mb-lg">
-              <img src={preview} alt="Vorschau" className="w-full max-h-96 object-contain border border-kore-border" />
-              <button type="button" onClick={() => { setFile(null); setPreview(null); }} className="absolute top-sm right-sm bg-kore-ink text-kore-white px-md py-xs text-caption uppercase tracking-widest">Entfernen</button>
+              <img
+                src={preview}
+                alt="Vorschau"
+                className="w-full max-h-96 object-contain border border-kore-border"
+              />
+              <button
+                type="button"
+                onClick={() => { setFile(null); setPreview(null); }}
+                className="absolute top-sm right-sm bg-kore-ink text-kore-white px-md py-xs text-caption uppercase tracking-widest"
+              >
+                Entfernen
+              </button>
             </div>
           ) : (
             <label className="flex flex-col items-center justify-center border-2 border-dashed border-kore-border p-3xl cursor-pointer hover:border-kore-brass transition-colors">
               <Camera size={36} className="text-kore-faint mb-md" />
               <span className="text-body text-kore-mid">Foto hochladen</span>
               <span className="text-small text-kore-faint mt-xs">JPG, PNG bis 10 MB</span>
-              <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="hidden"
+              />
             </label>
           )}
         </div>
 
+        {/* Notes */}
         <div className="bg-kore-white border border-kore-border p-xl">
           <h2 className="font-display text-h3 text-kore-ink mb-lg">Anmerkungen</h2>
           <textarea
@@ -96,15 +176,20 @@ export function SubmitPage() {
           />
         </div>
 
+        {/* Actions */}
         <div className="flex gap-md">
           <button
             type="submit"
             disabled={!storeId || !guidelineId || !file || submitMutation.isPending}
             className="flex items-center gap-sm bg-kore-ink text-kore-white px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-brass transition-colors disabled:opacity-50"
           >
-            <Upload size={16} /> {submitMutation.isPending ? 'Wird eingereicht...' : 'Check einreichen'}
+            <Upload size={16} />{' '}
+            {submitMutation.isPending ? 'Wird eingereicht...' : 'Check einreichen'}
           </button>
-          <Link to="/app/tools/vm-compliance" className="flex items-center gap-sm border border-kore-border text-kore-ink px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors">
+          <Link
+            to="/app/tools/vm-compliance"
+            className="flex items-center gap-sm border border-kore-border text-kore-ink px-xl py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors"
+          >
             Abbrechen
           </Link>
         </div>
