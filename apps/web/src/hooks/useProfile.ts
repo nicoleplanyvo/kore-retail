@@ -16,6 +16,8 @@ interface Profile {
   position: string | null;
   managerId: string | null;
   managerName: string | null;
+  absentFrom: string | null;
+  absentUntil: string | null;
   stores: ProfileStore[];
 }
 
@@ -46,7 +48,7 @@ export function useColleagues() {
 export function useUpdateProfile() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (data: { name: string; position?: string | null }) =>
+    mutationFn: (data: { name: string; position?: string | null; absentFrom?: string | null; absentUntil?: string | null }) =>
       api<Profile>('/api/profile', { method: 'PUT', body: JSON.stringify(data) }),
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['profile'] }); },
   });

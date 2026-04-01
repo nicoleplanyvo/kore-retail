@@ -18,6 +18,8 @@ model User {
   avatarPath   String?
   position     String?
   managerId    String?
+  absentFrom   DateTime?
+  absentUntil  DateTime?
   tenantId     String?
   tenant       Tenant?   @relation(fields: [tenantId], references: [id])
   isActive     Boolean   @default(true)

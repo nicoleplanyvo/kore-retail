@@ -52,6 +52,8 @@ profileRouter.get('/', async (req, res) => {
         avatarPath: true,
         position: true,
         managerId: true,
+        absentFrom: true,
+        absentUntil: true,
         tenantId: true,
         isActive: true,
         storeAssignments: {
@@ -90,6 +92,8 @@ profileRouter.get('/', async (req, res) => {
       position: user.position,
       managerId: user.managerId,
       managerName,
+      absentFrom: user.absentFrom,
+      absentUntil: user.absentUntil,
       stores,
     });
   } catch (err) {
@@ -102,18 +106,24 @@ profileRouter.get('/', async (req, res) => {
 // Update own profile (name, position)
 profileRouter.put('/', async (req, res) => {
   try {
-    const { name, position } = req.body;
+    const { name, position, absentFrom, absentUntil } = req.body;
 
     if (!name || typeof name !== 'string' || name.trim().length === 0) {
       res.status(400).json({ error: 'Name ist erforderlich.' });
       return;
     }
 
-    const data: { name: string; position?: string | null } = { name: name.trim() };
+    const data: Record<string, unknown> = { name: name.trim() };
     if (position !== undefined) {
       data.position = typeof position === 'string' && position.trim().length > 0
         ? position.trim()
         : null;
+    }
+    if (absentFrom !== undefined) {
+      data.absentFrom = absentFrom ? new Date(absentFrom) : null;
+    }
+    if (absentUntil !== undefined) {
+      data.absentUntil = absentUntil ? new Date(absentUntil) : null;
     }
 
     const updated = await prisma.user.update({
@@ -127,6 +137,8 @@ profileRouter.put('/', async (req, res) => {
         avatarPath: true,
         position: true,
         managerId: true,
+        absentFrom: true,
+        absentUntil: true,
         storeAssignments: {
           select: {
             store: {
@@ -147,6 +159,8 @@ profileRouter.put('/', async (req, res) => {
       avatarUrl: updated.avatarPath ? `/api/uploads/${updated.avatarPath}` : null,
       position: updated.position,
       managerId: updated.managerId,
+      absentFrom: updated.absentFrom,
+      absentUntil: updated.absentUntil,
       stores,
     });
   } catch (err) {

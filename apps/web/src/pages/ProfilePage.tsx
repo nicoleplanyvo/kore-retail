@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Upload, Trash2, Save, Lock, MapPin, Briefcase } from 'lucide-react';
+import { Upload, Trash2, Save, Lock, MapPin, Briefcase, CalendarOff } from 'lucide-react';
 import { api } from '../lib/api';
 import { Breadcrumb } from '../components/Breadcrumb';
 import { useToast } from '../components/Toast';
@@ -13,7 +13,7 @@ function getInitials(name: string): string {
 
 const ROLE_LABELS: Record<string, string> = {
   kore_admin: 'Admin',
-  tenant_admin: 'Kunden-Admin',
+  tenant_admin: 'Admin',
   regional_manager: 'Regional Manager',
   multisite_manager: 'Multisite Manager',
   store_manager: 'Store Manager',
@@ -52,6 +52,8 @@ export function ProfilePage() {
 
   const [name, setName] = useState('');
   const [position, setPosition] = useState('');
+  const [absentFrom, setAbsentFrom] = useState('');
+  const [absentUntil, setAbsentUntil] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Password change state
@@ -69,9 +71,16 @@ export function ProfilePage() {
     setPosition(profile?.position ?? '');
   }, [profile?.position]);
 
+  useEffect(() => {
+    setAbsentFrom(profile?.absentFrom ? profile.absentFrom.slice(0, 10) : '');
+    setAbsentUntil(profile?.absentUntil ? profile.absentUntil.slice(0, 10) : '');
+  }, [profile?.absentFrom, profile?.absentUntil]);
+
   const nameChanged = profile ? name.trim() !== profile.name : false;
   const positionChanged = profile ? (position.trim() || null) !== (profile.position ?? null) : false;
-  const hasChanges = nameChanged || positionChanged;
+  const absFromChanged = profile ? absentFrom !== (profile.absentFrom?.slice(0, 10) ?? '') : false;
+  const absUntilChanged = profile ? absentUntil !== (profile.absentUntil?.slice(0, 10) ?? '') : false;
+  const hasChanges = nameChanged || positionChanged || absFromChanged || absUntilChanged;
 
   function handleFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -93,7 +102,12 @@ export function ProfilePage() {
   function handleSave() {
     if (!hasChanges) return;
     updateProfile.mutate(
-      { name: name.trim(), position: position.trim() || null },
+      {
+        name: name.trim(),
+        position: position.trim() || null,
+        absentFrom: absentFrom || null,
+        absentUntil: absentUntil || null,
+      },
       {
         onSuccess: () => toast.success('Profil gespeichert'),
         onError: () => toast.error('Profil konnte nicht gespeichert werden'),
@@ -284,6 +298,42 @@ export function ProfilePage() {
               </p>
             )}
           </div>
+        </div>
+
+        {/* Abwesenheit */}
+        <div className="mt-lg pt-lg border-t border-kore-border">
+          <h3 className="font-display text-body font-medium text-kore-ink mb-md flex items-center gap-sm">
+            <CalendarOff size={16} />
+            Abwesenheit
+          </h3>
+          <div className="grid grid-cols-2 gap-md">
+            <div>
+              <label className="block font-body text-small text-kore-mid mb-1">Von</label>
+              <input
+                type="date"
+                value={absentFrom}
+                onChange={(e) => setAbsentFrom(e.target.value)}
+                className="w-full px-3 py-2 rounded border border-kore-border font-body text-body text-kore-ink bg-kore-white focus:outline-none focus:ring-2 focus:ring-kore-brass/30 focus:border-kore-brass transition-colors"
+              />
+            </div>
+            <div>
+              <label className="block font-body text-small text-kore-mid mb-1">Bis</label>
+              <input
+                type="date"
+                value={absentUntil}
+                onChange={(e) => setAbsentUntil(e.target.value)}
+                className="w-full px-3 py-2 rounded border border-kore-border font-body text-body text-kore-ink bg-kore-white focus:outline-none focus:ring-2 focus:ring-kore-brass/30 focus:border-kore-brass transition-colors"
+              />
+            </div>
+          </div>
+          {(absentFrom || absentUntil) && (
+            <button
+              onClick={() => { setAbsentFrom(''); setAbsentUntil(''); }}
+              className="mt-sm font-body text-small text-red-600 hover:underline"
+            >
+              Abwesenheit entfernen
+            </button>
+          )}
         </div>
 
         {/* Save Button */}
