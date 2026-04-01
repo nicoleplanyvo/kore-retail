@@ -10,7 +10,7 @@ export const checklistenAuditsRouter: RouterType = Router();
 
 /**
  * Middleware: Authentifizierung + Zugriff auf 'standards.checklisten'.
- * (Ehemals auch 'standards.excellence_tracker' — jetzt zusammengefuehrt.)
+ * (Ehemals auch 'standards.excellence_tracker' — jetzt zusammengeführt.)
  */
 checklistenAuditsRouter.use(authenticate, requireToolAccess('standards.checklisten'));
 
