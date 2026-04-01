@@ -60,6 +60,12 @@ export interface AuthUser {
   impersonatedBy?: string;
   storeAssignments?: string[]; // Store-IDs
   regionAssignments?: string[]; // Region-IDs (für regional_manager)
+  tenantBranding?: {
+    tenantName: string;
+    logoUrl: string | null;
+    primaryColor: string | null;
+    accentColor: string | null;
+  };
 }
 
 // === User Store Assignment ===

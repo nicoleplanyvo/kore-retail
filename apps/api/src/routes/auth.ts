@@ -27,6 +27,29 @@ async function buildAuthResponse(userId: string, impersonatedBy?: string) {
 
   if (!user) return null;
 
+  // Fetch tenant branding if user belongs to a tenant
+  let tenantBranding: {
+    tenantName: string;
+    logoUrl: string | null;
+    primaryColor: string | null;
+    accentColor: string | null;
+  } | undefined;
+
+  if (user.tenantId) {
+    const tenant = await prisma.tenant.findUnique({
+      where: { id: user.tenantId },
+      select: { name: true, logoUrl: true, primaryColor: true, accentColor: true },
+    });
+    if (tenant) {
+      tenantBranding = {
+        tenantName: tenant.name,
+        logoUrl: tenant.logoUrl,
+        primaryColor: tenant.primaryColor,
+        accentColor: tenant.accentColor,
+      };
+    }
+  }
+
   return {
     id: user.id,
     name: user.name,
@@ -36,6 +59,7 @@ async function buildAuthResponse(userId: string, impersonatedBy?: string) {
     impersonatedBy: impersonatedBy || undefined,
     storeAssignments: user.storeAssignments.map((a: { storeId: string }) => a.storeId),
     regionAssignments: user.regionAssignments.map((a: { regionId: string }) => a.regionId),
+    tenantBranding,
   };
 }
 

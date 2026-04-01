@@ -1,8 +1,13 @@
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs/promises';
+import { mkdirSync } from 'fs';
 
-const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? './uploads';
+const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? path.resolve(__dirname, '../../uploads');
+
+// Ensure avatar and logo subdirectories exist on startup
+mkdirSync(path.join(UPLOAD_DIR, 'avatars'), { recursive: true });
+mkdirSync(path.join(UPLOAD_DIR, 'logos'), { recursive: true });
 
 const ALLOWED_MIMETYPES = ['image/jpeg', 'image/png', 'image/webp'];
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
