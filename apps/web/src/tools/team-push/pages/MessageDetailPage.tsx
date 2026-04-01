@@ -1,6 +1,6 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
-  ArrowLeft, Send, Check, AlertTriangle, AlertCircle,
+  ArrowLeft, Send, Check, CheckCheck, AlertTriangle, AlertCircle,
   Trash2, Users, Clock, Eye, EyeOff,
 } from 'lucide-react';
 import {
@@ -34,10 +34,26 @@ export function MessageDetailPage() {
     deleteMessage.mutate(id, { onSuccess: () => navigate('/app/tools/team-push') });
   };
 
-  const formatDate = (iso: string) => {
+  const formatTimestamp = (iso: string) => {
     const d = new Date(iso);
-    return d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' }) +
-      ' ' + d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+    const now = new Date();
+    const time = d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+
+    const isToday =
+      d.getDate() === now.getDate() &&
+      d.getMonth() === now.getMonth() &&
+      d.getFullYear() === now.getFullYear();
+
+    const yesterday = new Date(now);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const isYesterday =
+      d.getDate() === yesterday.getDate() &&
+      d.getMonth() === yesterday.getMonth() &&
+      d.getFullYear() === yesterday.getFullYear();
+
+    if (isToday) return time;
+    if (isYesterday) return `Gestern ${time}`;
+    return `${d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' })} ${time}`;
   };
 
   if (isLoading) return <div className="p-xl text-body text-kore-mid">Lade...</div>;
@@ -62,8 +78,20 @@ export function MessageDetailPage() {
           </div>
           <div className="flex items-center gap-md text-body text-kore-mid mt-xs">
             <span>{message.sender?.name ?? '--'}</span>
-            <span className="flex items-center gap-xs"><Clock size={14} /> {formatDate(message.createdAt)}</span>
+            <span className="flex items-center gap-xs"><Clock size={14} /> {formatTimestamp(message.createdAt)}</span>
             <span className="flex items-center gap-xs"><Users size={14} /> {TARGET_LABELS[message.targetType] ?? message.targetType}</span>
+            <span className="flex items-center gap-xs">
+              {readCount >= totalRecipients && totalRecipients > 0 ? (
+                <CheckCheck size={14} className="text-kore-brass" />
+              ) : readCount > 0 ? (
+                <CheckCheck size={14} className="text-kore-mid" />
+              ) : (
+                <Check size={14} className="text-kore-mid" />
+              )}
+              <span className={readCount >= totalRecipients && totalRecipients > 0 ? 'text-kore-brass font-medium' : ''}>
+                Gelesen von {readCount}/{totalRecipients}
+              </span>
+            </span>
           </div>
         </div>
         <span className={`px-sm py-xs text-small font-medium ${PRIORITY_BADGES[message.priority] ?? 'bg-kore-bg text-kore-mid'}`}>
@@ -155,7 +183,7 @@ export function MessageDetailPage() {
                     </div>
                     <span className="text-body text-kore-ink">{r.user?.name ?? '--'}</span>
                   </div>
-                  <span className="text-small text-kore-mid">{formatDate(r.readAt)}</span>
+                  <span className="text-small text-kore-mid">{formatTimestamp(r.readAt)}</span>
                 </div>
               ))}
             </div>

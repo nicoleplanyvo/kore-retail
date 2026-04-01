@@ -15,6 +15,10 @@ export interface Message {
   content: string;
   createdAt: string;
   sender: { id: string; name: string; avatarUrl: string | null };
+  readByCount?: number;
+  totalRecipients?: number;
+  allRead?: boolean;
+  readAt?: string | null;
 }
 
 export interface Colleague {
@@ -76,6 +80,21 @@ export function useCreateConversation() {
       ),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['conversations'] });
+    },
+  });
+}
+
+export function useMarkConversationRead() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (conversationId: string) =>
+      api<{ success: boolean }>(`/api/messaging/conversations/${conversationId}/mark-read`, {
+        method: 'POST',
+      }),
+    onSuccess: (_data, conversationId) => {
+      queryClient.invalidateQueries({ queryKey: ['messages', conversationId] });
+      queryClient.invalidateQueries({ queryKey: ['conversations'] });
+      queryClient.invalidateQueries({ queryKey: ['unread-count'] });
     },
   });
 }

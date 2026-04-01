@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback, type KeyboardEvent } from 'react';
-import { MessageSquare, Send, ArrowLeft, Plus, Search, User } from 'lucide-react';
+import { MessageSquare, Send, ArrowLeft, Plus, Search, User, Check, CheckCheck } from 'lucide-react';
 import { Breadcrumb } from '../components/Breadcrumb';
 import { useToast } from '../components/Toast';
 import { useAuthStore } from '../stores/authStore';
@@ -8,11 +8,39 @@ import {
   useMessages,
   useSendMessage,
   useCreateConversation,
+  useMarkConversationRead,
   useColleagues,
   type ConversationPreview,
 } from '../hooks/useMessaging';
 
-/* ---------- Relative time helper ---------- */
+/* ---------- Timestamp helpers ---------- */
+
+function formatMessageTime(dateStr: string): string {
+  const d = new Date(dateStr);
+  return d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+}
+
+function formatTimestamp(dateStr: string): string {
+  const d = new Date(dateStr);
+  const now = new Date();
+  const time = d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+
+  const isToday =
+    d.getDate() === now.getDate() &&
+    d.getMonth() === now.getMonth() &&
+    d.getFullYear() === now.getFullYear();
+
+  const yesterday = new Date(now);
+  yesterday.setDate(yesterday.getDate() - 1);
+  const isYesterday =
+    d.getDate() === yesterday.getDate() &&
+    d.getMonth() === yesterday.getMonth() &&
+    d.getFullYear() === yesterday.getFullYear();
+
+  if (isToday) return time;
+  if (isYesterday) return `Gestern ${time}`;
+  return `${d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' })} ${time}`;
+}
 
 function relativeTime(dateStr: string): string {
   const now = Date.now();
@@ -22,7 +50,7 @@ function relativeTime(dateStr: string): string {
   if (mins < 1) return 'Jetzt';
   if (mins < 60) return `vor ${mins} Min.`;
   const hours = Math.floor(mins / 60);
-  if (hours < 24) return `vor ${hours} Std.`;
+  if (hours < 24) return formatMessageTime(dateStr);
   const days = Math.floor(hours / 24);
   if (days === 1) return 'Gestern';
   if (days < 7) return `vor ${days} Tagen`;
@@ -276,6 +304,7 @@ export default function MessagingPage() {
   const { data: messages } = useMessages(activeConversationId);
   const sendMutation = useSendMessage();
   const createMutation = useCreateConversation();
+  const markReadMutation = useMarkConversationRead();
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
@@ -292,7 +321,8 @@ export default function MessagingPage() {
   const selectConversation = useCallback((id: string) => {
     setActiveConversationId(id);
     setMobileView('chat');
-  }, []);
+    markReadMutation.mutate(id);
+  }, [markReadMutation]);
 
   const handleBack = useCallback(() => {
     setMobileView('list');
@@ -460,13 +490,29 @@ export default function MessagingPage() {
                           </span>
                         ))}
                       </div>
-                      <p
-                        className={`text-[10px] text-kore-mid mt-0.5 px-1 ${
-                          isOwn ? 'text-right' : ''
+                      <div
+                        className={`flex items-center gap-1 text-[10px] text-kore-mid mt-0.5 px-1 ${
+                          isOwn ? 'justify-end' : ''
                         }`}
                       >
-                        {relativeTime(msg.createdAt)}
-                      </p>
+                        <span>{formatTimestamp(msg.createdAt)}</span>
+                        {isOwn && (
+                          <>
+                            {msg.allRead ? (
+                              <CheckCheck size={12} className="text-kore-brass" />
+                            ) : (msg.readByCount ?? 0) > 0 ? (
+                              <CheckCheck size={12} className="text-kore-mid" />
+                            ) : (
+                              <Check size={12} className="text-kore-mid" />
+                            )}
+                            {msg.readAt && (
+                              <span className="text-kore-brass">
+                                Gelesen um {formatMessageTime(msg.readAt)}
+                              </span>
+                            )}
+                          </>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>

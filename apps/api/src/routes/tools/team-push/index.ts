@@ -40,10 +40,11 @@ teamPushRouter.get('/users', async (req, res) => {
 
 // ── MESSAGES ────────────────────────────────────────
 
-// GET /messages — List messages (paginated) with filters
+// GET /messages — List messages (paginated) with filters + read receipt info
 teamPushRouter.get('/messages', async (req, res) => {
   try {
     const tenantId = req.user!.tenantId!;
+    const userId = req.user!.sub;
     const page = Math.max(1, Number(req.query.page) || 1);
     const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 20));
 
@@ -59,19 +60,31 @@ teamPushRouter.get('/messages', async (req, res) => {
     if (req.query.from) where['createdAt'] = { ...(where['createdAt'] as any || {}), gte: new Date(req.query.from as string) };
     if (req.query.to) where['createdAt'] = { ...(where['createdAt'] as any || {}), lte: new Date(req.query.to as string + 'T23:59:59') };
 
-    const [data, total] = await Promise.all([
+    const [messages, total, totalUsers] = await Promise.all([
       prisma.teamMessage.findMany({
         where,
         include: {
           sender: { select: { id: true, name: true } },
           _count: { select: { reads: true } },
+          reads: { where: { userId }, select: { id: true } },
         },
         orderBy: { createdAt: 'desc' },
         skip: (page - 1) * pageSize,
         take: pageSize,
       }),
       prisma.teamMessage.count({ where }),
+      prisma.user.count({ where: { tenantId, isActive: true } }),
     ]);
+
+    // Enrich each message with read receipt info
+    const data = messages.map(({ reads, ...msg }) => ({
+      ...msg,
+      readCount: msg._count.reads,
+      totalRecipients: totalUsers,
+      isReadByMe: reads.length > 0,
+      allRead: msg._count.reads >= totalUsers,
+    }));
+
     res.json({ data, total, page, pageSize });
   } catch (err) {
     console.error(err);

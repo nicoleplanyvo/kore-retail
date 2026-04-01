@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Send, Plus, AlertTriangle, AlertCircle, BarChart3, Search,
-  ChevronLeft, ChevronRight, X, Users, Building2,
+  ChevronLeft, ChevronRight, X, Users, Building2, Check, CheckCheck,
 } from 'lucide-react';
 import {
   useTeamMessages, useCreateTeamMessage, useTeamPushStores, useTeamPushUsers,
@@ -72,10 +72,26 @@ export function OverviewPage() {
     });
   };
 
-  const formatDate = (iso: string) => {
+  const formatTimestamp = (iso: string) => {
     const d = new Date(iso);
-    return d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: '2-digit' }) +
-      ' ' + d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+    const now = new Date();
+    const time = d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+
+    const isToday =
+      d.getDate() === now.getDate() &&
+      d.getMonth() === now.getMonth() &&
+      d.getFullYear() === now.getFullYear();
+
+    const yesterday = new Date(now);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const isYesterday =
+      d.getDate() === yesterday.getDate() &&
+      d.getMonth() === yesterday.getMonth() &&
+      d.getFullYear() === yesterday.getFullYear();
+
+    if (isToday) return time;
+    if (isYesterday) return `Gestern ${time}`;
+    return `${d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' })} ${time}`;
   };
 
   return (
@@ -262,10 +278,21 @@ export function OverviewPage() {
                 </div>
               </div>
               <p className="text-small text-kore-mid mt-xs line-clamp-1">{m.body}</p>
-              <div className="flex gap-md text-small text-kore-mid mt-sm">
+              <div className="flex items-center gap-md text-small text-kore-mid mt-sm">
                 <span>{m.sender?.name ?? '--'}</span>
-                <span>{formatDate(m.createdAt)}</span>
-                <span className="text-kore-brass font-medium">{m._count?.reads ?? 0} gelesen</span>
+                <span>{formatTimestamp(m.createdAt)}</span>
+                <span className="flex items-center gap-1">
+                  {m.allRead ? (
+                    <CheckCheck size={14} className="text-kore-brass" />
+                  ) : (m.readCount ?? m._count?.reads ?? 0) > 0 ? (
+                    <CheckCheck size={14} className="text-kore-mid" />
+                  ) : (
+                    <Check size={14} className="text-kore-mid" />
+                  )}
+                  <span className={m.allRead ? 'text-kore-brass font-medium' : ''}>
+                    Gelesen von {m.readCount ?? m._count?.reads ?? 0}/{m.totalRecipients ?? '?'}
+                  </span>
+                </span>
               </div>
             </Link>
           ))}

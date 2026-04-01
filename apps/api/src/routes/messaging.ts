@@ -236,6 +236,12 @@ messagingRouter.get('/conversations/:id/messages', async (req, res) => {
       take: limit,
     });
 
+    // Fetch all other participants' lastReadAt to determine read receipts
+    const otherParticipants = await prisma.conversationParticipant.findMany({
+      where: { conversationId, userId: { not: userId } },
+      select: { userId: true, lastReadAt: true },
+    });
+
     // Update lastReadAt for this user
     await prisma.conversationParticipant.update({
       where: { conversationId_userId: { conversationId, userId } },
@@ -243,16 +249,37 @@ messagingRouter.get('/conversations/:id/messages', async (req, res) => {
     });
 
     res.json({
-      messages: messages.map((m: any) => ({
-        id: m.id,
-        content: m.content,
-        createdAt: m.createdAt.toISOString(),
-        sender: {
-          id: m.sender.id,
-          name: m.sender.name,
-          avatarUrl: m.sender.avatarPath,
-        },
-      })),
+      messages: messages.map((m: any) => {
+        const isOwn = m.senderId === userId;
+        // For own messages: check which other participants have read it
+        const readByOthers = isOwn
+          ? otherParticipants.filter(
+              (p: { lastReadAt: Date | null }) =>
+                p.lastReadAt && p.lastReadAt >= m.createdAt,
+            )
+          : [];
+        const totalOthers = otherParticipants.length;
+
+        return {
+          id: m.id,
+          content: m.content,
+          createdAt: m.createdAt.toISOString(),
+          sender: {
+            id: m.sender.id,
+            name: m.sender.name,
+            avatarUrl: m.sender.avatarPath,
+          },
+          // Read receipt info (only meaningful for own messages)
+          readByCount: readByOthers.length,
+          totalRecipients: totalOthers,
+          allRead: isOwn && totalOthers > 0 && readByOthers.length >= totalOthers,
+          // For 1:1: include the exact readAt timestamp of the other person
+          readAt:
+            isOwn && readByOthers.length > 0 && totalOthers === 1
+              ? (readByOthers[0] as { lastReadAt: Date }).lastReadAt.toISOString()
+              : null,
+        };
+      }),
     });
   } catch (err) {
     console.error('Get messages error:', err);
@@ -338,6 +365,34 @@ messagingRouter.post('/conversations/:id/messages', async (req, res) => {
     }
   } catch (err) {
     console.error('Send message error:', err);
+    res.status(500).json({ error: 'Interner Serverfehler.' });
+  }
+});
+
+// ── POST /conversations/:id/mark-read ─────────────
+// Explicitly mark a conversation as read (e.g. when opened)
+messagingRouter.post('/conversations/:id/mark-read', async (req, res) => {
+  try {
+    const userId = req.user!.sub;
+    const conversationId = req.params['id']!;
+
+    const participant = await prisma.conversationParticipant.findUnique({
+      where: { conversationId_userId: { conversationId, userId } },
+    });
+
+    if (!participant) {
+      res.status(403).json({ error: 'Kein Zugriff auf diese Unterhaltung.' });
+      return;
+    }
+
+    await prisma.conversationParticipant.update({
+      where: { conversationId_userId: { conversationId, userId } },
+      data: { lastReadAt: new Date() },
+    });
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Mark-read error:', err);
     res.status(500).json({ error: 'Interner Serverfehler.' });
   }
 });

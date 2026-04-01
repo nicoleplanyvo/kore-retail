@@ -30,6 +30,9 @@ interface TeamMessageData {
   _count: { reads: number };
   reads?: { id: string; userId: string; readAt: string; user: { id: string; name: string } }[];
   totalRecipients?: number;
+  readCount?: number;
+  isReadByMe?: boolean;
+  allRead?: boolean;
 }
 
 interface MessageListResponse {
