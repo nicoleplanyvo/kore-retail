@@ -118,6 +118,7 @@ model Tenant {
   sops               Sop[]
   vmGuidelines       VmGuideline[]
   vmSubmissions      VmSubmission[]
+  vmAreas            VmArea[]
   standardCategories StandardCategory[]
   standardDefinitions StandardDefinition[]
   standardEvaluations StandardEvaluation[]
@@ -148,6 +149,9 @@ model Tenant {
   floorFrequencyLogs FloorFrequencyLog[]
   conversations   Conversation[]
   notifications   Notification[]
+  rtbIndicators   RtbIndicator[]
+  rtbEntries      RtbEntry[]
+  rtbSnapshots    RtbSnapshot[]
 }
 
 model Region {
@@ -221,6 +225,8 @@ model Store {
   frSettings         FRSettings?
   frRooms            FRRoom[]
   frSessions         FRSession[]
+  rtbEntries         RtbEntry[]
+  rtbSnapshots       RtbSnapshot[]
 
   @@index([tenantId])
   @@index([regionId])
@@ -337,16 +343,18 @@ model UserRegionAssignment {
 // ============================================================
 
 model AuditTemplate {
-  id          String   @id @default(cuid())
-  tenantId    String?  // null = KORE-Default, non-null = Tenant-spezifisch
-  name        String
-  description String?
-  version     Int      @default(1)
-  isDefault   Boolean  @default(false)
-  isActive    Boolean  @default(true)
-  createdBy   String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            String   @id @default(cuid())
+  tenantId      String?  // null = KORE-Default, non-null = Tenant-spezifisch
+  name          String
+  description   String?
+  version       Int      @default(1)
+  isDefault     Boolean  @default(false)
+  isActive      Boolean  @default(true)
+  createdBy     String
+  templateType  String   @default("AUDIT")   // "AUDIT" or "CHECKLIST"
+  recurrence    String?                       // daily, weekly, monthly
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   categories AuditCategory[]
   sessions   AuditSession[]
@@ -377,6 +385,7 @@ model AuditCriterion {
   sortOrder     Int           @default(0)
   isRequired    Boolean       @default(true)
   photoRequired Boolean       @default(false)
+  type          String        @default("SCORED")  // "SCORED", "BOOLEAN", "TEXT", "NUMBER"
 
   responses AuditResponse[]
 
@@ -384,21 +393,23 @@ model AuditCriterion {
 }
 
 model AuditSession {
-  id            String    @id @default(cuid())
-  tenantId      String
-  storeId       String
-  store         Store     @relation(fields: [storeId], references: [id])
-  templateId    String
-  template      AuditTemplate @relation(fields: [templateId], references: [id])
-  conductedBy   String
-  storeLocation String?   // Optionaler Sub-Bereich im Store
-  status        String    @default("DRAFT") // DRAFT, IN_PROGRESS, COMPLETED, CANCELLED
-  overallScore  Float?
-  notes         String?
-  startedAt     DateTime?
-  completedAt   DateTime?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  id             String    @id @default(cuid())
+  tenantId       String
+  storeId        String
+  store          Store     @relation(fields: [storeId], references: [id])
+  templateId     String
+  template       AuditTemplate @relation(fields: [templateId], references: [id])
+  conductedBy    String
+  storeLocation  String?   // Optionaler Sub-Bereich im Store
+  status         String    @default("DRAFT") // DRAFT, IN_PROGRESS, COMPLETED, CANCELLED
+  overallScore   Float?
+  completionRate Float     @default(0)
+  notes          String?
+  dueDate        DateTime?
+  startedAt      DateTime?
+  completedAt    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 
   responses AuditResponse[]
 
@@ -418,6 +429,9 @@ model AuditResponse {
   passed       Boolean?
   comment      String?
   photoPath    String?
+  valueBool    Boolean?
+  valueText    String?
+  valueNumber  Float?
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
 
@@ -544,14 +558,31 @@ model Sop {
   createdBy      String
   creator        User         @relation(fields: [createdBy], references: [id])
   attachmentPath String?
+  deadline       DateTime?
+  isMandatory    Boolean      @default(false)
+  isOverdue      Boolean      @default(false)
   publishedAt    DateTime?
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
 
   acknowledgments SopAcknowledgment[]
+  attachments     SopAttachment[]
 
   @@index([tenantId])
   @@index([categoryId])
+}
+
+model SopAttachment {
+  id        String   @id @default(cuid())
+  sopId     String
+  sop       Sop      @relation(fields: [sopId], references: [id], onDelete: Cascade)
+  fileName  String
+  filePath  String   // relative path in UPLOAD_DIR
+  fileType  String   // "pdf", "docx", "image"
+  fileSize  Int      // bytes
+  createdAt DateTime @default(now())
+
+  @@index([sopId])
 }
 
 model SopAcknowledgment {
@@ -589,6 +620,23 @@ model VmGuideline {
   @@index([tenantId])
 }
 
+model VmArea {
+  id          String   @id @default(cuid())
+  tenantId    String
+  tenant      Tenant   @relation(fields: [tenantId], references: [id])
+  name        String
+  description String?
+  pdfPath     String?
+  isActive    Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  submissions VmSubmission[]
+
+  @@index([tenantId])
+}
+
 model VmSubmission {
   id           String       @id @default(cuid())
   tenantId     String
@@ -597,6 +645,8 @@ model VmSubmission {
   guideline    VmGuideline  @relation(fields: [guidelineId], references: [id])
   storeId      String
   store        Store        @relation(fields: [storeId], references: [id])
+  areaId       String?
+  area         VmArea?      @relation(fields: [areaId], references: [id])
   submittedBy  String
   submitter    User         @relation("VmSubmitter", fields: [submittedBy], references: [id])
   photoPath    String
@@ -606,11 +656,16 @@ model VmSubmission {
   reviewNote   String?
   submittedAt  DateTime     @default(now())
   reviewedAt   DateTime?
+  deadline     DateTime?
+  escalatedAt  DateTime?
+  escalatedTo  String?      // userId of the person escalated to
 
   @@index([tenantId])
   @@index([storeId])
   @@index([guidelineId])
+  @@index([areaId])
   @@index([status])
+  @@index([deadline])
 }
 
 // ============================================================
@@ -687,6 +742,65 @@ model StandardScore {
 
   @@unique([evaluationId, definitionId])
   @@index([evaluationId])
+}
+
+// ============================================================
+// Raise the Bar — Store-Vergleich / Ranking
+// ============================================================
+
+model RtbIndicator {
+  id             String   @id @default(cuid())
+  tenantId       String
+  tenant         Tenant   @relation(fields: [tenantId], references: [id])
+  name           String
+  unit           String   @default("%")
+  weight         Float
+  targetValue    Float?
+  higherIsBetter Boolean  @default(true)
+  sortOrder      Int      @default(0)
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  entries RtbEntry[]
+
+  @@index([tenantId])
+}
+
+model RtbEntry {
+  id          String   @id @default(cuid())
+  tenantId    String
+  tenant      Tenant   @relation(fields: [tenantId], references: [id])
+  storeId     String
+  store       Store    @relation(fields: [storeId], references: [id])
+  indicatorId String
+  indicator   RtbIndicator @relation(fields: [indicatorId], references: [id])
+  period      String
+  value       Float
+  createdBy   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([storeId, indicatorId, period])
+  @@index([tenantId])
+  @@index([storeId])
+  @@index([indicatorId])
+}
+
+model RtbSnapshot {
+  id         String   @id @default(cuid())
+  tenantId   String
+  tenant     Tenant   @relation(fields: [tenantId], references: [id])
+  storeId    String
+  store      Store    @relation(fields: [storeId], references: [id])
+  period     String
+  totalScore Float
+  rank       Int
+  createdAt  DateTime @default(now())
+
+  @@unique([storeId, period])
+  @@index([tenantId])
+  @@index([storeId])
 }
 
 // ============================================================

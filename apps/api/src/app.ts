@@ -16,9 +16,11 @@ import { adminReportingRouter } from './routes/admin/reporting.js';
 import { adminRegionsRouter } from './routes/admin/regions.js';
 import { storeExcellenceAuditRouter } from './routes/tools/store-excellence-audit/index.js';
 import { checklistenRouter } from './routes/tools/checklisten/index.js';
+import { checklistenAuditsRouter } from './routes/tools/checklisten-audits/index.js';
 import { sopRouter } from './routes/tools/sop/index.js';
 import { vmComplianceRouter } from './routes/tools/vm-compliance/index.js';
 import { storeStandardsRouter } from './routes/tools/store-standards/index.js';
+import { raiseTheBarRouter } from './routes/tools/raise-the-bar/index.js';
 import { kpiDashboardRouter } from './routes/tools/kpi-dashboard/index.js';
 import { budgetTrackerRouter } from './routes/tools/budget-tracker/index.js';
 import { forecastRouter as forecastToolRouter } from './routes/tools/forecast/index.js';
@@ -116,12 +118,16 @@ export function createApp(): Express {
   app.use('/api/tools/sea', storeExcellenceAuditRouter);
   // Tools — Checklisten
   app.use('/api/tools/checklisten', checklistenRouter);
+  // Tools — Checklisten & Audits (merged)
+  app.use('/api/tools/checklisten-audits', checklistenAuditsRouter);
   // Tools — SOP Bibliothek
   app.use('/api/tools/sop', sopRouter);
   // Tools — VM Foto-Compliance
   app.use('/api/tools/vm-compliance', vmComplianceRouter);
-  // Tools — Personalkosten-Planer
+  // Tools — Store Standards (legacy)
   app.use('/api/tools/store-standards', storeStandardsRouter);
+  // Tools — Raise the Bar (Store-Vergleich / Ranking)
+  app.use('/api/tools/raise-the-bar', raiseTheBarRouter);
   // Tools — KPI Dashboard
   app.use('/api/tools/kpi', kpiDashboardRouter);
   // Tools — Budget Tracker

@@ -28,9 +28,11 @@ import { BrandingPage } from './pages/BrandingPage';
 // Tool-Routes importieren
 import StoreExcellenceAuditRoutes from './tools/store-excellence-audit/index';
 import ChecklistenRoutes from './tools/checklisten/index';
+import ChecklistenAuditsRoutes from './tools/checklisten-audits/index';
 import SopBibliothekRoutes from './tools/sop-bibliothek/index';
 import VmComplianceRoutes from './tools/vm-compliance/index';
 import StoreStandardsRoutes from './tools/store-standards/index';
+import RaiseTheBarRoutes from './tools/raise-the-bar/index';
 import KpiDashboardRoutes from './tools/kpi-dashboard/index';
 import BudgetTrackerRoutes from './tools/budget-tracker/index';
 import ForecastRoutes from './tools/forecast/index';
@@ -103,9 +105,11 @@ export function App() {
             {/* Standards & Compliance */}
             <Route path="/app/tools/sea/*" element={<StoreExcellenceAuditRoutes />} />
             <Route path="/app/tools/checklisten/*" element={<ChecklistenRoutes />} />
+            <Route path="/app/tools/checklisten-audits/*" element={<ChecklistenAuditsRoutes />} />
             <Route path="/app/tools/sop/*" element={<SopBibliothekRoutes />} />
             <Route path="/app/tools/vm-compliance/*" element={<VmComplianceRoutes />} />
             <Route path="/app/tools/store-standards/*" element={<StoreStandardsRoutes />} />
+            <Route path="/app/tools/raise-the-bar/*" element={<RaiseTheBarRoutes />} />
 
             {/* Performance & Sichtbarkeit */}
             <Route path="/app/tools/kpi/*" element={<KpiDashboardRoutes />} />
