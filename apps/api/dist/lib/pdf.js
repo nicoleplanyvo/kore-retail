@@ -79,7 +79,7 @@ export function addFooter(doc) {
 export function fmtDe(n, decimals = 0) {
     return n.toLocaleString('de-DE', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
 }
-/** Formatiert Euro-Betraege im deutschen Format (z.B. 1.234,56 EUR) */
+/** Formatiert Euro-Beträge im deutschen Format (z.B. 1.234,56 EUR) */
 export function fmtEur(n, decimals = 2) {
     return `${fmtDe(n, decimals)} EUR`;
 }

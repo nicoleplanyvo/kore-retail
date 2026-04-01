@@ -132,7 +132,7 @@ export function OverviewPage() {
             <div>
               <label className="block text-small text-kore-mid mb-xs">Mitarbeiter</label>
               <select value={form.userId} onChange={e => setForm({ ...form, userId: e.target.value })} className="w-full border border-kore-border px-md py-sm text-body" required>
-                <option value="">-- Waehlen --</option>
+                <option value="">-- Wählen --</option>
                 {users?.map((u: any) => <option key={u.id} value={u.id}>{u.name}</option>)}
               </select>
             </div>

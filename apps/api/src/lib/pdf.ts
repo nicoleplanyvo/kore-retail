@@ -100,7 +100,7 @@ export function fmtDe(n: number, decimals = 0): string {
   return n.toLocaleString('de-DE', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
 }
 
-/** Formatiert Euro-Betraege im deutschen Format (z.B. 1.234,56 EUR) */
+/** Formatiert Euro-Beträge im deutschen Format (z.B. 1.234,56 EUR) */
 export function fmtEur(n: number, decimals = 2): string {
   return `${fmtDe(n, decimals)} EUR`;
 }

@@ -195,7 +195,7 @@ export function createApp(): Express {
 
   // Statische Uploads
   const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? path.join(process.cwd(), 'uploads');
-  // Avatars und Logos sind oeffentlich zugaenglich (werden von <img>-Tags geladen, ohne Auth-Header)
+  // Avatars und Logos sind öffentlich zugänglich (werden von <img>-Tags geladen, ohne Auth-Header)
   app.use('/api/uploads/avatars', express.static(path.join(UPLOAD_DIR, 'avatars')));
   app.use('/api/uploads/logos', express.static(path.join(UPLOAD_DIR, 'logos')));
   // Alle anderen Uploads mit Auth-Schutz

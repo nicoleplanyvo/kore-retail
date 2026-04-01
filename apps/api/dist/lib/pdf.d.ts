@@ -7,6 +7,6 @@ export declare function addTable(doc: InstanceType<typeof PDFDocument>, headers:
 export declare function addFooter(doc: InstanceType<typeof PDFDocument>): void;
 /** Formatiert eine Zahl im deutschen Format (z.B. 1.234,56) */
 export declare function fmtDe(n: number, decimals?: number): string;
-/** Formatiert Euro-Betraege im deutschen Format (z.B. 1.234,56 EUR) */
+/** Formatiert Euro-Beträge im deutschen Format (z.B. 1.234,56 EUR) */
 export declare function fmtEur(n: number, decimals?: number): string;
 //# sourceMappingURL=pdf.d.ts.map

@@ -13410,10 +13410,7 @@ export namespace Prisma {
     passwordHash: string | null
     role: string | null
     avatarPath: string | null
-    position: string | null
     managerId: string | null
-    absentFrom: Date | null
-    absentUntil: Date | null
     tenantId: string | null
     isActive: boolean | null
     lastLoginAt: Date | null
@@ -13428,10 +13425,7 @@ export namespace Prisma {
     passwordHash: string | null
     role: string | null
     avatarPath: string | null
-    position: string | null
     managerId: string | null
-    absentFrom: Date | null
-    absentUntil: Date | null
     tenantId: string | null
     isActive: boolean | null
     lastLoginAt: Date | null
@@ -13446,10 +13440,7 @@ export namespace Prisma {
     passwordHash: number
     role: number
     avatarPath: number
-    position: number
     managerId: number
-    absentFrom: number
-    absentUntil: number
     tenantId: number
     isActive: number
     lastLoginAt: number
@@ -13466,10 +13457,7 @@ export namespace Prisma {
     passwordHash?: true
     role?: true
     avatarPath?: true
-    position?: true
     managerId?: true
-    absentFrom?: true
-    absentUntil?: true
     tenantId?: true
     isActive?: true
     lastLoginAt?: true
@@ -13484,10 +13472,7 @@ export namespace Prisma {
     passwordHash?: true
     role?: true
     avatarPath?: true
-    position?: true
     managerId?: true
-    absentFrom?: true
-    absentUntil?: true
     tenantId?: true
     isActive?: true
     lastLoginAt?: true
@@ -13502,10 +13487,7 @@ export namespace Prisma {
     passwordHash?: true
     role?: true
     avatarPath?: true
-    position?: true
     managerId?: true
-    absentFrom?: true
-    absentUntil?: true
     tenantId?: true
     isActive?: true
     lastLoginAt?: true
@@ -13593,10 +13575,7 @@ export namespace Prisma {
     passwordHash: string | null
     role: string
     avatarPath: string | null
-    position: string | null
     managerId: string | null
-    absentFrom: Date | null
-    absentUntil: Date | null
     tenantId: string | null
     isActive: boolean
     lastLoginAt: Date | null
@@ -13628,10 +13607,7 @@ export namespace Prisma {
     passwordHash?: boolean
     role?: boolean
     avatarPath?: boolean
-    position?: boolean
     managerId?: boolean
-    absentFrom?: boolean
-    absentUntil?: boolean
     tenantId?: boolean
     isActive?: boolean
     lastLoginAt?: boolean
@@ -13712,10 +13688,7 @@ export namespace Prisma {
     passwordHash?: boolean
     role?: boolean
     avatarPath?: boolean
-    position?: boolean
     managerId?: boolean
-    absentFrom?: boolean
-    absentUntil?: boolean
     tenantId?: boolean
     isActive?: boolean
     lastLoginAt?: boolean
@@ -13731,10 +13704,7 @@ export namespace Prisma {
     passwordHash?: boolean
     role?: boolean
     avatarPath?: boolean
-    position?: boolean
     managerId?: boolean
-    absentFrom?: boolean
-    absentUntil?: boolean
     tenantId?: boolean
     isActive?: boolean
     lastLoginAt?: boolean
@@ -13750,10 +13720,7 @@ export namespace Prisma {
     passwordHash?: boolean
     role?: boolean
     avatarPath?: boolean
-    position?: boolean
     managerId?: boolean
-    absentFrom?: boolean
-    absentUntil?: boolean
     tenantId?: boolean
     isActive?: boolean
     lastLoginAt?: boolean
@@ -13761,7 +13728,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "passwordHash" | "role" | "avatarPath" | "position" | "managerId" | "absentFrom" | "absentUntil" | "tenantId" | "isActive" | "lastLoginAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "passwordHash" | "role" | "avatarPath" | "managerId" | "tenantId" | "isActive" | "lastLoginAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | User$tenantArgs<ExtArgs>
     storeAssignments?: boolean | User$storeAssignmentsArgs<ExtArgs>
@@ -13913,10 +13880,7 @@ export namespace Prisma {
       passwordHash: string | null
       role: string
       avatarPath: string | null
-      position: string | null
       managerId: string | null
-      absentFrom: Date | null
-      absentUntil: Date | null
       tenantId: string | null
       isActive: boolean
       lastLoginAt: Date | null
@@ -14416,10 +14380,7 @@ export namespace Prisma {
     readonly passwordHash: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'String'>
     readonly avatarPath: FieldRef<"User", 'String'>
-    readonly position: FieldRef<"User", 'String'>
     readonly managerId: FieldRef<"User", 'String'>
-    readonly absentFrom: FieldRef<"User", 'DateTime'>
-    readonly absentUntil: FieldRef<"User", 'DateTime'>
     readonly tenantId: FieldRef<"User", 'String'>
     readonly isActive: FieldRef<"User", 'Boolean'>
     readonly lastLoginAt: FieldRef<"User", 'DateTime'>
@@ -143461,10 +143422,7 @@ export namespace Prisma {
     passwordHash: 'passwordHash',
     role: 'role',
     avatarPath: 'avatarPath',
-    position: 'position',
     managerId: 'managerId',
-    absentFrom: 'absentFrom',
-    absentUntil: 'absentUntil',
     tenantId: 'tenantId',
     isActive: 'isActive',
     lastLoginAt: 'lastLoginAt',
@@ -145180,16 +145138,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'DateTime'
+   * Reference to a field of type 'Boolean'
    */
-  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
   /**
-   * Reference to a field of type 'Boolean'
+   * Reference to a field of type 'DateTime'
    */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
     
 
 
@@ -145220,10 +145178,7 @@ export namespace Prisma {
     passwordHash?: StringNullableFilter<"User"> | string | null
     role?: StringFilter<"User"> | string
     avatarPath?: StringNullableFilter<"User"> | string | null
-    position?: StringNullableFilter<"User"> | string | null
     managerId?: StringNullableFilter<"User"> | string | null
-    absentFrom?: DateTimeNullableFilter<"User"> | Date | string | null
-    absentUntil?: DateTimeNullableFilter<"User"> | Date | string | null
     tenantId?: StringNullableFilter<"User"> | string | null
     isActive?: BoolFilter<"User"> | boolean
     lastLoginAt?: DateTimeNullableFilter<"User"> | Date | string | null
@@ -145303,10 +145258,7 @@ export namespace Prisma {
     passwordHash?: SortOrderInput | SortOrder
     role?: SortOrder
     avatarPath?: SortOrderInput | SortOrder
-    position?: SortOrderInput | SortOrder
     managerId?: SortOrderInput | SortOrder
-    absentFrom?: SortOrderInput | SortOrder
-    absentUntil?: SortOrderInput | SortOrder
     tenantId?: SortOrderInput | SortOrder
     isActive?: SortOrder
     lastLoginAt?: SortOrderInput | SortOrder
@@ -145389,10 +145341,7 @@ export namespace Prisma {
     passwordHash?: StringNullableFilter<"User"> | string | null
     role?: StringFilter<"User"> | string
     avatarPath?: StringNullableFilter<"User"> | string | null
-    position?: StringNullableFilter<"User"> | string | null
     managerId?: StringNullableFilter<"User"> | string | null
-    absentFrom?: DateTimeNullableFilter<"User"> | Date | string | null
-    absentUntil?: DateTimeNullableFilter<"User"> | Date | string | null
     tenantId?: StringNullableFilter<"User"> | string | null
     isActive?: BoolFilter<"User"> | boolean
     lastLoginAt?: DateTimeNullableFilter<"User"> | Date | string | null
@@ -145472,10 +145421,7 @@ export namespace Prisma {
     passwordHash?: SortOrderInput | SortOrder
     role?: SortOrder
     avatarPath?: SortOrderInput | SortOrder
-    position?: SortOrderInput | SortOrder
     managerId?: SortOrderInput | SortOrder
-    absentFrom?: SortOrderInput | SortOrder
-    absentUntil?: SortOrderInput | SortOrder
     tenantId?: SortOrderInput | SortOrder
     isActive?: SortOrder
     lastLoginAt?: SortOrderInput | SortOrder
@@ -145496,10 +145442,7 @@ export namespace Prisma {
     passwordHash?: StringNullableWithAggregatesFilter<"User"> | string | null
     role?: StringWithAggregatesFilter<"User"> | string
     avatarPath?: StringNullableWithAggregatesFilter<"User"> | string | null
-    position?: StringNullableWithAggregatesFilter<"User"> | string | null
     managerId?: StringNullableWithAggregatesFilter<"User"> | string | null
-    absentFrom?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
-    absentUntil?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     tenantId?: StringNullableWithAggregatesFilter<"User"> | string | null
     isActive?: BoolWithAggregatesFilter<"User"> | boolean
     lastLoginAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
@@ -154782,10 +154725,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -154864,10 +154804,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -154946,10 +154883,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -155028,10 +154962,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -155110,10 +155041,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -155128,10 +155056,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -155145,10 +155070,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -165038,6 +164960,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -165047,11 +164974,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -165622,10 +165544,7 @@ export namespace Prisma {
     passwordHash?: SortOrder
     role?: SortOrder
     avatarPath?: SortOrder
-    position?: SortOrder
     managerId?: SortOrder
-    absentFrom?: SortOrder
-    absentUntil?: SortOrder
     tenantId?: SortOrder
     isActive?: SortOrder
     lastLoginAt?: SortOrder
@@ -165640,10 +165559,7 @@ export namespace Prisma {
     passwordHash?: SortOrder
     role?: SortOrder
     avatarPath?: SortOrder
-    position?: SortOrder
     managerId?: SortOrder
-    absentFrom?: SortOrder
-    absentUntil?: SortOrder
     tenantId?: SortOrder
     isActive?: SortOrder
     lastLoginAt?: SortOrder
@@ -165658,10 +165574,7 @@ export namespace Prisma {
     passwordHash?: SortOrder
     role?: SortOrder
     avatarPath?: SortOrder
-    position?: SortOrder
     managerId?: SortOrder
-    absentFrom?: SortOrder
-    absentUntil?: SortOrder
     tenantId?: SortOrder
     isActive?: SortOrder
     lastLoginAt?: SortOrder
@@ -165703,6 +165616,14 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -165715,14 +165636,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -172341,12 +172254,12 @@ export namespace Prisma {
     set?: string | null
   }
 
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-  }
-
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -183177,6 +183090,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -183186,11 +183104,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -183260,6 +183173,14 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -183272,14 +183193,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -187896,10 +187809,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -187977,10 +187887,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -189808,10 +189715,7 @@ export namespace Prisma {
     passwordHash?: StringNullableFilter<"User"> | string | null
     role?: StringFilter<"User"> | string
     avatarPath?: StringNullableFilter<"User"> | string | null
-    position?: StringNullableFilter<"User"> | string | null
     managerId?: StringNullableFilter<"User"> | string | null
-    absentFrom?: DateTimeNullableFilter<"User"> | Date | string | null
-    absentUntil?: DateTimeNullableFilter<"User"> | Date | string | null
     tenantId?: StringNullableFilter<"User"> | string | null
     isActive?: BoolFilter<"User"> | boolean
     lastLoginAt?: DateTimeNullableFilter<"User"> | Date | string | null
@@ -194357,10 +194261,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -194438,10 +194339,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -194648,10 +194546,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -194729,10 +194624,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -195441,10 +195333,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -195522,10 +195411,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -195648,10 +195534,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -195729,10 +195612,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -197598,10 +197478,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -197679,10 +197556,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -198096,10 +197970,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -198177,10 +198048,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -198859,10 +198727,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -198940,10 +198805,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -199243,10 +199105,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -199324,10 +199183,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -199585,10 +199441,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -199666,10 +199519,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -199812,10 +199662,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -199893,10 +199740,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -200904,10 +200748,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -200985,10 +200826,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -201071,10 +200909,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -201152,10 +200987,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -201573,10 +201405,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -201654,10 +201483,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -201746,10 +201572,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -201827,10 +201650,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -202819,10 +202639,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -202900,10 +202717,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -203274,10 +203088,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -203355,10 +203166,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -205181,10 +204989,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -205262,10 +205067,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -205609,10 +205411,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -205690,10 +205489,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -206009,10 +205805,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -206090,10 +205883,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -206466,10 +206256,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -206547,10 +206334,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -206984,10 +206768,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -207065,10 +206846,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -207412,10 +207190,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -207493,10 +207268,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -207812,10 +207584,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -207893,10 +207662,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -207979,10 +207745,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -208060,10 +207823,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -208407,10 +208167,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -208488,10 +208245,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -208580,10 +208334,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -208661,10 +208412,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -208980,10 +208728,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -209061,10 +208806,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -209445,10 +209187,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -209526,10 +209265,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -211166,10 +210902,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -211247,10 +210980,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -211333,10 +211063,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -211414,10 +211141,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -211804,10 +211528,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -211885,10 +211606,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -211977,10 +211695,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -212058,10 +211773,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -213254,10 +212966,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -213335,10 +213044,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -213421,10 +213127,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -213502,10 +213205,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -213849,10 +213549,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -213930,10 +213627,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -214022,10 +213716,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -214103,10 +213794,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -214309,10 +213997,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -214390,10 +214075,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -214682,10 +214364,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -214763,10 +214442,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -215001,10 +214677,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -215082,10 +214755,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -215354,10 +215024,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -215435,10 +215102,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -215693,10 +215357,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -215774,10 +215435,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -215908,10 +215566,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -215989,10 +215644,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -216308,10 +215960,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -216389,10 +216038,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -216736,10 +216382,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -216817,10 +216460,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -217023,10 +216663,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -217104,10 +216741,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -217411,10 +217045,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -217492,10 +217123,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -217672,10 +217300,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -217753,10 +217378,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -218020,10 +217642,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -218101,10 +217720,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -218352,10 +217968,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -218433,10 +218046,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -218587,10 +218197,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -218668,10 +218275,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -218800,10 +218404,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -218881,10 +218482,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -218967,10 +218565,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -219048,10 +218643,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -219202,10 +218794,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -219283,10 +218872,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -219375,10 +218961,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -219456,10 +219039,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -220309,10 +219889,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -220390,10 +219967,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -220476,10 +220050,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -220557,10 +220128,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -220972,10 +220540,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -221053,10 +220618,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -221145,10 +220707,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -221226,10 +220785,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -221697,10 +221253,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -221778,10 +221331,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -221864,10 +221414,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -221945,10 +221492,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -222292,10 +221836,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -222373,10 +221914,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -222465,10 +222003,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -222546,10 +222081,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -222752,10 +222284,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -222833,10 +222362,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -223061,10 +222587,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -223142,10 +222665,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -223461,10 +222981,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -223542,10 +223059,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -223628,10 +223142,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -223709,10 +223220,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -224114,10 +223622,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -224195,10 +223700,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -224287,10 +223789,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -224368,10 +223867,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -224613,10 +224109,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -224694,10 +224187,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -224834,10 +224324,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -224915,10 +224402,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -225455,10 +224939,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -225536,10 +225017,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -225622,10 +225100,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -225703,10 +225178,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -225954,10 +225426,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -226035,10 +225504,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -226127,10 +225593,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -226208,10 +225671,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -226634,10 +226094,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -226715,10 +226172,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -226960,10 +226414,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -227041,10 +226492,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -227171,10 +226619,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -227252,10 +226697,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -227388,10 +226830,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -227469,10 +226908,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -227663,10 +227099,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -227744,10 +227177,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -227960,10 +227390,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -228041,10 +227468,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -228235,10 +227659,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -228316,10 +227737,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -228532,10 +227950,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -228613,10 +228028,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -230086,10 +229498,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -230167,10 +229576,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -230514,10 +229920,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -230595,10 +229998,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -231045,10 +230445,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -231126,10 +230523,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -231363,10 +230757,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -231444,10 +230835,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -231576,10 +230964,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -231657,10 +231042,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -231795,10 +231177,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -231876,10 +231255,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -232070,10 +231446,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -232151,10 +231524,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -232237,10 +231607,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -232318,10 +231685,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -232534,10 +231898,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -232615,10 +231976,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -232707,10 +232065,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -232788,10 +232143,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -232994,10 +232346,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -233075,10 +232424,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -233324,10 +232670,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -233405,10 +232748,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -233531,10 +232871,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -233612,10 +232949,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -233744,10 +233078,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -233825,10 +233156,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -234031,10 +233359,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -234112,10 +233437,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -234384,10 +233706,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -234465,10 +233784,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -234694,10 +234010,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -234775,10 +234088,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -234911,10 +234221,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -234992,10 +234299,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -235418,10 +234722,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -235499,10 +234800,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -235812,10 +235110,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -235893,10 +235188,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -236083,10 +235375,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -236164,10 +235453,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -236328,10 +235614,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -236409,10 +235692,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -236551,10 +235831,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -236632,10 +235909,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -236796,10 +236070,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -236877,10 +236148,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -237071,10 +236339,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -237152,10 +236417,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -237368,10 +236630,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -237449,10 +236708,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -237643,10 +236899,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -237724,10 +236977,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -237965,10 +237215,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -238046,10 +237293,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -238178,10 +237422,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -238259,10 +237500,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -238397,10 +237635,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -238478,10 +237713,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -238733,10 +237965,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -238814,10 +238043,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -239097,10 +238323,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -239178,10 +238401,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -239372,10 +238592,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -239453,10 +238670,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -239669,10 +238883,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -239750,10 +238961,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -240494,10 +239702,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -240575,10 +239780,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -240822,10 +240024,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -240903,10 +240102,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -240984,10 +240180,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -241065,10 +240258,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -241162,10 +240352,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -241243,10 +240430,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -241324,10 +240508,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -241405,10 +240586,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -241502,10 +240680,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -241583,10 +240758,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -242023,10 +241195,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -242104,10 +241273,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -242232,10 +241398,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -242313,10 +241476,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -242419,10 +241579,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -242500,10 +241657,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -242628,10 +241782,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -242709,10 +241860,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -242915,10 +242063,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -242996,10 +242141,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     tenantId?: string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
@@ -243224,10 +242366,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -243305,10 +242444,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenantId?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -246816,10 +245952,7 @@ export namespace Prisma {
     passwordHash?: string | null
     role?: string
     avatarPath?: string | null
-    position?: string | null
     managerId?: string | null
-    absentFrom?: Date | string | null
-    absentUntil?: Date | string | null
     isActive?: boolean
     lastLoginAt?: Date | string | null
     createdAt?: Date | string
@@ -247409,10 +246542,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -247490,10 +246620,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -247571,10 +246698,7 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
-    absentFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    absentUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

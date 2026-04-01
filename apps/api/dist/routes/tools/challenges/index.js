@@ -329,7 +329,7 @@ challengesRouter.post('/:id/vote', async (req, res) => {
             return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const challenge = await prisma.challenge.findFirst({ where: { id: challengeId, tenantId } });
         if (!challenge || challenge.mode !== 'VOTING') {
-            return res.status(400).json({ error: 'Diese Challenge unterstuetzt keine Abstimmung.' });
+            return res.status(400).json({ error: 'Diese Challenge unterstützt keine Abstimmung.' });
         }
         // Upsert vote
         const vote = await prisma.challengeVote.upsert({
