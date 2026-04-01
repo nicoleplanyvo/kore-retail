@@ -16,6 +16,7 @@ model User {
   passwordHash String?
   role         String    @default("learner")
   avatarPath   String?
+  position     String?
   managerId    String?
   tenantId     String?
   tenant       Tenant?   @relation(fields: [tenantId], references: [id])

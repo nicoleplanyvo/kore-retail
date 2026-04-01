@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { User, Upload, Trash2, Save, Lock } from 'lucide-react';
+import { Upload, Trash2, Save, Lock, MapPin, Briefcase } from 'lucide-react';
 import { api } from '../lib/api';
 import { Breadcrumb } from '../components/Breadcrumb';
 import { useToast } from '../components/Toast';
@@ -51,6 +51,7 @@ export function ProfilePage() {
   const deleteAvatar = useDeleteAvatar();
 
   const [name, setName] = useState('');
+  const [position, setPosition] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Password change state
@@ -64,7 +65,13 @@ export function ProfilePage() {
     if (profile?.name) setName(profile.name);
   }, [profile?.name]);
 
+  useEffect(() => {
+    setPosition(profile?.position ?? '');
+  }, [profile?.position]);
+
   const nameChanged = profile ? name.trim() !== profile.name : false;
+  const positionChanged = profile ? (position.trim() || null) !== (profile.position ?? null) : false;
+  const hasChanges = nameChanged || positionChanged;
 
   function handleFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -84,11 +91,14 @@ export function ProfilePage() {
   }
 
   function handleSave() {
-    if (!nameChanged) return;
-    updateProfile.mutate({ name: name.trim() }, {
-      onSuccess: () => toast.success('Profil gespeichert'),
-      onError: () => toast.error('Profil konnte nicht gespeichert werden'),
-    });
+    if (!hasChanges) return;
+    updateProfile.mutate(
+      { name: name.trim(), position: position.trim() || null },
+      {
+        onSuccess: () => toast.success('Profil gespeichert'),
+        onError: () => toast.error('Profil konnte nicht gespeichert werden'),
+      },
+    );
   }
 
   if (isLoading) {
@@ -227,6 +237,21 @@ export function ProfilePage() {
             </span>
           </div>
 
+          {/* Position (editable) */}
+          <div>
+            <label className="block font-body text-small text-kore-mid mb-1">Position</label>
+            <div className="relative">
+              <Briefcase size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-kore-mid pointer-events-none" />
+              <input
+                type="text"
+                value={position}
+                onChange={(e) => setPosition(e.target.value)}
+                placeholder="z.B. Store Manager, Verkaufsberater"
+                className="w-full pl-9 pr-3 py-2 rounded border border-kore-border font-body text-body text-kore-ink bg-kore-white focus:outline-none focus:ring-2 focus:ring-kore-brass/30 focus:border-kore-brass transition-colors"
+              />
+            </div>
+          </div>
+
           {/* Manager (read-only) */}
           <div>
             <label className="block font-body text-small text-kore-mid mb-1">Vorgesetzte/r</label>
@@ -237,13 +262,35 @@ export function ProfilePage() {
               className="w-full px-3 py-2 rounded border border-kore-border font-body text-body text-kore-mid bg-kore-faint cursor-not-allowed"
             />
           </div>
+
+          {/* Store Assignments (read-only) */}
+          <div>
+            <label className="block font-body text-small text-kore-mid mb-1">Zugewiesene Stores</label>
+            {profile.stores && profile.stores.length > 0 ? (
+              <div className="flex flex-wrap gap-sm">
+                {profile.stores.map((store) => (
+                  <span
+                    key={store.id}
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-kore-surface font-body text-small text-kore-ink"
+                  >
+                    <MapPin size={12} className="text-kore-mid" />
+                    {store.name}{store.city ? `, ${store.city}` : ''}
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <p className="px-3 py-2 rounded border border-kore-border font-body text-body text-kore-mid bg-kore-faint">
+                Kein Store zugewiesen
+              </p>
+            )}
+          </div>
         </div>
 
         {/* Save Button */}
         <div className="mt-xl flex justify-end">
           <button
             onClick={handleSave}
-            disabled={!nameChanged || updateProfile.isPending}
+            disabled={!hasChanges || updateProfile.isPending}
             className="flex items-center gap-[6px] px-4 py-2 rounded bg-kore-brass text-kore-white font-body text-small font-medium hover:bg-kore-brass-dk transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <Save size={14} />

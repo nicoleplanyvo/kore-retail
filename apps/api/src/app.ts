@@ -193,8 +193,11 @@ export function createApp(): Express {
   app.use('/api/messaging', messagingRouter);
   app.use('/api/notifications', notificationsRouter);
 
-  // Statische Uploads mit Auth-Schutz
+  // Statische Uploads
   const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? path.join(process.cwd(), 'uploads');
+  // Avatars sind öffentlich zugänglich (werden von <img>-Tags geladen, ohne Auth-Header)
+  app.use('/api/uploads/avatars', express.static(path.join(UPLOAD_DIR, 'avatars')));
+  // Alle anderen Uploads mit Auth-Schutz
   app.use('/api/uploads', authenticate, express.static(UPLOAD_DIR));
 
   return app;

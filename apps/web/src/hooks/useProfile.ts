@@ -1,14 +1,22 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { api, apiUpload } from '../lib/api';
 
+interface ProfileStore {
+  id: string;
+  name: string;
+  city: string | null;
+}
+
 interface Profile {
   id: string;
   name: string;
   email: string;
   role: string;
   avatarUrl: string | null;
+  position: string | null;
   managerId: string | null;
   managerName: string | null;
+  stores: ProfileStore[];
 }
 
 interface Colleague {
@@ -38,7 +46,8 @@ export function useColleagues() {
 export function useUpdateProfile() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (data: { name: string }) => api<Profile>('/api/profile', { method: 'PUT', body: JSON.stringify(data) }),
+    mutationFn: (data: { name: string; position?: string | null }) =>
+      api<Profile>('/api/profile', { method: 'PUT', body: JSON.stringify(data) }),
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['profile'] }); },
   });
 }
