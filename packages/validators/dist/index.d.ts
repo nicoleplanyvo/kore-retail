@@ -77,13 +77,13 @@ export declare const lessonCreateSchema: z.ZodObject<{
     order: z.ZodNumber;
     durationMins: z.ZodOptional<z.ZodNumber>;
 }, "strip", z.ZodTypeAny, {
-    type: "VIDEO" | "TEXT" | "QUIZ" | "CHECKLIST";
+    type: "TEXT" | "VIDEO" | "QUIZ" | "CHECKLIST";
     title: string;
     order: number;
     content: Record<string, unknown>;
     durationMins?: number | undefined;
 }, {
-    type: "VIDEO" | "TEXT" | "QUIZ" | "CHECKLIST";
+    type: "TEXT" | "VIDEO" | "QUIZ" | "CHECKLIST";
     title: string;
     order: number;
     content: Record<string, unknown>;

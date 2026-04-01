@@ -124,6 +124,7 @@ exports.Prisma.UserScalarFieldEnum = {
   passwordHash: 'passwordHash',
   role: 'role',
   avatarPath: 'avatarPath',
+  position: 'position',
   managerId: 'managerId',
   tenantId: 'tenantId',
   isActive: 'isActive',
@@ -252,6 +253,8 @@ exports.Prisma.AuditTemplateScalarFieldEnum = {
   isDefault: 'isDefault',
   isActive: 'isActive',
   createdBy: 'createdBy',
+  templateType: 'templateType',
+  recurrence: 'recurrence',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -272,7 +275,8 @@ exports.Prisma.AuditCriterionScalarFieldEnum = {
   description: 'description',
   sortOrder: 'sortOrder',
   isRequired: 'isRequired',
-  photoRequired: 'photoRequired'
+  photoRequired: 'photoRequired',
+  type: 'type'
 };
 
 exports.Prisma.AuditSessionScalarFieldEnum = {
@@ -284,7 +288,9 @@ exports.Prisma.AuditSessionScalarFieldEnum = {
   storeLocation: 'storeLocation',
   status: 'status',
   overallScore: 'overallScore',
+  completionRate: 'completionRate',
   notes: 'notes',
+  dueDate: 'dueDate',
   startedAt: 'startedAt',
   completedAt: 'completedAt',
   createdAt: 'createdAt',
@@ -299,6 +305,9 @@ exports.Prisma.AuditResponseScalarFieldEnum = {
   passed: 'passed',
   comment: 'comment',
   photoPath: 'photoPath',
+  valueBool: 'valueBool',
+  valueText: 'valueText',
+  valueNumber: 'valueNumber',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -375,9 +384,22 @@ exports.Prisma.SopScalarFieldEnum = {
   status: 'status',
   createdBy: 'createdBy',
   attachmentPath: 'attachmentPath',
+  deadline: 'deadline',
+  isMandatory: 'isMandatory',
+  isOverdue: 'isOverdue',
   publishedAt: 'publishedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SopAttachmentScalarFieldEnum = {
+  id: 'id',
+  sopId: 'sopId',
+  fileName: 'fileName',
+  filePath: 'filePath',
+  fileType: 'fileType',
+  fileSize: 'fileSize',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SopAcknowledgmentScalarFieldEnum = {
@@ -401,18 +423,34 @@ exports.Prisma.VmGuidelineScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.VmAreaScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  description: 'description',
+  pdfPath: 'pdfPath',
+  isActive: 'isActive',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.VmSubmissionScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
   guidelineId: 'guidelineId',
   storeId: 'storeId',
+  areaId: 'areaId',
   submittedBy: 'submittedBy',
   photoPath: 'photoPath',
   status: 'status',
   reviewedBy: 'reviewedBy',
   reviewNote: 'reviewNote',
   submittedAt: 'submittedAt',
-  reviewedAt: 'reviewedAt'
+  reviewedAt: 'reviewedAt',
+  deadline: 'deadline',
+  escalatedAt: 'escalatedAt',
+  escalatedTo: 'escalatedTo'
 };
 
 exports.Prisma.StandardCategoryScalarFieldEnum = {
@@ -459,6 +497,42 @@ exports.Prisma.StandardScoreScalarFieldEnum = {
   passed: 'passed',
   score: 'score',
   comment: 'comment'
+};
+
+exports.Prisma.RtbIndicatorScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  unit: 'unit',
+  weight: 'weight',
+  targetValue: 'targetValue',
+  higherIsBetter: 'higherIsBetter',
+  sortOrder: 'sortOrder',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.RtbEntryScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  storeId: 'storeId',
+  indicatorId: 'indicatorId',
+  period: 'period',
+  value: 'value',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.RtbSnapshotScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  storeId: 'storeId',
+  period: 'period',
+  totalScore: 'totalScore',
+  rank: 'rank',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.KpiEntryScalarFieldEnum = {
@@ -1449,13 +1523,18 @@ exports.Prisma.ModelName = {
   ChecklistEntry: 'ChecklistEntry',
   SopCategory: 'SopCategory',
   Sop: 'Sop',
+  SopAttachment: 'SopAttachment',
   SopAcknowledgment: 'SopAcknowledgment',
   VmGuideline: 'VmGuideline',
+  VmArea: 'VmArea',
   VmSubmission: 'VmSubmission',
   StandardCategory: 'StandardCategory',
   StandardDefinition: 'StandardDefinition',
   StandardEvaluation: 'StandardEvaluation',
   StandardScore: 'StandardScore',
+  RtbIndicator: 'RtbIndicator',
+  RtbEntry: 'RtbEntry',
+  RtbSnapshot: 'RtbSnapshot',
   KpiEntry: 'KpiEntry',
   BudgetPeriod: 'BudgetPeriod',
   BudgetActual: 'BudgetActual',

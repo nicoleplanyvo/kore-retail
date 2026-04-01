@@ -66,7 +66,7 @@ wellbeingRouter.post('/checkins', async (req, res) => {
         const tenantId = req.tenantId;
         const parsed = wellbeingCheckInCreateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const userId = parsed.data.isAnonymous ? null : req.user.sub;
         const checkin = await prisma.wellbeingCheckIn.create({
             data: { ...parsed.data, tenantId, userId },
@@ -106,7 +106,7 @@ wellbeingRouter.post('/resources', async (req, res) => {
         const tenantId = req.tenantId;
         const parsed = wellbeingResourceCreateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const resource = await prisma.wellbeingResource.create({
             data: { ...parsed.data, tenantId },
         });
@@ -127,7 +127,7 @@ wellbeingRouter.put('/resources/:id', async (req, res) => {
             return res.status(404).json({ error: 'Ressource nicht gefunden.' });
         const parsed = wellbeingResourceUpdateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const resource = await prisma.wellbeingResource.update({
             where: { id: req.params['id'] },
             data: parsed.data,

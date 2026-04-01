@@ -151,7 +151,7 @@ challengesRouter.post('/', async (req, res) => {
         const userId = req.user.sub;
         const parsed = challengeCreateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const { storeIds, ...challengeData } = parsed.data;
         const challenge = await prisma.challenge.create({
             data: { ...challengeData, tenantId, createdBy: userId },
@@ -241,7 +241,7 @@ challengesRouter.put('/:id', async (req, res) => {
         const tenantId = req.tenantId;
         const parsed = challengeUpdateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const existing = await prisma.challenge.findFirst({ where: { id: req.params['id'], tenantId } });
         if (!existing)
             return res.status(404).json({ error: 'Challenge nicht gefunden.' });
@@ -269,7 +269,7 @@ challengesRouter.put('/:id', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// ── DELETE /:id — Challenge loeschen ─────────────────
+// ── DELETE /:id — Challenge löschen ─────────────────
 challengesRouter.delete('/:id', async (req, res) => {
     try {
         const tenantId = req.tenantId;
@@ -292,7 +292,7 @@ challengesRouter.post('/:id/entries', async (req, res) => {
         const challengeId = req.params['id'];
         const parsed = challengeEntrySchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         // Verify challenge belongs to tenant
         const challengeCheck = await prisma.challenge.findFirst({ where: { id: challengeId, tenantId } });
         if (!challengeCheck)
@@ -326,7 +326,7 @@ challengesRouter.post('/:id/vote', async (req, res) => {
         const challengeId = req.params['id'];
         const parsed = challengeVoteSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const challenge = await prisma.challenge.findFirst({ where: { id: challengeId, tenantId } });
         if (!challenge || challenge.mode !== 'VOTING') {
             return res.status(400).json({ error: 'Diese Challenge unterstuetzt keine Abstimmung.' });

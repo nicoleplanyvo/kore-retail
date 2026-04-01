@@ -23,7 +23,7 @@ liveFloorRouter.get('/stores', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// ── GET /users — Mitarbeiter fuer Zuweisung ──────────
+// ── GET /users — Mitarbeiter für Zuweisung ──────────
 liveFloorRouter.get('/users', async (req, res) => {
     try {
         const tenantId = req.tenantId;
@@ -78,7 +78,7 @@ liveFloorRouter.post('/zones', async (req, res) => {
         const tenantId = req.tenantId;
         const parsed = floorZoneCreateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const zone = await prisma.floorZone.create({ data: { ...parsed.data, tenantId } });
         res.status(201).json(zone);
     }
@@ -96,7 +96,7 @@ liveFloorRouter.put('/zones/:id', async (req, res) => {
             return res.status(404).json({ error: 'Zone nicht gefunden.' });
         const parsed = floorZoneUpdateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const zone = await prisma.floorZone.update({ where: { id: req.params['id'] }, data: parsed.data });
         res.json(zone);
     }
@@ -105,7 +105,7 @@ liveFloorRouter.put('/zones/:id', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// ── DELETE /zones/:id — Zone loeschen ────────────────
+// ── DELETE /zones/:id — Zone löschen ────────────────
 liveFloorRouter.delete('/zones/:id', async (req, res) => {
     try {
         const tenantId = req.tenantId;
@@ -158,7 +158,7 @@ liveFloorRouter.put('/assignments', async (req, res) => {
         const userId = req.userId ?? req.user.sub;
         const parsed = floorBulkAssignSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const { assignments, storeId } = parsed.data;
         const results = [];
         for (const a of assignments) {
@@ -196,7 +196,7 @@ liveFloorRouter.post('/zones/:id/frequency', async (req, res) => {
         const userId = req.userId ?? req.user.sub;
         const parsed = floorFrequencyUpdateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.' });
+            return res.status(400).json({ error: 'Ungültige Daten.' });
         // Verify zone belongs to tenant
         const existing = await prisma.floorZone.findFirst({ where: { id: req.params['id'], tenantId } });
         if (!existing)
@@ -316,7 +316,7 @@ liveFloorRouter.get('/dashboard', async (req, res) => {
         const totalStaff = zones.reduce((s, z) => s + z.positions.length, 0);
         const totalCustomers = zones.reduce((s, z) => s + z.customerCount, 0);
         const activeZones = zones.filter((z) => z.positions.length > 0).length;
-        // Stundenaggregation fuer Peak-Analyse
+        // Stundenaggregation für Peak-Analyse
         const hourlyMap = {};
         for (const l of logs) {
             if (!hourlyMap[l.hour])
@@ -334,7 +334,7 @@ liveFloorRouter.get('/dashboard', async (req, res) => {
             entries: v.count,
         }))
             .sort((a, b) => b.avgCustomers - a.avgCustomers);
-        // Tagesaggregation fuer Trend
+        // Tagesaggregation für Trend
         const dailyMap = {};
         for (const l of logs) {
             if (!dailyMap[l.date])
@@ -411,7 +411,7 @@ liveFloorRouter.post('/positions', async (req, res) => {
         const userId = req.userId ?? req.user.sub;
         const parsed = floorPositionCreateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         await prisma.floorStaffPosition.updateMany({
             where: { userId: parsed.data.userId, storeId: parsed.data.storeId, endedAt: null },
             data: { endedAt: new Date() },
@@ -446,7 +446,7 @@ liveFloorRouter.put('/positions/:id', async (req, res) => {
         const userId = req.userId ?? req.user.sub;
         const parsed = floorPositionUpdateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const data = { ...parsed.data, updatedBy: userId };
         if (parsed.data.endedAt)
             data['endedAt'] = new Date(parsed.data.endedAt);

@@ -46,7 +46,7 @@ newsletterRouter.post('/', async (req, res) => {
         const userId = req.user.sub;
         const parsed = newsletterCreateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const newsletter = await prisma.newsletter.create({
             data: { ...parsed.data, tenantId, createdBy: userId },
             include: {
@@ -233,7 +233,7 @@ newsletterRouter.put('/:id', async (req, res) => {
             return res.status(404).json({ error: 'Newsletter nicht gefunden.' });
         const parsed = newsletterUpdateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const newsletter = await prisma.newsletter.update({
             where: { id: req.params['id'] },
             data: parsed.data,
@@ -345,7 +345,7 @@ newsletterRouter.post('/:id/sections', async (req, res) => {
             return res.status(404).json({ error: 'Newsletter nicht gefunden.' });
         const parsed = newsletterSectionSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         // Auto-assign sortOrder if not provided
         const maxOrder = await prisma.newsletterSection.findFirst({
             where: { newsletterId: req.params['id'] },
@@ -380,7 +380,7 @@ newsletterRouter.put('/sections/:sectionId', async (req, res) => {
             return res.status(404).json({ error: 'Abschnitt nicht gefunden.' });
         const parsed = newsletterSectionSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const section = await prisma.newsletterSection.update({
             where: { id: req.params['sectionId'] },
             data: {

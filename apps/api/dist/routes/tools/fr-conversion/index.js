@@ -29,7 +29,7 @@ frConversionRouter.put('/settings', async (req, res) => {
     try {
         const parsed = frSettingsSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const toolStoreIds = req.toolStoreIds;
         const storeId = req.body.storeId || (toolStoreIds !== 'all' ? toolStoreIds[0] : undefined);
         if (!storeId)
@@ -70,7 +70,7 @@ frConversionRouter.post('/rooms', async (req, res) => {
     try {
         const parsed = frRoomCreateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const toolStoreIds = req.toolStoreIds;
         const storeId = req.body.storeId || (toolStoreIds !== 'all' ? toolStoreIds[0] : undefined);
         if (!storeId)
@@ -163,7 +163,7 @@ frConversionRouter.post('/sessions/check-in', async (req, res) => {
     try {
         const parsed = frCheckInSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const toolStoreIds = req.toolStoreIds;
         const storeId = req.body.storeId || (toolStoreIds !== 'all' ? toolStoreIds[0] : undefined);
         if (!storeId)
@@ -202,7 +202,7 @@ frConversionRouter.put('/sessions/:id/check-out', async (req, res) => {
         const tenantId = req.tenantId;
         const parsed = frCheckOutSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const session = await prisma.fRSession.findFirst({ where: { id: req.params.id, store: { tenantId } } });
         if (!session)
             return res.status(404).json({ error: 'Session nicht gefunden.' });
@@ -238,7 +238,7 @@ frConversionRouter.put('/sessions/:id/add-items', async (req, res) => {
         const tenantId = req.tenantId;
         const parsed = frAddItemsSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const session = await prisma.fRSession.findFirst({ where: { id: req.params.id, store: { tenantId } } });
         if (!session)
             return res.status(404).json({ error: 'Session nicht gefunden.' });

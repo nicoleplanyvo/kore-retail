@@ -64,7 +64,7 @@ vmGuidelinesRouter.post('/', async (req, res) => {
         const userId = req.user.sub;
         const parsed = vmGuidelineDocCreateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const doc = await prisma.vmGuidelineDoc.create({
             data: { ...parsed.data, tenantId, createdBy: userId },
         });
@@ -140,7 +140,7 @@ vmGuidelinesRouter.put('/:id', async (req, res) => {
             return res.status(404).json({ error: 'Guideline nicht gefunden.' });
         const parsed = vmGuidelineDocUpdateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const doc = await prisma.vmGuidelineDoc.update({
             where: { id: req.params['id'] },
             data: { ...parsed.data, version: { increment: 1 } },
@@ -152,7 +152,7 @@ vmGuidelinesRouter.put('/:id', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// DELETE /:id — Guideline loeschen (archivieren)
+// DELETE /:id — Guideline löschen (archivieren)
 vmGuidelinesRouter.delete('/:id', async (req, res) => {
     try {
         const tenantId = req.tenantId;
@@ -170,7 +170,7 @@ vmGuidelinesRouter.delete('/:id', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// POST /:id/read — Lesebestaetigung
+// POST /:id/read — Lesebestätigung
 vmGuidelinesRouter.post('/:id/read', async (req, res) => {
     try {
         const userId = req.user.sub;
@@ -195,7 +195,7 @@ vmGuidelinesRouter.get('/:id/readers', async (_req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// POST /:id/publish — Veroeffentlichen
+// POST /:id/publish — Veröffentlichen
 vmGuidelinesRouter.post('/:id/publish', async (req, res) => {
     try {
         const tenantId = req.tenantId;
@@ -231,7 +231,7 @@ vmGuidelinesRouter.post('/:id/archive', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// POST /:id/images — Bild zur Guideline hinzufuegen
+// POST /:id/images — Bild zur Guideline hinzufügen
 vmGuidelinesRouter.post('/:id/images', async (req, res) => {
     try {
         const tenantId = req.tenantId;

@@ -142,7 +142,7 @@ budgetTrackerRouter.post('/targets', async (req, res) => {
         const userId = req.userId;
         const parsed = targetCreateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const { storeId, period, targetRevenue, minTarget, notes } = parsed.data;
         // Upsert: update if exists, create otherwise
         const existing = await prisma.budgetPeriod.findFirst({
@@ -182,7 +182,7 @@ budgetTrackerRouter.post('/targets', async (req, res) => {
     }
     catch (err) {
         if (err.code === 'P2002')
-            return res.status(409).json({ error: 'Ziel fuer diese Periode existiert bereits.' });
+            return res.status(409).json({ error: 'Ziel für diese Periode existiert bereits.' });
         console.error(err);
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
@@ -194,7 +194,7 @@ budgetTrackerRouter.post('/targets/import', async (req, res) => {
         const userId = req.userId;
         const parsed = targetImportSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const { storeId, entries } = parsed.data;
         let created = 0;
         let updated = 0;
@@ -312,7 +312,7 @@ budgetTrackerRouter.post('/actuals', async (req, res) => {
         const userId = req.userId;
         const parsed = actualCreateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const { storeId, date, amount, description } = parsed.data;
         const period = date.slice(0, 7); // "2025-03-15" -> "2025-03"
         // Find or create budget period
@@ -369,7 +369,7 @@ budgetTrackerRouter.put('/actuals/:id', async (req, res) => {
         const tenantId = req.tenantId;
         const parsed = actualUpdateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.' });
+            return res.status(400).json({ error: 'Ungültige Daten.' });
         // Verify ownership via budget period
         const actual = await prisma.budgetActual.findUnique({
             where: { id: req.params.id },
@@ -478,7 +478,7 @@ budgetTrackerRouter.get('/forecast', async (req, res) => {
             alerts.push({ type: 'danger', message: `Hochrechnung (${Math.round(projection).toLocaleString('de-DE')} EUR) liegt unter Mindestziel (${Math.round(minTarget).toLocaleString('de-DE')} EUR).` });
         }
         if (projectedAchievement > 100) {
-            alerts.push({ type: 'success', message: `Zielerreichung voraussichtlich ${projectedAchievement.toFixed(1)}% — Uebererfuellung erwartet.` });
+            alerts.push({ type: 'success', message: `Zielerreichung voraussichtlich ${projectedAchievement.toFixed(1)}% — Übererfüllung erwartet.` });
         }
         res.json({
             storeId,

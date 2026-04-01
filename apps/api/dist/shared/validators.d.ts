@@ -641,27 +641,39 @@ export declare const sopCreateSchema: z.ZodObject<{
     categoryId: z.ZodString;
     title: z.ZodString;
     content: z.ZodString;
+    deadline: z.ZodOptional<z.ZodNullable<z.ZodString>>;
+    isMandatory: z.ZodOptional<z.ZodBoolean>;
 }, "strip", z.ZodTypeAny, {
     title: string;
     content: string;
     categoryId: string;
+    deadline?: string | null | undefined;
+    isMandatory?: boolean | undefined;
 }, {
     title: string;
     content: string;
     categoryId: string;
+    deadline?: string | null | undefined;
+    isMandatory?: boolean | undefined;
 }>;
 export declare const sopUpdateSchema: z.ZodObject<{
     categoryId: z.ZodOptional<z.ZodString>;
     title: z.ZodOptional<z.ZodString>;
     content: z.ZodOptional<z.ZodString>;
+    deadline: z.ZodOptional<z.ZodNullable<z.ZodString>>;
+    isMandatory: z.ZodOptional<z.ZodBoolean>;
 }, "strip", z.ZodTypeAny, {
     title?: string | undefined;
     content?: string | undefined;
     categoryId?: string | undefined;
+    deadline?: string | null | undefined;
+    isMandatory?: boolean | undefined;
 }, {
     title?: string | undefined;
     content?: string | undefined;
     categoryId?: string | undefined;
+    deadline?: string | null | undefined;
+    isMandatory?: boolean | undefined;
 }>;
 export type ChecklistTemplateCreateInput = z.infer<typeof checklistTemplateCreateSchema>;
 export type ChecklistTemplateUpdateInput = z.infer<typeof checklistTemplateUpdateSchema>;
@@ -705,12 +717,18 @@ export declare const vmGuidelineUpdateSchema: z.ZodObject<{
 export declare const vmSubmissionCreateSchema: z.ZodObject<{
     guidelineId: z.ZodString;
     storeId: z.ZodString;
+    areaId: z.ZodOptional<z.ZodString>;
+    deadline: z.ZodOptional<z.ZodString>;
 }, "strip", z.ZodTypeAny, {
     storeId: string;
     guidelineId: string;
+    deadline?: string | undefined;
+    areaId?: string | undefined;
 }, {
     storeId: string;
     guidelineId: string;
+    deadline?: string | undefined;
+    areaId?: string | undefined;
 }>;
 export declare const vmReviewSchema: z.ZodObject<{
     status: z.ZodEnum<["APPROVED", "REJECTED"]>;
@@ -721,6 +739,35 @@ export declare const vmReviewSchema: z.ZodObject<{
 }, {
     status: "APPROVED" | "REJECTED";
     reviewNote?: string | undefined;
+}>;
+export declare const vmAreaCreateSchema: z.ZodObject<{
+    name: z.ZodString;
+    description: z.ZodOptional<z.ZodString>;
+    sortOrder: z.ZodDefault<z.ZodNumber>;
+}, "strip", z.ZodTypeAny, {
+    name: string;
+    sortOrder: number;
+    description?: string | undefined;
+}, {
+    name: string;
+    description?: string | undefined;
+    sortOrder?: number | undefined;
+}>;
+export declare const vmAreaUpdateSchema: z.ZodObject<{
+    name: z.ZodOptional<z.ZodString>;
+    description: z.ZodOptional<z.ZodString>;
+    isActive: z.ZodOptional<z.ZodBoolean>;
+    sortOrder: z.ZodOptional<z.ZodNumber>;
+}, "strip", z.ZodTypeAny, {
+    name?: string | undefined;
+    description?: string | undefined;
+    sortOrder?: number | undefined;
+    isActive?: boolean | undefined;
+}, {
+    name?: string | undefined;
+    description?: string | undefined;
+    sortOrder?: number | undefined;
+    isActive?: boolean | undefined;
 }>;
 export declare const standardCategoryCreateSchema: z.ZodObject<{
     name: z.ZodString;
@@ -834,6 +881,8 @@ export type VmGuidelineCreateInput = z.infer<typeof vmGuidelineCreateSchema>;
 export type VmGuidelineUpdateInput = z.infer<typeof vmGuidelineUpdateSchema>;
 export type VmSubmissionCreateInput = z.infer<typeof vmSubmissionCreateSchema>;
 export type VmReviewInput = z.infer<typeof vmReviewSchema>;
+export type VmAreaCreateInput = z.infer<typeof vmAreaCreateSchema>;
+export type VmAreaUpdateInput = z.infer<typeof vmAreaUpdateSchema>;
 export type StandardCategoryCreateInput = z.infer<typeof standardCategoryCreateSchema>;
 export type StandardCategoryUpdateInput = z.infer<typeof standardCategoryUpdateSchema>;
 export type StandardDefinitionCreateInput = z.infer<typeof standardDefinitionCreateSchema>;

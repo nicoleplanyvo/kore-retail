@@ -212,7 +212,7 @@ briefingsRouter.post('/', async (req, res) => {
         const userId = req.user.sub;
         const parsed = briefingCreateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const { sections, storeId, ...rest } = parsed.data;
         const briefing = await prisma.briefing.create({
             data: {
@@ -274,7 +274,7 @@ briefingsRouter.put('/:id', async (req, res) => {
             return res.status(404).json({ error: 'Briefing nicht gefunden.' });
         const parsed = briefingUpdateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const { sections, ...rest } = parsed.data;
         const updateData = { ...rest };
         if (sections !== undefined)

@@ -2,23 +2,184 @@ import { Router } from 'express';
 import prisma from '../../../lib/prisma.js';
 import { authenticate } from '../../../middleware/auth.js';
 import { requireToolAccess } from '../../../middleware/requireToolAccess.js';
-import { vmSubmissionCreateSchema, vmReviewSchema } from '../../../shared/validators.js';
+import { vmSubmissionCreateSchema, vmReviewSchema, vmAreaCreateSchema, vmAreaUpdateSchema, } from '../../../shared/validators.js';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
-const uploadDir = path.resolve('data/uploads/vm-submissions');
-if (!fs.existsSync(uploadDir))
-    fs.mkdirSync(uploadDir, { recursive: true });
-const upload = multer({
+/* ------------------------------------------------------------------ */
+/*  Upload directories — use same base dir as static /api/uploads      */
+/* ------------------------------------------------------------------ */
+const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? path.join(process.cwd(), 'uploads');
+const photoDir = path.join(UPLOAD_DIR, 'vm-submissions');
+if (!fs.existsSync(photoDir))
+    fs.mkdirSync(photoDir, { recursive: true });
+const pdfDir = path.join(UPLOAD_DIR, 'vm-area-pdfs');
+if (!fs.existsSync(pdfDir))
+    fs.mkdirSync(pdfDir, { recursive: true });
+const photoUpload = multer({
     storage: multer.diskStorage({
-        destination: uploadDir,
+        destination: photoDir,
         filename: (_r, file, cb) => cb(null, `${Date.now()}-${file.originalname}`),
     }),
     limits: { fileSize: 10 * 1024 * 1024 },
 });
+const pdfUpload = multer({
+    storage: multer.diskStorage({
+        destination: pdfDir,
+        filename: (_r, file, cb) => cb(null, `${Date.now()}-${file.originalname}`),
+    }),
+    limits: { fileSize: 20 * 1024 * 1024 },
+    fileFilter: (_req, file, cb) => {
+        if (file.mimetype === 'application/pdf') {
+            cb(null, true);
+        }
+        else {
+            cb(new Error('Nur PDF-Dateien sind erlaubt.'));
+        }
+    },
+});
+/* ------------------------------------------------------------------ */
+/*  Router setup                                                       */
+/* ------------------------------------------------------------------ */
 export const vmComplianceRouter = Router();
 vmComplianceRouter.use(authenticate, requireToolAccess('standards.vm_foto_compliance'));
-// GET /stores
+/* ================================================================== */
+/*  AREAS — Bereiche definieren                                        */
+/* ================================================================== */
+/** GET /areas — Liste aller aktiven Bereiche */
+vmComplianceRouter.get('/areas', async (req, res) => {
+    try {
+        const tenantId = req.tenantId;
+        const showAll = req.query.showAll === 'true';
+        const where = { tenantId };
+        if (!showAll)
+            where['isActive'] = true;
+        const areas = await prisma.vmArea.findMany({
+            where,
+            orderBy: { sortOrder: 'asc' },
+            include: { _count: { select: { submissions: true } } },
+        });
+        res.json(areas);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Interner Serverfehler.' });
+    }
+});
+/** POST /areas — Neuen Bereich anlegen */
+vmComplianceRouter.post('/areas', async (req, res) => {
+    try {
+        const tenantId = req.tenantId;
+        const parsed = vmAreaCreateSchema.safeParse(req.body);
+        if (!parsed.success) {
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
+        }
+        const area = await prisma.vmArea.create({
+            data: { tenantId, ...parsed.data },
+        });
+        res.status(201).json(area);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Interner Serverfehler.' });
+    }
+});
+/** PUT /areas/:id — Bereich aktualisieren */
+vmComplianceRouter.put('/areas/:id', async (req, res) => {
+    try {
+        const tenantId = req.tenantId;
+        const parsed = vmAreaUpdateSchema.safeParse(req.body);
+        if (!parsed.success) {
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
+        }
+        const existing = await prisma.vmArea.findFirst({
+            where: { id: req.params['id'], tenantId },
+        });
+        if (!existing)
+            return res.status(404).json({ error: 'Bereich nicht gefunden.' });
+        const updated = await prisma.vmArea.update({
+            where: { id: req.params['id'] },
+            data: parsed.data,
+        });
+        res.json(updated);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Interner Serverfehler.' });
+    }
+});
+/** DELETE /areas/:id — Bereich soft-löschen (isActive = false) */
+vmComplianceRouter.delete('/areas/:id', async (req, res) => {
+    try {
+        const tenantId = req.tenantId;
+        const existing = await prisma.vmArea.findFirst({
+            where: { id: req.params['id'], tenantId },
+        });
+        if (!existing)
+            return res.status(404).json({ error: 'Bereich nicht gefunden.' });
+        const updated = await prisma.vmArea.update({
+            where: { id: req.params['id'] },
+            data: { isActive: false },
+        });
+        res.json(updated);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Interner Serverfehler.' });
+    }
+});
+/** POST /areas/:id/pdf — PDF-Guideline hochladen */
+vmComplianceRouter.post('/areas/:id/pdf', pdfUpload.single('pdf'), async (req, res) => {
+    try {
+        const tenantId = req.tenantId;
+        const areaId = req.params['id'];
+        const existing = await prisma.vmArea.findFirst({
+            where: { id: areaId, tenantId },
+        });
+        if (!existing)
+            return res.status(404).json({ error: 'Bereich nicht gefunden.' });
+        if (!req.file)
+            return res.status(400).json({ error: 'PDF-Datei ist erforderlich.' });
+        const pdfPath = `/api/uploads/vm-area-pdfs/${req.file.filename}`;
+        const updated = await prisma.vmArea.update({
+            where: { id: areaId },
+            data: { pdfPath },
+        });
+        res.json(updated);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Interner Serverfehler.' });
+    }
+});
+/** GET /areas/:id/pdf — PDF anzeigen/herunterladen */
+vmComplianceRouter.get('/areas/:id/pdf', async (req, res) => {
+    try {
+        const tenantId = req.tenantId;
+        const area = await prisma.vmArea.findFirst({
+            where: { id: req.params['id'], tenantId },
+        });
+        if (!area || !area.pdfPath) {
+            return res.status(404).json({ error: 'PDF nicht gefunden.' });
+        }
+        // pdfPath is stored as "/api/uploads/vm-area-pdfs/..." — strip "/api/uploads/" to get relative
+        const relativePdf = area.pdfPath.replace(/^\/api\/uploads\//, '');
+        const filePath = path.join(UPLOAD_DIR, relativePdf);
+        if (!fs.existsSync(filePath)) {
+            return res.status(404).json({ error: 'PDF-Datei nicht vorhanden.' });
+        }
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', `inline; filename="${path.basename(filePath)}"`);
+        fs.createReadStream(filePath).pipe(res);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Interner Serverfehler.' });
+    }
+});
+/* ================================================================== */
+/*  STORES                                                             */
+/* ================================================================== */
 vmComplianceRouter.get('/stores', async (req, res) => {
     try {
         const toolStoreIds = req.toolStoreIds;
@@ -28,7 +189,11 @@ vmComplianceRouter.get('/stores', async (req, res) => {
             where['id'] = { in: toolStoreIds };
         else if (tenantId)
             where['tenantId'] = tenantId;
-        const stores = await prisma.store.findMany({ where, select: { id: true, name: true, city: true }, orderBy: { name: 'asc' } });
+        const stores = await prisma.store.findMany({
+            where,
+            select: { id: true, name: true, city: true },
+            orderBy: { name: 'asc' },
+        });
         res.json(stores);
     }
     catch (err) {
@@ -36,7 +201,9 @@ vmComplianceRouter.get('/stores', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// GET /users
+/* ================================================================== */
+/*  USERS                                                              */
+/* ================================================================== */
 vmComplianceRouter.get('/users', async (req, res) => {
     try {
         const tenantId = req.tenantId;
@@ -52,7 +219,91 @@ vmComplianceRouter.get('/users', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// GET /checks — Compliance-Checks Liste
+/* ================================================================== */
+/*  CHECKS — Compliance-Submissions                                    */
+/* ================================================================== */
+/* NOTE: /checks/overdue and /checks/escalate are registered BEFORE    */
+/* /checks/:id so Express does not treat "overdue"/"escalate" as :id   */
+/** GET /checks/overdue — Überfällige Checks auflisten */
+vmComplianceRouter.get('/checks/overdue', async (req, res) => {
+    try {
+        const tenantId = req.tenantId;
+        const toolStoreIds = req.toolStoreIds;
+        const where = {
+            tenantId,
+            status: 'PENDING',
+            deadline: { lt: new Date() },
+        };
+        if (toolStoreIds !== 'all')
+            where['storeId'] = { in: toolStoreIds };
+        const overdue = await prisma.vmSubmission.findMany({
+            where,
+            include: {
+                guideline: { select: { id: true, name: true } },
+                store: { select: { id: true, name: true, city: true } },
+                submitter: { select: { id: true, name: true, managerId: true } },
+                area: { select: { id: true, name: true } },
+            },
+            orderBy: { deadline: 'asc' },
+        });
+        res.json(overdue);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Interner Serverfehler.' });
+    }
+});
+/** POST /checks/escalate — Eskalation für überfällige Checks auslösen */
+vmComplianceRouter.post('/checks/escalate', async (req, res) => {
+    try {
+        const tenantId = req.tenantId;
+        const overdueChecks = await prisma.vmSubmission.findMany({
+            where: {
+                tenantId,
+                status: 'PENDING',
+                deadline: { lt: new Date() },
+                escalatedAt: null,
+            },
+            include: {
+                submitter: { select: { id: true, name: true, managerId: true } },
+                guideline: { select: { name: true } },
+                store: { select: { name: true } },
+                area: { select: { name: true } },
+            },
+        });
+        const escalated = [];
+        for (const check of overdueChecks) {
+            const managerId = check.submitter?.managerId;
+            if (!managerId)
+                continue;
+            const areaName = check.area?.name ?? check.guideline?.name ?? 'VM Check';
+            const storeName = check.store?.name ?? 'Unbekannter Store';
+            await prisma.$transaction([
+                prisma.vmSubmission.update({
+                    where: { id: check.id },
+                    data: { escalatedAt: new Date(), escalatedTo: managerId },
+                }),
+                prisma.notification.create({
+                    data: {
+                        tenantId,
+                        userId: managerId,
+                        type: 'VM_ESCALATION',
+                        title: `Überfälliger VM-Check: ${areaName}`,
+                        body: `Der VM-Compliance-Check für "${areaName}" im Store "${storeName}" ist überfällig und wurde eskaliert.`,
+                        link: `/app/tools/vm-compliance/checks/${check.id}`,
+                    },
+                }),
+            ]);
+            escalated.push(check.id);
+        }
+        res.json({ escalatedCount: escalated.length, escalatedIds: escalated });
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Interner Serverfehler.' });
+    }
+});
+/** GET /checks — Liste aller Checks */
 vmComplianceRouter.get('/checks', async (req, res) => {
     try {
         const tenantId = req.tenantId;
@@ -66,6 +317,8 @@ vmComplianceRouter.get('/checks', async (req, res) => {
             where['storeId'] = { in: toolStoreIds };
         if (req.query.status)
             where['status'] = req.query.status;
+        if (req.query.areaId)
+            where['areaId'] = req.query.areaId;
         if (req.query.from || req.query.to) {
             where['submittedAt'] = {};
             if (req.query.from)
@@ -80,6 +333,7 @@ vmComplianceRouter.get('/checks', async (req, res) => {
                     guideline: { select: { id: true, name: true, category: true, referencePhoto: true } },
                     store: { select: { id: true, name: true, city: true } },
                     submitter: { select: { id: true, name: true } },
+                    area: { select: { id: true, name: true } },
                 },
                 orderBy: { submittedAt: 'desc' },
                 skip: (page - 1) * pageSize,
@@ -94,14 +348,15 @@ vmComplianceRouter.get('/checks', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// POST /checks — Neuen Check einreichen
-vmComplianceRouter.post('/checks', upload.single('photo'), async (req, res) => {
+/** POST /checks — Neuen Check einreichen (supports area + deadline) */
+vmComplianceRouter.post('/checks', photoUpload.single('photo'), async (req, res) => {
     try {
         const tenantId = req.tenantId;
         const userId = req.user.sub;
         const parsed = vmSubmissionCreateSchema.safeParse(req.body);
-        if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+        if (!parsed.success) {
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
+        }
         if (!req.file)
             return res.status(400).json({ error: 'Foto ist erforderlich.' });
         const guideline = await prisma.vmGuideline.findFirst({
@@ -109,17 +364,27 @@ vmComplianceRouter.post('/checks', upload.single('photo'), async (req, res) => {
         });
         if (!guideline)
             return res.status(404).json({ error: 'Guideline nicht gefunden.' });
+        if (parsed.data.areaId) {
+            const area = await prisma.vmArea.findFirst({
+                where: { id: parsed.data.areaId, tenantId, isActive: true },
+            });
+            if (!area)
+                return res.status(404).json({ error: 'Bereich nicht gefunden.' });
+        }
         const submission = await prisma.vmSubmission.create({
             data: {
                 tenantId,
                 guidelineId: parsed.data.guidelineId,
                 storeId: parsed.data.storeId,
+                areaId: parsed.data.areaId || null,
                 submittedBy: userId,
-                photoPath: `/uploads/vm-submissions/${req.file.filename}`,
+                photoPath: `/api/uploads/vm-submissions/${req.file.filename}`,
+                deadline: parsed.data.deadline ? new Date(parsed.data.deadline) : null,
             },
             include: {
                 guideline: { select: { id: true, name: true } },
                 store: { select: { id: true, name: true } },
+                area: { select: { id: true, name: true } },
             },
         });
         res.status(201).json(submission);
@@ -129,7 +394,7 @@ vmComplianceRouter.post('/checks', upload.single('photo'), async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// GET /checks/:id — Check Detail
+/** GET /checks/:id — Check Detail */
 vmComplianceRouter.get('/checks/:id', async (req, res) => {
     try {
         const tenantId = req.tenantId;
@@ -140,6 +405,7 @@ vmComplianceRouter.get('/checks/:id', async (req, res) => {
                 store: { select: { id: true, name: true, city: true } },
                 submitter: { select: { id: true, name: true } },
                 reviewer: { select: { id: true, name: true } },
+                area: { select: { id: true, name: true, pdfPath: true } },
             },
         });
         if (!submission)
@@ -151,14 +417,15 @@ vmComplianceRouter.get('/checks/:id', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// PUT /checks/:id — Review / Bewertung
+/** PUT /checks/:id — Review / Bewertung */
 vmComplianceRouter.put('/checks/:id', async (req, res) => {
     try {
         const tenantId = req.tenantId;
         const userId = req.user.sub;
         const parsed = vmReviewSchema.safeParse(req.body);
-        if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+        if (!parsed.success) {
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
+        }
         const submission = await prisma.vmSubmission.findFirst({
             where: { id: req.params['id'], tenantId },
         });
@@ -175,6 +442,7 @@ vmComplianceRouter.put('/checks/:id', async (req, res) => {
             include: {
                 guideline: { select: { id: true, name: true } },
                 store: { select: { id: true, name: true } },
+                area: { select: { id: true, name: true } },
             },
         });
         res.json(updated);
@@ -184,7 +452,9 @@ vmComplianceRouter.put('/checks/:id', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// GET /dashboard — Dashboard-Daten
+/* ================================================================== */
+/*  DASHBOARD                                                          */
+/* ================================================================== */
 vmComplianceRouter.get('/dashboard', async (req, res) => {
     try {
         const tenantId = req.tenantId;
@@ -201,6 +471,14 @@ vmComplianceRouter.get('/dashboard', async (req, res) => {
         const complianceRate = (approved + rejected) > 0
             ? Math.round((approved / (approved + rejected)) * 100)
             : 0;
+        // Overdue count
+        const overdueCount = await prisma.vmSubmission.count({
+            where: {
+                ...storeFilter,
+                status: 'PENDING',
+                deadline: { lt: new Date() },
+            },
+        });
         // Store ranking
         const storeWhere = { tenantId, isActive: true };
         if (toolStoreIds !== 'all')
@@ -272,6 +550,7 @@ vmComplianceRouter.get('/dashboard', async (req, res) => {
             rejected,
             pending,
             complianceRate,
+            overdueCount,
             storeRanking,
             trend,
             worstAreas,
@@ -282,7 +561,9 @@ vmComplianceRouter.get('/dashboard', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// GET /guidelines — VM Guidelines (for the submit form)
+/* ================================================================== */
+/*  GUIDELINES                                                         */
+/* ================================================================== */
 vmComplianceRouter.get('/guidelines', async (req, res) => {
     try {
         const tenantId = req.tenantId;
@@ -298,7 +579,9 @@ vmComplianceRouter.get('/guidelines', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// GET /reports/summary — Compliance-Rate Overview (legacy compat)
+/* ================================================================== */
+/*  REPORTS / LEGACY COMPAT                                            */
+/* ================================================================== */
 vmComplianceRouter.get('/reports/summary', async (req, res) => {
     try {
         const tenantId = req.tenantId;
@@ -312,7 +595,9 @@ vmComplianceRouter.get('/reports/summary', async (req, res) => {
             prisma.vmSubmission.count({ where: { ...storeFilter, status: 'REJECTED' } }),
             prisma.vmSubmission.count({ where: { ...storeFilter, status: 'PENDING' } }),
         ]);
-        const complianceRate = (approved + rejected) > 0 ? Math.round((approved / (approved + rejected)) * 100) : 0;
+        const complianceRate = (approved + rejected) > 0
+            ? Math.round((approved / (approved + rejected)) * 100)
+            : 0;
         res.json({ totalSubmissions, approved, rejected, pending, complianceRate });
     }
     catch (err) {
@@ -320,7 +605,6 @@ vmComplianceRouter.get('/reports/summary', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// GET /submissions — legacy compat
 vmComplianceRouter.get('/submissions', async (req, res) => {
     try {
         const tenantId = req.tenantId;
@@ -343,6 +627,7 @@ vmComplianceRouter.get('/submissions', async (req, res) => {
                     guideline: { select: { id: true, name: true, category: true, referencePhoto: true } },
                     store: { select: { id: true, name: true, city: true } },
                     submitter: { select: { id: true, name: true } },
+                    area: { select: { id: true, name: true } },
                 },
                 orderBy: { submittedAt: 'desc' },
                 skip: (page - 1) * pageSize,
@@ -357,14 +642,14 @@ vmComplianceRouter.get('/submissions', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// POST /submissions — legacy compat
-vmComplianceRouter.post('/submissions', upload.single('photo'), async (req, res) => {
+vmComplianceRouter.post('/submissions', photoUpload.single('photo'), async (req, res) => {
     try {
         const tenantId = req.tenantId;
         const userId = req.user.sub;
         const parsed = vmSubmissionCreateSchema.safeParse(req.body);
-        if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+        if (!parsed.success) {
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
+        }
         if (!req.file)
             return res.status(400).json({ error: 'Foto ist erforderlich.' });
         const guideline = await prisma.vmGuideline.findFirst({
@@ -377,12 +662,15 @@ vmComplianceRouter.post('/submissions', upload.single('photo'), async (req, res)
                 tenantId,
                 guidelineId: parsed.data.guidelineId,
                 storeId: parsed.data.storeId,
+                areaId: parsed.data.areaId || null,
                 submittedBy: userId,
-                photoPath: `/uploads/vm-submissions/${req.file.filename}`,
+                photoPath: `/api/uploads/vm-submissions/${req.file.filename}`,
+                deadline: parsed.data.deadline ? new Date(parsed.data.deadline) : null,
             },
             include: {
                 guideline: { select: { id: true, name: true } },
                 store: { select: { id: true, name: true } },
+                area: { select: { id: true, name: true } },
             },
         });
         res.status(201).json(submission);
@@ -392,14 +680,14 @@ vmComplianceRouter.post('/submissions', upload.single('photo'), async (req, res)
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// PUT /reviews/submissions/:id/review — legacy compat
 vmComplianceRouter.put('/reviews/submissions/:id/review', async (req, res) => {
     try {
         const tenantId = req.tenantId;
         const userId = req.user.sub;
         const parsed = vmReviewSchema.safeParse(req.body);
-        if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+        if (!parsed.success) {
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
+        }
         const submission = await prisma.vmSubmission.findFirst({
             where: { id: req.params['id'], tenantId },
         });

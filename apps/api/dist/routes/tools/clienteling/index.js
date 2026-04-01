@@ -95,7 +95,7 @@ clientelingRouter.post('/customers', async (req, res) => {
         const userId = req.user.sub;
         const parsed = clientProfileCreateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const storeId = req.body.storeId || (toolStoreIds !== 'all' ? toolStoreIds[0] : undefined);
         if (!storeId)
             return res.status(400).json({ error: 'storeId ist erforderlich.' });
@@ -156,7 +156,7 @@ clientelingRouter.put('/customers/:id', async (req, res) => {
             return res.status(404).json({ error: 'Kunde nicht gefunden.' });
         const parsed = clientProfileUpdateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const data = { ...parsed.data };
         if (parsed.data.lastVisit)
             data['lastVisit'] = new Date(parsed.data.lastVisit);
@@ -185,7 +185,7 @@ clientelingRouter.delete('/customers/:id', async (req, res) => {
         // Cascade: interactions, tasks are cascade-deleted by schema
         // Appointments: clientId set to null
         await prisma.clientProfile.delete({ where: { id: req.params['id'] } });
-        res.json({ success: true, message: 'Kundendaten wurden DSGVO-konform geloescht.' });
+        res.json({ success: true, message: 'Kundendaten wurden DSGVO-konform gelöscht.' });
     }
     catch (err) {
         if (err.code === 'P2025')
@@ -204,7 +204,7 @@ clientelingRouter.post('/customers/:id/interactions', async (req, res) => {
         const userId = req.user.sub;
         const parsed = clientInteractionSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const data = {
             clientId: req.params['id'],
             userId,
@@ -265,7 +265,7 @@ clientelingRouter.post('/appointments', async (req, res) => {
         const userId = req.user.sub;
         const parsed = clientAppointmentCreateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const appointment = await prisma.clientAppointment.create({
             data: {
                 ...parsed.data,
@@ -296,7 +296,7 @@ clientelingRouter.put('/appointments/:id', async (req, res) => {
             return res.status(404).json({ error: 'Termin nicht gefunden.' });
         const parsed = clientAppointmentUpdateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const data = { ...parsed.data };
         if (parsed.data.startsAt)
             data['startsAt'] = new Date(parsed.data.startsAt);

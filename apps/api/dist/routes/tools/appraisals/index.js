@@ -6,7 +6,7 @@ export const appraisalsRouter = Router();
 appraisalsRouter.use(authenticate, requireToolAccess('coaching.appraisals'));
 /* ──────────────────────────────────────────
    Rating-Skala
-   5 = Uebertrifft Erwartungen
+   5 = Übertrifft Erwartungen
    4 = Erreicht voll
    3 = Erreicht
    2 = Teilweise erreicht
@@ -266,7 +266,7 @@ appraisalsRouter.post('/appraisals/:id/self-assessment', async (req, res) => {
             return res.status(404).json({ error: 'Beurteilung nicht gefunden.' });
         const { categories } = req.body;
         if (!categories || !Array.isArray(categories)) {
-            return res.status(400).json({ error: 'Kategorien muessen angegeben werden.' });
+            return res.status(400).json({ error: 'Kategorien müssen angegeben werden.' });
         }
         let detail = {};
         try {

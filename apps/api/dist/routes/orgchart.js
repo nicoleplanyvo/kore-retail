@@ -97,7 +97,7 @@ orgchartRouter.put('/manager', requireMinRole('tenant_admin'), async (req, res) 
             // Both users must belong to the same tenant
             if (targetUser.tenantId !== managerUser.tenantId) {
                 res.status(400).json({
-                    error: 'Benutzer und Vorgesetzter muessen demselben Mandanten angehoeren.',
+                    error: 'Benutzer und Vorgesetzter müssen demselben Mandanten angehören.',
                 });
                 return;
             }
@@ -115,7 +115,7 @@ orgchartRouter.put('/manager', requireMinRole('tenant_admin'), async (req, res) 
                     break;
                 if (current.managerId === userId) {
                     res.status(400).json({
-                        error: 'Zirkulaere Referenz: Der Vorgesetzte befindet sich bereits in der Berichtskette dieses Benutzers.',
+                        error: 'Zirkuläre Referenz: Der Vorgesetzte befindet sich bereits in der Berichtskette dieses Benutzers.',
                     });
                     return;
                 }

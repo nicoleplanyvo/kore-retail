@@ -104,7 +104,7 @@ coachingRouter.post('/sessions', async (req, res) => {
         const coachId = req.user.sub;
         const parsed = coachingSessionCreateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const session = await prisma.coachingSession.create({
             data: { ...parsed.data, tenantId, coachId, scheduledAt: new Date(parsed.data.scheduledAt), followUpDate: parsed.data.followUpDate ? new Date(parsed.data.followUpDate) : undefined },
             include: {
@@ -147,7 +147,7 @@ coachingRouter.put('/sessions/:id', async (req, res) => {
         const tenantId = req.tenantId;
         const parsed = coachingSessionUpdateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const updateData = { ...parsed.data };
         if (parsed.data.scheduledAt)
             updateData['scheduledAt'] = new Date(parsed.data.scheduledAt);
@@ -213,7 +213,7 @@ coachingRouter.post('/templates', async (req, res) => {
         const createdBy = req.user.sub;
         const parsed = coachingTemplateCreateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const template = await prisma.coachingTemplate.create({
             data: { ...parsed.data, tenantId, createdBy },
             include: { creator: { select: { id: true, name: true } } },

@@ -61,7 +61,7 @@ onboardingRouter.post('/templates', async (req, res) => {
         const tenantId = req.user.tenantId;
         const parsed = onboardingTemplateCreateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const { steps, ...templateData } = parsed.data;
         const template = await prisma.onboardingTemplate.create({
             data: {
@@ -104,7 +104,7 @@ onboardingRouter.put('/templates/:id', async (req, res) => {
             return res.status(404).json({ error: 'Template nicht gefunden.' });
         const parsed = onboardingTemplateCreateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const { steps, ...templateData } = parsed.data;
         const template = await prisma.onboardingTemplate.update({
             where: { id: req.params['id'] },
@@ -199,7 +199,7 @@ onboardingRouter.post('/journeys', async (req, res) => {
         const tenantId = req.user.tenantId;
         const parsed = onboardingJourneyCreateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const template = await prisma.onboardingTemplate.findFirst({
             where: { id: parsed.data.templateId, tenantId },
             include: { steps: true },
@@ -261,7 +261,7 @@ onboardingRouter.put('/journeys/:id/status', async (req, res) => {
             return res.status(404).json({ error: 'Journey nicht gefunden.' });
         const { status } = req.body;
         if (!['IN_PROGRESS', 'COMPLETED', 'CANCELLED'].includes(status)) {
-            return res.status(400).json({ error: 'Ungueltiger Status.' });
+            return res.status(400).json({ error: 'Ungültiger Status.' });
         }
         const data = { status };
         if (status === 'COMPLETED')
@@ -316,7 +316,7 @@ onboardingRouter.put('/journeys/:id/steps/:sid', async (req, res) => {
             return res.status(404).json({ error: 'Journey nicht gefunden.' });
         const parsed = onboardingStepUpdateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const data = { ...parsed.data };
         if (parsed.data.status === 'COMPLETED')
             data['completedAt'] = new Date();

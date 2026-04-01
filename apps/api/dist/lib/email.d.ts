@@ -1,7 +1,3 @@
-/**
- * E-Mail-Versand über Lettermint API
- * https://api.lettermint.co/v1/send
- */
 interface EmailPayload {
     from: string;
     to: string | string[];

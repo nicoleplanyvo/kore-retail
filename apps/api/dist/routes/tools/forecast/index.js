@@ -44,7 +44,7 @@ forecastRouter.get('/stores', async (req, res) => {
     }
 });
 /* ──────────────────────────────────────────────
-   GET /users — Users eines Stores (fuer Zuordnung)
+   GET /users — Users eines Stores (für Zuordnung)
    ────────────────────────────────────────────── */
 forecastRouter.get('/users', async (req, res) => {
     try {
@@ -97,7 +97,7 @@ forecastRouter.get('/dashboard', async (req, res) => {
                 periodFilter['lte'] = to;
             where['period'] = periodFilter;
         }
-        // Alle Forecasts fuer den Zeitraum
+        // Alle Forecasts für den Zeitraum
         const forecasts = await prisma.forecast.findMany({
             where,
             include: {
@@ -323,7 +323,7 @@ forecastRouter.post('/', async (req, res) => {
         const userId = req.user.sub;
         const parsed = forecastCreateSchema.safeParse(req.body);
         if (!parsed.success) {
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         }
         const forecast = await prisma.forecast.create({
             data: { ...parsed.data, tenantId, createdBy: userId },
@@ -333,7 +333,7 @@ forecastRouter.post('/', async (req, res) => {
     }
     catch (err) {
         if (err.code === 'P2002')
-            return res.status(409).json({ error: 'Forecast fuer diese Periode existiert bereits.' });
+            return res.status(409).json({ error: 'Forecast für diese Periode existiert bereits.' });
         console.error(err);
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
@@ -367,7 +367,7 @@ forecastRouter.put('/:id', async (req, res) => {
         const tenantId = req.tenantId;
         const parsed = forecastUpdateSchema.safeParse(req.body);
         if (!parsed.success) {
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         }
         const existing = await prisma.forecast.findFirst({
             where: { id: req.params.id, tenantId },
@@ -389,7 +389,7 @@ forecastRouter.put('/:id', async (req, res) => {
     }
 });
 /* ──────────────────────────────────────────────
-   DELETE /:id — Forecast loeschen
+   DELETE /:id — Forecast löschen
    ────────────────────────────────────────────── */
 forecastRouter.delete('/:id', async (req, res) => {
     try {

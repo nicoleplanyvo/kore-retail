@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-31T08:23:50.922Z",
+  "timestamp": "2026-04-01T14:10:04.289Z",
   "baseUrl": "https://app.kore-retail.de",
   "totalEndpoints": 95,
   "passed": 95,
@@ -17,7 +17,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 94,
+          "ms": 81,
           "dataCount": 2,
           "error": null
         },
@@ -27,7 +27,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 32,
+          "ms": 33,
           "dataCount": 2,
           "error": null
         },
@@ -37,7 +37,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 66,
+          "ms": 29,
           "dataCount": 1,
           "error": null
         }
@@ -53,7 +53,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 32,
+          "ms": 25,
           "dataCount": 2,
           "error": null
         },
@@ -63,7 +63,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 46,
+          "ms": 28,
           "dataCount": 1,
           "error": null
         }
@@ -79,7 +79,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 29,
+          "ms": 32,
           "dataCount": 2,
           "error": null
         },
@@ -89,7 +89,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 26,
+          "ms": 31,
           "dataCount": 3,
           "error": null
         },
@@ -99,7 +99,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 35,
+          "ms": 37,
           "dataCount": 3,
           "error": null
         }
@@ -115,7 +115,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 27,
+          "ms": 30,
           "dataCount": 2,
           "error": null
         },
@@ -125,8 +125,8 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 33,
-          "dataCount": 0,
+          "ms": 28,
+          "dataCount": 6,
           "error": null
         },
         {
@@ -135,7 +135,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 32,
+          "ms": 31,
           "dataCount": null,
           "error": null
         }
@@ -151,7 +151,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 37,
+          "ms": 25,
           "dataCount": 2,
           "error": null
         },
@@ -161,7 +161,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 29,
+          "ms": 26,
           "dataCount": 0,
           "error": null
         }
@@ -177,7 +177,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 30,
+          "ms": 26,
           "dataCount": 2,
           "error": null
         },
@@ -187,8 +187,8 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 57,
-          "dataCount": 0,
+          "ms": 32,
+          "dataCount": 30,
           "error": null
         },
         {
@@ -197,7 +197,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 41,
+          "ms": 32,
           "dataCount": null,
           "error": null
         }
@@ -213,7 +213,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 28,
+          "ms": 26,
           "dataCount": 2,
           "error": null
         },
@@ -223,8 +223,8 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 27,
-          "dataCount": 0,
+          "ms": 37,
+          "dataCount": 3,
           "error": null
         },
         {
@@ -233,7 +233,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 40,
+          "ms": 30,
           "dataCount": null,
           "error": null
         }
@@ -249,7 +249,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 28,
+          "ms": 24,
           "dataCount": 2,
           "error": null
         },
@@ -259,8 +259,8 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 49,
-          "dataCount": 0,
+          "ms": 27,
+          "dataCount": 20,
           "error": null
         },
         {
@@ -269,7 +269,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 28,
+          "ms": 32,
           "dataCount": null,
           "error": null
         }
@@ -285,7 +285,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 45,
+          "ms": 27,
           "dataCount": 2,
           "error": null
         },
@@ -296,7 +296,7 @@
           "ok": true,
           "warning": false,
           "ms": 27,
-          "dataCount": 0,
+          "dataCount": 8,
           "error": null
         },
         {
@@ -321,7 +321,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 32,
+          "ms": 23,
           "dataCount": 2,
           "error": null
         },
@@ -331,7 +331,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 38,
+          "ms": 25,
           "dataCount": 1,
           "error": null
         }
@@ -347,7 +347,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 49,
+          "ms": 29,
           "dataCount": 2,
           "error": null
         },
@@ -367,7 +367,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 35,
+          "ms": 34,
           "dataCount": null,
           "error": null
         }
@@ -383,7 +383,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 31,
+          "ms": 24,
           "dataCount": 2,
           "error": null
         },
@@ -393,7 +393,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 36,
+          "ms": 32,
           "dataCount": null,
           "error": null
         },
@@ -403,8 +403,8 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 35,
-          "dataCount": 0,
+          "ms": 30,
+          "dataCount": 30,
           "error": null
         }
       ]
@@ -419,7 +419,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 29,
+          "ms": 25,
           "dataCount": 2,
           "error": null
         },
@@ -429,7 +429,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 33,
+          "ms": 32,
           "dataCount": 2,
           "error": null
         },
@@ -439,7 +439,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 35,
+          "ms": 26,
           "dataCount": null,
           "error": null
         }
@@ -455,7 +455,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 28,
+          "ms": 23,
           "dataCount": 2,
           "error": null
         },
@@ -465,8 +465,8 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 32,
-          "dataCount": 0,
+          "ms": 28,
+          "dataCount": 8,
           "error": null
         },
         {
@@ -475,7 +475,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 33,
+          "ms": 27,
           "dataCount": null,
           "error": null
         }
@@ -491,7 +491,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 32,
+          "ms": 27,
           "dataCount": 4,
           "error": null
         },
@@ -501,7 +501,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 33,
+          "ms": 30,
           "dataCount": 0,
           "error": null
         },
@@ -511,7 +511,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 32,
+          "ms": 26,
           "dataCount": 0,
           "error": null
         }
@@ -527,7 +527,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 30,
+          "ms": 29,
           "dataCount": 2,
           "error": null
         },
@@ -537,8 +537,8 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 34,
-          "dataCount": 0,
+          "ms": 49,
+          "dataCount": 28,
           "error": null
         },
         {
@@ -547,7 +547,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 30,
+          "ms": 27,
           "dataCount": null,
           "error": null
         }
@@ -563,7 +563,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 30,
+          "ms": 26,
           "dataCount": 2,
           "error": null
         },
@@ -573,8 +573,8 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 32,
-          "dataCount": 0,
+          "ms": 33,
+          "dataCount": 3,
           "error": null
         },
         {
@@ -583,7 +583,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 42,
+          "ms": 29,
           "dataCount": null,
           "error": null
         }
@@ -599,7 +599,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 35,
+          "ms": 28,
           "dataCount": 2,
           "error": null
         },
@@ -609,7 +609,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 28,
+          "ms": 26,
           "dataCount": 2,
           "error": null
         },
@@ -619,7 +619,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 30,
+          "ms": 39,
           "dataCount": 0,
           "error": null
         }
@@ -635,7 +635,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 32,
+          "ms": 28,
           "dataCount": 2,
           "error": null
         },
@@ -645,7 +645,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 32,
+          "ms": 30,
           "dataCount": 0,
           "error": null
         },
@@ -655,7 +655,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 33,
+          "ms": 54,
           "dataCount": null,
           "error": null
         }
@@ -671,7 +671,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 32,
+          "ms": 25,
           "dataCount": 2,
           "error": null
         },
@@ -681,7 +681,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 33,
+          "ms": 25,
           "dataCount": 0,
           "error": null
         },
@@ -691,7 +691,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 34,
+          "ms": 26,
           "dataCount": null,
           "error": null
         }
@@ -707,7 +707,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 30,
+          "ms": 24,
           "dataCount": 2,
           "error": null
         },
@@ -717,7 +717,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 39,
+          "ms": 29,
           "dataCount": 0,
           "error": null
         },
@@ -727,7 +727,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 29,
+          "ms": 33,
           "dataCount": 0,
           "error": null
         }
@@ -743,7 +743,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 30,
+          "ms": 23,
           "dataCount": 2,
           "error": null
         },
@@ -753,7 +753,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 29,
+          "ms": 26,
           "dataCount": 5,
           "error": null
         },
@@ -763,7 +763,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 34,
+          "ms": 37,
           "dataCount": null,
           "error": null
         }
@@ -779,7 +779,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 27,
+          "ms": 28,
           "dataCount": 2,
           "error": null
         },
@@ -789,7 +789,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 28,
+          "ms": 32,
           "dataCount": 1,
           "error": null
         },
@@ -799,7 +799,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 33,
+          "ms": 25,
           "dataCount": null,
           "error": null
         }
@@ -815,7 +815,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 32,
+          "ms": 28,
           "dataCount": 2,
           "error": null
         },
@@ -825,8 +825,8 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 32,
-          "dataCount": 0,
+          "ms": 39,
+          "dataCount": 10,
           "error": null
         },
         {
@@ -835,7 +835,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 31,
+          "ms": 25,
           "dataCount": null,
           "error": null
         }
@@ -851,7 +851,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 31,
+          "ms": 27,
           "dataCount": 2,
           "error": null
         },
@@ -861,7 +861,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 32,
+          "ms": 26,
           "dataCount": 0,
           "error": null
         },
@@ -871,7 +871,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 29,
+          "ms": 25,
           "dataCount": null,
           "error": null
         }
@@ -887,7 +887,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 30,
+          "ms": 24,
           "dataCount": 2,
           "error": null
         },
@@ -897,7 +897,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 37,
+          "ms": 26,
           "dataCount": 0,
           "error": null
         },
@@ -907,7 +907,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 32,
+          "ms": 29,
           "dataCount": 0,
           "error": null
         }
@@ -923,7 +923,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 30,
+          "ms": 27,
           "dataCount": 2,
           "error": null
         },
@@ -933,8 +933,8 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 32,
-          "dataCount": 0,
+          "ms": 27,
+          "dataCount": 4,
           "error": null
         }
       ]
@@ -949,8 +949,8 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 31,
-          "dataCount": 0,
+          "ms": 29,
+          "dataCount": 2,
           "error": null
         },
         {
@@ -959,7 +959,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 29,
+          "ms": 30,
           "dataCount": null,
           "error": null
         }
@@ -975,7 +975,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 25,
+          "ms": 26,
           "dataCount": 3,
           "error": null
         },
@@ -995,7 +995,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 27,
+          "ms": 32,
           "dataCount": null,
           "error": null
         }
@@ -1011,7 +1011,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 27,
+          "ms": 25,
           "dataCount": 2,
           "error": null
         },
@@ -1021,7 +1021,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 32,
+          "ms": 42,
           "dataCount": 0,
           "error": null
         },
@@ -1031,7 +1031,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 32,
+          "ms": 27,
           "dataCount": null,
           "error": null
         }
@@ -1047,7 +1047,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 28,
+          "ms": 26,
           "dataCount": 2,
           "error": null
         },
@@ -1057,8 +1057,8 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 30,
-          "dataCount": 0,
+          "ms": 28,
+          "dataCount": 6,
           "error": null
         },
         {
@@ -1067,7 +1067,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 30,
+          "ms": 25,
           "dataCount": null,
           "error": null
         }
@@ -1083,7 +1083,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 30,
+          "ms": 28,
           "dataCount": 2,
           "error": null
         },
@@ -1093,7 +1093,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 30,
+          "ms": 26,
           "dataCount": 0,
           "error": null
         },
@@ -1103,7 +1103,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 35,
+          "ms": 25,
           "dataCount": null,
           "error": null
         }
@@ -1119,7 +1119,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 27,
+          "ms": 24,
           "dataCount": 2,
           "error": null
         },
@@ -1129,8 +1129,8 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 27,
-          "dataCount": 0,
+          "ms": 26,
+          "dataCount": 2,
           "error": null
         }
       ]
@@ -1145,7 +1145,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 34,
+          "ms": 27,
           "dataCount": 2,
           "error": null
         },
@@ -1155,7 +1155,7 @@
           "status": 200,
           "ok": true,
           "warning": false,
-          "ms": 42,
+          "ms": 32,
           "dataCount": null,
           "error": null
         }

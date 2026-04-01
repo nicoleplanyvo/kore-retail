@@ -199,11 +199,15 @@ export const sopCreateSchema = z.object({
     categoryId: z.string().min(1),
     title: z.string().min(2).max(200),
     content: z.string().min(1),
+    deadline: z.string().datetime().nullable().optional(),
+    isMandatory: z.boolean().optional(),
 });
 export const sopUpdateSchema = z.object({
     categoryId: z.string().min(1).optional(),
     title: z.string().min(2).max(200).optional(),
     content: z.string().min(1).optional(),
+    deadline: z.string().datetime().nullable().optional(),
+    isMandatory: z.boolean().optional(),
 });
 // ============================================================
 // VM Foto-Compliance — Validators
@@ -223,10 +227,23 @@ export const vmGuidelineUpdateSchema = z.object({
 export const vmSubmissionCreateSchema = z.object({
     guidelineId: z.string().min(1),
     storeId: z.string().min(1),
+    areaId: z.string().min(1).optional(),
+    deadline: z.string().optional(),
 });
 export const vmReviewSchema = z.object({
     status: z.enum(['APPROVED', 'REJECTED']),
     reviewNote: z.string().max(1000).optional(),
+});
+export const vmAreaCreateSchema = z.object({
+    name: z.string().min(2).max(100),
+    description: z.string().max(500).optional(),
+    sortOrder: z.number().int().min(0).default(0),
+});
+export const vmAreaUpdateSchema = z.object({
+    name: z.string().min(2).max(100).optional(),
+    description: z.string().max(500).optional(),
+    isActive: z.boolean().optional(),
+    sortOrder: z.number().int().min(0).optional(),
 });
 // ============================================================
 // Personalkosten-Planer — Validators

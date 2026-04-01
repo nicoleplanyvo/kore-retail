@@ -62,7 +62,7 @@ reportingExportRouter.get('/kpi', async (req, res) => {
         addKeyValue(doc, 'Conversion-Rate', `${avgConversion}%`);
         addKeyValue(doc, 'Einheiten verkauft', fmtDe(totalUnits));
         addKeyValue(doc, 'Personalstunden', fmtDe(totalHours, 1));
-        addKeyValue(doc, 'Eintraege', String(entries.length));
+        addKeyValue(doc, 'Einträge', String(entries.length));
         doc.moveDown(1);
         // Tabelle
         addSectionTitle(doc, 'Detaildaten');
@@ -170,7 +170,7 @@ reportingExportRouter.get('/audit', async (req, res) => {
         }
     }
 });
-// ── GET /store-overview — Store-Uebersicht als PDF ───────────────
+// ── GET /store-overview — Store-Übersicht als PDF ───────────────
 reportingExportRouter.get('/store-overview', async (req, res) => {
     try {
         const tenantId = req.user.tenantId;
@@ -205,7 +205,7 @@ reportingExportRouter.get('/store-overview', async (req, res) => {
             res.status(404).json({ error: 'Store nicht gefunden.' });
             return;
         }
-        // Letzte KPI-Eintraege
+        // Letzte KPI-Einträge
         const recentKpis = await prisma.kpiEntry.findMany({
             where: { storeId, tenantId },
             orderBy: { date: 'desc' },
@@ -223,11 +223,11 @@ reportingExportRouter.get('/store-overview', async (req, res) => {
         const totalTransactions = recentKpis.reduce((s, e) => s + (e.transactions ?? 0), 0);
         const totalFootfall = recentKpis.reduce((s, e) => s + (e.footfall ?? 0), 0);
         // PDF erzeugen
-        const doc = createPdfDocument(`Store-Uebersicht - ${store.name}`);
+        const doc = createPdfDocument(`Store-Übersicht - ${store.name}`);
         res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', `attachment; filename="store-uebersicht-${store.name.replace(/\s/g, '-').toLowerCase()}.pdf"`);
+        res.setHeader('Content-Disposition', `attachment; filename="store-übersicht-${store.name.replace(/\s/g, '-').toLowerCase()}.pdf"`);
         doc.pipe(res);
-        addHeader(doc, `Store-Uebersicht — ${store.name}`, `${tenantName} | Erstellt: ${new Date().toLocaleDateString('de-DE')}`);
+        addHeader(doc, `Store-Übersicht — ${store.name}`, `${tenantName} | Erstellt: ${new Date().toLocaleDateString('de-DE')}`);
         // Store-Details
         addSectionTitle(doc, 'Store-Details');
         addKeyValue(doc, 'Name', store.name);
@@ -260,7 +260,7 @@ reportingExportRouter.get('/store-overview', async (req, res) => {
         }
         doc.moveDown(1);
         // KPI-Zusammenfassung (letzte 30 Tage)
-        addSectionTitle(doc, `KPI-Zusammenfassung (letzte ${recentKpis.length} Eintraege)`);
+        addSectionTitle(doc, `KPI-Zusammenfassung (letzte ${recentKpis.length} Einträge)`);
         addKeyValue(doc, 'Gesamtumsatz', fmtEur(totalRevenue));
         addKeyValue(doc, 'Transaktionen', fmtDe(totalTransactions));
         addKeyValue(doc, 'Kundenfrequenz', fmtDe(totalFootfall));

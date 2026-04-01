@@ -101,7 +101,7 @@ inventoryRouter.post('/counts', async (req, res) => {
         const userId = req.user.sub;
         const parsed = inventoryCountCreateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const count = await prisma.inventoryCount.create({
             data: {
                 ...parsed.data,
@@ -192,7 +192,7 @@ inventoryRouter.put('/counts/:id/items', async (req, res) => {
         const tenantId = req.tenantId;
         const parsed = inventoryItemUpsertSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const count = await prisma.inventoryCount.findFirst({
             where: { id: req.params.id, tenantId, status: 'IN_PROGRESS' },
         });
@@ -259,13 +259,13 @@ inventoryRouter.post('/counts/:id/items/batch', async (req, res) => {
             return res.status(404).json({ error: 'Inventur nicht gefunden oder bereits abgeschlossen.' });
         const items = req.body.items;
         if (!Array.isArray(items) || items.length === 0) {
-            return res.status(400).json({ error: 'Keine Positionen uebergeben.' });
+            return res.status(400).json({ error: 'Keine Positionen übergeben.' });
         }
         const results = [];
         for (const raw of items) {
             const parsed = inventoryItemUpsertSchema.safeParse(raw);
             if (!parsed.success) {
-                results.push({ sku: raw.sku || '?', success: false, error: 'Ungueltige Daten' });
+                results.push({ sku: raw.sku || '?', success: false, error: 'Ungültige Daten' });
                 continue;
             }
             const discrepancy = parsed.data.actualQty - parsed.data.expectedQty;

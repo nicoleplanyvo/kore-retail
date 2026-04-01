@@ -5,7 +5,7 @@ import fs from 'fs/promises';
 import prisma from '../lib/prisma.js';
 import { authenticate, requireMinRole } from '../middleware/auth.js';
 export const profileRouter = Router();
-const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? './uploads';
+const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? path.join(process.cwd(), 'uploads');
 // ── Avatar Multer Setup ──────────────────────────
 const avatarStorage = multer.diskStorage({
     destination: async (_req, _file, cb) => {
@@ -44,9 +44,17 @@ profileRouter.get('/', async (req, res) => {
                 email: true,
                 role: true,
                 avatarPath: true,
+                position: true,
                 managerId: true,
                 tenantId: true,
                 isActive: true,
+                storeAssignments: {
+                    select: {
+                        store: {
+                            select: { id: true, name: true, city: true },
+                        },
+                    },
+                },
             },
         });
         if (!user) {
@@ -62,14 +70,17 @@ profileRouter.get('/', async (req, res) => {
             });
             managerName = manager?.name ?? null;
         }
+        const stores = user.storeAssignments.map((a) => a.store);
         res.json({
             id: user.id,
             name: user.name,
             email: user.email,
             role: user.role,
             avatarUrl: user.avatarPath ? `/api/uploads/${user.avatarPath}` : null,
+            position: user.position,
             managerId: user.managerId,
             managerName,
+            stores,
         });
     }
     catch (err) {
@@ -78,33 +89,50 @@ profileRouter.get('/', async (req, res) => {
     }
 });
 // ── PUT /api/profile ─────────────────────────────
-// Update own profile (name only)
+// Update own profile (name, position)
 profileRouter.put('/', async (req, res) => {
     try {
-        const { name } = req.body;
+        const { name, position } = req.body;
         if (!name || typeof name !== 'string' || name.trim().length === 0) {
             res.status(400).json({ error: 'Name ist erforderlich.' });
             return;
         }
+        const data = { name: name.trim() };
+        if (position !== undefined) {
+            data.position = typeof position === 'string' && position.trim().length > 0
+                ? position.trim()
+                : null;
+        }
         const updated = await prisma.user.update({
             where: { id: req.user.sub },
-            data: { name: name.trim() },
+            data,
             select: {
                 id: true,
                 name: true,
                 email: true,
                 role: true,
                 avatarPath: true,
+                position: true,
                 managerId: true,
+                storeAssignments: {
+                    select: {
+                        store: {
+                            select: { id: true, name: true, city: true },
+                        },
+                    },
+                },
             },
         });
+        const stores = updated.storeAssignments.map((a) => a.store);
         res.json({
             id: updated.id,
             name: updated.name,
             email: updated.email,
             role: updated.role,
             avatarUrl: updated.avatarPath ? `/api/uploads/${updated.avatarPath}` : null,
+            position: updated.position,
             managerId: updated.managerId,
+            stores,
         });
     }
     catch (err) {

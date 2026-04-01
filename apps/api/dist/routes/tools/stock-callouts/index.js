@@ -81,7 +81,7 @@ stockCalloutsRouter.post('/callouts', async (req, res) => {
         const userId = req.user.sub;
         const parsed = stockCalloutCreateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const storeId = req.body.storeId || (toolStoreIds !== 'all' ? toolStoreIds[0] : undefined);
         if (!storeId)
             return res.status(400).json({ error: 'storeId ist erforderlich.' });
@@ -128,7 +128,7 @@ stockCalloutsRouter.put('/callouts/:id', async (req, res) => {
             return res.status(404).json({ error: 'Stock Callout nicht gefunden.' });
         const parsed = stockCalloutUpdateSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const callout = await prisma.stockCallout.update({
             where: { id: req.params['id'] },
             data: parsed.data,
@@ -149,7 +149,7 @@ stockCalloutsRouter.put('/callouts/:id/offer', async (req, res) => {
     try {
         const parsed = stockCalloutOfferSchema.safeParse(req.body);
         if (!parsed.success)
-            return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+            return res.status(400).json({ error: 'Ungültige Daten.', details: parsed.error.flatten() });
         const toolStoreIds = req.toolStoreIds;
         const offeringStoreId = req.body.storeId || (toolStoreIds !== 'all' ? toolStoreIds[0] : undefined);
         const tenantId = req.tenantId;
@@ -202,7 +202,7 @@ stockCalloutsRouter.put('/callouts/:id/transfer', async (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler.' });
     }
 });
-// PUT /callouts/:id/resolve — Mark as resolved (Transfer -> Geloest)
+// PUT /callouts/:id/resolve — Mark as resolved (Transfer -> Gelöst)
 stockCalloutsRouter.put('/callouts/:id/resolve', async (req, res) => {
     try {
         const tenantId = req.tenantId;
@@ -310,7 +310,7 @@ stockCalloutsRouter.get('/dashboard', async (req, res) => {
             storeMap.set(c.storeId, existing);
         });
         const storeComparison = Array.from(storeMap.values()).sort((a, b) => b.open - a.open);
-        // Buying-Info: Aggregierte Uebersicht welche Artikel wo fehlen (nur offene)
+        // Buying-Info: Aggregierte Übersicht welche Artikel wo fehlen (nur offene)
         const buyingMap = new Map();
         callouts.filter(c => c.status === 'OPEN' || c.status === 'OFFERED').forEach(c => {
             const existing = buyingMap.get(c.sku) || { sku: c.sku, productName: c.productName, stores: [] };
