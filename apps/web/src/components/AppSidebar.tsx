@@ -65,17 +65,21 @@ export function AppSidebar({ open, onClose, collapsed, onToggleCollapse }: AppSi
   const hasTenantLogo = !!branding?.logoUrl;
   const tenantPrimary = branding?.primaryColor;
 
-  // Tool-Items nach Kategorie gruppieren
+  // Tool-Items nach Kategorie gruppieren (dedupliziert nach Route)
   const toolsByCategory: Record<string, Array<{
     key: string;
     to: string;
     icon: LucideIcon;
     label: string;
   }>> = {};
+  const seenRoutes = new Set<string>();
 
   for (const assignment of myTools || []) {
     const route = TOOL_ROUTES[assignment.tool.key];
     if (!route) continue;
+    // Duplikate vermeiden (z.B. wenn alte + neue Tool-Keys auf gleiche Route zeigen)
+    if (seenRoutes.has(route)) continue;
+    seenRoutes.add(route);
     const cat = assignment.tool.category;
     if (!toolsByCategory[cat]) toolsByCategory[cat] = [];
     toolsByCategory[cat]!.push({

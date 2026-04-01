@@ -101,9 +101,9 @@ async function main() {
   // priceMonthly in Cent (z.B. 1500 = 15€)
   const tools = [
     // STANDARDS & COMPLIANCE
-    { key: 'standards.checklisten', name: 'Checklisten', category: 'STANDARDS_COMPLIANCE', description: 'Standardisierte Checklisten für Store-Visits und Audits', icon: 'ClipboardCheck', priceMonthly: 1500, sortOrder: 1, learnerAccessible: true },
-    { key: 'standards.store_standards', name: 'Personalkosten-Planer', category: 'STANDARDS_COMPLIANCE', description: 'Budget-Simulation und Personalkosten-Planung pro Store', icon: 'Award', priceMonthly: 1500, sortOrder: 2 },
-    { key: 'standards.excellence_tracker', name: 'Excellence Tracker', category: 'STANDARDS_COMPLIANCE', description: 'Store Excellence Audit mit Foto-Proof und Scoring', icon: 'TrendingUp', priceMonthly: 1900, sortOrder: 3 },
+    { key: 'standards.checklisten', name: 'Checklisten & Audits', category: 'STANDARDS_COMPLIANCE', description: 'Gewichtete Checklisten, Audits und Excellence-Tracking', icon: 'ClipboardCheck', priceMonthly: 1500, sortOrder: 1, learnerAccessible: true },
+    { key: 'standards.store_standards', name: 'Raise the Bar', category: 'STANDARDS_COMPLIANCE', description: 'Store-Ranking ueber gewichtete KPIs mit Excel-Import', icon: 'Award', priceMonthly: 1500, sortOrder: 2 },
+    { key: 'standards.excellence_tracker', name: 'Excellence Tracker (Legacy)', category: 'STANDARDS_COMPLIANCE', description: 'Zusammengefuehrt mit Checklisten & Audits', icon: 'TrendingUp', priceMonthly: 0, sortOrder: 99 },
     { key: 'standards.vm_foto_compliance', name: 'VM Foto-Compliance', category: 'STANDARDS_COMPLIANCE', description: 'Foto-basierte VM-Compliance-Checks mit KI-Unterstützung', icon: 'Camera', priceMonthly: 1900, sortOrder: 4 },
     { key: 'standards.sop_bibliothek', name: 'SOP Bibliothek', category: 'STANDARDS_COMPLIANCE', description: 'Zentrale Verwaltung aller Standard Operating Procedures', icon: 'BookOpen', priceMonthly: 1500, sortOrder: 5 },
 

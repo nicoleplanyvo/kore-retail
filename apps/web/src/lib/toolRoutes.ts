@@ -5,11 +5,13 @@
  * Alle Routen sind relativ zu /app/tools/
  */
 export const TOOL_ROUTES: Record<string, string> = {
-  'standards.excellence_tracker': '/app/tools/sea',
-  'standards.checklisten': '/app/tools/checklisten',
+  'standards.checklisten_audits': '/app/tools/checklisten-audits',
+  'standards.excellence_tracker': '/app/tools/checklisten-audits',
+  'standards.checklisten': '/app/tools/checklisten-audits',
   'standards.sop_bibliothek': '/app/tools/sop',
   'standards.vm_foto_compliance': '/app/tools/vm-compliance',
-  'standards.store_standards': '/app/tools/store-standards',
+  'standards.raise_the_bar': '/app/tools/raise-the-bar',
+  'standards.store_standards': '/app/tools/raise-the-bar',
   // Performance & Sichtbarkeit
   'performance.kpi_dashboard': '/app/tools/kpi',
   'performance.budget_tracker': '/app/tools/budget',
