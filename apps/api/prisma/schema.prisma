@@ -24,65 +24,65 @@ model User {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 
-  storeAssignments  UserStoreAssignment[]
-  regionAssignments UserRegionAssignment[]
-  checklistSessions ChecklistSession[]
-  createdSops       Sop[]
-  sopAcknowledgments SopAcknowledgment[]
-  vmSubmissions     VmSubmission[]  @relation("VmSubmitter")
-  vmReviews         VmSubmission[]  @relation("VmReviewer")
-  standardEvaluations StandardEvaluation[]
-  kpiEntries        KpiEntry[]      @relation("KpiEntries")
-  budgetPeriods     BudgetPeriod[]  @relation("BudgetPeriods")
-  forecasts         Forecast[]      @relation("Forecasts")
-  lossReports       LossIncident[]  @relation("LossReporter")
-  lossAssignments   LossIncident[]  @relation("LossAssignee")
-  inventoryCounts   InventoryCount[] @relation("InventoryConductor")
-  floorPositions    FloorStaffPosition[] @relation("FloorPositionUser")
-  floorUpdates      FloorStaffPosition[] @relation("FloorPositionUpdater")
-  maintenanceReports MaintenanceRequest[] @relation("MaintenanceReporter")
-  maintenanceAssignments MaintenanceRequest[] @relation("MaintenanceAssignee")
-  courseCreations    Course[]             @relation("CourseCreator")
-  courseEnrollments  CourseEnrollment[]   @relation("CourseEnrollments")
-  certificates      Certificate[]        @relation("Certificates")
-  trainingLogs      TrainingLog[]        @relation("TrainingLogs")
-  challengeCreations Challenge[]         @relation("ChallengeCreator")
-  challengeParticipations ChallengeParticipant[] @relation("ChallengeParticipants")
-  onboardingJourneys OnboardingJourney[] @relation("OnboardingJourneys")
-  onboardingMentoring OnboardingJourney[] @relation("OnboardingMentors")
-  coachSessions    CoachingSession[] @relation("CoachSessions")
-  coacheeSessions  CoachingSession[] @relation("CoacheeSessions")
-  devPlansAsUser   DevelopmentPlan[] @relation("DevelopmentPlanUser")
-  devPlansAsManager DevelopmentPlan[] @relation("DevelopmentPlanManager")
-  devReviews       DevelopmentReview[] @relation("DevelopmentReviewer")
-  appraisalsAsEmployee Appraisal[] @relation("AppraisalEmployee")
-  appraisalsAsManager  Appraisal[] @relation("AppraisalManager")
-  shiftEntries     ShiftEntry[]
-  swapRequests     ShiftSwapRequest[] @relation("SwapRequester")
-  shiftAvailabilities ShiftAvailability[]
-  shiftTimeEntries    ShiftTimeEntry[]
-  wellbeingCheckIns WellbeingCheckIn[]
-  challengeEntries   ChallengeEntry[]    @relation("ChallengeEntries")
-  challengeVotesCast ChallengeVote[]     @relation("ChallengeVoter")
-  challengeVotesReceived ChallengeVote[] @relation("ChallengeVoteTarget")
-  coachingTemplates CoachingTemplate[] @relation("CoachingTemplateCreator")
-  clientAppointments   ClientAppointment[]   @relation("ClientAppointmentAdvisor")
-  budgetScenarios      BudgetScenario[]      @relation("BudgetScenarioCreator")
-  frSessions           FRSession[]           @relation("FRSessionStaff")
-  briefingsCreated     Briefing[]               @relation("BriefingCreator")
-  briefingAcks         BriefingAcknowledgment[] @relation("BriefingAcknowledgments")
-  handoversFrom        Handover[]               @relation("HandoverFrom")
-  handoversTo          Handover[]               @relation("HandoverTo")
-  teamMessagesSent     TeamMessage[]             @relation("TeamMessageSender")
-  teamMessageReads     TeamMessageRead[]         @relation("TeamMessageReads")
-  newslettersCreated   Newsletter[]              @relation("NewsletterCreator")
-  newsletterViews      NewsletterView[]          @relation("NewsletterViews")
-  clientsCreated       ClientProfile[]       @relation("ClientCreator")
-  clientInteractions   ClientInteraction[]   @relation("ClientInteractions")
-  clientTasks          ClientTask[]          @relation("ClientTasks")
-  stockCallouts        StockCallout[]        @relation("StockCalloutReporter")
-  ordersCreated        CustomerOrder[]       @relation("OrderCreator")
-  orderStatusUpdates   OrderStatusUpdate[]   @relation("OrderStatusUpdater")
+  storeAssignments           UserStoreAssignment[]
+  regionAssignments          UserRegionAssignment[]
+  checklistSessions          ChecklistSession[]
+  createdSops                Sop[]
+  sopAcknowledgments         SopAcknowledgment[]
+  vmSubmissions              VmSubmission[]            @relation("VmSubmitter")
+  vmReviews                  VmSubmission[]            @relation("VmReviewer")
+  standardEvaluations        StandardEvaluation[]
+  kpiEntries                 KpiEntry[]                @relation("KpiEntries")
+  budgetPeriods              BudgetPeriod[]            @relation("BudgetPeriods")
+  forecasts                  Forecast[]                @relation("Forecasts")
+  lossReports                LossIncident[]            @relation("LossReporter")
+  lossAssignments            LossIncident[]            @relation("LossAssignee")
+  inventoryCounts            InventoryCount[]          @relation("InventoryConductor")
+  floorPositions             FloorStaffPosition[]      @relation("FloorPositionUser")
+  floorUpdates               FloorStaffPosition[]      @relation("FloorPositionUpdater")
+  maintenanceReports         MaintenanceRequest[]      @relation("MaintenanceReporter")
+  maintenanceAssignments     MaintenanceRequest[]      @relation("MaintenanceAssignee")
+  courseCreations            Course[]                  @relation("CourseCreator")
+  courseEnrollments          CourseEnrollment[]        @relation("CourseEnrollments")
+  certificates               Certificate[]             @relation("Certificates")
+  trainingLogs               TrainingLog[]             @relation("TrainingLogs")
+  challengeCreations         Challenge[]               @relation("ChallengeCreator")
+  challengeParticipations    ChallengeParticipant[]    @relation("ChallengeParticipants")
+  onboardingJourneys         OnboardingJourney[]       @relation("OnboardingJourneys")
+  onboardingMentoring        OnboardingJourney[]       @relation("OnboardingMentors")
+  coachSessions              CoachingSession[]         @relation("CoachSessions")
+  coacheeSessions            CoachingSession[]         @relation("CoacheeSessions")
+  devPlansAsUser             DevelopmentPlan[]         @relation("DevelopmentPlanUser")
+  devPlansAsManager          DevelopmentPlan[]         @relation("DevelopmentPlanManager")
+  devReviews                 DevelopmentReview[]       @relation("DevelopmentReviewer")
+  appraisalsAsEmployee       Appraisal[]               @relation("AppraisalEmployee")
+  appraisalsAsManager        Appraisal[]               @relation("AppraisalManager")
+  shiftEntries               ShiftEntry[]
+  swapRequests               ShiftSwapRequest[]        @relation("SwapRequester")
+  shiftAvailabilities        ShiftAvailability[]
+  shiftTimeEntries           ShiftTimeEntry[]
+  wellbeingCheckIns          WellbeingCheckIn[]
+  challengeEntries           ChallengeEntry[]          @relation("ChallengeEntries")
+  challengeVotesCast         ChallengeVote[]           @relation("ChallengeVoter")
+  challengeVotesReceived     ChallengeVote[]           @relation("ChallengeVoteTarget")
+  coachingTemplates          CoachingTemplate[]        @relation("CoachingTemplateCreator")
+  clientAppointments         ClientAppointment[]       @relation("ClientAppointmentAdvisor")
+  budgetScenarios            BudgetScenario[]          @relation("BudgetScenarioCreator")
+  frSessions                 FRSession[]               @relation("FRSessionStaff")
+  briefingsCreated           Briefing[]                @relation("BriefingCreator")
+  briefingAcks               BriefingAcknowledgment[]  @relation("BriefingAcknowledgments")
+  handoversFrom              Handover[]                @relation("HandoverFrom")
+  handoversTo                Handover[]                @relation("HandoverTo")
+  teamMessagesSent           TeamMessage[]             @relation("TeamMessageSender")
+  teamMessageReads           TeamMessageRead[]         @relation("TeamMessageReads")
+  newslettersCreated         Newsletter[]              @relation("NewsletterCreator")
+  newsletterViews            NewsletterView[]          @relation("NewsletterViews")
+  clientsCreated             ClientProfile[]           @relation("ClientCreator")
+  clientInteractions         ClientInteraction[]       @relation("ClientInteractions")
+  clientTasks                ClientTask[]              @relation("ClientTasks")
+  stockCallouts              StockCallout[]            @relation("StockCalloutReporter")
+  ordersCreated              CustomerOrder[]           @relation("OrderCreator")
+  orderStatusUpdates         OrderStatusUpdate[]       @relation("OrderStatusUpdater")
   conversationParticipations ConversationParticipant[]
   directMessagesSent         DirectMessage[]           @relation("DirectMessageSender")
   invitationTokens           InvitationToken[]
@@ -93,65 +93,65 @@ model User {
 }
 
 model Tenant {
-  id           String    @id @default(cuid())
+  id           String   @id @default(cuid())
   name         String
-  slug         String    @unique
-  status       String    @default("ACTIVE")
+  slug         String   @unique
+  status       String   @default("ACTIVE")
   contactEmail String?
   contactName  String?
   contactPhone String?
-  maxUsers     Int       @default(15)
+  maxUsers     Int      @default(15)
   logoUrl      String?
   primaryColor String?
   accentColor  String?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
-  users        User[]
-  stores       Store[]
-  regions      Region[]
-  subscription Subscription?
-  consents     DataProcessingConsent[]
-  checklistTemplates ChecklistTemplate[]
-  checklistSessions  ChecklistSession[]
-  sopCategories      SopCategory[]
-  sops               Sop[]
-  vmGuidelines       VmGuideline[]
-  vmSubmissions      VmSubmission[]
-  vmAreas            VmArea[]
-  standardCategories StandardCategory[]
+  users               User[]
+  stores              Store[]
+  regions             Region[]
+  subscription        Subscription?
+  consents            DataProcessingConsent[]
+  checklistTemplates  ChecklistTemplate[]
+  checklistSessions   ChecklistSession[]
+  sopCategories       SopCategory[]
+  sops                Sop[]
+  vmGuidelines        VmGuideline[]
+  vmSubmissions       VmSubmission[]
+  vmAreas             VmArea[]
+  standardCategories  StandardCategory[]
   standardDefinitions StandardDefinition[]
   standardEvaluations StandardEvaluation[]
-  kpiEntries         KpiEntry[]
-  budgetPeriods      BudgetPeriod[]
-  forecasts          Forecast[]
-  lossIncidents      LossIncident[]
-  inventoryCounts    InventoryCount[]
-  floorZones         FloorZone[]
-  floorPositions     FloorStaffPosition[]
-  footfallEntries    FootfallEntry[]
-  vmGuidelineDocs    VmGuidelineDoc[]
+  kpiEntries          KpiEntry[]
+  budgetPeriods       BudgetPeriod[]
+  forecasts           Forecast[]
+  lossIncidents       LossIncident[]
+  inventoryCounts     InventoryCount[]
+  floorZones          FloorZone[]
+  floorPositions      FloorStaffPosition[]
+  footfallEntries     FootfallEntry[]
+  vmGuidelineDocs     VmGuidelineDoc[]
   maintenanceRequests MaintenanceRequest[]
-  courses            Course[]
-  trainingLogs       TrainingLog[]
-  challenges         Challenge[]
+  courses             Course[]
+  trainingLogs        TrainingLog[]
+  challenges          Challenge[]
   onboardingTemplates OnboardingTemplate[]
   onboardingJourneys  OnboardingJourney[]
-  coachingSessions CoachingSession[]
-  coachingTemplates CoachingTemplate[]
-  developmentPlans DevelopmentPlan[]
-  appraisalCycles  AppraisalCycle[]
-  pulseSurveys     PulseSurvey[]
-  wellbeingCheckIns WellbeingCheckIn[]
-  wellbeingResources WellbeingResource[]
-  teamMessages    TeamMessage[]
-  newsletters     Newsletter[]
-  floorFrequencyLogs FloorFrequencyLog[]
-  conversations   Conversation[]
-  notifications   Notification[]
-  rtbIndicators   RtbIndicator[]
-  rtbEntries      RtbEntry[]
-  rtbSnapshots    RtbSnapshot[]
+  coachingSessions    CoachingSession[]
+  coachingTemplates   CoachingTemplate[]
+  developmentPlans    DevelopmentPlan[]
+  appraisalCycles     AppraisalCycle[]
+  pulseSurveys        PulseSurvey[]
+  wellbeingCheckIns   WellbeingCheckIn[]
+  wellbeingResources  WellbeingResource[]
+  teamMessages        TeamMessage[]
+  newsletters         Newsletter[]
+  floorFrequencyLogs  FloorFrequencyLog[]
+  conversations       Conversation[]
+  notifications       Notification[]
+  rtbIndicators       RtbIndicator[]
+  rtbEntries          RtbEntry[]
+  rtbSnapshots        RtbSnapshot[]
 }
 
 model Region {
@@ -184,81 +184,81 @@ model Store {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  tools     StoreToolAssignment[]
-  userAssignments UserStoreAssignment[]
-  auditSessions   AuditSession[]
-  checklistSessions ChecklistSession[]
-  vmSubmissions     VmSubmission[]
-  standardEvaluations StandardEvaluation[]
-  kpiEntries        KpiEntry[]
-  budgetPeriods     BudgetPeriod[]
-  forecasts         Forecast[]
-  lossIncidents     LossIncident[]
-  inventoryCounts   InventoryCount[]
-  floorZones        FloorZone[]
-  floorPositions    FloorStaffPosition[]
-  footfallEntries   FootfallEntry[]
-  maintenanceRequests MaintenanceRequest[]
-  courseEnrollments   CourseEnrollment[]
-  trainingLogs       TrainingLog[]
+  tools                 StoreToolAssignment[]
+  userAssignments       UserStoreAssignment[]
+  auditSessions         AuditSession[]
+  checklistSessions     ChecklistSession[]
+  vmSubmissions         VmSubmission[]
+  standardEvaluations   StandardEvaluation[]
+  kpiEntries            KpiEntry[]
+  budgetPeriods         BudgetPeriod[]
+  forecasts             Forecast[]
+  lossIncidents         LossIncident[]
+  inventoryCounts       InventoryCount[]
+  floorZones            FloorZone[]
+  floorPositions        FloorStaffPosition[]
+  footfallEntries       FootfallEntry[]
+  maintenanceRequests   MaintenanceRequest[]
+  courseEnrollments     CourseEnrollment[]
+  trainingLogs          TrainingLog[]
   challengeParticipants ChallengeParticipant[]
-  onboardingJourneys  OnboardingJourney[]
-  coachingSessions  CoachingSession[]
-  developmentPlans  DevelopmentPlan[]
-  appraisals        Appraisal[]
-  shiftTemplates    ShiftTemplate[]
-  shiftEntries      ShiftEntry[]
-  shiftAvailabilities ShiftAvailability[]
-  shiftTimeEntries    ShiftTimeEntry[]
-  shiftWeekStatuses   ShiftWeekStatus[]
-  pulseResponses    PulseResponse[]
-  wellbeingCheckIns WellbeingCheckIn[]
-  briefings    Briefing[]
-  handovers    Handover[]
-  conversionGoals    ConversionGoal[]
-  clientProfiles     ClientProfile[]
-  clientAppointments ClientAppointment[]
-  stockCallouts      StockCallout[]
-  customerOrders     CustomerOrder[]
-  budgetScenarios    BudgetScenario[]
-  floorFrequencyLogs FloorFrequencyLog[]
-  frSettings         FRSettings?
-  frRooms            FRRoom[]
-  frSessions         FRSession[]
-  rtbEntries         RtbEntry[]
-  rtbSnapshots       RtbSnapshot[]
+  onboardingJourneys    OnboardingJourney[]
+  coachingSessions      CoachingSession[]
+  developmentPlans      DevelopmentPlan[]
+  appraisals            Appraisal[]
+  shiftTemplates        ShiftTemplate[]
+  shiftEntries          ShiftEntry[]
+  shiftAvailabilities   ShiftAvailability[]
+  shiftTimeEntries      ShiftTimeEntry[]
+  shiftWeekStatuses     ShiftWeekStatus[]
+  pulseResponses        PulseResponse[]
+  wellbeingCheckIns     WellbeingCheckIn[]
+  briefings             Briefing[]
+  handovers             Handover[]
+  conversionGoals       ConversionGoal[]
+  clientProfiles        ClientProfile[]
+  clientAppointments    ClientAppointment[]
+  stockCallouts         StockCallout[]
+  customerOrders        CustomerOrder[]
+  budgetScenarios       BudgetScenario[]
+  floorFrequencyLogs    FloorFrequencyLog[]
+  frSettings            FRSettings?
+  frRooms               FRRoom[]
+  frSessions            FRSession[]
+  rtbEntries            RtbEntry[]
+  rtbSnapshots          RtbSnapshot[]
 
   @@index([tenantId])
   @@index([regionId])
 }
 
 model ToolDefinition {
-  id           String   @id @default(cuid())
-  key          String   @unique
-  name         String
-  description  String?
-  category     String
-  icon         String?
-  priceMonthly Int      @default(0)
-  isActive     Boolean  @default(true)
+  id                String   @id @default(cuid())
+  key               String   @unique
+  name              String
+  description       String?
+  category          String
+  icon              String?
+  priceMonthly      Int      @default(0)
+  isActive          Boolean  @default(true)
   sortOrder         Int      @default(0)
   learnerAccessible Boolean  @default(false)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 
-  assignments  StoreToolAssignment[]
+  assignments StoreToolAssignment[]
 
   @@index([category])
 }
 
 model StoreToolAssignment {
-  id         String   @id @default(cuid())
+  id         String         @id @default(cuid())
   storeId    String
   store      Store          @relation(fields: [storeId], references: [id], onDelete: Cascade)
   toolId     String
   tool       ToolDefinition @relation(fields: [toolId], references: [id], onDelete: Cascade)
-  isActive   Boolean  @default(true)
-  assignedAt DateTime @default(now())
+  isActive   Boolean        @default(true)
+  assignedAt DateTime       @default(now())
   config     String?
 
   @@unique([storeId, toolId])
@@ -280,27 +280,27 @@ model UserStoreAssignment {
 }
 
 model Subscription {
-  id               String    @id @default(cuid())
-  tenantId         String    @unique
-  tenant           Tenant    @relation(fields: [tenantId], references: [id])
-  stripeCustomerId String    @unique
-  stripeSubId      String    @unique
+  id               String   @id @default(cuid())
+  tenantId         String   @unique
+  tenant           Tenant   @relation(fields: [tenantId], references: [id])
+  stripeCustomerId String   @unique
+  stripeSubId      String   @unique
   status           String
   currentPeriodEnd DateTime
-  cancelAtPeriod   Boolean   @default(false)
+  cancelAtPeriod   Boolean  @default(false)
 }
 
 // GDPR: Audit-Log für Datenänderungen
 model AuditLog {
-  id         String   @id @default(cuid())
-  tenantId   String?
-  userId     String?
-  action     String
-  entity     String
-  entityId   String?
-  details    String?
-  ipAddress  String?
-  createdAt  DateTime @default(now())
+  id        String   @id @default(cuid())
+  tenantId  String?
+  userId    String?
+  action    String
+  entity    String
+  entityId  String?
+  details   String?
+  ipAddress String?
+  createdAt DateTime @default(now())
 
   @@index([tenantId])
   @@index([createdAt])
@@ -320,8 +320,8 @@ model DataProcessingConsent {
   version     String
   document    String?
 
-  @@index([tenantId])
   @@unique([tenantId, consentType])
+  @@index([tenantId])
 }
 
 model UserRegionAssignment {
@@ -343,18 +343,18 @@ model UserRegionAssignment {
 // ============================================================
 
 model AuditTemplate {
-  id            String   @id @default(cuid())
-  tenantId      String?  // null = KORE-Default, non-null = Tenant-spezifisch
-  name          String
-  description   String?
-  version       Int      @default(1)
-  isDefault     Boolean  @default(false)
-  isActive      Boolean  @default(true)
-  createdBy     String
-  templateType  String   @default("AUDIT")   // "AUDIT" or "CHECKLIST"
-  recurrence    String?                       // daily, weekly, monthly
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id           String   @id @default(cuid())
+  tenantId     String? // null = KORE-Default, non-null = Tenant-spezifisch
+  name         String
+  description  String?
+  version      Int      @default(1)
+  isDefault    Boolean  @default(false)
+  isActive     Boolean  @default(true)
+  createdBy    String
+  templateType String   @default("AUDIT") // "AUDIT" or "CHECKLIST"
+  recurrence   String? // daily, weekly, monthly
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   categories AuditCategory[]
   sessions   AuditSession[]
@@ -385,7 +385,7 @@ model AuditCriterion {
   sortOrder     Int           @default(0)
   isRequired    Boolean       @default(true)
   photoRequired Boolean       @default(false)
-  type          String        @default("SCORED")  // "SCORED", "BOOLEAN", "TEXT", "NUMBER"
+  type          String        @default("SCORED") // "SCORED", "BOOLEAN", "TEXT", "NUMBER"
 
   responses AuditResponse[]
 
@@ -393,23 +393,23 @@ model AuditCriterion {
 }
 
 model AuditSession {
-  id             String    @id @default(cuid())
+  id             String        @id @default(cuid())
   tenantId       String
   storeId        String
-  store          Store     @relation(fields: [storeId], references: [id])
+  store          Store         @relation(fields: [storeId], references: [id])
   templateId     String
   template       AuditTemplate @relation(fields: [templateId], references: [id])
   conductedBy    String
-  storeLocation  String?   // Optionaler Sub-Bereich im Store
-  status         String    @default("DRAFT") // DRAFT, IN_PROGRESS, COMPLETED, CANCELLED
+  storeLocation  String? // Optionaler Sub-Bereich im Store
+  status         String        @default("DRAFT") // DRAFT, IN_PROGRESS, COMPLETED, CANCELLED
   overallScore   Float?
-  completionRate Float     @default(0)
+  completionRate Float         @default(0)
   notes          String?
   dueDate        DateTime?
   startedAt      DateTime?
   completedAt    DateTime?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
 
   responses AuditResponse[]
 
@@ -456,8 +456,8 @@ model ChecklistTemplate {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  sections    ChecklistSection[]
-  sessions    ChecklistSession[]
+  sections ChecklistSection[]
+  sessions ChecklistSession[]
 
   @@index([tenantId])
 }
@@ -533,12 +533,12 @@ model ChecklistEntry {
 // ============================================================
 
 model SopCategory {
-  id        String   @id @default(cuid())
+  id        String  @id @default(cuid())
   tenantId  String?
-  tenant    Tenant?  @relation(fields: [tenantId], references: [id])
+  tenant    Tenant? @relation(fields: [tenantId], references: [id])
   name      String
-  sortOrder Int      @default(0)
-  isActive  Boolean  @default(true)
+  sortOrder Int     @default(0)
+  isActive  Boolean @default(true)
 
   documents Sop[]
 
@@ -546,24 +546,24 @@ model SopCategory {
 }
 
 model Sop {
-  id             String       @id @default(cuid())
+  id             String      @id @default(cuid())
   tenantId       String?
-  tenant         Tenant?      @relation(fields: [tenantId], references: [id])
+  tenant         Tenant?     @relation(fields: [tenantId], references: [id])
   categoryId     String
-  category       SopCategory  @relation(fields: [categoryId], references: [id])
+  category       SopCategory @relation(fields: [categoryId], references: [id])
   title          String
-  content        String       // Markdown
-  version        Int          @default(1)
-  status         String       @default("DRAFT") // DRAFT, PUBLISHED, ARCHIVED
+  content        String // Markdown
+  version        Int         @default(1)
+  status         String      @default("DRAFT") // DRAFT, PUBLISHED, ARCHIVED
   createdBy      String
-  creator        User         @relation(fields: [createdBy], references: [id])
+  creator        User        @relation(fields: [createdBy], references: [id])
   attachmentPath String?
   deadline       DateTime?
-  isMandatory    Boolean      @default(false)
-  isOverdue      Boolean      @default(false)
+  isMandatory    Boolean     @default(false)
+  isOverdue      Boolean     @default(false)
   publishedAt    DateTime?
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
 
   acknowledgments SopAcknowledgment[]
   attachments     SopAttachment[]
@@ -577,9 +577,9 @@ model SopAttachment {
   sopId     String
   sop       Sop      @relation(fields: [sopId], references: [id], onDelete: Cascade)
   fileName  String
-  filePath  String   // relative path in UPLOAD_DIR
-  fileType  String   // "pdf", "docx", "image"
-  fileSize  Int      // bytes
+  filePath  String // relative path in UPLOAD_DIR
+  fileType  String // "pdf", "docx", "image"
+  fileSize  Int // bytes
   createdAt DateTime @default(now())
 
   @@index([sopId])
@@ -607,8 +607,8 @@ model VmGuideline {
   tenant         Tenant   @relation(fields: [tenantId], references: [id])
   name           String
   description    String?
-  category       String?  // z.B. "Schaufenster", "Eingang", "Kasse"
-  referencePhoto String?  // Pfad zum Referenzbild
+  category       String? // z.B. "Schaufenster", "Eingang", "Kasse"
+  referencePhoto String? // Pfad zum Referenzbild
   isActive       Boolean  @default(true)
   sortOrder      Int      @default(0)
   createdBy      String
@@ -638,27 +638,27 @@ model VmArea {
 }
 
 model VmSubmission {
-  id           String       @id @default(cuid())
-  tenantId     String
-  tenant       Tenant       @relation(fields: [tenantId], references: [id])
-  guidelineId  String
-  guideline    VmGuideline  @relation(fields: [guidelineId], references: [id])
-  storeId      String
-  store        Store        @relation(fields: [storeId], references: [id])
-  areaId       String?
-  area         VmArea?      @relation(fields: [areaId], references: [id])
-  submittedBy  String
-  submitter    User         @relation("VmSubmitter", fields: [submittedBy], references: [id])
-  photoPath    String
-  status       String       @default("PENDING") // PENDING, APPROVED, REJECTED
-  reviewedBy   String?
-  reviewer     User?        @relation("VmReviewer", fields: [reviewedBy], references: [id])
-  reviewNote   String?
-  submittedAt  DateTime     @default(now())
-  reviewedAt   DateTime?
-  deadline     DateTime?
-  escalatedAt  DateTime?
-  escalatedTo  String?      // userId of the person escalated to
+  id          String      @id @default(cuid())
+  tenantId    String
+  tenant      Tenant      @relation(fields: [tenantId], references: [id])
+  guidelineId String
+  guideline   VmGuideline @relation(fields: [guidelineId], references: [id])
+  storeId     String
+  store       Store       @relation(fields: [storeId], references: [id])
+  areaId      String?
+  area        VmArea?     @relation(fields: [areaId], references: [id])
+  submittedBy String
+  submitter   User        @relation("VmSubmitter", fields: [submittedBy], references: [id])
+  photoPath   String
+  status      String      @default("PENDING") // PENDING, APPROVED, REJECTED
+  reviewedBy  String?
+  reviewer    User?       @relation("VmReviewer", fields: [reviewedBy], references: [id])
+  reviewNote  String?
+  submittedAt DateTime    @default(now())
+  reviewedAt  DateTime?
+  deadline    DateTime?
+  escalatedAt DateTime?
+  escalatedTo String? // userId of the person escalated to
 
   @@index([tenantId])
   @@index([storeId])
@@ -673,13 +673,13 @@ model VmSubmission {
 // ============================================================
 
 model StandardCategory {
-  id          String   @id @default(cuid())
+  id          String  @id @default(cuid())
   tenantId    String?
-  tenant      Tenant?  @relation(fields: [tenantId], references: [id])
+  tenant      Tenant? @relation(fields: [tenantId], references: [id])
   name        String
   description String?
-  sortOrder   Int      @default(0)
-  isActive    Boolean  @default(true)
+  sortOrder   Int     @default(0)
+  isActive    Boolean @default(true)
 
   definitions StandardDefinition[]
 
@@ -694,7 +694,7 @@ model StandardDefinition {
   tenant      Tenant?          @relation(fields: [tenantId], references: [id])
   name        String
   description String?
-  unit        String?          // z.B. "%", "min", "€", "Anzahl"
+  unit        String? // z.B. "%", "min", "€", "Anzahl"
   targetValue Float
   operator    String           @default("GTE") // GTE, LTE, EQ, GT, LT
   weight      Float            @default(1)
@@ -715,7 +715,7 @@ model StandardEvaluation {
   store        Store     @relation(fields: [storeId], references: [id])
   evaluatedBy  String
   evaluator    User      @relation(fields: [evaluatedBy], references: [id])
-  period       String    // z.B. "2025-KW12" oder "2025-03"
+  period       String // z.B. "2025-KW12" oder "2025-03"
   overallScore Float?
   notes        String?
   status       String    @default("IN_PROGRESS") // IN_PROGRESS, COMPLETED
@@ -737,7 +737,7 @@ model StandardScore {
   definition   StandardDefinition @relation(fields: [definitionId], references: [id])
   actualValue  Float
   passed       Boolean
-  score        Float              // 0-100
+  score        Float // 0-100
   comment      String?
 
   @@unique([evaluationId, definitionId])
@@ -768,18 +768,18 @@ model RtbIndicator {
 }
 
 model RtbEntry {
-  id          String   @id @default(cuid())
+  id          String       @id @default(cuid())
   tenantId    String
-  tenant      Tenant   @relation(fields: [tenantId], references: [id])
+  tenant      Tenant       @relation(fields: [tenantId], references: [id])
   storeId     String
-  store       Store    @relation(fields: [storeId], references: [id])
+  store       Store        @relation(fields: [storeId], references: [id])
   indicatorId String
   indicator   RtbIndicator @relation(fields: [indicatorId], references: [id])
   period      String
   value       Float
   createdBy   String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 
   @@unique([storeId, indicatorId, period])
   @@index([tenantId])
@@ -813,7 +813,7 @@ model KpiEntry {
   tenant       Tenant   @relation(fields: [tenantId], references: [id])
   storeId      String
   store        Store    @relation(fields: [storeId], references: [id])
-  date         String   // ISO date "2025-03-12"
+  date         String // ISO date "2025-03-12"
   revenue      Float    @default(0)
   transactions Int      @default(0)
   footfall     Int?
@@ -840,7 +840,7 @@ model BudgetPeriod {
   tenant     Tenant   @relation(fields: [tenantId], references: [id])
   storeId    String
   store      Store    @relation(fields: [storeId], references: [id])
-  period     String   // z.B. "2025-03" oder "2025-Q1"
+  period     String // z.B. "2025-03" oder "2025-Q1"
   budgetType String   @default("MONTHLY") // MONTHLY, QUARTERLY, YEARLY
   revenue    Float    @default(0) // Budget-Ziel Umsatz
   cogs       Float    @default(0) // Cost of Goods Sold
@@ -865,9 +865,9 @@ model BudgetActual {
   id             String       @id @default(cuid())
   budgetPeriodId String
   budgetPeriod   BudgetPeriod @relation(fields: [budgetPeriodId], references: [id], onDelete: Cascade)
-  category       String       // REVENUE, COGS, LABOR, RENT, MARKETING, OTHER
+  category       String // REVENUE, COGS, LABOR, RENT, MARKETING, OTHER
   actualAmount   Float
-  date           String       // ISO date
+  date           String // ISO date
   description    String?
   enteredBy      String
   createdAt      DateTime     @default(now())
@@ -880,22 +880,22 @@ model BudgetActual {
 // ============================================================
 
 model Forecast {
-  id              String   @id @default(cuid())
-  tenantId        String
-  tenant          Tenant   @relation(fields: [tenantId], references: [id])
-  storeId         String
-  store           Store    @relation(fields: [storeId], references: [id])
-  period          String   // z.B. "2025-03" oder "2025-KW12"
-  forecastType    String   @default("REVENUE") // REVENUE, TRANSACTIONS, FOOTFALL
-  forecastValue   Float
-  actualValue     Float?
-  confidence      Float?   // 0-100
-  method          String   @default("MANUAL") // MANUAL, TREND, AI
-  notes           String?
-  createdBy       String
-  user            User     @relation("Forecasts", fields: [createdBy], references: [id])
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id            String   @id @default(cuid())
+  tenantId      String
+  tenant        Tenant   @relation(fields: [tenantId], references: [id])
+  storeId       String
+  store         Store    @relation(fields: [storeId], references: [id])
+  period        String // z.B. "2025-03" oder "2025-KW12"
+  forecastType  String   @default("REVENUE") // REVENUE, TRANSACTIONS, FOOTFALL
+  forecastValue Float
+  actualValue   Float?
+  confidence    Float? // 0-100
+  method        String   @default("MANUAL") // MANUAL, TREND, AI
+  notes         String?
+  createdBy     String
+  user          User     @relation("Forecasts", fields: [createdBy], references: [id])
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   @@unique([storeId, period, forecastType])
   @@index([tenantId])
@@ -907,26 +907,26 @@ model Forecast {
 // ============================================================
 
 model LossIncident {
-  id            String   @id @default(cuid())
-  tenantId      String
-  tenant        Tenant   @relation(fields: [tenantId], references: [id])
-  storeId       String
-  store         Store    @relation(fields: [storeId], references: [id])
-  incidentDate  String   // ISO date
-  category      String   // THEFT, DAMAGE, ADMIN_ERROR, SUPPLIER, OTHER
-  amount        Float    // Wert in EUR/Cent
-  description   String
-  severity      String   @default("MEDIUM") // LOW, MEDIUM, HIGH, CRITICAL
-  status        String   @default("OPEN") // OPEN, INVESTIGATING, RESOLVED, CLOSED
-  resolution    String?
-  reportedBy    String
-  reporter      User     @relation("LossReporter", fields: [reportedBy], references: [id])
-  assignedTo    String?
-  assignee      User?    @relation("LossAssignee", fields: [assignedTo], references: [id])
-  photoPath     String?
-  resolvedAt    DateTime?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id           String    @id @default(cuid())
+  tenantId     String
+  tenant       Tenant    @relation(fields: [tenantId], references: [id])
+  storeId      String
+  store        Store     @relation(fields: [storeId], references: [id])
+  incidentDate String // ISO date
+  category     String // THEFT, DAMAGE, ADMIN_ERROR, SUPPLIER, OTHER
+  amount       Float // Wert in EUR/Cent
+  description  String
+  severity     String    @default("MEDIUM") // LOW, MEDIUM, HIGH, CRITICAL
+  status       String    @default("OPEN") // OPEN, INVESTIGATING, RESOLVED, CLOSED
+  resolution   String?
+  reportedBy   String
+  reporter     User      @relation("LossReporter", fields: [reportedBy], references: [id])
+  assignedTo   String?
+  assignee     User?     @relation("LossAssignee", fields: [assignedTo], references: [id])
+  photoPath    String?
+  resolvedAt   DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
 
   @@index([tenantId])
   @@index([storeId])
@@ -939,24 +939,24 @@ model LossIncident {
 // ============================================================
 
 model InventoryCount {
-  id           String   @id @default(cuid())
-  tenantId     String
-  tenant       Tenant   @relation(fields: [tenantId], references: [id])
-  storeId      String
-  store        Store    @relation(fields: [storeId], references: [id])
-  countDate    String   // ISO date
-  countType    String   @default("FULL") // FULL, PARTIAL, CYCLE
-  status       String   @default("IN_PROGRESS") // IN_PROGRESS, COMPLETED, CANCELLED
-  totalItems   Int      @default(0)
-  countedItems Int      @default(0)
-  discrepancies Int     @default(0)
-  totalValue   Float    @default(0)
-  notes        String?
-  conductedBy  String
-  conductor    User     @relation("InventoryConductor", fields: [conductedBy], references: [id])
-  completedAt  DateTime?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id            String    @id @default(cuid())
+  tenantId      String
+  tenant        Tenant    @relation(fields: [tenantId], references: [id])
+  storeId       String
+  store         Store     @relation(fields: [storeId], references: [id])
+  countDate     String // ISO date
+  countType     String    @default("FULL") // FULL, PARTIAL, CYCLE
+  status        String    @default("IN_PROGRESS") // IN_PROGRESS, COMPLETED, CANCELLED
+  totalItems    Int       @default(0)
+  countedItems  Int       @default(0)
+  discrepancies Int       @default(0)
+  totalValue    Float     @default(0)
+  notes         String?
+  conductedBy   String
+  conductor     User      @relation("InventoryConductor", fields: [conductedBy], references: [id])
+  completedAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 
   items InventoryItem[]
 
@@ -966,19 +966,19 @@ model InventoryCount {
 }
 
 model InventoryItem {
-  id             String         @id @default(cuid())
-  countId        String
-  count          InventoryCount @relation(fields: [countId], references: [id], onDelete: Cascade)
-  sku            String
-  productName    String
-  category       String?
-  expectedQty    Int            @default(0)
-  actualQty      Int            @default(0)
-  unitPrice      Float          @default(0)
-  discrepancy    Int            @default(0) // actualQty - expectedQty
-  discrepancyValue Float        @default(0)
-  notes          String?
-  countedAt      DateTime?
+  id               String         @id @default(cuid())
+  countId          String
+  count            InventoryCount @relation(fields: [countId], references: [id], onDelete: Cascade)
+  sku              String
+  productName      String
+  category         String?
+  expectedQty      Int            @default(0)
+  actualQty        Int            @default(0)
+  unitPrice        Float          @default(0)
+  discrepancy      Int            @default(0) // actualQty - expectedQty
+  discrepancyValue Float          @default(0)
+  notes            String?
+  countedAt        DateTime?
 
   @@unique([countId, sku])
   @@index([countId])
@@ -989,20 +989,20 @@ model InventoryItem {
 // ============================================================
 
 model FloorZone {
-  id              String   @id @default(cuid())
-  tenantId        String
-  tenant          Tenant   @relation(fields: [tenantId], references: [id])
-  storeId         String
-  store           Store    @relation(fields: [storeId], references: [id])
-  name            String
-  description     String?
-  sortOrder       Int      @default(0)
-  minStaff        Int      @default(1)
-  maxStaff        Int      @default(5)
-  customerCount   Int      @default(0)
-  isActive        Boolean  @default(true)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id            String   @id @default(cuid())
+  tenantId      String
+  tenant        Tenant   @relation(fields: [tenantId], references: [id])
+  storeId       String
+  store         Store    @relation(fields: [storeId], references: [id])
+  name          String
+  description   String?
+  sortOrder     Int      @default(0)
+  minStaff      Int      @default(1)
+  maxStaff      Int      @default(5)
+  customerCount Int      @default(0)
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   positions     FloorStaffPosition[]
   frequencyLogs FloorFrequencyLog[]
@@ -1012,19 +1012,19 @@ model FloorZone {
 }
 
 model FloorFrequencyLog {
-  id            String   @id @default(cuid())
+  id            String    @id @default(cuid())
   tenantId      String
-  tenant        Tenant   @relation(fields: [tenantId], references: [id])
+  tenant        Tenant    @relation(fields: [tenantId], references: [id])
   storeId       String
-  store         Store    @relation(fields: [storeId], references: [id])
+  store         Store     @relation(fields: [storeId], references: [id])
   zoneId        String
   zone          FloorZone @relation(fields: [zoneId], references: [id])
   customerCount Int
   staffCount    Int
-  hour          Int      // 0-23
-  date          String   // ISO date "2026-03-17"
+  hour          Int // 0-23
+  date          String // ISO date "2026-03-17"
   recordedBy    String
-  createdAt     DateTime @default(now())
+  createdAt     DateTime  @default(now())
 
   @@index([tenantId])
   @@index([storeId, date])
@@ -1032,25 +1032,25 @@ model FloorFrequencyLog {
 }
 
 model FloorStaffPosition {
-  id        String    @id @default(cuid())
+  id        String     @id @default(cuid())
   tenantId  String
-  tenant    Tenant    @relation(fields: [tenantId], references: [id])
+  tenant    Tenant     @relation(fields: [tenantId], references: [id])
   storeId   String
-  store     Store     @relation(fields: [storeId], references: [id])
+  store     Store      @relation(fields: [storeId], references: [id])
   zoneId    String?
   zone      FloorZone? @relation(fields: [zoneId], references: [id])
   userId    String
-  user      User      @relation("FloorPositionUser", fields: [userId], references: [id])
-  userName  String    // denormalized for quick display
-  role      String?   // staff role on floor
-  status    String    @default("ON_FLOOR") // ON_FLOOR, ON_BREAK, OFF_FLOOR, CASHIER
-  startedAt DateTime  @default(now())
+  user      User       @relation("FloorPositionUser", fields: [userId], references: [id])
+  userName  String // denormalized for quick display
+  role      String? // staff role on floor
+  status    String     @default("ON_FLOOR") // ON_FLOOR, ON_BREAK, OFF_FLOOR, CASHIER
+  startedAt DateTime   @default(now())
   endedAt   DateTime?
   notes     String?
   updatedBy String
-  updater   User      @relation("FloorPositionUpdater", fields: [updatedBy], references: [id])
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  updater   User       @relation("FloorPositionUpdater", fields: [updatedBy], references: [id])
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 
   @@index([tenantId, storeId])
   @@index([storeId, status])
@@ -1062,8 +1062,8 @@ model FootfallEntry {
   tenant         Tenant   @relation(fields: [tenantId], references: [id])
   storeId        String
   store          Store    @relation(fields: [storeId], references: [id])
-  date           String   // ISO date "2025-03-12"
-  hour           Int?     // 0-23, null = daily aggregate
+  date           String // ISO date "2025-03-12"
+  hour           Int? // 0-23, null = daily aggregate
   footfall       Int      @default(0)
   revenue        Float    @default(0)
   transactions   Int      @default(0)
@@ -1083,12 +1083,12 @@ model VmGuidelineDoc {
   tenantId      String
   tenant        Tenant    @relation(fields: [tenantId], references: [id])
   title         String
-  category      String?   // z.B. "Schaufenster", "Eingang", "Warenträger"
-  content       String    // Markdown
+  category      String? // z.B. "Schaufenster", "Eingang", "Warenträger"
+  content       String // Markdown
   version       Int       @default(1)
   status        String    @default("DRAFT") // DRAFT, PUBLISHED, ARCHIVED
-  effectiveFrom String?   // ISO date
-  effectiveTo   String?   // ISO date
+  effectiveFrom String? // ISO date
+  effectiveTo   String? // ISO date
   createdBy     String
   publishedAt   DateTime?
   createdAt     DateTime  @default(now())
@@ -1101,13 +1101,13 @@ model VmGuidelineDoc {
 }
 
 model VmGuidelineImage {
-  id            String         @id @default(cuid())
+  id             String         @id @default(cuid())
   guidelineDocId String
-  guidelineDoc  VmGuidelineDoc @relation(fields: [guidelineDocId], references: [id], onDelete: Cascade)
-  imagePath     String
-  caption       String?
-  sortOrder     Int            @default(0)
-  createdAt     DateTime       @default(now())
+  guidelineDoc   VmGuidelineDoc @relation(fields: [guidelineDocId], references: [id], onDelete: Cascade)
+  imagePath      String
+  caption        String?
+  sortOrder      Int            @default(0)
+  createdAt      DateTime       @default(now())
 
   @@index([guidelineDocId])
 }
@@ -1145,19 +1145,19 @@ model MaintenanceRequest {
 // ============================================================
 
 model Course {
-  id             String   @id @default(cuid())
-  tenantId       String
-  tenant         Tenant   @relation(fields: [tenantId], references: [id])
-  title          String
-  description    String?
-  category       String?
-  durationMinutes Int     @default(0)
-  isRequired     Boolean  @default(false)
-  status         String   @default("DRAFT") // DRAFT, PUBLISHED, ARCHIVED
-  createdBy      String
-  creator        User     @relation("CourseCreator", fields: [createdBy], references: [id])
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id              String   @id @default(cuid())
+  tenantId        String
+  tenant          Tenant   @relation(fields: [tenantId], references: [id])
+  title           String
+  description     String?
+  category        String?
+  durationMinutes Int      @default(0)
+  isRequired      Boolean  @default(false)
+  status          String   @default("DRAFT") // DRAFT, PUBLISHED, ARCHIVED
+  createdBy       String
+  creator         User     @relation("CourseCreator", fields: [createdBy], references: [id])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   modules     CourseModule[]
   enrollments CourseEnrollment[]
@@ -1167,22 +1167,22 @@ model Course {
 }
 
 model CourseModule {
-  id             String   @id @default(cuid())
+  id              String   @id @default(cuid())
   courseId        String
-  course         Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  title          String
-  content        String?  // Markdown
-  sortOrder      Int      @default(0)
-  durationMinutes Int     @default(0)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  course          Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title           String
+  content         String? // Markdown
+  sortOrder       Int      @default(0)
+  durationMinutes Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   @@index([courseId])
 }
 
 model CourseEnrollment {
   id            String    @id @default(cuid())
-  courseId       String
+  courseId      String
   course        Course    @relation(fields: [courseId], references: [id])
   userId        String
   user          User      @relation("CourseEnrollments", fields: [userId], references: [id])
@@ -1203,13 +1203,13 @@ model CourseEnrollment {
 }
 
 model Certificate {
-  id           String    @id @default(cuid())
-  enrollmentId String    @unique
+  id           String           @id @default(cuid())
+  enrollmentId String           @unique
   enrollment   CourseEnrollment @relation(fields: [enrollmentId], references: [id])
   userId       String
-  user         User      @relation("Certificates", fields: [userId], references: [id])
+  user         User             @relation("Certificates", fields: [userId], references: [id])
   courseName   String
-  issuedAt     DateTime  @default(now())
+  issuedAt     DateTime         @default(now())
   expiresAt    DateTime?
 
   @@index([userId])
@@ -1220,21 +1220,21 @@ model Certificate {
 // ============================================================
 
 model TrainingLog {
-  id             String   @id @default(cuid())
-  tenantId       String
-  tenant         Tenant   @relation(fields: [tenantId], references: [id])
-  storeId        String
-  store          Store    @relation(fields: [storeId], references: [id])
-  userId         String
-  user           User     @relation("TrainingLogs", fields: [userId], references: [id])
-  date           String   // ISO date
+  id              String   @id @default(cuid())
+  tenantId        String
+  tenant          Tenant   @relation(fields: [tenantId], references: [id])
+  storeId         String
+  store           Store    @relation(fields: [storeId], references: [id])
+  userId          String
+  user            User     @relation("TrainingLogs", fields: [userId], references: [id])
+  date            String // ISO date
   durationMinutes Int
-  category       String   @default("OTHER") // PRODUCT, SALES, SERVICE, COMPLIANCE, ONBOARDING, OTHER
-  topic          String?
-  notes          String?
-  verifiedBy     String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  category        String   @default("OTHER") // PRODUCT, SALES, SERVICE, COMPLIANCE, ONBOARDING, OTHER
+  topic           String?
+  notes           String?
+  verifiedBy      String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   @@index([tenantId])
   @@index([storeId])
@@ -1247,26 +1247,26 @@ model TrainingLog {
 // ============================================================
 
 model Challenge {
-  id           String    @id @default(cuid())
-  tenantId     String
-  tenant       Tenant    @relation(fields: [tenantId], references: [id])
-  title        String
-  description  String?
-  mode         String    @default("KPI")        // KPI, VOTING (creative)
-  type         String    @default("INDIVIDUAL") // INDIVIDUAL, TEAM, STORE
-  metric       String?
-  targetValue  Float?
-  startDate    String
-  endDate      String
-  recurring    String?                           // NONE, WEEKLY, MONTHLY, QUARTERLY
-  reward       String?
-  rewardType   String?                           // HONOUR, PRIZE, POINTS, BADGE
-  anonymized   Boolean   @default(false)
-  status       String    @default("DRAFT")       // DRAFT, ACTIVE, COMPLETED, CANCELLED
-  createdBy    String
-  creator      User      @relation("ChallengeCreator", fields: [createdBy], references: [id])
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  id          String   @id @default(cuid())
+  tenantId    String
+  tenant      Tenant   @relation(fields: [tenantId], references: [id])
+  title       String
+  description String?
+  mode        String   @default("KPI") // KPI, VOTING (creative)
+  type        String   @default("INDIVIDUAL") // INDIVIDUAL, TEAM, STORE
+  metric      String?
+  targetValue Float?
+  startDate   String
+  endDate     String
+  recurring   String? // NONE, WEEKLY, MONTHLY, QUARTERLY
+  reward      String?
+  rewardType  String? // HONOUR, PRIZE, POINTS, BADGE
+  anonymized  Boolean  @default(false)
+  status      String   @default("DRAFT") // DRAFT, ACTIVE, COMPLETED, CANCELLED
+  createdBy   String
+  creator     User     @relation("ChallengeCreator", fields: [createdBy], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   participants ChallengeParticipant[]
   entries      ChallengeEntry[]
@@ -1295,14 +1295,14 @@ model ChallengeParticipant {
 }
 
 model ChallengeEntry {
-  id           String    @id @default(cuid())
-  challengeId  String
-  challenge    Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
-  userId       String
-  user         User      @relation("ChallengeEntries", fields: [userId], references: [id])
-  value        Float     @default(0)
-  note         String?
-  createdAt    DateTime  @default(now())
+  id          String    @id @default(cuid())
+  challengeId String
+  challenge   Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User      @relation("ChallengeEntries", fields: [userId], references: [id])
+  value       Float     @default(0)
+  note        String?
+  createdAt   DateTime  @default(now())
 
   @@index([challengeId])
   @@index([userId])
@@ -1331,7 +1331,7 @@ model OnboardingTemplate {
   tenantId     String
   tenant       Tenant   @relation(fields: [tenantId], references: [id])
   name         String
-  role         String?  // Target role for this template
+  role         String? // Target role for this template
   durationDays Int      @default(30)
   isDefault    Boolean  @default(false)
   isActive     Boolean  @default(true)
@@ -1345,16 +1345,16 @@ model OnboardingTemplate {
 }
 
 model OnboardingStep {
-  id           String             @id @default(cuid())
-  templateId   String
-  template     OnboardingTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
-  title        String
-  description  String?
-  category     String?
-  dayNumber    Int      @default(1)
-  sortOrder    Int      @default(0)
-  isRequired   Boolean  @default(true)
-  createdAt    DateTime @default(now())
+  id          String             @id @default(cuid())
+  templateId  String
+  template    OnboardingTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  title       String
+  description String?
+  category    String?
+  dayNumber   Int                @default(1)
+  sortOrder   Int                @default(0)
+  isRequired  Boolean            @default(true)
+  createdAt   DateTime           @default(now())
 
   progress OnboardingProgress[]
 
@@ -1362,22 +1362,22 @@ model OnboardingStep {
 }
 
 model OnboardingJourney {
-  id           String              @id @default(cuid())
-  templateId   String
-  template     OnboardingTemplate  @relation(fields: [templateId], references: [id])
-  tenantId     String
-  tenant       Tenant              @relation(fields: [tenantId], references: [id])
-  storeId      String
-  store        Store               @relation(fields: [storeId], references: [id])
-  userId       String
-  user         User                @relation("OnboardingJourneys", fields: [userId], references: [id])
-  mentorId     String?
-  mentor       User?               @relation("OnboardingMentors", fields: [mentorId], references: [id])
-  startDate    String
-  status       String    @default("IN_PROGRESS") // IN_PROGRESS, COMPLETED, CANCELLED
-  completedAt  DateTime?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  id          String             @id @default(cuid())
+  templateId  String
+  template    OnboardingTemplate @relation(fields: [templateId], references: [id])
+  tenantId    String
+  tenant      Tenant             @relation(fields: [tenantId], references: [id])
+  storeId     String
+  store       Store              @relation(fields: [storeId], references: [id])
+  userId      String
+  user        User               @relation("OnboardingJourneys", fields: [userId], references: [id])
+  mentorId    String?
+  mentor      User?              @relation("OnboardingMentors", fields: [mentorId], references: [id])
+  startDate   String
+  status      String             @default("IN_PROGRESS") // IN_PROGRESS, COMPLETED, CANCELLED
+  completedAt DateTime?
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
 
   progress OnboardingProgress[]
 
@@ -1387,17 +1387,17 @@ model OnboardingJourney {
 }
 
 model OnboardingProgress {
-  id           String            @id @default(cuid())
-  journeyId    String
-  journey      OnboardingJourney @relation(fields: [journeyId], references: [id], onDelete: Cascade)
-  stepId       String
-  step         OnboardingStep    @relation(fields: [stepId], references: [id])
-  status       String  @default("PENDING") // PENDING, IN_PROGRESS, COMPLETED, SKIPPED
-  completedAt  DateTime?
-  notes        String?
-  verifiedBy   String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id          String            @id @default(cuid())
+  journeyId   String
+  journey     OnboardingJourney @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  stepId      String
+  step        OnboardingStep    @relation(fields: [stepId], references: [id])
+  status      String            @default("PENDING") // PENDING, IN_PROGRESS, COMPLETED, SKIPPED
+  completedAt DateTime?
+  notes       String?
+  verifiedBy  String?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
 
   @@unique([journeyId, stepId])
   @@index([journeyId])
@@ -1408,30 +1408,30 @@ model OnboardingProgress {
 // ============================================================
 
 model CoachingSession {
-  id          String   @id @default(cuid())
-  tenantId    String
-  storeId     String
-  coachId     String
-  coacheeId   String
-  scheduledAt DateTime
-  duration    Int      @default(30)
-  type        String   @default("REGULAR") // REGULAR, AD_HOC, FOLLOW_UP
-  status      String   @default("SCHEDULED") // SCHEDULED, COMPLETED, CANCELLED
-  framework   String   @default("GROW") // GROW, SMART, FREE
-  topic       String?  // Verkauf, Kundenservice, Fuehrung, Produktwissen, Soft Skills, custom
-  category    String?  // additional category tag
+  id             String    @id @default(cuid())
+  tenantId       String
+  storeId        String
+  coachId        String
+  coacheeId      String
+  scheduledAt    DateTime
+  duration       Int       @default(30)
+  type           String    @default("REGULAR") // REGULAR, AD_HOC, FOLLOW_UP
+  status         String    @default("SCHEDULED") // SCHEDULED, COMPLETED, CANCELLED
+  framework      String    @default("GROW") // GROW, SMART, FREE
+  topic          String? // Verkauf, Kundenservice, Fuehrung, Produktwissen, Soft Skills, custom
+  category       String? // additional category tag
   goalText       String? // GROW: Goal / SMART: Specific
   realityText    String? // GROW: Reality / SMART: Measurable
   optionsText    String? // GROW: Options / SMART: Achievable
   wayForwardText String? // GROW: Way forward / SMART: Relevant
   timelineText   String? // SMART: Time-bound
-  notes       String?
-  actionItems String?
-  mood        Int?     // 1-5
-  followUpDate DateTime?
-  templateId  String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  notes          String?
+  actionItems    String?
+  mood           Int? // 1-5
+  followUpDate   DateTime?
+  templateId     String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 
   tenant  Tenant @relation(fields: [tenantId], references: [id])
   store   Store  @relation(fields: [storeId], references: [id])
@@ -1440,59 +1440,59 @@ model CoachingSession {
 }
 
 model CoachingTemplate {
-  id          String   @id @default(cuid())
-  tenantId    String
-  name        String
-  framework   String   @default("GROW")
-  topic       String?
-  category    String?
+  id             String   @id @default(cuid())
+  tenantId       String
+  name           String
+  framework      String   @default("GROW")
+  topic          String?
+  category       String?
   goalText       String?
   realityText    String?
   optionsText    String?
   wayForwardText String?
   timelineText   String?
-  notes       String?
-  createdBy   String
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  notes          String?
+  createdBy      String
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   tenant  Tenant @relation(fields: [tenantId], references: [id])
   creator User   @relation("CoachingTemplateCreator", fields: [createdBy], references: [id])
 }
 
 model DevelopmentPlan {
-  id         String   @id @default(cuid())
+  id         String    @id @default(cuid())
   tenantId   String
   storeId    String?
   userId     String
   managerId  String
-  type       String   // PDP, PIP
+  type       String // PDP, PIP
   title      String
-  status     String   @default("ACTIVE") // ACTIVE, COMPLETED, CANCELLED
-  startDate  DateTime @default(now())
+  status     String    @default("ACTIVE") // ACTIVE, COMPLETED, CANCELLED
+  startDate  DateTime  @default(now())
   targetDate DateTime?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
 
-  tenant  Tenant             @relation(fields: [tenantId], references: [id])
-  store   Store?             @relation(fields: [storeId], references: [id])
-  user    User               @relation("DevelopmentPlanUser", fields: [userId], references: [id])
-  manager User               @relation("DevelopmentPlanManager", fields: [managerId], references: [id])
+  tenant  Tenant              @relation(fields: [tenantId], references: [id])
+  store   Store?              @relation(fields: [storeId], references: [id])
+  user    User                @relation("DevelopmentPlanUser", fields: [userId], references: [id])
+  manager User                @relation("DevelopmentPlanManager", fields: [managerId], references: [id])
   goals   DevelopmentGoal[]
   reviews DevelopmentReview[]
 }
 
 model DevelopmentGoal {
-  id               String   @id @default(cuid())
+  id               String    @id @default(cuid())
   planId           String
   title            String
   measureOfSuccess String?
   targetDate       DateTime?
-  status           String   @default("NOT_STARTED") // NOT_STARTED, IN_PROGRESS, COMPLETED
-  progress         Int      @default(0)
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  status           String    @default("NOT_STARTED") // NOT_STARTED, IN_PROGRESS, COMPLETED
+  progress         Int       @default(0)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
 
   plan DevelopmentPlan @relation(fields: [planId], references: [id])
 }
@@ -1518,7 +1518,7 @@ model AppraisalCycle {
   id        String   @id @default(cuid())
   tenantId  String
   name      String
-  period    String?  // e.g. "Q1 2025", "H1 2025"
+  period    String? // e.g. "Q1 2025", "H1 2025"
   startDate DateTime
   endDate   DateTime
   status    String   @default("DRAFT") // DRAFT, ACTIVE, COMPLETED
@@ -1530,12 +1530,12 @@ model AppraisalCycle {
 }
 
 model Appraisal {
-  id            String   @id @default(cuid())
+  id            String    @id @default(cuid())
   cycleId       String
   storeId       String?
   employeeId    String
   managerId     String
-  status        String   @default("PENDING") // PENDING, SELF_REVIEW, MANAGER_REVIEW, COMPLETED
+  status        String    @default("PENDING") // PENDING, SELF_REVIEW, MANAGER_REVIEW, COMPLETED
   selfRating    Int?
   managerRating Int?
   overallRating Int?
@@ -1544,8 +1544,8 @@ model Appraisal {
   goals         String?
   meetingNotes  String?
   completedAt   DateTime?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 
   cycle    AppraisalCycle @relation(fields: [cycleId], references: [id])
   store    Store?         @relation(fields: [storeId], references: [id])
@@ -1561,9 +1561,9 @@ model ShiftTemplate {
   id        String   @id @default(cuid())
   storeId   String
   name      String
-  dayOfWeek Int      // 0=Sun, 1=Mon ... 6=Sat
-  startTime String   // "09:00"
-  endTime   String   // "17:00"
+  dayOfWeek Int // 0=Sun, 1=Mon ... 6=Sat
+  startTime String // "09:00"
+  endTime   String // "17:00"
   minStaff  Int      @default(1)
   role      String?
   createdAt DateTime @default(now())
@@ -1585,8 +1585,8 @@ model ShiftEntry {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  store Store            @relation(fields: [storeId], references: [id])
-  user  User             @relation(fields: [userId], references: [id])
+  store Store              @relation(fields: [storeId], references: [id])
+  user  User               @relation(fields: [userId], references: [id])
   swaps ShiftSwapRequest[]
 }
 
@@ -1610,8 +1610,8 @@ model ShiftAvailability {
   userId    String
   date      DateTime
   type      String   @default("AVAILABLE") // AVAILABLE, UNAVAILABLE, WISH, VACATION, SICK
-  wishStart String?  // gewuenschte Schicht-Startzeit
-  wishEnd   String?  // gewuenschte Schicht-Endzeit
+  wishStart String? // gewuenschte Schicht-Startzeit
+  wishEnd   String? // gewuenschte Schicht-Endzeit
   note      String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -1642,14 +1642,14 @@ model ShiftTimeEntry {
 }
 
 model ShiftWeekStatus {
-  id        String   @id @default(cuid())
-  storeId   String
-  weekStart DateTime
-  status    String   @default("DRAFT") // DRAFT, PUBLISHED
+  id          String    @id @default(cuid())
+  storeId     String
+  weekStart   DateTime
+  status      String    @default("DRAFT") // DRAFT, PUBLISHED
   publishedBy String?
   publishedAt DateTime?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   store Store @relation(fields: [storeId], references: [id])
 
@@ -1661,16 +1661,16 @@ model ShiftWeekStatus {
 // ============================================================
 
 model PulseSurvey {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   tenantId    String
   title       String
-  status      String   @default("DRAFT") // DRAFT, ACTIVE, CLOSED
+  status      String    @default("DRAFT") // DRAFT, ACTIVE, CLOSED
   startDate   DateTime?
   endDate     DateTime?
-  isAnonymous Boolean  @default(true)
+  isAnonymous Boolean   @default(true)
   createdBy   String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   tenant    Tenant          @relation(fields: [tenantId], references: [id])
   questions PulseQuestion[]
@@ -1678,14 +1678,14 @@ model PulseSurvey {
 }
 
 model PulseQuestion {
-  id       String @id @default(cuid())
-  surveyId String
-  text     String
-  type     String @default("RATING") // RATING, TEXT, CHOICE
-  options  String? // JSON string for choices
-  sortOrder Int   @default(0)
+  id        String  @id @default(cuid())
+  surveyId  String
+  text      String
+  type      String  @default("RATING") // RATING, TEXT, CHOICE
+  options   String? // JSON string for choices
+  sortOrder Int     @default(0)
 
-  survey  PulseSurvey  @relation(fields: [surveyId], references: [id])
+  survey  PulseSurvey   @relation(fields: [surveyId], references: [id])
   answers PulseAnswer[]
 }
 
@@ -1696,9 +1696,9 @@ model PulseResponse {
   respondentId String?
   submittedAt  DateTime @default(now())
 
-  survey    PulseSurvey   @relation(fields: [surveyId], references: [id])
-  store     Store?        @relation(fields: [storeId], references: [id])
-  answers   PulseAnswer[]
+  survey  PulseSurvey   @relation(fields: [surveyId], references: [id])
+  store   Store?        @relation(fields: [storeId], references: [id])
+  answers PulseAnswer[]
 }
 
 model PulseAnswer {
@@ -1718,18 +1718,18 @@ model PulseAnswer {
 // ============================================================
 
 model WellbeingCheckIn {
-  id              String   @id @default(cuid())
-  tenantId        String
-  storeId         String?
-  userId          String?
-  date            DateTime @default(now())
-  moodScore       Int      // 1-5
-  energyLevel     Int      // 1-5
-  stressLevel     Int      // 1-5
-  workloadRating  Int      // 1-5
-  notes           String?
-  isAnonymous     Boolean  @default(false)
-  createdAt       DateTime @default(now())
+  id             String   @id @default(cuid())
+  tenantId       String
+  storeId        String?
+  userId         String?
+  date           DateTime @default(now())
+  moodScore      Int // 1-5
+  energyLevel    Int // 1-5
+  stressLevel    Int // 1-5
+  workloadRating Int // 1-5
+  notes          String?
+  isAnonymous    Boolean  @default(false)
+  createdAt      DateTime @default(now())
 
   tenant Tenant @relation(fields: [tenantId], references: [id])
   store  Store? @relation(fields: [storeId], references: [id])
@@ -1753,21 +1753,21 @@ model WellbeingResource {
 // ── Kat.6: Kommunikation & Signal ─────────────────
 
 model Briefing {
-  id           String   @id @default(cuid())
-  storeId      String
-  store        Store    @relation(fields: [storeId], references: [id])
-  title        String
-  content      String
-  sections     String   @default("[]") // JSON array of {title,content,sortOrder}
-  date         String
-  type         String   @default("MORNING") // MORNING, EVENING, SPECIAL
-  scheduledFor String?  // ISO date-time; if set, visible from that moment
-  createdBy    String
-  creator      User     @relation("BriefingCreator", fields: [createdBy], references: [id])
-  publishedAt  DateTime?
+  id              String                   @id @default(cuid())
+  storeId         String
+  store           Store                    @relation(fields: [storeId], references: [id])
+  title           String
+  content         String
+  sections        String                   @default("[]") // JSON array of {title,content,sortOrder}
+  date            String
+  type            String                   @default("MORNING") // MORNING, EVENING, SPECIAL
+  scheduledFor    String? // ISO date-time; if set, visible from that moment
+  createdBy       String
+  creator         User                     @relation("BriefingCreator", fields: [createdBy], references: [id])
+  publishedAt     DateTime?
   acknowledgments BriefingAcknowledgment[]
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt       DateTime                 @default(now())
+  updatedAt       DateTime                 @updatedAt
 }
 
 model BriefingAcknowledgment {
@@ -1803,18 +1803,18 @@ model Handover {
 }
 
 model TeamMessage {
-  id             String   @id @default(cuid())
+  id             String            @id @default(cuid())
   tenantId       String
-  tenant         Tenant   @relation(fields: [tenantId], references: [id])
+  tenant         Tenant            @relation(fields: [tenantId], references: [id])
   title          String
   body           String
-  priority       String   @default("NORMAL") // NORMAL, HIGH, URGENT
-  targetType     String   @default("ALL") // ALL, STORE, ROLE
+  priority       String            @default("NORMAL") // NORMAL, HIGH, URGENT
+  targetType     String            @default("ALL") // ALL, STORE, ROLE
   targetStoreIds String?
   sentBy         String
-  sender         User     @relation("TeamMessageSender", fields: [sentBy], references: [id])
+  sender         User              @relation("TeamMessageSender", fields: [sentBy], references: [id])
   reads          TeamMessageRead[]
-  createdAt      DateTime @default(now())
+  createdAt      DateTime          @default(now())
 }
 
 model TeamMessageRead {
@@ -1829,20 +1829,20 @@ model TeamMessageRead {
 }
 
 model Newsletter {
-  id             String   @id @default(cuid())
+  id             String              @id @default(cuid())
   tenantId       String
-  tenant         Tenant   @relation(fields: [tenantId], references: [id])
+  tenant         Tenant              @relation(fields: [tenantId], references: [id])
   title          String
   content        String?
   coverImagePath String?
-  status         String   @default("DRAFT") // DRAFT, PUBLISHED, ARCHIVED
+  status         String              @default("DRAFT") // DRAFT, PUBLISHED, ARCHIVED
   publishedAt    DateTime?
   createdBy      String
-  creator        User     @relation("NewsletterCreator", fields: [createdBy], references: [id])
+  creator        User                @relation("NewsletterCreator", fields: [createdBy], references: [id])
   sections       NewsletterSection[]
   views          NewsletterView[]
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
 }
 
 model NewsletterSection {
@@ -1868,22 +1868,22 @@ model NewsletterView {
 // ── Kat.7: Customer, Clienteling & Stock ──────────
 
 model ConversionGoal {
-  id              String   @id @default(cuid())
-  storeId         String
-  store           Store    @relation(fields: [storeId], references: [id])
-  period          String
+  id               String   @id @default(cuid())
+  storeId          String
+  store            Store    @relation(fields: [storeId], references: [id])
+  period           String
   targetConversion Float?
-  targetAvgBasket Float?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  targetAvgBasket  Float?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 
   @@unique([storeId, period])
 }
 
 model ClientProfile {
-  id              String   @id @default(cuid())
+  id              String              @id @default(cuid())
   storeId         String
-  store           Store    @relation(fields: [storeId], references: [id])
+  store           Store               @relation(fields: [storeId], references: [id])
   firstName       String
   lastName        String
   email           String?
@@ -1893,22 +1893,22 @@ model ClientProfile {
   sizes           String?
   birthday        DateTime?
   vipLevel        String?
-  loyaltyPoints   Int      @default(0)
-  totalPurchases  Float    @default(0)
-  totalSpent      Float    @default(0)
+  loyaltyPoints   Int                 @default(0)
+  totalPurchases  Float               @default(0)
+  totalSpent      Float               @default(0)
   notes           String?
-  consentEmail    Boolean  @default(false)
-  consentSms      Boolean  @default(false)
-  consentWhatsapp Boolean  @default(false)
-  consentGeneral  Boolean  @default(false)
+  consentEmail    Boolean             @default(false)
+  consentSms      Boolean             @default(false)
+  consentWhatsapp Boolean             @default(false)
+  consentGeneral  Boolean             @default(false)
   lastVisit       DateTime?
   createdBy       String
-  creator         User     @relation("ClientCreator", fields: [createdBy], references: [id])
+  creator         User                @relation("ClientCreator", fields: [createdBy], references: [id])
   interactions    ClientInteraction[]
   tasks           ClientTask[]
   appointments    ClientAppointment[]
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
 }
 
 model ClientInteraction {
@@ -1939,20 +1939,20 @@ model ClientTask {
 }
 
 model StockCallout {
-  id            String   @id @default(cuid())
-  storeId       String
-  store         Store    @relation(fields: [storeId], references: [id])
-  sku           String
-  productName   String
-  currentStock  Int      @default(0)
-  reorderPoint  Int      @default(0)
-  requestedQty  Int      @default(0)
-  urgency       String   @default("NORMAL")
-  status        String   @default("OPEN")
-  reportedBy    String
-  reporter      User     @relation("StockCalloutReporter", fields: [reportedBy], references: [id])
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id           String   @id @default(cuid())
+  storeId      String
+  store        Store    @relation(fields: [storeId], references: [id])
+  sku          String
+  productName  String
+  currentStock Int      @default(0)
+  reorderPoint Int      @default(0)
+  requestedQty Int      @default(0)
+  urgency      String   @default("NORMAL")
+  status       String   @default("OPEN")
+  reportedBy   String
+  reporter     User     @relation("StockCalloutReporter", fields: [reportedBy], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model CustomerOrder {
@@ -1985,21 +1985,21 @@ model OrderStatusUpdate {
 }
 
 model ClientAppointment {
-  id          String        @id @default(cuid())
-  storeId     String
-  store       Store         @relation(fields: [storeId], references: [id])
-  clientId    String?
-  client      ClientProfile? @relation(fields: [clientId], references: [id], onDelete: SetNull)
-  advisorId   String
-  advisor     User          @relation("ClientAppointmentAdvisor", fields: [advisorId], references: [id])
-  type        String        @default("BERATUNG")
-  title       String
-  notes       String?
-  startsAt    DateTime
-  endsAt      DateTime
-  status      String        @default("GEPLANT")
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  id        String         @id @default(cuid())
+  storeId   String
+  store     Store          @relation(fields: [storeId], references: [id])
+  clientId  String?
+  client    ClientProfile? @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  advisorId String
+  advisor   User           @relation("ClientAppointmentAdvisor", fields: [advisorId], references: [id])
+  type      String         @default("BERATUNG")
+  title     String
+  notes     String?
+  startsAt  DateTime
+  endsAt    DateTime
+  status    String         @default("GEPLANT")
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
 }
 
 model BudgetScenario {
@@ -2009,7 +2009,7 @@ model BudgetScenario {
   createdBy String
   creator   User     @relation("BudgetScenarioCreator", fields: [createdBy], references: [id])
   name      String
-  data      String   // JSON blob with full scenario state
+  data      String // JSON blob with full scenario state
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -2020,14 +2020,14 @@ model BudgetScenario {
 // ── FR Conversion (Fitting Room) ────────────────────
 
 model FRSettings {
-  id              String   @id @default(cuid())
-  storeId         String   @unique
-  store           Store    @relation(fields: [storeId], references: [id])
-  maxItems        Int      @default(8)
-  warningMinutes  Int      @default(15)
-  alertMinutes    Int      @default(20)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id             String   @id @default(cuid())
+  storeId        String   @unique
+  store          Store    @relation(fields: [storeId], references: [id])
+  maxItems       Int      @default(8)
+  warningMinutes Int      @default(15)
+  alertMinutes   Int      @default(20)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
 
 model FRRoom {
@@ -2040,31 +2040,31 @@ model FRRoom {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  sessions  FRSession[]
+  sessions FRSession[]
 
   @@unique([storeId, number])
 }
 
 model FRSession {
-  id              String    @id @default(cuid())
-  storeId         String
-  store           Store     @relation(fields: [storeId], references: [id])
-  roomId          String
-  room            FRRoom    @relation(fields: [roomId], references: [id])
-  staffId         String?
-  staff           User?     @relation("FRSessionStaff", fields: [staffId], references: [id])
-  itemsIn         Int       @default(0)
-  itemsReturned   Int?
-  itemsPurchased  Int?
-  itemsShrinkage  Int?
-  conversionRate  Int?
-  status          String    @default("active") // active, completed, canceled
-  notes           String?
-  checkedInBy     String
-  checkInAt       DateTime  @default(now())
-  checkOutAt      DateTime?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  id             String    @id @default(cuid())
+  storeId        String
+  store          Store     @relation(fields: [storeId], references: [id])
+  roomId         String
+  room           FRRoom    @relation(fields: [roomId], references: [id])
+  staffId        String?
+  staff          User?     @relation("FRSessionStaff", fields: [staffId], references: [id])
+  itemsIn        Int       @default(0)
+  itemsReturned  Int?
+  itemsPurchased Int?
+  itemsShrinkage Int?
+  conversionRate Int?
+  status         String    @default("active") // active, completed, canceled
+  notes          String?
+  checkedInBy    String
+  checkInAt      DateTime  @default(now())
+  checkOutAt     DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 
   @@index([storeId, status])
   @@index([roomId])
@@ -2122,13 +2122,13 @@ model PasswordResetToken {
 // ============================================================
 
 model Conversation {
-  id         String   @id @default(cuid())
-  tenantId   String
-  tenant     Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  isGroup    Boolean  @default(false)
-  groupName  String?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id        String   @id @default(cuid())
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  isGroup   Boolean  @default(false)
+  groupName String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   participants ConversationParticipant[]
   messages     DirectMessage[]
@@ -2137,26 +2137,26 @@ model Conversation {
 }
 
 model ConversationParticipant {
-  id             String   @id @default(cuid())
+  id             String       @id @default(cuid())
   conversationId String
   conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
   userId         String
-  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  lastReadAt     DateTime @default(now())
-  joinedAt       DateTime @default(now())
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lastReadAt     DateTime     @default(now())
+  joinedAt       DateTime     @default(now())
 
   @@unique([conversationId, userId])
   @@index([userId])
 }
 
 model DirectMessage {
-  id             String   @id @default(cuid())
+  id             String       @id @default(cuid())
   conversationId String
   conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
   senderId       String
-  sender         User     @relation("DirectMessageSender", fields: [senderId], references: [id])
+  sender         User         @relation("DirectMessageSender", fields: [senderId], references: [id])
   content        String
-  createdAt      DateTime @default(now())
+  createdAt      DateTime     @default(now())
 
   @@index([conversationId, createdAt])
   @@index([senderId])

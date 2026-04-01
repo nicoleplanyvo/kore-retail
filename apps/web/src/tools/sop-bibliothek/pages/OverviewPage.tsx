@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, Search, Plus, Filter, Eye, CheckCircle, Clock, FileText } from 'lucide-react';
+import { BookOpen, Search, Plus, Filter, Eye, CheckCircle, Clock, FileText, AlertTriangle, Shield } from 'lucide-react';
 import { useSopDocuments, useSopCategories } from '../../../hooks/useSop';
 import { Breadcrumb } from '../../../components/Breadcrumb';
 
@@ -16,11 +16,25 @@ const STATUS_COLORS: Record<string, string> = {
   ARCHIVED: 'text-kore-faint bg-kore-bg border-kore-border',
 };
 
+type FilterType = 'alle' | 'pflicht' | 'optional';
+type ReadFilter = '' | 'overdue';
+
+function isOverdue(deadline: string | null): boolean {
+  if (!deadline) return false;
+  return new Date(deadline) < new Date();
+}
+
+function formatDeadline(deadline: string): string {
+  return new Date(deadline).toLocaleDateString('de-DE');
+}
+
 export function OverviewPage() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
   const [categoryId, setCategoryId] = useState('');
   const [status, setStatus] = useState('');
+  const [typeFilter, setTypeFilter] = useState<FilterType>('alle');
+  const [readFilter, setReadFilter] = useState<ReadFilter>('');
 
   const { data: categories } = useSopCategories();
   const { data: result, isLoading } = useSopDocuments({
@@ -28,6 +42,8 @@ export function OverviewPage() {
     categoryId: categoryId || undefined,
     status: status || undefined,
     search: search || undefined,
+    mandatory: typeFilter === 'pflicht' ? true : undefined,
+    overdue: readFilter === 'overdue' ? true : undefined,
   });
 
   const totalPages = result ? Math.ceil(result.total / result.pageSize) : 0;
@@ -93,6 +109,22 @@ export function OverviewPage() {
             <option value="PUBLISHED">Freigegeben</option>
             <option value="ARCHIVED">Archiviert</option>
           </select>
+          <select
+            value={typeFilter}
+            onChange={(e) => { setTypeFilter(e.target.value as FilterType); setPage(1); }}
+            className="border border-kore-border px-md py-sm text-small bg-kore-white"
+          >
+            <option value="alle">Pflicht & Optional</option>
+            <option value="pflicht">Nur Pflicht-SOPs</option>
+          </select>
+          <select
+            value={readFilter}
+            onChange={(e) => { setReadFilter(e.target.value as ReadFilter); setPage(1); }}
+            className="border border-kore-border px-md py-sm text-small bg-kore-white"
+          >
+            <option value="">Alle Deadlines</option>
+            <option value="overdue">Überfällig</option>
+          </select>
         </div>
       </div>
 
@@ -104,7 +136,7 @@ export function OverviewPage() {
           <BookOpen size={48} className="text-kore-faint mb-lg" />
           <h2 className="font-display text-h2 text-kore-ink mb-md">Keine SOPs gefunden</h2>
           <p className="text-body text-kore-mid max-w-md mb-xl">
-            {search || categoryId || status
+            {search || categoryId || status || typeFilter !== 'alle' || readFilter
               ? 'Passen Sie Ihre Filter an oder erstellen Sie eine neue SOP.'
               : 'Erstellen Sie Ihre erste Standard Operating Procedure.'}
           </p>
@@ -118,40 +150,60 @@ export function OverviewPage() {
       ) : (
         <>
           <div className="space-y-sm">
-            {result.data.map((doc) => (
-              <Link
-                key={doc.id}
-                to={`sops/${doc.id}`}
-                className="block bg-kore-white border border-kore-border p-lg hover:border-kore-brass transition-colors"
-              >
-                <div className="flex items-start justify-between gap-lg">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-md mb-xs">
-                      <FileText size={16} className="text-kore-brass flex-shrink-0" />
-                      <h3 className="text-body font-medium text-kore-ink truncate">{doc.title}</h3>
-                    </div>
-                    <div className="flex items-center gap-lg text-small text-kore-mid">
-                      {doc.category && <span>{doc.category.name}</span>}
-                      <span className="flex items-center gap-xs">
-                        <Clock size={12} /> v{doc.version}
-                      </span>
-                      {doc.creator && <span>von {doc.creator.name}</span>}
-                      <span>
-                        {new Date(doc.updatedAt).toLocaleDateString('de-DE')}
-                      </span>
-                      {doc._count && (
+            {result.data.map((doc) => {
+              const deadlineOverdue = isOverdue(doc.deadline);
+              return (
+                <Link
+                  key={doc.id}
+                  to={`sops/${doc.id}`}
+                  className={`block bg-kore-white border p-lg hover:border-kore-brass transition-colors ${
+                    deadlineOverdue ? 'border-red-300 bg-red-50/30' : 'border-kore-border'
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-lg">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-md mb-xs">
+                        <FileText size={16} className="text-kore-brass flex-shrink-0" />
+                        <h3 className="text-body font-medium text-kore-ink truncate">{doc.title}</h3>
+                        {doc.isMandatory && (
+                          <span className="flex items-center gap-xs text-caption px-md py-xs border border-blue-200 bg-blue-50 text-blue-700 uppercase tracking-widest flex-shrink-0">
+                            <Shield size={10} /> Pflicht
+                          </span>
+                        )}
+                        {deadlineOverdue && (
+                          <span className="flex items-center gap-xs text-caption px-md py-xs border border-red-200 bg-red-50 text-red-700 uppercase tracking-widest flex-shrink-0">
+                            <AlertTriangle size={10} /> Überfällig
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-lg text-small text-kore-mid">
+                        {doc.category && <span>{doc.category.name}</span>}
                         <span className="flex items-center gap-xs">
-                          <CheckCircle size={12} /> {doc._count.acknowledgments} gelesen
+                          <Clock size={12} /> v{doc.version}
                         </span>
-                      )}
+                        {doc.creator && <span>von {doc.creator.name}</span>}
+                        <span>
+                          {new Date(doc.updatedAt).toLocaleDateString('de-DE')}
+                        </span>
+                        {doc._count && (
+                          <span className="flex items-center gap-xs">
+                            <CheckCircle size={12} /> {doc._count.acknowledgments} gelesen
+                          </span>
+                        )}
+                        {doc.deadline && (
+                          <span className={`flex items-center gap-xs ${deadlineOverdue ? 'text-red-600 font-medium' : ''}`}>
+                            <Clock size={12} /> Frist: {formatDeadline(doc.deadline)}
+                          </span>
+                        )}
+                      </div>
                     </div>
+                    <span className={`text-caption px-md py-xs border ${STATUS_COLORS[doc.status] ?? 'text-kore-mid bg-kore-bg border-kore-border'} uppercase tracking-widest`}>
+                      {STATUS_LABELS[doc.status] ?? doc.status}
+                    </span>
                   </div>
-                  <span className={`text-caption px-md py-xs border ${STATUS_COLORS[doc.status] ?? 'text-kore-mid bg-kore-bg border-kore-border'} uppercase tracking-widest`}>
-                    {STATUS_LABELS[doc.status] ?? doc.status}
-                  </span>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Pagination */}

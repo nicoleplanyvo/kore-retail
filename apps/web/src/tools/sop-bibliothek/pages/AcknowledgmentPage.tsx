@@ -30,7 +30,7 @@ export function AcknowledgmentPage() {
                   <SopStatusBadge status={item.status} />
                 </div>
               </div>
-              <AcknowledgmentProgress acknowledged={item.acknowledged} total={item.total} />
+              <AcknowledgmentProgress acknowledged={item.acknowledgedCount} total={item.totalUsers} />
             </div>
           ))}
         </div>

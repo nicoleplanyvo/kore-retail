@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { api } from '../lib/api';
+import { api, apiUpload } from '../lib/api';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -12,36 +12,84 @@ interface SopCategorySummary {
   _count?: { documents: number };
 }
 
+interface SopAttachment {
+  id: string;
+  sopId: string;
+  fileName: string;
+  filePath: string;
+  fileType: string;
+  fileSize: number;
+  createdAt: string;
+}
+
 interface SopDocumentSummary {
   id: string; title: string; version: number; status: string;
   categoryId: string; publishedAt: string | null; updatedAt: string;
+  deadline: string | null; isMandatory: boolean; isOverdue: boolean;
   category?: { id: string; name: string };
   creator?: { id: string; name: string };
-  _count?: { acknowledgments: number };
+  _count?: { acknowledgments: number; attachments: number };
 }
 
 interface SopDocumentDetail {
   id: string; tenantId: string | null; categoryId: string; title: string;
   content: string; version: number; status: string; createdBy: string;
   attachmentPath: string | null; publishedAt: string | null;
+  deadline: string | null; isMandatory: boolean; isOverdue: boolean;
   createdAt: string; updatedAt: string;
   category?: { id: string; name: string };
   creator?: { id: string; name: string };
-  _count?: { acknowledgments: number };
+  attachments?: SopAttachment[];
+  _count?: { acknowledgments: number; attachments: number };
   /** Whether the current user has already acknowledged this document */
   userAcknowledged?: boolean;
 }
 
+interface AcknowledgmentUser {
+  id: string;
+  name: string;
+  email: string;
+  acknowledgedAt: string;
+}
+
+interface AcknowledgmentResponse {
+  totalReports: number;
+  acknowledged: number;
+  users: AcknowledgmentUser[];
+}
+
 interface AcknowledgmentStatusItem {
-  sopId: string; title: string; category?: { id: string; name: string };
+  sopId: string; title: string; status: string;
+  category?: { id: string; name: string };
   publishedAt: string | null; acknowledgedCount: number; totalUsers: number;
   acknowledgedPercent: number;
-  /** SOP publish status (e.g. PUBLISHED, DRAFT) */
-  status: string;
-  /** Number of users who acknowledged */
-  acknowledged: number;
-  /** Total number of users expected to acknowledge */
-  total: number;
+  isMandatory: boolean;
+  deadline: string | null;
+  isOverdue: boolean;
+}
+
+interface ComplianceUser {
+  userId: string;
+  name: string;
+  email: string;
+  readCount: number;
+  totalMandatory: number;
+  readPercent: number;
+}
+
+interface ComplianceReport {
+  totalMandatory: number;
+  users: ComplianceUser[];
+}
+
+interface OverdueItem {
+  sopId: string;
+  title: string;
+  deadline: string;
+  category?: { id: string; name: string };
+  acknowledgedCount: number;
+  totalUsers: number;
+  acknowledgedPercent: number;
 }
 
 interface PaginatedResponse<T> { data: T[]; total: number; page: number; pageSize: number; }
@@ -62,12 +110,21 @@ export function useSopCategories() {
   });
 }
 
-export function useSopDocuments(params: { page?: number; categoryId?: string; status?: string; search?: string } = {}) {
+export function useSopDocuments(params: {
+  page?: number;
+  categoryId?: string;
+  status?: string;
+  search?: string;
+  mandatory?: boolean;
+  overdue?: boolean;
+} = {}) {
   const qs = new URLSearchParams();
   if (params.page) qs.set('page', String(params.page));
   if (params.categoryId) qs.set('categoryId', params.categoryId);
   if (params.status) qs.set('status', params.status);
   if (params.search) qs.set('search', params.search);
+  if (params.mandatory) qs.set('mandatory', 'true');
+  if (params.overdue) qs.set('overdue', 'true');
   const query = qs.toString();
   return useQuery<PaginatedResponse<SopDocumentSummary>>({
     queryKey: ['sop', 'documents', params],
@@ -84,7 +141,7 @@ export function useSopDocument(id?: string) {
 }
 
 export function useSopAcknowledgments(sopId?: string) {
-  return useQuery<any[]>({
+  return useQuery<AcknowledgmentResponse>({
     queryKey: ['sop', 'acknowledgments', sopId],
     queryFn: () => api(`/api/tools/sop/documents/${sopId}/acknowledgments`),
     enabled: !!sopId,
@@ -98,12 +155,41 @@ export function useSopAcknowledgmentStatus() {
   });
 }
 
+export function useSopCompliance() {
+  return useQuery<ComplianceReport>({
+    queryKey: ['sop', 'compliance'],
+    queryFn: () => api('/api/tools/sop/reports/compliance'),
+  });
+}
+
+export function useSopOverdue() {
+  return useQuery<OverdueItem[]>({
+    queryKey: ['sop', 'overdue'],
+    queryFn: () => api('/api/tools/sop/reports/overdue'),
+  });
+}
+
+export function useSopAttachments(sopId?: string) {
+  return useQuery<SopAttachment[]>({
+    queryKey: ['sop', 'attachments', sopId],
+    queryFn: () => api(`/api/tools/sop/documents/${sopId}/attachments`),
+    enabled: !!sopId,
+  });
+}
+
 // ── Mutations ──────────────────────────────────────
 
 export function useCreateSop() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: (data: { title: string; content: string; categoryId: string; isGlobal?: boolean }) =>
+    mutationFn: (data: {
+      title: string;
+      content: string;
+      categoryId: string;
+      isGlobal?: boolean;
+      deadline?: string | null;
+      isMandatory?: boolean;
+    }) =>
       api<SopDocumentDetail>('/api/tools/sop/documents', { method: 'POST', body: JSON.stringify(data) }),
     onSuccess: () => { qc.invalidateQueries({ queryKey: ['sop'] }); },
   });
@@ -112,7 +198,13 @@ export function useCreateSop() {
 export function useUpdateSop(id: string) {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: (data: { title?: string; content?: string; categoryId?: string }) =>
+    mutationFn: (data: {
+      title?: string;
+      content?: string;
+      categoryId?: string;
+      deadline?: string | null;
+      isMandatory?: boolean;
+    }) =>
       api<SopDocumentDetail>(`/api/tools/sop/documents/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
     onSuccess: () => { qc.invalidateQueries({ queryKey: ['sop'] }); },
   });
@@ -145,6 +237,27 @@ export function useAcknowledgeSop() {
   });
 }
 
+export function useUploadSopAttachments(sopId: string) {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (files: File[]) => {
+      const formData = new FormData();
+      files.forEach((file) => formData.append('files', file));
+      return apiUpload<SopAttachment[]>(`/api/tools/sop/documents/${sopId}/attachments`, formData);
+    },
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['sop'] }); },
+  });
+}
+
+export function useDeleteSopAttachment(sopId: string) {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (attachmentId: string) =>
+      api(`/api/tools/sop/documents/${sopId}/attachments/${attachmentId}`, { method: 'DELETE' }),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['sop'] }); },
+  });
+}
+
 export function useCreateSopCategory() {
   const qc = useQueryClient();
   return useMutation({
@@ -153,3 +266,6 @@ export function useCreateSopCategory() {
     onSuccess: () => { qc.invalidateQueries({ queryKey: ['sop', 'categories'] }); },
   });
 }
+
+// Re-export types for use in components
+export type { SopDocumentSummary, SopDocumentDetail, SopAttachment, AcknowledgmentResponse, AcknowledgmentStatusItem, ComplianceReport, ComplianceUser, OverdueItem };

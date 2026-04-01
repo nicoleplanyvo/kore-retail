@@ -59,6 +59,8 @@ sopDocumentsRouter.get('/', async (req, res) => {
     const categoryId = req.query['categoryId'] as string | undefined;
     const status = req.query['status'] as string | undefined;
     const search = req.query['search'] as string | undefined;
+    const mandatory = req.query['mandatory'] as string | undefined;
+    const overdue = req.query['overdue'] as string | undefined;
 
     const where: Record<string, unknown> = {
       OR: [
@@ -72,6 +74,8 @@ sopDocumentsRouter.get('/', async (req, res) => {
     if (search) {
       where['title'] = { contains: search, mode: 'insensitive' };
     }
+    if (mandatory === 'true') where['isMandatory'] = true;
+    if (overdue === 'true') where['isOverdue'] = true;
 
     const [documents, total] = await Promise.all([
       prisma.sop.findMany({
@@ -79,7 +83,7 @@ sopDocumentsRouter.get('/', async (req, res) => {
         include: {
           category: { select: { id: true, name: true } },
           creator: { select: { id: true, name: true } },
-          _count: { select: { acknowledgments: true } },
+          _count: { select: { acknowledgments: true, attachments: true } },
         },
         orderBy: { updatedAt: 'desc' },
         skip: (page - 1) * pageSize,
@@ -95,7 +99,7 @@ sopDocumentsRouter.get('/', async (req, res) => {
   }
 });
 
-// GET /documents/:id — SOP-Detail mit Kategorie, Ersteller, Bestätigungen
+// GET /documents/:id — SOP-Detail mit Kategorie, Ersteller, Bestätigungen, Anhängen
 sopDocumentsRouter.get('/:id', async (req, res) => {
   try {
     const tenantId = (req as any).tenantId as string;
@@ -106,7 +110,11 @@ sopDocumentsRouter.get('/:id', async (req, res) => {
       include: {
         category: { select: { id: true, name: true } },
         creator: { select: { id: true, name: true } },
-        _count: { select: { acknowledgments: true } },
+        attachments: {
+          select: { id: true, fileName: true, filePath: true, fileType: true, fileSize: true, createdAt: true },
+          orderBy: { createdAt: 'desc' },
+        },
+        _count: { select: { acknowledgments: true, attachments: true } },
       },
     });
 
@@ -158,11 +166,13 @@ sopDocumentsRouter.post(
           tenantId: isGlobal ? null : tenantId,
           createdBy: userId,
           status: 'DRAFT',
+          deadline: data.deadline ? new Date(data.deadline) : null,
+          isMandatory: data.isMandatory ?? false,
         },
         include: {
           category: { select: { id: true, name: true } },
           creator: { select: { id: true, name: true } },
-          _count: { select: { acknowledgments: true } },
+          _count: { select: { acknowledgments: true, attachments: true } },
         },
       });
 
@@ -224,6 +234,12 @@ sopDocumentsRouter.put(
         return;
       }
 
+      // Compute isOverdue if deadline is being set
+      const newDeadline = data.deadline !== undefined
+        ? (data.deadline ? new Date(data.deadline) : null)
+        : existing.deadline;
+      const computedOverdue = newDeadline ? new Date() > newDeadline : false;
+
       const sop = await prisma.sop.update({
         where: { id: sopId },
         data: {
@@ -231,11 +247,14 @@ sopDocumentsRouter.put(
           content: data.content,
           categoryId: data.categoryId,
           version: { increment: 1 },
+          deadline: data.deadline !== undefined ? (data.deadline ? new Date(data.deadline) : null) : undefined,
+          isMandatory: data.isMandatory,
+          isOverdue: computedOverdue,
         },
         include: {
           category: { select: { id: true, name: true } },
           creator: { select: { id: true, name: true } },
-          _count: { select: { acknowledgments: true } },
+          _count: { select: { acknowledgments: true, attachments: true } },
         },
       });
 
@@ -299,7 +318,7 @@ sopDocumentsRouter.post(
         include: {
           category: { select: { id: true, name: true } },
           creator: { select: { id: true, name: true } },
-          _count: { select: { acknowledgments: true } },
+          _count: { select: { acknowledgments: true, attachments: true } },
         },
       });
 
@@ -357,7 +376,7 @@ sopDocumentsRouter.post(
         include: {
           category: { select: { id: true, name: true } },
           creator: { select: { id: true, name: true } },
-          _count: { select: { acknowledgments: true } },
+          _count: { select: { acknowledgments: true, attachments: true } },
         },
       });
 
@@ -379,58 +398,132 @@ sopDocumentsRouter.post(
   },
 );
 
-// POST /documents/:id/attachment — Anhang hochladen
+// ── Helpers ─────────────────────────────────────────
+
+function classifyFileType(mimetype: string): string {
+  if (mimetype.startsWith('image/')) return 'image';
+  if (mimetype === 'application/pdf') return 'pdf';
+  if (
+    mimetype === 'application/msword' ||
+    mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+  ) return 'docx';
+  if (
+    mimetype === 'application/vnd.ms-excel' ||
+    mimetype === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  ) return 'xlsx';
+  return 'other';
+}
+
+async function verifySopAccess(sopId: string, tenantId: string, userRole: string) {
+  const existing = await prisma.sop.findUnique({ where: { id: sopId } });
+  if (!existing) return { error: 'SOP nicht gefunden.', status: 404, sop: null };
+  if (existing.tenantId === null && userRole !== 'kore_admin') {
+    return { error: 'Globale SOPs können nur von KORE-Admins bearbeitet werden.', status: 403, sop: null };
+  }
+  if (existing.tenantId !== null && existing.tenantId !== tenantId) {
+    return { error: 'Kein Zugriff auf dieses SOP.', status: 403, sop: null };
+  }
+  return { error: null, status: 200, sop: existing };
+}
+
+// POST /documents/:id/attachments — Anhang(e) hochladen (multi)
 sopDocumentsRouter.post(
-  '/:id/attachment',
+  '/:id/attachments',
   requireRole('tenant_admin', 'kore_admin'),
-  upload.single('file'),
+  upload.array('files', 10),
   async (req, res) => {
     try {
       const tenantId = (req as any).tenantId as string;
       const sopId = req.params['id'] as string;
 
-      const existing = await prisma.sop.findUnique({
-        where: { id: sopId },
-      });
+      const { error, status } = await verifySopAccess(sopId, tenantId, req.user!.role);
+      if (error) { res.status(status).json({ error }); return; }
 
-      if (!existing) {
-        res.status(404).json({ error: 'SOP nicht gefunden.' });
+      const files = req.files as Express.Multer.File[] | undefined;
+      if (!files || files.length === 0) {
+        res.status(400).json({ error: 'Keine Datei(en) hochgeladen.' });
         return;
       }
 
-      if (existing.tenantId === null && req.user!.role !== 'kore_admin') {
-        res.status(403).json({ error: 'Globale SOPs können nur von KORE-Admins bearbeitet werden.' });
-        return;
-      }
+      const attachments = await Promise.all(
+        files.map((file) => {
+          const relativePath = path.join('sop', tenantId || 'global', file.filename);
+          return prisma.sopAttachment.create({
+            data: {
+              sopId,
+              fileName: file.originalname,
+              filePath: relativePath,
+              fileType: classifyFileType(file.mimetype),
+              fileSize: file.size,
+            },
+          });
+        }),
+      );
 
-      if (existing.tenantId !== null && existing.tenantId !== tenantId) {
-        res.status(403).json({ error: 'Kein Zugriff auf dieses SOP.' });
-        return;
-      }
-
-      if (!req.file) {
-        res.status(400).json({ error: 'Keine Datei hochgeladen.' });
-        return;
-      }
-
-      // Relativen Pfad speichern
-      const relativePath = path.join('sop', tenantId || 'global', req.file.filename);
-
-      const sop = await prisma.sop.update({
-        where: { id: sopId },
-        data: {
-          attachmentPath: relativePath,
-        },
-        include: {
-          category: { select: { id: true, name: true } },
-          creator: { select: { id: true, name: true } },
-          _count: { select: { acknowledgments: true } },
-        },
-      });
-
-      res.json(sop);
+      res.status(201).json(attachments);
     } catch (err) {
-      console.error('SOP attachment upload error:', err);
+      console.error('SOP attachments upload error:', err);
+      res.status(500).json({ error: 'Interner Serverfehler.' });
+    }
+  },
+);
+
+// GET /documents/:id/attachments — Liste aller Anhänge
+sopDocumentsRouter.get('/:id/attachments', async (req, res) => {
+  try {
+    const tenantId = (req as any).tenantId as string;
+    const sopId = req.params['id'] as string;
+
+    const sop = await prisma.sop.findUnique({ where: { id: sopId } });
+    if (!sop) { res.status(404).json({ error: 'SOP nicht gefunden.' }); return; }
+    if (sop.tenantId !== null && sop.tenantId !== tenantId) {
+      res.status(403).json({ error: 'Kein Zugriff auf dieses SOP.' });
+      return;
+    }
+
+    const attachments = await prisma.sopAttachment.findMany({
+      where: { sopId },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    res.json(attachments);
+  } catch (err) {
+    console.error('SOP attachments list error:', err);
+    res.status(500).json({ error: 'Interner Serverfehler.' });
+  }
+});
+
+// DELETE /documents/:id/attachments/:attachmentId — Anhang entfernen
+sopDocumentsRouter.delete(
+  '/:id/attachments/:attachmentId',
+  requireRole('tenant_admin', 'kore_admin'),
+  async (req, res) => {
+    try {
+      const tenantId = (req as any).tenantId as string;
+      const sopId = req.params['id'] as string;
+      const attachmentId = req.params['attachmentId'] as string;
+
+      const { error, status } = await verifySopAccess(sopId, tenantId, req.user!.role);
+      if (error) { res.status(status).json({ error }); return; }
+
+      const attachment = await prisma.sopAttachment.findUnique({
+        where: { id: attachmentId },
+      });
+
+      if (!attachment || attachment.sopId !== sopId) {
+        res.status(404).json({ error: 'Anhang nicht gefunden.' });
+        return;
+      }
+
+      // Remove file from disk
+      const fullPath = path.join(UPLOAD_DIR, attachment.filePath);
+      await fs.unlink(fullPath).catch(() => { /* file may not exist */ });
+
+      await prisma.sopAttachment.delete({ where: { id: attachmentId } });
+
+      res.json({ success: true });
+    } catch (err) {
+      console.error('SOP attachment delete error:', err);
       res.status(500).json({ error: 'Interner Serverfehler.' });
     }
   },
