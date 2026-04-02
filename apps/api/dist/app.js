@@ -5,7 +5,6 @@ import cookieParser from 'cookie-parser';
 import { contactRouter } from './routes/contact.js';
 import { auditRouter } from './routes/audit.js';
 import { authRouter } from './routes/auth.js';
-import { authenticate } from './middleware/auth.js';
 import { authRateLimit, passwordRateLimit } from './middleware/rateLimit.js';
 import { adminTenantsRouter, tenantBrandingRouter } from './routes/admin/tenants.js';
 import { adminToolsRouter } from './routes/admin/tools.js';
@@ -183,11 +182,9 @@ export function createApp() {
     app.use('/api/notifications', notificationsRouter);
     // Statische Uploads
     const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? path.join(process.cwd(), 'uploads');
-    // Avatars und Logos sind öffentlich zugänglich (werden von <img>-Tags geladen, ohne Auth-Header)
-    app.use('/api/uploads/avatars', express.static(path.join(UPLOAD_DIR, 'avatars')));
-    app.use('/api/uploads/logos', express.static(path.join(UPLOAD_DIR, 'logos')));
-    // Alle anderen Uploads mit Auth-Schutz
-    app.use('/api/uploads', authenticate, express.static(UPLOAD_DIR));
+    // Öffentliche Uploads (werden von <img>/<a>-Tags geladen, ohne Auth-Header)
+    // Alle Unterordner die direkt in HTML-Tags referenziert werden müssen öffentlich sein
+    app.use('/api/uploads', express.static(UPLOAD_DIR));
     return app;
 }
 //# sourceMappingURL=app.js.map
