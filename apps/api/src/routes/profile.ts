@@ -51,6 +51,8 @@ profileRouter.get('/', async (req, res) => {
         role: true,
         avatarPath: true,
         managerId: true,
+        absentFrom: true,
+        absentUntil: true,
         tenantId: true,
         isActive: true,
       },
@@ -79,6 +81,8 @@ profileRouter.get('/', async (req, res) => {
       avatarUrl: user.avatarPath ? `/api/uploads/${user.avatarPath}` : null,
       managerId: user.managerId,
       managerName,
+      absentFrom: user.absentFrom?.toISOString() ?? null,
+      absentUntil: user.absentUntil?.toISOString() ?? null,
     });
   } catch (err) {
     console.error('Profile GET error:', err);
@@ -87,19 +91,30 @@ profileRouter.get('/', async (req, res) => {
 });
 
 // ── PUT /api/profile ─────────────────────────────
-// Update own profile (name only)
+// Update own profile (name, absence dates)
 profileRouter.put('/', async (req, res) => {
   try {
-    const { name } = req.body;
+    const { name, absentFrom, absentUntil } = req.body;
 
     if (!name || typeof name !== 'string' || name.trim().length === 0) {
       res.status(400).json({ error: 'Name ist erforderlich.' });
       return;
     }
 
+    // Build update data
+    const data: Record<string, unknown> = { name: name.trim() };
+
+    // Handle absence dates — null clears them
+    if (absentFrom !== undefined) {
+      data.absentFrom = absentFrom ? new Date(absentFrom) : null;
+    }
+    if (absentUntil !== undefined) {
+      data.absentUntil = absentUntil ? new Date(absentUntil) : null;
+    }
+
     const updated = await prisma.user.update({
       where: { id: req.user!.sub },
-      data: { name: name.trim() },
+      data,
       select: {
         id: true,
         name: true,
@@ -107,6 +122,8 @@ profileRouter.put('/', async (req, res) => {
         role: true,
         avatarPath: true,
         managerId: true,
+        absentFrom: true,
+        absentUntil: true,
       },
     });
 
@@ -117,6 +134,8 @@ profileRouter.put('/', async (req, res) => {
       role: updated.role,
       avatarUrl: updated.avatarPath ? `/api/uploads/${updated.avatarPath}` : null,
       managerId: updated.managerId,
+      absentFrom: updated.absentFrom?.toISOString() ?? null,
+      absentUntil: updated.absentUntil?.toISOString() ?? null,
     });
   } catch (err) {
     console.error('Profile PUT error:', err);

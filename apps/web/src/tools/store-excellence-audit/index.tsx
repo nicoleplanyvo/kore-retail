@@ -5,7 +5,7 @@ import { CreateAuditPage } from './pages/CreateAuditPage';
 import { TemplatesPage } from './pages/TemplatesPage';
 import { DashboardPage } from './pages/DashboardPage';
 
-export function StoreExcellenceAuditRoutes() {
+export default function StoreExcellenceAuditRoutes() {
   return (
     <Routes>
       <Route index element={<OverviewPage />} />

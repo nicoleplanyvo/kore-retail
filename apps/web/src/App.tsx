@@ -16,11 +16,13 @@ import { BlogPostPage } from './pages/BlogPostPage';
 import { LoginPage } from './pages/LoginPage';
 import { ToolsHomePage } from './pages/ToolsHomePage';
 import { NotificationsPage } from './pages/NotificationsPage';
+import { ProfilePage } from './pages/ProfilePage';
+import { MessagingPage } from './pages/MessagingPage';
 import { useAnalytics } from './hooks/useAnalytics';
 import { ScrollToTop } from './components/ScrollToTop';
 
 // Tool-Routes importieren
-import { StoreExcellenceAuditRoutes } from './tools/store-excellence-audit/index';
+import StoreExcellenceAuditRoutes from './tools/store-excellence-audit/index';
 import ChecklistenRoutes from './tools/checklisten/index';
 import SopBibliothekRoutes from './tools/sop-bibliothek/index';
 import VmComplianceRoutes from './tools/vm-compliance/index';
@@ -87,6 +89,8 @@ export function App() {
             {/* Home — Alle authentifizierten User */}
             <Route path="/app" element={<ToolsHomePage />} />
             <Route path="/app/notifications" element={<NotificationsPage />} />
+            <Route path="/app/profile" element={<ProfilePage />} />
+            <Route path="/app/messaging" element={<MessagingPage />} />
 
             {/* Standards & Compliance */}
             <Route path="/app/tools/sea/*" element={<StoreExcellenceAuditRoutes />} />

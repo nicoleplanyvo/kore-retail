@@ -15,7 +15,7 @@ const ROLE_COLORS: Record<string, { bg: string; text: string }> = {
 
 const ROLE_LABELS: Record<string, string> = {
   kore_admin: 'Admin',
-  tenant_admin: 'Kunden-Admin',
+  tenant_admin: 'Admin',
   regional_manager: 'Regional',
   multisite_manager: 'Multisite',
   store_manager: 'Store Manager',

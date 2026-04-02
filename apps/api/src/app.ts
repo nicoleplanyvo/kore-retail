@@ -187,8 +187,9 @@ export function createApp(): Express {
   app.use('/api/messaging', messagingRouter);
   app.use('/api/notifications', notificationsRouter);
 
-  // Statische Uploads mit Auth-Schutz
+  // Statische Uploads — Logos oeffentlich, Rest mit Auth-Schutz
   const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? path.join(process.cwd(), 'uploads');
+  app.use('/api/uploads/logos', express.static(path.join(UPLOAD_DIR, 'logos')));
   app.use('/api/uploads', authenticate, express.static(UPLOAD_DIR));
 
   return app;

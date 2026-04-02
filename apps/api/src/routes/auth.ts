@@ -27,6 +27,21 @@ async function buildAuthResponse(userId: string, impersonatedBy?: string) {
 
   if (!user) return null;
 
+  // Lade Tenant-Branding falls User einem Tenant zugeordnet ist
+  let tenantBranding: { tenantName: string; logoUrl: string | null } | undefined;
+  if (user.tenantId) {
+    const tenant = await prisma.tenant.findUnique({
+      where: { id: user.tenantId },
+      select: { name: true, logoUrl: true },
+    });
+    if (tenant) {
+      tenantBranding = {
+        tenantName: tenant.name,
+        logoUrl: tenant.logoUrl,
+      };
+    }
+  }
+
   return {
     id: user.id,
     name: user.name,
@@ -36,6 +51,7 @@ async function buildAuthResponse(userId: string, impersonatedBy?: string) {
     impersonatedBy: impersonatedBy || undefined,
     storeAssignments: user.storeAssignments.map((a: { storeId: string }) => a.storeId),
     regionAssignments: user.regionAssignments.map((a: { regionId: string }) => a.regionId),
+    tenantBranding,
   };
 }
 

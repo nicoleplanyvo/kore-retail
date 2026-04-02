@@ -51,6 +51,11 @@ export interface JWTPayload {
 
 // === Auth User (Frontend) ===
 
+export interface TenantBranding {
+  tenantName: string;
+  logoUrl: string | null;
+}
+
 export interface AuthUser {
   id: string;
   name: string;
@@ -60,6 +65,7 @@ export interface AuthUser {
   impersonatedBy?: string;
   storeAssignments?: string[]; // Store-IDs
   regionAssignments?: string[]; // Region-IDs (für regional_manager)
+  tenantBranding?: TenantBranding;
 }
 
 // === User Store Assignment ===

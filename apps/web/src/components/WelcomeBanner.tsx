@@ -39,7 +39,7 @@ const ROLE_CONFIGS: Record<string, RoleConfig> = {
     ],
   },
   tenant_admin: {
-    description: 'Als Kunden-Admin verwaltest du Benutzer, Stores und Tool-Zuweisungen fuer deinen Mandanten.',
+    description: 'Als Admin verwaltest du Benutzer, Stores und Tool-Zuweisungen fuer deinen Mandanten.',
     quickLinks: [
       { label: 'Meine Tools', path: '/app' },
     ],
@@ -54,7 +54,7 @@ const ROLE_CONFIGS: Record<string, RoleConfig> = {
 
 const ROLE_LABELS: Record<string, string> = {
   kore_admin: 'Super Admin',
-  tenant_admin: 'Kunden-Admin',
+  tenant_admin: 'Admin',
   regional_manager: 'Regional Manager',
   multisite_manager: 'Multisite Manager',
   store_manager: 'Store Manager',

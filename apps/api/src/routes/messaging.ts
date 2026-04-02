@@ -34,7 +34,7 @@ messagingRouter.get('/conversations', async (req, res) => {
       include: {
         participants: {
           include: {
-            user: { select: { id: true, name: true, avatarPath: true } },
+            user: { select: { id: true, name: true, avatarPath: true, absentFrom: true, absentUntil: true } },
           },
         },
         messages: {
@@ -75,6 +75,8 @@ messagingRouter.get('/conversations', async (req, res) => {
               id: p.user.id,
               name: p.user.name,
               avatarUrl: p.user.avatarPath,
+              absentFrom: p.user.absentFrom?.toISOString() ?? null,
+              absentUntil: p.user.absentUntil?.toISOString() ?? null,
             })),
           lastMessage: lastMsg
             ? {

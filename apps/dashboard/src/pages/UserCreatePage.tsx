@@ -13,7 +13,7 @@ import { useRegions } from '../hooks/useRegions';
 import { canCreateRole, type UserRole } from '@kore/types';
 
 const ROLE_OPTIONS: { value: UserRole; label: string }[] = [
-  { value: 'tenant_admin', label: 'Kunden-Admin' },
+  { value: 'tenant_admin', label: 'Admin' },
   { value: 'regional_manager', label: 'Regional Manager' },
   { value: 'multisite_manager', label: 'Multisite Manager' },
   { value: 'store_manager', label: 'Store Manager' },

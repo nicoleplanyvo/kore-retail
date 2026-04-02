@@ -52,3 +52,50 @@ export function useVmComplianceDashboard() {
     queryFn: () => api<any>('/api/tools/vm-compliance/dashboard'),
   });
 }
+
+// Alias for cleaner imports
+export const useVmGuidelines = useVmComplianceGuidelines;
+
+export function useCreateVmGuideline() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (data: { name: string; description?: string; category?: string }) =>
+      api<any>('/api/tools/vm-compliance/guidelines', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      }),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['vmc', 'guidelines'] }); },
+  });
+}
+
+export function useUpdateVmGuideline() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, ...data }: { id: string; name?: string; description?: string; category?: string; isActive?: boolean; sortOrder?: number }) =>
+      api<any>(`/api/tools/vm-compliance/guidelines/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      }),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['vmc', 'guidelines'] }); },
+  });
+}
+
+export function useDeleteVmGuideline() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) =>
+      api<any>(`/api/tools/vm-compliance/guidelines/${id}`, { method: 'DELETE' }),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['vmc', 'guidelines'] }); },
+  });
+}
+
+export function useUploadGuidelinePhoto() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, formData }: { id: string; formData: FormData }) =>
+      apiUpload<any>(`/api/tools/vm-compliance/guidelines/${id}/photo`, formData),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['vmc', 'guidelines'] }); },
+  });
+}

@@ -5,7 +5,7 @@ import type { AuthUser } from '@kore/types';
 
 const ROLE_LABELS: Record<string, string> = {
   kore_admin: 'Super Admin',
-  tenant_admin: 'Kunden-Admin',
+  tenant_admin: 'Admin',
   regional_manager: 'Regional Manager',
   multisite_manager: 'Multisite Manager',
   store_manager: 'Store Manager',

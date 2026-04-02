@@ -2,16 +2,30 @@ import { Router, type Router as RouterType } from 'express';
 import prisma from '../../../lib/prisma.js';
 import { authenticate } from '../../../middleware/auth.js';
 import { requireToolAccess } from '../../../middleware/requireToolAccess.js';
-import { vmSubmissionCreateSchema, vmReviewSchema } from '../../../shared/validators.js';
+import { vmSubmissionCreateSchema, vmReviewSchema, vmGuidelineCreateSchema, vmGuidelineUpdateSchema } from '../../../shared/validators.js';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 
-const uploadDir = path.resolve('data/uploads/vm-submissions');
-if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
+const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? path.join(process.cwd(), 'uploads');
+
+const submissionDir = path.join(UPLOAD_DIR, 'vm-submissions');
+if (!fs.existsSync(submissionDir)) fs.mkdirSync(submissionDir, { recursive: true });
+
+const guidelinePhotoDir = path.join(UPLOAD_DIR, 'vm-guidelines');
+if (!fs.existsSync(guidelinePhotoDir)) fs.mkdirSync(guidelinePhotoDir, { recursive: true });
+
 const upload = multer({
   storage: multer.diskStorage({
-    destination: uploadDir,
+    destination: submissionDir,
+    filename: (_r, file, cb) => cb(null, `${Date.now()}-${file.originalname}`),
+  }),
+  limits: { fileSize: 10 * 1024 * 1024 },
+});
+
+const guidelineUpload = multer({
+  storage: multer.diskStorage({
+    destination: guidelinePhotoDir,
     filename: (_r, file, cb) => cb(null, `${Date.now()}-${file.originalname}`),
   }),
   limits: { fileSize: 10 * 1024 * 1024 },
@@ -272,6 +286,108 @@ vmComplianceRouter.get('/guidelines', async (req, res) => {
       include: { _count: { select: { submissions: true } } },
     });
     res.json(guidelines);
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
+});
+
+// POST /guidelines — Neue Guideline erstellen
+vmComplianceRouter.post('/guidelines', async (req, res) => {
+  try {
+    const tenantId = (req as any).tenantId as string;
+    const userId = req.user!.sub;
+    const parsed = vmGuidelineCreateSchema.safeParse(req.body);
+    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+
+    // sortOrder: nächste Position
+    const maxSort = await prisma.vmGuideline.aggregate({
+      where: { tenantId },
+      _max: { sortOrder: true },
+    });
+    const nextSort = (maxSort._max.sortOrder ?? -1) + 1;
+
+    const guideline = await prisma.vmGuideline.create({
+      data: {
+        tenantId,
+        name: parsed.data.name,
+        description: parsed.data.description || null,
+        category: parsed.data.category || null,
+        createdBy: userId,
+        sortOrder: nextSort,
+      },
+    });
+    res.status(201).json(guideline);
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
+});
+
+// PUT /guidelines/:id — Guideline aktualisieren
+vmComplianceRouter.put('/guidelines/:id', async (req, res) => {
+  try {
+    const tenantId = (req as any).tenantId as string;
+    const guidelineId = req.params['id'] as string;
+    const parsed = vmGuidelineUpdateSchema.safeParse(req.body);
+    if (!parsed.success) return res.status(400).json({ error: 'Ungueltige Daten.', details: parsed.error.flatten() });
+
+    const existing = await prisma.vmGuideline.findFirst({
+      where: { id: guidelineId, tenantId },
+    });
+    if (!existing) return res.status(404).json({ error: 'Guideline nicht gefunden.' });
+
+    const updated = await prisma.vmGuideline.update({
+      where: { id: guidelineId },
+      data: {
+        ...(parsed.data.name !== undefined && { name: parsed.data.name }),
+        ...(parsed.data.description !== undefined && { description: parsed.data.description || null }),
+        ...(parsed.data.category !== undefined && { category: parsed.data.category || null }),
+        ...(parsed.data.isActive !== undefined && { isActive: parsed.data.isActive }),
+        ...(parsed.data.sortOrder !== undefined && { sortOrder: parsed.data.sortOrder }),
+      },
+    });
+    res.json(updated);
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
+});
+
+// DELETE /guidelines/:id — Guideline löschen (soft-delete)
+vmComplianceRouter.delete('/guidelines/:id', async (req, res) => {
+  try {
+    const tenantId = (req as any).tenantId as string;
+    const guidelineId = req.params['id'] as string;
+    const existing = await prisma.vmGuideline.findFirst({
+      where: { id: guidelineId, tenantId },
+    });
+    if (!existing) return res.status(404).json({ error: 'Guideline nicht gefunden.' });
+
+    await prisma.vmGuideline.update({
+      where: { id: guidelineId },
+      data: { isActive: false },
+    });
+    res.json({ success: true });
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
+});
+
+// POST /guidelines/:id/photo — Referenzbild hochladen
+vmComplianceRouter.post('/guidelines/:id/photo', guidelineUpload.single('photo'), async (req, res) => {
+  try {
+    const tenantId = (req as any).tenantId as string;
+    const guidelineId = req.params['id'] as string;
+    if (!req.file) return res.status(400).json({ error: 'Foto ist erforderlich.' });
+
+    const existing = await prisma.vmGuideline.findFirst({
+      where: { id: guidelineId, tenantId },
+    });
+    if (!existing) return res.status(404).json({ error: 'Guideline nicht gefunden.' });
+
+    // Altes Referenzbild löschen falls vorhanden
+    if (existing.referencePhoto) {
+      const oldPath = path.join(UPLOAD_DIR, existing.referencePhoto.replace(/^\/uploads\//, ''));
+      if (fs.existsSync(oldPath)) {
+        fs.unlinkSync(oldPath);
+      }
+    }
+
+    const updated = await prisma.vmGuideline.update({
+      where: { id: guidelineId },
+      data: { referencePhoto: `/uploads/vm-guidelines/${req.file.filename}` },
+    });
+    res.json(updated);
   } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
 });
 
