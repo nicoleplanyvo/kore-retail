@@ -2,92 +2,13 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { api, apiUpload } from '../lib/api';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-/* ================================================================== */
-/*  STORES                                                             */
-/* ================================================================== */
-
 export function useVmComplianceStores() {
-  return useQuery({
-    queryKey: ['vmc', 'stores'],
-    queryFn: () => api<any[]>('/api/tools/vm-compliance/stores'),
-  });
+  return useQuery({ queryKey: ['vmc', 'stores'], queryFn: () => api<any[]>('/api/tools/vm-compliance/stores') });
 }
-
-/* ================================================================== */
-/*  AREAS — Bereiche                                                   */
-/* ================================================================== */
-
-export function useVmAreas(showAll = false) {
-  return useQuery({
-    queryKey: ['vmc', 'areas', showAll],
-    queryFn: () => {
-      const params = showAll ? '?showAll=true' : '';
-      return api<any[]>(`/api/tools/vm-compliance/areas${params}`);
-    },
-  });
-}
-
-export function useCreateVmArea() {
-  const qc = useQueryClient();
-  return useMutation({
-    mutationFn: (data: { name: string; description?: string; sortOrder?: number }) =>
-      api<any>('/api/tools/vm-compliance/areas', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['vmc', 'areas'] }); },
-  });
-}
-
-export function useUpdateVmArea() {
-  const qc = useQueryClient();
-  return useMutation({
-    mutationFn: ({ id, ...data }: any) =>
-      api<any>(`/api/tools/vm-compliance/areas/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['vmc', 'areas'] }); },
-  });
-}
-
-export function useDeleteVmArea() {
-  const qc = useQueryClient();
-  return useMutation({
-    mutationFn: (id: string) =>
-      api<any>(`/api/tools/vm-compliance/areas/${id}`, { method: 'DELETE' }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['vmc', 'areas'] }); },
-  });
-}
-
-export function useUploadAreaPdf() {
-  const qc = useQueryClient();
-  return useMutation({
-    mutationFn: ({ id, formData }: { id: string; formData: FormData }) =>
-      apiUpload<any>(`/api/tools/vm-compliance/areas/${id}/pdf`, formData),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ['vmc', 'areas'] }); },
-  });
-}
-
-/* ================================================================== */
-/*  GUIDELINES                                                         */
-/* ================================================================== */
 
 export function useVmComplianceGuidelines() {
-  return useQuery({
-    queryKey: ['vmc', 'guidelines'],
-    queryFn: () => api<any[]>('/api/tools/vm-compliance/guidelines'),
-  });
+  return useQuery({ queryKey: ['vmc', 'guidelines'], queryFn: () => api<any[]>('/api/tools/vm-compliance/guidelines') });
 }
-
-/** Alias for useVmComplianceGuidelines — used by GuidelinesPage */
-export const useVmGuidelines = useVmComplianceGuidelines;
-
-/* ================================================================== */
-/*  CHECKS                                                             */
-/* ================================================================== */
 
 export function useVmComplianceChecks(page = 1, storeId?: string, status?: string) {
   return useQuery({
@@ -112,8 +33,7 @@ export function useVmComplianceCheck(id?: string) {
 export function useSubmitVmCheck() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: (formData: FormData) =>
-      apiUpload<any>('/api/tools/vm-compliance/checks', formData),
+    mutationFn: (formData: FormData) => apiUpload<any>('/api/tools/vm-compliance/checks', formData),
     onSuccess: () => { qc.invalidateQueries({ queryKey: ['vmc'] }); },
   });
 }
@@ -121,19 +41,10 @@ export function useSubmitVmCheck() {
 export function useReviewVmCheck() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: ({ id, ...data }: any) =>
-      api<any>(`/api/tools/vm-compliance/checks/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      }),
+    mutationFn: ({ id, ...data }: any) => api<any>(`/api/tools/vm-compliance/checks/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }),
     onSuccess: () => { qc.invalidateQueries({ queryKey: ['vmc'] }); },
   });
 }
-
-/* ================================================================== */
-/*  DASHBOARD                                                          */
-/* ================================================================== */
 
 export function useVmComplianceDashboard() {
   return useQuery({
@@ -142,84 +53,49 @@ export function useVmComplianceDashboard() {
   });
 }
 
-/* ================================================================== */
-/*  OVERDUE / ESCALATION                                               */
-/* ================================================================== */
+// Alias for cleaner imports
+export const useVmGuidelines = useVmComplianceGuidelines;
 
-export function useVmOverdueChecks() {
-  return useQuery({
-    queryKey: ['vmc', 'checks', 'overdue'],
-    queryFn: () => api<any[]>('/api/tools/vm-compliance/checks/overdue'),
-  });
-}
-
-export function useEscalateVmChecks() {
+export function useCreateVmGuideline() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: () =>
-      api<{ escalatedCount: number; escalatedIds: string[] }>(
-        '/api/tools/vm-compliance/checks/escalate',
-        { method: 'POST' },
-      ),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ['vmc'] });
-    },
+    mutationFn: (data: { name: string; description?: string; category?: string }) =>
+      api<any>('/api/tools/vm-compliance/guidelines', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      }),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['vmc', 'guidelines'] }); },
   });
 }
 
-/* ================================================================== */
-/*  LEGACY COMPAT                                                      */
-/* ================================================================== */
-
-/** Paginated submissions with optional filters */
-export function useVmSubmissions(params: {
-  page?: number;
-  storeId?: string;
-  status?: string;
-  from?: string;
-  to?: string;
-} = {}) {
-  return useQuery({
-    queryKey: ['vmc', 'submissions', params],
-    queryFn: () => {
-      const p = new URLSearchParams({ page: String(params.page ?? 1), pageSize: '20' });
-      if (params.storeId) p.set('storeId', params.storeId);
-      if (params.status) p.set('status', params.status);
-      if (params.from) p.set('from', params.from);
-      if (params.to) p.set('to', params.to);
-      return api<{ data: any[]; total: number }>(`/api/tools/vm-compliance/checks?${p}`);
-    },
+export function useUpdateVmGuideline() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, ...data }: { id: string; name?: string; description?: string; category?: string; isActive?: boolean; sortOrder?: number }) =>
+      api<any>(`/api/tools/vm-compliance/guidelines/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      }),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['vmc', 'guidelines'] }); },
   });
 }
 
-/** Fetches pending checks for the review queue with optional filters */
-export function useVmCompliancePendingChecks(
-  page = 1,
-  storeId?: string,
-  from?: string,
-  to?: string,
-) {
-  return useQuery({
-    queryKey: ['vmc', 'checks', 'pending', page, storeId, from, to],
-    queryFn: () => {
-      const params = new URLSearchParams({ page: String(page), pageSize: '20', status: 'PENDING' });
-      if (storeId) params.set('storeId', storeId);
-      if (from) params.set('from', from);
-      if (to) params.set('to', to);
-      return api<{ data: any[]; total: number }>(`/api/tools/vm-compliance/checks?${params}`);
-    },
+export function useDeleteVmGuideline() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) =>
+      api<any>(`/api/tools/vm-compliance/guidelines/${id}`, { method: 'DELETE' }),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['vmc', 'guidelines'] }); },
   });
 }
 
-/** Lightweight count of pending checks (for badge on overview) */
-export function useVmCompliancePendingCount() {
-  return useQuery({
-    queryKey: ['vmc', 'checks', 'pending-count'],
-    queryFn: async () => {
-      const result = await api<{ data: any[]; total: number }>(
-        '/api/tools/vm-compliance/checks?status=PENDING&pageSize=1',
-      );
-      return result.total;
-    },
+export function useUploadGuidelinePhoto() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, formData }: { id: string; formData: FormData }) =>
+      apiUpload<any>(`/api/tools/vm-compliance/guidelines/${id}/photo`, formData),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['vmc', 'guidelines'] }); },
   });
 }

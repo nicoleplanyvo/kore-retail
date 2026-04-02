@@ -9,6 +9,152 @@ import { tenantCreateSchema, tenantUpdateSchema } from '../../shared/validators.
 export const adminTenantsRouter: RouterType = Router();
 adminTenantsRouter.use(authenticate, requireMinRole('kore_admin'));
 
+// Branding router — tenant_admin can manage own branding, kore_admin can manage any
+export const tenantBrandingRouter: RouterType = Router();
+tenantBrandingRouter.use(authenticate, requireMinRole('tenant_admin'));
+
+// ── Logo Upload Multer Config ──────────────────────────────────────
+const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? './uploads';
+const LOGO_DIR = path.join(UPLOAD_DIR, 'logos');
+
+const logoStorage = multer.diskStorage({
+  destination: async (_req, _file, cb) => {
+    try {
+      await fs.mkdir(LOGO_DIR, { recursive: true });
+      cb(null, LOGO_DIR);
+    } catch (error) {
+      cb(error as Error, '');
+    }
+  },
+  filename: (req, file, cb) => {
+    const tenantId = req.params['id'] as string;
+    const ext = path.extname(file.originalname) || '.png';
+    cb(null, `${tenantId}-${Date.now()}${ext}`);
+  },
+});
+
+const logoUpload = multer({
+  storage: logoStorage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB
+  fileFilter: (_req, file, cb) => {
+    const allowed = ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml'];
+    if (allowed.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Nur JPEG, PNG, WebP und SVG Dateien sind erlaubt.'));
+    }
+  },
+});
+
+// ── GET /api/admin/tenants/:id/branding — Branding-Daten eines Tenants ──
+tenantBrandingRouter.get('/:id/branding', async (req, res) => {
+  try {
+    const tenantId = req.params['id'] as string;
+
+    // Tenant-Zugriff prüfen: kore_admin darf alles, andere nur eigenen Tenant
+    if (req.user!.role !== 'kore_admin' && req.user!.tenantId !== tenantId) {
+      res.status(403).json({ error: 'Kein Zugriff auf diesen Mandanten.' });
+      return;
+    }
+
+    const tenant = await prisma.tenant.findUnique({
+      where: { id: tenantId },
+      select: { id: true, name: true, slug: true, logoUrl: true },
+    });
+
+    if (!tenant) {
+      res.status(404).json({ error: 'Tenant nicht gefunden.' });
+      return;
+    }
+
+    res.json(tenant);
+  } catch (err) {
+    console.error('Branding GET error:', err);
+    res.status(500).json({ error: 'Interner Serverfehler.' });
+  }
+});
+
+// ── PUT /api/admin/tenants/:id/branding — Branding-Daten aktualisieren ──
+tenantBrandingRouter.put('/:id/branding', async (req, res) => {
+  try {
+    const tenantId = req.params['id'] as string;
+
+    // Tenant-Zugriff prüfen
+    if (req.user!.role !== 'kore_admin' && req.user!.tenantId !== tenantId) {
+      res.status(403).json({ error: 'Kein Zugriff auf diesen Mandanten.' });
+      return;
+    }
+
+    const tenant = await prisma.tenant.findUnique({ where: { id: tenantId } });
+    if (!tenant) {
+      res.status(404).json({ error: 'Tenant nicht gefunden.' });
+      return;
+    }
+
+    // Only allow updating name for now (extend later with primaryColor etc.)
+    const { name } = req.body;
+    const updateData: Record<string, unknown> = {};
+    if (name && typeof name === 'string') updateData['name'] = name;
+
+    const updated = await prisma.tenant.update({
+      where: { id: tenantId },
+      data: updateData,
+      select: { id: true, name: true, slug: true, logoUrl: true },
+    });
+
+    res.json(updated);
+  } catch (err) {
+    console.error('Branding PUT error:', err);
+    res.status(500).json({ error: 'Interner Serverfehler.' });
+  }
+});
+
+// ── POST /api/admin/tenants/:id/branding/logo — Logo hochladen ──
+tenantBrandingRouter.post('/:id/branding/logo', logoUpload.single('logo'), async (req, res) => {
+  try {
+    const tenantId = req.params['id'] as string;
+
+    // Tenant-Zugriff prüfen
+    if (req.user!.role !== 'kore_admin' && req.user!.tenantId !== tenantId) {
+      res.status(403).json({ error: 'Kein Zugriff auf diesen Mandanten.' });
+      return;
+    }
+
+    if (!req.file) {
+      res.status(400).json({ error: 'Keine Datei hochgeladen.' });
+      return;
+    }
+
+    // Altes Logo löschen, falls vorhanden
+    const existing = await prisma.tenant.findUnique({
+      where: { id: tenantId },
+      select: { logoUrl: true },
+    });
+
+    if (existing?.logoUrl) {
+      try {
+        await fs.unlink(path.join(UPLOAD_DIR, existing.logoUrl));
+      } catch {
+        // Altes Logo existiert evtl. nicht mehr — kein harter Fehler
+      }
+    }
+
+    // Relativer Pfad für die DB: "logos/tenantId-timestamp.ext"
+    const logoUrl = `logos/${req.file.filename}`;
+
+    const updated = await prisma.tenant.update({
+      where: { id: tenantId },
+      data: { logoUrl },
+      select: { id: true, name: true, slug: true, logoUrl: true },
+    });
+
+    res.json(updated);
+  } catch (err) {
+    console.error('Logo upload error:', err);
+    res.status(500).json({ error: 'Interner Serverfehler.' });
+  }
+});
+
 // GET /api/admin/tenants/stats — Dashboard-Statistiken
 adminTenantsRouter.get('/stats', async (_req, res) => {
   try {
@@ -198,200 +344,6 @@ adminTenantsRouter.delete('/:id', async (req, res) => {
     res.json({ success: true, tenant });
   } catch (err) {
     console.error('Admin tenant delete error:', err);
-    res.status(500).json({ error: 'Interner Serverfehler.' });
-  }
-});
-
-// ============================================================
-// Tenant Branding — kore_admin OR tenant_admin (own tenant only)
-// ============================================================
-
-/**
- * Separate router for branding endpoints.
- * Mounted at /api/admin/tenants in index.ts (same path), but uses
- * authenticate + requireMinRole('tenant_admin') instead of kore_admin.
- * We export it separately and mount it alongside adminTenantsRouter.
- */
-export const tenantBrandingRouter: RouterType = Router();
-tenantBrandingRouter.use(authenticate, requireMinRole('tenant_admin'));
-
-const HEX_COLOR_REGEX = /^#[0-9a-fA-F]{6}$/;
-
-const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? './uploads';
-const LOGO_ALLOWED_MIMETYPES = [
-  'image/jpeg',
-  'image/png',
-  'image/webp',
-  'image/svg+xml',
-];
-const LOGO_MAX_SIZE = 2 * 1024 * 1024; // 2 MB
-
-const logoStorage = multer.diskStorage({
-  destination: async (_req, _file, cb) => {
-    const dir = path.join(UPLOAD_DIR, 'logos');
-    await fs.mkdir(dir, { recursive: true });
-    cb(null, dir);
-  },
-  filename: (req, file, cb) => {
-    const tenantId = req.params['id'];
-    const ext = path.extname(file.originalname) || '.png';
-    cb(null, `${tenantId}-${Date.now()}${ext}`);
-  },
-});
-
-const logoUpload = multer({
-  storage: logoStorage,
-  limits: { fileSize: LOGO_MAX_SIZE },
-  fileFilter: (_req, file, cb) => {
-    if (LOGO_ALLOWED_MIMETYPES.includes(file.mimetype)) {
-      cb(null, true);
-    } else {
-      cb(new Error('Nur JPEG, PNG, WebP und SVG Dateien sind erlaubt.'));
-    }
-  },
-});
-
-/** Helper: Check branding permission — kore_admin can update any, tenant_admin only their own */
-function checkBrandingPermission(
-  userRole: string,
-  userTenantId: string | null,
-  targetTenantId: string,
-): boolean {
-  if (userRole === 'kore_admin') return true;
-  if (userRole === 'tenant_admin' && userTenantId === targetTenantId) return true;
-  return false;
-}
-
-// GET /api/admin/tenants/:id/branding — Load tenant branding (tenant_admin + kore_admin)
-tenantBrandingRouter.get('/:id/branding', async (req, res) => {
-  try {
-    const tenantId = req.params['id'] as string;
-    if (!checkBrandingPermission(req.user!.role, req.user!.tenantId, tenantId)) {
-      res.status(403).json({ error: 'Keine Berechtigung für diesen Mandanten.' });
-      return;
-    }
-    const tenant = await prisma.tenant.findUnique({
-      where: { id: tenantId },
-      select: { id: true, name: true, logoUrl: true, primaryColor: true, accentColor: true },
-    });
-    if (!tenant) {
-      res.status(404).json({ error: 'Tenant nicht gefunden.' });
-      return;
-    }
-    res.json(tenant);
-  } catch (err) {
-    console.error('Tenant branding load error:', err);
-    res.status(500).json({ error: 'Interner Serverfehler.' });
-  }
-});
-
-// PUT /api/admin/tenants/:id/branding — Update tenant colors
-tenantBrandingRouter.put('/:id/branding', async (req, res) => {
-  try {
-    const tenantId = req.params['id'] as string;
-
-    if (!checkBrandingPermission(req.user!.role, req.user!.tenantId, tenantId)) {
-      res.status(403).json({ error: 'Keine Berechtigung für diesen Mandanten.' });
-      return;
-    }
-
-    const { primaryColor, accentColor } = req.body as {
-      primaryColor?: string | null;
-      accentColor?: string | null;
-    };
-
-    // Validate hex colors if provided (allow null/empty to reset)
-    if (primaryColor && !HEX_COLOR_REGEX.test(primaryColor)) {
-      res.status(400).json({ error: 'primaryColor muss ein gültiger Hex-Farbwert sein (#000000).' });
-      return;
-    }
-    if (accentColor && !HEX_COLOR_REGEX.test(accentColor)) {
-      res.status(400).json({ error: 'accentColor muss ein gültiger Hex-Farbwert sein (#000000).' });
-      return;
-    }
-
-    const updateData: Record<string, string | null> = {};
-    if (primaryColor !== undefined) updateData['primaryColor'] = primaryColor || null;
-    if (accentColor !== undefined) updateData['accentColor'] = accentColor || null;
-
-    const tenant = await prisma.tenant.update({
-      where: { id: tenantId },
-      data: updateData,
-      select: {
-        id: true,
-        name: true,
-        logoUrl: true,
-        primaryColor: true,
-        accentColor: true,
-      },
-    });
-
-    res.json({
-      id: tenant.id,
-      name: tenant.name,
-      logoUrl: tenant.logoUrl,
-      primaryColor: tenant.primaryColor,
-      accentColor: tenant.accentColor,
-    });
-  } catch (err) {
-    console.error('Tenant branding update error:', err);
-    res.status(500).json({ error: 'Interner Serverfehler.' });
-  }
-});
-
-// POST /api/admin/tenants/:id/logo — Upload tenant logo
-tenantBrandingRouter.post('/:id/logo', (req, res, next) => {
-  const tenantId = req.params['id'] as string;
-  if (!checkBrandingPermission(req.user!.role, req.user!.tenantId, tenantId)) {
-    res.status(403).json({ error: 'Keine Berechtigung für diesen Mandanten.' });
-    return;
-  }
-  next();
-}, logoUpload.single('logo'), async (req, res) => {
-  try {
-    if (!req.file) {
-      res.status(400).json({ error: 'Keine Datei hochgeladen.' });
-      return;
-    }
-
-    const tenantId = req.params['id'] as string;
-    const relativePath = path.join('logos', req.file.filename);
-
-    // Delete old logo file if it exists
-    const existingTenant = await prisma.tenant.findUnique({
-      where: { id: tenantId },
-      select: { logoUrl: true },
-    });
-
-    if (existingTenant?.logoUrl) {
-      try {
-        await fs.unlink(path.join(UPLOAD_DIR, existingTenant.logoUrl));
-      } catch {
-        // Old file may not exist — not a hard error
-      }
-    }
-
-    const tenant = await prisma.tenant.update({
-      where: { id: tenantId },
-      data: { logoUrl: relativePath },
-      select: {
-        id: true,
-        name: true,
-        logoUrl: true,
-        primaryColor: true,
-        accentColor: true,
-      },
-    });
-
-    res.json({
-      id: tenant.id,
-      name: tenant.name,
-      logoUrl: tenant.logoUrl,
-      primaryColor: tenant.primaryColor,
-      accentColor: tenant.accentColor,
-    });
-  } catch (err) {
-    console.error('Tenant logo upload error:', err);
     res.status(500).json({ error: 'Interner Serverfehler.' });
   }
 });

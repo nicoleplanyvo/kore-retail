@@ -1,572 +1,304 @@
-import { useState, useRef, useEffect, useCallback, type KeyboardEvent } from 'react';
-import { MessageSquare, Send, ArrowLeft, Plus, Search, User, Check, CheckCheck } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { MessageSquare, Send, Loader2, ArrowLeft, AlertTriangle } from 'lucide-react';
 import { Breadcrumb } from '../components/Breadcrumb';
-import { useToast } from '../components/Toast';
 import { useAuthStore } from '../stores/authStore';
 import {
   useConversations,
   useMessages,
   useSendMessage,
-  useCreateConversation,
-  useMarkConversationRead,
-  useColleagues,
+  isCurrentlyAbsent,
   type ConversationPreview,
+  type ConversationParticipant,
 } from '../hooks/useMessaging';
 
-/* ---------- Timestamp helpers ---------- */
-
-function formatMessageTime(dateStr: string): string {
-  const d = new Date(dateStr);
-  return d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
-}
-
-function formatTimestamp(dateStr: string): string {
-  const d = new Date(dateStr);
+function formatTime(iso: string): string {
+  const d = new Date(iso);
   const now = new Date();
-  const time = d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
-
-  const isToday =
-    d.getDate() === now.getDate() &&
-    d.getMonth() === now.getMonth() &&
-    d.getFullYear() === now.getFullYear();
-
-  const yesterday = new Date(now);
-  yesterday.setDate(yesterday.getDate() - 1);
-  const isYesterday =
-    d.getDate() === yesterday.getDate() &&
-    d.getMonth() === yesterday.getMonth() &&
-    d.getFullYear() === yesterday.getFullYear();
-
-  if (isToday) return time;
-  if (isYesterday) return `Gestern ${time}`;
-  return `${d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' })} ${time}`;
-}
-
-function relativeTime(dateStr: string): string {
-  const now = Date.now();
-  const then = new Date(dateStr).getTime();
-  const diff = now - then;
-  const mins = Math.floor(diff / 60000);
-  if (mins < 1) return 'Jetzt';
-  if (mins < 60) return `vor ${mins} Min.`;
-  const hours = Math.floor(mins / 60);
-  if (hours < 24) return formatMessageTime(dateStr);
-  const days = Math.floor(hours / 24);
-  if (days === 1) return 'Gestern';
-  if (days < 7) return `vor ${days} Tagen`;
-  return new Date(dateStr).toLocaleDateString('de-DE');
-}
-
-/* ---------- Avatar helper ---------- */
-
-function Avatar({ name, avatarUrl, size = 32 }: { name: string; avatarUrl?: string | null; size?: number }) {
-  if (avatarUrl) {
-    return (
-      <img
-        src={avatarUrl}
-        alt={name}
-        className="rounded-full object-cover flex-shrink-0"
-        style={{ width: size, height: size }}
-      />
-    );
+  const isToday = d.toDateString() === now.toDateString();
+  if (isToday) {
+    return d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
   }
-  const initials = name
-    .split(' ')
-    .map((n) => n[0])
-    .join('')
-    .slice(0, 2)
-    .toUpperCase();
-  return (
-    <div
-      className="rounded-full bg-kore-brass/20 text-kore-brass flex items-center justify-center flex-shrink-0 font-medium"
-      style={{ width: size, height: size, fontSize: size * 0.38 }}
-    >
-      {initials}
-    </div>
-  );
+  return d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' });
 }
 
-/* ---------- Conversation display name ---------- */
+function formatAbsentUntil(iso: string): string {
+  return new Date(iso).toLocaleDateString('de-DE', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  });
+}
 
-function conversationName(conv: ConversationPreview, currentUserId: string | undefined): string {
+function getConversationName(conv: ConversationPreview): string {
   if (conv.isGroup && conv.groupName) return conv.groupName;
-  const others = conv.participants.filter((p) => p.id !== currentUserId);
-  if (others.length === 0) return 'Ich';
-  return others.map((p) => p.name).join(', ');
+  return conv.participants.map((p) => p.name).join(', ') || 'Unbekannt';
 }
 
-function conversationAvatar(conv: ConversationPreview, currentUserId: string | undefined) {
-  const others = conv.participants.filter((p) => p.id !== currentUserId);
-  if (others.length === 1) return others[0];
-  return null;
-}
-
-/* ---------- New conversation dialog ---------- */
-
-function NewConversationDialog({
-  onSelect,
-  onClose,
-}: {
-  onSelect: (colleagueId: string) => void;
-  onClose: () => void;
-}) {
-  const { data: colleagues, isLoading } = useColleagues();
-  const [search, setSearch] = useState('');
-  const dialogRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (dialogRef.current && !dialogRef.current.contains(e.target as Node)) {
-        onClose();
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [onClose]);
-
-  const filtered = (colleagues ?? []).filter((c) =>
-    c.name.toLowerCase().includes(search.toLowerCase()),
-  );
+/** Absence banner for a single participant. */
+function AbsenceBanner({ participant }: { participant: ConversationParticipant }) {
+  if (!isCurrentlyAbsent(participant)) return null;
 
   return (
-    <div
-      ref={dialogRef}
-      className="absolute top-full left-0 right-0 mt-1 bg-kore-white border border-kore-border rounded-lg shadow-lg z-50 max-h-80 flex flex-col"
-    >
-      <div className="p-2 border-b border-kore-border">
-        <div className="relative">
-          <Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-kore-mid" />
-          <input
-            type="text"
-            placeholder="Kollegen suchen..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-8 pr-3 py-1.5 text-sm bg-kore-bg border border-kore-border rounded-md focus:outline-none focus:ring-1 focus:ring-kore-brass/40 text-kore-ink placeholder:text-kore-mid"
-            autoFocus
-          />
-        </div>
-      </div>
-      <div className="overflow-y-auto flex-1">
-        {isLoading && (
-          <div className="p-4 text-center text-sm text-kore-mid">Laden...</div>
-        )}
-        {!isLoading && filtered.length === 0 && (
-          <div className="p-4 text-center text-sm text-kore-mid">Keine Kollegen gefunden</div>
-        )}
-        {filtered.map((colleague) => (
-          <button
-            key={colleague.id}
-            onClick={() => onSelect(colleague.id)}
-            className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-kore-surface transition-colors text-left"
-          >
-            <Avatar name={colleague.name} avatarUrl={colleague.avatarUrl} size={28} />
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-medium text-kore-ink truncate">{colleague.name}</p>
-              <p className="text-xs text-kore-mid truncate">{colleague.email}</p>
-            </div>
-          </button>
-        ))}
-      </div>
+    <div className="flex items-center gap-sm px-md py-sm bg-amber-50 border border-amber-200 text-amber-800 font-body text-small rounded-sm">
+      <AlertTriangle size={14} className="flex-shrink-0" />
+      <span>
+        {participant.name} ist abwesend bis {formatAbsentUntil(participant.absentUntil!)}
+      </span>
     </div>
   );
 }
 
-/* ---------- Conversation list item ---------- */
-
-function ConversationItem({
-  conv,
-  isActive,
-  currentUserId,
-  onClick,
+/** Left column: Conversation list */
+function ConversationList({
+  conversations,
+  selectedId,
+  onSelect,
 }: {
-  conv: ConversationPreview;
-  isActive: boolean;
-  currentUserId: string | undefined;
-  onClick: () => void;
+  conversations: ConversationPreview[];
+  selectedId: string | null;
+  onSelect: (id: string) => void;
 }) {
-  const name = conversationName(conv, currentUserId);
-  const avatar = conversationAvatar(conv, currentUserId);
-
   return (
-    <button
-      onClick={onClick}
-      className={`w-full flex items-start gap-3 px-4 py-3 transition-colors text-left ${
-        isActive ? 'bg-kore-surface' : 'hover:bg-kore-bg'
-      }`}
-    >
-      {avatar ? (
-        <Avatar name={avatar.name} avatarUrl={avatar.avatarUrl} size={40} />
-      ) : (
-        <div className="w-10 h-10 rounded-full bg-kore-brass/20 text-kore-brass flex items-center justify-center flex-shrink-0">
-          <User size={18} />
+    <div className="flex flex-col divide-y divide-kore-border overflow-y-auto">
+      {conversations.length === 0 && (
+        <div className="p-xl text-center">
+          <MessageSquare size={24} className="text-kore-mid/30 mx-auto mb-sm" />
+          <p className="font-body text-small text-kore-mid">Keine Unterhaltungen.</p>
         </div>
       )}
-      <div className="min-w-0 flex-1">
-        <div className="flex items-center justify-between gap-2">
-          <p className="text-sm font-medium text-kore-ink truncate">{name}</p>
-          {conv.lastMessage && (
-            <span className="text-[11px] text-kore-mid flex-shrink-0">
-              {relativeTime(conv.lastMessage.createdAt)}
-            </span>
-          )}
-        </div>
-        {conv.lastMessage && (
-          <p className="text-xs text-kore-mid truncate mt-0.5">
-            {conv.lastMessage.senderName}: {conv.lastMessage.content}
-          </p>
-        )}
-      </div>
-      {conv.unreadCount > 0 && (
-        <span className="mt-1 flex-shrink-0 bg-kore-brass text-kore-white text-[10px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1">
-          {conv.unreadCount}
-        </span>
-      )}
-    </button>
+      {conversations.map((conv) => {
+        const isSelected = conv.id === selectedId;
+        const absentParticipants = conv.participants.filter(isCurrentlyAbsent);
+
+        return (
+          <button
+            key={conv.id}
+            onClick={() => onSelect(conv.id)}
+            className={`w-full text-left px-md py-md transition-colors ${
+              isSelected ? 'bg-kore-surface' : 'hover:bg-kore-surface/50'
+            }`}
+          >
+            <div className="flex items-center justify-between gap-sm">
+              <span className="font-body text-small text-kore-ink font-medium truncate">
+                {getConversationName(conv)}
+              </span>
+              {conv.unreadCount > 0 && (
+                <span className="flex-shrink-0 w-5 h-5 bg-kore-brass text-kore-white text-[0.6rem] font-bold rounded-full flex items-center justify-center">
+                  {conv.unreadCount}
+                </span>
+              )}
+            </div>
+            {conv.lastMessage && (
+              <p className="font-body text-caption text-kore-mid mt-xs truncate">
+                {conv.lastMessage.senderName}: {conv.lastMessage.content}
+              </p>
+            )}
+            {conv.lastMessage && (
+              <p className="font-body text-[0.6rem] text-kore-mid/60 mt-xs">
+                {formatTime(conv.lastMessage.createdAt)}
+              </p>
+            )}
+            {absentParticipants.length > 0 && (
+              <p className="font-body text-[0.6rem] text-amber-600 mt-xs truncate">
+                Abwesend: {absentParticipants.map((p) => p.name).join(', ')}
+              </p>
+            )}
+          </button>
+        );
+      })}
+    </div>
   );
 }
 
-/* ---------- Message input ---------- */
-
-function MessageInput({
-  onSend,
-  isPending,
+/** Right column: Message thread */
+function MessageThread({
+  conversation,
+  onBack,
 }: {
-  onSend: (content: string) => void;
-  isPending: boolean;
+  conversation: ConversationPreview;
+  onBack: () => void;
 }) {
-  const [text, setText] = useState('');
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const { user } = useAuthStore();
+  const { data: messagesData, isLoading } = useMessages(conversation.id);
+  const sendMessage = useSendMessage(conversation.id);
+  const [input, setInput] = useState('');
+  const bottomRef = useRef<HTMLDivElement>(null);
 
-  const handleSend = useCallback(() => {
-    const trimmed = text.trim();
-    if (!trimmed || isPending) return;
-    onSend(trimmed);
-    setText('');
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-    }
-  }, [text, isPending, onSend]);
+  const messages = messagesData?.messages ?? [];
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+  // Scroll to bottom when messages change
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages.length]);
+
+  const handleSend = async () => {
+    const text = input.trim();
+    if (!text) return;
+    setInput('');
+    await sendMessage.mutateAsync(text);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSend();
     }
   };
 
-  const handleInput = () => {
-    const ta = textareaRef.current;
-    if (ta) {
-      ta.style.height = 'auto';
-      ta.style.height = Math.min(ta.scrollHeight, 120) + 'px';
-    }
-  };
+  const absentParticipants = conversation.participants.filter(isCurrentlyAbsent);
 
   return (
-    <div className="border-t border-kore-border p-3 bg-kore-white">
-      <div className="flex items-end gap-2">
-        <textarea
-          ref={textareaRef}
-          value={text}
-          onChange={(e) => {
-            setText(e.target.value);
-            handleInput();
-          }}
-          onKeyDown={handleKeyDown}
+    <div className="flex flex-col h-full">
+      {/* Conversation header */}
+      <div className="px-md py-md border-b border-kore-border flex items-center gap-md flex-shrink-0">
+        <button
+          onClick={onBack}
+          className="sm:hidden text-kore-mid hover:text-kore-ink transition-colors"
+        >
+          <ArrowLeft size={18} />
+        </button>
+        <h3 className="font-body text-small text-kore-ink font-medium truncate">
+          {getConversationName(conversation)}
+        </h3>
+      </div>
+
+      {/* Absence banners */}
+      {absentParticipants.length > 0 && (
+        <div className="px-md py-sm flex flex-col gap-xs flex-shrink-0">
+          {absentParticipants.map((p) => (
+            <AbsenceBanner key={p.id} participant={p} />
+          ))}
+        </div>
+      )}
+
+      {/* Messages */}
+      <div className="flex-1 overflow-y-auto px-md py-md flex flex-col gap-sm">
+        {isLoading ? (
+          <div className="flex items-center justify-center py-xl">
+            <Loader2 size={18} className="animate-spin text-kore-mid" />
+          </div>
+        ) : messages.length === 0 ? (
+          <p className="text-center font-body text-small text-kore-mid py-xl">
+            Noch keine Nachrichten.
+          </p>
+        ) : (
+          [...messages].reverse().map((msg) => {
+            const isOwn = msg.sender.id === user?.id;
+            return (
+              <div
+                key={msg.id}
+                className={`flex flex-col max-w-[75%] ${isOwn ? 'self-end items-end' : 'self-start items-start'}`}
+              >
+                {!isOwn && (
+                  <span className="font-body text-[0.6rem] text-kore-mid mb-xs">
+                    {msg.sender.name}
+                  </span>
+                )}
+                <div
+                  className={`px-md py-sm rounded-lg font-body text-small ${
+                    isOwn
+                      ? 'bg-kore-brass text-kore-white'
+                      : 'bg-kore-surface text-kore-ink'
+                  }`}
+                >
+                  {msg.content}
+                </div>
+                <span className="font-body text-[0.55rem] text-kore-mid/60 mt-xs">
+                  {formatTime(msg.createdAt)}
+                </span>
+              </div>
+            );
+          })
+        )}
+        <div ref={bottomRef} />
+      </div>
+
+      {/* Input */}
+      <div className="px-md py-md border-t border-kore-border flex items-center gap-sm flex-shrink-0">
+        <input
+          type="text"
           placeholder="Nachricht schreiben..."
-          rows={1}
-          className="flex-1 resize-none bg-kore-bg border border-kore-border rounded-lg px-3 py-2 text-sm text-kore-ink placeholder:text-kore-mid focus:outline-none focus:ring-1 focus:ring-kore-brass/40 max-h-[120px]"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown}
+          className="flex-1 px-md py-sm border border-kore-border font-body text-small text-kore-ink placeholder:text-kore-mid focus:outline-none focus:border-kore-brass rounded-sm"
         />
         <button
           onClick={handleSend}
-          disabled={!text.trim() || isPending}
-          className="flex-shrink-0 p-2 rounded-lg bg-kore-brass text-kore-white hover:bg-kore-brass/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-          aria-label="Senden"
+          disabled={!input.trim() || sendMessage.isPending}
+          className="flex items-center justify-center w-[36px] h-[36px] bg-kore-ink text-kore-white rounded-sm hover:bg-kore-ink/90 transition-colors disabled:opacity-30"
         >
-          <Send size={18} />
+          {sendMessage.isPending ? (
+            <Loader2 size={16} className="animate-spin" />
+          ) : (
+            <Send size={16} />
+          )}
         </button>
       </div>
     </div>
   );
 }
 
-/* ---------- Main page ---------- */
+export function MessagingPage() {
+  const { data, isLoading } = useConversations();
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
-export default function MessagingPage() {
-  const user = useAuthStore((s) => s.user);
-  const toast = useToast();
-
-  const [activeConversationId, setActiveConversationId] = useState<string | null>(null);
-  const [mobileView, setMobileView] = useState<'list' | 'chat'>('list');
-  const [showNewDialog, setShowNewDialog] = useState(false);
-
-  const { data: conversations, isLoading: convsLoading } = useConversations();
-  const { data: messages } = useMessages(activeConversationId);
-  const sendMutation = useSendMessage();
-  const createMutation = useCreateConversation();
-  const markReadMutation = useMarkConversationRead();
-
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const messagesContainerRef = useRef<HTMLDivElement>(null);
-
-  // Auto-scroll to bottom when messages change
-  useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [messages]);
-
-  const activeConversation = conversations?.find((c) => c.id === activeConversationId) ?? null;
-
-  const selectConversation = useCallback((id: string) => {
-    setActiveConversationId(id);
-    setMobileView('chat');
-    markReadMutation.mutate(id);
-  }, [markReadMutation]);
-
-  const handleBack = useCallback(() => {
-    setMobileView('list');
-  }, []);
-
-  const handleNewConversation = useCallback(
-    async (colleagueId: string) => {
-      setShowNewDialog(false);
-      try {
-        const result = await createMutation.mutateAsync({ participantIds: [colleagueId] });
-        setActiveConversationId(result.id);
-        setMobileView('chat');
-      } catch {
-        toast.error('Unterhaltung konnte nicht erstellt werden.');
-      }
-    },
-    [createMutation, toast],
-  );
-
-  const handleSendMessage = useCallback(
-    (content: string) => {
-      if (!activeConversationId) return;
-      sendMutation.mutate(
-        { conversationId: activeConversationId, content },
-        {
-          onError: () => toast.error('Nachricht konnte nicht gesendet werden.'),
-        },
-      );
-    },
-    [activeConversationId, sendMutation, toast],
-  );
-
-  /* ---------- Render: Conversation list panel ---------- */
-
-  const conversationList = (
-    <div className="flex flex-col h-full bg-kore-white border-r border-kore-border">
-      {/* Header */}
-      <div className="p-4 border-b border-kore-border relative">
-        <div className="flex items-center justify-between mb-1">
-          <h2 className="text-base font-semibold text-kore-ink">Nachrichten</h2>
-          <button
-            onClick={() => setShowNewDialog((v) => !v)}
-            className="p-1.5 rounded-md hover:bg-kore-surface transition-colors text-kore-ink"
-            aria-label="Neue Unterhaltung"
-          >
-            <Plus size={18} />
-          </button>
-        </div>
-        {showNewDialog && (
-          <NewConversationDialog
-            onSelect={handleNewConversation}
-            onClose={() => setShowNewDialog(false)}
-          />
-        )}
-      </div>
-
-      {/* List */}
-      <div className="flex-1 overflow-y-auto">
-        {convsLoading && (
-          <div className="p-6 text-center text-sm text-kore-mid">Laden...</div>
-        )}
-        {!convsLoading && (!conversations || conversations.length === 0) && (
-          <div className="flex flex-col items-center justify-center h-full px-6 py-12 text-center">
-            <MessageSquare size={40} className="text-kore-mid/40 mb-3" />
-            <p className="text-sm text-kore-mid">
-              Noch keine Unterhaltungen.
-            </p>
-            <p className="text-xs text-kore-mid mt-1">
-              Klicken Sie auf <strong>+</strong>, um eine neue zu starten.
-            </p>
-          </div>
-        )}
-        {conversations?.map((conv) => (
-          <ConversationItem
-            key={conv.id}
-            conv={conv}
-            isActive={conv.id === activeConversationId}
-            currentUserId={user?.id}
-            onClick={() => selectConversation(conv.id)}
-          />
-        ))}
-      </div>
-    </div>
-  );
-
-  /* ---------- Render: Messages panel ---------- */
-
-  const chatHeaderName = activeConversation
-    ? conversationName(activeConversation, user?.id)
-    : '';
-
-  const chatHeaderAvatar = activeConversation
-    ? conversationAvatar(activeConversation, user?.id)
-    : null;
-
-  const messagesPanel = (
-    <div className="flex flex-col h-full bg-kore-bg">
-      {activeConversation ? (
-        <>
-          {/* Chat header */}
-          <div className="flex items-center gap-3 px-4 py-3 bg-kore-white border-b border-kore-border">
-            <button
-              onClick={handleBack}
-              className="md:hidden p-1 -ml-1 rounded-md hover:bg-kore-surface transition-colors text-kore-ink"
-              aria-label="Zurück"
-            >
-              <ArrowLeft size={20} />
-            </button>
-            {chatHeaderAvatar ? (
-              <Avatar
-                name={chatHeaderAvatar.name}
-                avatarUrl={chatHeaderAvatar.avatarUrl}
-                size={32}
-              />
-            ) : (
-              <div className="w-8 h-8 rounded-full bg-kore-brass/20 text-kore-brass flex items-center justify-center flex-shrink-0">
-                <User size={16} />
-              </div>
-            )}
-            <h3 className="text-sm font-semibold text-kore-ink truncate">{chatHeaderName}</h3>
-          </div>
-
-          {/* Messages */}
-          <div
-            ref={messagesContainerRef}
-            className="flex-1 overflow-y-auto px-4 py-4 space-y-4"
-          >
-            {(!messages || messages.length === 0) && (
-              <div className="flex flex-col items-center justify-center h-full text-center">
-                <p className="text-sm text-kore-mid">
-                  Noch keine Nachrichten. Schreiben Sie die erste!
-                </p>
-              </div>
-            )}
-            {messages?.map((msg) => {
-              const isOwn = msg.sender.id === user?.id;
-              return (
-                <div
-                  key={msg.id}
-                  className={`flex ${isOwn ? 'justify-end' : 'justify-start'}`}
-                >
-                  <div className={`flex gap-2 max-w-[75%] ${isOwn ? 'flex-row-reverse' : ''}`}>
-                    <Avatar
-                      name={msg.sender.name}
-                      avatarUrl={msg.sender.avatarUrl}
-                      size={24}
-                    />
-                    <div>
-                      {!isOwn && (
-                        <p className="text-[11px] text-kore-mid mb-0.5 px-1">
-                          {msg.sender.name}
-                        </p>
-                      )}
-                      <div
-                        className={`rounded-xl px-3 py-2 text-sm leading-relaxed ${
-                          isOwn
-                            ? 'bg-kore-brass/15 text-kore-ink'
-                            : 'bg-kore-white border border-kore-border text-kore-ink'
-                        }`}
-                      >
-                        {msg.content.split('\n').map((line, i) => (
-                          <span key={i}>
-                            {line}
-                            {i < msg.content.split('\n').length - 1 && <br />}
-                          </span>
-                        ))}
-                      </div>
-                      <div
-                        className={`flex items-center gap-1 text-[10px] text-kore-mid mt-0.5 px-1 ${
-                          isOwn ? 'justify-end' : ''
-                        }`}
-                      >
-                        <span>{formatTimestamp(msg.createdAt)}</span>
-                        {isOwn && (
-                          <>
-                            {msg.allRead ? (
-                              <CheckCheck size={12} className="text-kore-brass" />
-                            ) : (msg.readByCount ?? 0) > 0 ? (
-                              <CheckCheck size={12} className="text-kore-mid" />
-                            ) : (
-                              <Check size={12} className="text-kore-mid" />
-                            )}
-                            {msg.readAt && (
-                              <span className="text-kore-brass">
-                                Gelesen um {formatMessageTime(msg.readAt)}
-                              </span>
-                            )}
-                          </>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-            <div ref={messagesEndRef} />
-          </div>
-
-          {/* Input */}
-          <MessageInput onSend={handleSendMessage} isPending={sendMutation.isPending} />
-        </>
-      ) : (
-        /* Empty state */
-        <div className="flex flex-col items-center justify-center h-full text-center px-6">
-          <MessageSquare size={48} className="text-kore-mid/30 mb-4" />
-          <p className="text-base font-medium text-kore-ink mb-1">Nachrichten</p>
-          <p className="text-sm text-kore-mid max-w-xs">
-            Starten Sie eine Unterhaltung mit einem Kollegen
-          </p>
-        </div>
-      )}
-    </div>
-  );
-
-  /* ---------- Render: Full page ---------- */
+  const conversations = data?.conversations ?? [];
+  const selectedConv = conversations.find((c) => c.id === selectedId) ?? null;
 
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Breadcrumb - only visible on desktop */}
-      <div className="px-4 pt-4 hidden md:block">
-        <Breadcrumb items={[{ label: 'Nachrichten' }]} />
+    <div>
+      <Breadcrumb items={[{ label: 'Nachrichten' }]} />
+
+      <div className="flex items-center gap-md mb-lg">
+        <div className="w-10 h-10 bg-kore-surface flex items-center justify-center rounded-lg flex-shrink-0">
+          <MessageSquare size={20} className="text-kore-ink" />
+        </div>
+        <div>
+          <h1 className="font-display text-h2 sm:text-h1 text-kore-ink">Nachrichten</h1>
+          <p className="font-body text-small text-kore-mid">
+            Direkte Unterhaltungen mit Kollegen
+          </p>
+        </div>
       </div>
 
-      {/* Split-pane layout */}
-      <div className="flex-1 flex overflow-hidden" style={{ height: 'calc(100vh - 80px)' }}>
-        {/* Desktop: both panels visible. Mobile: toggle based on mobileView */}
+      <div className="bg-kore-white border border-kore-border rounded-sm overflow-hidden" style={{ height: 'calc(100vh - 240px)', minHeight: '400px' }}>
+        {isLoading ? (
+          <div className="flex items-center justify-center h-full">
+            <Loader2 size={18} className="animate-spin text-kore-mid" />
+          </div>
+        ) : (
+          <div className="flex h-full">
+            {/* Conversation list — hidden on mobile when a conversation is selected */}
+            <div
+              className={`w-full sm:w-[280px] sm:min-w-[280px] border-r border-kore-border flex-shrink-0 overflow-y-auto ${
+                selectedConv ? 'hidden sm:block' : 'block'
+              }`}
+            >
+              <ConversationList
+                conversations={conversations}
+                selectedId={selectedId}
+                onSelect={setSelectedId}
+              />
+            </div>
 
-        {/* Conversation list */}
-        <div
-          className={`w-full md:w-80 md:flex-shrink-0 md:block ${
-            mobileView === 'list' ? 'block' : 'hidden'
-          }`}
-        >
-          {conversationList}
-        </div>
-
-        {/* Messages */}
-        <div
-          className={`flex-1 w-full md:block ${
-            mobileView === 'chat' ? 'block' : 'hidden'
-          }`}
-        >
-          {messagesPanel}
-        </div>
+            {/* Message thread */}
+            <div className={`flex-1 min-w-0 ${selectedConv ? 'block' : 'hidden sm:block'}`}>
+              {selectedConv ? (
+                <MessageThread
+                  conversation={selectedConv}
+                  onBack={() => setSelectedId(null)}
+                />
+              ) : (
+                <div className="flex items-center justify-center h-full">
+                  <p className="font-body text-small text-kore-mid">
+                    Unterhaltung auswaehlen
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

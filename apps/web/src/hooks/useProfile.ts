@@ -1,75 +1,41 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { api, apiUpload } from '../lib/api';
+import { api } from '../lib/api';
 
-interface ProfileStore {
-  id: string;
-  name: string;
-  city: string | null;
-}
-
-interface Profile {
+export interface ProfileData {
   id: string;
   name: string;
   email: string;
   role: string;
   avatarUrl: string | null;
-  position: string | null;
   managerId: string | null;
   managerName: string | null;
   absentFrom: string | null;
   absentUntil: string | null;
-  stores: ProfileStore[];
-}
-
-interface Colleague {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  avatarPath: string | null;
-  managerId: string | null;
-  isActive: boolean;
 }
 
 export function useProfile() {
-  return useQuery({
+  return useQuery<ProfileData>({
     queryKey: ['profile'],
-    queryFn: () => api<Profile>('/api/profile'),
+    queryFn: () => api<ProfileData>('/api/profile'),
   });
 }
 
-export function useColleagues() {
-  return useQuery({
-    queryKey: ['colleagues'],
-    queryFn: () => api<Colleague[]>('/api/profile/colleagues'),
-  });
+interface UpdateProfileInput {
+  name: string;
+  absentFrom: string | null;
+  absentUntil: string | null;
 }
 
 export function useUpdateProfile() {
-  const queryClient = useQueryClient();
+  const qc = useQueryClient();
   return useMutation({
-    mutationFn: (data: { name: string; position?: string | null; absentFrom?: string | null; absentUntil?: string | null }) =>
-      api<Profile>('/api/profile', { method: 'PUT', body: JSON.stringify(data) }),
-    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['profile'] }); },
-  });
-}
-
-export function useUploadAvatar() {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (file: File) => {
-      const fd = new FormData();
-      fd.append('avatar', file);
-      return apiUpload<{ avatarUrl: string }>('/api/profile/avatar', fd);
+    mutationFn: (data: UpdateProfileInput) =>
+      api<ProfileData>('/api/profile', {
+        method: 'PUT',
+        body: JSON.stringify(data),
+      }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['profile'] });
     },
-    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['profile'] }); },
-  });
-}
-
-export function useDeleteAvatar() {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: () => api('/api/profile/avatar', { method: 'DELETE' }),
-    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['profile'] }); },
   });
 }

@@ -39,7 +39,7 @@ const ROLE_CONFIGS: Record<string, RoleConfig> = {
     ],
   },
   tenant_admin: {
-    description: 'Als Admin verwaltest du Benutzer, Stores und Tool-Zuweisungen für deinen Mandanten.',
+    description: 'Als Admin verwaltest du Benutzer, Stores und Tool-Zuweisungen fuer deinen Mandanten.',
     quickLinks: [
       { label: 'Meine Tools', path: '/app' },
     ],
@@ -86,7 +86,7 @@ export function WelcomeBanner() {
       <button
         onClick={dismiss}
         className="absolute top-3 right-3 p-1 text-gray-400 hover:text-gray-600 transition-colors"
-        aria-label="Schließen"
+        aria-label="Schliessen"
       >
         <X size={18} />
       </button>
