@@ -187,10 +187,10 @@ export function createApp(): Express {
   app.use('/api/messaging', messagingRouter);
   app.use('/api/notifications', notificationsRouter);
 
-  // Statische Uploads — Logos oeffentlich, Rest mit Auth-Schutz
+  // Oeffentliche Uploads (werden von <img>/<a>-Tags geladen, ohne Auth-Header)
+  // Alle Unterordner die direkt in HTML-Tags referenziert werden muessen oeffentlich sein
   const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? path.join(process.cwd(), 'uploads');
-  app.use('/api/uploads/logos', express.static(path.join(UPLOAD_DIR, 'logos')));
-  app.use('/api/uploads', authenticate, express.static(UPLOAD_DIR));
+  app.use('/api/uploads', express.static(UPLOAD_DIR));
 
   return app;
 }
