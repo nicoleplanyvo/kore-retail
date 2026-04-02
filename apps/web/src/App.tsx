@@ -16,13 +16,11 @@ import { BlogPostPage } from './pages/BlogPostPage';
 import { LoginPage } from './pages/LoginPage';
 import { ToolsHomePage } from './pages/ToolsHomePage';
 import { NotificationsPage } from './pages/NotificationsPage';
-import { ProfilePage } from './pages/ProfilePage';
-import { MessagingPage } from './pages/MessagingPage';
 import { useAnalytics } from './hooks/useAnalytics';
 import { ScrollToTop } from './components/ScrollToTop';
 
 // Platform-Seiten
-import MessagingPage from './pages/MessagingPage';
+import { MessagingPage } from './pages/MessagingPage';
 import { OrgchartPage } from './pages/OrgchartPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { BrandingPage } from './pages/BrandingPage';
