@@ -127,7 +127,7 @@ vmComplianceRouter.post('/checks', upload.single('photo'), async (req, res) => {
         guidelineId: parsed.data.guidelineId,
         storeId: parsed.data.storeId,
         submittedBy: userId,
-        photoPath: `/uploads/vm-submissions/${req.file.filename}`,
+        photoPath: `/api/uploads/vm-submissions/${req.file.filename}`,
       },
       include: {
         guideline: { select: { id: true, name: true } },
@@ -358,12 +358,12 @@ vmComplianceRouter.post('/areas/:id/pdf', areaPdfUpload.single('pdf'), async (re
     if (!existing) return res.status(404).json({ error: 'Bereich nicht gefunden.' });
     // Alte PDF loeschen
     if (existing.pdfPath) {
-      const oldPath = path.join(UPLOAD_DIR, existing.pdfPath.replace(/^\/uploads\//, ''));
+      const oldPath = path.join(UPLOAD_DIR, existing.pdfPath.replace(/^\/(api\/)?uploads\//, ''));
       if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
     }
     const updated = await prisma.vmArea.update({
       where: { id: areaId },
-      data: { pdfPath: `/uploads/vm-area-pdfs/${req.file.filename}` },
+      data: { pdfPath: `/api/uploads/vm-area-pdfs/${req.file.filename}` },
     });
     res.json(updated);
   } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
@@ -470,7 +470,7 @@ vmComplianceRouter.post('/guidelines/:id/photo', guidelineUpload.single('photo')
 
     // Altes Referenzbild löschen falls vorhanden
     if (existing.referencePhoto) {
-      const oldPath = path.join(UPLOAD_DIR, existing.referencePhoto.replace(/^\/uploads\//, ''));
+      const oldPath = path.join(UPLOAD_DIR, existing.referencePhoto.replace(/^\/(api\/)?uploads\//, ''));
       if (fs.existsSync(oldPath)) {
         fs.unlinkSync(oldPath);
       }
@@ -478,7 +478,7 @@ vmComplianceRouter.post('/guidelines/:id/photo', guidelineUpload.single('photo')
 
     const updated = await prisma.vmGuideline.update({
       where: { id: guidelineId },
-      data: { referencePhoto: `/uploads/vm-guidelines/${req.file.filename}` },
+      data: { referencePhoto: `/api/uploads/vm-guidelines/${req.file.filename}` },
     });
     res.json(updated);
   } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
@@ -555,7 +555,7 @@ vmComplianceRouter.post('/submissions', upload.single('photo'), async (req, res)
         guidelineId: parsed.data.guidelineId,
         storeId: parsed.data.storeId,
         submittedBy: userId,
-        photoPath: `/uploads/vm-submissions/${req.file.filename}`,
+        photoPath: `/api/uploads/vm-submissions/${req.file.filename}`,
       },
       include: {
         guideline: { select: { id: true, name: true } },
