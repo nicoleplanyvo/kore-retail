@@ -31,6 +31,17 @@ const guidelineUpload = multer({
   limits: { fileSize: 10 * 1024 * 1024 },
 });
 
+const areaPdfDir = path.join(UPLOAD_DIR, 'vm-area-pdfs');
+if (!fs.existsSync(areaPdfDir)) fs.mkdirSync(areaPdfDir, { recursive: true });
+
+const areaPdfUpload = multer({
+  storage: multer.diskStorage({
+    destination: areaPdfDir,
+    filename: (_r, file, cb) => cb(null, `${Date.now()}-${file.originalname}`),
+  }),
+  limits: { fileSize: 20 * 1024 * 1024 },
+});
+
 export const vmComplianceRouter: RouterType = Router();
 vmComplianceRouter.use(authenticate, requireToolAccess('vm.vm_compliance'));
 
@@ -273,6 +284,88 @@ vmComplianceRouter.get('/dashboard', async (req, res) => {
       trend,
       worstAreas,
     });
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
+});
+
+// GET /areas — VM Areas (mit PDF-Pfad)
+vmComplianceRouter.get('/areas', async (req, res) => {
+  try {
+    const tenantId = (req as any).tenantId as string;
+    const areas = await prisma.vmArea.findMany({
+      where: { tenantId, isActive: true },
+      orderBy: { sortOrder: 'asc' },
+    });
+    res.json(areas);
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
+});
+
+// POST /areas — Neuen Bereich erstellen
+vmComplianceRouter.post('/areas', async (req, res) => {
+  try {
+    const tenantId = (req as any).tenantId as string;
+    const { name, description } = req.body;
+    if (!name || typeof name !== 'string' || name.trim().length < 2) {
+      return res.status(400).json({ error: 'Name ist erforderlich (mind. 2 Zeichen).' });
+    }
+    const maxSort = await prisma.vmArea.aggregate({ where: { tenantId }, _max: { sortOrder: true } });
+    const area = await prisma.vmArea.create({
+      data: { tenantId, name: name.trim(), description: description?.trim() || null, sortOrder: (maxSort._max.sortOrder ?? -1) + 1 },
+    });
+    res.status(201).json(area);
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
+});
+
+// PUT /areas/:id — Bereich aktualisieren
+vmComplianceRouter.put('/areas/:id', async (req, res) => {
+  try {
+    const tenantId = (req as any).tenantId as string;
+    const areaId = req.params['id'] as string;
+    const existing = await prisma.vmArea.findFirst({ where: { id: areaId, tenantId } });
+    if (!existing) return res.status(404).json({ error: 'Bereich nicht gefunden.' });
+    const { name, description, isActive, sortOrder } = req.body;
+    const updated = await prisma.vmArea.update({
+      where: { id: areaId },
+      data: {
+        ...(name !== undefined && { name: name.trim() }),
+        ...(description !== undefined && { description: description?.trim() || null }),
+        ...(isActive !== undefined && { isActive }),
+        ...(sortOrder !== undefined && { sortOrder }),
+      },
+    });
+    res.json(updated);
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
+});
+
+// DELETE /areas/:id — Bereich loeschen (soft-delete)
+vmComplianceRouter.delete('/areas/:id', async (req, res) => {
+  try {
+    const tenantId = (req as any).tenantId as string;
+    const areaId = req.params['id'] as string;
+    const existing = await prisma.vmArea.findFirst({ where: { id: areaId, tenantId } });
+    if (!existing) return res.status(404).json({ error: 'Bereich nicht gefunden.' });
+    await prisma.vmArea.update({ where: { id: areaId }, data: { isActive: false } });
+    res.json({ success: true });
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
+});
+
+// POST /areas/:id/pdf — PDF Guideline fuer Bereich hochladen
+vmComplianceRouter.post('/areas/:id/pdf', areaPdfUpload.single('pdf'), async (req, res) => {
+  try {
+    const tenantId = (req as any).tenantId as string;
+    const areaId = req.params['id'] as string;
+    if (!req.file) return res.status(400).json({ error: 'PDF ist erforderlich.' });
+    const existing = await prisma.vmArea.findFirst({ where: { id: areaId, tenantId } });
+    if (!existing) return res.status(404).json({ error: 'Bereich nicht gefunden.' });
+    // Alte PDF loeschen
+    if (existing.pdfPath) {
+      const oldPath = path.join(UPLOAD_DIR, existing.pdfPath.replace(/^\/uploads\//, ''));
+      if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+    }
+    const updated = await prisma.vmArea.update({
+      where: { id: areaId },
+      data: { pdfPath: `/uploads/vm-area-pdfs/${req.file.filename}` },
+    });
+    res.json(updated);
   } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
 });
 

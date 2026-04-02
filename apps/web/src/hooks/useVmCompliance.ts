@@ -53,6 +53,108 @@ export function useVmComplianceDashboard() {
   });
 }
 
+export function useVmAreas() {
+  return useQuery({ queryKey: ['vmc', 'areas'], queryFn: () => api<any[]>('/api/tools/vm-compliance/areas') });
+}
+
+export function useVmSubmissions(opts: { page?: number; status?: string; storeId?: string; guidelineId?: string } = {}) {
+  const { page = 1, status, storeId, guidelineId } = opts;
+  return useQuery({
+    queryKey: ['vmc', 'submissions', page, status, storeId, guidelineId],
+    queryFn: () => {
+      const params = new URLSearchParams({ page: String(page), pageSize: '20' });
+      if (status) params.set('status', status);
+      if (storeId) params.set('storeId', storeId);
+      if (guidelineId) params.set('guidelineId', guidelineId);
+      return api<{ data: any[]; total: number }>(`/api/tools/vm-compliance/submissions?${params}`);
+    },
+  });
+}
+
+// VM Areas CRUD
+export function useCreateVmArea() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (data: { name: string; description?: string }) =>
+      api<any>('/api/tools/vm-compliance/areas', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      }),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['vmc', 'areas'] }); },
+  });
+}
+
+export function useUpdateVmArea() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, ...data }: { id: string; name?: string; description?: string; isActive?: boolean; sortOrder?: number }) =>
+      api<any>(`/api/tools/vm-compliance/areas/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      }),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['vmc', 'areas'] }); },
+  });
+}
+
+export function useDeleteVmArea() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) =>
+      api<any>(`/api/tools/vm-compliance/areas/${id}`, { method: 'DELETE' }),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['vmc', 'areas'] }); },
+  });
+}
+
+export function useUploadAreaPdf() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, formData }: { id: string; formData: FormData }) =>
+      apiUpload<any>(`/api/tools/vm-compliance/areas/${id}/pdf`, formData),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['vmc', 'areas'] }); },
+  });
+}
+
+// Pending checks for review queue
+export function useVmCompliancePendingChecks(page = 1) {
+  return useQuery({
+    queryKey: ['vmc', 'checks', 'pending', page],
+    queryFn: () => {
+      const params = new URLSearchParams({ page: String(page), pageSize: '20', status: 'PENDING' });
+      return api<{ data: any[]; total: number }>(`/api/tools/vm-compliance/checks?${params}`);
+    },
+  });
+}
+
+// Overdue checks (checks pending for more than 48h)
+export function useVmOverdueChecks() {
+  return useQuery({
+    queryKey: ['vmc', 'checks', 'overdue'],
+    queryFn: async () => {
+      const result = await api<{ data: any[]; total: number }>('/api/tools/vm-compliance/checks?status=PENDING&pageSize=50');
+      const cutoff = Date.now() - 48 * 60 * 60 * 1000;
+      return (result.data ?? []).filter((c: any) => new Date(c.submittedAt).getTime() < cutoff);
+    },
+  });
+}
+
+// Escalate checks (stub — marks as high priority via review note)
+export function useEscalateVmChecks() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (ids: string[]) =>
+      Promise.all(ids.map((id) =>
+        api<any>(`/api/tools/vm-compliance/checks/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: 'REJECTED', reviewNote: 'Eskaliert — ueberfaellig' }),
+        })
+      )),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['vmc'] }); },
+  });
+}
+
 // Alias for cleaner imports
 export const useVmGuidelines = useVmComplianceGuidelines;
 

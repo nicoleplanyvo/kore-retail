@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Camera, Plus, BarChart3, Eye, BookOpen } from 'lucide-react';
+import { Camera, Plus, BarChart3, Eye, BookOpen, Settings } from 'lucide-react';
 import { useVmComplianceChecks, useVmComplianceStores } from '../../../hooks/useVmCompliance';
 
 const STATUS_LABELS: Record<string, string> = { PENDING: 'Offen', APPROVED: 'Bewertet', REJECTED: 'Abgelehnt' };
@@ -25,6 +25,9 @@ export function OverviewPage() {
         <div className="flex gap-md flex-wrap">
           <Link to="guidelines" className="flex items-center gap-sm border border-kore-border text-kore-ink px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors">
             <BookOpen size={16} /> Guidelines
+          </Link>
+          <Link to="areas" className="flex items-center gap-sm border border-kore-border text-kore-ink px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors">
+            <Settings size={16} /> Bereiche
           </Link>
           <Link to="dashboard" className="flex items-center gap-sm border border-kore-border text-kore-ink px-lg py-md-sm text-small font-medium uppercase tracking-widest hover:bg-kore-bg transition-colors">
             <BarChart3 size={16} /> Dashboard
