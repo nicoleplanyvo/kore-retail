@@ -150,7 +150,7 @@ export function AppSidebar({ open, onClose }: AppSidebarProps) {
                 />
               ) : null}
               <div className="min-w-0">
-                <h1 className="font-display text-h3 text-kore-white tracking-wider truncate">
+                <h1 className="font-display text-h3 text-kore-white tracking-wider leading-tight">
                   {user?.tenantBranding?.tenantName ?? 'KORE'}
                 </h1>
                 <p className="font-body text-[0.65rem] text-kore-faint uppercase tracking-[0.16em] mt-xs">

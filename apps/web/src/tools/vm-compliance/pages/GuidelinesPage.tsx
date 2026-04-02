@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Image, Plus, Pencil, Trash2, Upload, Save } from 'lucide-react';
+import { ArrowLeft, Image, Plus, Pencil, Trash2, Upload, Save, Camera, X } from 'lucide-react';
 import {
   useVmGuidelines,
   useCreateVmGuideline,
@@ -23,13 +23,22 @@ function GuidelineForm({
   onSubmit,
   onCancel,
   isSubmitting,
+  showPhotoUpload = false,
+  onPhotoSelected,
+  photoPreview,
+  onRemovePhoto,
 }: {
   initial: GuidelineFormData;
   onSubmit: (data: GuidelineFormData) => void;
   onCancel: () => void;
   isSubmitting: boolean;
+  showPhotoUpload?: boolean;
+  onPhotoSelected?: (file: File) => void;
+  photoPreview?: string | null;
+  onRemovePhoto?: () => void;
 }) {
   const [form, setForm] = useState<GuidelineFormData>(initial);
+  const fileRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,26 +50,35 @@ function GuidelineForm({
     });
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file && onPhotoSelected) {
+      onPhotoSelected(file);
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit} className="bg-kore-white border border-kore-border p-lg space-y-md">
-      <div>
-        <label className="label-default">Name *</label>
-        <input
-          value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-          className="input-default w-full"
-          placeholder="z.B. Schaufenster-Display"
-          required
-        />
-      </div>
-      <div>
-        <label className="label-default">Kategorie</label>
-        <input
-          value={form.category}
-          onChange={(e) => setForm({ ...form, category: e.target.value })}
-          className="input-default w-full"
-          placeholder="z.B. Schaufenster, Eingang, Kasse"
-        />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-md">
+        <div>
+          <label className="label-default">Name *</label>
+          <input
+            value={form.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
+            className="input-default w-full"
+            placeholder="z.B. Schaufenster-Display"
+            required
+          />
+        </div>
+        <div>
+          <label className="label-default">Kategorie</label>
+          <input
+            value={form.category}
+            onChange={(e) => setForm({ ...form, category: e.target.value })}
+            className="input-default w-full"
+            placeholder="z.B. Schaufenster, Eingang, Kasse"
+          />
+        </div>
       </div>
       <div>
         <label className="label-default">Beschreibung</label>
@@ -68,10 +86,40 @@ function GuidelineForm({
           value={form.description}
           onChange={(e) => setForm({ ...form, description: e.target.value })}
           className="input-default w-full resize-none"
-          rows={3}
+          rows={2}
           placeholder="Optionale Beschreibung..."
         />
       </div>
+
+      {showPhotoUpload && (
+        <div>
+          <label className="label-default">Referenzbild</label>
+          {photoPreview ? (
+            <div className="relative inline-block">
+              <img src={photoPreview} alt="Vorschau" className="h-32 w-auto border border-kore-border object-cover" />
+              <button
+                type="button"
+                onClick={onRemovePhoto}
+                className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-700"
+              >
+                <X size={12} />
+              </button>
+            </div>
+          ) : (
+            <>
+              <input ref={fileRef} type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
+              <button
+                type="button"
+                onClick={() => fileRef.current?.click()}
+                className="flex items-center gap-sm border-2 border-dashed border-kore-border px-xl py-lg text-small text-kore-mid hover:border-kore-brass hover:text-kore-brass transition-colors"
+              >
+                <Camera size={18} /> Referenzbild auswaehlen (optional)
+              </button>
+            </>
+          )}
+        </div>
+      )}
+
       <div className="flex justify-end gap-md pt-sm">
         <button
           type="button"
@@ -126,14 +174,48 @@ export function GuidelinesPage() {
   const createGuideline = useCreateVmGuideline();
   const updateGuideline = useUpdateVmGuideline();
   const deleteGuideline = useDeleteVmGuideline();
+  const uploadPhoto = useUploadGuidelinePhoto();
 
   const [showCreate, setShowCreate] = useState(false);
   const [editId, setEditId] = useState<string | null>(null);
+  const [pendingPhoto, setPendingPhoto] = useState<File | null>(null);
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+
+  const handlePhotoSelected = (file: File) => {
+    setPendingPhoto(file);
+    setPhotoPreview(URL.createObjectURL(file));
+  };
+
+  const handleRemovePhoto = () => {
+    setPendingPhoto(null);
+    if (photoPreview) URL.revokeObjectURL(photoPreview);
+    setPhotoPreview(null);
+  };
 
   const handleCreate = (data: GuidelineFormData) => {
     createGuideline.mutate(
       { name: data.name, description: data.description || undefined, category: data.category || undefined },
-      { onSuccess: () => setShowCreate(false) },
+      {
+        onSuccess: (newGuideline: any) => {
+          // Nach dem Erstellen sofort Foto hochladen falls vorhanden
+          if (pendingPhoto && newGuideline?.id) {
+            const fd = new FormData();
+            fd.append('photo', pendingPhoto);
+            uploadPhoto.mutate(
+              { id: newGuideline.id, formData: fd },
+              {
+                onSettled: () => {
+                  handleRemovePhoto();
+                  setShowCreate(false);
+                },
+              },
+            );
+          } else {
+            handleRemovePhoto();
+            setShowCreate(false);
+          }
+        },
+      },
     );
   };
 
@@ -148,6 +230,8 @@ export function GuidelinesPage() {
     if (!window.confirm(`Guideline "${name}" wirklich loeschen?`)) return;
     deleteGuideline.mutate(id);
   };
+
+  const isSaving = createGuideline.isPending || uploadPhoto.isPending;
 
   return (
     <div className="p-xl max-w-5xl">
@@ -181,8 +265,12 @@ export function GuidelinesPage() {
           <GuidelineForm
             initial={EMPTY_FORM}
             onSubmit={handleCreate}
-            onCancel={() => setShowCreate(false)}
-            isSubmitting={createGuideline.isPending}
+            onCancel={() => { handleRemovePhoto(); setShowCreate(false); }}
+            isSubmitting={isSaving}
+            showPhotoUpload
+            onPhotoSelected={handlePhotoSelected}
+            photoPreview={photoPreview}
+            onRemovePhoto={handleRemovePhoto}
           />
         </div>
       )}
@@ -232,6 +320,7 @@ export function GuidelinesPage() {
                         src={`${API_URL}${g.referencePhoto}`}
                         alt={g.name}
                         className="w-full h-full object-cover"
+                        onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                       />
                     ) : (
                       <div className="flex flex-col items-center gap-xs text-kore-faint">
