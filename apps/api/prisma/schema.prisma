@@ -612,6 +612,7 @@ model VmGuideline {
   description    String?
   category       String? // z.B. "Schaufenster", "Eingang", "Kasse"
   referencePhoto String? // Pfad zum Referenzbild
+  pdfPath        String? // Pfad zur PDF-Guideline
   isActive       Boolean  @default(true)
   sortOrder      Int      @default(0)
   createdBy      String

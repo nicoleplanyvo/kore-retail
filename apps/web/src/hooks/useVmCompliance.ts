@@ -201,3 +201,12 @@ export function useUploadGuidelinePhoto() {
     onSuccess: () => { qc.invalidateQueries({ queryKey: ['vmc', 'guidelines'] }); },
   });
 }
+
+export function useUploadGuidelinePdf() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, formData }: { id: string; formData: FormData }) =>
+      apiUpload<any>(`/api/tools/vm-compliance/guidelines/${id}/pdf`, formData),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['vmc', 'guidelines'] }); },
+  });
+}

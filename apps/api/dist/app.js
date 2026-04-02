@@ -15,11 +15,9 @@ import { adminReportingRouter } from './routes/admin/reporting.js';
 import { adminRegionsRouter } from './routes/admin/regions.js';
 import { storeExcellenceAuditRouter } from './routes/tools/store-excellence-audit/index.js';
 import { checklistenRouter } from './routes/tools/checklisten/index.js';
-import { checklistenAuditsRouter } from './routes/tools/checklisten-audits/index.js';
 import { sopRouter } from './routes/tools/sop/index.js';
 import { vmComplianceRouter } from './routes/tools/vm-compliance/index.js';
 import { storeStandardsRouter } from './routes/tools/store-standards/index.js';
-import { raiseTheBarRouter } from './routes/tools/raise-the-bar/index.js';
 import { kpiDashboardRouter } from './routes/tools/kpi-dashboard/index.js';
 import { budgetTrackerRouter } from './routes/tools/budget-tracker/index.js';
 import { forecastRouter as forecastToolRouter } from './routes/tools/forecast/index.js';
@@ -60,7 +58,7 @@ export function createApp() {
     // Trust Proxy — nötig hinter Nginx/Plesk damit req.ip die echte Client-IP ist (Rate-Limiting)
     app.set('trust proxy', 1);
     // ── CORS ──────────────────────────────────────────
-    // Alle Frontends müssen sich mit der API verbinden können
+    // Alle Frontends muessen sich mit der API verbinden koennen
     const CORS_ORIGIN = process.env['CORS_ORIGIN'] ??
         'http://localhost:5173,http://localhost:5174,http://localhost:5175,http://localhost:5176,https://kore-retail.de,https://www.kore-retail.de,https://dashboard.kore-retail.de,https://app.kore-retail.de';
     const allowedOrigins = CORS_ORIGIN.split(',').map((o) => o.trim());
@@ -107,16 +105,12 @@ export function createApp() {
     app.use('/api/tools/sea', storeExcellenceAuditRouter);
     // Tools — Checklisten
     app.use('/api/tools/checklisten', checklistenRouter);
-    // Tools — Checklisten & Audits (merged)
-    app.use('/api/tools/checklisten-audits', checklistenAuditsRouter);
     // Tools — SOP Bibliothek
     app.use('/api/tools/sop', sopRouter);
     // Tools — VM Foto-Compliance
     app.use('/api/tools/vm-compliance', vmComplianceRouter);
-    // Tools — Store Standards (legacy)
+    // Tools — Personalkosten-Planer
     app.use('/api/tools/store-standards', storeStandardsRouter);
-    // Tools — Raise the Bar (Store-Vergleich / Ranking)
-    app.use('/api/tools/raise-the-bar', raiseTheBarRouter);
     // Tools — KPI Dashboard
     app.use('/api/tools/kpi', kpiDashboardRouter);
     // Tools — Budget Tracker
@@ -180,10 +174,9 @@ export function createApp() {
     app.use('/api/orgchart', orgchartRouter);
     app.use('/api/messaging', messagingRouter);
     app.use('/api/notifications', notificationsRouter);
-    // Statische Uploads
+    // Oeffentliche Uploads (werden von <img>/<a>-Tags geladen, ohne Auth-Header)
+    // Alle Unterordner die direkt in HTML-Tags referenziert werden muessen oeffentlich sein
     const UPLOAD_DIR = process.env['UPLOAD_DIR'] ?? path.join(process.cwd(), 'uploads');
-    // Öffentliche Uploads (werden von <img>/<a>-Tags geladen, ohne Auth-Header)
-    // Alle Unterordner die direkt in HTML-Tags referenziert werden müssen öffentlich sein
     app.use('/api/uploads', express.static(UPLOAD_DIR));
     return app;
 }

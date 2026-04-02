@@ -24,19 +24,17 @@ async function buildAuthResponse(userId, impersonatedBy) {
     });
     if (!user)
         return null;
-    // Fetch tenant branding if user belongs to a tenant
+    // Lade Tenant-Branding falls User einem Tenant zugeordnet ist
     let tenantBranding;
     if (user.tenantId) {
         const tenant = await prisma.tenant.findUnique({
             where: { id: user.tenantId },
-            select: { name: true, logoUrl: true, primaryColor: true, accentColor: true },
+            select: { name: true, logoUrl: true },
         });
         if (tenant) {
             tenantBranding = {
                 tenantName: tenant.name,
                 logoUrl: tenant.logoUrl,
-                primaryColor: tenant.primaryColor,
-                accentColor: tenant.accentColor,
             };
         }
     }

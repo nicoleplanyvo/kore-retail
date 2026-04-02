@@ -1,12 +1,13 @@
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Image, Plus, Pencil, Trash2, Upload, Save, Camera, X } from 'lucide-react';
+import { ArrowLeft, Image, Plus, Pencil, Trash2, Upload, Save, Camera, X, FileText } from 'lucide-react';
 import {
   useVmGuidelines,
   useCreateVmGuideline,
   useUpdateVmGuideline,
   useDeleteVmGuideline,
   useUploadGuidelinePhoto,
+  useUploadGuidelinePdf,
 } from '../../../hooks/useVmCompliance';
 import { API_URL } from '../../../lib/api';
 
@@ -23,22 +24,29 @@ function GuidelineForm({
   onSubmit,
   onCancel,
   isSubmitting,
-  showPhotoUpload = false,
+  showFileUploads = false,
   onPhotoSelected,
   photoPreview,
   onRemovePhoto,
+  onPdfSelected,
+  pdfName,
+  onRemovePdf,
 }: {
   initial: GuidelineFormData;
   onSubmit: (data: GuidelineFormData) => void;
   onCancel: () => void;
   isSubmitting: boolean;
-  showPhotoUpload?: boolean;
+  showFileUploads?: boolean;
   onPhotoSelected?: (file: File) => void;
   photoPreview?: string | null;
   onRemovePhoto?: () => void;
+  onPdfSelected?: (file: File) => void;
+  pdfName?: string | null;
+  onRemovePdf?: () => void;
 }) {
   const [form, setForm] = useState<GuidelineFormData>(initial);
-  const fileRef = useRef<HTMLInputElement>(null);
+  const photoRef = useRef<HTMLInputElement>(null);
+  const pdfRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,13 +56,6 @@ function GuidelineForm({
       description: form.description.trim(),
       category: form.category.trim(),
     });
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file && onPhotoSelected) {
-      onPhotoSelected(file);
-    }
   };
 
   return (
@@ -91,32 +92,64 @@ function GuidelineForm({
         />
       </div>
 
-      {showPhotoUpload && (
-        <div>
-          <label className="label-default">Referenzbild</label>
-          {photoPreview ? (
-            <div className="relative inline-block">
-              <img src={photoPreview} alt="Vorschau" className="h-32 w-auto border border-kore-border object-cover" />
-              <button
-                type="button"
-                onClick={onRemovePhoto}
-                className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-700"
-              >
-                <X size={12} />
-              </button>
-            </div>
-          ) : (
-            <>
-              <input ref={fileRef} type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
-              <button
-                type="button"
-                onClick={() => fileRef.current?.click()}
-                className="flex items-center gap-sm border-2 border-dashed border-kore-border px-xl py-lg text-small text-kore-mid hover:border-kore-brass hover:text-kore-brass transition-colors"
-              >
-                <Camera size={18} /> Referenzbild auswaehlen (optional)
-              </button>
-            </>
-          )}
+      {showFileUploads && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-md">
+          {/* Referenzbild */}
+          <div>
+            <label className="label-default">Referenzbild</label>
+            {photoPreview ? (
+              <div className="relative inline-block">
+                <img src={photoPreview} alt="Vorschau" className="h-28 w-auto border border-kore-border object-cover" />
+                <button
+                  type="button"
+                  onClick={onRemovePhoto}
+                  className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-700"
+                >
+                  <X size={12} />
+                </button>
+              </div>
+            ) : (
+              <>
+                <input ref={photoRef} type="file" accept="image/*" onChange={(e) => { const f = e.target.files?.[0]; if (f && onPhotoSelected) onPhotoSelected(f); }} className="hidden" />
+                <button
+                  type="button"
+                  onClick={() => photoRef.current?.click()}
+                  className="flex items-center gap-sm border-2 border-dashed border-kore-border px-lg py-md text-small text-kore-mid hover:border-kore-brass hover:text-kore-brass transition-colors w-full justify-center"
+                >
+                  <Camera size={16} /> Bild auswaehlen
+                </button>
+              </>
+            )}
+          </div>
+
+          {/* PDF */}
+          <div>
+            <label className="label-default">PDF-Guideline</label>
+            {pdfName ? (
+              <div className="flex items-center gap-sm border border-kore-border px-md py-sm">
+                <FileText size={16} className="text-red-500 flex-shrink-0" />
+                <span className="text-small text-kore-ink truncate flex-1">{pdfName}</span>
+                <button
+                  type="button"
+                  onClick={onRemovePdf}
+                  className="text-red-500 hover:text-red-700 flex-shrink-0"
+                >
+                  <X size={14} />
+                </button>
+              </div>
+            ) : (
+              <>
+                <input ref={pdfRef} type="file" accept=".pdf" onChange={(e) => { const f = e.target.files?.[0]; if (f && onPdfSelected) onPdfSelected(f); }} className="hidden" />
+                <button
+                  type="button"
+                  onClick={() => pdfRef.current?.click()}
+                  className="flex items-center gap-sm border-2 border-dashed border-kore-border px-lg py-md text-small text-kore-mid hover:border-kore-brass hover:text-kore-brass transition-colors w-full justify-center"
+                >
+                  <FileText size={16} /> PDF auswaehlen
+                </button>
+              </>
+            )}
+          </div>
         </div>
       )}
 
@@ -140,30 +173,52 @@ function GuidelineForm({
   );
 }
 
-function PhotoUploadButton({ guidelineId }: { guidelineId: string }) {
-  const fileRef = useRef<HTMLInputElement>(null);
+function FileUploadButtons({ guidelineId, hasPdf }: { guidelineId: string; hasPdf: boolean }) {
+  const photoRef = useRef<HTMLInputElement>(null);
+  const pdfRef = useRef<HTMLInputElement>(null);
   const uploadPhoto = useUploadGuidelinePhoto();
+  const uploadPdf = useUploadGuidelinePdf();
 
-  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     const fd = new FormData();
     fd.append('photo', file);
     uploadPhoto.mutate({ id: guidelineId, formData: fd });
-    if (fileRef.current) fileRef.current.value = '';
+    if (photoRef.current) photoRef.current.value = '';
+  };
+
+  const handlePdf = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const fd = new FormData();
+    fd.append('pdf', file);
+    uploadPdf.mutate({ id: guidelineId, formData: fd });
+    if (pdfRef.current) pdfRef.current.value = '';
   };
 
   return (
     <>
-      <input ref={fileRef} type="file" accept="image/*" onChange={handleFile} className="hidden" />
+      <input ref={photoRef} type="file" accept="image/*" onChange={handlePhoto} className="hidden" />
       <button
         type="button"
-        onClick={() => fileRef.current?.click()}
+        onClick={() => photoRef.current?.click()}
         disabled={uploadPhoto.isPending}
         className="flex items-center gap-xs text-small text-kore-brass hover:text-kore-brass-dk transition-colors disabled:opacity-50"
         title="Referenzbild hochladen"
       >
-        <Upload size={14} /> {uploadPhoto.isPending ? 'Hochladen...' : 'Foto'}
+        <Camera size={14} /> {uploadPhoto.isPending ? '...' : 'Foto'}
+      </button>
+
+      <input ref={pdfRef} type="file" accept=".pdf" onChange={handlePdf} className="hidden" />
+      <button
+        type="button"
+        onClick={() => pdfRef.current?.click()}
+        disabled={uploadPdf.isPending}
+        className="flex items-center gap-xs text-small text-kore-brass hover:text-kore-brass-dk transition-colors disabled:opacity-50"
+        title="PDF-Guideline hochladen"
+      >
+        <FileText size={14} /> {uploadPdf.isPending ? '...' : 'PDF'}
       </button>
     </>
   );
@@ -175,11 +230,13 @@ export function GuidelinesPage() {
   const updateGuideline = useUpdateVmGuideline();
   const deleteGuideline = useDeleteVmGuideline();
   const uploadPhoto = useUploadGuidelinePhoto();
+  const uploadPdf = useUploadGuidelinePdf();
 
   const [showCreate, setShowCreate] = useState(false);
   const [editId, setEditId] = useState<string | null>(null);
   const [pendingPhoto, setPendingPhoto] = useState<File | null>(null);
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const [pendingPdf, setPendingPdf] = useState<File | null>(null);
 
   const handlePhotoSelected = (file: File) => {
     setPendingPhoto(file);
@@ -192,27 +249,45 @@ export function GuidelinesPage() {
     setPhotoPreview(null);
   };
 
+  const handlePdfSelected = (file: File) => setPendingPdf(file);
+  const handleRemovePdf = () => setPendingPdf(null);
+
+  const resetForm = () => {
+    handleRemovePhoto();
+    handleRemovePdf();
+    setShowCreate(false);
+  };
+
   const handleCreate = (data: GuidelineFormData) => {
     createGuideline.mutate(
       { name: data.name, description: data.description || undefined, category: data.category || undefined },
       {
         onSuccess: (newGuideline: any) => {
-          // Nach dem Erstellen sofort Foto hochladen falls vorhanden
-          if (pendingPhoto && newGuideline?.id) {
+          const id = newGuideline?.id;
+          if (!id) { resetForm(); return; }
+
+          // Upload-Queue: erst Foto, dann PDF
+          const uploads: Promise<unknown>[] = [];
+
+          if (pendingPhoto) {
             const fd = new FormData();
             fd.append('photo', pendingPhoto);
-            uploadPhoto.mutate(
-              { id: newGuideline.id, formData: fd },
-              {
-                onSettled: () => {
-                  handleRemovePhoto();
-                  setShowCreate(false);
-                },
-              },
+            uploads.push(
+              new Promise((resolve) => uploadPhoto.mutate({ id, formData: fd }, { onSettled: resolve }))
             );
+          }
+          if (pendingPdf) {
+            const fd = new FormData();
+            fd.append('pdf', pendingPdf);
+            uploads.push(
+              new Promise((resolve) => uploadPdf.mutate({ id, formData: fd }, { onSettled: resolve }))
+            );
+          }
+
+          if (uploads.length > 0) {
+            Promise.all(uploads).then(() => resetForm());
           } else {
-            handleRemovePhoto();
-            setShowCreate(false);
+            resetForm();
           }
         },
       },
@@ -231,7 +306,7 @@ export function GuidelinesPage() {
     deleteGuideline.mutate(id);
   };
 
-  const isSaving = createGuideline.isPending || uploadPhoto.isPending;
+  const isSaving = createGuideline.isPending || uploadPhoto.isPending || uploadPdf.isPending;
 
   return (
     <div className="p-xl max-w-5xl">
@@ -246,7 +321,7 @@ export function GuidelinesPage() {
         <div>
           <h1 className="font-display text-h1 text-kore-ink">VM Guidelines verwalten</h1>
           <p className="text-body text-kore-mid mt-xs">
-            Guidelines erstellen, Referenzbilder hochladen und bearbeiten
+            Guidelines erstellen, Referenzbilder und PDFs hochladen
           </p>
         </div>
         {!showCreate && (
@@ -265,12 +340,15 @@ export function GuidelinesPage() {
           <GuidelineForm
             initial={EMPTY_FORM}
             onSubmit={handleCreate}
-            onCancel={() => { handleRemovePhoto(); setShowCreate(false); }}
+            onCancel={resetForm}
             isSubmitting={isSaving}
-            showPhotoUpload
+            showFileUploads
             onPhotoSelected={handlePhotoSelected}
             photoPreview={photoPreview}
             onRemovePhoto={handleRemovePhoto}
+            onPdfSelected={handlePdfSelected}
+            pdfName={pendingPdf?.name ?? null}
+            onRemovePdf={handleRemovePdf}
           />
         </div>
       )}
@@ -282,7 +360,7 @@ export function GuidelinesPage() {
           <Image size={48} className="text-kore-faint mb-lg" />
           <h2 className="font-display text-h2 text-kore-ink mb-md">Keine Guidelines</h2>
           <p className="text-body text-kore-mid mb-xl max-w-md">
-            Erstellen Sie die erste VM-Guideline mit Referenzbild, damit Ihr Team weiss, worauf es achten soll.
+            Erstellen Sie die erste VM-Guideline mit Referenzbild und PDF.
           </p>
           {!showCreate && (
             <button
@@ -331,8 +409,8 @@ export function GuidelinesPage() {
                   </div>
 
                   {/* Info + Actions */}
-                  <div className="flex-1 p-lg flex items-center justify-between">
-                    <div>
+                  <div className="flex-1 p-lg flex items-start justify-between gap-md">
+                    <div className="min-w-0">
                       <h3 className="text-body font-medium text-kore-ink">{g.name}</h3>
                       {g.category && (
                         <span className="text-small text-kore-brass">{g.category}</span>
@@ -340,13 +418,25 @@ export function GuidelinesPage() {
                       {g.description && (
                         <p className="text-small text-kore-mid mt-xs">{g.description}</p>
                       )}
-                      <p className="text-caption text-kore-faint mt-sm">
-                        {g._count?.submissions ?? 0} Einreichungen
-                      </p>
+                      <div className="flex items-center gap-md mt-sm">
+                        <span className="text-caption text-kore-faint">
+                          {g._count?.submissions ?? 0} Einreichungen
+                        </span>
+                        {g.pdfPath && (
+                          <a
+                            href={`${API_URL}${g.pdfPath}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-xs text-caption text-red-600 hover:text-red-800"
+                          >
+                            <FileText size={12} /> PDF ansehen
+                          </a>
+                        )}
+                      </div>
                     </div>
 
-                    <div className="flex items-center gap-md flex-shrink-0">
-                      <PhotoUploadButton guidelineId={g.id} />
+                    <div className="flex items-center gap-md flex-shrink-0 flex-wrap justify-end">
+                      <FileUploadButtons guidelineId={g.id} hasPdf={!!g.pdfPath} />
                       <button
                         onClick={() => setEditId(g.id)}
                         className="flex items-center gap-xs text-small text-kore-mid hover:text-kore-ink transition-colors"

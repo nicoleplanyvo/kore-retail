@@ -31,6 +31,17 @@ const guidelineUpload = multer({
   limits: { fileSize: 10 * 1024 * 1024 },
 });
 
+const guidelinePdfDir = path.join(UPLOAD_DIR, 'vm-guideline-pdfs');
+if (!fs.existsSync(guidelinePdfDir)) fs.mkdirSync(guidelinePdfDir, { recursive: true });
+
+const guidelinePdfUpload = multer({
+  storage: multer.diskStorage({
+    destination: guidelinePdfDir,
+    filename: (_r, file, cb) => cb(null, `${Date.now()}-${file.originalname}`),
+  }),
+  limits: { fileSize: 20 * 1024 * 1024 },
+});
+
 const areaPdfDir = path.join(UPLOAD_DIR, 'vm-area-pdfs');
 if (!fs.existsSync(areaPdfDir)) fs.mkdirSync(areaPdfDir, { recursive: true });
 
@@ -479,6 +490,32 @@ vmComplianceRouter.post('/guidelines/:id/photo', guidelineUpload.single('photo')
     const updated = await prisma.vmGuideline.update({
       where: { id: guidelineId },
       data: { referencePhoto: `/api/uploads/vm-guidelines/${req.file.filename}` },
+    });
+    res.json(updated);
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
+});
+
+// POST /guidelines/:id/pdf — PDF-Guideline hochladen
+vmComplianceRouter.post('/guidelines/:id/pdf', guidelinePdfUpload.single('pdf'), async (req, res) => {
+  try {
+    const tenantId = (req as any).tenantId as string;
+    const guidelineId = req.params['id'] as string;
+    if (!req.file) return res.status(400).json({ error: 'PDF ist erforderlich.' });
+
+    const existing = await prisma.vmGuideline.findFirst({
+      where: { id: guidelineId, tenantId },
+    });
+    if (!existing) return res.status(404).json({ error: 'Guideline nicht gefunden.' });
+
+    // Alte PDF loeschen falls vorhanden
+    if (existing.pdfPath) {
+      const oldPath = path.join(UPLOAD_DIR, existing.pdfPath.replace(/^\/(api\/)?uploads\//, ''));
+      if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+    }
+
+    const updated = await prisma.vmGuideline.update({
+      where: { id: guidelineId },
+      data: { pdfPath: `/api/uploads/vm-guideline-pdfs/${req.file.filename}` },
     });
     res.json(updated);
   } catch (err) { console.error(err); res.status(500).json({ error: 'Interner Serverfehler.' }); }
