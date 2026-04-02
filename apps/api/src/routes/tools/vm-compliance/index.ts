@@ -43,7 +43,7 @@ const areaPdfUpload = multer({
 });
 
 export const vmComplianceRouter: RouterType = Router();
-vmComplianceRouter.use(authenticate, requireToolAccess('vm.vm_compliance'));
+vmComplianceRouter.use(authenticate, requireToolAccess('standards.vm_foto_compliance'));
 
 // GET /stores
 vmComplianceRouter.get('/stores', async (req, res) => {
